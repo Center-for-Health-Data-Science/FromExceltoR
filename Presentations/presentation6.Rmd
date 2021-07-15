@@ -64,9 +64,7 @@ library(readxl)
 
 # For Plotting
 # install.packages("ggplot2")
-# install.packages("viridis")
 library(ggplot2)
-library(viridis)
 
 
 # For DEA
@@ -74,13 +72,6 @@ library(viridis)
 # BiocManager::install("DESeq2")
 library(BiocManager)
 library(DESeq2)
-
-
-# For Enrichment Analysis
-# BiocManager::install("clusterProfiler")
-# BiocManager::install("org.Mm.eg.db")
-library(clusterProfiler)
-library(org.Mm.eg.db)
 ```
 
 
@@ -118,48 +109,25 @@ head(exprInfo)
 
 ### Initial Data Check & Filtering:
 
-Firstly, we will give our count distributions a look. You could plot all gene counts together or even better sample a couple to get an idea of what they look like individually.
-
-All together:
-```{r}
-expr1 <- exprDat %>% 
-  dplyr::select(-EntrezGeneID, -GeneName) %>%
-  gather() %>% 
-  dplyr::select(value) %>%
-  mutate(valuelog2 = log2(value+1))
-
-head(expr1, n=5)
-```
-
-Plot it with ggplot2:
-```{r}
-p1 <- ggplot(expr1, aes(value)) + 
-  geom_histogram(color="black", fill="grey80", bins=100) + 
-  theme_minimal()
-p1
-
-
-p2 <- ggplot(expr1, aes(valuelog2)) + 
-  geom_histogram(color="black", fill="grey80", bins=100) + 
-  theme_minimal()
-
-p2
-```
-
-The first plot tells us that we have a lot of 0 counts. Let's try to sample n random genes and plot their count distribution.
+Let's try to sample 12 (n) random genes and plot their count distribution.
 
 ```{r}
-expr10 <- exprDat %>%
+expr12 <- exprDat %>%
   dplyr::select(-EntrezGeneID, -GeneName) %>%
   sample_n(.,12) %>% 
   t() %>%
   as_tibble() %>% 
   rename_at(vars(names(.)), ~paste0("Gene", seq(1:12))) %>% 
-  gather() 
+  gather() %>% 
+  mutate(valuelog2 = log2(value+1))
+
+# Give it a look:
+expr12
 ```
 
+Plot:
 ```{r}
-ggplot(expr10, aes(value)) + 
+ggplot(expr12, aes(valuelog2)) + 
   geom_histogram(color="black", fill="grey80", bins=20) + 
   theme_minimal() +
   facet_wrap(~key)
@@ -171,6 +139,7 @@ We will filter out genes with too many zero counts. Exclude the columns with gen
 
 ```{r}
 # Count number of 0s across samples. Filter samples where at least four samples has a count great than 0.
+
 exprDat <- exprDat %>% 
   mutate(nzeros = rowSums(dplyr::select(.,-EntrezGeneID, -GeneName)==0)) %>%
   filter(nzeros <= 8) %>%
@@ -234,8 +203,8 @@ The count distributions may be dominated by a few genes with very large counts. 
 Let's see if we have any genes with high large counts and in turn, dispersion in our dataset. For convenience I am using the base R boxplot function:
 
 ```{r}
-#boxplot(assay(exprObj))
-boxplot(log2(assay(exprObj)+1))
+#boxplot(assay(exprObj), las=2)
+boxplot(log2(assay(exprObj)+1), las=2)
 ```
 
 We perform variance stabilizing transformation to obtain log2 counts per million read mapped, overcoming issues with outlier genes and sequencing depth:
@@ -298,14 +267,12 @@ Custom function to filter results of DEA. We make a function to save writing the
 # my.res = a dataframe of results from the DEseq results()function
 # my.LFC = log fold change cutoff, default is 1.0
 # my.cof = adjusted p-value cutoff, default is 0.01 
-
-SigDE <- function(my.res, my.LFC=1.0, my.cof=0.01) {
+SigDE <- function(my.res) {
   my.res <- as.data.frame(my.res) %>%
     rownames_to_column(., var = "GeneName") %>%
     as_tibble() %>%
-    left_join(., GeneNames) %>%
     mutate(dir = ifelse(log2FoldChange >= 0, 'up', 'down')) %>%
-    filter((log2FoldChange >= my.LFC | log2FoldChange <= -my.LFC) & padj <= my.cof) %>%
+    filter((log2FoldChange >= 1.0 | log2FoldChange <= -1.0) & padj <= 0.01) %>%
     arrange(padj, desc(abs(log2FoldChange)))
   return(my.res)
 }
@@ -415,88 +382,4 @@ heatmap(HPdat, labRow=FALSE,
 ```
 
 
-&nbsp;
 
----
-
-
-## GO & Pathway enrichment analysis with KEGG
-
-For gene ontology enrichment and pathway enrichment analysis we will use the R-package `clusterProfiler` <http://yulab-smu.top/clusterProfiler-book/index.html> and the `KEGG` ontologies and pathways.   
-
-First, we check that we have pathway information for our species of interest, in this case mouse:
-
-```{r}
-search_kegg_organism('mmu', by='kegg_code')
-```
-
-Pathway enrichment analysis, using all genes from our expression dataset as the gene universe (e.g. background for enrichment):
-
-```{r}
-resLCpw <- enrichKEGG(gene = resLC$EntrezGeneID,
-                      organism = 'mmu', 
-                      universe=unique(GeneNames$EntrezGeneID))
-head(resLCpw, n=3)
-```
-
-Gene ontology enrichment analysis, using all genes from our expression dataset as the gene universe (e.g. background for enrichment). 
-Here we enrich for _molecular function_ (MF), but there are also other options for type of ontology. 
-Other parameters set are: Benjamini holbech correction for multiple testing and cutoffs for significance.
-
-```{r, eval=FALSE}
-resLCgo <- enrichGO(gene = resLC$EntrezGeneID, 
-                    OrgDb = org.Mm.eg.db, 
-                    ont = "MF", 
-                    pAdjustMethod = "BH",
-                    pvalueCutoff  = 0.01,
-                    qvalueCutoff  = 0.05, 
-                    readable = TRUE,
-                    universe = unique(GeneNames$EntrezGeneID))
-
-head(resLCgo, n=3)
-```
-
-
-Below we perform the same steps as above to get the DE genes between (I) pregnant and control mice and (II) lactating and pregnant mice:  
-
-(I) pregnant and control mice:
-```{r, eval=FALSE}
-resPCpw <- enrichKEGG(gene = resPC$EntrezGeneID,
-                      organism = 'mmu', 
-                      universe=unique(GeneNames$EntrezGeneID))
-head(resPCpw)
-```
-
-```{r, eval=FALSE}
-resPCgo <- enrichGO(gene = resPC$EntrezGeneID, 
-                    OrgDb = org.Mm.eg.db, 
-                    ont = "MF", 
-                    pAdjustMethod = "BH",
-                    pvalueCutoff  = 0.01,
-                    qvalueCutoff  = 0.05, 
-                    readable = TRUE,
-                    universe=unique(GeneNames$EntrezGeneID))
-
-head(resPCgo)
-```
-
-(II) lactating and pregnant mice:
-
-```{r, eval=FALSE}
-resLPpw <- enrichKEGG(gene = resLP$EntrezGeneID,
-                      organism = 'mmu', 
-                      universe=unique(GeneNames$EntrezGeneID))
-head(resLPpw)
-```
-
-```{r, eval=FALSE}
-resLPgo <- enrichGO(gene = resLP$EntrezGeneID, 
-                    OrgDb = org.Mm.eg.db, 
-                    ont = "MF", 
-                    pAdjustMethod = "BH",
-                    pvalueCutoff  = 0.01,
-                    qvalueCutoff  = 0.05, 
-                    readable = TRUE,
-                    universe=unique(GeneNames$EntrezGeneID))
-
-head(resPCgo)
