@@ -166,7 +166,7 @@ pre code {
 
 <h1 class="title toc-ignore">III. Graphics with ggplot2</h1>
 <h4 class="author">Data Science Laboratory, University of Copenhagen</h4>
-<h4 class="date">05 July, 2021</h4>
+<h4 class="date">01 September, 2021</h4>
 
 </div>
 
@@ -239,22 +239,22 @@ dl_sizes</code></pre>
 MachineName50 &lt;- downloads$machineName %&gt;% 
   sample(., 50)
 MachineName50</code></pre>
-<pre><code>##  [1] piglet  piglet  kermit  piglet  kermit  cs18    kermit  piglet  pluto  
-## [10] kermit  kermit  kermit  kermit  cs18    kermit  kermit  piglet  piglet 
-## [19] piglet  piglet  kermit  piglet  kermit  kermit  piglet  tweetie piglet 
-## [28] piglet  kermit  piglet  tweetie piglet  kermit  kermit  kermit  piglet 
-## [37] kermit  piglet  piglet  piglet  pluto   kermit  kermit  piglet  piglet 
-## [46] tweetie kermit  kermit  cs18    pluto  
+<pre><code>##  [1] kermit  piglet  kermit  kermit  cs18    piglet  tweetie tweetie pluto  
+## [10] piglet  tweetie kermit  piglet  pluto   kermit  kermit  cs18    tweetie
+## [19] pluto   piglet  pluto   cs18    tweetie kermit  tweetie kermit  kermit 
+## [28] kermit  pluto   pluto   cs18    pluto   tweetie tweetie piglet  piglet 
+## [37] piglet  piglet  tweetie piglet  piglet  cs18    tweetie piglet  kermit 
+## [46] kermit  cs18    piglet  pluto   kermit 
 ## Levels: pluto cs18 tweetie piglet kermit</code></pre>
 <pre class="r"><code>### MachineName as factor:
 MachineName50 &lt;- factor(MachineName50, )
 MachineName50</code></pre>
-<pre><code>##  [1] piglet  piglet  kermit  piglet  kermit  cs18    kermit  piglet  pluto  
-## [10] kermit  kermit  kermit  kermit  cs18    kermit  kermit  piglet  piglet 
-## [19] piglet  piglet  kermit  piglet  kermit  kermit  piglet  tweetie piglet 
-## [28] piglet  kermit  piglet  tweetie piglet  kermit  kermit  kermit  piglet 
-## [37] kermit  piglet  piglet  piglet  pluto   kermit  kermit  piglet  piglet 
-## [46] tweetie kermit  kermit  cs18    pluto  
+<pre><code>##  [1] kermit  piglet  kermit  kermit  cs18    piglet  tweetie tweetie pluto  
+## [10] piglet  tweetie kermit  piglet  pluto   kermit  kermit  cs18    tweetie
+## [19] pluto   piglet  pluto   cs18    tweetie kermit  tweetie kermit  kermit 
+## [28] kermit  pluto   pluto   cs18    pluto   tweetie tweetie piglet  piglet 
+## [37] piglet  piglet  tweetie piglet  piglet  cs18    tweetie piglet  kermit 
+## [46] kermit  cs18    piglet  pluto   kermit 
 ## Levels: pluto cs18 tweetie piglet kermit</code></pre>
 <pre class="r"><code>downloads</code></pre>
 <pre><code>## # A tibble: 36,708 x 6
