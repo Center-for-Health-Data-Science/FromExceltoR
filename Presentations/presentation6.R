@@ -76,20 +76,18 @@ exprInfo <- read_excel("MouseSampleInfo.xlsx")
 head(exprDat, n=5)
 dim(exprDat)
 
+
+# Look at the samples:
 exprInfo
 
 
 # Convert character columns to factor types:
 exprInfo <- exprInfo %>%
   mutate(CellType = as.factor(CellType),
-         Status = factor(Status, levels = c("control", "pregnant", "lactate")),
+         Status = as.factor(Status),
          Status.Type = as.factor(Status.Type))
 
 exprInfo
-
-
-## Extracting Gene Dataset
-
 
 
 #############
@@ -97,20 +95,29 @@ exprInfo
 ### Initial Data Check
 
 # Let's try to sample 12 (n) random genes and plot their count distribution:
-expr12 <- exprDat %>%
-  dplyr::select(-EntrezGeneID, -GeneName) %>%
-  sample_n(.,12) %>% 
-  t() %>%
-  as_tibble() %>% 
-  rename_at(vars(names(.)), ~paste0("Gene", seq(1:12))) %>% 
-  gather() %>% 
-  mutate(valuelog2 = log2(value+1))
 
-expr12
+# Sample 16 random rows (genes)
+expr16 <- exprDat %>%
+  sample_n(.,16)
+
+# Extract genename
+GeneName <- expr16$GeneName
+
+# Gather counts
+expr16 <- expr16 %>%
+  dplyr::select(-EntrezGeneID, -GeneName) %>%
+  t() %>% 
+  as_tibble() %>% 
+  rename_at(vars(names(.)), ~GeneName) %>% 
+  gather()
+
+
+
+expr16
 
 # Plot n randomly sampled genes:
-ggplot(expr12, aes(valuelog2)) + 
-  geom_histogram(color="black", fill="grey80", bins=20) + 
+ggplot(expr16, aes(log2(value+1))) + 
+  geom_histogram(color="black", fill="grey80", bins=30) + 
   theme_minimal() +
   facet_wrap(~key)
 
@@ -171,17 +178,7 @@ exprObj
 # --------------
 
 
-# In brief, DEseq2 fits a generalized linear model (GLM) for each gene in the dataset. 
-# DEseq2 adjusts variable gene dispersions by borrowing information across genes to shrinks 
-# gene-wise dispersions towards a common trend to increase accuracy of differential expression testing.
-
-# The GLM fit returns coefficients indicating the overall expression strength of a gene and the log-2 fold change between groups. 
-
-
-# Estimating dispersion, gene-wise and mean-dispersion, fitting model and testing:
-exprObj <- DESeq(exprObj)
-
-# --------------
+### Preliminary analysis:
 
 # Counts:
 head(assay(exprObj))
@@ -198,26 +195,41 @@ boxplot(log2(assay(exprObj)+1), las=2)
 
 exprObjvst <- vst(exprObj,blind=TRUE)
 boxplot(assay(exprObjvst), xlab="", ylab="Log2 counts per million reads mapped ",las=2)
-
-
-
 # --------------
+
+
 
 ## PCA Plotting:
 
 plotPCA(exprObjvst,intgroup=c("Status"))
 plotPCA(exprObjvst,intgroup=c("CellType"))
 #plotPCA(exprObjvst,intgroup=c("TypeStatus"))
+# --------------
+
+
+### Differential Expression Analysis:
+
+
+# In brief, DEseq2 fits a generalized linear model (GLM) for each gene in the dataset. 
+# DEseq2 adjusts variable gene dispersions by borrowing information across genes to shrink
+# gene-wise dispersions towards a common trend to increase accuracy of differential expression testing.
+
+# The GLM fit returns coefficients indicating the overall expression strength of a gene and the log-2 fold change between groups. 
+
+
+# Estimating dispersion, gene-wise and mean-dispersion, fitting model and testing:
+exprObj <- DESeq(exprObj)
 
 
 
 # --------------
 
-
 # Test for DE genes between the three groups of mice, adjusted for cell type:
 
 # (I) Lactating vs Control mice
-resLC <- results(exprObj, contrast = c("Status", "lactate", "control"), independentFiltering = FALSE)
+resLC <- results(exprObj, contrast = c("Status", "lactate", "control"), 
+                 independentFiltering = FALSE)
+
 head(resLC)
 dim(resLC)
 
@@ -225,68 +237,59 @@ dim(resLC)
 summary(resLC)
 DESeq2::plotMA(resLC)
 
-
 # --------------
 
-
-# Custom function to filter results of DEA. 
-# We make a function to save writing the same code three times in a row, one time for each comparison.
-
-# SIGNIFICANT DE GENES:
-# Takes as arguments:
-# my.res = a dataframe of results from the DEseq results()function
-# my.LFC = log fold change cutoff, default is 1.0
-# my.cof = adjusted p-value cutoff, default is 0.01 
-
-SigDE <- function(my.res) {
-  my.res <- as.data.frame(my.res) %>%
-    rownames_to_column(., var = "GeneName") %>%
-    as_tibble() %>%
-    mutate(dir = ifelse(log2FoldChange >= 0, 'up', 'down')) %>%
-    filter((log2FoldChange >= 1.0 | log2FoldChange <= -1.0) & padj <= 0.01) %>%
-    arrange(padj, desc(abs(log2FoldChange)))
-  return(my.res)
-}
-
-# --------------
-
-
-# Filter DEA results from comparison of lactating vs control mice using custom function:
-resLC <- SigDE(resLC)
-
-# Number of DE genes:
-dim(resLC)
-
-# Give it a look:
-resLC
-
-# --------------
 
 
 # (II) Pregnant vs Control mice
-resPC <- results(exprObj, contrast = c("Status", "pregnant", "control"),  independentFiltering = FALSE)
+resPC <- results(exprObj, contrast = c("Status", "pregnant", "control"), 
+                 independentFiltering = FALSE)
+
+# Summary and plot of DE analysis results:
 #summary(resPC)
 #DESeq2::plotMA(resPC)
 
-# Filtering for significant results:
-resPC <- SigDE(resPC)
-
-# Number of DE genes:
-dim(resPC)
-
-
 # --------------
 
+
 # (III) Lactating vs Pregnant mice
-resLP <- results(exprObj, contrast = c("Status", "lactate", "pregnant"),  independentFiltering = FALSE)
+resLP <- results(exprObj, contrast = c("Status", "lactate", "pregnant"),  
+                 independentFiltering = FALSE)
+
+# Summary and plot of DE analysis results:
 #summary(resLP)
 #DESeq2::plotMA(resLP)
 
-# Filtering for significant results:
-resLP <- SigDE(resLP)
+# --------------
+
+
+
+### Filtering results:
+
+# Bind all DE sets together
+# Convert to tibble
+# Add columns with GeneNames and DE direction
+# Filter and arrange(order)
+resDE <- rbind(resLC, resPC, resLP) %>% 
+  as_tibble() %>%
+  mutate(GeneName = rep(GeneNames$GeneName, 3), 
+         dir = ifelse(log2FoldChange >= 0, 'up', 'down')) %>%
+  filter((log2FoldChange >= 1.0 | log2FoldChange <= -1.0) & padj <= 0.01) %>%
+  arrange(padj, desc(abs(log2FoldChange)))
+
+dim(resDE)
+
+# --------------
 
 # Number of DE genes:
-dim(resLP)
+dim(resDE)
+length(unique(resDE$GeneName))
+
+
+# Give it a look:
+resDE
+
+# --------------
 
 
 
@@ -295,17 +298,18 @@ dim(resLP)
 ## Heatmap Visualization:
 
 # To visually inspect if DE genes identified in our DESeq2 analysis successfully separate the three groups of mice (control, pregnant and lactating), we will make a heatmap. 
-# For this we use packages stats and viridis.
-# It will not make sense to include all DE genes in this heatmap (3000 genes). Instead pick the top 50 most sig. DE genes based on adj. p-value and logFC.
+# For this we use the heatmap function.
+# It will not make sense to include all DE genes in this heatmap (almost 3000 unique genes). Instead pick the top 100 most sig. DE genes based on adj. p-value and logFC.
 
 
-# Make a vector of unique EntrezGeneIDs (top50):
+# Make a vector of unique EntrezGeneIDs (top100):
 
-topDE <- bind_rows(resPC[1:50,], resLC[1:50,], resLP[1:50,]) %>%
+top100 <- resDE[1:100,] %>%
   pull(GeneName) %>%
   unique()
 
-length(topDE)
+
+length(top100)
 
 # --------------  
 
@@ -321,7 +325,7 @@ resVST <- assay(exprObjvst) %>%
   as.data.frame() %>%
   rownames_to_column(var = "GeneName")  %>%
   as_tibble() %>%
-  filter(GeneName %in% topDE)
+  filter(GeneName %in% top100)
 
 
 # --------------  
@@ -341,9 +345,9 @@ HPdat <- resVST %>%
 # Use the heatmap function to generate a heatmap. 
 # We can modify the look of the heatmap as desired, e.g. add column colors, row labels, change color scheme etc.
 
-heatmap(HPdat, labRow=FALSE,
+heatmap(scale(HPdat),
         ColSideColors=exprInfo$CellType.colors, 
-        labCol=exprInfo$Status, 
+        labCol=exprInfo$Status,
+        labRow = HPnames,
         cexCol=1.2, 
-        cexRow = 1.3)
-
+        cexRow = 1.0)
