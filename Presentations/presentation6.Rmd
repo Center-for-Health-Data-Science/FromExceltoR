@@ -96,8 +96,7 @@ Convert character columns to factor types:
 ```{r}
 exprInfo <- exprInfo %>%
   mutate(CellType = as.factor(CellType),
-         Status = as.factor(Status),
-         Status.Type = as.factor(Status.Type))
+         Status = as.factor(Status))
 
 head(exprInfo)
 ```
@@ -221,9 +220,8 @@ boxplot(assay(exprObjvst), xlab="", ylab="Log2 counts per million",las=2)
 Before performing DEA it is a good idea to explore how samples cluster together based on there gene expression profile. The expectation here is that samples from the same group (treatment vs control, condition A vs condition B, etc.) will cluster together. A principal component analysis (PCA) plot can also help us to identify outlier samples which might need to be removed from the analysis. We use our vst counts for principal component analysis:
 
 ```{r}
-plotPCA(exprObjvst,intgroup=c("Status"))
-plotPCA(exprObjvst,intgroup=c("CellType"))
-#plotPCA(exprObj,intgroup=c("TypeStatus"))
+plotPCA(exprObjvst,intgroup="Status")
+plotPCA(exprObjvst,intgroup="CellType")
 ```
 
 &nbsp;
@@ -290,13 +288,12 @@ resLP <- results(exprObj, contrast = c("Status", "lactate", "pregnant"),  indepe
 ---
 
 We filter the results of the DEA to only include those genes which are differentially expressed based on logFC (>= 1.0 or <= -1.0) and adjusted p-value (< 0.01).   
-Firstly, bind the three DE genesets together and convert to a tibble. Then, add a column with GeneNames and a column indicating the directionality of differential expression (up or down). Lastly, filter and arrange rows (genes) based on logFC and adjusted p-values.
+Firstly, bind the three DE genesets together and convert to a tibble. Then, add a column with GeneNames. Lastly, filter and arrange rows (genes) based on logFC and adjusted p-values.
 
 ```{r}
 resDE <- rbind(resLC, resPC, resLP) %>% 
   as_tibble() %>%
-  mutate(GeneName = rep(GeneNames$GeneName, 3), 
-         dir = ifelse(log2FoldChange >= 0, 'up', 'down')) %>%
+  mutate(GeneName = rep(GeneNames$GeneName, 3)) %>%
   filter((log2FoldChange >= 1.0 | log2FoldChange <= -1.0) & padj <= 0.01) %>%
   arrange(padj, desc(abs(log2FoldChange)))
 

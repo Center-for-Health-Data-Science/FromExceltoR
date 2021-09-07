@@ -84,8 +84,7 @@ exprInfo
 # Convert character columns to factor types:
 exprInfo <- exprInfo %>%
   mutate(CellType = as.factor(CellType),
-         Status = as.factor(Status),
-         Status.Type = as.factor(Status.Type))
+         Status = as.factor(Status))
 
 exprInfo
 
@@ -184,14 +183,13 @@ exprObj
 head(assay(exprObj))
 
 # The count distributions may be dominated by a few genes with very large counts. These genes will drive plotting e.g. heatmaps, PCA analysis etc.
+# Library sizes:
 
-# boxplot(assay(exprObj), las=2)
 boxplot(log2(assay(exprObj)+1), las=2)
-
+colSums(assay(exprObj))
 
 # Variance stabilizing transformation
 # vst returns log2 counts adjusted for sequencing depths. 
-# vst removes the dependence of the variance on the mean, particularly the high variance of the log counts when the mean is low.
 
 exprObjvst <- vst(exprObj,blind=TRUE)
 boxplot(assay(exprObjvst), xlab="", ylab="Log2 counts per million reads mapped ",las=2)
@@ -201,9 +199,8 @@ boxplot(assay(exprObjvst), xlab="", ylab="Log2 counts per million reads mapped "
 
 ## PCA Plotting:
 
-plotPCA(exprObjvst,intgroup=c("Status"))
-plotPCA(exprObjvst,intgroup=c("CellType"))
-#plotPCA(exprObjvst,intgroup=c("TypeStatus"))
+plotPCA(exprObjvst,intgroup="Status")
+plotPCA(exprObjvst,intgroup="CellType")
 # --------------
 
 
@@ -268,16 +265,13 @@ resLP <- results(exprObj, contrast = c("Status", "lactate", "pregnant"),
 
 # Bind all DE sets together
 # Convert to tibble
-# Add columns with GeneNames and DE direction
+# Add columns with GeneNames
 # Filter and arrange(order)
 resDE <- rbind(resLC, resPC, resLP) %>% 
   as_tibble() %>%
-  mutate(GeneName = rep(GeneNames$GeneName, 3), 
-         dir = ifelse(log2FoldChange >= 0, 'up', 'down')) %>%
+  mutate(GeneName = rep(GeneNames$GeneName, 3)) %>%
   filter((log2FoldChange >= 1.0 | log2FoldChange <= -1.0) & padj <= 0.01) %>%
   arrange(padj, desc(abs(log2FoldChange)))
-
-dim(resDE)
 
 # --------------
 
