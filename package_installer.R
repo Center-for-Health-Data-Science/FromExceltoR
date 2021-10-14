@@ -27,7 +27,9 @@ if(as.numeric(base::version$major) < 4){
 
 # list package names that are needed from CRAN
 packages_needed = c("tidyverse","readxl","ggplot2",
-                    "table1","knitr","GGally","emmeans")
+                    "table1","knitr","GGally","emmeans","BiocManager")
+# list needed packages that require different installation
+packages_needed_biocmanager = c("DESeq2","EDASeq")
 
 finished = FALSE
 
@@ -49,22 +51,34 @@ while(!finished){
     }
   }
   
+  # some packages for Bioinformatics have to be installed differently
+  packages_installed = installed.packages()[,"Package"]
+  if("BiocManager" %in% packages_installed){ # if the specific installer is installed^^
+    suppressMessages(library(BiocManager)) # load that package
+    for(package_name in packages_needed_biocmanager){
+      if(!(package_name %in% packages_installed)){
+        cat('package',package_name,'missing\ninstalling now\n')
+        BiocManager::install(package_name, update=TRUE, ask=FALSE) # this function is the difference
+      }
+    }
+  }
   
   #####################
   # check and print out whether all packages are installed
   #####################
   
   packages_installed = installed.packages()[,"Package"] # now update the list of installed packages
-   
+  all_packages_needed = append(packages_needed,packages_needed_biocmanager) # combining two vectors
+  
   count = 0 # use this count to keep track if all necessary packages are installed
-  for(package_name in packages_needed){
+  for(package_name in all_packages_needed){
     if(!(package_name %in% packages_installed)){
       cat('package',package_name,'missing\n')
     }else{
       count = count + 1
     }
   }
-  if(count == length(packages_needed)){
+  if(count == length(all_packages_needed)){
     print('all packages have been successfully installed')
     finished = TRUE
   }else{
