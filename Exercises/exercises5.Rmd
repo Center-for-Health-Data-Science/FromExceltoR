@@ -28,13 +28,13 @@ The dataset to be used is about risk factors associated with low infant birth we
 
 1. Use the commands below to load the MASS package and get the help page for the data frame. The help page will appear
 in the lower right window of RStudio. Read about the data; in particular about the variables `age`, `lwt`, `ftv`, `smoke`, and `bwt`. 
-    ```{r, eval = TRUE}
+```{r, eval = TRUE}
 library(MASS)
 ?birthwt
 ```
 
 2. `birthwt` is not a tibble (the modern way to organize data), but we can make it one:
-    ```{r}
+```{r}
 library(tidyverse)    
 birthData <- as_tibble(birthwt)
 birthData
@@ -43,7 +43,7 @@ birthData
 3. Mother's smoking habits (`smoke`) is coded as numerical variable. Make it a factor (categorical variable). 
 
 4. The `ftv` is a numerical variable, but we would also like a categorical version of it, with groups corresponding to zero visits, one visit, and two or more visits, respectively. Try the following commands, and check the results:
-    ```{r}
+```{r}
 table(birthData$ftv)
 birthData <- mutate(birthData, ftvFac = factor(ftv))
 birthData <- mutate(birthData, visits = fct_collapse(ftvFac, Never="0", Once="1", other_level="MoreThanOnce"))
@@ -73,7 +73,7 @@ If you are not too familiar with linear regression, you can have a look at what 
 10. Fit the multiple linear regression model where you include `lwt` as well as `age` and `ftv` (numerical variables) as covariates. Identify the parameter estimates, and consider what their interpretation is.
 
 11. Try the following commands, and see if you can figure out what the outcome means. You should replace `reg2` with the name of the model object from the previous question.  
-    ```{r}
+```{r}
 newData <- data.frame(lwt=100, age=25, ftv=0)
 newData
 predict(reg2, newData)
@@ -99,13 +99,13 @@ library(emmeans)
 _Hint_ `drop1(, test="F")`. What is the conclusion? 
 
 15. Now, consider both `visits` and `smoke` as explanatory variables. Since they are both categorical variables (factors), the relevant model is a _twoway_ ANOVA. Fit the twoway ANOVA model _without interaction_, and make sure you understand the estimates:
-    ```{r}
+```{r}
 twoway1 <- lm(bwt ~ visits + smoke, data=birthData)
 summary(twoway1)
 ```
 
 16. Fit the twoway ANOVA model _with interaction_ (use the command below). Then use `anova` and/or `drop1` to test if the interaction between visits and smoking habits is statistically significant.
-    ```{r}
+```{r}
 twoway2 <- lm(bwt ~ visits * smoke, data=birthData)
 ```
 
@@ -116,14 +116,14 @@ twoway2 <- lm(bwt ~ visits * smoke, data=birthData)
 Predictors of any type can be included in Gaussian linear models, still using `lm`. 
 
 18. Fit a model where `lwt` (numeric) and `smoke` (factor) are included as predictors in an additive way: 
-    ```{r} 
+```{r} 
 model1 <- lm(bwt ~ lwt + smoke, data=birthData)
 summary(model1)
 ```
 What is the interpretation of the estimates?
 
 19. Fit a model with _interaction_ between the two predictors, replacing  `+` by a `*`:
-    ```{r} 
+```{r} 
 model2 <- lm(bwt ~ lwt * smoke, data=birthData)
 summary(model2)
 ```
@@ -141,7 +141,7 @@ ggplot(birthData, aes(x=bwt, y=low)) + geom_point()
 Consider for a moment the situation where the actual birth weight (`bwt`) was not registered, such that `low` was the only information on the child. Hence, the outcome is binary (`low` has two values), and the relevant analysis would be a _logistic regression_ where the probablity $Pr(low=1)$ is described in terms of predictors. For example, we may consider a model with mothers's weight, smoking status, age, and visit status as predictors, just like in the previous question.
 
 21. Fit the model, and consider the estimates:
-    ```{r}
+```{r}
 logreg1 <- glm(low ~ lwt + smoke + age + visits, data=birthData, family="binomial")
 summary(logreg1)
 ```
@@ -152,7 +152,7 @@ Does this model give evidence for an effect of smoking on the weight of infants?
 ### Linear mixed models
 
 22. Assume for a moment that the 189 births took place at 19 different medical centers with 10 births at each center, except for one center with only nine births. This is not the case, so we have to generate a center variable artificially. You should of course never invent such an artificial structure for a real dataset! Anyway, let's do it like this:
-    ```{r}
+```{r}
 set.seed(123)
 center <- sample(rep(1:19, each=10)[1:189])
 center
@@ -162,7 +162,7 @@ The `rep` command repeats the number from 1 to 19, 10 times each. We only need t
 changes the order of the 189 numbers at random. The `set.seed` command has the effect that you get the same sample each time you run the commands. The last line includes the new variable in the original dataset as a categorical variable. 
 
 23. The `center` variable would typically be included in the model as a _random effect_. Gaussian models with both fixed and random effects are called _linear mixed models_, and are fitted with the `lmer` function from the `lme4` package. Run the code below and identify relevant estimates. Remember that `lme4` must be installed before the commands below can be used.
-    ```{r}
+```{r}
 library(lme4)
 lmm1 <- lmer(bwt ~ lwt + smoke + age + visits + (1|center), data=birthData)
 summary(lmm1)

@@ -14,7 +14,7 @@ library(ggplot2)
 
 
 ### Set working directory ----
-setwd('/Users/kgx936/Desktop/FromExceltoR/Presentations/')
+setwd('/Users/kgx936/Desktop/FromExceltoR_2021/Presentations/')
 
 
 ### Reading in data and filtering out entries where size is 0 ----
@@ -50,6 +50,8 @@ dl_sizes
 ### Order by making a factor with specified levels
 downloads <- downloads %>% 
   mutate(machineName = factor(machineName, levels = dl_sizes$machineName))
+
+
 
 ### MachineName as character vector, sample random 50:
 MachineName50 <- downloads$machineName %>% 

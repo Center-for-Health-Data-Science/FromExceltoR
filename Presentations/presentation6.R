@@ -39,7 +39,7 @@
 
 
 # Set working directory:
-setwd("~/Desktop/FromExceltoR/Presentations")
+setwd("~/Desktop/FromExceltoR_2021/Presentations")
 
 
 #############
@@ -99,12 +99,14 @@ exprInfo
 expr16 <- exprDat %>%
   sample_n(.,16)
 
+expr16
+
 # Extract genename
 GeneName <- expr16$GeneName
 
 # Gather counts
 expr16 <- expr16 %>%
-  dplyr::select(-EntrezGeneID, -GeneName) %>%
+  dplyr::select(-GeneName) %>%
   t() %>% 
   as_tibble() %>% 
   rename_at(vars(names(.)), ~GeneName) %>% 
@@ -133,7 +135,7 @@ ggplot(expr16, aes(log2(value+1))) +
 #exprDat %>% mutate(nzeros = rowSums(dplyr::select(.,-EntrezGeneID, -GeneName)==0)) %>% dplyr::select(nzeros)
 
 exprDat <- exprDat %>% 
-  mutate(nzeros = rowSums(dplyr::select(.,-EntrezGeneID, -GeneName)==0)) %>%
+  mutate(nzeros = rowSums(dplyr::select(.,-GeneName)==0)) %>%
   filter(nzeros <= 8) %>%
   dplyr::select(-nzeros)
 
@@ -156,12 +158,11 @@ dim(exprDat)
 
 # Pull out GeneNames and EntrezGeneID for later use.
 GeneNames <- exprDat %>% 
-  dplyr::select(EntrezGeneID, GeneName)
+  dplyr::select(GeneName)
 
 
 # Convert to exprDat to a dataframe and make GenNames column into rownames:
 exprDat <- exprDat %>%
-  dplyr::select(-EntrezGeneID) %>%
   column_to_rownames(., var = "GeneName")
 
 head(exprDat, n=5)

@@ -70,7 +70,6 @@ library(ggplot2)
 # For DEA
 # install.packages("BiocManager")
 # BiocManager::install("DESeq2")
-library(BiocManager)
 library(DESeq2)
 ```
 
@@ -120,7 +119,7 @@ GeneName <- expr16$GeneName
 
 # Gather counts
 expr16 <- expr16 %>%
-  dplyr::select(-EntrezGeneID, -GeneName) %>%
+  dplyr::select(-GeneName) %>%
   t() %>% 
   as_tibble() %>% 
   rename_at(vars(names(.)), ~GeneName) %>% 
@@ -146,7 +145,7 @@ We will filter out genes with too many zero counts. We will exclude the columns 
 # Count number of 0s across samples. Filter samples where at least four samples has a count great than 0.
 
 exprDat <- exprDat %>% 
-  mutate(nzeros = rowSums(dplyr::select(.,-EntrezGeneID, -GeneName)==0)) %>%
+  mutate(nzeros = rowSums(dplyr::select(.,-GeneName)==0)) %>%
   filter(nzeros <= 8) %>%
   dplyr::select(-nzeros)
 
@@ -168,11 +167,10 @@ Convert to exprDat to a dataframe and make GeneNames column into rownames:
 ```{r}
 # Pull out GeneNames and EntrezGeneID for later use
 GeneNames <- exprDat %>%
-  dplyr::select(EntrezGeneID, GeneName)
+  dplyr::select(GeneName)
 
   
 exprDat <- exprDat %>%
-  dplyr::select(-EntrezGeneID) %>%
   column_to_rownames(., var = "GeneName")
 ```
 

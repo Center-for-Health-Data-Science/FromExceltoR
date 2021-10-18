@@ -3,8 +3,8 @@ title: "IV. R Markdown (presentation)"
 author: "Data Science Lab, University of Copenhagen"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
-  html_document: default
   #pdf_document: default
+  html_document: default
 ---
 
 <!-- this is an Rmd comment  and it will NOT appear in the final output document -->

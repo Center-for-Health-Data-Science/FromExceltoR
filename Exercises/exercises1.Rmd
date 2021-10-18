@@ -27,7 +27,7 @@ Go to the menu bar and click *file* &#8594; *New project...* &#8594; *New Direct
 ## Write commands at the prompt
 
 1. Go to the R console (lower left window) and write a few commands, **one at a time**. You could for example try thee commands: 
-    ```{r results='hide'}
+```{r results='hide'}
 6*12
 x <- 100
 x + 7
@@ -57,13 +57,13 @@ One option is to write your commands in a so-called R script. An R script is jus
 Let's also try to make some plots using the base graphics system in R (in *Presentation III* you will learn to make graphics using the *ggplot2*-package).
 
 6. First we need something to plot, that is a dataset. R has some built in datasets, which may be loaded using the command `data`. Insert the following two commands in your R script, and execute them (if you forgot how to do this, then see question 3 above) to learn about the *trees* dataset. Here the prefix `?` in the second command opens a help page in the lower-right window.
-    ```{r eval=FALSE}
+```{r eval=FALSE}
 data("trees")
 ?trees
 ```
 
 7. The dataset *trees* contains 31 observations of 3 variables (diameter, height and volume of black cherry trees). Insert the following two commands in your R script, and execute them to make two plots. Thereafter click *"Plots"* in the lower-right window, and use the arrows to toggle between the two plots you just made. What is the difference between the two plots?
-    ```{r eval=FALSE}
+```{r eval=FALSE}
 plot(Volume~Height, data=trees)
 plot(Volume~Height, data=trees, log="xy")
 ```
@@ -100,7 +100,7 @@ Notice - if you have a SCIENCE-PC:  There is sometimes problems with installatio
 Every R function comes with a help page, that gives a brief description of the function and describes its usage (input/arguments and output/value). Let's use the function `median` as example. It is, no surprise, computing the median from a vector of numbers. 
 
 12. Try these commands:
-    ```{r, results="hide"}
+```{r, results="hide"}
 x <- c(1,3,8,9,100,NA)
 x
 median(x)
@@ -108,12 +108,12 @@ median(x)
 The first command defines a vector with six elements, but where the last number is missing (NA = Not Available). Since the last number is missing, `median` returns `NA`. However, could we make `median` find the median of the remaining numbers. Perhaps the help page can help out!
 
 13. Try the command
-    ```{r}
+```{r}
 ?median
 ```
 Then the help page for `median` appears in the lower left window. If we read it carefully, then we realize that the extra argument (input) `na.rm` may help us. We therefore try this:
-    ```{r}
-   median(x, na.rm=TRUE)
+```{r}
+median(x, na.rm=TRUE)
 ```
 
 Admittedly, R help pages are often quite difficult to read, but be aware that there are examples of commands in the bottom of each help page. For more complicated functions, these examples can be very useful while trying to get to know the function and its functionalities. 

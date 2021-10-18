@@ -20,7 +20,7 @@ library(emmeans)
 # Package for statistical analysis. Estimated marginal means. 
 # Means "extracted" from model not the data itself. Good for pairwise comparisons and adjustment for multiple testing. Back-transformation of model estimates.
 
-setwd("~/Desktop/FromExceltoR/Presentations")
+setwd("~/Desktop/FromExceltoR_2021/Presentations")
 
 
 

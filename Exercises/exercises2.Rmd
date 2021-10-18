@@ -40,7 +40,7 @@ The spreadsheet contains data from five UK weather stations. The following varia
 Before you proceed with the exercises in this document, make sure to run the command `library(tidyverse)` in order to load the core **tidyverse** packages.
 
 4. Try out the following commands, and understand what they do.
-    ```{r}
+```{r}
 filter(climate, station == "oxford")
 select(climate, station, year, month, af)
 mutate(climate, rain_cm = rain/10)
@@ -50,9 +50,9 @@ arrange(climate, sun)
 ```
 
 5. a. Assign the output of `filter(climate, station == "oxford", af == 0)` to `oxford_af`, that is, use the command
-    ```{r, results="hide"}
+```{r, results="hide"}
 oxford_af <- filter(climate, station == "oxford", af == 0)
-    ```
+```
 
     b. Type `oxford_af` to view the content of the new data set. What do the observations have in common?
     
@@ -67,12 +67,12 @@ oxford_af <- filter(climate, station == "oxford", af == 0)
 
     b. Try out the following commands, and understand the output.
         
-        ```{r}
-        rain_vector
-        rain_vector[1:6]
-        rain_vector[5]
-        rain_vector[c(2,4,6)]
-        ```
+```{r}
+rain_vector
+rain_vector[1:6]
+rain_vector[5]
+rain_vector[c(2,4,6)]
+```
 
     c. Use the `mean` and `sd` functions to compute the average and standard deviation of the monthly rainfall in the climate data set.
     
