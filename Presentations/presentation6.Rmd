@@ -71,6 +71,7 @@ library(ggplot2)
 # install.packages("BiocManager")
 # BiocManager::install("DESeq2")
 library(DESeq2)
+library(dplyr)
 ```
 
 
@@ -100,7 +101,6 @@ exprInfo <- exprInfo %>%
 head(exprInfo)
 ```
 
-
 &nbsp;
 
 ---
@@ -113,7 +113,7 @@ Let's try to sample 16 (n) random genes and plot their count distribution.
 # Sample 16 random rows
 expr16 <- exprDat %>%
   sample_n(.,16)
-
+expr16
 # Extract genenames
 GeneName <- expr16$GeneName
 
@@ -139,18 +139,25 @@ ggplot(expr16, aes(log2(value+1))) +
 
 ---
 
-We will filter out genes with too many zero counts. We will exclude the columns with gene information:
+We will filter out low expressed genes. There are many strategies for doing so, but here we will filter out genes that have less than 3 counts in at least _n_ samples. We select _n_ as the smallest number of biologically meaningful groups. In this case, it is 2. 
+
 
 ```{r}
-# Count number of 0s across samples. Filter samples where at least four samples has a count great than 0.
+table(exprInfo$CellType, exprInfo$Status)
+# 2 samples in each group
+```
 
-exprDat <- exprDat %>% 
-  mutate(nzeros = rowSums(dplyr::select(.,-GeneName)==0)) %>%
-  filter(nzeros <= 8) %>%
+```{r}
+# First, we count the number of times a count value in a sample is greater or equal to 3. Then Filter rows where at least 2 samples has a count great than 3.
+
+exprDat <- exprDat %>%
+  mutate(nzeros = rowSums(dplyr::select(.,-GeneName)<=3)) %>% # count number of 
+  filter(nzeros <= 2) %>%
   dplyr::select(-nzeros)
 
 # How many genes do we have left:
 dim(exprDat)
+
 ```
 
 &nbsp;
@@ -160,22 +167,31 @@ dim(exprDat)
 ## Differential Expression Analysis- DESeq2
 
 
-We will now make a DESeq2 object. For this we use the function `DESeqDataSetFromMatrix` from the DEseq2 package. As input we give our count matrix, our gene IDs and our meta data (exprInfo). Additionally we include a design for DE contrasts. In this case we add CellType (luminal or basal) and Status (control, pregnant or lactating).   
+We will now make a DESeq2 object. For this we use the function `DESeqDataSetFromMatrix` from the DEseq2 package.
+
+DESeq object is a type of SummarizedExperiment container used to store the input values, intermediate calculations and results of an analysis of differential expression. The rows typically represent Genes (genomic ranges) of interest and the columns represent samples.
+
+```{r fig.align="center", echo=FALSE, out.width="70%"}
+knitr::include_graphics(paste0(getwd(),"/sumExp.png"))
+```
 
 
-Convert to exprDat to a dataframe and make GeneNames column into rownames:
+
+
+First, Convert exprDat to a dataframe and make GeneNames column into rownames:
 ```{r}
 # Pull out GeneNames and EntrezGeneID for later use
 GeneNames <- exprDat %>%
   dplyr::select(GeneName)
 
-  
 exprDat <- exprDat %>%
   column_to_rownames(., var = "GeneName")
 ```
 
-
 Make a DESeq2 object:
+As input we give our count matrix, our gene IDs and our meta data (exprInfo). Additionally we include a design for DE contrasts. In this case we add CellType (luminal or basal) and Status (control, pregnant or lactating).   
+
+
 ```{r}
 exprObj <- DESeqDataSetFromMatrix(countData = exprDat,
                               colData = exprInfo,
@@ -185,6 +201,74 @@ exprObj
 
 ---
 
+### Preliminary analysis:
+
+There are multiple biases in RNAseq experiment: library size, genes length, genes GC composition, etc.
+Library size is the most well-known bias. For the purpose of DEA - genes length and GC composition are not so important because it is supposed to be about the same for the gene across different samples.
+
+Let's have a look at the library sizes:
+
+```{r}
+colSums(assay(exprObj))
+```
+
+The count distributions may be dominated by a few genes with very large counts. These genes will drive plotting e.g. heatmaps, PCA analysis etc.
+Let's see if we have any "outlier" genes in our dataset and at the same time inspect the sample library sizes. For convenience I am using the base R boxplot function:
+
+```{r}
+#boxplot(assay(exprObj), las=2)
+boxplot(log2(assay(exprObj)+1), las=2)
+```
+
+As you can see we do not have any extreme outliers, but we do see some differences between libraries. 
+
+Next, we will apply the "vst" function to do a couple of things 
+
+* normalize library size to obtain counts per million mapped reads
+* log2 transform the data to get more normally distributed data 
+* apply variance stabilizing transformation which we will discuss below. 
+
+
+```{r}
+exprObjvst <- vst(exprObj,blind=FALSE)
+```
+
+Let's plot normalized data.
+
+```{r}
+par(mfrow=c(1,1))
+boxplot(assay(exprObjvst), xlab="", ylab="Log2 counts per million",las=2)
+```
+
+
+&nbsp;
+
+### Variance stabilizing transformation:
+
+In RNA-Seq data, genes with larger average expression have on average larger observed variances (sd) across samples. This is know as data heteroscedasticity. Expression varies from sample to sample more than other genes with lower average expression. 
+
+
+```{r fig.height = 4, fig.width = 12}
+
+# BiocManager::install("vsn")
+library(vsn)
+rawSd <- vsn::meanSdPlot(as.matrix(assay(exprObj)), plot=FALSE)
+logSd <- vsn::meanSdPlot(log2(as.matrix(assay(exprObj))+1), plot=FALSE)
+vstSd <- vsn::meanSdPlot(as.matrix(assay(exprObjvst)), plot=FALSE)
+
+par(mfrow = c(1,3),  mar = c(3, 3, 3, 1), mgp = c(1.5, 0.5, 0))
+smoothScatter(x = rawSd$px, y = rawSd$py, ylab = "Sd",xlab = "Rank", main = "Counts", cex.main=1.5, ylim = c(0,4e+03))
+lines(x = rawSd$rank, y = rawSd$sd, add = TRUE, col = "red")
+smoothScatter(x = logSd$px, y = logSd$py, ylab = "Sd",xlab = "Rank", main = "Log2", cex.main=1.5, ylim = c(0,4))
+lines(x = logSd$rank, y = logSd$sd, add = TRUE, col = "red")
+smoothScatter(x = vstSd$px, y = vstSd$py, ylab = "Sd",xlab = "Rank", main = "VST", cex.main=1.5, ylim = c(0,4))
+lines(x = vstSd$rank, y = vstSd$sd, add = TRUE, col = "red")
+
+```
+
+&nbsp;
+
+---
 
 ### Preliminary analysis:
 
