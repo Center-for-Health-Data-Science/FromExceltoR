@@ -231,7 +231,8 @@ Remake the boxplot with transformed counts.<br />
 <strong>Extra (optional)</strong>: Make a boxplot with the vst counts.</p>
 <pre class="r"><code>exprObjvst &lt;- vst(exprObj,blind=FALSE)</code></pre>
 <p> </p>
-<p>We would like to use a PCA plot to inspect if the vst transformation has improved the clustering of our samples by group. For this we will first perform principal component analysis using both the ‘raw’ counts and vst-transformed counts. We extract counts from the DESeq2 objects using the function <code>assay()</code>.</p>
+<p>We would like to inspect if the vst transformation has improved the clustering of our samples by the group. For this, previously we have used Principal Component Analysis (PCA), however, there are many different methods to accomplish the task.</p>
+<p>Here we apply the Multidimensional Scaling method (also known as principal coordinates analysis) to perform dimensionality reduction analysis using both the ‘raw’ and vst-transformed data. We extract counts from the DESeq2 objects using the function <code>assay()</code>.</p>
 <ol start="8" style="list-style-type: decimal">
 <li>Copy and run the two chunks of code below.<br />
 In the second chunk we are using three different functions: <code>t()</code>, <code>dist()</code> and <code>cmdscale()</code>. Use <strong>?</strong> to figure out what each of them do! What inputs do they take? and what are the default values?</li>
@@ -247,18 +248,18 @@ head(vstTrf, n=3)</code></pre>
 unTrf &lt;- unTrf %&gt;% t() %&gt;% 
     dist() %&gt;% cmdscale(., eig=TRUE, k=2)
 
-unTrf &lt;- tibble(PC1=unTrf$points[,1],PC2=unTrf$points[,2])
+unTrf &lt;- tibble(PCo1=unTrf$points[,1],PCo2=unTrf$points[,2])
 
 # vst transformed counts
 
 vstTrf &lt;- vstTrf %&gt;% t() %&gt;% 
     dist() %&gt;% cmdscale(., eig=TRUE, k=2)
 
-vstTrf &lt;- tibble(PC1=vstTrf$points[,1],PC2=vstTrf$points[,2])</code></pre>
+vstTrf &lt;- tibble(PCo1=vstTrf$points[,1],PCo2=vstTrf$points[,2])</code></pre>
 <p> </p>
-<p>You now have two datasets containing the first two principal components (PC1 &amp; PC2) for both ‘raw’ (un-transformed) counts, <em>unTrf</em>, and vst-transformed counts, <em>vstTrf</em>.</p>
+<p>You now have two datasets containing the first two principal coordinates (PCa1 &amp; PCo2) for both ‘raw’ (un-transformed) counts, <em>unTrf</em>, and vst-transformed counts, <em>vstTrf</em>.</p>
 <ol start="9" style="list-style-type: decimal">
-<li>Make a PCA plot for each set using ggplot2. Color the samples by condition and label them by <em>celltype</em> (<strong>airMet</strong> has this information).<br />
+<li>Make a PCaA plot for each set using ggplot2. Color the samples by condition and label them by <em>celltype</em> (<strong>airMet</strong> has this information).<br />
 <strong>HINT</strong> A PCA plot is just a <code>geom_point()</code> plot with x=PC1 and y=PC2. Would you say that the transformation improved the partitioning of control and treated samples?</li>
 </ol>
 <p> </p>
@@ -283,7 +284,7 @@ exprObj &lt;- DESeq(exprObj)</code></pre>
 </ol>
 <p> </p>
 <ol start="13" style="list-style-type: decimal">
-<li>Make a bubble plot (fancy point plot) of the top 50 most significant DE genes:
+<li>Make a bubble plot (fancy point plot) of the top 50 most significant DE genes on the x-axis and log2FoldChange on the y-axis:
 <ol style="list-style-type: lower-alpha">
 <li>The size of the point should reflect the <strong>absolute</strong> <em>log2FoldChange</em> and the shade of the point should reflect the significance (e.g. the padj).</li>
 <li>Remove the x-axis labels (gene symbols) and instead add these to the points themselves with <code>geom_text()</code>.</li>
@@ -294,6 +295,7 @@ exprObj &lt;- DESeq(exprObj)</code></pre>
 <li>Based on your plot, which genes seem to be most effected by treatment with dexamethasone and albuterol?</li>
 </ol></li>
 </ol>
+<p> </p>
 </div>
 </div>
 

@@ -118,8 +118,11 @@ exprObjvst <- vst(exprObj,blind=FALSE)
 
 &nbsp;
 
-We would like to use a PCA plot to inspect if the vst transformation has improved the clustering of our samples by group. For this we will first perform principal component analysis using both the 'raw' counts and vst-transformed counts. We extract counts from the DESeq2 objects using the function `assay()`.
+We would like to inspect if the vst transformation has improved the clustering of our samples by the group. For this, previously we have used Principal Component Analysis (PCA), however, there are many different methods to accomplish the task. 
 
+Here we apply the Multidimensional Scaling method (also known as principal coordinates analysis) to perform dimensionality reduction analysis using both the 'raw' and vst-transformed data. 
+
+We extract counts from the DESeq2 objects using the function `assay()`.
 
 8. Copy and run the two chunks of code below.   
 In the second chunk we are using three different functions: `t()`, `dist()` and `cmdscale()`. Use **?** to figure out what each of them do! What inputs do they take? and what are the default values?
@@ -139,22 +142,22 @@ head(vstTrf, n=3)
 unTrf <- unTrf %>% t() %>% 
     dist() %>% cmdscale(., eig=TRUE, k=2)
 
-unTrf <- tibble(PC1=unTrf$points[,1],PC2=unTrf$points[,2])
+unTrf <- tibble(PCo1=unTrf$points[,1],PCo2=unTrf$points[,2])
 
 # vst transformed counts
 
 vstTrf <- vstTrf %>% t() %>% 
     dist() %>% cmdscale(., eig=TRUE, k=2)
 
-vstTrf <- tibble(PC1=vstTrf$points[,1],PC2=vstTrf$points[,2])
+vstTrf <- tibble(PCo1=vstTrf$points[,1],PCo2=vstTrf$points[,2])
 
 ```
 
 &nbsp;
 
-You now have two datasets containing the first two principal components (PC1 & PC2) for both 'raw' (un-transformed) counts, _unTrf_, and vst-transformed counts, _vstTrf_.   
+You now have two datasets containing the first two principal coordinates (PCa1 & PCo2) for both 'raw' (un-transformed) counts, _unTrf_, and vst-transformed counts, _vstTrf_.   
 
-9. Make a PCA plot for each set using ggplot2. Color the samples by condition and label them by _celltype_ (**airMet** has this information).   
+9. Make a PCaA plot for each set using ggplot2. Color the samples by condition and label them by _celltype_ (**airMet** has this information).   
   **HINT** A PCA plot is just a `geom_point()` plot with x=PC1 and y=PC2.
 Would you say that the transformation improved the partitioning of control and treated samples?
 
@@ -189,8 +192,10 @@ resTC <- results(. , contrast = c(), independentFiltering = FALSE)
     
 &nbsp;
 
-13. Make a bubble plot (fancy point plot) of the top 50 most significant DE genes:
+13. Make a bubble plot (fancy point plot) of the top 50 most significant DE genes on the x-axis and log2FoldChange on the y-axis:
     (a) The size of the point should reflect the **absolute** _log2FoldChange_ and the shade of the point should reflect the significance (e.g. the padj).
     (b) Remove the x-axis labels (gene symbols) and instead add these to the points themselves with `geom_text()`.
     (c) Use `facet_grid(rows = vars(dir))` to wrap the top most up-regulated and down-regulated genes in each their own plot (grid).   
     (D) Based on your plot, which genes seem to be most effected by treatment with dexamethasone and albuterol?
+    
+&nbsp;   
