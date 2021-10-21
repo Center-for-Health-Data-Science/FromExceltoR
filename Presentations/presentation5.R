@@ -1,6 +1,6 @@
 # Statistical analysis in R ----
 # Data Science Lab, University of Copenhagen
-# August 2020
+# 21 October 2021
 
 
 # Step 1: Load packages & set working directory ----
@@ -20,7 +20,7 @@ library(emmeans)
 # Package for statistical analysis. Estimated marginal means. 
 # Means "extracted" from model not the data itself. Good for pairwise comparisons and adjustment for multiple testing. Back-transformation of model estimates.
 
-setwd("~/Desktop/FromExceltoR_2021/Presentations")
+setwd("~/Desktop/FromExceltoR/Presentations")
 
 
 
@@ -39,8 +39,18 @@ setwd("~/Desktop/FromExceltoR_2021/Presentations")
 
 # Step 2: Data ----
 
-psorData <- read_excel("psoriasis.xlsx")
+psoriasisData <- read_excel("psoriasis.xlsx")
+psoriasisData
+
+# Dataset1 - Statistical analysis
+# Gene IGFL4. 
+
+psorData  <-  select(psoriasisData, type, IGFL4)
 psorData
+
+# Dataset2 - Bioinformatic analysis
+psorDataG <- select(psoriasisData, -IGFL4)
+psorDataG
 
 
 # -----------------------------------------------------------------------------------------
@@ -49,7 +59,7 @@ psorData
 
 # -----------------------------------------------------------------------------------------
 
-# Make type a factor and count entry in each group
+# Dataset 1, make type a factor and count entry in each group
 psorData <- mutate(psorData, type = factor(type))
 count(psorData, type)
 
@@ -69,7 +79,7 @@ ggplot(psorData, aes(x=type, y=IGFL4)) +
 
 psorData %>% 
   group_by(type) %>% 
-  summarise(avg=mean(IGFL4), sd=sd(IGFL4))
+  summarise(avg=mean(IGFL4), median=median(IGFL4), sd=sd(IGFL4))
 
 
 # Step 4: Fit of oneway ANOVA, model validation ----
@@ -80,12 +90,6 @@ psorData %>%
 oneway <- lm(log(IGFL4) ~ type, data=psorData)
 oneway
 
-# Test the model assumptions
-# Assumptions about linearity.
-# Variance homogeneity (homoscedasticity), and normality. 
-
-par(mfrow=c(2,2))   # makes room for 4=2x2 plots!
-plot(oneway)
 
 
 # Step 5: Hypothesis test + Post hoc tests ----
@@ -128,10 +132,15 @@ data(trees)
 trees
 head(trees)
 
+# Pairwise scatter plots:
+plot(trees)
+
+
 # Step 2: Visualization of raw data ----
 # Pairwise scatter plots:
+plot(trees)
 
-# The **GGally** package helps us make an easy summary plot, where the diagonal is used to visualize the marginal distribution of the three tree variables:
+# A more fancy version of this is available in **GGally**, where the diagonal is used to visualize the marginal distribution of the three tree variables:
 ggpairs(trees)
 
 
@@ -145,11 +154,17 @@ linreg1
 par(mfrow=c(2,2))   # makes room for 4=2x2 plots!
 plot(linreg1)
 
-#  Quadratic tendency in upper left plot suggesting that the linearity assumption is not appropriate. 
-# Datapoint 31 seems to be an outlier
+# Quadratic tendency in upper left plot suggesting that the linearity assumption is not appropriate. 
+# Datapoint 31 seems to be an outlier.
 
 
 # Step 4 iterated: Transformation ----
+
+linreg2 <- lm(log(Volume) ~ log(Girth), data=trees)
+par(mfrow=c(2,2))
+plot(linreg2)
+
+
 # Step 5: Report of the model ----
 # The linear regression model above is  concerned with absolute changes. 
 # Perhaps it is more reasonable to talk about relative changes.
@@ -176,7 +191,6 @@ confint(linreg2)
 # ln(V) = a + b* ln(G)
 # V = e^a * G^b
 
-exp(-2.35332) * 0.1^2.19997
 # This means that an increment of girth by 10%, say, corresponds to an increment of volume by a factor of 1.1^2.2 = 1.23, that is, by 23%.
 
 

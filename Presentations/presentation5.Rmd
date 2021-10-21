@@ -1,9 +1,9 @@
 ---
-title: "V.\\ Statistical analysis in R (presentation)"
+title: "V.\ Statistical analysis in R (presentation)"
 author: "Data Science Lab, University of Copenhagen"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
-  #pdf_document: default
+  pdf_document: default
   html_document: default
 ---
 
@@ -34,7 +34,7 @@ In this manuscript we will exemplify the proposed steps in the analysis of two s
 
 ####  Load packages
 
-For both examples we will use **ggplot2** to make plots, and to be prepared for data manipulations we simply load this together with the rest of the **tidyverse**. Moreover, we will also use extra plotting functionalities from the **GGally** package.
+For both examples we will use **ggplot2** to make plots, and to be prepared for data manipulations, we simply load this together with the rest of the **tidyverse**. Moreover, we will also use extra plotting functionalities from the **GGally** package.
 
 The psoriasis data are provided in an Excel sheet, so we also load **readxl**. Finally, we will use the package **emmeans** to make post hoc tests and to report model predictions.
 
@@ -59,13 +59,22 @@ Now we have done step 1 for both analyses. Next we will look specifically at the
 
 #### Step 1: Data
 
-Psoriasis is an immune-mediated disease that affects the skin. Researchers carried out an microarray experiment with skin from 37 people in order to examine a potential association between the disease and a certain gene (IGFL4). For each of the 37 samples the gene expression was measured. Fifteen skin samples were from psoriasis patients and from a part of the body affected by the disease (`psor`); 15 samples were from psoriasis patients but from a part of the body not affected by the disease (`psne`); and 7 skin samples were from healthy people (`control`).  
+Psoriasis is an immune-mediated disease that affects the skin. Researchers carried out a micro-array experiment with skin from 37 people in order to examine a potential association between the disease and a certain gene (IGFL4). For each of the 37 samples the gene expression was measured. Fifteen skin samples were from psoriasis patients and from a part of the body affected by the disease (`psor`); 15 samples were from psoriasis patients but from a part of the body not affected by the disease (`psne`); and 7 skin samples were from healthy people (`control`).  
 
-The data are saved in the file **psoriasis.xlsx**. At first the variable `type` is stored as a character variable we change it to a factor (and check that indeed there are 15, 15 and 7 patients in the three groups).
+The data are saved in the file **psoriasis.xlsx**. At first the variable `type` is stored as a character variable, we change it to a factor (and check that indeed there are 15, 15 and 7 patients in the three groups).
 
 ```{r}
-psorData <- read_excel("psoriasis.xlsx")
-psorData
+psoriasisData <- read_excel("psoriasis.xlsx")
+
+# Dataset1
+psorData  <- select(psoriasisData, type, IGFL4)
+
+# Dataset2
+psorDataG <- select(psoriasisData, -IGFL4)
+
+
+psorData <- mutate(psorData, type = factor(type))
+count(psorData, type)
 ```
 
 
@@ -84,13 +93,13 @@ ggplot(psorData, aes(x=type, y=IGFL4)) +
 
 psorData %>% 
   group_by(type) %>% 
-  summarise(avg=mean(IGFL4), sd=sd(IGFL4))
+  summarise(avg=mean(IGFL4), median=median(IGFL4), sd=sd(IGFL4))
 ```
 
 
 #### Step 3: Fit of oneway ANOVA, model validation
 
-The scientific question is whether the gene expression level differs between the three types/groups. Thus, the natural type of analysis is a oneway analysis of variance (ANOVA). The oneway ANOVA is fitted with `lm`. It is a good approach to assign a name (below *oneway*) to the object with the fitted model. This object contains all relevant information and may be used for subsequent analysis. Note that we have logarithmic transformed the response as intensities are often on a multiplicative scale. 
+The scientific question is whether the gene expression level of IGFL4 differs between the three types/groups. Thus, the natural type of analysis is a oneway analysis of variance (ANOVA). The oneway ANOVA is fitted with `lm`. It is a good approach to assign a name (below *oneway*) to the object with the fitted model. This object contains all relevant information and may be used for subsequent analysis. Note that we have logarithmic transformed the response as intensities are often on a multiplicative scale.
 
 ```{r}
 oneway <- lm(log(IGFL4) ~ type, data=psorData)
@@ -116,7 +125,7 @@ pairs(emmeans(oneway,~type))
 
 #### Step 5: Report of model parameters
 
-In this example it is natural to report the estimated intensities as well as the comparisons between the 3 groups. As the analysis was done using a log transformation it is also advisable to backtransform. Both things can be done automatically by the **emmeans** package, where the option `type="response"` (here `type` is the name of an option inside the R command, and it is a coincidence that it has the same name as the variable *type*) requests the backtransformation:
+In this example, it is natural to report the estimated intensities as well as the comparisons between the 3 groups. As the analysis was done using a log transformation it is also advisable to backtransform. Both things can be done automatically by the **emmeans** package, where the option `type="response"` (here `type` is the name of an option inside the R command, and it is a coincidence that it has the same name as the variable *type*) requests the backtransformation:
 
 ```{r}
 emmeans(oneway,~type,type="response")
@@ -131,7 +140,7 @@ Although we don't recommend usage of standard errors in the context of backtrans
 
 #### Step 1: Data
 
-For the first part of the presentation we will use data from 31 cherry trees available in the built in dataset `trees`: Girth, height and tree volume have been measured for each tree. Please note, that the help page `?trees` states, that girth is the tree diameter. Interest is in the association between tree volume on the one side and girth and height on the other side. 
+For the first part of the presentation we will use data from 31 cherry trees available in the built-in dataset `trees`: Girth, height and tree volume have been measured for each tree. Please note, that the help page `?trees` states, that girth is the tree diameter. Interest is in the association between tree volume on the one side, and girth and height on the other side. 
 
 ```{r}
 data(trees)
@@ -141,7 +150,11 @@ head(trees)
 
 #### Step 2: Visualization of raw data
 
-The **GGally** package helps us make an easy summary plot, where the diagonal is used to visualize the marginal distribution of the three tree variables:
+```{r, echo=TRUE, message=FALSE, fig.height=4, fig.width=4}
+plot(trees)
+```
+
+A more fancy version of this is available in **GGally**, where the diagonal is used to visualize the marginal distribution of the three tree variables:
 ```{r, fig.height=4, fig.width=4}
 ggpairs(trees)
 ```
@@ -155,14 +168,14 @@ linreg1 <- lm(Volume ~ Girth, data=trees)
 linreg1
 ```
 
-Mathematically this model makes assumptions about linearity, variance homogeneity, and normality. These assumptions are checked visually via four plots generated from the model residuals. In R it is easy to make these plots; simply apply `plot` on the `lm`-object.
+Mathematically this model makes assumptions about linearity, variance homogeneity, and normality. These assumptions are checked visually via four plots generated from the model residuals. In R, it is easy to make these plots; simply apply `plot` on the `lm`-object.
 
 ```{r}
 par(mfrow=c(2,2))   # makes room for 4=2x2 plots!
 plot(linreg1)
 ```
 
-In this case there appears to be problems with the model. In particular, the upper left plot shows a quadratic tendency suggesting that the linearity assumption is not appropriate. Perhaps a data transformation can help us out.
+In this case there appears to be problems with the model. In particular, the upper left plot shows a quadratic tendency suggesting that the linearity assumption is not appropriate. Datapoint 31 seems to be an outlier as well. There seems to be some potential skewness. Perhaps a data transformation can help us out. 
 
 #### Step 4 iterated: Transformation
 
@@ -173,7 +186,7 @@ linreg2 <- lm(log(Volume) ~ log(Girth), data=trees)
 par(mfrow=c(2,2))
 plot(linreg2)
 ```
-This model looks better! 
+This model looks better! Residuals vs. fitted values as well as no outliers in the leverage plot!
 
 
 #### Step 5: Report of the model
@@ -243,19 +256,20 @@ The $F$-test for comparison of two nested models may be carried out by the `anov
 anova(linreg3, linreg2)
 ```
 
-However, as an alternative to `anova` it is more pratical to use the `drop1` command, which makes all the tests corresponding to removal of one of the explanatory variables. If you want $p$-values, then ask for $F$-tests:
+However, as an alternative to `anova` it is more pratical to use the `drop1` command, which makes all the tests corresponding to removal of one of the explanatory variables (i.e. independent variables). If you want $p$-values, then ask for $F$-tests:
 ```{r}
 drop1(linreg3,test="F")
 ```
 
 We see that `anova` and `drop1` give the same p-value ($p=7.8 * 10^{-6}$) for the effect of log(Height). And in a Gaussian model (like this) this coincides with the p-value from the $t$-test for the null hypothesis that there is no effect of a single numerical covariate i.e. height in our example. Thus, 
+
 ```{r}
 summary(linreg3)$coefficients
 ```
 
 So should you do all three tests? Definitely not! 
 
-* In general it is not recommendable to use `summary` for doing tests: The $F$-tests and $t$-tests only coincide for hypothesis on a single parameter. And you may also be deceived by the model parametrizations when interpreting $t$-tests.
+* In general, it is not recommendable to use `summary` for doing tests: The $F$-tests and $t$-tests only coincide for hypothesis on a single parameter. And you may also be deceived by the model parametrizations when interpreting $t$-tests.
 * To use `drop1` you only need to fit the large model (here *linreg3*). Thus, it gives shorter and more easily readable R code.   
 
 &nbsp;
@@ -265,7 +279,7 @@ So should you do all three tests? Definitely not!
 
 ## Outlook: Other analyses
 
-The `lm` function is used for linear models, that is, models where data points are assumed to be independent with a Gaussian (i.e. normal) distribution (and typically also with the same variance). Obviously this class of models is not always appropriate, and there exists functions for many, many more situations and data types. Here we just mention a few functions corresponding to common data types and statistical problems. 
+The `lm` function is used for linear models, that is, models where data points are assumed to be independent with a Gaussian (i.e. normal) distribution (and typically also with the same variance). Obviously, these models are not always appropriate, and there exists functions for many, many more situations and data types. Here, we just mention a few functions corresponding to common data types and statistical problems. 
 
 * `glm`: For independent, but non-Gaussian data. Examples are binary outcomes (logistic regression) and outcomes that are counts (Poisson regression). glm is short for generalized linear models, and the `glm` function is part of the base installation of R.
 * `lmer` and `glmer`: For data with dependence structures that can be described by random effects, e.g., block designs. lme is short for linear mixed effects  (Gaussian data), glmer is short for generalized linear mixed effects  (binary or count data). Both functions are part of the **lme4** package. 

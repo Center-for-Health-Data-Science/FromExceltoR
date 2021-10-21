@@ -58,7 +58,7 @@ setwd('./Presentations')
 setwd('..')
 
 # absolute path
-setwd("~/Documents/work/Projects/FromExceltoR_2021/Presentations")
+setwd("~/Documents/work/Projects/FromExceltoR/Presentations")
 ```
 
 ---
