@@ -31,7 +31,7 @@ The cell lines were treated with dexamethasone and albuterol, or were left untre
 
 ### PART 1 - Preliminary Analysis
 
-For this exercise you will need five R-packages: `tidyverse`, `ggplot2`,  `readxl`, `BiocManager`and `DESeq2`. You should already have these installed!    
+For this exercise you will need five R-packages: `tidyverse`, `ggplot2`,  `readxl`, `BiocManager`, `DESeq2`  and `EDASeq`. You should already have these installed!    
 Copy the chunk below to your .R or .Rmd file to load packages you need.    
   **N.B** If you do get an error when trying to load one of the packages below, you can try to install the missing package using `install.packages('my.package')`:   
 
@@ -42,6 +42,7 @@ library(ggplot2)
 library(readxl)
 library(BiocManager)
 library(DESeq2)
+library(EDASeq)
 ```
 
 
@@ -62,17 +63,17 @@ library(DESeq2)
 
 &nbsp;
 
-**Copy and run the code below**. This line of code will give you a new column in your **airDat** tibble named _nzeros_ (sum of <=3 across samples for each gene).   
-First we temporarily de-select the columns with gene information, then we count <=3 across samples.
+**Copy and run the code below**. This line of code will give you a new column in your **airDat** tibble named _nzeros_ (sum of 0 across samples for each gene).   
+First we temporarily de-select the columns with gene information, then we count 0s across samples.
 
 ```{r, eval=FALSE}
 airDat <- airDat %>% 
-  mutate(nzeros = rowSums(dplyr::select(., -Ensgene, -GeneSymbol, -GC, -Length)<=3))
+  mutate(nzeros = rowSums(dplyr::select(., -Ensgene, -GeneSymbol, -GC, -Length)==0))
 ```
 
 &nbsp;
 
-4. We do not want any genes where less than 4 of the samples have a counts above 3. Filter out the genes for which this is the case, and remove the column _nzeros_ from your tibble after filtering.
+4. We do not want any genes where less than half of the samples have a count above 0. Filter out the genes for which this is the case, and remove the column _nzeros_ from your tibble after filtering.
 Check how many genes you are left with.
    
 
@@ -88,13 +89,62 @@ Remake the boxplot with transformed counts.
 
 
 &nbsp;
+
+
+#### Adjusting for GC content and gene length:
+
+It is well-established that gene length and GC-content will affect the number of reads obtained. It is therefore standard practice to check for such biases and correct accordingly. You already have information on length and GC content in the **airDat** tibble.
+
+The `EDAseq` package can help you correct for gene length and GC content.
+`EDAseq` provides a `biasPlot` showing you if GC content and gene length are a problem. To use this function your data must be in a format that `biasPlot` accepts, e.g. and `EDAseq` object.   
+
+7. Copy the code from both chunks below and run it. Have a look at the object you created, named _EDAobj_, and importantly, look at the plots created, does there appear to be a GC and/or gene length bias in your data?
+  **HINT 1:** An unbias dataset should not show any trend in GC content or gene length across gene counts.   
+
+```{r, eval=FALSE}
+# Converts tibble to matrix of expression counts and removes gene information:
+airDatM <- airDat %>% 
+  dplyr::select(-Ensgene, -GeneSymbol, -GC, -Length) %>% 
+  as.matrix() %>% 
+  unname()
+
+# Make EDASeq object 
+EDAobj <- newSeqExpressionSet(airDatM, 
+                              phenoData=AnnotatedDataFrame(data.frame(condition=airMet$condition, 
+                                                                      celltype=airMet$celltype)),
+                              featureData=AnnotatedDataFrame(data.frame(GC=airDat$GC, 
+                                                                        Length=airDat$Length)))
+```
+
+```{r, eval=FALSE}
+# Bias plots
+par(mfrow=c(1,2))
+biasPlot(EDAobj, "GC", log=TRUE, ylim=c(0,10))
+biasPlot(EDAobj, "Length", log=TRUE, ylim=c(0,10))
+```
+
+&nbsp;
+
+If you observe a bias in your data, you can correct for this with the function `withinLaneNormalization` from `EDASeq`. You can have a look at the [EDASeq documentation](https://www.bioconductor.org/packages/devel/bioc/vignettes/EDASeq/inst/doc/EDASeq.html#retrieving-gene-length-and-gc-content) under point 5 for more info on this function.   
+
+8. Copy and run the code in below to normalize your _EDAobj_ object for GC content and gene length.
+Remake the `biasPlot` from above with the _EDAobjNorm_ object. Are the biases removed?
+
+
+```{r, eval=FALSE}
+EDAobjNorm <- withinLaneNormalization(EDAobj, "GC", which="full", offset=TRUE) %>% 
+  withinLaneNormalization(., "Length", which="full", offset=TRUE)
+```
+
+
+&nbsp;
 ---
 
 ### PART 2 - Differential Expression Analysis with DESeq2
 
 Now we we begin our differential expression analysis in `DESeq2`. First, we use the function `DESeqDataSetFromMatrix` to make a `DESeq2 object` (just as shown in the presentation). 
 
-7. Fill in the DESeq2 object below. We want our design matrix to include _celltype_ and _condition_ from the metadata, (**airMet**). Fill in the _countData_, _colData_ and _design_ (rowData is optional).  
+9. Fill in the DESeq2 object below. We want our design matrix to include _celltype_ and _condition_ from the metadata, (**airMet**). Fill in the _countData_, _colData_ and _design_ (rowData is optional).  
   **HINT** Your countData must only contain counts, no gene IDs etc., so you should filter/slice these these columns out before adding the counts to the object.
 
 
@@ -104,6 +154,23 @@ exprObj <- DESeqDataSetFromMatrix(countData = ,
                               rowData = ,
                               colData = ,
                               design=~)
+```
+
+
+&nbsp;
+
+10. If we are to be correct, you should "feed" the function `DESeqDataSetFromMatrix` the normalized counts from the `EDASeq` analysis, where you corrected for GC content and gene Length. This is slightly more tricky, so we have provided you with the code needed for this. Copy and run the code below. 
+
+
+```{r, eval=FALSE}
+exprObj <- DESeqDataSetFromMatrix(countData = counts(EDAobjNorm),
+                             colData = pData(EDAobjNorm),
+                             design = ~celltype+condition)
+
+normFactors <- exp(-1 * offst(EDAobjNorm))
+normFactors <- normFactors / exp(rowMeans(log(normFactors)))
+normalizationFactors(exprObj) <- normFactors
+
 ```
 
 &nbsp;
@@ -118,13 +185,10 @@ exprObjvst <- vst(exprObj,blind=FALSE)
 
 &nbsp;
 
-We would like to inspect if the vst transformation has improved the clustering of our samples by the group. For this, previously we have used Principal Component Analysis (PCA), however, there are many different methods to accomplish the task. 
+We would like to use a PCA plot to inspect if the vst transformation has improved the clustering of our samples by group. For this we will first perform principal component analysis using both the 'raw' counts and vst-transformed counts. We extract counts from the DESeq2 objects using the function `assay()`.
 
-Here we apply the Multidimensional Scaling method (also known as principal coordinates analysis) to perform dimensionality reduction analysis using both the 'raw' and vst-transformed data. 
 
-We extract counts from the DESeq2 objects using the function `assay()`.
-
-8. Copy and run the two chunks of code below.   
+11. Copy and run the two chunks of code below.   
 In the second chunk we are using three different functions: `t()`, `dist()` and `cmdscale()`. Use **?** to figure out what each of them do! What inputs do they take? and what are the default values?
 
 ```{r, eval=FALSE}
@@ -142,22 +206,22 @@ head(vstTrf, n=3)
 unTrf <- unTrf %>% t() %>% 
     dist() %>% cmdscale(., eig=TRUE, k=2)
 
-unTrf <- tibble(PCo1=unTrf$points[,1],PCo2=unTrf$points[,2])
+unTrf <- tibble(PC1=unTrf$points[,1],PC2=unTrf$points[,2])
 
 # vst transformed counts
 
 vstTrf <- vstTrf %>% t() %>% 
     dist() %>% cmdscale(., eig=TRUE, k=2)
 
-vstTrf <- tibble(PCo1=vstTrf$points[,1],PCo2=vstTrf$points[,2])
+vstTrf <- tibble(PC1=vstTrf$points[,1],PC2=vstTrf$points[,2])
 
 ```
 
 &nbsp;
 
-You now have two datasets containing the first two principal coordinates (PCa1 & PCo2) for both 'raw' (un-transformed) counts, _unTrf_, and vst-transformed counts, _vstTrf_.   
+You now have two datasets containing the first two principal components (PC1 & PC2) for both 'raw' (un-transformed) counts, _unTrf_, and vst-transformed counts, _vstTrf_.   
 
-9. Make a PCaA plot for each set using ggplot2. Color the samples by condition and label them by _celltype_ (**airMet** has this information).   
+12. Make a PCA plot for each set using ggplot2. Color the samples by condition and label them by _celltype_ (**airMet** has this information).   
   **HINT** A PCA plot is just a `geom_point()` plot with x=PC1 and y=PC2.
 Would you say that the transformation improved the partitioning of control and treated samples?
 
@@ -175,16 +239,16 @@ exprObj <- DESeq(exprObj)
 
 We now have our model(s) ready and we want to contrast our condition groups, e.g. treated vs control.   
 
-10. Use the `DESeq2` function `results()` to do the post hoc test (just like we did in the presentation). Figure out what arguments it takes. As a minimum you will have to specify a DESeq2 model object (denoted by '.' below) and a contrast of interest. When you have run the function, have a look at the output.   
+13. Use the `DESeq2` function `results()` to do the post hoc test (just like we did in the presentation). Figure out what arguments it takes. As a minimum you will have to specify a DESeq2 model object (denoted by '.' below) and a contrast of interest. When you have run the function, have a look at the output.   
 
 
 ```{r, eval=FALSE}
 resTC <- results(. , contrast = c(), independentFiltering = FALSE)
 ```
 
-11. Use the function `summary()` to see the number of identified differentially expressed gene. Use the `plotMA()` function to visualize these.   
+14. Use the function `summary()` to see the number of identified differentially expressed gene. Use the `plotMA()` function to visualize these.   
 
-12. Convert your results from `DESeq2` to a tibble and do the following:
+15. Convert your results from `DESeq2` to a tibble and do the following:
     (a) Add two new columns to it (using `mutate`): _dir_ indicating directionality of the logFC. The column _dir_ can be made using the following syntax: `dir=factor(ifelse(log2FoldChange >= 1.0, "Up", "Down"), levels=c("Up", "Down"))` and one named _geneSymbols_ with gene symbols from _airDat_.
     (b) Filter your results to only include genes with log2FoldChange of more than 1 or less than -1 and a _padj_ (adjusted p-value) of less than 0.05. 
     (c) Arrange by _padj_ (ascending) and the **absolute** _log2FoldChange_ (descending). **HINT:** use the function `abs()` to get the absolute log2FoldChange before arranging.
@@ -192,10 +256,8 @@ resTC <- results(. , contrast = c(), independentFiltering = FALSE)
     
 &nbsp;
 
-13. Make a bubble plot (fancy point plot) of the top 50 most significant DE genes on the x-axis and log2FoldChange on the y-axis:
+16. Make a bubble plot (fancy point plot) of the top 50 most significant DE genes:
     (a) The size of the point should reflect the **absolute** _log2FoldChange_ and the shade of the point should reflect the significance (e.g. the padj).
     (b) Remove the x-axis labels (gene symbols) and instead add these to the points themselves with `geom_text()`.
     (c) Use `facet_grid(rows = vars(dir))` to wrap the top most up-regulated and down-regulated genes in each their own plot (grid).   
     (D) Based on your plot, which genes seem to be most effected by treatment with dexamethasone and albuterol?
-    
-&nbsp;   

@@ -166,7 +166,7 @@ pre code {
 
 <h1 class="title toc-ignore">VI. Bioinformatics in R (exercises)</h1>
 <h4 class="author">Center for Health Data Science, University of Copenhagen</h4>
-<h4 class="date">20 October, 2021</h4>
+<h4 class="date">18 October, 2021</h4>
 
 </div>
 
@@ -181,14 +181,15 @@ The dataset <code>airway</code> contains mRNA profiles from bulk RNAseq of smoot
 <hr />
 <div id="part-1---preliminary-analysis" class="section level3">
 <h3>PART 1 - Preliminary Analysis</h3>
-<p>For this exercise you will need five R-packages: <code>tidyverse</code>, <code>ggplot2</code>, <code>readxl</code>, <code>BiocManager</code>and <code>DESeq2</code>. You should already have these installed!<br />
+<p>For this exercise you will need five R-packages: <code>tidyverse</code>, <code>ggplot2</code>, <code>readxl</code>, <code>BiocManager</code>, <code>DESeq2</code> and <code>EDASeq</code>. You should already have these installed!<br />
 Copy the chunk below to your .R or .Rmd file to load packages you need.<br />
 <strong>N.B</strong> If you do get an error when trying to load one of the packages below, you can try to install the missing package using <code>install.packages(&#39;my.package&#39;)</code>:</p>
 <pre class="r"><code>library(tidyverse)
 library(ggplot2)
 library(readxl)
 library(BiocManager)
-library(DESeq2)</code></pre>
+library(DESeq2)
+library(EDASeq)</code></pre>
 <p> </p>
 <hr />
 <ol style="list-style-type: decimal">
@@ -198,13 +199,13 @@ library(DESeq2)</code></pre>
 <li><p>In your <strong>airMet</strong> tibble you have four variables, all characters, convert <em>condition</em> and <em>celltype</em> into factors for further analysis.</p></li>
 </ol>
 <p> </p>
-<p><strong>Copy and run the code below</strong>. This line of code will give you a new column in your <strong>airDat</strong> tibble named <em>nzeros</em> (sum of &lt;=3 across samples for each gene).<br />
-First we temporarily de-select the columns with gene information, then we count &lt;=3 across samples.</p>
+<p><strong>Copy and run the code below</strong>. This line of code will give you a new column in your <strong>airDat</strong> tibble named <em>nzeros</em> (sum of 0 across samples for each gene).<br />
+First we temporarily de-select the columns with gene information, then we count 0s across samples.</p>
 <pre class="r"><code>airDat &lt;- airDat %&gt;% 
-  mutate(nzeros = rowSums(dplyr::select(., -Ensgene, -GeneSymbol, -GC, -Length)&lt;=3))</code></pre>
+  mutate(nzeros = rowSums(dplyr::select(., -Ensgene, -GeneSymbol, -GC, -Length)==0))</code></pre>
 <p> </p>
 <ol start="4" style="list-style-type: decimal">
-<li><p>We do not want any genes where less than 4 of the samples have a counts above 3. Filter out the genes for which this is the case, and remove the column <em>nzeros</em> from your tibble after filtering. Check how many genes you are left with.</p></li>
+<li><p>We do not want any genes where less than half of the samples have a count above 0. Filter out the genes for which this is the case, and remove the column <em>nzeros</em> from your tibble after filtering. Check how many genes you are left with.</p></li>
 <li><p>To get en idea of sample library sizes make a boxplot of gene counts, one for each sample. You will need to <code>gather()</code> the gene counts across samples into one column and the sample IDs into another column. Assign this output to a new variable named <code>airPlot</code>.<br />
 <strong>HINT 1:</strong> First remove the columns with information on genes (there are four) and next use this: <code>gather(key = ID, value=geneCount)</code> to gather the counts into one column.<br />
 <strong>HINT 2:</strong> Use <code>geom_boxplot()</code> to make a boxplot with ggplot2. Extra: To tilt your x-axis labels 90 degrees, add <code>theme(axis.text.x = element_text(angle = 90))</code> to your ggplot code.</p></li>
@@ -212,13 +213,45 @@ First we temporarily de-select the columns with gene information, then we count 
 Remake the boxplot with transformed counts.<br />
 <strong>HINT</strong> remember to add 1.0 pseudo count to all counts before transformation to handle counts which are 0.</p></li>
 </ol>
+<p> </p>
+<div id="adjusting-for-gc-content-and-gene-length" class="section level4">
+<h4>Adjusting for GC content and gene length:</h4>
+<p>It is well-established that gene length and GC-content will affect the number of reads obtained. It is therefore standard practice to check for such biases and correct accordingly. You already have information on length and GC content in the <strong>airDat</strong> tibble.</p>
+<p>The <code>EDAseq</code> package can help you correct for gene length and GC content. <code>EDAseq</code> provides a <code>biasPlot</code> showing you if GC content and gene length are a problem. To use this function your data must be in a format that <code>biasPlot</code> accepts, e.g. and <code>EDAseq</code> object.</p>
+<ol start="7" style="list-style-type: decimal">
+<li>Copy the code from both chunks below and run it. Have a look at the object you created, named <em>EDAobj</em>, and importantly, look at the plots created, does there appear to be a GC and/or gene length bias in your data? <strong>HINT 1:</strong> An unbias dataset should not show any trend in GC content or gene length across gene counts.</li>
+</ol>
+<pre class="r"><code># Converts tibble to matrix of expression counts and removes gene information:
+airDatM &lt;- airDat %&gt;% 
+  dplyr::select(-Ensgene, -GeneSymbol, -GC, -Length) %&gt;% 
+  as.matrix() %&gt;% 
+  unname()
+
+# Make EDASeq object 
+EDAobj &lt;- newSeqExpressionSet(airDatM, 
+                              phenoData=AnnotatedDataFrame(data.frame(condition=airMet$condition, 
+                                                                      celltype=airMet$celltype)),
+                              featureData=AnnotatedDataFrame(data.frame(GC=airDat$GC, 
+                                                                        Length=airDat$Length)))</code></pre>
+<pre class="r"><code># Bias plots
+par(mfrow=c(1,2))
+biasPlot(EDAobj, &quot;GC&quot;, log=TRUE, ylim=c(0,10))
+biasPlot(EDAobj, &quot;Length&quot;, log=TRUE, ylim=c(0,10))</code></pre>
+<p> </p>
+<p>If you observe a bias in your data, you can correct for this with the function <code>withinLaneNormalization</code> from <code>EDASeq</code>. You can have a look at the <a href="https://www.bioconductor.org/packages/devel/bioc/vignettes/EDASeq/inst/doc/EDASeq.html#retrieving-gene-length-and-gc-content">EDASeq documentation</a> under point 5 for more info on this function.</p>
+<ol start="8" style="list-style-type: decimal">
+<li>Copy and run the code in below to normalize your <em>EDAobj</em> object for GC content and gene length. Remake the <code>biasPlot</code> from above with the <em>EDAobjNorm</em> object. Are the biases removed?</li>
+</ol>
+<pre class="r"><code>EDAobjNorm &lt;- withinLaneNormalization(EDAobj, &quot;GC&quot;, which=&quot;full&quot;, offset=TRUE) %&gt;% 
+  withinLaneNormalization(., &quot;Length&quot;, which=&quot;full&quot;, offset=TRUE)</code></pre>
+</div>
 </div>
 <div id="section" class="section level2">
 <h2> </h2>
 <div id="part-2---differential-expression-analysis-with-deseq2" class="section level3">
 <h3>PART 2 - Differential Expression Analysis with DESeq2</h3>
 <p>Now we we begin our differential expression analysis in <code>DESeq2</code>. First, we use the function <code>DESeqDataSetFromMatrix</code> to make a <code>DESeq2 object</code> (just as shown in the presentation).</p>
-<ol start="7" style="list-style-type: decimal">
+<ol start="9" style="list-style-type: decimal">
 <li>Fill in the DESeq2 object below. We want our design matrix to include <em>celltype</em> and <em>condition</em> from the metadata, (<strong>airMet</strong>). Fill in the <em>countData</em>, <em>colData</em> and <em>design</em> (rowData is optional).<br />
 <strong>HINT</strong> Your countData must only contain counts, no gene IDs etc., so you should filter/slice these these columns out before adding the counts to the object.</li>
 </ol>
@@ -227,13 +260,23 @@ Remake the boxplot with transformed counts.<br />
                               colData = ,
                               design=~)</code></pre>
 <p> </p>
+<ol start="10" style="list-style-type: decimal">
+<li>If we are to be correct, you should “feed” the function <code>DESeqDataSetFromMatrix</code> the normalized counts from the <code>EDASeq</code> analysis, where you corrected for GC content and gene Length. This is slightly more tricky, so we have provided you with the code needed for this. Copy and run the code below.</li>
+</ol>
+<pre class="r"><code>exprObj &lt;- DESeqDataSetFromMatrix(countData = counts(EDAobjNorm),
+                             colData = pData(EDAobjNorm),
+                             design = ~celltype+condition)
+
+normFactors &lt;- exp(-1 * offst(EDAobjNorm))
+normFactors &lt;- normFactors / exp(rowMeans(log(normFactors)))
+normalizationFactors(exprObj) &lt;- normFactors</code></pre>
+<p> </p>
 <p>In question 5., we made a ggplot2 boxplots to see the difference in library sizes and variances of samples. Based on this plot it seems like variance stabilizing transformation might improve our dataset for DEA analysis. Copy and run the code below to perform vst transformation.<br />
 <strong>Extra (optional)</strong>: Make a boxplot with the vst counts.</p>
 <pre class="r"><code>exprObjvst &lt;- vst(exprObj,blind=FALSE)</code></pre>
 <p> </p>
-<p>We would like to inspect if the vst transformation has improved the clustering of our samples by the group. For this, previously we have used Principal Component Analysis (PCA), however, there are many different methods to accomplish the task.</p>
-<p>Here we apply the Multidimensional Scaling method (also known as principal coordinates analysis) to perform dimensionality reduction analysis using both the ‘raw’ and vst-transformed data. We extract counts from the DESeq2 objects using the function <code>assay()</code>.</p>
-<ol start="8" style="list-style-type: decimal">
+<p>We would like to use a PCA plot to inspect if the vst transformation has improved the clustering of our samples by group. For this we will first perform principal component analysis using both the ‘raw’ counts and vst-transformed counts. We extract counts from the DESeq2 objects using the function <code>assay()</code>.</p>
+<ol start="11" style="list-style-type: decimal">
 <li>Copy and run the two chunks of code below.<br />
 In the second chunk we are using three different functions: <code>t()</code>, <code>dist()</code> and <code>cmdscale()</code>. Use <strong>?</strong> to figure out what each of them do! What inputs do they take? and what are the default values?</li>
 </ol>
@@ -248,18 +291,18 @@ head(vstTrf, n=3)</code></pre>
 unTrf &lt;- unTrf %&gt;% t() %&gt;% 
     dist() %&gt;% cmdscale(., eig=TRUE, k=2)
 
-unTrf &lt;- tibble(PCo1=unTrf$points[,1],PCo2=unTrf$points[,2])
+unTrf &lt;- tibble(PC1=unTrf$points[,1],PC2=unTrf$points[,2])
 
 # vst transformed counts
 
 vstTrf &lt;- vstTrf %&gt;% t() %&gt;% 
     dist() %&gt;% cmdscale(., eig=TRUE, k=2)
 
-vstTrf &lt;- tibble(PCo1=vstTrf$points[,1],PCo2=vstTrf$points[,2])</code></pre>
+vstTrf &lt;- tibble(PC1=vstTrf$points[,1],PC2=vstTrf$points[,2])</code></pre>
 <p> </p>
-<p>You now have two datasets containing the first two principal coordinates (PCa1 &amp; PCo2) for both ‘raw’ (un-transformed) counts, <em>unTrf</em>, and vst-transformed counts, <em>vstTrf</em>.</p>
-<ol start="9" style="list-style-type: decimal">
-<li>Make a PCaA plot for each set using ggplot2. Color the samples by condition and label them by <em>celltype</em> (<strong>airMet</strong> has this information).<br />
+<p>You now have two datasets containing the first two principal components (PC1 &amp; PC2) for both ‘raw’ (un-transformed) counts, <em>unTrf</em>, and vst-transformed counts, <em>vstTrf</em>.</p>
+<ol start="12" style="list-style-type: decimal">
+<li>Make a PCA plot for each set using ggplot2. Color the samples by condition and label them by <em>celltype</em> (<strong>airMet</strong> has this information).<br />
 <strong>HINT</strong> A PCA plot is just a <code>geom_point()</code> plot with x=PC1 and y=PC2. Would you say that the transformation improved the partitioning of control and treated samples?</li>
 </ol>
 <p> </p>
@@ -268,11 +311,11 @@ vstTrf &lt;- tibble(PCo1=vstTrf$points[,1],PCo2=vstTrf$points[,2])</code></pre>
 exprObj &lt;- DESeq(exprObj)</code></pre>
 <p> </p>
 <p>We now have our model(s) ready and we want to contrast our condition groups, e.g. treated vs control.</p>
-<ol start="10" style="list-style-type: decimal">
+<ol start="13" style="list-style-type: decimal">
 <li>Use the <code>DESeq2</code> function <code>results()</code> to do the post hoc test (just like we did in the presentation). Figure out what arguments it takes. As a minimum you will have to specify a DESeq2 model object (denoted by ‘.’ below) and a contrast of interest. When you have run the function, have a look at the output.</li>
 </ol>
 <pre class="r"><code>resTC &lt;- results(. , contrast = c(), independentFiltering = FALSE)</code></pre>
-<ol start="11" style="list-style-type: decimal">
+<ol start="14" style="list-style-type: decimal">
 <li><p>Use the function <code>summary()</code> to see the number of identified differentially expressed gene. Use the <code>plotMA()</code> function to visualize these.</p></li>
 <li><p>Convert your results from <code>DESeq2</code> to a tibble and do the following:</p>
 <ol style="list-style-type: lower-alpha">
@@ -283,8 +326,8 @@ exprObj &lt;- DESeq(exprObj)</code></pre>
 </ol></li>
 </ol>
 <p> </p>
-<ol start="13" style="list-style-type: decimal">
-<li>Make a bubble plot (fancy point plot) of the top 50 most significant DE genes on the x-axis and log2FoldChange on the y-axis:
+<ol start="16" style="list-style-type: decimal">
+<li>Make a bubble plot (fancy point plot) of the top 50 most significant DE genes:
 <ol style="list-style-type: lower-alpha">
 <li>The size of the point should reflect the <strong>absolute</strong> <em>log2FoldChange</em> and the shade of the point should reflect the significance (e.g. the padj).</li>
 <li>Remove the x-axis labels (gene symbols) and instead add these to the points themselves with <code>geom_text()</code>.</li>
@@ -295,7 +338,6 @@ exprObj &lt;- DESeq(exprObj)</code></pre>
 <li>Based on your plot, which genes seem to be most effected by treatment with dexamethasone and albuterol?</li>
 </ol></li>
 </ol>
-<p> </p>
 </div>
 </div>
 
