@@ -1,63 +1,3 @@
-<<<<<<< HEAD
-#' ---
-#' title: "VI. Bioinformatics in R (presentation)"
-#' author: "Center for Health Data Science, University of Copenhagen"
-#' date: "`r format(Sys.time(), '%d %B, %Y')`"
-#' output:
-#'   #pdf_document: default
-#'   html_document: default
-#' ---
-#' 
-## ----setup, include=FALSE, warning=FALSE, message=FALSE----------------------------------------
-knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
-
-#' 
-#' ## Bioconductor
-#' 
-#' [Bioconductor](https://www.bioconductor.org/) provides tools for computational biology and bioinformatics analysis in R - it is open source and open development and it has an active user community.   
-#' Mostly when we install R-packages we use `install.packages('name_of_package')`. When we use this command we refer to the [CRAN repository](https://cran.r-project.org/) of packages, however sometimes we want a package from `Bioconductor` instead. For this we use the command `BiocManager::install('name_of_package')`. In order to use this installer, you need to download the R-package `BiocManager` e.g. `install.packages('BiocManager')`.  
-#' 
-#' 
-#' 
-#' ## Gene Expression Analysis in R with `DEseq2`
-#' 
-#' [DEseq2](https://bioconductor.org/packages/release/bioc/vignettes/DESeq2/inst/doc/DESeq2.html) is one of the many packages/frameworks which exists for analysis of bulk gene expression data in R. For more information on DEseq2, please have a look at the original publication [here](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-014-0550-8).   
-#' 
-#' Other highly used packages for differential expression analysis _DEA_ are:   
-#' 
-#' * [limma](https://bioconductor.org/packages/release/bioc/vignettes/limma/inst/doc/usersguide.pdf)   
-#' 
-#' * [edgeR](https://bioconductor.org/packages/release/bioc/vignettes/edgeR/inst/doc/edgeRUsersGuide.pdf)   
-#' 
-#' * [NOIseq](https://www.bioconductor.org/packages/release/bioc/vignettes/NOISeq/inst/doc/NOISeq.pdf)   
-#' 
-#' `DEseq2` has many advantages over classical models and post hoc tests, as it is specifically developed for handling common issues and biases in expression data, including differences in sequencing depth and highly variable dispersion of counts between genes.   
-#' In brief, `DEseq2` fits a generalized linear model (GLM) for each gene in the dataset. In the case where we compare two groups i.e. treatment vs control, the GLM fit returns coefficients indicating the overall expression strength of a gene, along with the log2 fold change between groups. `DEseq2` adjusts variable gene dispersion estimates using an empirical Bayes approach which borrows information across genes and shrinks gene-wise dispersions towards a common dispersion trend to increase accuracy of differential expression testing.
-#' 
-#' &nbsp;
-#' 
-#' ---
-#' 
-#' 
-#' ### About the Dataset
-#' 
-#' The dataset used for this presentation was acquired from the following github tutorial on RNAseq analysis: <https://combine-australia.github.io/RNAseq-R/06-rnaseq-day1.html>.
-#' 
-#' RNA sequencing data generated from luminal and basal cell sub-populations in the mammary gland of three groups of mice:   
-#' - Control   
-#' - Pregnant   
-#' - Lactating
-#' 
-#' The objective of the original study (found [here](https://pubmed.ncbi.nlm.nih.gov/25730472/)) was to identify genes specifically expressed in lactating mammary glands, the gene expression profiles of luminal and basal cells from different developmental stages were compared.
-#' 
-#' &nbsp;
-#' 
-#' ---
-#' 
-#' ### Load R-packages:
-#' 
-## ----------------------------------------------------------------------------------------------
-=======
 ### "VI. Bioinformatics in R (presentation)"
 ### author: "Center for Health Data Science, University of Copenhagen"
 ### source("~/Desktop/HeaDS/GeneExpressDat/Presentation6Functions.R")
@@ -106,7 +46,6 @@ setwd("~/Desktop/FromExceltoR/Presentations")
 
 
 ### Load R-packages:
->>>>>>> 1338a05a164da2e77edab534b74de3eb976b0079
 # Data Wrangling
 # install.packages("tidyverse")
 # install.packages("readxl")
@@ -125,24 +64,11 @@ library(ggplot2)
 # BiocManager::install("DESeq2")
 library(DESeq2)
 
-<<<<<<< HEAD
-#' 
-#' 
-#' &nbsp;
-#' 
-#' ---
-#' 
-#' ### Importing Data
-#' 
-#' Reading in data:
-## ----------------------------------------------------------------------------------------------
-=======
 
 #############
 
 
 ### Reading in data
->>>>>>> 1338a05a164da2e77edab534b74de3eb976b0079
 exprDat <- read_excel("MouseRNAseq.xlsx")
 exprInfo <- read_excel("MouseSampleInfo.xlsx")
 
@@ -154,13 +80,8 @@ dim(exprDat)
 # Look at the samples:
 exprInfo
 
-<<<<<<< HEAD
-#' Convert character columns to factor types:
-## ----------------------------------------------------------------------------------------------
-=======
 
 # Convert character columns to factor types:
->>>>>>> 1338a05a164da2e77edab534b74de3eb976b0079
 exprInfo <- exprInfo %>%
   mutate(CellType = as.factor(CellType),
          Status = as.factor(Status))
@@ -172,23 +93,9 @@ exprInfo
 
 ### Initial Data Check
 
-<<<<<<< HEAD
-#' 
-#' &nbsp;
-#' 
-#' ---
-#' 
-#' ### Initial Data Check & Filtering:
-#' 
-#' Let's try to sample 16 (n) random genes and plot their count distribution.
-#' 
-## ----------------------------------------------------------------------------------------------
-# Sample 16 random rows
-=======
 # Let's try to sample 12 (n) random genes and plot their count distribution:
 
 # Sample 16 random rows (genes)
->>>>>>> 1338a05a164da2e77edab534b74de3eb976b0079
 expr16 <- exprDat %>%
   sample_n(.,16)
 
@@ -206,42 +113,20 @@ expr16 <- expr16 %>%
   gather()
 
 
-<<<<<<< HEAD
-#' 
-#' Plot:
-## ----------------------------------------------------------------------------------------------
-=======
 
 expr16
 
 # Plot n randomly sampled genes:
->>>>>>> 1338a05a164da2e77edab534b74de3eb976b0079
 ggplot(expr16, aes(log2(value+1))) + 
   geom_histogram(color="black", fill="grey80", bins=30) + 
   theme_minimal() +
   facet_wrap(~key)
 
-<<<<<<< HEAD
-#' 
-#' ---
-#' 
-#' We will filter out low expressed genes. There are many strategies for doing so, but here we will filter out genes that have less than 3 counts in at least _n_ samples. We select _n_ as the smallest number of biologically meaningful groups. In this case, it is 2. 
-#' 
-#' 
-## ----------------------------------------------------------------------------------------------
-table(exprInfo$CellType, exprInfo$Status)
-# 2 samples in each group
-
-#' 
-## ----------------------------------------------------------------------------------------------
-# First, we count the number of times a count value in a sample is greater or equal to 3. Then Filter rows where at least 2 samples has a count great than 3.
-=======
 
 # --------------
 
 
 ### Filtering
->>>>>>> 1338a05a164da2e77edab534b74de3eb976b0079
 
 
 # Count number of 0s across samples. 
@@ -258,31 +143,6 @@ exprDat <- exprDat %>%
 dim(exprDat)
 
 
-<<<<<<< HEAD
-#' 
-#' &nbsp;
-#' 
-#' ---
-#' 
-#' ## Differential Expression Analysis- DESeq2
-#' 
-#' 
-#' We will now make a DESeq2 object. For this we use the function `DESeqDataSetFromMatrix` from the DEseq2 package.
-#' 
-#' DESeq object is a type of SummarizedExperiment container used to store the input values, intermediate calculations and results of an analysis of differential expression. The rows typically represent Genes (genomic ranges) of interest and the columns represent samples.
-#' 
-## ----fig.align="center", echo=FALSE, out.width="70%"-------------------------------------------
-knitr::include_graphics(paste0(getwd(),"/sumExp.png"))
-
-#' 
-#' 
-#' 
-#' 
-#' First, Convert exprDat to a dataframe and make GeneNames column into rownames:
-## ----------------------------------------------------------------------------------------------
-# Pull out GeneNames and EntrezGeneID for later use
-GeneNames <- exprDat %>%
-=======
 
 
 
@@ -298,7 +158,6 @@ GeneNames <- exprDat %>%
 
 # Pull out GeneNames and EntrezGeneID for later use.
 GeneNames <- exprDat %>% 
->>>>>>> 1338a05a164da2e77edab534b74de3eb976b0079
   dplyr::select(GeneName)
 
 
@@ -306,20 +165,11 @@ GeneNames <- exprDat %>%
 exprDat <- exprDat %>%
   column_to_rownames(., var = "GeneName")
 
-<<<<<<< HEAD
-#' 
-#' Make a DESeq2 object:
-#' As input we give our count matrix, our gene IDs and our meta data (exprInfo). Additionally we include a design for DE contrasts. In this case we add CellType (luminal or basal) and Status (control, pregnant or lactating).   
-#' 
-#' 
-## ----------------------------------------------------------------------------------------------
-=======
 head(exprDat, n=5)
 
 
 
 # Make a DESeq2 object:
->>>>>>> 1338a05a164da2e77edab534b74de3eb976b0079
 exprObj <- DESeqDataSetFromMatrix(countData = exprDat,
                               colData = exprInfo,
                               design= ~CellType+Status)
@@ -327,27 +177,6 @@ exprObj <- DESeqDataSetFromMatrix(countData = exprDat,
 exprObj
 # --------------
 
-<<<<<<< HEAD
-#' 
-#' ---
-#' 
-#' ### Preliminary analysis:
-#' 
-#' There are multiple biases in RNAseq experiment: library size, genes length, genes GC composition, etc.
-#' Library size is the most well-known bias. For the purpose of DEA - genes length and GC composition are not so important because it is supposed to be about the same for the gene across different samples.
-#' 
-#' Let's have a look at the library sizes:
-#' 
-## ----------------------------------------------------------------------------------------------
-colSums(assay(exprObj))
-
-#' 
-#' The count distributions may be dominated by a few genes with very large counts. These genes will drive plotting e.g. heatmaps, PCA analysis etc.
-#' Let's see if we have any "outlier" genes in our dataset and at the same time inspect the sample library sizes. For convenience I am using the base R boxplot function:
-#' 
-## ----------------------------------------------------------------------------------------------
-#boxplot(assay(exprObj), las=2)
-=======
 
 ### Preliminary analysis:
 
@@ -357,42 +186,9 @@ head(assay(exprObj))
 # The count distributions may be dominated by a few genes with very large counts. These genes will drive plotting e.g. heatmaps, PCA analysis etc.
 # Library sizes:
 
->>>>>>> 1338a05a164da2e77edab534b74de3eb976b0079
 boxplot(log2(assay(exprObj)+1), las=2)
 colSums(assay(exprObj))
 
-<<<<<<< HEAD
-#' 
-#' As you can see we do not have any extreme outliers, but we do see some differences between libraries. 
-#' 
-#' Next, we will apply the "vst" function to do a couple of things 
-#' 
-#' * normalize library size to obtain counts per million mapped reads
-#' * log2 transform the data to get more normally distributed data 
-#' * apply variance stabilizing transformation which we will discuss below. 
-#' 
-#' 
-## ----------------------------------------------------------------------------------------------
-exprObjvst <- vst(exprObj,blind=FALSE)
-
-#' 
-#' Let's plot normalized data.
-#' 
-## ----------------------------------------------------------------------------------------------
-par(mfrow=c(1,1))
-boxplot(assay(exprObjvst), xlab="", ylab="Log2 counts per million",las=2)
-
-#' 
-#' 
-#' &nbsp;
-#' 
-#' ### Variance stabilizing transformation:
-#' 
-#' In RNA-Seq data, genes with larger average expression have on average larger observed variances (sd) across samples. This is know as data heteroscedasticity. Expression varies from sample to sample more than other genes with lower average expression. 
-#' 
-#' 
-## ----fig.height = 4, fig.width = 12------------------------------------------------------------
-=======
 # Variance stabilizing transformation
 # vst returns log2 counts adjusted for sequencing depths. 
 
@@ -407,72 +203,11 @@ boxplot(assay(exprObjvst), xlab="", ylab="Log2 counts per million reads mapped "
 plotPCA(exprObjvst,intgroup="Status")
 plotPCA(exprObjvst,intgroup="CellType")
 # --------------
->>>>>>> 1338a05a164da2e77edab534b74de3eb976b0079
 
 
 ### Differential Expression Analysis:
 
 
-<<<<<<< HEAD
-#' 
-#' &nbsp;
-#' 
-#' ---
-#' 
-#' ### Principal Component Analysis
-#' 
-#' Before performing DEA it is a good idea to explore how samples cluster together based on there gene expression profile. The expectation here is that samples from the same group (treatment vs control, condition A vs condition B, etc.) will cluster together. A principal component analysis (PCA) plot can also help us to identify outlier samples which might need to be removed from the analysis. We use our vst counts for principal component analysis:
-#' 
-## ----------------------------------------------------------------------------------------------
-plotPCA(exprObjvst,intgroup="Status")
-plotPCA(exprObjvst,intgroup="CellType")
-
-#' 
-#' &nbsp;
-#' 
-#' ---
-#' 
-#' ### DESeq function for DEA
-#' 
-#' Next, we use `DEseq()` to estimate dispersion, gene-wise and mean-dispersion, fitting model(s):
-## ----------------------------------------------------------------------------------------------
-exprObj <- DESeq(exprObj)
-
-#' 
-#' ---
-#' 
-#' ### Testing
-#' 
-#' Have a look at the group comparisons: 
-#' 
-## ----------------------------------------------------------------------------------------------
-resultsNames(exprObj)
-
-#' 
-#' &nbsp;
-#' 
-#' ---
-#' 
-#' Test for DE genes between the three groups of mice, adjusted for cell type:   
-#' 
-#' (I) lactating and control mice:
-## ----------------------------------------------------------------------------------------------
-resLC <- results(exprObj, contrast = c("Status", "lactate", "control"), independentFiltering = FALSE)
-
-#' 
-#' Summary and plot of DE analysis results:
-#' 
-## ----------------------------------------------------------------------------------------------
-DESeq2::plotMA(resLC)
-summary(resLC)
-
-#' Below we perform the same steps as above to get the DE genes between (II) pregnant and control mice and (III) lactating and pregnant mice:   
-#' 
-#'    
-#' (II) pregnant and control mice:
-## ----------------------------------------------------------------------------------------------
-resPC <- results(exprObj, contrast = c("Status", "pregnant", "control"),  independentFiltering = FALSE)
-=======
 # In brief, DEseq2 fits a generalized linear model (GLM) for each gene in the dataset. 
 # DEseq2 adjusts variable gene dispersions by borrowing information across genes to shrink
 # gene-wise dispersions towards a common trend to increase accuracy of differential expression testing.
@@ -514,7 +249,6 @@ resPC <- results(exprObj, contrast = c("Status", "pregnant", "control"),
 
 # --------------
 
->>>>>>> 1338a05a164da2e77edab534b74de3eb976b0079
 
 # (III) Lactating vs Pregnant mice
 resLP <- results(exprObj, contrast = c("Status", "lactate", "pregnant"),  
@@ -524,37 +258,16 @@ resLP <- results(exprObj, contrast = c("Status", "lactate", "pregnant"),
 #summary(resLP)
 #DESeq2::plotMA(resLP)
 
-<<<<<<< HEAD
-#' 
-#'    
-#'    
-#' (III) lactating and pregnant mice:
-## ----------------------------------------------------------------------------------------------
-resLP <- results(exprObj, contrast = c("Status", "lactate", "pregnant"),  independentFiltering = FALSE)
-=======
 # --------------
 
->>>>>>> 1338a05a164da2e77edab534b74de3eb976b0079
 
 
-<<<<<<< HEAD
-#' 
-#' &nbsp;
-#' 
-#' ---
-#' 
-#' We filter the results of the DEA to only include those genes which are differentially expressed based on logFC (>= 1.0 or <= -1.0) and adjusted p-value (< 0.01).   
-#' Firstly, bind the three DE genesets together and convert to a tibble. Then, add a column with GeneNames. Lastly, filter and arrange rows (genes) based on logFC and adjusted p-values.
-#' 
-## ----------------------------------------------------------------------------------------------
-=======
 ### Filtering results:
 
 # Bind all DE sets together
 # Convert to tibble
 # Add columns with GeneNames
 # Filter and arrange(order)
->>>>>>> 1338a05a164da2e77edab534b74de3eb976b0079
 resDE <- rbind(resLC, resPC, resLP) %>% 
   as_tibble() %>%
   mutate(GeneName = rep(GeneNames$GeneName, 3)) %>%
@@ -567,27 +280,6 @@ resDE <- rbind(resLC, resPC, resLP) %>%
 dim(resDE)
 length(unique(resDE$GeneName))
 
-<<<<<<< HEAD
-#'    
-#' ---
-#' 
-#' 
-#' &nbsp;
-#' 
-#' ---
-#' 
-#' ### Heatmap Visualization
-#' 
-#' To visually inspect if DE genes identified in our DESeq2 analysis successfully separate the three groups of mice (control, pregnant and lactating), we will make a heatmap. 
-#' For this we use the `heatmap` function.
-#' 
-#' It will not make sense to include all DE genes in this heatmap (almost 3000 unique genes). Instead pick the top 100 most significant DE genes, based on adj. p-value and logFC.
-#' 
-#' ---
-#' 
-#' Make a vector of unique GeneNames (top100):
-## ----------------------------------------------------------------------------------------------
-=======
 
 # Give it a look:
 resDE
@@ -605,7 +297,6 @@ resDE
 # It will not make sense to include all DE genes in this heatmap (almost 3000 unique genes). Instead pick the top 100 most sig. DE genes based on adj. p-value and logFC.
 
 
->>>>>>> 1338a05a164da2e77edab534b74de3eb976b0079
 # Make a vector of unique EntrezGeneIDs (top100):
 
 top100 <- resDE[1:100,] %>%
@@ -615,21 +306,12 @@ top100 <- resDE[1:100,] %>%
 
 length(top100)
 
-<<<<<<< HEAD
-#' 
-#' ---
-#' 
-#' The expression counts themselves (not logFC) are needed for the heatmap. We use the topDE vector to extract these from the vst normalized DESeq2 object.
-#' 
-## ----------------------------------------------------------------------------------------------
-=======
 # --------------  
 
 # The expression counts themselves (not logFC) are needed for the heatmap. 
 # We use the topDE vector to extract these from the vst normalized DESeq2 object.
 
 # Let's give the data a look:
->>>>>>> 1338a05a164da2e77edab534b74de3eb976b0079
 head(assay(exprObjvst), n=5)
 
 
@@ -640,18 +322,11 @@ resVST <- assay(exprObjvst) %>%
   as_tibble() %>%
   filter(GeneName %in% top100)
 
-<<<<<<< HEAD
-#' 
-#' 
-#' The heatmap function in base R wants gene expression data as a matrix (a dataframe with numeric values only). We extract the GeneNames column and convert the tibble into a matrix:
-## ----------------------------------------------------------------------------------------------
-=======
 
 # --------------  
 # The heatmap function in base R wants gene expression data as a matrix (a dataframe with numeric values only). 
 
 # We extract the GeneNames:
->>>>>>> 1338a05a164da2e77edab534b74de3eb976b0079
 HPnames <- resVST %>% 
   pull(GeneName)
 
@@ -660,32 +335,14 @@ HPdat <- resVST %>%
   dplyr::select(-GeneName) %>%
   as.matrix()
 
-<<<<<<< HEAD
-#' 
-#' 
-#' ---
-#' 
-#' We use the `heatmap` function to generate a heatmap. We can modify the look of the heatmap as desired, e.g. add column colors, row labels, change color scheme etc.
-#' 
-## ----------------------------------------------------------------------------------------------
-heatmap(HPdat,
-=======
 # --------------  
   
 # Use the heatmap function to generate a heatmap. 
 # We can modify the look of the heatmap as desired, e.g. add column colors, row labels, change color scheme etc.
 
 heatmap(scale(HPdat),
->>>>>>> 1338a05a164da2e77edab534b74de3eb976b0079
         ColSideColors=exprInfo$CellType.colors, 
         labCol=exprInfo$Status,
         labRow = HPnames,
         cexCol=1.2, 
         cexRow = 1.0)
-<<<<<<< HEAD
-
-#' 
-#' 
-#' 
-=======
->>>>>>> 1338a05a164da2e77edab534b74de3eb976b0079
