@@ -270,33 +270,6 @@ lines(x = vstSd$rank, y = vstSd$sd, add = TRUE, col = "red")
 
 ---
 
-### Preliminary analysis:
-
-Let's have a look at the library sizes:
-
-```{r}
-colSums(assay(exprObj))
-```
-
-The count distributions may be dominated by a few genes with very large counts. These genes will drive plotting e.g. heatmaps, PCA analysis etc.
-Let's see if we have any "outlier" genes in our dataset and at the same time inspect the sample library sizes. For convenience I am using the base R boxplot function:
-
-```{r}
-#boxplot(assay(exprObj), las=2)
-boxplot(log2(assay(exprObj)+1), las=2)
-```
-
-We perform variance stabilizing transformation to obtain log2 counts per million read mapped, overcoming issues with outlier genes and sequencing depth:
-
-```{r}
-exprObjvst <- vst(exprObj,blind=FALSE)
-boxplot(assay(exprObjvst), xlab="", ylab="Log2 counts per million",las=2)
-```
-
-&nbsp;
-
----
-
 ### Principal Component Analysis
 
 Before performing DEA it is a good idea to explore how samples cluster together based on there gene expression profile. The expectation here is that samples from the same group (treatment vs control, condition A vs condition B, etc.) will cluster together. A principal component analysis (PCA) plot can also help us to identify outlier samples which might need to be removed from the analysis. We use our vst counts for principal component analysis:

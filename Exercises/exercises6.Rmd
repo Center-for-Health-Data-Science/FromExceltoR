@@ -158,7 +158,7 @@ vstTrf <- tibble(PCo1=vstTrf$points[,1],PCo2=vstTrf$points[,2])
 You now have two datasets containing the first two principal coordinates (PCa1 & PCo2) for both 'raw' (un-transformed) counts, _unTrf_, and vst-transformed counts, _vstTrf_.   
 
 9. Make a PCaA plot for each set using ggplot2. Color the samples by condition and label them by _celltype_ (**airMet** has this information).   
-  **HINT** A PCA plot is just a `geom_point()` plot with x=PC1 and y=PC2.
+  **HINT** A PCoA plot is just a `geom_point()` plot with x=PCo1 and y=PCo2.
 Would you say that the transformation improved the partitioning of control and treated samples?
 
 

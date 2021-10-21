@@ -166,7 +166,7 @@ pre code {
 
 <h1 class="title toc-ignore">VI. Bioinformatics in R (exercises)</h1>
 <h4 class="author">Center for Health Data Science, University of Copenhagen</h4>
-<h4 class="date">20 October, 2021</h4>
+<h4 class="date">21 October, 2021</h4>
 
 </div>
 
@@ -232,7 +232,8 @@ Remake the boxplot with transformed counts.<br />
 <pre class="r"><code>exprObjvst &lt;- vst(exprObj,blind=FALSE)</code></pre>
 <p> </p>
 <p>We would like to inspect if the vst transformation has improved the clustering of our samples by the group. For this, previously we have used Principal Component Analysis (PCA), however, there are many different methods to accomplish the task.</p>
-<p>Here we apply the Multidimensional Scaling method (also known as principal coordinates analysis) to perform dimensionality reduction analysis using both the ‘raw’ and vst-transformed data. We extract counts from the DESeq2 objects using the function <code>assay()</code>.</p>
+<p>Here we apply the Multidimensional Scaling method (also known as principal coordinates analysis) to perform dimensionality reduction analysis using both the ‘raw’ and vst-transformed data.</p>
+<p>We extract counts from the DESeq2 objects using the function <code>assay()</code>.</p>
 <ol start="8" style="list-style-type: decimal">
 <li>Copy and run the two chunks of code below.<br />
 In the second chunk we are using three different functions: <code>t()</code>, <code>dist()</code> and <code>cmdscale()</code>. Use <strong>?</strong> to figure out what each of them do! What inputs do they take? and what are the default values?</li>
@@ -260,7 +261,7 @@ vstTrf &lt;- tibble(PCo1=vstTrf$points[,1],PCo2=vstTrf$points[,2])</code></pre>
 <p>You now have two datasets containing the first two principal coordinates (PCa1 &amp; PCo2) for both ‘raw’ (un-transformed) counts, <em>unTrf</em>, and vst-transformed counts, <em>vstTrf</em>.</p>
 <ol start="9" style="list-style-type: decimal">
 <li>Make a PCaA plot for each set using ggplot2. Color the samples by condition and label them by <em>celltype</em> (<strong>airMet</strong> has this information).<br />
-<strong>HINT</strong> A PCA plot is just a <code>geom_point()</code> plot with x=PC1 and y=PC2. Would you say that the transformation improved the partitioning of control and treated samples?</li>
+<strong>HINT</strong> A PCoA plot is just a <code>geom_point()</code> plot with x=PCo1 and y=PCo2. Would you say that the transformation improved the partitioning of control and treated samples?</li>
 </ol>
 <p> </p>
 <p>Next, we use <code>DEseq()</code> to estimate dispersion, gene-wise and mean-dispersion, fitting model(s). Copy the code below and run it.</p>
