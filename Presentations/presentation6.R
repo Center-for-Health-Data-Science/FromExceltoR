@@ -79,6 +79,7 @@ dim(exprDat)
 
 # Look at the samples:
 exprInfo
+table(exprInfo$CellType, exprInfo$Status)
 
 
 # Convert character columns to factor types:
@@ -128,23 +129,17 @@ ggplot(expr16, aes(log2(value+1))) +
 
 ### Filtering
 
+# First, we count the number of times a count value in a sample is greater or equal to 3. 
+# Then Filter rows where at least 3 samples has a count great than 4.
 
-# Count number of 0s across samples. 
-# Filter samples where at least four samples has a count great than 0:
+exprDat <- exprDat %>%
+  mutate(nthrees = rowSums(dplyr::select(.,-GeneName)<=3)) %>% # count number of 
+  filter(nthrees <= 4) %>%
+  dplyr::select(-nthrees)
 
-#exprDat %>% mutate(nzeros = rowSums(dplyr::select(.,-EntrezGeneID, -GeneName)==0)) %>% dplyr::select(nzeros)
-
-exprDat <- exprDat %>% 
-  mutate(nzeros = rowSums(dplyr::select(.,-GeneName)==0)) %>%
-  filter(nzeros <= 8) %>%
-  dplyr::select(-nzeros)
 
 # How many genes do we have left:
 dim(exprDat)
-
-
-
-
 
 
 #############
@@ -184,16 +179,21 @@ exprObj
 head(assay(exprObj))
 
 # The count distributions may be dominated by a few genes with very large counts. These genes will drive plotting e.g. heatmaps, PCA analysis etc.
-# Library sizes:
+# Let's see if we have any "outlier" genes in our dataset and at the same time inspect the sample library sizes.
 
 boxplot(log2(assay(exprObj)+1), las=2)
 colSums(assay(exprObj))
 
 # Variance stabilizing transformation
 # vst returns log2 counts adjusted for sequencing depths. 
+  # normalize library size to obtain counts per million mapped reads
+  # log2 transform the data to get more normally distributed data 
+  # apply variance stabilizing transformation which we will discuss below. 
+
 
 exprObjvst <- vst(exprObj,blind=TRUE)
 boxplot(assay(exprObjvst), xlab="", ylab="Log2 counts per million reads mapped ",las=2)
+
 # --------------
 
 
