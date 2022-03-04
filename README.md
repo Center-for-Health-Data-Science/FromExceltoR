@@ -1,6 +1,6 @@
 # FromExceltoR
 
-This repository contains the course material for the course`From Excel to R`, October 2021.   
+This repository contains the course material for the course`From Excel to R`, March 2022.   
 
 The course material is originally made by Professor Helle Sørensen and Associate Professor Bo Markussen, SCIENCE data lab, Department of Mathematical Sciences at the University of Copenhagen.
 Contact: helle@math.ku.dk or bomar@math.ku.dk   
