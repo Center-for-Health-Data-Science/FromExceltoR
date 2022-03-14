@@ -279,6 +279,64 @@ time_vector[1:40]</code></pre>
 <p>Notice that more than half the observations have time equal to zero (median is zero).</p>
 <hr />
 </div>
+<div id="data-structures-tibble-and-data.frame" class="section level2">
+<h2>Data structures: <code>tibble</code> and <code>data.frame</code></h2>
+<p>Before we continue with tidyverse, lets look at some highly used data structures in R. Want to know what data type or structure you have, try the function class.</p>
+<pre class="r"><code># Vectors with characters and numeric values
+class(downloads$machineName)</code></pre>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<pre class="r"><code>class(downloads$size)</code></pre>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<pre class="r"><code>class(downloads)</code></pre>
+<pre><code>## [1] &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;</code></pre>
+<p>You will need to make structures or convert between these in R. In the example below we make a dataframe and a tibble and convert between these.</p>
+<pre class="r"><code># Make a dataframe from scratch:
+downloads2 &lt;-  data.frame(machineName=c(&quot;cs18&quot;,&quot;kermit&quot;), rank=c(1,2))
+downloads2</code></pre>
+<pre><code>##   machineName rank
+## 1        cs18    1
+## 2      kermit    2</code></pre>
+<pre class="r"><code>class(downloads2)</code></pre>
+<pre><code>## [1] &quot;data.frame&quot;</code></pre>
+<pre class="r"><code># Convert existing object to a dataframe:
+downloads2 &lt;-  as.data.frame(downloads)
+head(downloads2) # head/top of object</code></pre>
+<pre><code>##   machineName userID  size     time       date   month
+## 1        cs18 146579  2464 0.493030 1995-04-24 1995-04
+## 2        cs18 995988  7745 0.325608 1995-04-24 1995-04
+## 3        cs18 317649  6727 0.313704 1995-04-24 1995-04
+## 4        cs18 748501 13049 0.582537 1995-04-24 1995-04
+## 5        cs18 955815   356 0.259252 1995-04-24 1995-04
+## 6        cs18 444174     0 0.000000 1995-04-24 1995-04</code></pre>
+<pre class="r"><code># Convert existing object to a tibble:
+downloads2 &lt;- as_tibble(downloads2)
+downloads2</code></pre>
+<pre><code>## # A tibble: 147,035 × 6
+##    machineName userID  size  time date                month  
+##    &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dttm&gt;              &lt;chr&gt;  
+##  1 cs18        146579  2464 0.493 1995-04-24 00:00:00 1995-04
+##  2 cs18        995988  7745 0.326 1995-04-24 00:00:00 1995-04
+##  3 cs18        317649  6727 0.314 1995-04-24 00:00:00 1995-04
+##  4 cs18        748501 13049 0.583 1995-04-24 00:00:00 1995-04
+##  5 cs18        955815   356 0.259 1995-04-24 00:00:00 1995-04
+##  6 cs18        444174     0 0     1995-04-24 00:00:00 1995-04
+##  7 cs18        446911     0 0     1995-04-24 00:00:00 1995-04
+##  8 cs18        449552     0 0     1995-04-24 00:00:00 1995-04
+##  9 cs18        456142     0 0     1995-04-24 00:00:00 1995-04
+## 10 cs18        458942     0 0     1995-04-24 00:00:00 1995-04
+## # … with 147,025 more rows</code></pre>
+<pre class="r"><code>class(downloads2)</code></pre>
+<pre><code>## [1] &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;</code></pre>
+<pre class="r"><code># Make tibble from scratch:
+downloads2 &lt;-  tibble(machineName=c(&quot;cs18&quot;,&quot;kermit&quot;), rank=c(1,2))
+downloads2</code></pre>
+<pre><code>## # A tibble: 2 × 2
+##   machineName  rank
+##   &lt;chr&gt;       &lt;dbl&gt;
+## 1 cs18            1
+## 2 kermit          2</code></pre>
+<hr />
+</div>
 <div id="filtering-data-selecting-rows-filter" class="section level2">
 <h2>Filtering data (selecting rows): <code>filter</code></h2>
 <p>The <code>filter</code> function is used to make sub-datasets where only certain datalines (rows) are maintained. It’s described with <em>logical expressions</em> which datalines should be kept in the dataset.</p>
@@ -687,6 +745,96 @@ summarize(downloads.grp2,
 ## 3 tweetie     14207.
 ## 4 kermit      19247.
 ## 5 cs18        26375.</code></pre>
+<hr />
+</div>
+<div id="more-functions-from-tidyverse" class="section level2">
+<h2>More functions from tidyverse</h2>
+<p>Below are three useful functions for column manipulation, <code>relocate</code>, <code>rename</code> and <code>pull</code>:</p>
+<pre class="r"><code># relocate (move one or more columns):
+downloads %&gt;% relocate(time, .before = size)</code></pre>
+<pre><code>## # A tibble: 147,035 × 6
+##    machineName userID  time  size date                month  
+##    &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dttm&gt;              &lt;chr&gt;  
+##  1 cs18        146579 0.493  2464 1995-04-24 00:00:00 1995-04
+##  2 cs18        995988 0.326  7745 1995-04-24 00:00:00 1995-04
+##  3 cs18        317649 0.314  6727 1995-04-24 00:00:00 1995-04
+##  4 cs18        748501 0.583 13049 1995-04-24 00:00:00 1995-04
+##  5 cs18        955815 0.259   356 1995-04-24 00:00:00 1995-04
+##  6 cs18        444174 0         0 1995-04-24 00:00:00 1995-04
+##  7 cs18        446911 0         0 1995-04-24 00:00:00 1995-04
+##  8 cs18        449552 0         0 1995-04-24 00:00:00 1995-04
+##  9 cs18        456142 0         0 1995-04-24 00:00:00 1995-04
+## 10 cs18        458942 0         0 1995-04-24 00:00:00 1995-04
+## # … with 147,025 more rows</code></pre>
+<pre class="r"><code># rename (rename one column):
+downloads %&gt;% rename(year.month=month)</code></pre>
+<pre><code>## # A tibble: 147,035 × 6
+##    machineName userID  size  time date                year.month
+##    &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dttm&gt;              &lt;chr&gt;     
+##  1 cs18        146579  2464 0.493 1995-04-24 00:00:00 1995-04   
+##  2 cs18        995988  7745 0.326 1995-04-24 00:00:00 1995-04   
+##  3 cs18        317649  6727 0.314 1995-04-24 00:00:00 1995-04   
+##  4 cs18        748501 13049 0.583 1995-04-24 00:00:00 1995-04   
+##  5 cs18        955815   356 0.259 1995-04-24 00:00:00 1995-04   
+##  6 cs18        444174     0 0     1995-04-24 00:00:00 1995-04   
+##  7 cs18        446911     0 0     1995-04-24 00:00:00 1995-04   
+##  8 cs18        449552     0 0     1995-04-24 00:00:00 1995-04   
+##  9 cs18        456142     0 0     1995-04-24 00:00:00 1995-04   
+## 10 cs18        458942     0 0     1995-04-24 00:00:00 1995-04   
+## # … with 147,025 more rows</code></pre>
+<pre class="r"><code># pull out one column, equivalent to using $:
+downloads %&gt;% pull(machineName) %&gt;% head()</code></pre>
+<pre><code>## [1] &quot;cs18&quot; &quot;cs18&quot; &quot;cs18&quot; &quot;cs18&quot; &quot;cs18&quot; &quot;cs18&quot;</code></pre>
+<hr />
+<p>Below is an example of how to use the family of <code>_join</code> function included in tidyverse. They are useful for combining two (or more) datasets, even if the sets only contain partial/subset of information.</p>
+<pre class="r"><code># Join tibbles with subsets of information together:
+
+# machineName and power rank
+dowloads5 &lt;- tibble(machineName=c(&quot;cs18&quot;,&quot;piglet&quot;,&quot;tweetie&quot;,&quot;kermit&quot;, &quot;pluto&quot;),
+                    powerRank=c(2,4,1,3,5))
+
+# machineName and location of machine
+dowloads6 &lt;- tibble(machineName=c(&quot;cs18&quot;,&quot;tweetie&quot;,&quot;kermit&quot;,&quot;skeeter&quot;),
+                    location=c(&quot;China&quot;, &quot;USA&quot;, &quot;Germany&quot;, &quot;Japan&quot;))
+
+# all machineNames from tibble on the left are kept
+left_join(dowloads5, dowloads6)</code></pre>
+<pre><code>## # A tibble: 5 × 3
+##   machineName powerRank location
+##   &lt;chr&gt;           &lt;dbl&gt; &lt;chr&gt;   
+## 1 cs18                2 China   
+## 2 piglet              4 &lt;NA&gt;    
+## 3 tweetie             1 USA     
+## 4 kermit              3 Germany 
+## 5 pluto               5 &lt;NA&gt;</code></pre>
+<pre class="r"><code># all machineNames from tibble on the right are kept
+right_join(dowloads5, dowloads6)</code></pre>
+<pre><code>## # A tibble: 4 × 3
+##   machineName powerRank location
+##   &lt;chr&gt;           &lt;dbl&gt; &lt;chr&gt;   
+## 1 cs18                2 China   
+## 2 tweetie             1 USA     
+## 3 kermit              3 Germany 
+## 4 skeeter            NA Japan</code></pre>
+<pre class="r"><code># only machineNames in both left and right tibble are kept 
+inner_join(dowloads5, dowloads6)</code></pre>
+<pre><code>## # A tibble: 3 × 3
+##   machineName powerRank location
+##   &lt;chr&gt;           &lt;dbl&gt; &lt;chr&gt;   
+## 1 cs18                2 China   
+## 2 tweetie             1 USA     
+## 3 kermit              3 Germany</code></pre>
+<pre class="r"><code># all machineNames, from both tibbles are kept
+full_join(dowloads5, dowloads6)</code></pre>
+<pre><code>## # A tibble: 6 × 3
+##   machineName powerRank location
+##   &lt;chr&gt;           &lt;dbl&gt; &lt;chr&gt;   
+## 1 cs18                2 China   
+## 2 piglet              4 &lt;NA&gt;    
+## 3 tweetie             1 USA     
+## 4 kermit              3 Germany 
+## 5 pluto               5 &lt;NA&gt;    
+## 6 skeeter            NA Japan</code></pre>
 </div>
 
 

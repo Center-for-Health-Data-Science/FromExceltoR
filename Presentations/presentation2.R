@@ -70,11 +70,52 @@ sd(time_vector)
 median(time_vector)
 min(time_vector)
 
+
+###############
+
+### Data structures
+
+# Before we continue with tidyverse, lets look at some highly used data structures in R. 
+# Want to know what data type or structure you have, try the function class.
+
+
+# Vectors with characters and numeric values
+class(downloads$machineName)
+class(downloads$size)
+
+
+###############
+
+# You will need to make structures or convert between these in R.
+# In the example below we make a dataframe and a tibble and convert between these.
+
+# Make a dataframe from scratch:
+downloads2 <-  data.frame(machineName=c("cs18","kermit"), rank=c(1,2))
+downloads2
+class(downloads2)
+
+# Convert existing object to a dataframe:
+downloads2 <-  as.data.frame(downloads)
+head(downloads2) # head/top of object
+
+
+# Convert existing object to a tibble:
+downloads2 <- as_tibble(downloads2)
+downloads2
+class(downloads2)
+
+# Make tibble from scratch:
+downloads2 <-  tibble(machineName=c("cs18","kermit"), rank=c(1,2))
+downloads2
+
+
 ###############
 
 ### Let's try some tidyverse commands.
 
 ###############
+
+
 
 ### Filtering data (selecting rows): filter
   
@@ -91,18 +132,19 @@ downloads %>%
 # otherwise write as little as possible
 
 # Only datalines with size variable >0
-downloads2 <- downloads %>% 
+downloads3 <- downloads %>% 
   filter(size > 0)
 
 # view data
-downloads2 # print the first lines in console
-View(downloads2) # view the whole data in a new tab
+downloads3 # print the first lines in console
+View(downloads3) # view the whole data in a new tab
+head(downloads3) # "head" of dataset 
 
-# what are the unique machine names in downloads2?
-distinct(downloads2, machineName)
+# what are the unique machine names in downloads3?
+distinct(downloads3, machineName)
 
 # Datalines from kermit, and with size greater than 2000000 bytes are kept.
-downloads2 %>% 
+downloads3 %>% 
   filter(machineName == "kermit" & size > 2000000)
 
 # other conditional operators can be found in the first presentation!
@@ -111,7 +153,7 @@ downloads2 %>%
 ?dplyr::filter
 
 # what if you want to filter multiple arguments in a variable?
-downloads2 %>% 
+downloads3 %>% 
   filter(machineName %in% c("kermit","pluto"), size > 2000000)
 
 #############
@@ -119,26 +161,26 @@ downloads2 %>%
 ### Selecting variables (columns): select
 
 # Without the date variable
-select(downloads2, -date)
+select(downloads3, -date)
 
 # Only include the three mentioned variable names
-downloads3 <- downloads2 %>% select(machineName, size, time)
-downloads3
+downloads4 <- downloads3 %>% select(machineName, size, time)
+downloads4
 
 ###############
 
 ### Transformations of data
 
 # New variables included in dataset
-downloads3 <- downloads3 %>% 
+downloads4 <- downloads4 %>% 
   mutate(speed = size / time, logSize = log10(size))
 
-downloads3
+downloads4
 
-downloads3 <- downloads3 %>% 
+downloads4 <- downloads4 %>% 
   mutate(slow = ifelse(speed < 150, "Yes", "No"))
 
-downloads3
+downloads4
 
 ?mutate
 ###########
@@ -146,50 +188,50 @@ downloads3
 ### Counting, tabulation of categorical variables: count
 
 # Total number of observations in the current dataset
-count(downloads3)
+count(downloads4)
 
 # Number of observations from each machine
-count(downloads3, machineName)
+count(downloads4, machineName)
 
 # Number of observations which have/have not size larger than 5000
-count(downloads3, size>5000)
+count(downloads4, size>5000)
 
 # Number of observations for each combiation of machine name and the *slow* variable.
-count(downloads3, machineName, slow)
+count(downloads4, machineName, slow)
 
 ##########
 
 ## Sorting data: arrange
 
 # Sort after size
-arrange(downloads3, size)
+arrange(downloads4, size)
 
 # Sort according to download size in descending order
-arrange(downloads3, desc(size))
+arrange(downloads4, desc(size))
 
 # Sort after machine name and then according to download size in descending order
-arrange(downloads3, machineName, desc(size))
+arrange(downloads4, machineName, desc(size))
 
 #########
 
 ### Grouping: group_by
   
 # Group according to machine
-group_by(downloads3, machineName)
+group_by(downloads4, machineName)
 
 # Group according to machine and slow
-group_by(downloads3, machineName, slow)
+group_by(downloads4, machineName, slow)
 
 ###########
 
 ### Summary statistics, revisited: summarize
 
 # Method from above  
-mean(downloads3$size)
-max(downloads3$size)
+mean(downloads4$size)
+max(downloads4$size)
 
 # Group after machine name and make summaries for each machine
-downloads3 %>%
+downloads4 %>%
   group_by(machineName) %>%
   summarise(avg = mean(size),
             med = median(size),
@@ -199,7 +241,7 @@ downloads3 %>%
 
 
 # Group after machine name and slow variable, and make summaries for each combination
-downloads.grp2 <- downloads3 %>% 
+downloads.grp2 <- downloads4 %>% 
   group_by(machineName, slow)
 
 summarize(downloads.grp2, 
@@ -217,11 +259,52 @@ summarize_at(downloads.grp2, c("time", "size"), list(ave=mean,stdev=sd))
 ### The pipe operator: %>%
 
 # Many commands combined with the pipe operator
-" see that the variables for functions change, 
-as the dataframe stands now at the beginning of the sequence "
+# see that the variables for functions change, as the dataframe stands now at the beginning of the sequence
+
 downloads %>% 
   filter(size>0) %>% # Subset of data
   group_by(machineName) %>% # Grouping 
   summarize(avg = mean(size)) %>% # Compute mean
   arrange(avg) # Sort after mean
+
+
+##########
+
+### More dplyr functions from tidyverse
+
+##########
+
+# relocate (move one or more columns):
+downloads %>% relocate(time, .before = size)
+
+# rename (rename one column):
+downloads %>% rename(year.month=month)
+
+# pull out one column, equivalent to using $:
+downloads %>% pull(machineName)
+
+
+##########
+
+# Join tibbles with subsets of information together:
+
+# machineName and power rank
+dowloads5 <- tibble(machineName=c("cs18","piglet","tweetie","kermit", "pluto"),
+                    powerRank=c(2,4,1,3,5))
+
+# machineName and location of machine
+dowloads6 <- tibble(machineName=c("cs18","tweetie","kermit","skeeter"),
+                    location=c("China", "USA", "Germany", "Japan"))
+
+# all machineNames from tibble on the left are kept
+left_join(dowloads5, dowloads6)
+
+# all machineNames from tibble on the right are kept
+right_join(dowloads5, dowloads6)
+
+# only machineNames in both left and right tibble are kept 
+inner_join(dowloads5, dowloads6)
+
+# all machineNames, from both tibbles are kept
+full_join(dowloads5, dowloads6)
 
