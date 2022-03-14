@@ -13,8 +13,8 @@
 # show current working directory
 getwd()
 
-# show folders in cwd
-list.dirs(path = ".", recursive = FALSE)
+# absolute path
+setwd("~/Desktop/FromExceltoR/")
 
 # relative path
 setwd('./Presentations')
@@ -22,8 +22,11 @@ setwd('./Presentations')
 # go one step back in the directory
 setwd('..')
 
-# absolute path
-setwd("~/Documents/work/Projects/FromExceltoR/Presentations")
+# show folders in cwd
+list.dirs(path = ".", recursive = FALSE)
+
+#set working directory absolute path
+setwd("~/Desktop/FromExceltoR/Presentations")
 
 ############
 ### Tidyverse package 
@@ -41,9 +44,7 @@ library(readxl)
 
 # This command is generated via the Import data facility
 downloads <- read_excel("downloads.xlsx")
-downloads = read_excel("downloads.xlsx")
-# see that you can assign variables with either '<-' or '='?
-# choose a style and stick to it
+
 
 # Print first lines of dataset on screen
 downloads
@@ -57,7 +58,7 @@ dim(downloads)
 ### Extracting variables, simple summary statistics
 
 # Extract time variable by use of $ syntax
-time_vector = downloads$time
+time_vector <- downloads$time
 
 # Print first 40 elements on screen
 time_vector[1:40]
@@ -79,16 +80,19 @@ min(time_vector)
   
 # see only datalines with time variable >1000
 filter(downloads, time > 1000)
+
 # great about tidyverse: write code the way you think
-filter(downloads, time > 1000) # processed from inside to outside
-downloads %>% filter(time > 1000) # processed from left to right
+
+downloads %>% 
+  filter(time > 1000) # processed from left to right
 
 # my style: when assigning and doing multiple operations, use pipe operator
 # also when it helps readability
 # otherwise write as little as possible
 
 # Only datalines with size variable >0
-downloads2 = downloads %>% filter(size > 0)
+downloads2 <- downloads %>% 
+  filter(size > 0)
 
 # view data
 downloads2 # print the first lines in console
@@ -118,7 +122,7 @@ downloads2 %>%
 select(downloads2, -date)
 
 # Only include the three mentioned variable names
-downloads3 = downloads2 %>% select(machineName, size, time)
+downloads3 <- downloads2 %>% select(machineName, size, time)
 downloads3
 
 ###############
@@ -126,11 +130,14 @@ downloads3
 ### Transformations of data
 
 # New variables included in dataset
-downloads3 = downloads3 %>% 
+downloads3 <- downloads3 %>% 
   mutate(speed = size / time, logSize = log10(size))
+
 downloads3
-downloads3 = downloads3 %>% 
+
+downloads3 <- downloads3 %>% 
   mutate(slow = ifelse(speed < 150, "Yes", "No"))
+
 downloads3
 
 ?mutate
@@ -192,7 +199,7 @@ downloads3 %>%
 
 
 # Group after machine name and slow variable, and make summaries for each combination
-downloads.grp2 = downloads3 %>% 
+downloads.grp2 <- downloads3 %>% 
   group_by(machineName, slow)
 
 summarize(downloads.grp2, 

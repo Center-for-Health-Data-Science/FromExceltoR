@@ -73,13 +73,12 @@ exprDat <- read_excel("MouseRNAseq.xlsx")
 exprInfo <- read_excel("MouseSampleInfo.xlsx")
 
 # Look at the data:
-head(exprDat, n=5)
+exprDat
 dim(exprDat)
 
 
 # Look at the samples:
 exprInfo
-table(exprInfo$CellType, exprInfo$Status)
 
 
 # Convert character columns to factor types:
@@ -101,18 +100,15 @@ expr16 <- exprDat %>%
   sample_n(.,16)
 
 expr16
+dim(expr16)
 
-# Extract genename
-GeneName <- expr16$GeneName
 
 # Gather counts
 expr16 <- expr16 %>%
-  dplyr::select(-GeneName) %>%
+  column_to_rownames(var = "GeneName") %>%
   t() %>% 
   as_tibble() %>% 
-  rename_at(vars(names(.)), ~GeneName) %>% 
   gather()
-
 
 
 expr16
@@ -129,17 +125,23 @@ ggplot(expr16, aes(log2(value+1))) +
 
 ### Filtering
 
-# First, we count the number of times a count value in a sample is greater or equal to 3. 
-# Then Filter rows where at least 3 samples has a count great than 4.
 
-exprDat <- exprDat %>%
-  mutate(nthrees = rowSums(dplyr::select(.,-GeneName)<=3)) %>% # count number of 
-  filter(nthrees <= 4) %>%
-  dplyr::select(-nthrees)
+# Count number of samples with min. count size of 5 for a given gene. 
+# Filter for genes were min. 4 samples have a count equal to or greater than 5.
 
+#exprDat %>% mutate(nzeros = rowSums(dplyr::select(.,-EntrezGeneID, -GeneName)==0)) %>% dplyr::select(nzeros)
+
+exprDat <- exprDat %>% 
+  mutate(nzeros = rowSums(dplyr::select(.,-GeneName) >= 4)) %>%
+  filter(nzeros <= 8) %>%
+  dplyr::select(-nzeros)
 
 # How many genes do we have left:
 dim(exprDat)
+
+
+
+
 
 
 #############
@@ -152,8 +154,8 @@ dim(exprDat)
 
 
 # Pull out GeneNames and EntrezGeneID for later use.
-GeneNames <- exprDat %>% 
-  dplyr::select(GeneName)
+#GeneNames <- exprDat %>% 
+#  dplyr::select(GeneName)
 
 
 # Convert to exprDat to a dataframe and make GenNames column into rownames:
@@ -179,21 +181,17 @@ exprObj
 head(assay(exprObj))
 
 # The count distributions may be dominated by a few genes with very large counts. These genes will drive plotting e.g. heatmaps, PCA analysis etc.
-# Let's see if we have any "outlier" genes in our dataset and at the same time inspect the sample library sizes.
+# Library sizes:
+
 
 boxplot(log2(assay(exprObj)+1), las=2)
 colSums(assay(exprObj))
 
 # Variance stabilizing transformation
 # vst returns log2 counts adjusted for sequencing depths. 
-  # normalize library size to obtain counts per million mapped reads
-  # log2 transform the data to get more normally distributed data 
-  # apply variance stabilizing transformation which we will discuss below. 
-
 
 exprObjvst <- vst(exprObj,blind=TRUE)
 boxplot(assay(exprObjvst), xlab="", ylab="Log2 counts per million reads mapped ",las=2)
-
 # --------------
 
 
@@ -201,7 +199,7 @@ boxplot(assay(exprObjvst), xlab="", ylab="Log2 counts per million reads mapped "
 ## PCA Plotting:
 
 plotPCA(exprObjvst,intgroup="Status")
-plotPCA(exprObjvst,intgroup="CellType")
+plotPCA(exprObjvst,intgroup="CellTypes")
 # --------------
 
 
@@ -226,14 +224,22 @@ exprObj <- DESeq(exprObj)
 
 # (I) Lactating vs Control mice
 resLC <- results(exprObj, contrast = c("Status", "lactate", "control"), 
-                 independentFiltering = FALSE)
+                 independentFiltering = FALSE) 
 
-head(resLC)
+resLC
+
 dim(resLC)
-
+class(resLC)
+  
 # Summary and plot of DE analysis results:
 summary(resLC)
 DESeq2::plotMA(resLC)
+
+
+
+resLC <-  resLC %>% 
+  as.data.frame() %>%
+  rownames_to_column(., var = "GeneName")
 
 # --------------
 
@@ -241,12 +247,15 @@ DESeq2::plotMA(resLC)
 
 # (II) Pregnant vs Control mice
 resPC <- results(exprObj, contrast = c("Status", "pregnant", "control"), 
-                 independentFiltering = FALSE)
+                 independentFiltering = FALSE) 
 
 # Summary and plot of DE analysis results:
 #summary(resPC)
 #DESeq2::plotMA(resPC)
 
+resPC <- resPC %>% 
+  as.data.frame() %>%
+  rownames_to_column(., var = "GeneName")
 # --------------
 
 
@@ -258,6 +267,11 @@ resLP <- results(exprObj, contrast = c("Status", "lactate", "pregnant"),
 #summary(resLP)
 #DESeq2::plotMA(resLP)
 
+resLP <- resLP %>% 
+  as.data.frame() %>%
+  rownames_to_column(., var = "GeneName")
+
+
 # --------------
 
 
@@ -265,84 +279,32 @@ resLP <- results(exprObj, contrast = c("Status", "lactate", "pregnant"),
 ### Filtering results:
 
 # Bind all DE sets together
-# Convert to tibble
-# Add columns with GeneNames
+# Convert to tibble with column GeneNames
 # Filter and arrange(order)
+
+
 resDE <- rbind(resLC, resPC, resLP) %>% 
   as_tibble() %>%
-  mutate(GeneName = rep(GeneNames$GeneName, 3)) %>%
-  filter((log2FoldChange >= 1.0 | log2FoldChange <= -1.0) & padj <= 0.01) %>%
-  arrange(padj, desc(abs(log2FoldChange)))
+  mutate(pair = c(rep("Lactate.Control", nrow(exprDat)),
+                  rep("Pregnant.Control", nrow(exprDat)),
+                  rep("Lactate.Pregnant", nrow(exprDat)))) %>%
+  filter((log2FoldChange >= 1.0 | log2FoldChange <= -1.0) & padj <= 0.05)
 
 # --------------
-
-# Number of DE genes:
-dim(resDE)
-length(unique(resDE$GeneName))
 
 
 # Give it a look:
 resDE
 
-# --------------
+# Number of DE genes:
+dim(resDE)
+
+resDE %>% 
+  pull(GeneName) %>% 
+  unique() %>% 
+  length()
 
 
 
-#############
-
-## Heatmap Visualization:
-
-# To visually inspect if DE genes identified in our DESeq2 analysis successfully separate the three groups of mice (control, pregnant and lactating), we will make a heatmap. 
-# For this we use the heatmap function.
-# It will not make sense to include all DE genes in this heatmap (almost 3000 unique genes). Instead pick the top 100 most sig. DE genes based on adj. p-value and logFC.
 
 
-# Make a vector of unique EntrezGeneIDs (top100):
-
-top100 <- resDE[1:100,] %>%
-  pull(GeneName) %>%
-  unique()
-
-
-length(top100)
-
-# --------------  
-
-# The expression counts themselves (not logFC) are needed for the heatmap. 
-# We use the topDE vector to extract these from the vst normalized DESeq2 object.
-
-# Let's give the data a look:
-head(assay(exprObjvst), n=5)
-
-
-# Extract vst counts for the top 150 (124 unique) genes we want for the heatmap:
-resVST <- assay(exprObjvst) %>% 
-  as.data.frame() %>%
-  rownames_to_column(var = "GeneName")  %>%
-  as_tibble() %>%
-  filter(GeneName %in% top100)
-
-
-# --------------  
-# The heatmap function in base R wants gene expression data as a matrix (a dataframe with numeric values only). 
-
-# We extract the GeneNames:
-HPnames <- resVST %>% 
-  pull(GeneName)
-
-# Convert the tibble into a matrix:
-HPdat <- resVST %>%
-  dplyr::select(-GeneName) %>%
-  as.matrix()
-
-# --------------  
-  
-# Use the heatmap function to generate a heatmap. 
-# We can modify the look of the heatmap as desired, e.g. add column colors, row labels, change color scheme etc.
-
-heatmap(scale(HPdat),
-        ColSideColors=exprInfo$CellType.colors, 
-        labCol=exprInfo$Status,
-        labRow = HPnames,
-        cexCol=1.2, 
-        cexRow = 1.0)

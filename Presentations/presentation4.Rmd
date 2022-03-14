@@ -3,8 +3,9 @@ title: "IV. R Markdown (presentation)"
 author: "Data Science Lab, University of Copenhagen"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
+  #pdf_document: default
   html_document: default
-  pdf_document: default
+
 ---
 
 <!-- this is an Rmd comment  and it will NOT appear in the final output document -->
@@ -98,8 +99,7 @@ We first (install and) load the package and import the **downloads** data. (I in
 # install.packages("table1")
 library(table1)
 library(readxl)
-# downloads <- read_excel("downloads.xlsx")
-downloads <- read_excel("~/Documents/GitHub/FromExceltoR/Presentations/downloads.xlsx")
+downloads <- read_excel("downloads.xlsx")
 ```
 
 

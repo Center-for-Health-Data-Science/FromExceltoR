@@ -18,7 +18,7 @@ The tidyverse is a collection of R packages which, among other things, facilitat
 We must install and load the R package **tidyverse** before we have access to the functions. 
 
 * Install package: One option is to go via the _Tools_ menu: *Tools* &#8594; *Install packages* &#8594; write `tidyverse` in the field called _Packages_. This only has to be done once. Otherwise use the `install.packages` function as shown here:  
-```{r, message=FALSE}
+```{r, message=FALSE, eval=FALSE}
 install.packages("tidyverse", repos = "https://mirrors.dotsrc.org/cran/")
 ```
 
@@ -48,17 +48,20 @@ There are several helpful commands that help you navigate.
 # show current working directory (cwd)
 getwd()
 
-# show folders in cwd
-list.dirs(path = ".", recursive = FALSE)
+# absolute path
+setwd("~/Desktop/FromExceltoR/")
 
-# relative path, go one folder deeper into Presentations
+# relative path
 setwd('./Presentations')
 
 # go one step back in the directory
 setwd('..')
 
-# absolute path
-setwd("~/Documents/work/Projects/FromExceltoR/Presentations")
+# show folders in cwd
+list.dirs(path = ".", recursive = FALSE)
+
+# set working directory absolute path
+setwd("~/Desktop/FromExceltoR/Presentations")
 ```
 
 ---
@@ -141,6 +144,9 @@ Say that we only want observations with download time larger than 1000 seconds; 
 
 ```{r}
 filter(downloads, time > 1000)
+
+downloads %>% 
+  filter(time > 1000)
 ```
 
 Or say that only want observations with strictly positive download size:

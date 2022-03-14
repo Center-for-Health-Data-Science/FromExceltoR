@@ -3,8 +3,8 @@ title: "III.\\ Graphics with ggplot2"
 author: "Data Science Laboratory, University of Copenhagen"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
-  #pdf_document: default
-  html_document: default
+  pdf_document: default
+  #html_document: default
 ---
 
 

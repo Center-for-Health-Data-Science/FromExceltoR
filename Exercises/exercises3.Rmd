@@ -4,7 +4,7 @@ author: "Data Science Lab, University of Copenhagen"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
   #pdf_document: default
-  html_document: default
+  #html_document: default
 ---
 
 ```{r setup, include=FALSE}
