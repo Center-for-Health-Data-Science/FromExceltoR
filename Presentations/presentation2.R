@@ -28,30 +28,52 @@ list.dirs(path = ".", recursive = FALSE)
 #set working directory absolute path
 setwd("~/Desktop/FromExceltoR/Presentations")
 
+
+
 ############
 ### Tidyverse package 
 #install.packages('tidyverse')
+#install.packages('readxl')
+
 
 # Load package
 library("tidyverse")
 
-############
-
-### Import data
-  
 # Load a package that can read excel files
 library(readxl)
 
+############
+
+### Import data
+
 # This command is generated via the Import data facility
 downloads <- read_excel("downloads.xlsx")
-
-
-# Print first lines of dataset on screen
 downloads
-downloads[1:5,]
 
-# Get dimensions of your dataset
-dim(downloads)
+###############
+
+### Data structures
+
+# Before we continue with tidyverse, lets look at some highly used data structures in R. 
+
+# You will need to make structures or convert between these in R.
+# In the example below we make a dataframe and a tibble and convert between these.
+
+
+# Convert existing object to a dataframe:
+downloads2 <-  as.data.frame(downloads)
+head(downloads) # head/top of object
+
+
+# Make tibble from scratch:
+downloads2 <-  tibble(machineName=c("cs18","kermit"), rank=c(1,2))
+downloads2
+
+
+# Make a dataframe from scratch:
+downloads2 <-  data.frame(machineName=c("cs18","kermit"), rank=c(1,2))
+downloads2
+
 
 #############
 
@@ -60,8 +82,21 @@ dim(downloads)
 # Extract time variable by use of $ syntax
 time_vector <- downloads$time
 
-# Print first 40 elements on screen
+
+# Want to know what data type or structure you have, try the function class.
+class(downloads)
+class(downloads2)
+class(time_vector)
+
+
+# First lines of dataset or vector on screen x[row, column]
+downloads[1:5,]
 time_vector[1:40]
+
+
+# Get dimensions of your dataset
+dim(downloads)
+
 
 # Simple summary statistics
 length(time_vector)
@@ -69,44 +104,6 @@ mean(time_vector)
 sd(time_vector)
 median(time_vector)
 min(time_vector)
-
-
-###############
-
-### Data structures
-
-# Before we continue with tidyverse, lets look at some highly used data structures in R. 
-# Want to know what data type or structure you have, try the function class.
-
-
-# Vectors with characters and numeric values
-class(downloads$machineName)
-class(downloads$size)
-
-
-###############
-
-# You will need to make structures or convert between these in R.
-# In the example below we make a dataframe and a tibble and convert between these.
-
-# Make a dataframe from scratch:
-downloads2 <-  data.frame(machineName=c("cs18","kermit"), rank=c(1,2))
-downloads2
-class(downloads2)
-
-# Convert existing object to a dataframe:
-downloads2 <-  as.data.frame(downloads)
-head(downloads2) # head/top of object
-
-
-# Convert existing object to a tibble:
-downloads2 <- as_tibble(downloads2)
-downloads2
-class(downloads2)
-
-# Make tibble from scratch:
-downloads2 <-  tibble(machineName=c("cs18","kermit"), rank=c(1,2))
-downloads2
 
 
 ###############
@@ -123,7 +120,6 @@ downloads2
 filter(downloads, time > 1000)
 
 # great about tidyverse: write code the way you think
-
 downloads %>% 
   filter(time > 1000) # processed from left to right
 
@@ -138,10 +134,11 @@ downloads3 <- downloads %>%
 # view data
 downloads3 # print the first lines in console
 View(downloads3) # view the whole data in a new tab
-head(downloads3) # "head" of dataset 
+
 
 # what are the unique machine names in downloads3?
-distinct(downloads3, machineName)
+downloads3 %>% 
+  distinct(machineName)
 
 # Datalines from kermit, and with size greater than 2000000 bytes are kept.
 downloads3 %>% 
@@ -164,7 +161,9 @@ downloads3 %>%
 select(downloads3, -date)
 
 # Only include the three mentioned variable names
-downloads4 <- downloads3 %>% select(machineName, size, time)
+downloads4 <- downloads3 %>% 
+  select(machineName, size, time)
+
 downloads4
 
 ###############

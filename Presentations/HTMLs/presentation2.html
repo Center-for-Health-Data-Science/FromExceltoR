@@ -166,7 +166,7 @@ pre code {
 
 <h1 class="title toc-ignore">II. Working with data in R (presentation)</h1>
 <h4 class="author">Data Science Lab, University of Copenhagen</h4>
-<h4 class="date">14 March, 2022</h4>
+<h4 class="date">15 March, 2022</h4>
 
 </div>
 
@@ -254,16 +254,69 @@ downloads</code></pre>
 </ul>
 <hr />
 </div>
+<div id="data-structures-tibble-and-data.frame" class="section level2">
+<h2>Data structures: <code>tibble</code> and <code>data.frame</code></h2>
+<p>You will need to make structures or convert between these in R. In the example below we make a dataframe and a tibble and convert between these.</p>
+<pre class="r"><code># Convert existing object to a dataframe:
+downloads2 &lt;-  as.data.frame(downloads)
+head(downloads) # head/top of object</code></pre>
+<pre><code>## # A tibble: 6 × 6
+##   machineName userID  size  time date                month  
+##   &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dttm&gt;              &lt;chr&gt;  
+## 1 cs18        146579  2464 0.493 1995-04-24 00:00:00 1995-04
+## 2 cs18        995988  7745 0.326 1995-04-24 00:00:00 1995-04
+## 3 cs18        317649  6727 0.314 1995-04-24 00:00:00 1995-04
+## 4 cs18        748501 13049 0.583 1995-04-24 00:00:00 1995-04
+## 5 cs18        955815   356 0.259 1995-04-24 00:00:00 1995-04
+## 6 cs18        444174     0 0     1995-04-24 00:00:00 1995-04</code></pre>
+<pre class="r"><code># Make tibble from scratch:
+downloads2 &lt;-  tibble(machineName=c(&quot;cs18&quot;,&quot;kermit&quot;), rank=c(1,2))
+downloads2</code></pre>
+<pre><code>## # A tibble: 2 × 2
+##   machineName  rank
+##   &lt;chr&gt;       &lt;dbl&gt;
+## 1 cs18            1
+## 2 kermit          2</code></pre>
+<pre class="r"><code># Make a dataframe from scratch:
+downloads2 &lt;-  data.frame(machineName=c(&quot;cs18&quot;,&quot;kermit&quot;), rank=c(1,2))
+downloads2</code></pre>
+<pre><code>##   machineName rank
+## 1        cs18    1
+## 2      kermit    2</code></pre>
+</div>
 <div id="extracting-variables-simple-summary-statistics" class="section level2">
 <h2>Extracting variables, simple summary statistics</h2>
 <p>Variables can be extracted with the $-syntax, and we can use squared brackets to show only the first 40, say, values.</p>
-<pre class="r"><code>time_vector &lt;- downloads$time
+<pre class="r"><code># Extract time variable by use of $ syntax
+time_vector &lt;- downloads$time
+
+# First 40 observation in vector
 time_vector[1:40]</code></pre>
 <pre><code>##  [1] 0.493030 0.325608 0.313704 0.582537 0.259252 0.000000 0.000000 0.000000
 ##  [9] 0.000000 0.000000 0.000000 0.335502 0.284853 0.000000 0.000000 0.000000
 ## [17] 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000 0.000000
 ## [25] 0.285665 0.397111 3.410561 0.267474 0.842364 0.903005 2.784645 2.806157
 ## [33] 0.990092 0.477629 0.000000 0.000000 0.000000 0.000000 0.988944 0.000000</code></pre>
+<pre class="r"><code># First five lines of dataset x[row, column]
+downloads[1:5,]</code></pre>
+<pre><code>## # A tibble: 5 × 6
+##   machineName userID  size  time date                month  
+##   &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dttm&gt;              &lt;chr&gt;  
+## 1 cs18        146579  2464 0.493 1995-04-24 00:00:00 1995-04
+## 2 cs18        995988  7745 0.326 1995-04-24 00:00:00 1995-04
+## 3 cs18        317649  6727 0.314 1995-04-24 00:00:00 1995-04
+## 4 cs18        748501 13049 0.583 1995-04-24 00:00:00 1995-04
+## 5 cs18        955815   356 0.259 1995-04-24 00:00:00 1995-04</code></pre>
+<pre class="r"><code># Want to know what data type or structure you have, try the function class.
+class(downloads)</code></pre>
+<pre><code>## [1] &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;</code></pre>
+<pre class="r"><code>class(downloads2)</code></pre>
+<pre><code>## [1] &quot;data.frame&quot;</code></pre>
+<pre class="r"><code>class(time_vector)</code></pre>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<pre class="r"><code># Get dimensions of your dataset
+dim(downloads)</code></pre>
+<pre><code>## [1] 147035      6</code></pre>
 <p>Summary statistics like mean, standard deviation, median are easily computed for a vector.</p>
 <p>Examples of R functions for computing summary statistics: <code>length</code>, <code>mean</code>, <code>median</code>, <code>sd</code>, <code>var</code>, <code>sum</code>, <code>quantile</code>, <code>min</code>, <code>max</code>, <code>IQR</code>.</p>
 <pre class="r"><code>length(time_vector)</code></pre>
@@ -277,64 +330,6 @@ time_vector[1:40]</code></pre>
 <pre class="r"><code>min(time_vector)</code></pre>
 <pre><code>## [1] 0</code></pre>
 <p>Notice that more than half the observations have time equal to zero (median is zero).</p>
-<hr />
-</div>
-<div id="data-structures-tibble-and-data.frame" class="section level2">
-<h2>Data structures: <code>tibble</code> and <code>data.frame</code></h2>
-<p>Before we continue with tidyverse, lets look at some highly used data structures in R. Want to know what data type or structure you have, try the function class.</p>
-<pre class="r"><code># Vectors with characters and numeric values
-class(downloads$machineName)</code></pre>
-<pre><code>## [1] &quot;character&quot;</code></pre>
-<pre class="r"><code>class(downloads$size)</code></pre>
-<pre><code>## [1] &quot;numeric&quot;</code></pre>
-<pre class="r"><code>class(downloads)</code></pre>
-<pre><code>## [1] &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;</code></pre>
-<p>You will need to make structures or convert between these in R. In the example below we make a dataframe and a tibble and convert between these.</p>
-<pre class="r"><code># Make a dataframe from scratch:
-downloads2 &lt;-  data.frame(machineName=c(&quot;cs18&quot;,&quot;kermit&quot;), rank=c(1,2))
-downloads2</code></pre>
-<pre><code>##   machineName rank
-## 1        cs18    1
-## 2      kermit    2</code></pre>
-<pre class="r"><code>class(downloads2)</code></pre>
-<pre><code>## [1] &quot;data.frame&quot;</code></pre>
-<pre class="r"><code># Convert existing object to a dataframe:
-downloads2 &lt;-  as.data.frame(downloads)
-head(downloads2) # head/top of object</code></pre>
-<pre><code>##   machineName userID  size     time       date   month
-## 1        cs18 146579  2464 0.493030 1995-04-24 1995-04
-## 2        cs18 995988  7745 0.325608 1995-04-24 1995-04
-## 3        cs18 317649  6727 0.313704 1995-04-24 1995-04
-## 4        cs18 748501 13049 0.582537 1995-04-24 1995-04
-## 5        cs18 955815   356 0.259252 1995-04-24 1995-04
-## 6        cs18 444174     0 0.000000 1995-04-24 1995-04</code></pre>
-<pre class="r"><code># Convert existing object to a tibble:
-downloads2 &lt;- as_tibble(downloads2)
-downloads2</code></pre>
-<pre><code>## # A tibble: 147,035 × 6
-##    machineName userID  size  time date                month  
-##    &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dttm&gt;              &lt;chr&gt;  
-##  1 cs18        146579  2464 0.493 1995-04-24 00:00:00 1995-04
-##  2 cs18        995988  7745 0.326 1995-04-24 00:00:00 1995-04
-##  3 cs18        317649  6727 0.314 1995-04-24 00:00:00 1995-04
-##  4 cs18        748501 13049 0.583 1995-04-24 00:00:00 1995-04
-##  5 cs18        955815   356 0.259 1995-04-24 00:00:00 1995-04
-##  6 cs18        444174     0 0     1995-04-24 00:00:00 1995-04
-##  7 cs18        446911     0 0     1995-04-24 00:00:00 1995-04
-##  8 cs18        449552     0 0     1995-04-24 00:00:00 1995-04
-##  9 cs18        456142     0 0     1995-04-24 00:00:00 1995-04
-## 10 cs18        458942     0 0     1995-04-24 00:00:00 1995-04
-## # … with 147,025 more rows</code></pre>
-<pre class="r"><code>class(downloads2)</code></pre>
-<pre><code>## [1] &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;</code></pre>
-<pre class="r"><code># Make tibble from scratch:
-downloads2 &lt;-  tibble(machineName=c(&quot;cs18&quot;,&quot;kermit&quot;), rank=c(1,2))
-downloads2</code></pre>
-<pre><code>## # A tibble: 2 × 2
-##   machineName  rank
-##   &lt;chr&gt;       &lt;dbl&gt;
-## 1 cs18            1
-## 2 kermit          2</code></pre>
 <hr />
 </div>
 <div id="filtering-data-selecting-rows-filter" class="section level2">
