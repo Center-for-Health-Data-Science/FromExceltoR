@@ -127,14 +127,12 @@ ggplot(expr16, aes(log2(value+1))) +
 
 
 # Count number of samples with min. count size of 5 for a given gene. 
-# Filter for genes were min. 4 samples have a count equal to or greater than 5.
-
-#exprDat %>% mutate(nzeros = rowSums(dplyr::select(.,-EntrezGeneID, -GeneName)==0)) %>% dplyr::select(nzeros)
+# Filter for genes were min. 4 samples have a count equal to or greater than 4.
 
 exprDat <- exprDat %>% 
-  mutate(nzeros = rowSums(dplyr::select(.,-GeneName) >= 4)) %>%
-  filter(nzeros <= 8) %>%
-  dplyr::select(-nzeros)
+  mutate(ncount = rowSums(dplyr::select(.,-GeneName) >= 4)) %>%
+  filter(ncount >= 4) %>%
+  dplyr::select(-ncount)
 
 # How many genes do we have left:
 dim(exprDat)
@@ -199,7 +197,7 @@ boxplot(assay(exprObjvst), xlab="", ylab="Log2 counts per million reads mapped "
 ## PCA Plotting:
 
 plotPCA(exprObjvst,intgroup="Status")
-plotPCA(exprObjvst,intgroup="CellTypes")
+plotPCA(exprObjvst,intgroup="CellType")
 # --------------
 
 
@@ -213,7 +211,7 @@ plotPCA(exprObjvst,intgroup="CellTypes")
 # The GLM fit returns coefficients indicating the overall expression strength of a gene and the log-2 fold change between groups. 
 
 
-# Estimating dispersion, gene-wise and mean-dispersion, fitting model and testing:
+# Estimating library sizes, gene-wise dispersion and mean-dispersion, fitting model and testing:
 exprObj <- DESeq(exprObj)
 
 
@@ -240,6 +238,8 @@ DESeq2::plotMA(resLC)
 resLC <-  resLC %>% 
   as.data.frame() %>%
   rownames_to_column(., var = "GeneName")
+
+
 
 # --------------
 
@@ -300,9 +300,8 @@ resDE
 dim(resDE)
 
 resDE %>% 
-  pull(GeneName) %>% 
-  unique() %>% 
-  length()
+  distinct(GeneName) %>% 
+  nrow()
 
 
 
