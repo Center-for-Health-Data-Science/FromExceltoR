@@ -166,7 +166,7 @@ pre code {
 
 <h1 class="title toc-ignore">VI. Bioinformatics in R (exercises)</h1>
 <h4 class="author">Center for Health Data Science, University of Copenhagen</h4>
-<h4 class="date">14 March, 2022</h4>
+<h4 class="date">16 March, 2022</h4>
 
 </div>
 
@@ -204,8 +204,8 @@ First we temporarily de-select the columns with gene information, then we count 
   mutate(nzeros = rowSums(dplyr::select(., -Ensgene, -GeneSymbol, -GC, -Length)==0))</code></pre>
 <p> </p>
 <ol start="4" style="list-style-type: decimal">
-<li><p>We do not want any genes where less than half of the samples have a count above 0. Filter out the genes for which this is the case, and remove the column <em>nzeros</em> from your tibble after filtering. Check how many genes you are left with.</p></li>
-<li><p>To get en idea of sample library sizes make a boxplot of gene counts, one for each sample. You will need to <code>gather()</code> the gene counts across samples into one column and the sample IDs into another column. Assign this output to a new variable named <code>airPlot</code>.<br />
+<li><p>We do not want any genes where less than half of the samples have a count above 0. Filter out the genes for which this is the case, and remove the column <em>nzeros</em> from your tibble after filtering. Check how many genes you are left with. <em>N.B</em> Name the filtered dataset <em>airDatFilt</em>.</p></li>
+<li><p>To get an idea of sample library sizes make a boxplot of gene counts, one for each sample. You will need to <code>gather()</code> the gene counts across samples into one column and the sample IDs into another column. Assign this output to a new variable named <code>airPlot</code>.<br />
 <strong>HINT 1:</strong> First remove the columns with information on genes (there are four) and next use this: <code>gather(key = ID, value=geneCount)</code> to gather the counts into one column.<br />
 <strong>HINT 2:</strong> Use <code>geom_boxplot()</code> to make a boxplot with ggplot2. Extra: To tilt your x-axis labels 90 degrees, add <code>theme(axis.text.x = element_text(angle = 90))</code> to your ggplot code.</p></li>
 <li><p>You will see that boxplots are squeezed due to difference in count range between genes. Which type of data transformation could you use to overcome this problem?<br />
@@ -215,13 +215,13 @@ Remake the boxplot with transformed counts.<br />
 <p> </p>
 <div id="adjusting-for-gc-content-and-gene-length" class="section level4">
 <h4>Adjusting for GC content and gene length:</h4>
-<p>It is well-established that gene length and GC-content will affect the number of reads obtained. It is therefore standard practice to check for such biases and correct accordingly. You already have information on length and GC content in the <strong>airDat</strong> tibble.</p>
-<p>The <code>EDAseq</code> package can help you correct for gene length and GC content. <code>EDAseq</code> provides a <code>biasPlot</code> showing you if GC content and gene length are a problem. To use this function your data must be in a format that <code>biasPlot</code> accepts, e.g. and <code>EDAseq</code> object.</p>
+<p>It is well-established that gene length and GC-content will affect the number of reads obtained. It is therefore standard practice to check for such biases and correct accordingly. You already have information on length and GC content in the <strong>airDatFilt</strong> tibble.</p>
+<p>The <code>EDAseq</code> package can help you correct for gene length and GC content. <code>EDAseq</code> provides a <code>biasPlot</code> showing you if GC content and gene length are a problem. To use this function your data must be in a format that <code>biasPlot</code> accepts, e.g. an <code>EDAseq</code> object.</p>
 <ol start="7" style="list-style-type: decimal">
 <li>Copy the code from both chunks below and run it. Have a look at the object you created, named <em>EDAobj</em>, and importantly, look at the plots created, does there appear to be a GC and/or gene length bias in your data? <strong>HINT 1:</strong> An unbias dataset should not show any trend in GC content or gene length across gene counts.</li>
 </ol>
 <pre class="r"><code># Converts tibble to matrix of expression counts and removes gene information:
-airDatM &lt;- airDat %&gt;% 
+airDatM &lt;- airDatFilt %&gt;% 
   dplyr::select(-Ensgene, -GeneSymbol, -GC, -Length) %&gt;% 
   as.matrix() %&gt;% 
   unname()
@@ -230,8 +230,8 @@ airDatM &lt;- airDat %&gt;%
 EDAobj &lt;- newSeqExpressionSet(airDatM, 
                               phenoData=AnnotatedDataFrame(data.frame(condition=airMet$condition, 
                                                                       celltype=airMet$celltype)),
-                              featureData=AnnotatedDataFrame(data.frame(GC=airDat$GC, 
-                                                                        Length=airDat$Length)))</code></pre>
+                              featureData=AnnotatedDataFrame(data.frame(GC=airDatFilt$GC, 
+                                                                        Length=airDatFilt$Length)))</code></pre>
 <pre class="r"><code># Bias plots
 par(mfrow=c(1,2))
 biasPlot(EDAobj, &quot;GC&quot;, log=TRUE, ylim=c(0,10))
@@ -316,7 +316,7 @@ exprObj &lt;- DESeq(exprObj)</code></pre>
 <li><p>Use the function <code>summary()</code> to see the number of identified differentially expressed gene. Use the <code>plotMA()</code> function to visualize these.</p></li>
 <li><p>Convert your results from <code>DESeq2</code> to a tibble and do the following:</p>
 <ol style="list-style-type: lower-alpha">
-<li>Add two new columns to it (using <code>mutate</code>): <em>dir</em> indicating directionality of the logFC. The column <em>dir</em> can be made using the following syntax: <code>dir=factor(ifelse(log2FoldChange &gt;= 1.0, &quot;Up&quot;, &quot;Down&quot;), levels=c(&quot;Up&quot;, &quot;Down&quot;))</code> and one named <em>geneSymbols</em> with gene symbols from <em>airDat</em>.</li>
+<li>Add two new columns to it (using <code>mutate</code>): <em>dir</em> indicating directionality of the logFC. The column <em>dir</em> can be made using the following syntax: <code>dir=factor(ifelse(log2FoldChange &gt;= 1.0, &quot;Up&quot;, &quot;Down&quot;), levels=c(&quot;Up&quot;, &quot;Down&quot;))</code> and one named <em>geneSymbols</em> with gene symbols from <em>airDatFilt</em>.</li>
 <li>Filter your results to only include genes with log2FoldChange of more than 1 or less than -1 and a <em>padj</em> (adjusted p-value) of less than 0.05.</li>
 <li>Arrange by <em>padj</em> (ascending) and the <strong>absolute</strong> <em>log2FoldChange</em> (descending). <strong>HINT:</strong> use the function <code>abs()</code> to get the absolute log2FoldChange before arranging.</li>
 <li>Extract the top 50 most significant DE genes based on <em>log2FoldChange</em> and <em>padj</em>.</li>
@@ -324,14 +324,12 @@ exprObj &lt;- DESeq(exprObj)</code></pre>
 </ol>
 <p> </p>
 <ol start="16" style="list-style-type: decimal">
-<li>Make a bubble plot (fancy point plot) of the top 50 most significant DE genes:
+<li>Make a lollipop plot (<a href="https://www.r-graph-gallery.com/lollipop-plot.html" class="uri">https://www.r-graph-gallery.com/lollipop-plot.html</a>) of the top 50 most significant DE genes:
 <ol style="list-style-type: lower-alpha">
-<li>The size of the point should reflect the <strong>absolute</strong> <em>log2FoldChange</em> and the shade of the point should reflect the significance (e.g. the padj).</li>
-<li>Remove the x-axis labels (gene symbols) and instead add these to the points themselves with <code>geom_text()</code>.</li>
-<li>Use <code>facet_grid(rows = vars(dir))</code> to wrap the top most up-regulated and down-regulated genes in each their own plot (grid).<br />
-</li>
-</ol>
-<ol start="4" style="list-style-type: upper-alpha">
+<li>You will need two ggplot geoms for this: <code>geom_segment()</code> and <code>geom_point()</code>.</li>
+<li>The size of the point should reflect the log2FoldChange and the shade of the point should reflect the significance (e.g. the padj). <em>N.B</em> you may have to scale one or both of these to get a nicer plot.</li>
+<li>Change the color scheme to one you would like, try <code>scale_colour_gradient2()</code>.</li>
+<li>Play around with the look/theme of the plot, remove legends you dont need, grid lines etc.</li>
 <li>Based on your plot, which genes seem to be most effected by treatment with dexamethasone and albuterol?</li>
 </ol></li>
 </ol>
