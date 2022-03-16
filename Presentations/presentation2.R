@@ -26,7 +26,7 @@ setwd('..')
 list.dirs(path = ".", recursive = FALSE)
 
 #set working directory absolute path
-setwd("~/Desktop/FromExceltoR/Presentations")
+setwd("/Users/kgx936/Desktop/FromExceltoR/Presentations")
 
 
 
@@ -37,7 +37,7 @@ setwd("~/Desktop/FromExceltoR/Presentations")
 
 
 # Load package
-library("tidyverse")
+library(tidyverse)
 
 # Load a package that can read excel files
 library(readxl)
@@ -56,23 +56,12 @@ downloads
 
 # Before we continue with tidyverse, lets look at some highly used data structures in R. 
 
-# You will need to make structures or convert between these in R.
-# In the example below we make a dataframe and a tibble and convert between these.
-
+#You will need to make structures or convert between these in R. 
+#In the example below we will convert a tibble to a dataframe.
 
 # Convert existing object to a dataframe:
 downloads2 <-  as.data.frame(downloads)
-head(downloads) # head/top of object
-
-
-# Make tibble from scratch:
-downloads2 <-  tibble(machineName=c("cs18","kermit"), rank=c(1,2))
-downloads2
-
-
-# Make a dataframe from scratch:
-downloads2 <-  data.frame(machineName=c("cs18","kermit"), rank=c(1,2))
-downloads2
+head(downloads2) # head/top of object
 
 
 #############
@@ -81,6 +70,7 @@ downloads2
 
 # Extract time variable by use of $ syntax
 time_vector <- downloads$time
+head(time_vector)
 
 
 # Want to know what data type or structure you have, try the function class.
@@ -88,14 +78,13 @@ class(downloads)
 class(downloads2)
 class(time_vector)
 
-
-# First lines of dataset or vector on screen x[row, column]
-downloads[1:5,]
-time_vector[1:40]
-
-
 # Get dimensions of your dataset
 dim(downloads)
+
+
+# First lines of dataset or vector on screen x[row, column]
+downloads[1:5, 1:3]
+time_vector[1:40]
 
 
 # Simple summary statistics
@@ -133,12 +122,10 @@ downloads3 <- downloads %>%
 
 # view data
 downloads3 # print the first lines in console
-View(downloads3) # view the whole data in a new tab
 
 
 # what are the unique machine names in downloads3?
-downloads3 %>% 
-  distinct(machineName)
+distinct(downloads3, machineName)
 
 # Datalines from kermit, and with size greater than 2000000 bytes are kept.
 downloads3 %>% 
@@ -156,9 +143,6 @@ downloads3 %>%
 #############
 
 ### Selecting variables (columns): select
-
-# Without the date variable
-select(downloads3, -date)
 
 # Only include the three mentioned variable names
 downloads4 <- downloads3 %>% 
@@ -194,9 +178,6 @@ count(downloads4, machineName)
 
 # Number of observations which have/have not size larger than 5000
 count(downloads4, size>5000)
-
-# Number of observations for each combiation of machine name and the *slow* variable.
-count(downloads4, machineName, slow)
 
 ##########
 
@@ -240,18 +221,15 @@ downloads4 %>%
 
 
 # Group after machine name and slow variable, and make summaries for each combination
-downloads.grp2 <- downloads4 %>% 
-  group_by(machineName, slow)
 
-summarize(downloads.grp2, 
-          avg = mean(size),
-          med = median(size),
-          stdev = sd(size),
-          total = sum(size),
-          n = n())
+downloads4 %>% 
+  group_by(machineName, slow) %>%
+  summarize(avg = mean(size),
+            med = median(size),
+            stdev = sd(size),
+            total = sum(size),
+            n = n())
 
-# Mean and standard deviation for several variables: 
-summarize_at(downloads.grp2, c("time", "size"), list(ave=mean,stdev=sd))
 
 ##########
 
@@ -261,7 +239,7 @@ summarize_at(downloads.grp2, c("time", "size"), list(ave=mean,stdev=sd))
 # see that the variables for functions change, as the dataframe stands now at the beginning of the sequence
 
 downloads %>% 
-  filter(size>0) %>% # Subset of data
+  filter(size > 0) %>% # Subset of data
   group_by(machineName) %>% # Grouping 
   summarize(avg = mean(size)) %>% # Compute mean
   arrange(avg) # Sort after mean
@@ -290,10 +268,14 @@ downloads %>% pull(machineName)
 # machineName and power rank
 dowloads5 <- tibble(machineName=c("cs18","piglet","tweetie","kermit", "pluto"),
                     powerRank=c(2,4,1,3,5))
+dowloads5
+
 
 # machineName and location of machine
 dowloads6 <- tibble(machineName=c("cs18","tweetie","kermit","skeeter"),
                     location=c("China", "USA", "Germany", "Japan"))
+dowloads6
+
 
 # all machineNames from tibble on the left are kept
 left_join(dowloads5, dowloads6)

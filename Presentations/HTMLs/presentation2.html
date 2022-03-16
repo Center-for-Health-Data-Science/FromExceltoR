@@ -166,7 +166,7 @@ pre code {
 
 <h1 class="title toc-ignore">II. Working with data in R (presentation)</h1>
 <h4 class="author">Data Science Lab, University of Copenhagen</h4>
-<h4 class="date">15 March, 2022</h4>
+<h4 class="date">16 March, 2022</h4>
 
 </div>
 
@@ -254,38 +254,19 @@ downloads</code></pre>
 </ul>
 <hr />
 </div>
-<div id="data-structures-tibble-and-data.frame" class="section level2">
-<h2>Data structures: <code>tibble</code> and <code>data.frame</code></h2>
-<p>You will need to make structures or convert between these in R. In the example below we make a dataframe and a tibble and convert between these.</p>
+<div id="data-structures-vector-tibble-and-data.frame" class="section level2">
+<h2>Data structures: <code>vector</code>, <code>tibble</code> and <code>data.frame</code></h2>
+<p>You will need to make structures or convert between these in R. In the example below we will convert a tibble to a dataframe.</p>
 <pre class="r"><code># Convert existing object to a dataframe:
 downloads2 &lt;-  as.data.frame(downloads)
-head(downloads) # head/top of object</code></pre>
-<pre><code>## # A tibble: 6 × 6
-##   machineName userID  size  time date                month  
-##   &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dttm&gt;              &lt;chr&gt;  
-## 1 cs18        146579  2464 0.493 1995-04-24 00:00:00 1995-04
-## 2 cs18        995988  7745 0.326 1995-04-24 00:00:00 1995-04
-## 3 cs18        317649  6727 0.314 1995-04-24 00:00:00 1995-04
-## 4 cs18        748501 13049 0.583 1995-04-24 00:00:00 1995-04
-## 5 cs18        955815   356 0.259 1995-04-24 00:00:00 1995-04
-## 6 cs18        444174     0 0     1995-04-24 00:00:00 1995-04</code></pre>
-<pre class="r"><code># Make tibble from scratch:
-downloads2 &lt;-  tibble(machineName=c(&quot;cs18&quot;,&quot;kermit&quot;), rank=c(1,2))
-downloads2</code></pre>
-<pre><code>## # A tibble: 2 × 2
-##   machineName  rank
-##   &lt;chr&gt;       &lt;dbl&gt;
-## 1 cs18            1
-## 2 kermit          2</code></pre>
-<pre class="r"><code># Make a dataframe from scratch:
-downloads2 &lt;-  data.frame(machineName=c(&quot;cs18&quot;,&quot;kermit&quot;), rank=c(1,2))
-downloads2</code></pre>
-<pre><code>##   machineName rank
-## 1        cs18    1
-## 2      kermit    2</code></pre>
-</div>
-<div id="extracting-variables-simple-summary-statistics" class="section level2">
-<h2>Extracting variables, simple summary statistics</h2>
+head(downloads2) # head/top of object</code></pre>
+<pre><code>##   machineName userID  size     time       date   month
+## 1        cs18 146579  2464 0.493030 1995-04-24 1995-04
+## 2        cs18 995988  7745 0.325608 1995-04-24 1995-04
+## 3        cs18 317649  6727 0.313704 1995-04-24 1995-04
+## 4        cs18 748501 13049 0.582537 1995-04-24 1995-04
+## 5        cs18 955815   356 0.259252 1995-04-24 1995-04
+## 6        cs18 444174     0 0.000000 1995-04-24 1995-04</code></pre>
 <p>Variables can be extracted with the $-syntax, and we can use squared brackets to show only the first 40, say, values.</p>
 <pre class="r"><code># Extract time variable by use of $ syntax
 time_vector &lt;- downloads$time
@@ -362,8 +343,8 @@ dim(downloads)</code></pre>
 ## 7 kermit      139654  1079731 1129. 1995-02-23 00:00:00 1995-02
 ## 8 pluto       337530  8674562 1878. 1995-03-13 00:00:00 1995-03</code></pre>
 <p>Or say that only want observations with strictly positive download size:</p>
-<pre class="r"><code>downloads2 &lt;- filter(downloads, size &gt; 0)
-downloads2</code></pre>
+<pre class="r"><code>downloads3 &lt;- filter(downloads, size &gt; 0)
+downloads3</code></pre>
 <pre><code>## # A tibble: 36,708 × 6
 ##    machineName userID  size  time date                month  
 ##    &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dttm&gt;              &lt;chr&gt;  
@@ -378,7 +359,7 @@ downloads2</code></pre>
 ##  9 cs18        783767  7294 0.397 1995-04-24 00:00:00 1995-04
 ## 10 cs18        788633  4470 3.41  1995-04-24 00:00:00 1995-04
 ## # … with 36,698 more rows</code></pre>
-<p>Notice that this result is assigned to <strong>downloads2</strong>. It has 36,708 data lines. The original data called <strong>downloads</strong> still exists with 147,035 data lines.</p>
+<p>Notice that this result is assigned to <strong>downloads3</strong>. It has 36,708 data lines. The original data called <strong>downloads</strong> still exists with 147,035 data lines.</p>
 <p>Filtering requires <em>logical predicates</em>. These are expressions in terms of columns, which evaluate to either <code>TRUE</code> or <code>FALSE</code> for each row. Logical expressions can be combined with logical operations.</p>
 <ul>
 <li><p>Comparisons: <code>==</code>, <code>!=</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code>, <code>%in%</code>, <code>is.na</code></p></li>
@@ -386,7 +367,7 @@ downloads2</code></pre>
 </ul>
 <p>Here comes two sub-datasets:</p>
 <pre class="r"><code># Rows from kermit, and with size greater than 200000 bytes are kept.
-filter(downloads2, machineName == &quot;kermit&quot;, size &gt; 200000)</code></pre>
+filter(downloads3, machineName == &quot;kermit&quot;, size &gt; 200000)</code></pre>
 <pre><code>## # A tibble: 98 × 6
 ##    machineName userID     size     time date                month  
 ##    &lt;chr&gt;        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt; &lt;dttm&gt;              &lt;chr&gt;  
@@ -402,7 +383,7 @@ filter(downloads2, machineName == &quot;kermit&quot;, size &gt; 200000)</code></
 ## 10 kermit      198041   355963   15.3   1995-04-20 00:00:00 1995-04
 ## # … with 88 more rows</code></pre>
 <pre class="r"><code># Rows NOT from kermit, and with size greater than 200000 bytes are kept.
-filter(downloads2, machineName != &quot;kermit&quot; &amp; size &gt; 200000)</code></pre>
+filter(downloads3, machineName != &quot;kermit&quot; &amp; size &gt; 200000)</code></pre>
 <pre><code>## # A tibble: 220 × 6
 ##    machineName userID    size    time date                month  
 ##    &lt;chr&gt;        &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dttm&gt;              &lt;chr&gt;  
@@ -418,8 +399,8 @@ filter(downloads2, machineName != &quot;kermit&quot; &amp; size &gt; 200000)</co
 ## 10 cs18        974956  203714   6.13  1994-12-16 00:00:00 1994-12
 ## # … with 210 more rows</code></pre>
 <p>A helpful function to know which machine names are valid can be:</p>
-<pre class="r"><code># get unique machineName values in downloads2
-distinct(downloads2, machineName)</code></pre>
+<pre class="r"><code># get unique machineName values in downloads3
+distinct(downloads3, machineName)</code></pre>
 <pre><code>## # A tibble: 5 × 1
 ##   machineName
 ##   &lt;chr&gt;      
@@ -429,7 +410,7 @@ distinct(downloads2, machineName)</code></pre>
 ## 4 tweetie    
 ## 5 pluto</code></pre>
 <p>And if you are looking for multiple values for a given variable:</p>
-<pre class="r"><code>downloads2 %&gt;% filter(machineName %in% c(&quot;kermit&quot;,&quot;pluto&quot;), size &gt; 2000000)</code></pre>
+<pre class="r"><code>downloads3 %&gt;% filter(machineName %in% c(&quot;kermit&quot;,&quot;pluto&quot;), size &gt; 2000000)</code></pre>
 <pre><code>## # A tibble: 8 × 6
 ##   machineName userID     size   time date                month  
 ##   &lt;chr&gt;        &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;dttm&gt;              &lt;chr&gt;  
@@ -446,25 +427,9 @@ distinct(downloads2, machineName)</code></pre>
 <div id="selecting-variables-select" class="section level2">
 <h2>Selecting variables: <code>select</code></h2>
 <p>Sometimes, datasets has many variables of which only some are relevant for the analysis. Variables can be selected or skipped with the <code>select</code> function.</p>
-<pre class="r"><code># Without the date variable
-select(downloads2, -date)</code></pre>
-<pre><code>## # A tibble: 36,708 × 5
-##    machineName userID  size  time month  
-##    &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;  
-##  1 cs18        146579  2464 0.493 1995-04
-##  2 cs18        995988  7745 0.326 1995-04
-##  3 cs18        317649  6727 0.314 1995-04
-##  4 cs18        748501 13049 0.583 1995-04
-##  5 cs18        955815   356 0.259 1995-04
-##  6 cs18        596819 15063 0.336 1995-04
-##  7 cs18        169424  2548 0.285 1995-04
-##  8 cs18        386686  1932 0.286 1995-04
-##  9 cs18        783767  7294 0.397 1995-04
-## 10 cs18        788633  4470 3.41  1995-04
-## # … with 36,698 more rows</code></pre>
 <pre class="r"><code># Only include the three mentioned variable names
-downloads3 &lt;- select(downloads2, machineName, size, time)
-downloads3</code></pre>
+downloads4 &lt;- select(downloads3, machineName, size, time)
+downloads4</code></pre>
 <pre><code>## # A tibble: 36,708 × 3
 ##    machineName  size  time
 ##    &lt;chr&gt;       &lt;dbl&gt; &lt;dbl&gt;
@@ -479,15 +444,15 @@ downloads3</code></pre>
 ##  9 cs18         7294 0.397
 ## 10 cs18         4470 3.41 
 ## # … with 36,698 more rows</code></pre>
-<p>Notice that we have made a new dataframe, <strong>downloads3</strong> with only three variables.</p>
+<p>Notice that we have made a new dataframe, <strong>downloads4</strong> with only three variables.</p>
 <hr />
 </div>
 <div id="transformations-of-data" class="section level2">
 <h2>Transformations of data</h2>
 <p>Tranformations of existing variables in the data set can be computed and included in the data set with the <code>mutate</code> function.</p>
 <p>We first compute two new variables, download speed (<strong>speed</strong>) and the logarithm of the download size (<strong>logSize</strong>):</p>
-<pre class="r"><code>downloads3 &lt;- mutate(downloads3, speed = size / time, logSize = log10(size))
-downloads3</code></pre>
+<pre class="r"><code>downloads4 &lt;- mutate(downloads4, speed = size / time, logSize = log10(size))
+downloads4</code></pre>
 <pre><code>## # A tibble: 36,708 × 5
 ##    machineName  size  time  speed logSize
 ##    &lt;chr&gt;       &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
@@ -503,8 +468,8 @@ downloads3</code></pre>
 ## 10 cs18         4470 3.41   1311.    3.65
 ## # … with 36,698 more rows</code></pre>
 <p>We then make a new categorial variable, <strong>slow</strong>, which is “Yes” is speed &lt; 150 and “No” otherwise</p>
-<pre class="r"><code>downloads3 &lt;- mutate(downloads3, slow = ifelse(speed &lt; 150, &quot;Yes&quot;, &quot;No&quot;))
-downloads3</code></pre>
+<pre class="r"><code>downloads4 &lt;- mutate(downloads4, slow = ifelse(speed &lt; 150, &quot;Yes&quot;, &quot;No&quot;))
+downloads4</code></pre>
 <pre><code>## # A tibble: 36,708 × 6
 ##    machineName  size  time  speed logSize slow 
 ##    &lt;chr&gt;       &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;
@@ -525,13 +490,13 @@ downloads3</code></pre>
 <h2>Counting, tabulation of categorical variables: <code>count</code></h2>
 <p>The <code>count</code> function is useful for counting data datalines, possibly according to certain criteria or for the different levels of categorical values.</p>
 <pre class="r"><code># Total number of observations in the current dataset
-count(downloads3)</code></pre>
+count(downloads4)</code></pre>
 <pre><code>## # A tibble: 1 × 1
 ##       n
 ##   &lt;int&gt;
 ## 1 36708</code></pre>
 <pre class="r"><code># Number of observations from each machine
-count(downloads3, machineName)</code></pre>
+count(downloads4, machineName)</code></pre>
 <pre><code>## # A tibble: 5 × 2
 ##   machineName     n
 ##   &lt;chr&gt;       &lt;int&gt;
@@ -541,34 +506,19 @@ count(downloads3, machineName)</code></pre>
 ## 4 pluto        5253
 ## 5 tweetie      7347</code></pre>
 <pre class="r"><code># Number of observations which have/have not size larger than 5000
-count(downloads3, size&gt;5000)</code></pre>
+count(downloads4, size&gt;5000)</code></pre>
 <pre><code>## # A tibble: 2 × 2
 ##   `size &gt; 5000`     n
 ##   &lt;lgl&gt;         &lt;int&gt;
 ## 1 FALSE         25865
 ## 2 TRUE          10843</code></pre>
-<pre class="r"><code># Number of observations for each combination of machine name and the *slow* variable.
-count(downloads3, machineName, slow)</code></pre>
-<pre><code>## # A tibble: 10 × 3
-##    machineName slow      n
-##    &lt;chr&gt;       &lt;chr&gt; &lt;int&gt;
-##  1 cs18        No     3662
-##  2 cs18        Yes     152
-##  3 kermit      No     8717
-##  4 kermit      Yes     377
-##  5 piglet      No    10734
-##  6 piglet      Yes     466
-##  7 pluto       No     4963
-##  8 pluto       Yes     290
-##  9 tweetie     No     6983
-## 10 tweetie     Yes     364</code></pre>
 <hr />
 </div>
 <div id="sorting-data-arrange" class="section level2">
 <h2>Sorting data: <code>arrange</code></h2>
 <p>The <code>arrange</code> function can be used to sort the data according to one or more columns.</p>
-<p>Let’s sort the data according to download size (ascending order). The first lines of the sorted data set is printed on-screen, but the dataset <strong>downloads3</strong> has <em>not</em> been changed.</p>
-<pre class="r"><code>arrange(downloads3, size)</code></pre>
+<p>Let’s sort the data according to download size (ascending order). The first lines of the sorted data set is printed on-screen, but the dataset <strong>downloads4</strong> has <em>not</em> been changed.</p>
+<pre class="r"><code>arrange(downloads4, size)</code></pre>
 <pre><code>## # A tibble: 36,708 × 6
 ##    machineName  size  time speed logSize slow 
 ##    &lt;chr&gt;       &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;
@@ -585,7 +535,7 @@ count(downloads3, machineName, slow)</code></pre>
 ## # … with 36,698 more rows</code></pre>
 <p>Two different examples:</p>
 <pre class="r"><code># According to download size in descending order
-arrange(downloads3, desc(size))</code></pre>
+arrange(downloads4, desc(size))</code></pre>
 <pre><code>## # A tibble: 36,708 × 6
 ##    machineName     size   time   speed logSize slow 
 ##    &lt;chr&gt;          &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;
@@ -601,7 +551,7 @@ arrange(downloads3, desc(size))</code></pre>
 ## 10 cs18         4720220 1749.    2700.    6.67 No   
 ## # … with 36,698 more rows</code></pre>
 <pre class="r"><code># After machine name and then according to download size in descending order
-arrange(downloads3, machineName, desc(size))</code></pre>
+arrange(downloads4, machineName, desc(size))</code></pre>
 <pre><code>## # A tibble: 36,708 × 6
 ##    machineName    size     time    speed logSize slow 
 ##    &lt;chr&gt;         &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;
@@ -623,7 +573,7 @@ arrange(downloads3, machineName, desc(size))</code></pre>
 <p>We can group the dataset by one or more categorical variables with <code>group_by</code>. The dataset is not changed as such, but - as we will see - grouping can be useful for computation of summary statistics and graphics.</p>
 <p>Here we group after machine name (first) <em>and</em> the slow variable (second). The only way we can see it at this point is in the second line in the output (<code># Groups:</code>):</p>
 <pre class="r"><code># Group according to machine
-group_by(downloads3, machineName)</code></pre>
+group_by(downloads4, machineName)</code></pre>
 <pre><code>## # A tibble: 36,708 × 6
 ## # Groups:   machineName [5]
 ##    machineName  size  time  speed logSize slow 
@@ -640,7 +590,7 @@ group_by(downloads3, machineName)</code></pre>
 ## 10 cs18         4470 3.41   1311.    3.65 No   
 ## # … with 36,698 more rows</code></pre>
 <pre class="r"><code># Group according to machine and slow
-group_by(downloads3, machineName, slow)</code></pre>
+group_by(downloads4, machineName, slow)</code></pre>
 <pre><code>## # A tibble: 36,708 × 6
 ## # Groups:   machineName, slow [10]
 ##    machineName  size  time  speed logSize slow 
@@ -661,19 +611,19 @@ group_by(downloads3, machineName, slow)</code></pre>
 <div id="summary-statistics-revisited-summarize" class="section level2">
 <h2>Summary statistics, revisited: <code>summarize</code></h2>
 <p>Recall how we could compute summary statistics for a single variable in a dataset, e.g.</p>
-<pre class="r"><code>mean(downloads3$size)</code></pre>
+<pre class="r"><code>mean(downloads4$size)</code></pre>
 <pre><code>## [1] 16638.36</code></pre>
-<pre class="r"><code>max(downloads3$size)</code></pre>
+<pre class="r"><code>max(downloads4$size)</code></pre>
 <pre><code>## [1] 14518894</code></pre>
 <p>With <code>summarize</code> we can compute summary statistics for a variable for each level of a grouping variable or for each combination of several grouping variables.</p>
 <p>First, a bunch of summaries for the size variable for each machine name, where we give explicit names for the new variables:</p>
-<pre class="r"><code>downloads.grp1 &lt;- group_by(downloads3, machineName)
-summarize(downloads.grp1, 
-          avg = mean(size),
-          med = median(size),
-          stdev = sd(size),
-          total = sum(size),
-          n = n())</code></pre>
+<pre class="r"><code>downloads4 %&gt;%
+  group_by(machineName) %&gt;%
+  summarise(avg = mean(size),
+            med = median(size),
+            stdev = sd(size),
+            total = sum(size),
+            n = n())</code></pre>
 <pre><code>## # A tibble: 5 × 6
 ##   machineName    avg   med   stdev     total     n
 ##   &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt; &lt;int&gt;
@@ -683,13 +633,13 @@ summarize(downloads.grp1,
 ## 4 pluto       13822. 2069  144425.  72605544  5253
 ## 5 tweetie     14207. 2197   94318. 104379794  7347</code></pre>
 <p>Second, the same thing but for each combination of machine name and the slow variable:</p>
-<pre class="r"><code>downloads.grp2 &lt;- group_by(downloads3, machineName, slow)
-summarize(downloads.grp2, 
-          avg = mean(size),
-          med = median(size),
-          stdev = sd(size),
-          total = sum(size),
-          n = n())</code></pre>
+<pre class="r"><code>downloads4 %&gt;% 
+  group_by(machineName, slow) %&gt;%
+  summarize(avg = mean(size),
+            med = median(size),
+            stdev = sd(size),
+            total = sum(size),
+            n = n())</code></pre>
 <pre><code>## # A tibble: 10 × 7
 ## # Groups:   machineName [5]
 ##    machineName slow     avg   med   stdev     total     n
@@ -704,23 +654,7 @@ summarize(downloads.grp2,
 ##  8 pluto       Yes    1120.  413    2108.    324754   290
 ##  9 tweetie     No    14894. 2373   96694. 104001733  6983
 ## 10 tweetie     Yes    1039.  471    2603.    378061   364</code></pre>
-<p>Third, mean and standard deviation for several variables:</p>
-<pre class="r"><code>summarize_at(downloads.grp2, c(&quot;time&quot;, &quot;size&quot;), list(ave=mean,stdev=sd))</code></pre>
-<pre><code>## # A tibble: 10 × 6
-## # Groups:   machineName [5]
-##    machineName slow  time_ave size_ave time_stdev size_stdev
-##    &lt;chr&gt;       &lt;chr&gt;    &lt;dbl&gt;    &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;
-##  1 cs18        No        5.17   27445.       57.1    213140.
-##  2 cs18        Yes       9.63     594.       17.8       614.
-##  3 kermit      No        3.41   20030.       25.3    218529.
-##  4 kermit      Yes      20.7     1141.       47.8      3049.
-##  5 piglet      No        2.33   14687.       13.8    192365.
-##  6 piglet      Yes      19.4     1071.       40.2      1934.
-##  7 pluto       No        3.40   14564.       30.4    148551.
-##  8 pluto       Yes      21.7     1120.       46.3      2108.
-##  9 tweetie     No        2.68   14894.       17.3     96694.
-## 10 tweetie     Yes      17.8     1039.       34.5      2603.</code></pre>
-<p>The datasets with summaries can be saves as datasets themselves, for example to be used as the basis for certain graphs.</p>
+<p>The datasets with summaries can be saved as datasets themselves, for example to be used as the basis for certain graphs.</p>
 <hr />
 </div>
 <div id="the-pipe-operator" class="section level2">
@@ -742,8 +676,8 @@ summarize(downloads.grp2,
 ## 5 cs18        26375.</code></pre>
 <hr />
 </div>
-<div id="more-functions-from-tidyverse" class="section level2">
-<h2>More functions from tidyverse</h2>
+<div id="more-functions-relocate-rename-pull-join" class="section level2">
+<h2>More functions: <code>relocate, rename, pull &amp; join</code></h2>
 <p>Below are three useful functions for column manipulation, <code>relocate</code>, <code>rename</code> and <code>pull</code>:</p>
 <pre class="r"><code># relocate (move one or more columns):
 downloads %&gt;% relocate(time, .before = size)</code></pre>
