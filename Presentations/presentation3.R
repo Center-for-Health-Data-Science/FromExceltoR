@@ -14,7 +14,7 @@ library(ggplot2)
 
 
 ### Set working directory ----
-setwd('/Users/kgx936/Desktop/FromExceltoR/Presentations/')
+setwd('/Users/pbj825/Desktop/FromExceltoR/Presentations/')
 
 
 ### Reading in data and filtering out entries where size is 0 ----
@@ -48,18 +48,11 @@ dl_sizes <- downloads %>%
 dl_sizes
 
 ### Order by making a factor with specified levels
+
+downloads$machineName[1:10]
+
 downloads <- downloads %>% 
   mutate(machineName = factor(machineName, levels = dl_sizes$machineName))
-
-### MachineName as character vector, sample random 50:
-MachineName50 <- downloads$machineName %>% 
-  sample(., 50)
-MachineName50
-
-### MachineName as factor:
-MachineName50 <- factor(MachineName50)
-MachineName50
-
 
 ggplot(downloads, aes(x = machineName, y = size/10^6)) + 
   geom_col()
@@ -87,6 +80,11 @@ p <- ggplot(downloads, aes(x = machineName, y = size/10^6, fill = month))
 p + geom_col(position = "dodge") ## Left/first plot
 p + geom_col(position = "fill") ## Right/second plot
 
+###  Grouping by machine and month ----
+p1 <- ggplot(downloads, aes(x = machineName, y = size, groups = month, fill=month)) + 
+  geom_boxplot() + scale_y_log10() 
+p1
+
 
 #############
 
@@ -105,7 +103,6 @@ daily_downloads
 p <- ggplot(daily_downloads, aes(x = date, y = dl_count)) +
   geom_point()
 p
-
 
 ### Plotting on the log-scale ----
 
@@ -130,18 +127,15 @@ p + aes(size = size_mb)
 # Points colored by download size ----
 
 p + aes(size = size_mb, color = size_mb > 2)
+p2 <- p + aes(size = size_mb, color = size_mb > 2)
 
 
 ### Cumulative total download size over the dates within machines ----
 
-ggplot(daily_downloads, aes(x = date, y = total_dl_count)) + 
-  geom_line()
-
-ggplot(daily_downloads, aes(x = date, y = total_dl_count)) + 
+p3 <- ggplot(daily_downloads, aes(x = date, y = total_dl_count)) + 
   geom_line(aes(group = machineName, colour = machineName)) 
-
+p3 
 #ggplot(daily_downloads, aes(x = date, y = total_dl_count, colour = machineName)) + geom_line()
-
 
 ### A box plot ----
 
@@ -154,24 +148,51 @@ p + scale_y_log10()
 ### A violin plot ----
 p <- ggplot(daily_downloads, aes(x = machineName, y = size_mb, fill=machineName)) + 
   geom_violin(trim = TRUE) + scale_y_log10() 
-
 p
 
-p2 <- p + geom_point(size = 1, alpha = 0.5) + 
+
+p4 <- p + geom_point(size = 1, alpha = 0.5) + 
   theme_minimal() +
   scale_fill_manual(values=c("#2A2D43", "#91A6FF", "#C7EDE4", "#AFA060", "#AD8350"))
 
-p2
+p4
+
+
+### Arrange multiple ggplots on the same page ----
+
+# install.packages("ggpubr")
+library(ggpubr)
+
+figure <- ggarrange(p1, p2, p3, p4,
+                    ncol = 2, nrow = 2)
+figure
+
+figure <- ggarrange(p1 + theme_bw(),
+                    p2 + theme_bw() + scale_color_manual(
+                      values=c("#2A2D43", "#91A6FF", "#AD8350")),
+                    p3 + theme_bw(), 
+                    p4 + theme_bw(), 
+                    labels = c ("A", "B", "C", "D"),
+                    ncol = 2, nrow = 2)
+figure
 
 
 ### Save Object and Save Plot ----
 
 write_xlsx(daily_downloads, "daily_downloads.xlsx")
 
-ggsave(filename = "vionlinPlot.pdf", plot = p2, height = 5, width = 10)
+ggsave(filename = "vionlinPlot.pdf", plot = p4, height = 5, width = 10)
 
 pdf("vionlinPlot2.pdf", height = 5, width = 10)
-p2
+p4
 dev.off()
+
+
+
+
+
+
+
+
 
 
