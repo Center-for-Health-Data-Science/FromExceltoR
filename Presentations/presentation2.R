@@ -10,6 +10,7 @@
 
 ### Set working directory 
 
+
 # show current working directory
 getwd()
 
@@ -156,7 +157,7 @@ downloads4
 
 # New variables included in dataset
 downloads4 <- downloads4 %>% 
-  mutate(speed = size / time, logSize = log10(size))
+  mutate(speed = size/time ,logSize = log10(size))
 
 downloads4
 
