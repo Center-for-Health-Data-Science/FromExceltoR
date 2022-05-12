@@ -1,6 +1,4 @@
 # Graphics with ggplot2 ----
-# Data Science Laboratory, University of Copenhagen
-# August 2020
 
 
 #############

@@ -1,6 +1,5 @@
 ---
 title: "V.\ Statistical analysis in R (presentation)"
-author: "Data Science Lab, University of Copenhagen"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
   #pdf_document: default
