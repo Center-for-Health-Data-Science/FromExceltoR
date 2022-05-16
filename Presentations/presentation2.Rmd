@@ -2,7 +2,7 @@
 title: "II. Working with data in R (presentation)"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
-  #pdf_document: default
+  pdf_document: default
   html_document: default
 ---
 
@@ -16,12 +16,12 @@ The tidyverse is a collection of R packages which, among other things, facilitat
 
 We must install and load the R package **tidyverse** before we have access to the functions. 
 
-* Install package: One option is to go via the _Tools_ menu: *Tools* &#8594; *Install packages* &#8594; write `tidyverse` in the field called _Packages_. This only has to be done once. Otherwise use the `install.packages` function as shown here:  
+* Install package: One option is to go via the _Packages_ tab of the lower right panel: *Packages* &#8594; *Install* &#8594; write `tidyverse` in the field called _Packages_. This only has to be done once. Otherwise use the `install.packages` function as shown here:  
 ```{r, message=FALSE, eval=FALSE}
 install.packages("tidyverse", repos = "https://mirrors.dotsrc.org/cran/")
 ```
 
-* Load package: Use the `library` command below (preferred), or go to the _Packages_ menu in the bottom right window, find **tidyverse** in the list, and click it. This has to be done in every R-session where you use the package. 
+* Load package: Use the `library` command. This has to be done in every R-session where you use the package. 
 ```{r, message=FALSE}
 library(tidyverse)
 ```
@@ -32,13 +32,13 @@ library(tidyverse)
 
 Data from Excel files can be imported via the _Import Dataset_ facility. You may get the message that the package **readxl** should be installed. If so, then install it as explained for **tidyverse** above. 
 
-* Find _Import Data_ in the upper right window in RStudio, and choose _From Excel_ in the dropdown menu.
+* In the _Environment_ tab in the upper right panel, find _Import Dataset_ and choose _From Excel_ in the dropdown menu.
 
 * A new window opens. Browse for the relevant Excel file; then a preview of the dataset is shown. Check that it looks OK, and click _Import_. 
 
-* Three things happened: Three lines of code was generated (and executed) in the Console, a new dataset now appears in the Environment window, and the dataset is shown in the top left window. Check again that it looks OK. 
+* Three things happened: Three lines of code were generated (and executed) in the Console, a new dataset now appears in the Environment window, and the dataset is shown in the top left window. Check again that it looks OK. 
 
-* Copy the first two lines of code into your R script (or into an R chunk in your Markdown document), but delete line starting with `View` and write instead the name of the dataset, here **downloads**. Then the first 10 lines of the data set are printed. 
+* Copy the first two lines of code into your R script (or into an R chunk in your Markdown document), but delete the line starting with `View` and write instead the name of the dataset, here **downloads**. Then the first 10 lines of the data set are printed. 
 
 ```{r}
 library(readxl)
@@ -55,7 +55,7 @@ then data can be read with the read_csv function. For example, if the data file 
 ```{r, echo=TRUE, eval=FALSE}
 mydata <- read.csv("mydata.csv", sep=",")
 ```
-creates a data frame in R with the data. The data frame is _not_ a tibble and some of the commands below would not work for such a data frame. 
+creates a data frame in R with the data. The dataframe is _not_ a tibble and some of the commands below would not work for such a data frame. However, you can easily cast dataframes into tibbles, see presentation1.Rmd . 
 
 
 ---
@@ -73,13 +73,11 @@ The dataset is from Boston University and is about www data transfers from Novem
 
 ## Filtering data (selecting rows): `filter`
 
-The `filter` function is used to make sub-datasets where only certain datalines (rows) are maintained. It's described with _logical expressions_ which datalines should be kept in the dataset.
+The `filter` function is used to make sub-datasets where only certain data lines (rows) are maintained. It's described with _logical expressions_ which lines should be kept in the dataset.
 
 Say that we only want observations with download time larger than 1000 seconds; there happens to be eight such observations: 
 
 ```{r}
-filter(downloads, time > 1000)
-
 downloads %>% 
   filter(time > 1000)
 ```
@@ -87,8 +85,8 @@ downloads %>%
 Or say that only want observations with strictly positive download size:
 
 ```{r}
-downloads3 <- filter(downloads, size > 0)
-downloads3
+downloads3 <- downloads %>%
+  filter(size > 0)
 ```
 
 Notice that this result is assigned to **downloads3**. It has 36,708 data lines. The original data called **downloads** still exists with 147,035 data lines.
@@ -104,10 +102,10 @@ Here comes two sub-datasets:
 
 ```{r}
 # Rows from kermit, and with size greater than 200000 bytes are kept.
-filter(downloads3, machineName == "kermit", size > 200000)
+downloads3 %>% filter(machineName == "kermit", size > 200000)
 
 # Rows NOT from kermit, and with size greater than 200000 bytes are kept.
-filter(downloads3, machineName != "kermit" & size > 200000)
+downloads3 %>% filter(machineName != "kermit" & size > 200000)
 ```
 
 A helpful function to know which machine names are valid can be:
@@ -125,13 +123,14 @@ downloads3 %>% filter(machineName %in% c("kermit","pluto"), size > 2000000)
 
 ---
 
-## Selecting variables: `select`
+## Selecting columns: `select`
 
-Sometimes, datasets has many variables of which only some are relevant for the analysis. Variables can be selected or skipped with the `select` function.
+Sometimes, datasets have many columns of variables of which only some are relevant for the analysis. Columns can be selected or skipped with the `select` function.
 
 ```{r}
 # Only include the three mentioned variable names
-downloads4 <- select(downloads3, machineName, size, time)
+downloads4 <- downloads3 %>%
+  select(machineName, size, time)
 downloads4
 ```
 
@@ -142,19 +141,21 @@ Notice that we have made a new dataframe, **downloads4** with only three variabl
 
 ## Transformations of data
 
-Tranformations of existing variables in the data set can be computed and included in the data set with the `mutate` function. 
+Transformations of existing variables in the data set can be computed and included in the data set with the `mutate` function. 
 
 We first compute two new variables, download speed (**speed**) and the logarithm of the download size (**logSize**):
 
 ```{r}
-downloads4 <- mutate(downloads4, speed = size / time, logSize = log10(size))
+downloads4 <- downloads4 %>%
+  mutate(speed = size / time, logSize = log10(size))
 downloads4
 ```
 
 We then make a new categorial variable, **slow**, which is "Yes" is speed < 150 and "No" otherwise
 
 ```{r}
-downloads4 <- mutate(downloads4, slow = ifelse(speed < 150, "Yes", "No"))
+downloads4 <- downloads4 %>%
+  mutate(slow = ifelse(speed < 150, "Yes", "No"))
 downloads4
 ```
 
@@ -168,13 +169,13 @@ The `count` function is useful for counting data datalines, possibly according t
 
 ```{r}
 # Total number of observations in the current dataset
-count(downloads4)
+downloads4 %>% count()
 
 # Number of observations from each machine
-count(downloads4, machineName)
+downloads4 %>% count(machineName)
 
 # Number of observations which have/have not size larger than 5000
-count(downloads4, size>5000)
+downloads4 %>% count(size>5000)
 ```
 
 ---
@@ -186,17 +187,17 @@ The `arrange` function can be used to sort the data according to one or more col
 Let's sort the data according to download size (ascending order). The first lines of the sorted data set is printed on-screen, but the dataset **downloads4** has *not* been changed.
 
 ```{r}
-arrange(downloads4, size)
+downloads4 %>% arrange(size)
 ```
 
 Two different examples:
 
 ```{r}
 # According to download size in descending order
-arrange(downloads4, desc(size))
+downloads4 %>% arrange(desc(size))
 
 # After machine name and then according to download size in descending order
-arrange(downloads4, machineName, desc(size))
+downloads4 %>% arrange(machineName, desc(size))
 ```
 
 ---
@@ -209,10 +210,10 @@ Here we group after machine name (first) _and_ the slow variable (second). The o
 
 ```{r}
 # Group according to machine
-group_by(downloads4, machineName)
+downloads4 %>% group_by(machineName)
 
 # Group according to machine and slow
-group_by(downloads4, machineName, slow)
+downloads4 %>% group_by(machineName, slow)
 ```
 
 ---
