@@ -69,7 +69,7 @@ Note that for this approach you need to know the name of the package and spell i
 
 b.  Using the graphical interface:
 
-    Look at lower left of your Rstudio window where you have a window with several tabs. Click on _Packages_. You will see a list of your currently installed packages and their versions. To install `emmeans`, click on _Install_ and start to type the name. You will notice a drop down list appears from which you can select the correct package. This is useful if you are not quite sure of the correct spelling.
+    Look at lower right of your Rstudio window where you have a window with several tabs. Click on _Packages_. You will see a list of your currently installed packages and their versions. To install `emmeans`, click on _Install_ and start to type the name. You will notice a drop down list appears from which you can select the correct package. This is useful if you are not quite sure of the correct spelling.
 
 A lot of red text will be written in the console while the installation goes on. This usually does not mean there was a problem, unless the text reads 'error' or 'exit'. In the end, the package is installed, or you will see an explanation of what went wrong.
 
@@ -153,7 +153,7 @@ The first command defines a vector with six elements, but where the last number 
 ```{r}
 ?median
 ```
-The help page for `median` appears in the lower left window. If we read it carefully, then we realize that the extra argument (input) `na.rm` may help us. We therefore try this:
+The help page for `median` appears in the lower right window. If we read it carefully, then we realize that the extra argument (input) `na.rm` may help us. We therefore try this:
 ```{r}
 median(x, na.rm=TRUE)
 ```

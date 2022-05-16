@@ -3,8 +3,8 @@ title: "II. Working with data in R (exercises)"
 author: "Data Science Lab, University of Copenhagen"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
-  pdf_document: default
   html_document: default
+  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -30,7 +30,7 @@ The spreadsheet contains data from five UK weather stations. The following varia
 | **device** | Brand of sunshine recorder / sensor |
 
 
-1.  You should have already imported the data set from the small exercises during the lecture. If not, import it now. You can also do this via the graphical interface by selecting **Import Dataset** from the **Environment** tab on the upper left window. Check that the data preview looks okay and click _Import_.
+1.  You should have already imported the data set from the small exercises during the lecture. If not, import it now. You can also do this via the graphical interface by selecting **Import Dataset** from the **Environment** tab on the upper right window. Check that the data preview looks okay and click _Import_.
     
 2.  Write the name of the dataframe, i.e. `climate` and press enter to see the first lines of the dataset. You can also click on the `climate` object in the Environment panel.
 
