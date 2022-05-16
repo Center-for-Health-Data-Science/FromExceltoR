@@ -1,0 +1,255 @@
+---
+title: "I. The Fundamentals of R (R codes for presentation)"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  #pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE, warning=FALSE, message=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+```
+
+## Working directory and paths
+
+This presentation goes though the fundamentals of R. Before we can begin using R for any analysis, it is important to be familiarized with key concepts such as: directory paths, scrips, how to install, load and remove packages, the concept of functions, and importantly where to find help.   
+Firstly, lets have a look at how we locate and move between our directories (i.e. folders) from within R/Rstudio.   
+
+The term _path_ refers to the trajectory you need to follow from the place you are "located" on your computer to the place you want to work from. You can use the command `getwd()` to see where you are currently working from and `setwd()` to move to your directory of choice. As you will see in the code chunk below a path can be either relative or absolute.
+
+Show the path of the current working directory:
+```{r}
+getwd()
+```
+
+Set working directory:
+```{r}
+# set working directory (absolute path)
+setwd('/Users/kgx936/Desktop/HeaDS/GitHub_repos/FromExceltoR/Presentations')
+setwd('~/Desktop/HeaDS/GitHub_repos/FromExceltoR/Presentations')
+
+# move one directory back
+setwd('..')
+
+# where am I now?
+getwd()
+
+# set working directory (relative path)
+setwd('./Presentations')
+```
+
+```{r}
+# show folders in wd
+list.dirs(path = '.', recursive = FALSE)
+```
+
+---
+
+
+## R packages
+
+R packages are collections of functions written by R developers and super users and they make our lives much easier.   
+An example of a highly used function is `mean()`, which takes a vector of numbers and returns the mean of these. This saves us time as we do not need to write the code to perform this calculation ourselves, we simply call this function, and we can do it as many times as we want on different objects.   
+
+Functions used in the same type of R analysis/pipeline are bundled and organized in packages - the package name often denotes the purpose of the functions within it. There is a help page for each package to tell us which functions it contains and which arguments go into these.   
+
+In order to use a package we need to download and install it on our computer. Most R packages are stored and maintained on the CRAN{https://cran.r-project.org/mirrors.html} repository. When we call the function `install.packages('')` we are automatically querying this repository for our package of choice, downloading and installing.
+
+```{r, eval=FALSE}
+install.packages('tidyverse')
+```
+
+To use the package we do not only need to have it installed, we need to `load()` it into our R working environment.   
+**N.B.** you need to `load()` packages every time you start your R/Rstudio session (unless you saved a session). Packages are not automatically loaded into R as this would be very strenuous for our computers working memory, i.e. some people may have hundreds of packages installed on their computer, instead, we only load what we need for a specific R session.
+
+```{r}
+library(tidyverse)
+```
+
+```{r}
+# Query package
+?tidyverse
+
+# Query function from package
+?select()
+?dplyr::filter()
+?mean()
+```
+
+
+We can also unload a package from an R session:
+
+```{r, eval=FALSE}
+detach('package:tidyverse') 
+```
+
+
+If we would like to remove a package we can do so with `remove.packages('')`, *N.B* this will remove the package from your computer, not just from the R session.
+```{r, eval=FALSE}
+remove.packages('tidyverse')
+```
+
+---
+
+## Data structures: `vector`, `tibble` and `data.frame`
+
+We will need to work with a variety of data types and structures in R and often convert between these. In he examples below, we will look at three types of objects, a `vector`, a `tibble` and a `data.frame. There are of course many more, but these three are the ones we will mainly be working with in this course.   
+
+```{r}
+# A vector of characters:
+groupMembers <- c("Diana", "Tugce", "Henrike", "Thilde", "Alex", "Jennie", "Viki", "Yuhu", "Inigo", "Jonas", "Conor", "Marilena", "Chloe", "Anders")
+groupMembers
+
+# A vector of numeric values:
+cakeDegrees <- c(44.67, 35.43, 30.13, 44.94, 45.0, 39.37, 32.79, 43.92, 44.61, 40.88, 32.28, 42.79, 39.17, 50.41)
+cakeDegrees
+```
+
+Want to know what data type or structure you have, try the function class:
+
+```{r}
+class(cakeDegrees)
+class(groupMembers)
+```
+
+_cakeDegrees_ is a vector of numerical numbers (double), but we would like to convert these to integers (whole numbers). Luckily, there are a range of functions implemented in base R (i.e. no package need to be loaded for these to work) which helps you convert from one data type to another. Common for these functions is that they begin with `as.` followed by the type you would like to convert to, and example would be `as.integer()` which we use below:
+
+```{r}
+
+# Convert cakeDegrees to character values
+cakeDegrees <- as.character(cakeDegrees)
+cakeDegrees
+
+# Convert cakeDegrees back to numeric values
+cakeDegrees <- as.numeric(cakeDegrees)
+cakeDegrees
+
+# Convert cakeDegrees to integer values (whole numbers)
+cakeDegrees <- as.integer(cakeDegrees)
+cakeDegrees
+
+
+# Other examples of 'as.' functions for type conversion
+# as.numeric()
+# as.integer()
+# as.character()
+# as.factor()
+# ...
+```
+
+
+Now, lets make a `tibble` and `data.frame`. **N.B** Here we are using the two vectors we created above to make our dataframe and tibble. We could also have typed out the values in the vector notation i.e. `cakeDegrees = c(44.67, 35.43,...)` directly in the tibble and data.frame function, however this would be double work, as we have already made two vectors and assigned them names:
+
+```{r}
+
+# Make a dataframe
+CakeDF <- data.frame(groupMembers = groupMembers, 
+           cakeDegrees = cakeDegrees)
+
+# Check class
+class(CakeDF)
+
+
+
+# Make a tibble
+CakeT <- tibble(groupMembers = groupMembers, 
+                     cakeDegrees = cakeDegrees)
+
+# Check class
+class(CakeT)
+```
+
+Just like we can convert between different data types with some variant of an `as.` function, we can also convert between data structures/objects:
+
+```{r}
+# Convert tibble to dataframe:
+as.data.frame(CakeT)
+
+# Convert dataframe to matrix:
+as.matrix(CakeDF)
+
+# Convert dataframe to tibble:
+as_tibble(CakeDF)
+
+
+# Other examples of 'as.' function for structure/object conversion
+# as.data.frame()
+# as.matrix()
+# as.list()
+# as.table()
+# ...
+# as_tibble()
+
+```
+
+---
+
+
+## Fundamental operations & summary statistics
+
+It is continuously necessary to inspect R objects so ensure that whatever operation was performed on the object was done correctly. If the object is small we can simply call it and it will be printed to the console.   
+However, when we have a large object it impractical to have the whole thing printed out, instead we would just like to view the first part or last part of it - this can be done with `head()` and `tail()`.   
+If you would like to see your data in a tabular excel style format you can use `view()` which will open a new tap in Rstudio:
+
+```{r}
+# Look at the "head" of an object, default is print first 6 lines:
+head(CakeDF)
+head(CakeDF, n=8)
+
+
+
+# print (is almost always default, but there are times it is not)
+print(CakeDF)
+
+# opens table as a table, excel style
+view(CakeDF)
+```
+
+
+Another useful function is `dim()`, short for dimensions, which returns the number of rows and columns of an R object.
+
+```{r}
+dim(CakeDF)
+```
+
+
+Often we would like to pull out a single column from a dataframe or tibble to work with. This may be done with the '$' symbol:
+
+```{r}
+# Extract variable with $ symbol
+cakeDegrees <- CakeDF$cakeDegrees
+groupMembers <- CakeDF$groupMembers
+```
+
+If we are only interested in a specific subset of either rows or columns from an R data object, we can extract these using the *slice* annotation. A slice is defined as square parentheses with the selection of rows/columns inside it. You of course need to define where to slice from, so you will first write the name of the object followed by the slice, i.e. `x[row, column]`. 
+
+```{r}
+# Specific rows/columns of an R object (a slice):
+CakeDF[1:5, 1:2]
+
+groupMembers[3:9]
+groupMembers[c(1:3, 5, 9, 11)]
+
+```
+
+
+Lastly, it is easy to get basic summary statistics on object in R. The R-base has a variety of simple stats functions build in (i.e. no package needs to be loaded), see some examples below:
+
+```{r}
+# Simple summary statistics:
+length(cakeDegrees)
+
+mean(cakeDegrees)
+sd(cakeDegrees)
+median(cakeDegrees)
+
+min(cakeDegrees)
+max(cakeDegrees)
+
+
+
+summary(CakeDF)
+```
+
+
+

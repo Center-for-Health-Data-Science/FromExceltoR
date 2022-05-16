@@ -26,43 +26,6 @@ install.packages("tidyverse", repos = "https://mirrors.dotsrc.org/cran/")
 library(tidyverse)
 ```
 
-
-
-People with SCIENCE PC's (Windows) sometimes have problems with the installation step because R tries to install files to a place, where the user doesn't have permissions to save and edit files. You can try this instead:
-
-* When you start RStudio, right-click the icon and choose _Run as administrator_. Perhaps you can now install packages by clicking _Tools_ and _Include Packages_ as above. 
-
-* If not, then the problem may be that RStudio is trying to install to your science drive (H: or \\a00143.science.domain). If so, try the command `.libPaths()`. If it shows two folders - one at the science drive and one locally one on your computer (`C:`) - then try the command `install.packages("tidyverse", lib=.libPaths()[2])`.
-
-
----
-
-## About the working directory
-
-When working on a project, it is important to know _where you are_. The working directory is the path on your computer that R will _try_ to access files from.
-
-There are several helpful commands that help you navigate.
-
-```{r, message=FALSE, eval=FALSE}
-# show current working directory (cwd)
-getwd()
-
-# absolute path
-setwd("~/Desktop/FromExceltoR/")
-
-# relative path
-setwd('./Presentations')
-
-# go one step back in the directory
-setwd('..')
-
-# show folders in cwd
-list.dirs(path = ".", recursive = FALSE)
-
-# set working directory absolute path
-setwd("~/Desktop/FromExceltoR/Presentations")
-```
-
 ---
 
 ## Import data
@@ -105,60 +68,6 @@ The dataset is from Boston University and is about www data transfers from Novem
 * It has 147,035 data lines and 6 variables
 
 * _size_ is the download size in bytes, and _time_ is the download time in seconds.
-
----
-
-
-## Data structures: `vector`, `tibble` and `data.frame`
-
-You will need to make structures or convert between these in R. In the example below we will convert a tibble to a dataframe.
-```{r}
-# Convert existing object to a dataframe:
-downloads2 <-  as.data.frame(downloads)
-head(downloads2) # head/top of object
-
-```
-
-
-Variables can be extracted with the $-syntax, and we can use squared brackets to show only the first 40, say, values. 
-
-```{r}
-# Extract time variable by use of $ syntax
-time_vector <- downloads$time
-
-# First 40 observation in vector
-time_vector[1:40]
-
-# First five lines of dataset x[row, column]
-downloads[1:5,]
-```
-
-
-```{r}
-# Want to know what data type or structure you have, try the function class.
-class(downloads)
-class(downloads2)
-class(time_vector)
-
-# Get dimensions of your dataset
-dim(downloads)
-```
-
-Summary statistics like mean, standard deviation, median are easily computed for a vector. 
-
-Examples of R functions for computing summary statistics: `length`, `mean`, `median`, `sd`, `var`, `sum`, `quantile`, `min`, `max`, `IQR`.
-
-
-
-```{r}
-length(time_vector)
-mean(time_vector)
-sd(time_vector)
-median(time_vector)
-min(time_vector)
-```
-
-Notice that more than half the observations have time equal to zero (median is zero).
 
 ---
 
