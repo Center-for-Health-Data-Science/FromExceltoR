@@ -1,0 +1,84 @@
+---
+title: "data exercise"
+author: "datalab"
+date: '2022-05-18'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Dataset exercise
+
+If you don't have your own data to work on, you can follow this exercise to practise some more analysis in R. 
+
+We have put up a dataset on heart disease in the exercise folder. It is a csv file, not an excel so you need to use read.csv to load it:
+
+
+```{r cars}
+stroke <- read.csv("/home/henrike/Documents/Heads_center_management/courses/excel_to_r/June2022/FromExceltoR-June_2022/Exercises/healthcare-dataset-stroke-data.csv")
+str(stroke)
+```
+
+## Exploratory analysis
+
+Have a look at the dataset. 
+
+1. How many columns, i.e. variables are there? Which of them are continuous and which are categorical? NB: Columns with values that are nominally integers can actually be categorical too. It depends on what is *meant* by the value. Is it a measurement or is it a category? 
+
+2. Can you see a column that is a differnt type than you expected? In R, numerical columns are allowed to have missing values, so called `NA` values. However, sometimes R cannot recognize which values are supposed to be missing. Have a look at the help for `read.csv`. Import the stroke data again and this time explicitly state which values should be understood as `NA`.
+
+3. How many rows, i.e. observations are there?
+
+4. Make violin plots for all continuous variables (where it makes sense).
+
+5. Make bar charts for all categorical variables (where it makes sense).
+
+## Getting data out
+
+Since we have an outcome 'stroke' and a lot of predictor variables we could make a regression model to see which of the predictors seems to have a strong effect. However, this is a programming and not statics course, so we'll instead look at how we can work with the dataframe.
+
+6. How many people in rural residences had a stroke? How many people in urban residences? Hint: Use count()
+
+7. Get counts of people who had a stroke split by work_type, Residence_type, smoking_status and ever_married. Which group had the most strokes? Which the least?
+
+8. What type of work do most smokers have? (in this dataset, not a general conclusion!)
+
+9. Show the result form 6. in a bar chart. Hint: Use geom_bar and position = 'fill' since there are many more people without strokes than people with strokes.
+
+10. Now, make the same plot for work_type, smoking_status and ever_married VS stroke.
+
+11. Can you get both work_type and Residence_type VS stroke into the same plot? Hint: Use facet_wrap.
+
+12. Bonus question: Which group of people clearly doesn't want the interviewers to know that they smoke?
+
+## Correlation
+
+We now want to have a look at correlation between the continuous columns. In R we can get correlation coefficients by using the `cor` method. 
+
+13. Have a look at the help:
+
+```{r}
+?cor
+```
+
+14. Subset the dataset to only columns with continuous variables. There should be 3.
+
+15. Call `cor` on this subset:
+
+```{r}
+cor(num_cols)
+```
+
+16. Have a look at the result. We have some NA values in bmi and can't get a correlation coefficient for that column. Call `cor` again, but this time only use complete observations:
+
+```{r}
+cor(num_cols, use = 'complete.obs')
+```
+
+17. Make a scatter plot between the two variables with the highest correlation.
+
+
+
+
