@@ -13,7 +13,7 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 
 ## Importing libraries and data
 
-The examples below use the *downloads* dataset, which also was used for the presentation **Working with data in R**. This dataset is available as an Excel file, which we will import using the **readxl** package. Furthermore, **ggplot2** is part of the **tidyverse** package, so we also load that:
+The examples below use the *downloads* dataset, which also was used for the Tidyverse presentation. This dataset is available as an Excel file, which we will import using the **readxl** package. Furthermore, **ggplot2** is part of the **tidyverse** package, so we also load that:
 
 ```{r}
 library(readxl)
@@ -41,7 +41,7 @@ Suppose we want to use data from the tibble *downloads*, and that *machineName* 
 ggplot(downloads,aes(x=machineName,y=size))
 ```
 
-The reason that we don't see any points, lines or the like is, of course, that we did not yet ask for such thins to be made! Geometrical objects like points and lines are called **geoms** in ggplot2. But although we did not yet add any geoms to our plot, we see that the plot already recognized the range of the variables specified in the aesthetics.
+The reason that we don't see any points, lines or the like is, of course, that we did not yet ask for such things to be made! Geometrical objects like points and lines are called **geoms** in ggplot2. But although we did not yet add any geoms to our plot, we see that the plot already recognized the range of the variables specified in the aesthetics.
 
 
 ---
@@ -252,7 +252,7 @@ ggplot(daily_downloads, aes(x = date, y = total_dl_count)) +
   geom_line() 
 ```
 
-However, in the code above we forgot to make the lines *within the machines*. This may be achieved by adding a *group* aesthetic as shown in the following code.
+However, in the code above we forgot to split the lines *according the machines*, i.e. we want one line for each machine, not one line through all data points. This may be achieved by adding a *group* aesthetic as shown in the following code.
 
 ```{r}
 
@@ -282,7 +282,7 @@ p + scale_y_log10()
 
 ---
 
-Let's make violin plot, which is a boxplot that shows the distribution of points. We will log-scale it again, and this time we will change the colors as well.
+Let's add the colors per machine again:
 
 ```{r}
 p <- ggplot(daily_downloads, aes(x = machineName, y = size_mb, fill=machineName)) + geom_boxplot() + scale_y_log10()
@@ -291,16 +291,22 @@ p
 
 ---
 
-We can add the point to the violin outline and specify custom colors manually, like so:
+Now, we make a violin plot, which is a boxplot that shows the actual distribution of the points. We will log-scale it again.
+
 ```{r}
 p <- ggplot(daily_downloads, aes(x = machineName, y = size_mb, fill=machineName)) + 
-  geom_violin(trim = TRUE) + scale_y_log10() 
+  geom_violin() + scale_y_log10() 
 
 p
+```
 
-p4 <- p + geom_point(size = 1, alpha = 0.5) + 
+We can show the datapoints inside the violin outline by adding another geom_point on top of geom_violin. Custom colors can be picked manually with scale_fill_manual.
+
+```{r}
+
+p4 <- p + geom_point(position = position_jitter(width = 0.1), size = 1, alpha = 0.5) + 
   theme_minimal() +
-  scale_fill_manual(values=c("#2A2D43", "#91A6FF", "#C7EDE4", "#AFA060", "#AD8350"))
+  scale_fill_manual(values=c("#D1D3D6", "#91A6FF", "#C7EDE4", "#AFA060", "#AD8350"))
 p4
 ```
 
@@ -355,6 +361,6 @@ figure
 
 1. As far as we know some plots, e.g. using *faceting* (see the exercises), in practice are only producible in **ggplot2**.
 
-1. Learning the syntax needed for making specific plots is a challenge. The best way (the only way!?) to learn is to practice. You may start by solving the exercise sheet. After you have gotten used to the basic ideas you can find a lot of help on the internet. We remark, that there have been several updates of the **ggplot2** package over the recent years. And some of the old entries that might pop up when you google a ggplot2-issue might be outdated.
+1. Learning the syntax needed for making specific plots is a challenge. The best way (the only way!?) to learn is to practice. You may start by solving the exercise sheet. After you have gotten used to the basic ideas you can find a lot of help on the internet. The **ggplot2** package has had updates over the years like most R packages, so check the version number a post refers to if it doesn't seem to work for you.
 
 1. Not all things can be made in **ggplot2**! For a geometrical object to be available it need to have a syntaxical description, and it needs to be implemented. Other things require computer-hacks to be made (e.g. using different orderings of categorical variables in faceted plots).
