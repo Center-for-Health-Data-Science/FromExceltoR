@@ -248,7 +248,7 @@ ggplot(daily_downloads, aes(x = date, y = dl_count)) +
 p <- ggplot(daily_downloads, aes(x = date, y = dl_count)) +
   geom_point()
 # 2. Add a different point shape depending on the machine to the same plot.
-# 3. Change the coloring to be discrete instead of continuous. You can choose size_mb > 2 
+# 3. Change the coloring to be discrete instead of continuous. You can choose total_dl_count > 5000 
 # or any cutoff you like.  
 
 #############

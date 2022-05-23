@@ -169,8 +169,8 @@ downloads4
 
 # On the climate dataset, select:
 # 1. all rows from the station in Oxford
-# 2. all rows from the station in Oxford when there were at least 50 hours of sunlight
-# 3. all rows from the stations in Oxford and Camborne when there were at least 50 hours of sunlight 
+# 2. all rows from the station in Oxford when there were at least 100 hours of sunlight
+# 3. all rows from the stations in Oxford and Camborne when there were at least 100 hours of sunlight 
 # 4. a subset that only contains the station, year and rain columns
 
 ###############
@@ -241,9 +241,8 @@ downloads4 %>% count()
 # 50 hours of sunlight and less than 100 mm of rain. Otherwise the weather was bad.
 
 # 2. Count the number of: 
-# 2.1 Observations for each weather station
-# 2.2 Months, i.e. lines, per station that did not have any days with air frost (so two conditions)
-# 2.3 Months with good weather per station (use the column you made in 1.2). What's the place with 
+# 2.1 Months, i.e. lines, per station that did not have any days with air frost (so two conditions)
+# 2.2 Months with good weather per station (use the column you made in 1.2). What's the place with 
 # the best weather in England? 
 
 ###########
