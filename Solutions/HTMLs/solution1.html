@@ -9,10 +9,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Data Science Lab, University of Copenhagen" />
+<meta name="author" content="datalab" />
 
+<meta name="date" content="2022-05-20" />
 
-<title>II. Working with data in R (solution)</title>
+<title>I. Working with data in R (solution)</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -362,203 +363,82 @@ pre code {
 
 
 
-<h1 class="title toc-ignore">II. Working with data in R (solution)</h1>
-<h4 class="author">Data Science Lab, University of Copenhagen</h4>
-<h4 class="date">20 May, 2022</h4>
+<h1 class="title toc-ignore">I. Working with data in R (solution)</h1>
+<h4 class="author">datalab</h4>
+<h4 class="date">2022-05-20</h4>
 
 </div>
 
 
-<p>Loading the core <strong>tidyverse</strong> packages, as well as the
-<strong>readxl</strong> package for importing data from .xlsx</p>
-<pre class="r"><code>library(tidyverse)
-library(readxl)</code></pre>
-<div id="importing-data" class="section level3">
-<h3>Importing data</h3>
-<p>1-3. Use the <em>Import data facility</em>.</p>
-<pre class="r"><code>library(readxl)
-climate &lt;- read_excel(&quot;climate.xlsx&quot;)
-climate</code></pre>
-<pre><code>## # A tibble: 60 × 7
-##    station  year month    af  rain   sun device         
-##    &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;          
-##  1 armagh   2016     1     5 132.   44.5 Campbell Stokes
-##  2 armagh   2016     2    10  62.6  71.3 Campbell Stokes
-##  3 armagh   2016     3     4  43.8 117.  Campbell Stokes
-##  4 armagh   2016     4     5  54   140.  Campbell Stokes
-##  5 armagh   2016     5     0  41.4 210.  Campbell Stokes
-##  6 armagh   2016     6     0  75.1 114.  Campbell Stokes
-##  7 armagh   2016     7     0  80.6 113.  Campbell Stokes
-##  8 armagh   2016     8     0  52.5 135.  Campbell Stokes
-##  9 armagh   2016     9     0  65.4  91.1 Campbell Stokes
-## 10 armagh   2016    10     0  37.1  89.8 Campbell Stokes
-## # … with 50 more rows</code></pre>
-</div>
-<div id="working-with-the-data" class="section level3">
-<h3>Working with the data</h3>
-<pre class="r"><code>library(tidyverse)</code></pre>
-<ol start="3" style="list-style-type: decimal">
-<li>Assigning the data set of observations from Oxford with 0 days of
-air frost to <code>oxford_af</code>.</li>
-</ol>
-<pre class="r"><code>oxford_af &lt;- climate %&gt;%
-  filter(station == &quot;oxford&quot;, af == 0)
-oxford_af</code></pre>
-<pre><code>## # A tibble: 6 × 7
-##   station  year month    af  rain   sun device         
-##   &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;          
-## 1 oxford   2016     5     0  86.1  203. Campbell Stokes
-## 2 oxford   2016     6     0  95.7  100. Campbell Stokes
-## 3 oxford   2016     7     0   3.4  228. Campbell Stokes
-## 4 oxford   2016     8     0  41.2  204. Campbell Stokes
-## 5 oxford   2016     9     0  44.6  113. Campbell Stokes
-## 6 oxford   2016    10     0  26.5  112. Campbell Stokes</code></pre>
-<ol start="4" style="list-style-type: decimal">
-<li>Compute the average rainfall over all stations and months by using
-the summarize function</li>
-</ol>
-<pre class="r"><code>climate %&gt;%
-  summarize(avg_rain = mean(rain))</code></pre>
-<pre><code>## # A tibble: 1 × 1
-##   avg_rain
-##      &lt;dbl&gt;
-## 1     75.8</code></pre>
-<ol start="5" style="list-style-type: decimal">
-<li>Calculate average rainfall, the standard deviation of the monthly
-rainfall as well as the total rainfall nad put them in the same
-table.</li>
-</ol>
-<pre class="r"><code>rain_stats &lt;- climate %&gt;%
-  summarize(avg_rain = mean(rain),
-          sd_rain = sd(rain),
-          sum_rain = sum(rain))</code></pre>
-<ol start="6" style="list-style-type: decimal">
-<li>Summary statistics for rainfall data grouped by weather
-station.</li>
-</ol>
-<pre class="r"><code>climate %&gt;%
-  group_by(station) %&gt;% 
-  summarize(avg_rain = mean(rain),
-            sd_rain = sd(rain),
-            sum_rain = sum(rain))</code></pre>
-<pre><code>## # A tibble: 5 × 4
-##   station   avg_rain sd_rain sum_rain
-##   &lt;chr&gt;        &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;
-## 1 armagh        61.4    26.1     737.
-## 2 camborne      95.6    59.4    1147.
-## 3 lerwick      101.     45.6    1218.
-## 4 oxford        54.8    28.5     658.
-## 5 sheffield     65.6    30.5     788.</code></pre>
-<ol start="7" style="list-style-type: decimal">
-<li>Including number of observations for each station.</li>
-</ol>
-<pre class="r"><code>climate %&gt;%
-  group_by(station) %&gt;% 
-  summarize(avg_rain = mean(rain),
-            sd_rain = sd(rain),
-            sum_rain = sum(rain),
-            n=n())</code></pre>
-<pre><code>## # A tibble: 5 × 5
-##   station   avg_rain sd_rain sum_rain     n
-##   &lt;chr&gt;        &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt; &lt;int&gt;
-## 1 armagh        61.4    26.1     737.    12
-## 2 camborne      95.6    59.4    1147.    12
-## 3 lerwick      101.     45.6    1218.    12
-## 4 oxford        54.8    28.5     658.    12
-## 5 sheffield     65.6    30.5     788.    12</code></pre>
+<div id="basic-r-commands" class="section level2">
+<h2>Basic R commands</h2>
 <ol start="8" style="list-style-type: decimal">
-<li>Sorted in descending order according to annual rainfall.</li>
+<li>To start with, load the <code>tidyverse</code> package.</li>
 </ol>
-<pre class="r"><code>climate %&gt;%
-  group_by(station) %&gt;% 
-  summarize(avg_rain = mean(rain),
-            sd_rain = sd(rain),
-            sum_rain = sum(rain),
-            n=n()) %&gt;% 
-  arrange(desc(sum_rain))</code></pre>
-<pre><code>## # A tibble: 5 × 5
-##   station   avg_rain sd_rain sum_rain     n
-##   &lt;chr&gt;        &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt; &lt;int&gt;
-## 1 lerwick      101.     45.6    1218.    12
-## 2 camborne      95.6    59.4    1147.    12
-## 3 sheffield     65.6    30.5     788.    12
-## 4 armagh        61.4    26.1     737.    12
-## 5 oxford        54.8    28.5     658.    12</code></pre>
+<pre class="r"><code>library(tidyverse)</code></pre>
+<pre><code>## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──</code></pre>
+<pre><code>## ✔ ggplot2 3.3.6     ✔ purrr   0.3.4
+## ✔ tibble  3.1.7     ✔ dplyr   1.0.9
+## ✔ tidyr   1.2.0     ✔ stringr 1.4.0
+## ✔ readr   2.1.2     ✔ forcats 0.5.1</code></pre>
+<pre><code>## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+## ✖ dplyr::filter() masks stats::filter()
+## ✖ dplyr::lag()    masks stats::lag()</code></pre>
 <ol start="9" style="list-style-type: decimal">
-<li>Sorted by average monthly sunshine</li>
+<li>Now, load the <code>trees</code> dataset by copying and executing
+the following commands:</li>
 </ol>
-<pre class="r"><code>climate %&gt;%
-  group_by(station) %&gt;% 
-  summarize(avg_rain = mean(rain),
-            sd_rain = sd(rain),
-            sum_rain = sum(rain),
-            avg_sun = mean(sun),
-            n=n()) %&gt;% 
-  arrange(avg_sun)</code></pre>
-<pre><code>## # A tibble: 5 × 6
-##   station   avg_rain sd_rain sum_rain avg_sun     n
-##   &lt;chr&gt;        &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt; &lt;int&gt;
-## 1 lerwick      101.     45.6    1218.    101.    12
-## 2 armagh        61.4    26.1     737.    104.    12
-## 3 sheffield     65.6    30.5     788.    113.    12
-## 4 camborne      95.6    59.4    1147.    120.    12
-## 5 oxford        54.8    28.5     658.    131.    12</code></pre>
+<pre class="r"><code>data(&quot;trees&quot;)
+view(trees)
+?trees</code></pre>
 <ol start="10" style="list-style-type: decimal">
-<li>Weather station with largest median number of monthly sunshine hours
-over the months April to September was Oxford:</li>
+<li>Check what information is contained in the <code>trees</code>
+dataset by calling the <code>summary</code> function on it:</li>
 </ol>
-<pre class="r"><code>climate %&gt;% 
-  filter(month %in% 4:9) %&gt;% 
-  group_by(station) %&gt;% 
-  summarize(med_sun = median(sun)) %&gt;% 
-  arrange(desc(med_sun))</code></pre>
-<pre><code>## # A tibble: 5 × 2
-##   station   med_sun
-##   &lt;chr&gt;       &lt;dbl&gt;
-## 1 oxford       183.
-## 2 camborne     166 
-## 3 sheffield    160.
-## 4 lerwick      132.
-## 5 armagh       124.</code></pre>
+<pre class="r"><code>summary(trees)</code></pre>
+<pre><code>##      Girth           Height       Volume     
+##  Min.   : 8.30   Min.   :63   Min.   :10.20  
+##  1st Qu.:11.05   1st Qu.:72   1st Qu.:19.40  
+##  Median :12.90   Median :76   Median :24.20  
+##  Mean   :13.25   Mean   :76   Mean   :30.17  
+##  3rd Qu.:15.25   3rd Qu.:80   3rd Qu.:37.30  
+##  Max.   :20.60   Max.   :87   Max.   :77.00</code></pre>
 <ol start="11" style="list-style-type: decimal">
-<li>For each weather station apart from Armagh, the total rainfall (in
-cm) and duration of sunshine (in days) in the months with no days of air
-frost.</li>
+<li>How many trees do we have data for?</li>
 </ol>
-<pre class="r"><code>climate %&gt;% 
-  group_by(station) %&gt;% 
-  filter(station != &quot;armagh&quot;, af == 0) %&gt;% 
-  summarize(total_rain = sum(rain)/10,
-            total_sun = sum(sun)/24)</code></pre>
-<pre><code>## # A tibble: 4 × 3
-##   station   total_rain total_sun
-##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;
-## 1 camborne       115.       59.9
-## 2 lerwick         64.4      33.3
-## 3 oxford          29.8      40.0
-## 4 sheffield       35.4      35.0</code></pre>
+<pre class="r"><code>dim(trees)</code></pre>
+<pre><code>## [1] 31  3</code></pre>
+<p>We have 31 rows, so 31 observations.</p>
 <ol start="12" style="list-style-type: decimal">
-<li>For each month: Number of stations with at least two days of air
-frost or more than 95 mm rain, and the average sunshine duration for
-these stations.</li>
+<li>Now, extract the column called <code>volume</code> from the dataset
+and assign it to a new variable called <code>volume_col</code>.</li>
 </ol>
-<pre class="r"><code>climate %&gt;%
-  filter(af &gt;= 2 | rain &gt; 95) %&gt;% 
-  group_by(month) %&gt;% 
-  summarize(count = n(), avg_sun = mean(sun))</code></pre>
-<pre><code>## # A tibble: 10 × 3
-##    month count avg_sun
-##    &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt;
-##  1     1     5    45.3
-##  2     2     5    86.2
-##  3     3     4   106. 
-##  4     4     2   148. 
-##  5     6     2   103. 
-##  6     7     1    80.5
-##  7     8     1    92.2
-##  8     9     2   105. 
-##  9    11     5    68.0
-## 10    12     3    43.9</code></pre>
+<pre class="r"><code>volume_col &lt;- trees$Volume</code></pre>
+<ol start="13" style="list-style-type: decimal">
+<li>Display the volume of the first 10 trees.</li>
+</ol>
+<pre class="r"><code>volume_col[1:10]</code></pre>
+<pre><code>##  [1] 10.3 10.3 10.2 16.4 18.8 19.7 15.6 18.2 22.6 19.9</code></pre>
+<ol start="14" style="list-style-type: decimal">
+<li>Find the minimum, maximum and mean volume from the column you just
+extracted. Does it match what was stated in the
+<code>summary</code>?</li>
+</ol>
+<pre class="r"><code>min(volume_col)</code></pre>
+<pre><code>## [1] 10.2</code></pre>
+<pre class="r"><code>max(volume_col)</code></pre>
+<pre><code>## [1] 77</code></pre>
+<pre class="r"><code>mean(volume_col)</code></pre>
+<pre><code>## [1] 30.17097</code></pre>
+<p>Yes, the values match what was written in <code>summary</code> for
+the volumn column.</p>
+<ol start="15" style="list-style-type: decimal">
+<li>What class of datastructure is <code>trees</code>? Make it into a
+tibble.</li>
+</ol>
+<pre class="r"><code>class(trees)</code></pre>
+<pre><code>## [1] &quot;data.frame&quot;</code></pre>
+<pre class="r"><code>tib_trees &lt;- as_tibble(trees)</code></pre>
 </div>
 
 
