@@ -1,0 +1,130 @@
+---
+title: "Tidyverse lecture - Solutions"
+author: "datalab"
+date: '2022-05-20'
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Exercise A
+
+1. Make a new R script
+2. Load the climate data which you can find in the Exercises folder
+
+```{r message=FALSE, warning=FALSE}
+library(tidyverse)
+library(readxl)
+climate <- read_excel("climate.xlsx")
+climate
+```
+
+3. Is your data a dataframe or a tibble?
+```{r}
+class(climate)
+```
+
+It's a tibble.
+
+4. Have a look at:
+
+4.1 How many observations are there?
+```{r}
+dim(climate)
+```
+
+4.2 How many data columns are there and what are their types?
+```{r}
+summary(climate)
+```
+
+
+4.3 How many different stations are there?
+```{r}
+distinct(climate,station)
+```
+
+
+4.4 How many observations per station?
+```{r}
+climate %>% count(station)
+```
+
+## Exercise B: 5-10 mins
+
+On the climate dataset, select:
+
+1. all rows from the station in Oxford
+
+```{r}
+climate %>%
+  filter(station == 'oxford')
+```
+
+2. all rows from the station in Oxford when there were at least 100 hours of sunlight
+```{r}
+climate %>%
+  filter(station == 'oxford' & sun >= 100)
+```
+
+
+3. all rows from the stations in Oxford and Camborne when there were at least 100 hours of sunlight 
+```{r}
+climate %>%
+  filter(station %in% c('oxford','camborne') & sun >= 100)
+```
+
+4. a subset that only contains the station, year and rain columns
+```{r}
+sub <- climate %>%
+  select(station, year, rain)
+sub
+```
+
+
+## Exercise C
+
+1. To the climate dataset, add:
+
+1.1 A column that states the amount of hours with no sunshine for each month. A month has on average 730 hours, you can use the same amount of hours of all of them.
+
+```{r}
+climate <- climate %>%
+  mutate(no_sun = 730 - sun)
+```
+
+1.2. A column the says whether the weather this month was good. We consider good a month with at least 100 hours of sunlight and less than 100 mm of rain. Otherwise the weather was bad.
+
+```{r}
+climate <- climate %>%
+  mutate(good_weather = ifelse(sun > 100 & rain < 100, "Yes", "No"))
+climate
+```
+
+
+2. Count the number of: 
+
+2.1 Months, i.e. lines, per station that did not have any days with air frost (so two conditions)
+
+```{r}
+climate %>%
+  count(station, af == 0)
+```
+
+
+2.2 Months with good weather per station (use the column you made in 1.2). What's the place with the best weather in England? 
+
+```{r}
+climate %>%
+  filter(good_weather == 'Yes') %>%
+  count(station) %>%
+  arrange(n)
+```
+
+Oxford has the most months with good weather (9).
+
+
