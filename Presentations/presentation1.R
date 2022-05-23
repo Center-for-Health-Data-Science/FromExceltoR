@@ -5,6 +5,9 @@
 
 #############
 
+#link to questions board: 
+#https://ucph.padlet.org/henrikezschach1/mj1uqjn8om5ko47s
+
 ### Working directory 
 
 
