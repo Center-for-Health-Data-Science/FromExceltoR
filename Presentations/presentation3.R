@@ -1,5 +1,7 @@
 # Graphics with ggplot2 ----
 
+#link to question board:
+#https://ucph.padlet.org/henrikezschach1/2wh29pkqmtip4dt0
 
 #############
 
