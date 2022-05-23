@@ -1,0 +1,72 @@
+---
+title: "I\. Working with data in R (solution)"
+author: "datalab"
+date: '2022-05-20'
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Basic R commands
+
+8.  To start with, load the `tidyverse` package.
+    
+```{r}
+library(tidyverse)
+```
+
+9.  Now, load the `trees` dataset by copying and executing the following commands:
+    
+```{r}
+data("trees")
+view(trees)
+?trees
+```
+
+10.  Check what information is contained in the `trees` dataset by calling the `summary` function on it:
+    
+```{r}
+summary(trees)
+```
+
+11.  How many trees do we have data for?
+
+```{r}
+dim(trees)
+```
+
+We have 31 rows, so 31 observations.
+    
+12.  Now, extract the column called `volume` from the dataset and assign it to a new variable called `volume_col`.
+
+```{r}
+volume_col <- trees$Volume
+```
+
+13.  Display the volume of the first 10 trees.
+
+```{r}
+volume_col[1:10]
+```
+    
+14.  Find the minimum, maximum and mean volume from the column you just extracted. Does it match what was stated in the `summary`?
+
+```{r}
+min(volume_col)
+max(volume_col)
+mean(volume_col)
+```
+
+Yes, the values match what was written in `summary` for the volumn column.
+    
+15.  What class of datastructure is `trees`? Make it into a tibble.
+```{r}
+class(trees)
+tib_trees <- as_tibble(trees)
+```
+
+    
