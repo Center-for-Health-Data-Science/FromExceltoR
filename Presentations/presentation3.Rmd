@@ -357,10 +357,10 @@ figure
 
 1. The **ggplot2** package is a powerful and versatile tool for making plots.
 
-1. We think, that the generated plots are beautiful.
+2. We think, that the generated plots are beautiful.
 
-1. As far as we know some plots, e.g. using *faceting* (see the exercises), in practice are only producible in **ggplot2**.
+3. As far as we know some plots, e.g. using *faceting* (see the exercises), in practice are only producible in **ggplot2**.
 
-1. Learning the syntax needed for making specific plots is a challenge. The best way (the only way!?) to learn is to practice. You may start by solving the exercise sheet. After you have gotten used to the basic ideas you can find a lot of help on the internet. The **ggplot2** package has had updates over the years like most R packages, so check the version number a post refers to if it doesn't seem to work for you.
+4. Learning the syntax needed for making specific plots is a challenge. The best way (the only way!?) to learn is to practice. You may start by solving the exercise sheet. After you have gotten used to the basic ideas you can find a lot of help on the internet. The **ggplot2** package has had updates over the years like most R packages, so check the version number a post refers to if it doesn't seem to work for you.
 
-1. Not all things can be made in **ggplot2**! For a geometrical object to be available it need to have a syntaxical description, and it needs to be implemented. Other things require computer-hacks to be made (e.g. using different orderings of categorical variables in faceted plots).
+5. Not all things can be made in **ggplot2**! For a geometrical object to be available it need to have a syntaxical description, and it needs to be implemented. Other things require computer-hacks to be made (e.g. using different orderings of categorical variables in faceted plots).

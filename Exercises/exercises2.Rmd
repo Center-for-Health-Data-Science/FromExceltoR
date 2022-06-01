@@ -30,22 +30,17 @@ The spreadsheet contains data from five UK weather stations. The following varia
 | **device** | Brand of sunshine recorder / sensor |
 
 
-1.  You should have already imported the data set from the small exercises during the lecture. If not, import it now. You can also do this via the graphical interface by selecting **Import Dataset** from the **Environment** tab on the upper right window. Check that the data preview looks okay and click _Import_.
-    
+1.  You should have already imported the data set from the small exercises during the lecture. If not, read it in now using the `read_excel()` function, N.B. make sure you have the `readxl` package loaded and that R can "see" the excel file, i.e. either set your working directory or specify the path to the file. 
+
 2.  Write the name of the dataframe, i.e. `climate` and press enter to see the first lines of the dataset. You can also click on the `climate` object in the Environment panel.
 
 ### Working with the data
 
-Before you proceed with the exercises in this document, make sure to run the command `library(tidyverse)` in order to load the core **tidyverse** packages.
+Before you proceed with the exercises in this document, make sure you load the `tidyverse` in order to use the functions from this package.
 
-3. Select only months, i.e. rows, from the Oxford station where there were no days with airfrost. Assign this new dataset to the variable name `oxford_af`. If you have trouble with this, have a look at Tidyverse exercise B.
+3. Select only months from the Oxford station where there were no days with airfrost. Assign this new dataset to the variable name `oxford_af`. 
 
-4. Compute the average rainfall over all stations and months by using the `summarize` function. You do not need to use any grouping variables. Use the tidyverse syntax, i.e. :
-
-```{r}
-new_object <- dataset %>%
-  summarize(...)
-```
+4. Compute the average rainfall over all stations and months by using the `summarize` function. You can look at the examples we did at the end of presentation 2.
 
 5. Now, calculate the standard deviation of the monthly rainfall as well as the total rainfall (the sum), in addition to the average rainfall as above. I.e. all three measures should be inside the same resulting table. Have a look at the tidyverse lecture if you have trouble with this.
 
@@ -63,10 +58,10 @@ The final questions require that you combine commands and variables of the type 
 
 11. For each weather station apart from the one in Armagh, compute the total rainfall and sunshine duration during the months with no days of air frost. Present the totals in centimetres and days, respectively.
 
-11. For each of the months in the year 2016: 
+12. For each of the months in the year 2016: 
 
     a. Count how many stations recorded at least two days of air frost *or* more than 95 mm rain.
         
     b. Compute the average number of sunshine hours for these stations, for the month in question.
 
-15. Go through your solutions again. Figure out where you could have used the pipe operator `%>%` to make your R-code more readable (instead of saving intermediate data sets). Solve these questions again, this time using the pipe operator.
+13. Go through your solutions again. Figure out where you could have used the pipe operator `%>%` to make your R-code more readable (instead of saving intermediate data sets). Solve these questions again, this time using the pipe operator.

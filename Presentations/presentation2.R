@@ -23,11 +23,12 @@ library("tidyverse")
 # Load a package that can read excel files
 library(readxl)
 
+
+
 # You can use both relative and absolute paths to point to the data file.
-# If the data is in the same directory as your working directory import is easier since you can
-# use a short, relative path.
 # You can verify where your files are in the 'Files' panel on the lower right.
 downloads <- read_excel("Presentations/downloads.xlsx")
+
 
 # Print first few lines of dataset on screen
 downloads
@@ -48,6 +49,11 @@ distinct(downloads, machineName)
 # How many observations do we have per machine?
 count(downloads, machineName)
 
+
+
+
+
+
 ###############
 
 ### Data structures
@@ -55,6 +61,7 @@ count(downloads, machineName)
 # Before we continue with tidyverse, lets look at some highly used data structures in R. 
 # Want to know what data type or structure you have, try the function class.
 class(downloads)
+
 # Both 'str' and 'summary' will you what column types you have. Summary has some extra summary 
 # stats on numeric columns.
 str(downloads)
@@ -63,12 +70,18 @@ str(downloads)
 class(downloads$machineName)
 class(downloads$size)
 
+
+
+
+
+
 ###############
+
 
 ##Exercise A: 10 mins
 
 # 1. Make a new R script
-# 2. Load the climate data which you can find in the Exercises folder
+# 2. Read in the climate data which you can find in the Exercises folder using the read_excel function
 # 3. Is your data a dataframe or a tibble?
 
 # 4. Have a look at:
@@ -80,11 +93,16 @@ class(downloads$size)
 
 ###############
 
+
+
+
+
+
+
 ### Let's try some tidyverse commands.
 
-# We will use tidyverse syntax in thid course. It might look clunky for simple commands, 
-# but it is very useful for complex commands and the sooner you get used to it te easier 
-# it will be to use.
+# We will use tidyverse syntax in this course. It can look clunky for simple commands, 
+# but it is very useful for complex commands
 
 # Tidyverse syntax looks like this:
 
@@ -92,9 +110,16 @@ new_object <-  # the name of the new object you are creating. Can omit if you do
   dataset %>%  # the dataset we are working on
   my_function(arguments...) # the function you want to perform on the dataset
 
-#Often assignment is done on the same line as we name the dataset, i.e.:
+# Often assignment is done on the same line as we name the dataset, i.e.:
+
 new_object <- dataset %>%
   my_function(arguments...) # the function you want to perform on the dataset
+
+
+
+
+
+
 
 
 ###############
@@ -106,17 +131,15 @@ new_object <- dataset %>%
 downloads %>% 
   filter(time > 1000) # processed from left to right
 
-# You will notice that the result of our filter command appears in the console. 
-# However, it is not saved in memory! Have a look at your environment (right-side panel). No new 
-# object has appeared. 
-# If we want to continue to work with the result of our command, we need to assign it to an object
-# by giving it a name:
+# The result of our filter command appears in the console. However, it is not saved in memory! 
+# If we want to continue to work with the result of our command, we need to assign it to an object by giving it a name:
+
 
 large_downloads <- downloads %>% 
   filter(time > 1000)
 
-# This time, nothing was printed to the console (except the command itself). However, a new 
-# object named 'large_downloads' has appeared in our environment!
+# This time a new object named 'large_downloads' has appeared in our environment!
+
 # What is the type of this object?
 class(large_downloads)
 
@@ -128,28 +151,33 @@ downloads3 <- downloads %>%
 downloads3 # print the first lines in console
 View(downloads3) # view the whole data in a new tab
 head(downloads3) # "head" of dataset 
-# you can also click on the object in the environment panel
+
 
 # what are the unique machine names in downloads3?
 distinct(downloads3, machineName)
+
 
 # Filtering with two conditions:
 # Datalines from kermit, and with size greater than 2000000 bytes are kept.
 d4 <- downloads3 %>% 
   filter(machineName == "kermit" & size > 2000000)
 
+
 # what if you want to include multiple options for a column, i.e. several different machines?
 d4 <- downloads3 %>% 
   filter(machineName %in% c("kermit","pluto"), size > 2000000)
 
-# other conditional operators can be found in the intro presentation!
+
 # also have a look at the help:
 ?filter
+
 # There are several packages that have a filter function. 
 # We specify that we want the help for the function 'filter' from the dplyr package:
 ?dplyr::filter
 
-# Can also goolge it!
+
+
+
 
 
 #############
@@ -159,14 +187,16 @@ d4 <- downloads3 %>%
 # Similar to filter, but observe that this works on columns instead!
 
 # Create a tibble without the date variable: negative selection
-# Like with filter, you need to re-assign if want to keep working with this newly generated dataset
 without_date <- downloads3 %>% 
   select(-date)
 
 # Positive selection: Include these columns:
-# Notice that when we exclude columns, we use the minus '-' in front of the name
 downloads4 <- downloads3 %>% select(machineName, size, time)
 downloads4
+
+
+
+
 
 #############
 
@@ -180,6 +210,10 @@ downloads4
 
 ###############
 
+
+
+
+
 ### Transformations of data
 
 ## We can add new columns to our dataframe or tibble with the command 'mutate'
@@ -189,9 +223,11 @@ str(downloads4)
 
 # Note that this command does the exact same but in tidyverse syntax:
 downloads4 %>% str()
-# The reason we sometimes do not use tidyverse syntax is brevity. If you feel very confused
-# by this you can always do tidyverse syntax. It will help with when we do more difficult operations 
-# that require many steps.
+
+# The reason we sometimes do not use tidyverse syntax is brevity. 
+
+
+
 
 # Create a column named 'logSize' which is the logarithm of the size column:
 downloads4 <- downloads4 %>% 
@@ -202,7 +238,7 @@ downloads4 <- downloads4 %>%
 str(downloads4)
 
 # Notice that in the above example our input and output dataframe are the same (downloads4). 
-# We could also create a new object by assigning to a different name.
+
 
 # We can also create several columns within the same mutate command, just separate them by comma:
 downloads4 <- downloads4 %>% 
@@ -217,6 +253,11 @@ downloads4
 
 ?mutate
 
+
+
+
+
+
 ###########
 
 ### Counting, tabulation of categorical variables: count
@@ -228,12 +269,16 @@ downloads4 %>% count(machineName)
 # Number of observations which have/have not size larger than 5000
 downloads4 %>% count(size>5000)
 
-# Or count observations, i.e. lines, for a combination of features:
 # Number of observations for each combiation of machine name and the *slow* variable.
 downloads4 %>% count(machineName, slow)
 
 # Total number of observations in the current dataset: Call count without any arguments
 downloads4 %>% count()
+
+
+
+
+
 
 ##########
 
@@ -242,15 +287,20 @@ downloads4 %>% count()
 # 1. To the climate dataset, add:
 # 1.1 A column that states the amount of hours with no sunshine for each month. A month has on 
 # average 730 hours, you can use the same amount of hours of all of them.
-# 1.2. A column the says whether the weather this month was good. We consider good a month with at least 
+# 1.2. A column the says whether the weather this month was good. We consider a month to be good if it had at least 
 # 50 hours of sunlight and less than 100 mm of rain. Otherwise the weather was bad.
 
 # 2. Count the number of: 
-# 2.1 Months, i.e. lines, per station that did not have any days with air frost (so two conditions)
+# 2.1 Months per station that did not have any days with air frost (so two conditions)
 # 2.2 Months with good weather per station (use the column you made in 1.2). What's the place with 
 # the best weather in England? 
 
 ###########
+
+
+
+
+
 
 ## Sorting data: arrange
 
@@ -264,6 +314,9 @@ downloads4 %>% arrange(desc(size))
 downloads4 %>% arrange(machineName, desc(size))
 
 # Note that we have not re-assigned the results to anywhere, they are not saved!
+
+
+
 
 #########
 
@@ -280,6 +333,10 @@ downloads4 %>% group_by(machineName, slow)
 # By itself, group_by does nothing, we still get the same dataset. But we can use it in combination
 # with other commands (more below).
 
+
+
+
+
 ###########
 
 ### Summary statistics, revisited: summarize
@@ -288,9 +345,7 @@ downloads4 %>% group_by(machineName, slow)
 mean(downloads4$size)
 max(downloads4$size)
 
-# But 'tis not the tidyverse way! In tidyverse syntax, we try to be explicit about what is happening.
-# So let's pipe the data (downloads4) into the summarize function. 
-# We also state what statistic we are interested in (mean) and for which column (size) 
+# But 'tis not the tidyverse way! So let's pipe the data (downloads4) into the summarize function. 
 downloads4 %>% 
   summarise(mean(size))
 
@@ -311,8 +366,7 @@ class(sum_res2)
 sum_res2
 
 # Compare sum_res and sum_res2. You will note the (only) column of sum_res is named mean(size)  
-# surrounded by back ticks. This is super annoying when you later want to call upon the column by
-# name! Better to rename it.
+# This is annoying when you later want to call upon the column by name! Better to rename it.
 
 # We can also get several summary stats at the same time:
 # Note that indentation doesn't matter to R.
@@ -326,7 +380,7 @@ sum_res3
 
 # Now this is where the group_by fun comes in! We use it to generate groupings in our dataframe/tibble
 # which are then respected by the next functions we pipe our data into! 
-# Observe:
+
 
 # Group after machine name and make summaries for each machine
 downloads4 %>%
@@ -346,15 +400,19 @@ downloads4 %>%
             total = sum(size),
             n = n())
 
+
 # We can also get several statistics for several variables: Here mean and standard deviation
 downloads4 %>%
   summarize_at(c("time", "size"), list(ave=mean,stdev=sd))
 
-# There is a whole family of summarise functions which you can discover at: 
-#https://dplyr.tidyverse.org/reference/summarise_all.html
+
 
 # Note that R is tolerant of BE/AE spelling differences. 'summarise' and 'summarize' are the same 
 # function, likewise with 'color' and 'colour'.
+
+
+
+
 
 ##########
 
@@ -379,60 +437,13 @@ size_sorted_df <- downloads %>%
 
 ##########
 
+
+
+
+
 ## lunch
 
 ## Exercise: exercise2.html 
 
 
-##########
 
-### More dplyr functions from tidyverse
-
-##########
-
-# relocate (move one or more columns):
-downloads %>% relocate(time, .before = size)
-
-# rename (rename one column):
-downloads %>% rename(year.month=month)
-
-# pull out one column, equivalent to using $:
-downloads %>% pull(machineName)
-
-##########
-
-# Joining tibbles 
-
-# You can join two tibbles in four different ways: left, right, inner or full.
-# We show the effect of each on two small example tibbles
-
-# machineName and power rank
-downloads5 <- tibble(machineName=c("cs18","piglet","tweetie","kermit", "pluto"),
-                    powerRank=c(2,4,1,3,5))
-
-# machineName and location of machine
-downloads6 <- tibble(machineName=c("cs18","tweetie","kermit","skeeter"),
-                    location=c("China", "USA", "Germany", "Japan"))
-
-# let's have a look at the tibbles we created:
-downloads5
-downloads6
-
-# all machineNames from tibble on the left are kept
-left_join(downloads5, downloads6)
-
-# all machineNames from tibble on the right are kept
-right_join(downloads5, downloads6)
-
-# only machineNames in both left and right tibble are kept 
-inner_join(downloads5, downloads6)
-
-# all machineNames, from both tibbles are kept
-full_join(downloads5, downloads6)
-
-# Note that be default, the tibbles are joined by the content of the first column, machineName
-# change that by changing the 'by' parameter:
-left_join(downloads5, downloads6, by = location)
-
-# You can only join on columns that exist in both tibbles! Unless you specify which columns 
-# are equivalent, see the documentation for how to do that: ?left_join

@@ -65,14 +65,11 @@ ggplot(downloads, aes(x = machineName, y = size/10^6)) +
 p <- ggplot(downloads, aes(x = machineName, y = size/10^6)) + geom_col()
 
 # Note that if you execute the line above, no plot appears. That is because we have redirected
-# the output into a plot object we called 'p'. We could call it anything within the allowed 
-# variable names in R. 
+# the output into a plot object we called 'p'. 
 
-# Now that the plot object 'p' exists, we can call it by writing its name:
+# Now that the plot object 'p' exists, we can call it:
 p
 
-# This will cause the plot to appear, similar to how writing the name of a dataframe 
-# object causes the dataframe to be printed to the console.
 
 # Additional instructions can be added to an existing plot object, for example:
 ###  Flipping the bar chart ----
@@ -82,49 +79,48 @@ p + coord_flip()
 
 #############
 
-#Exercise A: 10 mins
+#Exercise A: 5 mins
 
-# 1. Make a bar chart of the downloads data showing the total download size per month. 
-# Hint: Very similar to the first example shown during the lecture 
-# 2. Make a bar chart of the downloads data showing the total time spend on downloads per month. 
-# 3. Assign the plot you made in 1. to the variable p_size_month .
+# 1. Make a bar plot of the downloads data showing the total download size in MB per month.
+# Assign the plot you made in to the variable named p_size_month.
+
 
 #############
 
 ### Another level of information
 
-# 2D plots have an x- and a y-axis. 
-# However, we can often convey additional information by using color and shape. 
-# I.e. in a plot with two lines, one of them can be dashed and the other solid, 
-# or one can be red and the other blue.  
+# 2D plots have an x- and a y-axis, but we can convey additional information by using color and shape. 
 
 # There are 4 different aesthetics (aes) we can use to add this kind of information to our plots:
-# color: change the color depending on the variable
-# fill: change the fill depending on the variable (this is what we use for bar charts)
-# shape: change the shape of the dot or line depending on the variable
-# size: change the size of the dot or line depending on the variable
+# color: color depending on the variable
+# fill: color fill depending on the variable
+# shape: the shape of the data points depending on the variable
+# size: size of the data points depending on the variable
+
+
 
 ###  Add coloring by monthly download info ----
 
-# This is the same command as above, but with an additional keyword in the aes: 'fill = ...'
-# Like with x and y, we pass here the column that contains the variable we want to color by. 
-# In this case it's the month column.
-# Note that in bar plots, color is defined with the 'fill' keyword. The 'color' keyword refers
-# to the outline of the bar.
+# We pass the column that contains the variable we want to color by. In this case it's the month.
+# Note that in bar plots we use 'fill', denoting color fill. 
 
 p <- ggplot(downloads, aes(x = machineName, y = size/10^6, fill = month))
 
 p + geom_col()
 
-# Compare this to the previous plots by using the arrows in the 'plot' window. 
+
+
 # You will note that each bar has become split up into colored fractions that are stacked on top of each other.
 
 # We could also use a different arrangement than stacked by calling the 'position' keyword:
 p + geom_col(position = "dodge") ## Left/first plot
 p + geom_col(position = "fill") ## Right/second plot
 
-# Note that we did not need to repeat the aesthetics mapping. It is still saved in our plot object 'p'.
-# We added an additional instruction by writing p + geom_col(...)
+# We did not need to repeat the aesthetics mapping, we simply added an additional instruction to our plot.
+
+
+
+
 
 ###  Grouping by machine and month ----
 p1 <- ggplot(downloads, aes(x = machineName, y = size, groups = month, fill=month)) + 
@@ -140,14 +136,12 @@ p1
 
 #############
 
-#Exercise B: 7 mins
+#Exercise B: 5-10 mins
 
-# 1. On the bar chart you made in A3 (p_size_month), add coloring by the machineName by using the 'fill' 
-# keyword in the aes.
+# 1. On the bar chart you made in A3 (p_size_month), add coloring by the machineName by using 'fill' as keyword in the aes function.
 # 2. Now, position the bars for the different machines next to each other instead of stacked. 
-# Hint: Use the 'position' keyword.
-# 3. Now turn it into a boxplot instead. If it's hard to see the boxes try to make the scale of 
-# the size axis logarithmic.
+# 3. Now turn it into a boxplot instead. If it's hard to see the boxes try to make the scale of the size axis logarithmic.
+# FWI: there is more than one way of getting a logarithmic y-axis.
 
 #############
 
@@ -237,21 +231,15 @@ ggplot(daily_downloads, aes(x = date, y = dl_count, color = machineName)) +
 ggplot(daily_downloads, aes(x = date, y = dl_count)) +
   geom_point(aes(color = machineName))
 
-# color aes added separately:
-ggplot(daily_downloads, aes(x = date, y = dl_count)) +
-  geom_point() +
-  aes(color = machineName)
 
 #############
 
 #Exercise C:
 
-# 1. Add coloring by the total download count (total_dl_count) to this plot:
-p <- ggplot(daily_downloads, aes(x = date, y = dl_count)) +
-  geom_point()
-# 2. Add a different point shape depending on the machine to the same plot.
-# 3. Change the coloring to be discrete instead of continuous. You can choose total_dl_count > 5000 
-# or any cutoff you like.  
+# 1. Make a point plot of download count as a function of date (use the daily_downloads object).
+# 2. Color the plot in accordance with the total download count.
+# 3. Add a different point shape depending on the machine to the same plot.
+# 4. Change the coloring to be discrete instead of continuous. You can choose total_dl_count > 5000 or any cutoff you like.  
 
 #############
 
