@@ -17,7 +17,7 @@ We have put up a dataset on heart disease in the exercise folder. It is a csv fi
 
 
 ```{r cars}
-stroke <- read.csv("/home/henrike/Documents/Heads_center_management/courses/excel_to_r/June2022/FromExceltoR-June_2022/Exercises/healthcare-dataset-stroke-data.csv")
+stroke <- read.csv("healthcare-dataset-stroke-data.csv")
 str(stroke)
 ```
 
@@ -68,13 +68,13 @@ We now want to have a look at correlation between the continuous columns. In R w
 15. Call `cor` on this subset:
 
 ```{r}
-cor(num_cols)
+#cor(num_cols)
 ```
 
 16. Have a look at the result. We have some NA values in bmi and can't get a correlation coefficient for that column. Call `cor` again, but this time only use complete observations:
 
 ```{r}
-cor(num_cols, use = 'complete.obs')
+#cor(num_cols, use = 'complete.obs')
 ```
 
 17. Make a scatter plot between the two variables with the highest correlation.
