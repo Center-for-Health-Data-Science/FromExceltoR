@@ -9,11 +9,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="datalab" />
+<meta name="author" content="Data Science Lab, University of Copenhagen" />
 
-<meta name="date" content="2022-05-20" />
 
-<title>I. Working with data in R (solution)</title>
+<title>I. Working with data in R (exercises)</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -256,7 +255,6 @@ if (window.hljs) {
 
 
 
-
 <style type="text/css">
 .main-container {
   max-width: 940px;
@@ -277,9 +275,6 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
-}
-details > summary > p:only-child {
-  display: inline;
 }
 pre code {
   padding: 0;
@@ -363,9 +358,9 @@ pre code {
 
 
 
-<h1 class="title toc-ignore">I. Working with data in R (solution)</h1>
-<h4 class="author">datalab</h4>
-<h4 class="date">2022-05-20</h4>
+<h1 class="title toc-ignore">I. Working with data in R (exercises)</h1>
+<h4 class="author">Data Science Lab, University of Copenhagen</h4>
+<h4 class="date">07 June, 2022</h4>
 
 </div>
 
@@ -376,14 +371,6 @@ pre code {
 <li>To start with, load the <code>tidyverse</code> package.</li>
 </ol>
 <pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──</code></pre>
-<pre><code>## ✔ ggplot2 3.3.6     ✔ purrr   0.3.4
-## ✔ tibble  3.1.7     ✔ dplyr   1.0.9
-## ✔ tidyr   1.2.0     ✔ stringr 1.4.0
-## ✔ readr   2.1.2     ✔ forcats 0.5.1</code></pre>
-<pre><code>## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-## ✖ dplyr::filter() masks stats::filter()
-## ✖ dplyr::lag()    masks stats::lag()</code></pre>
 <ol start="9" style="list-style-type: decimal">
 <li>Now, load the <code>trees</code> dataset by copying and executing
 the following commands:</li>
@@ -396,18 +383,10 @@ view(trees)
 dataset by calling the <code>summary</code> function on it:</li>
 </ol>
 <pre class="r"><code>summary(trees)</code></pre>
-<pre><code>##      Girth           Height       Volume     
-##  Min.   : 8.30   Min.   :63   Min.   :10.20  
-##  1st Qu.:11.05   1st Qu.:72   1st Qu.:19.40  
-##  Median :12.90   Median :76   Median :24.20  
-##  Mean   :13.25   Mean   :76   Mean   :30.17  
-##  3rd Qu.:15.25   3rd Qu.:80   3rd Qu.:37.30  
-##  Max.   :20.60   Max.   :87   Max.   :77.00</code></pre>
 <ol start="11" style="list-style-type: decimal">
 <li>How many trees do we have data for?</li>
 </ol>
 <pre class="r"><code>dim(trees)</code></pre>
-<pre><code>## [1] 31  3</code></pre>
 <p>We have 31 rows, so 31 observations.</p>
 <ol start="12" style="list-style-type: decimal">
 <li>Now, extract the column called <code>volume</code> from the dataset
@@ -418,27 +397,22 @@ and assign it to a new variable called <code>volume_col</code>.</li>
 <li>Display the volume of the first 10 trees.</li>
 </ol>
 <pre class="r"><code>volume_col[1:10]</code></pre>
-<pre><code>##  [1] 10.3 10.3 10.2 16.4 18.8 19.7 15.6 18.2 22.6 19.9</code></pre>
 <ol start="14" style="list-style-type: decimal">
 <li>Find the minimum, maximum and mean volume from the column you just
 extracted. Does it match what was stated in the
 <code>summary</code>?</li>
 </ol>
-<pre class="r"><code>min(volume_col)</code></pre>
-<pre><code>## [1] 10.2</code></pre>
-<pre class="r"><code>max(volume_col)</code></pre>
-<pre><code>## [1] 77</code></pre>
-<pre class="r"><code>mean(volume_col)</code></pre>
-<pre><code>## [1] 30.17097</code></pre>
+<pre class="r"><code>min(volume_col)
+max(volume_col)
+mean(volume_col)</code></pre>
 <p>Yes, the values match what was written in <code>summary</code> for
 the volumn column.</p>
 <ol start="15" style="list-style-type: decimal">
 <li>What class of datastructure is <code>trees</code>? Make it into a
 tibble.</li>
 </ol>
-<pre class="r"><code>class(trees)</code></pre>
-<pre><code>## [1] &quot;data.frame&quot;</code></pre>
-<pre class="r"><code>tib_trees &lt;- as_tibble(trees)</code></pre>
+<pre class="r"><code>class(trees)
+tib_trees &lt;- as_tibble(trees)</code></pre>
 </div>
 
 

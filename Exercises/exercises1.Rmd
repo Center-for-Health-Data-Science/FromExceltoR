@@ -3,7 +3,7 @@ title: "I. Working with data in R (exercises)"
 author: "Data Science Lab, University of Copenhagen"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
-  pdf_document: default
+  #pdf_document: default
   html_document: default
 ---
 
