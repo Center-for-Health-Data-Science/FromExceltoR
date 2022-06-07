@@ -1,0 +1,143 @@
+---
+title: "Data Exercise in R"
+author: "HeaDS Data Lab"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output: 
+      html_document
+      #pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introduction:
+
+If you don't have your own data to work on, you can practice your newly acquired R skills, using one of the available datasets located in the **Exercises folder**. Please see below for a brief description of each dataset:
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+library(tidyverse)
+```
+
+&nbsp;
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+
+datasets <-  tibble(
+  Name = c("HealthPrimaryCare", "CrohnsDisease", "StrokeData"),
+  Description=c("[Here](https://vincentarelbundock.github.io/Rdatasets/doc/mosaicData/HELPrct.html)", "[Here](https://vincentarelbundock.github.io/Rdatasets/doc/robustbase/CrohnD.html)", "[Here](https://www.kaggle.com/datasets/fedesoriano/stroke-prediction-dataset)"),
+  Variables=c(29, 9, 12),
+  Observations = c(453, 117, 5110))
+
+knitr::kable(datasets)
+
+```
+
+&nbsp;
+
+The sections which follow serve as inspiration for what you could do with the dataset at hand, but you do not need to adhere to these, it is completely up to you what you would like to try out!
+
+---
+
+### Read in the Dataset:
+
+When you have chosen a dataset for analysis, see summary above, the first thing is to read it into R. You can do this the usual way using the `read_excel()` function from `readxl`, as all datasets we have are in the form of excel sheets. Name your dataset something logical.   
+
+If you are using your own dataset you will have to figure out which read function you need to get your data into R. There is a function for reading in *almost* any type of text file, `read.csv()`, `read.table()`, `read.delim()`, etc. You can either google your way to an answer or ask one of the course instructors. 
+
+---
+
+### Exploratory Analysis
+
+Before making any statistical models, it is necessary to have a good understanding of ones dataset.   
+So, you could start by looking at:
+
+- How many variables and observations are there in the data? Which data types are the variables.   
+
+- Are there any missing values (`NA`), and how many?   
+
+- Make some preliminary plots of your data, i.e. these do not have to be beautiful, but they should be informative to you. You could try histograms, boxplots, barplots or something else you would like.   
+
+- Looks at your plots, do you appear to have any outlier data points in your dataset?   
+
+- Get some summary statistics for your variables, i.e. means, medians, sd, sums (for numerical types) and counts per group (for categorical or factor types).
+
+
+---
+
+### Scientific Question
+
+Now that you have got en overview of your dataset and the variables in it, try to think about and formulate a simple scientific hypothesis/question which you would like to explore. 
+
+Lets use an example of a dataset containing information on patients with breast cancer. Lets say that we follow these patients from diagnosis, though treatment, and 10 years after treatment ends, as follow-up:   
+
+&nbsp;
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+library(tidyverse)
+
+BC_dataset <-  tibble(
+  Age = c("60", "51", "58", "..."),
+  BC.subtype = c("luminal", "basal", "luminal", "..."),
+  Treatment = c("chemotherapy", "chemotherapy", "immunotherapy", "..."),
+  Survival = c("alive", "alive", "dead", "..."),
+  Stage = c("2", "3", "4", "..."),
+  Smoker = c("no","no", "yes", "..."),
+  Familial.BC = c("no", "yes", "no", "..."))
+
+knitr::kable(BC_dataset)
+```
+
+
+&nbsp;
+We need to decide on:
+
+
+- What is our **response/outcome variable (y)**. Using the example dataset above this might be patient survival or patient subgroup (BC.subtype).   
+**Q:** Which variable in your chosen dataset will you use as response variable? and what type is it, e.g. a categorical (two or more discrete types of outcome) or a continuous variable?   
+
+- Decide on our **predictive/explanatory variable (x)**. Which variable in the dataset is predictive of the outcome, in the example above, we might think treatment is predictive of patient survival? Could there be other variables of interest, i.e. covariates, which are predictive of patient survival in addition to treatment?   
+**Q:** Which predictive variables (x) do you have in your datatset?
+
+---
+
+### Data Wrangling
+
+After familiarizing yourself with your dataset and deciding on which variables may be of interest to include in an analysis, you might consider weather you need to do any data wrangling/management before defining your statistical model. Here we mean things like:
+
+- Do you need all variables in the dataset? Maybe some are redundant or uninteresting so you could remove them from the tibble.   
+
+- If you have missing values for some observations, do you want to filter out these rows before continuing analysis? There could also be other filtering criteria to thing about, removing rows with > than some number of zeros or some boundary value.   
+
+- Maybe you want to make new columns combining some existing ones? An example of this, could be as we did with the downloads dataset where you converted sizes from bytes to megabytes and added the result as a new column to your tibble.   
+
+- Do you want to rename the observations of a variables to something more suited for modeling? An examples of this could be converting a categorical variable like status of smoking (noted as _smoker_ or _non-smoker_) to integer values (_1_ or _0_).
+
+---
+
+### Modelling
+
+You have a *tidy* dataset ready for analysis. You have decided on your response and predictive variables and you know which datatypes they are. The latter is important as this will determine which type of model you can make.  
+
+In the statistics exercise we tried making linear regression and analysis of variance (ANOVA). Try out one of these models. As you may recall we can use linear regression if the outcome is continuous and anova if the outcome is categorical.   
+Have a look a the statics exercise/presentation and the pseudo code below:
+
+```{r, eval=FALSE}
+model1 <- lm(resp ~ pred1, data=name_of_dataset)
+```
+
+- Begin with a simple model, just one predictive variable.   
+
+- Test wheather your data fulfills the model assumptions by making residual plots and evaluating these, just like in the presentation and exercise:
+```{r, eval=FALSE}
+par(mfrow=c(2,2)) # makes room for 4=2x2 plots.
+plot(model1)
+```
+
+- If model assumptions are not appropriate could you perform some sort of transformation to help alleviate the problem?   
+
+- Get some summary statistics from your model. Can you extract the confidence intervals of your estimate? HINT: `summary()`, `confint()`.     
+
+- Try making a model with more than one predictive variable. Remake the residual plots for you new more complex model.   
+
+- Which model is best? How could you test this? HINT: `drop1()`, `anova()`.   
