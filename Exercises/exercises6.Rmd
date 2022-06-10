@@ -119,7 +119,8 @@ After familiarizing yourself with your dataset and deciding on which variables m
 
 You have a *tidy* dataset ready for analysis. You have decided on your response and predictive variables and you know which datatypes they are. The latter is important as this will determine which type of model you can make.  
 
-In the statistics exercise we tried making linear regression and analysis of variance (ANOVA). Try out one of these models. As you may recall we can use linear regression if the outcome is continuous and anova if the outcome is categorical.   
+In the statistics exercise we tried out the `lm()` function to do one-way ANOVA. Use this function again to make a simple statistical model.   
+If the outcome variable you are interested in is continuous, then you will be doing linear regression, however, if the outcome is categorical, you are performing ANOVA (if you only have two groups, this will effectively be a t-test). **N.B** the function and annotation in R is the same for these models.
 Have a look a the statics exercise/presentation and the pseudo code below:
 
 ```{r, eval=FALSE}
@@ -128,7 +129,7 @@ model1 <- lm(resp ~ pred1, data=name_of_dataset)
 
 - Begin with a simple model, just one predictive variable.   
 
-- Test wheather your data fulfills the model assumptions by making residual plots and evaluating these, just like in the presentation and exercise:
+- Test whether your data fulfills the model assumptions by making residual plots and evaluating these, just like in the presentation and exercise:
 ```{r, eval=FALSE}
 par(mfrow=c(2,2)) # makes room for 4=2x2 plots.
 plot(model1)

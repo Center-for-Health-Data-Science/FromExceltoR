@@ -360,7 +360,7 @@ pre code {
 
 <h1 class="title toc-ignore">Data Exercise in R</h1>
 <h4 class="author">HeaDS Data Lab</h4>
-<h4 class="date">07 June, 2022</h4>
+<h4 class="date">10 June, 2022</h4>
 
 </div>
 
@@ -562,16 +562,19 @@ converting a categorical variable like status of smoking (noted as
 on your response and predictive variables and you know which datatypes
 they are. The latter is important as this will determine which type of
 model you can make.</p>
-<p>In the statistics exercise we tried making linear regression and
-analysis of variance (ANOVA). Try out one of these models. As you may
-recall we can use linear regression if the outcome is continuous and
-anova if the outcome is categorical.<br />
-Have a look a the statics exercise/presentation and the pseudo code
-below:</p>
+<p>In the statistics exercise we tried out the <code>lm()</code>
+function to do one-way ANOVA. Use this function again to make a simple
+statistical model.<br />
+If the outcome variable you are interested in is continuous, then you
+will be doing linear regression, however, if the outcome is categorical,
+you are performing ANOVA (if you only have two groups, this will
+effectively be a t-test). <strong>N.B</strong> the function and
+annotation in R is the same for these models. Have a look a the statics
+exercise/presentation and the pseudo code below:</p>
 <pre class="r"><code>model1 &lt;- lm(resp ~ pred1, data=name_of_dataset)</code></pre>
 <ul>
 <li><p>Begin with a simple model, just one predictive variable.</p></li>
-<li><p>Test wheather your data fulfills the model assumptions by making
+<li><p>Test whether your data fulfills the model assumptions by making
 residual plots and evaluating these, just like in the presentation and
 exercise:</p></li>
 </ul>
