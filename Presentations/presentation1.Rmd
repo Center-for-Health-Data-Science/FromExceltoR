@@ -2,8 +2,9 @@
 title: "I. The Fundamentals of R (R codes for presentation)"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
-  #pdf_document: default
-  html_document: default
+  pdf_document: default
+  #html_document: default
+
 ---
 
 ```{r setup, include=FALSE, warning=FALSE, message=FALSE}
@@ -15,7 +16,8 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 This presentation goes though the fundamentals of R. Before we can begin using R for any analysis, it is important to be familiarized with key concepts such as: directory paths, scrips, how to install, load and remove packages, the concept of functions, and importantly where to find help.   
 Firstly, lets have a look at how we locate and move between our directories (i.e. folders) from within R/Rstudio.   
 
-The term _path_ refers to the trajectory you need to follow from the place you are "located" on your computer to the place you want to work from. You can use the command `getwd()` to see where you are currently working from and `setwd()` to move to your directory of choice. As you will see in the code chunk below a path can be either relative or absolute.
+The term **path** refers to the trajectory you need to follow from the place you are "located" on your computer to the place you want to work from. You can use the command `getwd()` to see where you are currently working from and `setwd()` to move to your directory of choice. As you will see in the code chunk below a path can be either relative or absolute.
+
 
 Show the path of the current working directory:
 ```{r}
@@ -28,11 +30,11 @@ Set working directory:
 setwd('/Users/kgx936/Desktop/HeaDS/GitHub_repos/FromExceltoR/Presentations')
 setwd('~/Desktop/HeaDS/GitHub_repos/FromExceltoR/Presentations')
 
-# move one directory back
-setwd('..')
-
 # where am I now?
 getwd()
+
+# move one directory back
+setwd('..')
 
 # set working directory (relative path)
 setwd('./Presentations')
@@ -45,6 +47,41 @@ list.dirs(path = '.', recursive = FALSE)
 
 ---
 
+## Functions & Arguments   
+
+A function is a chunk of code wrapped in a way which makes the code inside reusable. A function takes an input(s) (arguments) and returns an output(s). A concept example could be the one below
+
+
+```{r, eval=FALSE}
+function(x,y) {
+  z <- x + y
+  return(z)
+}
+```
+
+Lets have a look at some simple functions. We will use the `mean()` and `sum()` functions as examples:
+
+```{r}
+# Get the mean of some numbers:
+(5+1+11+6+4)/5
+
+
+# A vector of numbers named num1
+num1 <- c(5,1,11,6,4)
+num1
+
+
+# Mean: x (which is some numbers/values) is the input and mean is the output. 
+mean(x=num1)
+
+# Functions makes code reusable:
+num2 <- c(0,3,4,9,1,2,7,10,2,11)
+num2
+
+mean(x=num2)
+```
+
+---
 
 ## R packages
 
@@ -112,7 +149,7 @@ class(cakeDegrees)
 class(groupMembers)
 ```
 
-_cakeDegrees_ is a vector of numerical numbers (double), but we would like to convert these to integers (whole numbers). Luckily, there are a range of functions implemented in base R (i.e. no package need to be loaded for these to work) which helps you convert from one data type to another. Common for these functions is that they begin with `as.` followed by the type you would like to convert to, and example would be `as.integer()` which we use below:
+*cakeDegrees* is a vector of numerical numbers (double), but we would like to convert these to integers (whole numbers). Luckily, there are a range of functions implemented in base R (i.e. no package need to be loaded for these to work) which helps you convert from one data type to another. Common for these functions is that they begin with `as.` followed by the type you would like to convert to, and example would be `as.integer()` which we use below:
 
 ```{r}
 
@@ -202,7 +239,7 @@ head(CakeDF, n=8)
 print(CakeDF)
 
 # opens table as a table, excel style
-view(CakeDF)
+# view(CakeDF)
 ```
 
 

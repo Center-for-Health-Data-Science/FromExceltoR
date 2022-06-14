@@ -20,11 +20,11 @@
 setwd('/Users/kgx936/Desktop/HeaDS/GitHub_repos/FromExceltoR/Presentations')
 setwd('~/Desktop/HeaDS/GitHub_repos/FromExceltoR/Presentations')
 
-# move one directory back
-setwd('..')
-
 # where am I now?
 getwd()
+
+# move one directory back
+setwd('..')
 
 # set working directory (relative path)
 setwd('./Presentations')
@@ -33,10 +33,62 @@ setwd('./Presentations')
 list.dirs(path = '.', recursive = FALSE)
 
 
+### Variable assignment
+
+# In R we use an arrow for variable assigment. You may call your almost variables whatever you like.
+# DO NOT: use special characters in variable names, i.e. &, ), $ etc. or make spaces in naming.
+
+A <- c(1,2,3,4,5)
+myVar <- c(11,12,13,14,15) 
+
+A
+myVar
+
+
+
+
+# SLIDE BREAK
+
+
+
+
+### Functions & Arguments
+
+## Function are chunks of code wrapped in a way which makes the code inside reusable. 
+## A function takes an input(s) (arguments) and returns an output(s). 
+## One concept example could be: 
+
+# function(x,y) {
+ # z <- x + y 
+ # return(z)
+# }
+
+
+# Get the mean of some numbers:
+(5+1+11+6+4)/5
+
+
+# A vector of numbers named num1
+num1 <- c(5,1,11,6,4)
+num1
+
+
+# Mean: x (which is some numbers/values) is the input and mean is the output. 
+mean(x=num1)
+
+# Functions makes code reusable:
+num2 <- c(0,3,4,9,1,2,7,10,2,11)
+num2
+
+mean(x=num2)
+
+
+
+
+
 ############
 
-
-### R packages
+### R packages 
 
 ## R packages are collections of functions written by R developers and super users and they make our lives much easier. 
 ## Functions used in the same type of R analysis/pipeline are bundled and organized in packages.
@@ -60,8 +112,8 @@ library(tidyverse)
 
 # Query function from package
 ?select()
-?dplyr::filter()
-?mean()
+
+
 
 
 
@@ -104,6 +156,10 @@ cakeDegrees <- c(44.67, 35.43, 30.13, 44.94, 45.0, 39.37, 32.79, 43.92, 44.61, 4
 cakeDegrees
 
 
+
+############
+
+
 # Want to know what data type or structure you have, try the function class.
 class(cakeDegrees)
 class(groupMembers)
@@ -132,7 +188,7 @@ cakeDegrees
 
 
 
-
+############
 
 
 
@@ -145,7 +201,7 @@ CakeDF <- data.frame(groupMembers = groupMembers,
 
 # Check class
 class(CakeDF)
-
+CakeDF
 
 
 # Make a tibble
@@ -154,6 +210,7 @@ CakeT <- tibble(groupMembers = groupMembers,
 
 # Check class
 class(CakeT)
+CakeT
 
 
 
