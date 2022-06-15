@@ -255,7 +255,6 @@ if (window.hljs) {
 
 
 
-
 <style type="text/css">
 .main-container {
   max-width: 940px;
@@ -276,9 +275,6 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
-}
-details > summary > p:only-child {
-  display: inline;
 }
 pre code {
   padding: 0;
@@ -364,7 +360,7 @@ pre code {
 
 <h1 class="title toc-ignore">I. Working with data in R (exercises)</h1>
 <h4 class="author">Data Science Lab, University of Copenhagen</h4>
-<h4 class="date">16 May, 2022</h4>
+<h4 class="date">15 June, 2022</h4>
 
 </div>
 
@@ -456,7 +452,7 @@ package <code>emmeans</code>.</p>
 <ol style="list-style-type: lower-alpha">
 <li>Using the command line:</li>
 </ol>
-<pre class="r"><code>install.package(&quot;emmeans&quot;)</code></pre>
+<pre class="r"><code>install.packages(&quot;emmeans&quot;)</code></pre>
 <p>Note that for this approach you need to know the name of the package
 and spell it correctly, including capitalization!</p>
 <ol start="2" style="list-style-type: lower-alpha">
@@ -493,7 +489,7 @@ about. We will use an in-build dataset of R called
 <ol start="8" style="list-style-type: decimal">
 <li>To start with, load the <code>tidyverse</code> package.</li>
 </ol>
-<pre class="r"><code>load(tidyverse)</code></pre>
+<pre class="r"><code>library(tidyverse)</code></pre>
 <ol start="9" style="list-style-type: decimal">
 <li>Now, load the <code>trees</code> dataset by copying and executing
 the following commands:</li>
