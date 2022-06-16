@@ -164,13 +164,14 @@ pre code {
 
 
 <h1 class="title toc-ignore">V. Applied Statistics in R (presentation)</h1>
-<h4 class="date">14 June, 2022</h4>
+<h4 class="date">16 June, 2022</h4>
 
 </div>
 
 
 <div id="structure-of-a-biostatistical-analysis-in-r" class="section level2">
 <h2>Structure of a biostatistical analysis in R</h2>
+<p>For questions and comments - please use the padlet here: <a href="https://ucph.padlet.org/tugcekaraderi/kyk81qgc1l6qtnyg" class="uri">https://ucph.padlet.org/tugcekaraderi/kyk81qgc1l6qtnyg</a></p>
 <p>The very basic structure of an R script doing a classical statistical analysis is as follows:</p>
 <ul>
 <li>Load packages that you will be using.<br />
@@ -181,17 +182,13 @@ pre code {
 </li>
 <li>Fit and validate a statistical model.<br />
 </li>
-<li>Hypothesis testing. Possibly also post hoc testing.<br />
-</li>
-<li>Report model parameters and/or model predictions.<br />
-</li>
-<li>Visualize your results.</li>
+<li>Hypothesis testing. Possibly also post hoc testing.</li>
 </ul>
 <p>Of course there are variants of this set-up, and in practice there will often be some iterations of the steps.<br />
 In this manuscript we will exemplify the proposed steps in the analysis of a simple dataset:</p>
 <ul>
 <li>In our current scenario, you are a researcher investigating psoriasis, an inflammatory skin disease. You have data on the expression of a number genes that are suspected to have something to do with the disease, but you cannot be sure until you perform some formal statistical analysis.</li>
-<li>This is a great example of where R would come very handy!</li>
+<li>This is a great example where R skills would come very handy!</li>
 <li>You will start with your gene of special interest IGFL4. IGFL4 belongs to the insulin-like growth factor family of signaling molecules that play critical roles in cellular energy metabolism as well as in growth and development.</li>
 <li>You decide that your analysis approach will be one-way ANOVA of the expression of the IGFL4 gene against the skin type in psoriasis patients.</li>
 </ul>
@@ -207,7 +204,8 @@ In this manuscript we will exemplify the proposed steps in the analysis of a sim
 library(tidyverse)
 library(readxl)
 library(emmeans)</code></pre>
-<p>Now, we have done step 1 for our analyses. Next, we will look specifically at the possible association between IGFL4 gene expression and psoriasis. Finally, we conclude with a brief outlook on other statistical models in R.</p>
+<p>Now, we are done preparing for our analyses. Next, we will look specifically at the possible association between IGFL4 gene expression and psoriasis. Finally, we conclude with a brief outlook on other statistical models in R.</p>
+<p>Please refer to the ‘STATS CHEAT SHEET’ provided in the slides for hints as well as other cheat sheets provided in other sessions where necessary.</p>
 </div>
 </div>
 <div id="example-analysis-of-variance" class="section level2">
@@ -215,20 +213,64 @@ library(emmeans)</code></pre>
 <div id="step-1-data" class="section level4">
 <h4>Step 1: Data</h4>
 <p>Psoriasis is an immune-mediated disease that affects the skin. You, as a researcher, carried out a micro-array experiment with skin from 37 people in order to examine a potential association between the disease and a certain gene (IGFL4). For each of the 37 samples the gene expression was measured. Fifteen skin samples were from psoriasis patients and from a part of the body affected by the disease (<code>psor</code>); 15 samples were from psoriasis patients but from a part of the body not affected by the disease (<code>psne</code>); and 7 skin samples were from healthy people (<code>control</code>).</p>
-<p>The data are saved in the file <strong>psoriasis.xlsx</strong>. At first the variable <code>type</code> is stored as a character variable, we change it to a factor (and check that indeed there are 15, 15 and 7 patients in the three groups).</p>
+<p>The data are saved in the file <strong>psoriasis.xlsx</strong>. At first the variable named <code>type</code> (i.e. skin sample type) is stored as a character variable, we change it to a factor (and check that indeed there are 15, 15 and 7 skin samples in the three groups).</p>
+<pre class="r"><code># Read in the data from Excel file and call it psoriasisData
+# Start with command: psoriasisData &lt;- read_excel()
+
+# View the top rows of the dataset
+# Use code line: head(psoriasisData)
+
+# Extract the data of interest containing the IGFL4 expression levels and skin sample type from the dataset and call this subset psorData
+# Use code line: psorData  &lt;- select(psoriasisData, type, IGFL4)
+
+# View the top rows of the dataset psorData
+
+
+# Change variable named &#39;type&#39; to factor so that we can use in our analysis in the nextt steps
+# First let&#39;s check if it is character
+# Use code line: is.character(psorData$type)
+
+# Now change to factor
+# Use code line: psorData &lt;- mutate(psorData, type = factor(type))
+
+# Again, let&#39;s check if it is factor now
+
+
+# Check that there are 15, 15 and 7 skin samples in the three groups. Hint: count()</code></pre>
+<p>QUESTION 1: Are there 15, 15 and 7 skin samples in the three groups? Please share your answer here: menti.com 5103 9109</p>
 </div>
 <div id="step-2-descriptive-plots-and-statistics" class="section level4">
 <h4>Step 2: Descriptive plots and statistics</h4>
-<p>To get an impression of the data, we make two plots and compute group-wise means and standard deviations.</p>
+<p>To get an impression of the data, we make two plots, and compute group-wise means and standard deviations. Make (1) a plot showing three groups of skin samples (healthy, psne, psor) and IGFL4 expression levels from each skin sample so that we can visually compare each group of samples with regards to IGLF4 expression levels; (2) a boxplot for the same group-wise comparison. And finally, obtain the group-wise (healthy, psne, psor) descriptive statistics (mean, median and standard deviation). Hint: Consider using ggplot and tidyverse!</p>
+<pre class="r"><code># (1) a plot showing three groups of skin samples (healthy, psne, psor) and IGFL4 expression levels from each skin sample
+# Use code line: ggplot(psorData, aes(x=type, y=IGFL4)) + geom_point() + labs(x=&quot;Skin type&quot;, y=&quot;IGFL4&quot;)
+
+# (2) a boxplot for the same group-wise comparison. Hint: geom_boxplot()
+
+
+# And finally, obtain the group-wise (healthy, psne, psor) descriptive statistics (mean, median and standard deviation). Hint: group_by()</code></pre>
+<p>QUESTION 2: Please rank the three groups by their mean/average IGFL4 expression (descending order). Please share your answer here: menti.com 5103 9109</p>
 </div>
 <div id="step-3-fit-of-oneway-anova-model-validation" class="section level4">
 <h4>Step 3: Fit of oneway ANOVA, model validation</h4>
-<p>The scientific question is whether the gene expression level of IGFL4 differs between the three types/groups. Thus, the natural type of analysis is a oneway analysis of variance (ANOVA). The oneway ANOVA is fitted with a function in R. What is it? It is a good approach to assign a name (below <em>oneway</em>) to the object with the fitted model. This object contains all relevant information and may be used for subsequent analysis. Note that we need to logarithmic transform the response as intensities are often on a multiplicative scale.</p>
+<p>The scientific question is whether the gene expression level of IGFL4 differs between the three types/groups. Thus, the natural type of analysis is a oneway analysis of variance (ANOVA). The oneway ANOVA is fitted with the lm() function in R. It is a good approach to assign a name (below <em>oneway</em>) to the object with the fitted model. This object contains all relevant information and may be used for subsequent analysis. Note that we need to logarithmic transform the response (i.e. IGFL4 expression levels) as intensities are often on a multiplicative scale.</p>
+<pre class="r"><code># oneway analysis of variance (ANOVA)
+# Use code line: oneway &lt;- lm(log(IGFL4) ~ type, data=psorData)
+
+# View the model coefficients</code></pre>
+<p>QUESTION 3: Are you done? Please share how you feel here: menti.com 5806 6079</p>
 </div>
 <div id="step-4-hypothesis-test-post-hoc-tests" class="section level4">
 <h4>Step 4: Hypothesis test + Post hoc tests</h4>
-<p>It is standard to carry out an <span class="math inline">\(F\)</span>-test for the overall effect of the explanatory (i.e. independent) variable. To be precise, the hypothesis is that the expected values are the same in <em>all</em> groups. The most easy way to do this test is to use ???. Hint: The option <code>test=&quot;F&quot;</code> is needed to get the <span class="math inline">\(F\)</span>-test using that function:</p>
-<p>It might be that the gene expression in two of the three groups, say, are not significantly different. To investigate that we do post hoc testing. This is nicely done within the framework of <em>estimated marginal means</em> using the <strong>emmeans</strong> package. Here <code>emmeans</code> makes the estimated marginal means (that is the predicted gene expression IGFL4 on the log scale), and the ??? command provide post hoc pairwise comparisons (package automatically adjusts for multiple comparisons using the default tukey method):</p>
+<p>It is standard to carry out an <span class="math inline">\(F\)</span>-test for the overall effect of the explanatory (i.e. independent) variable. To be precise, the hypothesis is that the expected values are the same in <em>all</em> groups. The most easy way to do this test is to use <code>drop1</code>. The option <code>test=&quot;F&quot;</code> is needed to get the <span class="math inline">\(F\)</span>-test using that function:</p>
+<pre class="r"><code># Carry out an $F$-test for the overall effect of the explanatory (i.e. independent) variable</code></pre>
+<p>QUESTION 4: What is your conclusion from the <span class="math inline">\(F\)</span>-test result? Please share your answer here: menti.com 3783 8151</p>
+<p>It might be that the gene expression in two of the three groups may or may not be significantly different. To investigate that we do post hoc testing. This is nicely done within the framework of <em>estimated marginal means</em> using the <strong>emmeans</strong> package. Here <code>emmeans</code> makes the estimated marginal means (that is the predicted gene expression IGFL4 on the log scale), and the pairs() command provide post hoc pairwise comparisons (package automatically adjusts for multiple comparisons using the default tukey method):</p>
+<pre class="r"><code># Run emmeans
+# Use code line: emmeans(oneway,~type)
+
+# Perform post hoc pairwise comparisons</code></pre>
+<p>QUESTION 5: What is your conclusion from the pairwise comparisons? Please share your answer here: menti.com 3783 8151</p>
 </div>
 </div>
 
