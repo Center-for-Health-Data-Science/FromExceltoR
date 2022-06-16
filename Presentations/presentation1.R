@@ -80,7 +80,7 @@ mean(x=num1)
 num2 <- c(0,3,4,9,1,2,7,10,2,11)
 num2
 
-mean(x=num2)
+mean(num2)
 
 
 
@@ -100,7 +100,7 @@ mean(x=num2)
 
 
 # Install a package
-# install.packages('tidyverse')
+#install.packages('tidyverse')
 
 
 

@@ -62,7 +62,7 @@ An R package needs be _installed_ and _loaded_ before you can use its functional
 a.  Using the command line:
     
 ```{r}
-install.package("emmeans")
+install.packages("emmeans")
 ```
     
 Note that for this approach you need to know the name of the package and spell it correctly, including capitalization!
@@ -84,7 +84,7 @@ We will now have a look at basic commands in R that you just learned about. We w
 8.  To start with, load the `tidyverse` package.
     
 ```{r}
-load(tidyverse)
+library(tidyverse)
 ```
 
 9.  Now, load the `trees` dataset by copying and executing the following commands:
