@@ -10,36 +10,35 @@ output:
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 ```
 
-## Tidyverse package 
+## Tidyverse package
 
-The tidyverse is a collection of R packages which, among other things, facilitate data handling and data transformation in R. See <https://www.tidyverse.org/> for details. 
+The tidyverse is a collection of R packages which, among other things, facilitate data handling and data transformation in R. See <https://www.tidyverse.org/> for details.
 
-We must install and load the R package **tidyverse** before we have access to the functions. 
+We must install and load the R package **tidyverse** before we have access to the functions.
 
-* Install package: One option is to go via the _Tools_ menu: *Tools* &#8594; *Install packages* &#8594; write `tidyverse` in the field called _Packages_. This only has to be done once. Otherwise use the `install.packages` function as shown here:  
+-   Install package: One option is to go via the *Tools* menu: *Tools* → *Install packages* → write `tidyverse` in the field called *Packages*. This only has to be done once. Otherwise use the `install.packages` function as shown here:\
+
 ```{r, message=FALSE, eval=FALSE}
 install.packages("tidyverse", repos = "https://mirrors.dotsrc.org/cran/")
 ```
 
-* Load package: Use the `library` command below (preferred), or go to the _Packages_ menu in the bottom right window, find **tidyverse** in the list, and click it. This has to be done in every R-session where you use the package. 
+-   Load package: Use the `library` command below (preferred), or go to the *Packages* menu in the bottom right window, find **tidyverse** in the list, and click it. This has to be done in every R-session where you use the package.
+
 ```{r, message=FALSE}
 library(tidyverse)
 ```
 
-
-
 People with SCIENCE PC's (Windows) sometimes have problems with the installation step because R tries to install files to a place, where the user doesn't have permissions to save and edit files. You can try this instead:
 
-* When you start RStudio, right-click the icon and choose _Run as administrator_. Perhaps you can now install packages by clicking _Tools_ and _Include Packages_ as above. 
+-   When you start RStudio, right-click the icon and choose *Run as administrator*. Perhaps you can now install packages by clicking *Tools* and *Include Packages* as above.
 
-* If not, then the problem may be that RStudio is trying to install to your science drive (H: or \\a00143.science.domain). If so, try the command `.libPaths()`. If it shows two folders - one at the science drive and one locally one on your computer (`C:`) - then try the command `install.packages("tidyverse", lib=.libPaths()[2])`.
+-   If not, then the problem may be that RStudio is trying to install to your science drive (H: or \\a00143.science.domain). If so, try the command `.libPaths()`. If it shows two folders - one at the science drive and one locally one on your computer (`C:`) - then try the command `install.packages("tidyverse", lib=.libPaths()[2])`.
 
-
----
+------------------------------------------------------------------------
 
 ## About the working directory
 
-When working on a project, it is important to know _where you are_. The working directory is the path on your computer that R will _try_ to access files from.
+When working on a project, it is important to know *where you are*. The working directory is the path on your computer that R will *try* to access files from.
 
 There are several helpful commands that help you navigate.
 
@@ -61,293 +60,282 @@ list.dirs(path = ".", recursive = FALSE)
 
 # set working directory absolute path
 setwd("~/Desktop/FromExceltoR/Presentations")
+
 ```
 
----
+------------------------------------------------------------------------
 
 ## Import data
 
-Data from Excel files can be imported via the _Import Dataset_ facility. You may get the message that the package **readxl** should be installed. If so, then install it as explained for **tidyverse** above. 
+Data from Excel files can be imported via the *Import Dataset* facility. You may get the message that the package **readxl** should be installed. If so, then install it as explained for **tidyverse** above.
 
-* Find _Import Data_ in the upper right window in RStudio, and choose _From Excel_ in the dropdown menu.
+-   Find *Import Data* in the upper right window in RStudio, and choose *From Excel* in the dropdown menu.
 
-* A new window opens. Browse for the relevant Excel file; then a preview of the dataset is shown. Check that it looks OK, and click _Import_. 
+-   A new window opens. Browse for the relevant Excel file; then a preview of the dataset is shown. Check that it looks OK, and click *Import*.
 
-* Three things happened: Three lines of code was generated (and executed) in the Console, a new dataset now appears in the Environment window, and the dataset is shown in the top left window. Check again that it looks OK. 
+-   Three things happened: Three lines of code was generated (and executed) in the Console, a new dataset now appears in the Environment window, and the dataset is shown in the top left window. Check again that it looks OK.
 
-* Copy the first two lines of code into your R script (or into an R chunk in your Markdown document), but delete line starting with `View` and write instead the name of the dataset, here **downloads**. Then the first 10 lines of the data set are printed. 
+-   Copy the first two lines of code into your R script (or into an R chunk in your Markdown document), but delete line starting with `View` and write instead the name of the dataset, here **crohns**. Then the first 10 lines of the data set are printed.
 
 ```{r}
 library(readxl)
-downloads <- read_excel("downloads.xlsx")
-downloads
+
+# working directory on my computer, replace with path for your computer
+setwd("~/Documents/Heads_center_management/courses/excel_to_r/oct2022/FromExceltoR/Presentations")
+
+crohns <- read_excel("data/crohns_disease.xlsx")
+crohns
 ```
 
-R has stored the data in a so-called _tibble_, a type of data frame. 
-Rows are referred to as *observations* or *data lines*, columns as *variables*.
-The data rows appear in the order as in the Excel file.
+R has stored the data in a so-called *tibble*, a type of data frame. Rows are referred to as *observations* or *data lines*, columns as *variables*. The data rows appear in the order as in the Excel file.
 
-A slight digression: If data are saved in a csv file (comma separated values), possibly generated via an Excel sheet, 
-then data can be read with the read_csv function. For example, if the data file is called `mydata.csv` and values are separated with commas, then the command 
+A slight digression: If data are saved in a csv file (comma separated values), possibly generated via an Excel sheet, then data can be read with the read_csv function. For example, if the data file is called `mydata.csv` and values are separated with commas, then the command
+
 ```{r, echo=TRUE, eval=FALSE}
 mydata <- read.csv("mydata.csv", sep=",")
 ```
-creates a data frame in R with the data. The data frame is _not_ a tibble and some of the commands below would not work for such a data frame. 
 
+creates a data frame in R with the data. The data frame is *not* a tibble and some of the commands below would not work for such a data frame.
 
----
+------------------------------------------------------------------------
 
 ## About the data
 
-The dataset is from Boston University and is about www data transfers from November 1994 to May 1995, see <http://ita.ee.lbl.gov/html/contrib/BU-Web-Client.html>.
+The dataset is from a study of the adverse events of a drug on 117 patients affected by Crohn's disease (a chronic inflammatory disease of the intestines). See <https://rdrr.io/cran/robustbase/man/CrohnD.html> for further info and descriptions of the included columns.
 
-
-* It has 147,035 data lines and 6 variables
-
-* _size_ is the download size in bytes, and _time_ is the download time in seconds.
-
----
-
+------------------------------------------------------------------------
 
 ## Data structures: `vector`, `tibble` and `data.frame`
 
 You will need to make structures or convert between these in R. In the example below we will convert a tibble to a dataframe.
+
 ```{r}
 # Convert existing object to a dataframe:
-downloads2 <-  as.data.frame(downloads)
-head(downloads2) # head/top of object
+crohns2 <-  as.data.frame(crohns)
+head(crohns2) # head/top of object
 
 ```
 
-
-Variables can be extracted with the $-syntax, and we can use squared brackets to show only the first 40, say, values. 
+Variables can be extracted with the \$-syntax, and we can use squared brackets to show only the first 40, say, values.
 
 ```{r}
 # Extract time variable by use of $ syntax
-time_vector <- downloads$time
+height_vector <- crohns$height
 
 # First 40 observation in vector
-time_vector[1:40]
+height_vector[1:40]
 
 # First five lines of dataset x[row, column]
-downloads[1:5,]
+crohns[1:5,]
 ```
-
 
 ```{r}
 # Want to know what data type or structure you have, try the function class.
-class(downloads)
-class(downloads2)
-class(time_vector)
+class(crohns)
+class(crohns2)
+class(height_vector)
 
 # Get dimensions of your dataset
-dim(downloads)
+dim(crohns)
 ```
 
-Summary statistics like mean, standard deviation, median are easily computed for a vector. 
+Summary statistics like mean, standard deviation, median are easily computed for a vector.
 
 Examples of R functions for computing summary statistics: `length`, `mean`, `median`, `sd`, `var`, `sum`, `quantile`, `min`, `max`, `IQR`.
 
-
-
 ```{r}
-length(time_vector)
-mean(time_vector)
-sd(time_vector)
-median(time_vector)
-min(time_vector)
+length(height_vector)
+mean(height_vector)
+sd(height_vector)
+median(height_vector)
+min(height_vector)
 ```
 
-Notice that more than half the observations have time equal to zero (median is zero).
-
----
+------------------------------------------------------------------------
 
 ## Filtering data (selecting rows): `filter`
 
-The `filter` function is used to make sub-datasets where only certain datalines (rows) are maintained. It's described with _logical expressions_ which datalines should be kept in the dataset.
+The `filter` function is used to make sub-datasets where only certain datalines (rows) are maintained. It's described with *logical expressions* which datalines should be kept in the dataset.
 
-Say that we only want observations with download time larger than 1000 seconds; there happens to be eight such observations: 
-
-```{r}
-filter(downloads, time > 1000)
-
-downloads %>% 
-  filter(time > 1000)
-```
-
-Or say that only want observations with strictly positive download size:
+Say that we only want to look at female patients:
 
 ```{r}
-downloads3 <- filter(downloads, size > 0)
-downloads3
+crohns %>% 
+  filter(sex == 'F')
 ```
 
-Notice that this result is assigned to **downloads3**. It has 36,708 data lines. The original data called **downloads** still exists with 147,035 data lines.
+Or say that only want patients older than 65:
+
+```{r}
+seniors <- crohns %>% 
+  filter(age > 65)
+seniors
+```
+
+Notice that this result is assigned to the new tibble **seniors**. It has 21 data lines, i.e. patients. The original data called **crohns** still exists with all 117 patients.
 
 Filtering requires *logical predicates*. These are expressions in terms of columns, which evaluate to either `TRUE` or `FALSE` for each row. Logical expressions can be combined with logical operations.
 
-* Comparisons: ` == `, ` != `, ` < `, ` > `, ` <= `, ` >= `, ` %in% `, ` is.na `
+-   Comparisons: `==`, `!=`, `<`, `>`, `<=`, `>=`, `%in%`, `is.na`
 
-* Logical operations: `!` (not), `|` (or), `&` (and). A comma can be used instead of `&`
+-   Logical operations: `!` (not), `|` (or), `&` (and). A comma can be used instead of `&`
 
-Here comes two sub-datasets:
-
+Here comes a subset with two conditions:
 
 ```{r}
-# Rows from kermit, and with size greater than 200000 bytes are kept.
-filter(downloads3, machineName == "kermit", size > 200000)
-
-# Rows NOT from kermit, and with size greater than 200000 bytes are kept.
-filter(downloads3, machineName != "kermit" & size > 200000)
+# Here are patients aged 65 or younger who received drug 1:
+crohns %>% 
+  filter(age <= 65 & treat == 'd1')
 ```
 
-A helpful function to know which machine names are valid can be:
+A helpful function to know which treatments are in the data and what they are called can be:
 
 ```{r}
-# get unique machineName values in downloads3
-distinct(downloads3, machineName)
+# How many different treatments do we have?
+distinct(crohns, treat)
 ```
 
 And if you are looking for multiple values for a given variable:
 
 ```{r}
-downloads3 %>% filter(machineName %in% c("kermit","pluto"), size > 2000000)
+crohns %>% filter(treat %in% c("d1","d2"), age <= 65)
 ```
 
----
+------------------------------------------------------------------------
 
 ## Selecting variables: `select`
 
 Sometimes, datasets has many variables of which only some are relevant for the analysis. Variables can be selected or skipped with the `select` function.
 
 ```{r}
-# Only include the three mentioned variable names
-downloads4 <- select(downloads3, machineName, size, time)
-downloads4
+# select only BMI, age and the number of adverse events:
+subset_1 <- crohns %>% 
+  select(nrAdvE, BMI, age)
+subset_1
 ```
 
-Notice that we have made a new dataframe, **downloads4** with only three variables. 
+Notice that we have made a new dataframe, **downloads4** with only three variables.
 
-
----
+------------------------------------------------------------------------
 
 ## Transformations of data
 
-Tranformations of existing variables in the data set can be computed and included in the data set with the `mutate` function. 
+Tranformations of existing variables in the data set can be computed and included in the data set with the `mutate` function.
 
-We first compute two new variables, download speed (**speed**) and the logarithm of the download size (**logSize**):
-
-```{r}
-downloads4 <- mutate(downloads4, speed = size / time, logSize = log10(size))
-downloads4
-```
-
-We then make a new categorial variable, **slow**, which is "Yes" is speed < 150 and "No" otherwise
+We first compute the height in meters, based on the original height column:
 
 ```{r}
-downloads4 <- mutate(downloads4, slow = ifelse(speed < 150, "Yes", "No"))
-downloads4
+# We want to add height in meters
+crohns <- crohns %>% 
+  mutate(height_m = height/100)
+crohns
 ```
 
----
+We then make a new categorial variable, **underweight**, which is "Yes" if BMI \< 18.5 and "No" otherwise
+
+```{r}
+crohns <- crohns %>% 
+  mutate(underweight = ifelse(BMI < 18.5, "Yes", "No"))
+crohns
+```
+
+------------------------------------------------------------------------
 
 ## Counting, tabulation of categorical variables: `count`
 
 The `count` function is useful for counting data datalines, possibly according to certain criteria or for the different levels of categorical values.
 
-
-
 ```{r}
 # Total number of observations in the current dataset
-count(downloads4)
+count(crohns)
 
-# Number of observations from each machine
-count(downloads4, machineName)
+# How many observations, i.e. patients do we have per treatment?
+count(crohns, treat)
 
-# Number of observations which have/have not size larger than 5000
-count(downloads4, size>5000)
+# How many patients are older than 65?
+count(crohns, age>65)
 ```
 
----
+------------------------------------------------------------------------
 
 ## Sorting data: `arrange`
 
 The `arrange` function can be used to sort the data according to one or more columns.
 
-Let's sort the data according to download size (ascending order). The first lines of the sorted data set is printed on-screen, but the dataset **downloads4** has *not* been changed.
+Let's sort the data according to patient age (ascending order). The first lines of the sorted data set is printed on-screen, but the dataset **crohn** has *not* been changed since we did not re-assign.
 
 ```{r}
-arrange(downloads4, size)
+# Sort by age
+arrange(crohns, age)
 ```
 
 Two different examples:
 
 ```{r}
-# According to download size in descending order
-arrange(downloads4, desc(size))
+# Sort according to age size in descending order
+arrange(crohns, desc(age))
 
-# After machine name and then according to download size in descending order
-arrange(downloads4, machineName, desc(size))
+# We can also sort after sex first and then according to age size in descending order
+arrange(crohns, sex, desc(age))
 ```
 
----
+------------------------------------------------------------------------
 
 ## Grouping: `group_by`
 
-We can group the dataset by one or more categorical variables with `group_by`. The dataset is not changed as such, but - as we will see - grouping can be useful for computation of summary statistics and graphics. 
+We can group the dataset by one or more categorical variables with `group_by`. The dataset is not changed as such, but - as we will see - grouping can be useful for computation of summary statistics and graphics.
 
-Here we group after machine name (first) _and_ the slow variable (second). The only way we can see it at this point is in the second line in the output (`# Groups:`):
+Here we group after sex (first) *and* the treat variable (second). The only way we can see it at this point is in the second line in the output (`# Groups:`):
 
 ```{r}
-# Group according to machine
-group_by(downloads4, machineName)
+# Group according to sex
+group_by(crohns, sex)
 
-# Group according to machine and slow
-group_by(downloads4, machineName, slow)
+# We also group according to several variables!
+# How many groups will we get?
+group_by(crohns, sex, treat)
 ```
 
----
+------------------------------------------------------------------------
 
 ## Summary statistics, revisited: `summarize`
 
 Recall how we could compute summary statistics for a single variable in a dataset, e.g.
 
 ```{r}
-mean(downloads4$size)
-max(downloads4$size)
+mean(crohns$age)
+max(crohns$age)
 ```
 
-With `summarize` we can compute summary statistics for a variable for each level of a grouping variable or for each combination of several grouping variables. 
+With `summarize` we can compute summary statistics for a variable for each level of a grouping variable or for each combination of several grouping variables.
 
-First, a bunch of summaries for the size variable for each machine name, where we give explicit names for the new variables:
+First, a bunch of summaries for the age variable for each machine name, where we give explicit names for the new variables:
 
 ```{r}
-downloads4 %>%
-  group_by(machineName) %>%
-  summarise(avg = mean(size),
-            med = median(size),
-            stdev = sd(size),
-            total = sum(size),
-            n = n())
+crohns %>%                      # the dataset
+  group_by(sex) %>%             # grouped by sex
+  summarise(avg = mean(age),    # calculate mean of the age
+            med = median(age),  # calc median
+            stdev = sd(age),    # calc standard dev.
+            n = n())            # get the number of observations
 ```
 
-Second, the same thing but for each combination of machine name and the slow variable:
+Second, the same thing but for each combination of sex and treatment:
 
 ```{r}
-downloads4 %>% 
-  group_by(machineName, slow) %>%
-  summarize(avg = mean(size),
-            med = median(size),
-            stdev = sd(size),
-            total = sum(size),
-            n = n())
+crohns %>%                              # the dataset
+  group_by(sex, treat) %>%              # grouped by sex
+  summarise(avg = mean(nrAdvE),         # calculate mean number of adverse events
+            med = median(nrAdvE),       # calc median
+            max = max(nrAdvE),          # calc max 
+            stdev = sd(nrAdvE),         # calc standard dev.
+            total_events = sum(nrAdvE), # calc cumulative sum 
+            n = n())                    # get the number of observations
 ```
 
+The datasets with summaries can be saved as datasets themselves, for example to be used as the basis for certain graphs.
 
-
-The datasets with summaries can be saved as datasets themselves, for example to be used as the basis for certain graphs. 
-
----
+------------------------------------------------------------------------
 
 ## The pipe operator: `%>%`
 
@@ -356,61 +344,47 @@ Two or more function calls can be evaluated sequentially using the so-called pip
 Let's try it to do a bunch of things in one go, starting with the original dataset:
 
 ```{r}
-downloads %>% 
-  filter(size>0) %>% # Subset of data
-  group_by(machineName) %>% # Grouping 
-  summarize(avg = mean(size)) %>% # Compute mean
-  arrange(avg) # Sort after mean
+crohns %>%                              # the dataset
+  filter(age > 65) %>%                  # filtered to only people over 65
+  group_by(sex, treat) %>%              # Grouping 
+  summarise(avg = mean(nrAdvE),         # calculate mean number of adverse events
+            med = median(nrAdvE),       # calc median
+            max = max(nrAdvE),          # calc max 
+            stdev = sd(nrAdvE),         # calc standard dev.
+            total_events = sum(nrAdvE), # calc cumulative sum 
+            n = n()) %>%                # get the number of observations
+  arrange(avg)                          # Sort output by the mean
 ```
 
----
+------------------------------------------------------------------------
 
-
-## More functions: `relocate, rename, pull & join`
-
-Below are three useful functions for column manipulation,  `relocate`, `rename` and `pull`:
-
-```{r}
-# relocate (move one or more columns):
-downloads %>% relocate(time, .before = size)
-
-# rename (rename one column):
-downloads %>% rename(year.month=month)
-
-# pull out one column, equivalent to using $:
-downloads %>% pull(machineName) %>% head()
-```
-
-
----
-
-Below is an example of how to use the family of `_join` function included in tidyverse.
-They are useful for combining two (or more) datasets, even if the sets only contain partial/subset of information.
+Below is an example of how to use the family of `_join` function included in tidyverse. They are useful for combining two (or more) datasets, even if the sets only contain partial/subset of information.
 
 ```{r}
 
 # Join tibbles with subsets of information together:
 
-# machineName and power rank
-dowloads5 <- tibble(machineName=c("cs18","piglet","tweetie","kermit", "pluto"),
-                    powerRank=c(2,4,1,3,5))
+# We create two made up datasets to illustrate the different kinds of merging.
 
-# machineName and location of machine
-dowloads6 <- tibble(machineName=c("cs18","tweetie","kermit","skeeter"),
-                    location=c("China", "USA", "Germany", "Japan"))
+# department name and number of patients treated 
+dat1 <- tibble(department=c("oncology","paediatry","heart_diseases","child_birth", "intensive_care"),
+               patients_treated=c(605,1145,865,700,455))
 
-# all machineNames from tibble on the left are kept
-left_join(dowloads5, dowloads6)
+# department name and yearly expenses
+dat2 <- tibble(department=c("oncology","intensive_care","heart_diseases","neurology", "physioterapy"),
+               expense=c(30, 25, 17, 21, 12))
 
-# all machineNames from tibble on the right are kept
-right_join(dowloads5, dowloads6)
+# all departments from tibble on the left are kept
+left_join(dat1, dat2)
 
-# only machineNames in both left and right tibble are kept 
-inner_join(dowloads5, dowloads6)
+# all departments from tibble on the right are kept
+right_join(dat1, dat2)
 
-# all machineNames, from both tibbles are kept
-full_join(dowloads5, dowloads6)
+# only departments in both left and right tibble are kept 
+inner_join(dat1, dat2)
+
+# all departments, from both tibbles are kept
+full_join(dat1, dat2)
 
 
 ```
-

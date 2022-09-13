@@ -17,7 +17,7 @@ setwd('/Users/pbj825/Desktop/FromExceltoR/Presentations/')
 
 ### Reading in data and filtering out entries where size is 0 ----
 downloads <- 
-  read_excel("downloads.xlsx") %>% 
+  read_excel("data/downloads.xlsx") %>% 
   filter(size > 0)
 
 downloads
@@ -177,11 +177,11 @@ figure
 
 ### Save Object and Save Plot ----
 
-write_xlsx(daily_downloads, "daily_downloads.xlsx")
+write_xlsx(daily_downloads, "data/daily_downloads.xlsx")
 
-ggsave(filename = "vionlinPlot.pdf", plot = p4, height = 5, width = 10)
+ggsave(filename = "output/vionlinPlot.pdf", plot = p4, height = 5, width = 10)
 
-pdf("vionlinPlot2.pdf", height = 5, width = 10)
+pdf("output/vionlinPlot2.pdf", height = 5, width = 10)
 p4
 dev.off()
 
