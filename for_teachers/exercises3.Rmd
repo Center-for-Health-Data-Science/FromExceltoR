@@ -1,6 +1,6 @@
 ---
 title: "III. Graphics with ggplot2 (exercises)"
-author: "Data Science Lab, University of Copenhagen"
+author: "Science Data Lab & Center for Health Data Science"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
   #pdf_document: default

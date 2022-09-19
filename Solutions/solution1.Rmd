@@ -1,6 +1,6 @@
 ---
 title: "I. Working with data in R (exercises)"
-author: "Data Science Lab, University of Copenhagen"
+author: "Science Data Lab & Center for Health Data Science"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
   #pdf_document: default
@@ -8,65 +8,86 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
+knitr::opts_chunk$set(echo = TRUE, eval = TRUE)
 ```
 
 ## Basic R commands
 
-8.  To start with, load the `tidyverse` package.
+6.  Load the `trees` dataset by copying and executing the following commands:
     
+```{r}
+data(trees)
+trees
+?trees
+```
+
+7. Scatter plot of tree Volume as a function of tree height:
+
+```{r}
+par(mfrow=c(2,2))
+plot(Volume~Height, data=trees)
+plot(Volume~Height, data=trees, log="xy")
+plot(log(Volume)~log(Height), data=trees)
+```    
+    
+10. Install the tidyverse package:    
+```{r, eval=FALSE}
+install.packages(tidyverse)
+```
+
+11. Load the tidyverse package:    
 ```{r}
 library(tidyverse)
 ```
 
-9.  Now, load the `trees` dataset by copying and executing the following commands:
-    
+
+12. Median of variable x:
 ```{r}
-data("trees")
-view(trees)
-?trees
+x <- c(1,3,8,9,100,NA)
+x
+median(x)
 ```
 
-10.  Check what information is contained in the `trees` dataset by calling the `summary` function on it:
-    
+13. Function help and median without NAs
 ```{r}
+?median
+median(x, na.rm=TRUE)
+```
+\
+
+14. Extract variables `Girth, Height, and Volume` from the `trees` dataset and get some summary statistics:   
+
+Extract variables:
+```{r}
+height <- trees$Height
+volume <- trees$Volume
+girth <- trees$Girth
+```
+
+Summary statistics:
+```{r}
+length(height)
+sum(height)
+median(height)
+max(height)
+min(height)
+
+mean(volume)
+var(volume)
+sd(volume)
+quantile(volume)
+
 summary(trees)
-```
 
-11.  How many trees do we have data for?
+```
+\
+
+15. Bonus questions. How do you extract only elements/values `2 to 5` from the `Girth` variable in the trees dataset?
 
 ```{r}
-dim(trees)
+girth[2:5]
+girth[c(2,3,4,5)]
 ```
-
-We have 31 rows, so 31 observations.
-    
-12.  Now, extract the column called `volume` from the dataset and assign it to a new variable called `volume_col`.
-
-```{r}
-volume_col <- trees$Volume
-```
-
-13.  Display the volume of the first 10 trees.
-
-```{r}
-volume_col[1:10]
-```
-    
-14.  Find the minimum, maximum and mean volume from the column you just extracted. Does it match what was stated in the `summary`?
-
-```{r}
-min(volume_col)
-max(volume_col)
-mean(volume_col)
-```
-
-Yes, the values match what was written in `summary` for the volumn column.
-    
-15.  What class of datastructure is `trees`? Make it into a tibble.
-```{r}
-class(trees)
-tib_trees <- as_tibble(trees)
-```
+\
 
     

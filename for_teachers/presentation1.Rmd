@@ -1,9 +1,10 @@
 ---
 title: "I. The Fundamentals of R (R codes for presentation)"
+author: "Center for Health Data Science, University of Copenhagen"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
-  pdf_document: default
-  #html_document: default
+  #pdf_document: default
+  html_document: default
 
 ---
 
@@ -27,25 +28,32 @@ getwd()
 Set working directory:
 ```{r}
 # set working directory (absolute path)
-setwd('/Users/kgx936/Desktop/HeaDS/GitHub_repos/FromExceltoR/Presentations')
-setwd('~/Desktop/HeaDS/GitHub_repos/FromExceltoR/Presentations')
+setwd('/Users/kgx936/Desktop/HeaDS/GitHub_repos/FromExceltoR')
+setwd('~/Desktop/HeaDS/GitHub_repos/FromExceltoR')
 
 # where am I now?
 getwd()
-
-# move one directory back
-setwd('..')
 
 # set working directory (relative path)
 setwd('./Presentations')
 ```
 
+---
+
+## Variable assignment
+
+In R we use an arrow for variable assigment. You may call your almost variables whatever you like.   
+DO NOT use special characters in variable names, i.e. &, ), $ etc. or make spaces in naming.
+
 ```{r}
-# show folders in wd
-list.dirs(path = '.', recursive = FALSE)
+# A vector of numbers named num1
+num1 <- c(5,1,11,6,4)
+num1
 ```
 
 ---
+
+
 
 ## Functions & Arguments   
 
@@ -59,19 +67,15 @@ function(x,y) {
 }
 ```
 
-Lets have a look at some simple functions. We will use the `mean()` and `sum()` functions as examples:
+Lets have a look at some simple functions. We will use the `mean()` function as an example:
 
 ```{r}
 # Get the mean of some numbers:
 (5+1+11+6+4)/5
 
 
-# A vector of numbers named num1
-num1 <- c(5,1,11,6,4)
-num1
-
-
-# Mean: x (which is some numbers/values) is the input and mean is the output. 
+# Or I use the function mean.
+# x (which is some numbers/values) is the input argument and mean is the output. 
 mean(x=num1)
 
 # Functions makes code reusable:
@@ -80,6 +84,26 @@ num2
 
 mean(x=num2)
 ```
+
+
+Using a function it is easy to get basic summary statistics on an object in R.   
+The R-base has a variety of simple stats functions build in (i.e. no package needs to be loaded):
+
+
+```{r}
+# Simple summary statistics
+length(num2)
+
+sd(num2)
+median(num2)
+sum(num2)
+
+min(num2)
+max(num2)
+```
+
+
+
 
 ---
 
@@ -114,56 +138,51 @@ library(tidyverse)
 ```
 
 
-We can also unload a package from an R session:
-
-```{r, eval=FALSE}
-detach('package:tidyverse') 
-```
-
 
 If we would like to remove a package we can do so with `remove.packages('')`, *N.B* this will remove the package from your computer, not just from the R session.
 ```{r, eval=FALSE}
 remove.packages('tidyverse')
 ```
 
+
 ---
 
-## Data structures: `vector`, `tibble` and `data.frame`
+## Data structures
 
-We will need to work with a variety of data types and structures in R and often convert between these. In he examples below, we will look at three types of objects, a `vector`, a `tibble` and a `data.frame. There are of course many more, but these three are the ones we will mainly be working with in this course.   
+We will need to work with a variety of data types and structures in R and often convert between these. In the example below we will make two vectors into a tibble. We will try to convert between data types and structures using the collection of 'as.' functions. 
 
 ```{r}
 # A vector of characters:
-groupMembers <- c("Diana", "Tugce", "Henrike", "Thilde", "Alex", "Jennie", "Viki", "Yuhu", "Inigo", "Jonas", "Conor", "Marilena", "Chloe", "Anders")
-groupMembers
+groupMem <- c("Diana", "Tugce", "Henrike", "Thilde", "Alex", "Jennie", "Viki", "Yuhu", "Inigo", "Jonas", "Conor", "Marilena", "Chloe", "Anders")
+
+groupMem
 
 # A vector of numeric values:
-cakeDegrees <- c(44.67, 35.43, 30.13, 44.94, 45.0, 39.37, 32.79, 43.92, 44.61, 40.88, 32.28, 42.79, 39.17, 50.41)
-cakeDegrees
+cakeSlice <- c(44.67, 35.43, 30.13, 44.94, 45.0, 39.37, 32.79, 43.92, 44.61, 40.88, 32.28, 42.79, 39.17, 55.41)
+
+cakeSlice
 ```
 
 Want to know what data type or structure you have, try the function class:
 
 ```{r}
-class(cakeDegrees)
-class(groupMembers)
+class(cakeSlice)
+class(groupMem)
 ```
 
-*cakeDegrees* is a vector of numerical numbers (double), but we would like to convert these to integers (whole numbers). Luckily, there are a range of functions implemented in base R (i.e. no package need to be loaded for these to work) which helps you convert from one data type to another. Common for these functions is that they begin with `as.` followed by the type you would like to convert to, and example would be `as.integer()` which we use below:
+*cakeSlice* is a vector of numerical numbers (double), but we would like to convert these to integers (whole numbers). Luckily, there are a range of functions implemented in base R (i.e. no package need to be loaded for these to work) which helps you convert from one data type to another. Common for these functions is that they begin with `as.` followed by the type you would like to convert to, and example would be `as.integer()` which we use below:
 
 ```{r}
 
-# Convert cakeDegrees to character values
-cakeDegrees <- as.character(cakeDegrees)
-cakeDegrees
+# Convert cakeSlice to character values
+as.character(cakeSlice)
 
-# Convert cakeDegrees back to numeric values
-cakeDegrees <- as.numeric(cakeDegrees)
-cakeDegrees
+# Convert cakeSlice back to numeric values
+as.numeric(cakeSlice)
 
-# Convert cakeDegrees to integer values (whole numbers)
-cakeDegrees <- as.integer(cakeDegrees)
-cakeDegrees
+# Convert cakeSlice to integer values (whole numbers)
+as.integer(cakeSlice)
+
 
 
 # Other examples of 'as.' functions for type conversion
@@ -175,22 +194,14 @@ cakeDegrees
 ```
 
 
-Now, lets make a `tibble` and `data.frame`. **N.B** Here we are using the two vectors we created above to make our dataframe and tibble. We could also have typed out the values in the vector notation i.e. `cakeDegrees = c(44.67, 35.43,...)` directly in the tibble and data.frame function, however this would be double work, as we have already made two vectors and assigned them names:
+Now, lets make a `tibble`. **N.B** Here we are using the two vectors we created above to make our tibble. We could also have typed out the values in the vector notation i.e. `cakeSlice = c(44.67, 35.43,...)` directly in the tibble function, however this would be double work, as we have already made two vectors and assigned them names:
 
 ```{r}
-
-# Make a dataframe
-CakeDF <- data.frame(groupMembers = groupMembers, 
-           cakeDegrees = cakeDegrees)
-
-# Check class
-class(CakeDF)
-
-
-
 # Make a tibble
-CakeT <- tibble(groupMembers = groupMembers, 
-                     cakeDegrees = cakeDegrees)
+
+CakeT <- tibble(groupMem = groupMem, 
+                     cakeSlice = cakeSlice)
+CakeT
 
 # Check class
 class(CakeT)
@@ -201,12 +212,6 @@ Just like we can convert between different data types with some variant of an `a
 ```{r}
 # Convert tibble to dataframe:
 as.data.frame(CakeT)
-
-# Convert dataframe to matrix:
-as.matrix(CakeDF)
-
-# Convert dataframe to tibble:
-as_tibble(CakeDF)
 
 
 # Other examples of 'as.' function for structure/object conversion
@@ -222,7 +227,7 @@ as_tibble(CakeDF)
 ---
 
 
-## Fundamental operations & summary statistics
+## Fundamental operations
 
 It is continuously necessary to inspect R objects so ensure that whatever operation was performed on the object was done correctly. If the object is small we can simply call it and it will be printed to the console.   
 However, when we have a large object it impractical to have the whole thing printed out, instead we would just like to view the first part or last part of it - this can be done with `head()` and `tail()`.   
@@ -230,23 +235,23 @@ If you would like to see your data in a tabular excel style format you can use `
 
 ```{r}
 # Look at the "head" of an object, default is print first 6 lines:
-head(CakeDF)
-head(CakeDF, n=8)
+head(CakeT)
+head(CakeT, n=8)
 
 
 
 # print (is almost always default, but there are times it is not)
-print(CakeDF)
+print(CakeT)
 
 # opens table as a table, excel style
-# view(CakeDF)
+# view(CakeT)
 ```
 
 
 Another useful function is `dim()`, short for dimensions, which returns the number of rows and columns of an R object.
 
 ```{r}
-dim(CakeDF)
+dim(CakeT)
 ```
 
 
@@ -254,39 +259,18 @@ Often we would like to pull out a single column from a dataframe or tibble to wo
 
 ```{r}
 # Extract variable with $ symbol
-cakeDegrees <- CakeDF$cakeDegrees
-groupMembers <- CakeDF$groupMembers
+cakeSlice <- CakeT$cakeSlice
+groupMem <- CakeT$groupMem
 ```
 
 If we are only interested in a specific subset of either rows or columns from an R data object, we can extract these using the *slice* annotation. A slice is defined as square parentheses with the selection of rows/columns inside it. You of course need to define where to slice from, so you will first write the name of the object followed by the slice, i.e. `x[row, column]`. 
 
 ```{r}
 # Specific rows/columns of an R object (a slice):
-CakeDF[1:5, 1:2]
+CakeT[1:5, 1:2]
 
-groupMembers[3:9]
-groupMembers[c(1:3, 5, 9, 11)]
+groupMem[3:9]
+groupMem[c(1:3, 5, 9, 11)]
 
 ```
-
-
-Lastly, it is easy to get basic summary statistics on object in R. The R-base has a variety of simple stats functions build in (i.e. no package needs to be loaded), see some examples below:
-
-```{r}
-# Simple summary statistics:
-length(cakeDegrees)
-
-mean(cakeDegrees)
-sd(cakeDegrees)
-median(cakeDegrees)
-
-min(cakeDegrees)
-max(cakeDegrees)
-
-
-
-summary(CakeDF)
-```
-
-
 
