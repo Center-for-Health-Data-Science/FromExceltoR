@@ -1,7 +1,7 @@
 ---
 title: "II\\. Working with data in R (solution)"
+author: "Science Data Lab & Center for Health Data Science"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
-author: "Data Science Lab, University of Copenhagen"
 output:
   #pdf_document: default
   html_document: default
@@ -24,7 +24,9 @@ library(readxl)
 
 ```{r}
 library(readxl)
-climate <- read_excel("climate.xlsx")
+# point to the file so I can knit
+full_path <- '~/Documents/Heads_center_management/courses/excel_to_r/oct2022/FromExceltoR/Exercises/data/'
+climate <- read_excel(paste0(full_path,"climate.xlsx"))
 climate
 ```
 

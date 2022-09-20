@@ -1,5 +1,6 @@
 ---
 title: "IV. R Markdown (presentation)"
+author: "Science Data Lab & Center for Health Data Science"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
   #pdf_document: default
@@ -98,7 +99,10 @@ We first (install and) load the package and import the **downloads** data. (I in
 # install.packages("table1")
 library(table1)
 library(readxl)
-downloads <- read_excel("downloads.xlsx")
+
+# HZ: point to the file so I can knit
+full_path <-'~/Documents/Heads_center_management/courses/excel_to_r/oct2022/FromExceltoR/Presentations/data/'
+downloads <- read_excel(paste0(full_path,"downloads.xlsx"))
 ```
 
 

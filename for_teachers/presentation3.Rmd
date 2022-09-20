@@ -1,5 +1,6 @@
 ---
 title: "III.\\ Graphics with ggplot2"
+author: "Science Data Lab & Center for Health Data Science"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
   html_document: default
@@ -23,8 +24,11 @@ library(tidyverse)
 
 We read the *downloads* dataset from the Excel file, and assign it to a `tibble` named *downloads*. Doing this we only keep the observations, where the *size* variable is strictly larger than zero: 
 ```{r}
+# HZ: point to the file so I can knit
+full_path <- '~/Documents/Heads_center_management/courses/excel_to_r/oct2022/FromExceltoR/Presentations/data/'
+
 downloads <- 
-  read_excel("downloads.xlsx") %>% 
+  read_excel(paste0(full_path,"downloads.xlsx")) %>% 
   filter(size > 0)
 downloads
 ```

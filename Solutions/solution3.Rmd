@@ -1,6 +1,6 @@
 ---
 title: "Graphics with ggplot2 (solution)"
-author: "Data Science Lab, University of Copenhagen"
+author: "Science Data Lab & Center for Health Data Science"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
   #pdf_document: default
@@ -21,7 +21,9 @@ library(readxl)
 Importing the climate data from **climate.xlsx**^[Contains public sector information licensed under the [Open Government Licence v3.0](http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/).]. (Change the path to the Excel file below so that it matches the path to the file saved on your own computer, or use *Import Dataset* in RStudio to obtain the relevant code.)
 
 ```{r}
-climate <- read_excel("climate.xlsx")
+# point to the file so I can knit
+full_path <- '~/Documents/Heads_center_management/courses/excel_to_r/oct2022/FromExceltoR/Exercises/data/'
+climate <- read_excel(paste0(full_path,"climate.xlsx"))
 climate
 ```
 

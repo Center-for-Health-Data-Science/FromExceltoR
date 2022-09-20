@@ -1,5 +1,6 @@
 ---
 title: "II. Working with data in R (presentation)"
+author: "Science Data Lab & Center for Health Data Science"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
   #pdf_document: default
