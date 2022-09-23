@@ -9,7 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Science Data Lab &amp; Center for Health Data Science" />
+<meta name="author" content="Data Science Lab, University of Copenhagen" />
 
 
 <title>II. Working with data in R (exercises)</title>
@@ -255,6 +255,7 @@ if (window.hljs) {
 
 
 
+
 <style type="text/css">
 .main-container {
   max-width: 940px;
@@ -275,6 +276,9 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
 }
 pre code {
   padding: 0;
@@ -359,15 +363,22 @@ pre code {
 
 
 <h1 class="title toc-ignore">II. Working with data in R (exercises)</h1>
-<h4 class="author">Science Data Lab &amp; Center for Health Data
-Science</h4>
-<h4 class="date">19 September, 2022</h4>
+<h4 class="author">Data Science Lab, University of Copenhagen</h4>
+<h4 class="date">23 September, 2022</h4>
 
 </div>
 
 
-<div id="importing-data" class="section level3">
-<h3>Importing data</h3>
+<div id="setting-up" class="section level3">
+<h3>Setting up</h3>
+<ol start="0" style="list-style-type: decimal">
+<li>For working on the exercise, create a new Rscript with a descriptive
+name and save it where you can find it again, i.e. in the folder where
+you downloaded the teaching material.</li>
+</ol>
+</div>
+<div id="importing-data-and-a-first-look-at-the-dataset" class="section level3">
+<h3>Importing data and a first look at the dataset</h3>
 <p>The data set used in these exercises was compiled from data
 downloaded from the website of the UK’s national weather service, the <a href="http://www.metoffice.gov.uk/public/weather/climate-historic/"><em>Met
 Office</em></a>. It is saved in the file <strong>climate.xlsx</strong><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. The
@@ -412,94 +423,88 @@ variables are included in the data set:</p>
 </tbody>
 </table>
 <ol style="list-style-type: decimal">
-<li><p>Import the climate data to R from the Excel file
-<strong>climate.xlsx</strong>. You can, for example, do this via
-<em>File</em> → <em>Import Dataset</em>. Check that the data preview
-looks okay, copy the content of the code preview, and click
-<em>Import</em>.</p></li>
-<li><p>Paste the code that you copied into your R script. Delete the
-line which starts with <code>View</code>.</p></li>
-<li><p>Use the command <code>climate</code> to see the first lines of
-the dataset.</p></li>
+<li><p>Start by importing the dataset using the
+<code>read_excel()</code> function. Make sure you have the
+<code>readxl</code> package loaded in your new script and have executed
+the line. Also, check that R can “see” the excel file, i.e. either set
+your working directory or specify the path to the file.</p></li>
+<li><p>Write the name you have given the dataframe,
+i.e. <code>climate</code>, into the console and press enter to see the
+first lines of the dataset. You can also click on the
+<code>climate</code> object in the Environment panel.</p></li>
+<li><p>Explore your dataset and understand what data you have.</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>How many observations are there?</p></li>
+<li><p>How many data columns are there and what are their
+types?</p></li>
+<li><p>How many different stations are there?</p></li>
+<li><p>How many observations per station?</p></li>
+</ol></li>
 </ol>
 </div>
 <div id="working-with-the-data" class="section level3">
 <h3>Working with the data</h3>
-<p>Before you proceed with the exercises in this document, make sure to
-run the command <code>library(tidyverse)</code> in order to load the
-core <strong>tidyverse</strong> packages.</p>
+<p>Before you proceed with the exercises in this document, make sure you
+load the <code>tidyverse</code> in order to use the functions from this
+package.</p>
 <ol start="4" style="list-style-type: decimal">
-<li>Try out the following commands, and understand what they do.</li>
+<li><p>Select from the climate dataset:</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>all rows from the station in Oxford</p></li>
+<li><p>all rows from the station in Oxford when there were at least 100
+hours of sunlight</p></li>
+<li><p>all rows from the stations in Oxford and Camborne when there were
+at least 100 hours of sunlight</p></li>
+<li><p>a subset that only contains the <code>station</code>,
+<code>year</code> and <code>rain</code> columns</p></li>
+</ol></li>
 </ol>
-<pre class="r"><code>filter(climate, station == &quot;oxford&quot;)
-select(climate, station, year, month, af)
-mutate(climate, rain_cm = rain/10)
-count(climate, station)
-summarize(climate, total_sun = sum(sun))
-arrange(climate, sun)</code></pre>
+<p>The next few questions build on each other, each adding a piece of
+code:</p>
 <ol start="5" style="list-style-type: decimal">
-<li><ol style="list-style-type: lower-alpha">
-<li>Assign the output of
-<code>filter(climate, station == &quot;oxford&quot;, af == 0)</code> to
-<code>oxford_af</code>, that is, use the command</li>
-</ol></li>
-</ol>
-<pre class="r"><code>oxford_af &lt;- filter(climate, station == &quot;oxford&quot;, af == 0)</code></pre>
-<pre><code>b. Type `oxford_af` to view the content of the new data set. What do the observations have in common?
-
-c. Use the `count` function to count how many months with no days of air frost were recorded at the Oxford weather station. </code></pre>
-<ol start="6" style="list-style-type: decimal">
-<li><p>Change the command
-<code>filter(climate, station == &quot;oxford&quot;)</code> so that observations
-for the weather station in Camborne are included in the output, too.
-<em>Help:</em> Use <code>|</code> (vertical bar) for the logical
-<em>or</em>; or use <code>%in%</code> for <em>included in</em>.</p></li>
-<li><p>Add a variable called <strong>sqrtSun</strong> to the dataset
-which contains the squareroot of the sunshine duration. Assign this
-extended dataset to a dataset called <strong>climate2</strong>.
-<em>Help:</em> The squareroot function in R is called
-<code>sqrt</code>.</p></li>
-<li><ol style="list-style-type: lower-alpha">
-<li><p>Use the <code>$</code> operator to extract the rainfall
-observations from the climate data set, and assign the output to
-<code>rain_vector</code>.</p></li>
-<li><p>Try out the following commands, and understand the
-output.</p></li>
-</ol></li>
-</ol>
-<pre class="r"><code>rain_vector
-rain_vector[1:6]
-rain_vector[5]
-rain_vector[c(2,4,6)]</code></pre>
-<pre><code>c. Use the `mean` and `sd` functions to compute the average and standard deviation of the monthly rainfall in the climate data set.
-
-d. Use the `sum` function to compute the total annual rainfall recorded in 2016 (total over all five stations).</code></pre>
-<ol start="9" style="list-style-type: decimal">
-<li><p>Compute the same values as in the previous question, this time by
-applying the <code>summarize</code> function to the climate data set
-(don’t use any grouping variables). This can be done in three lines of
-code, but try to do it in one line. <em>HINT:</em> assign the output of
-<code>mean</code>, <code>sd</code> and <code>sum</code> a name.</p></li>
-<li><ol style="list-style-type: lower-alpha">
-<li><p>Use <code>group_by</code> and <code>summarize</code> to compute
-group summary statistics (average, standard deviation, and sum) for the
-monthly rainfall observations from each of the five weather stations.
-NB: This is done most elegantly with the pipe operator
-(<code>%&gt;%</code>).</p></li>
+<li><p>Compute the average rainfall over the full dataset by using the
+<code>summarize</code> function. You can look at the examples we did at
+the end of presentation 2.</p></li>
+<li><p>Now, add to this calculating also the standard deviation of the
+rainfall as well as the total rainfall (the sum). I.e. all three
+measures should be inside the same resulting table. Have a look at the
+tidyverse lecture if you have trouble with this.</p></li>
+<li><p>Now, use <code>group_by</code> before <code>summarize</code> in
+order to compute group summary statistics (average, standard deviation,
+and sum) for each of the five weather stations.</p></li>
 <li><p>Include a column in the summary statistics which shows how many
 observations the data set contains for each station.</p></li>
 <li><p>Sort the rows in the output in descending order according to
 annual rainfall.</p></li>
-</ol></li>
 </ol>
+</div>
+<div id="manipulating-the-data" class="section level3">
+<h3>Manipulating the data</h3>
+<ol start="10" style="list-style-type: decimal">
+<li><p>Create a new copy of the climate dataset to which you have added
+a column that states the amount of hours with no sunshine for each
+month. A month has on average 730 hours, you can use the same amount of
+hours for all of them to calculate the new column.</p></li>
+<li><p>Add another column to your new dataset that says whether the
+weather this month was good. We consider a month to be good if it had at
+least 50 hours of sunlight and less than 100 mm of rain. Otherwise the
+weather was bad.</p></li>
+<li><p>Count the number of months per station that did not have any days
+with air frost.</p></li>
+<li><p>Count the number of months with good weather per station (use the
+column you made in 10). What’s the place with the best weather in
+England?</p></li>
+</ol>
+</div>
+<div id="complex-operations" class="section level3">
+<h3>Complex operations</h3>
 <p>The final questions require that you combine commands and variables
 of the type above.</p>
-<ol start="11" style="list-style-type: decimal">
-<li><p>Like in the previous question, compute group summary statistics
-(average, standard deviation, and sum) for the rainfall observations
-from all five weather stations. This time, sort the output in ascending
-order according to the stations’ average monthly sunshine
-duration.</p></li>
+<ol start="14" style="list-style-type: decimal">
+<li><p>Like in questions 5 - 9, compute group summary statistics
+(average, standard deviation, and sum) this time for the sun hours,
+split up by weather station. Sort the output in ascending order
+according to the stations’ average monthly sunshine duration.</p></li>
 <li><p>Identify the weather station for which the median number of
 monthly sunshine hours over the months April to September was
 largest.</p></li>
@@ -507,17 +512,9 @@ largest.</p></li>
 the total rainfall and sunshine duration during the months with no days
 of air frost. Present the totals in centimetres and days,
 respectively.</p></li>
-<li><p>For each of the months in the year 2016:</p>
-<ol style="list-style-type: lower-alpha">
-<li><p>Count how many stations recorded at least two days of air frost
-<em>or</em> more than 95 mm rain.</p></li>
-<li><p>Compute the average number of sunshine hours for these stations,
-for the month in question.</p></li>
-</ol></li>
-<li><p>Go through your solutions again. Figure out where you could have
-used the pipe operator <code>%&gt;%</code> to make your R-code more
-readable (instead of saving intermediate data sets). Solve these
-questions again, this time using the pipe operator.</p></li>
+<li><p>For each of the months, count how many stations recorded at least
+two days of air frost or more than 95 mm rain. Then for these months,
+compute the average number of sunshine hours.</p></li>
 </ol>
 </div>
 <div class="footnotes footnotes-end-of-document">
