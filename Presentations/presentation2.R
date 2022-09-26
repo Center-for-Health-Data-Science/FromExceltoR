@@ -190,6 +190,8 @@ crohns %>%
 without_id <- crohns %>% 
   select(-ID)
 
+#show the new tibble without the ID column
+without_id
 
 ########################
 ### 7. Transformations of data
