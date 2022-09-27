@@ -364,7 +364,7 @@ pre code {
 
 <h1 class="title toc-ignore">II. Working with data in R (exercises)</h1>
 <h4 class="author">Data Science Lab, University of Copenhagen</h4>
-<h4 class="date">23 September, 2022</h4>
+<h4 class="date">27 September, 2022</h4>
 
 </div>
 
@@ -501,10 +501,6 @@ England?</p></li>
 <p>The final questions require that you combine commands and variables
 of the type above.</p>
 <ol start="14" style="list-style-type: decimal">
-<li><p>Like in questions 5 - 9, compute group summary statistics
-(average, standard deviation, and sum) this time for the sun hours,
-split up by weather station. Sort the output in ascending order
-according to the stations’ average monthly sunshine duration.</p></li>
 <li><p>Identify the weather station for which the median number of
 monthly sunshine hours over the months April to September was
 largest.</p></li>
@@ -512,9 +508,11 @@ largest.</p></li>
 the total rainfall and sunshine duration during the months with no days
 of air frost. Present the totals in centimetres and days,
 respectively.</p></li>
-<li><p>For each of the months, count how many stations recorded at least
-two days of air frost or more than 95 mm rain. Then for these months,
-compute the average number of sunshine hours.</p></li>
+<li><p>For each month, count how many stations recorded at least two
+days of air frost or more than 95 mm rain. Tip: Think about how you can
+do that with <code>filter</code> and <code>summarize</code>. Then, for
+these data lines compute the average number of sunshine hours split up
+by month.</p></li>
 </ol>
 </div>
 <div class="footnotes footnotes-end-of-document">

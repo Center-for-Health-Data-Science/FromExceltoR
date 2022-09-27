@@ -186,21 +186,7 @@ Oxford has the most months with good weather (9).
 
 The final questions require that you combine commands and variables of the type above.
 
-14. Like in questions 5 - 9, compute group summary statistics (average, standard deviation, and sum) this time for the sun hours, split up by weather station. Sort the output in ascending order according to the stations’ average monthly sunshine duration.
-
-```{r}
-climate %>%
-  group_by(station) %>% 
-  summarize(avg_rain = mean(sun),
-            sd_rain = sd(sun),
-            sum_rain = sum(sun),
-            avg_sun = mean(sun),
-            n=n()) %>% 
-  arrange(avg_sun)
-```
-
-
-15. Identify the weather station for which the median number of monthly sunshine hours over the months April to September was largest.
+14. Identify the weather station for which the median number of monthly sunshine hours over the months April to September was largest.
 
 
 ```{r}
@@ -213,7 +199,7 @@ climate %>%
 
 Weather station with largest median number of monthly sunshine hours over the months April to September was Oxford
 
-16. For each weather station apart from the one in Armagh, compute the total rainfall and sunshine duration during the months with no days of air frost. Present the totals in centimetres and days, respectively.
+15. For each weather station apart from the one in Armagh, compute the total rainfall and sunshine duration during the months with no days of air frost. Present the totals in centimetres and days, respectively.
 
 
 ```{r}
@@ -225,7 +211,7 @@ climate %>%
 ```
 
 
-17. For each of the months, count how many stations recorded at least two days of air frost or more than 95 mm rain. Then for these months, compute the average number of sunshine hours.
+16. For each month, count how many stations recorded at least two days of air frost or more than 95 mm rain. Tip: Think about how you can do that with `filter` and `summarize`. Then, for these data lines compute the average number of sunshine hours split up by month.
 
    
 ```{r}
@@ -234,114 +220,3 @@ climate %>%
   group_by(month) %>% 
   summarize(count = n(), avg_sun = mean(sun))
 ```
-
-
- 
-6. Dataset with observations from Camborne and Oxford.
-
-    ```{r, results = "hold"}
-    filter(climate, station == "camborne" | station == "oxford")
-    # Or: filter(climate, station %in% c("camborne", "oxford"))
-    ```
-
-
-7. Make the new variable and give the nes dataset a name
-
-    ```{r}
-    climate2 <- mutate(climate, sqrtSum=sqrt(sun))
-    ```
-
-
-8. Assigning the rainfall observations to the vector `rain_vector`.
-
-    ```{r}
-    rain_vector <- climate$rain
-    ```
-    
-    Extracting elements from the rainfall vector. 
-    
-    ```{r}
-    rain_vector
-    # First six elements
-    rain_vector[1:6]
-    # Element number five
-    rain_vector[5]
-    # Element numbers 2, 4 and 6
-    rain_vector[c(2,4,6)]
-    ```
-    
-    Some summary statistics for the rainfall observations.
-    
-    ```{r}
-    mean(rain_vector)
-    sd(rain_vector)
-    sum(rain_vector)
-    ```
-
-9. Summary statistics for the rainfall observations computed using `summarize`. It is most easily made with the pipe operator, but can also be done in several steps (not shown).
-
-    ```{r}
-    summarize(climate, 
-          avg_rain = mean(rain),
-          sd_rain = sd(rain),
-          sum_rain = sum(rain))
-    ```
-
-
-10. Summary statistics for rainfall data by weather station, including number of observations for each station, and sorted in descending order according to annual rainfall.
-
-    ```{r}
-    climate %>%
-      group_by(station) %>% 
-      summarize(avg_rain = mean(rain),
-                sd_rain = sd(rain),
-                sum_rain = sum(rain),
-                n=n()) %>% 
-      arrange(desc(sum_rain))
-    ```
-   
-
-
-11. Summary statistics for rainfall data by weather station, sorted in ascending order according to average monthly sunshine duration.
-
-    ```{r}
-    climate %>%
-      group_by(station) %>% 
-      summarize(avg_rain = mean(rain),
-                sd_rain = sd(rain),
-                sum_rain = sum(rain),
-                avg_sun = mean(sun)) %>% 
-      arrange(avg_sun) 
-    ```
-    
-    
-12. Weather station with largest median number of monthly sunshine hours over the months April to September was Oxford:
-
-    ```{r}
-    climate %>% 
-      filter(month %in% 4:9) %>% 
-      group_by(station) %>% 
-      summarize(med_sun = median(sun)) %>% 
-      arrange(desc(med_sun))
-    ```
-
-13. For each weather station apart from Armagh, the total rainfall (in cm) and duration of sunshine (in days) in the months with no days of air frost.
-
-    ```{r}
-    climate %>% 
-      group_by(station) %>% 
-      filter(station != "armagh", af == 0) %>% 
-      summarize(total_rain = sum(rain)/10,
-                total_sun = sum(sun)/24)
-    ```
-
-14. For each month: Number of stations with at least two days of air frost or more than 95 mm rain, and the average sunshine duration for these stations.
-    
-    ```{r}
-    climate %>%
-      filter(af >= 2 | rain > 95) %>% 
-      group_by(month) %>% 
-      summarize(count = n(), avg_sun = mean(sun))
-    ```
-    
-15. Many solutions were already made with the pipe operator.

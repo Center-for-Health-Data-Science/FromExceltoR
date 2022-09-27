@@ -88,10 +88,9 @@ The next few questions build on each other, each adding a piece of code:
 
 The final questions require that you combine commands and variables of the type above.
 
-14. Like in questions 5 - 9, compute group summary statistics (average, standard deviation, and sum) this time for the sun hours, split up by weather station. Sort the output in ascending order according to the stations' average monthly sunshine duration.
+14. Identify the weather station for which the median number of monthly sunshine hours over the months April to September was largest.
 
-15. Identify the weather station for which the median number of monthly sunshine hours over the months April to September was largest.
+15. For each weather station apart from the one in Armagh, compute the total rainfall and sunshine duration during the months with no days of air frost. Present the totals in centimetres and days, respectively.
 
-16. For each weather station apart from the one in Armagh, compute the total rainfall and sunshine duration during the months with no days of air frost. Present the totals in centimetres and days, respectively.
+16. For each month, count how many stations recorded at least two days of air frost or more than 95 mm rain. Tip: Think about how you can do that with `filter` and `summarize`. Then, for these data lines compute the average number of sunshine hours split up by month.
 
-17. For each of the months, count how many stations recorded at least two days of air frost or more than 95 mm rain. Then for these months, compute the average number of sunshine hours.

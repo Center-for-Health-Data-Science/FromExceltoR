@@ -365,7 +365,7 @@ pre code {
 <h1 class="title toc-ignore">II. Working with data in R (solution)</h1>
 <h4 class="author">Science Data Lab &amp; Center for Health Data
 Science</h4>
-<h4 class="date">23 September, 2022</h4>
+<h4 class="date">27 September, 2022</h4>
 
 </div>
 
@@ -668,28 +668,6 @@ England?</li>
 <p>The final questions require that you combine commands and variables
 of the type above.</p>
 <ol start="14" style="list-style-type: decimal">
-<li>Like in questions 5 - 9, compute group summary statistics (average,
-standard deviation, and sum) this time for the sun hours, split up by
-weather station. Sort the output in ascending order according to the
-stations’ average monthly sunshine duration.</li>
-</ol>
-<pre class="r"><code>climate %&gt;%
-  group_by(station) %&gt;% 
-  summarize(avg_rain = mean(sun),
-            sd_rain = sd(sun),
-            sum_rain = sum(sun),
-            avg_sun = mean(sun),
-            n=n()) %&gt;% 
-  arrange(avg_sun)</code></pre>
-<pre><code>## # A tibble: 5 × 6
-##   station   avg_rain sd_rain sum_rain avg_sun     n
-##   &lt;chr&gt;        &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt; &lt;int&gt;
-## 1 lerwick       101.    57.5    1210.    101.    12
-## 2 armagh        104.    45.1    1251.    104.    12
-## 3 sheffield     113.    49.2    1361.    113.    12
-## 4 camborne      120.    55.8    1437.    120.    12
-## 5 oxford        131.    56.1    1571.    131.    12</code></pre>
-<ol start="15" style="list-style-type: decimal">
 <li>Identify the weather station for which the median number of monthly
 sunshine hours over the months April to September was largest.</li>
 </ol>
@@ -708,7 +686,7 @@ sunshine hours over the months April to September was largest.</li>
 ## 5 armagh       124.</code></pre>
 <p>Weather station with largest median number of monthly sunshine hours
 over the months April to September was Oxford</p>
-<ol start="16" style="list-style-type: decimal">
+<ol start="15" style="list-style-type: decimal">
 <li>For each weather station apart from the one in Armagh, compute the
 total rainfall and sunshine duration during the months with no days of
 air frost. Present the totals in centimetres and days,
@@ -726,10 +704,12 @@ respectively.</li>
 ## 2 lerwick         64.4      33.3
 ## 3 oxford          29.8      40.0
 ## 4 sheffield       35.4      35.0</code></pre>
-<ol start="17" style="list-style-type: decimal">
-<li>For each of the months, count how many stations recorded at least
-two days of air frost or more than 95 mm rain. Then for these months,
-compute the average number of sunshine hours.</li>
+<ol start="16" style="list-style-type: decimal">
+<li>For each month, count how many stations recorded at least two days
+of air frost or more than 95 mm rain. Tip: Think about how you can do
+that with <code>filter</code> and <code>summarize</code>. Then, for
+these data lines compute the average number of sunshine hours split up
+by month.</li>
 </ol>
 <pre class="r"><code>climate %&gt;%
   filter(af &gt;= 2 | rain &gt; 95) %&gt;% 
@@ -748,151 +728,6 @@ compute the average number of sunshine hours.</li>
 ##  8     9     2   105. 
 ##  9    11     5    68.0
 ## 10    12     3    43.9</code></pre>
-<ol start="6" style="list-style-type: decimal">
-<li><p>Dataset with observations from Camborne and Oxford.</p>
-<pre class="r"><code>filter(climate, station == &quot;camborne&quot; | station == &quot;oxford&quot;)
-# Or: filter(climate, station %in% c(&quot;camborne&quot;, &quot;oxford&quot;))</code></pre>
-<pre><code>## # A tibble: 24 × 7
-##    station   year month    af  rain   sun device    
-##    &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;     
-##  1 camborne  2016     1     0 222.   48   Kipp Zonen
-##  2 camborne  2016     2     0 162.   64.1 Kipp Zonen
-##  3 camborne  2016     3     0  88.4 140.  Kipp Zonen
-##  4 camborne  2016     4     0  81.4 184.  Kipp Zonen
-##  5 camborne  2016     5     0  45.6 206.  Kipp Zonen
-##  6 camborne  2016     6     0  65.8 132.  Kipp Zonen
-##  7 camborne  2016     7     0  23.2 161.  Kipp Zonen
-##  8 camborne  2016     8     0  57.4 171.  Kipp Zonen
-##  9 camborne  2016     9     0 154.  103.  Kipp Zonen
-## 10 camborne  2016    10     0  53.2 125.  Kipp Zonen
-## # … with 14 more rows
-## # ℹ Use `print(n = ...)` to see more rows</code></pre></li>
-<li><p>Make the new variable and give the nes dataset a name</p>
-<pre class="r"><code>climate2 &lt;- mutate(climate, sqrtSum=sqrt(sun))</code></pre></li>
-<li><p>Assigning the rainfall observations to the vector
-<code>rain_vector</code>.</p>
-<pre class="r"><code>rain_vector &lt;- climate$rain</code></pre>
-<p>Extracting elements from the rainfall vector.</p>
-<pre class="r"><code>rain_vector</code></pre>
-<pre><code>##  [1] 131.9  62.6  43.8  54.0  41.4  75.1  80.6  52.5  65.4  37.1  40.8  51.4
-## [13] 221.6 161.6  88.4  81.4  45.6  65.8  23.2  57.4 153.7  53.2 137.0  58.4
-## [25] 187.0 119.6  79.2  55.1  46.0  48.4 115.2 108.4 110.0  56.2 133.4 159.4
-## [37]  83.9  47.6  74.2  53.1  86.1  95.7   3.4  41.2  44.6  26.5  76.1  25.8
-## [49]  84.8  68.6  87.2  65.8  58.2 130.4  30.0  62.0  44.2  29.2  95.6  31.8</code></pre>
-<pre class="r"><code># First six elements
-rain_vector[1:6]</code></pre>
-<pre><code>## [1] 131.9  62.6  43.8  54.0  41.4  75.1</code></pre>
-<pre class="r"><code># Element number five
-rain_vector[5]</code></pre>
-<pre><code>## [1] 41.4</code></pre>
-<pre class="r"><code># Element numbers 2, 4 and 6
-rain_vector[c(2,4,6)]</code></pre>
-<pre><code>## [1] 62.6 54.0 75.1</code></pre>
-<p>Some summary statistics for the rainfall observations.</p>
-<pre class="r"><code>mean(rain_vector)</code></pre>
-<pre><code>## [1] 75.79667</code></pre>
-<pre class="r"><code>sd(rain_vector)</code></pre>
-<pre><code>## [1] 43.18915</code></pre>
-<pre class="r"><code>sum(rain_vector)</code></pre>
-<pre><code>## [1] 4547.8</code></pre></li>
-<li><p>Summary statistics for the rainfall observations computed using
-<code>summarize</code>. It is most easily made with the pipe operator,
-but can also be done in several steps (not shown).</p>
-<pre class="r"><code>summarize(climate, 
-      avg_rain = mean(rain),
-      sd_rain = sd(rain),
-      sum_rain = sum(rain))</code></pre>
-<pre><code>## # A tibble: 1 × 3
-##   avg_rain sd_rain sum_rain
-##      &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;
-## 1     75.8    43.2    4548.</code></pre></li>
-<li><p>Summary statistics for rainfall data by weather station,
-including number of observations for each station, and sorted in
-descending order according to annual rainfall.</p>
-<pre class="r"><code>climate %&gt;%
-  group_by(station) %&gt;% 
-  summarize(avg_rain = mean(rain),
-            sd_rain = sd(rain),
-            sum_rain = sum(rain),
-            n=n()) %&gt;% 
-  arrange(desc(sum_rain))</code></pre>
-<pre><code>## # A tibble: 5 × 5
-##   station   avg_rain sd_rain sum_rain     n
-##   &lt;chr&gt;        &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt; &lt;int&gt;
-## 1 lerwick      101.     45.6    1218.    12
-## 2 camborne      95.6    59.4    1147.    12
-## 3 sheffield     65.6    30.5     788.    12
-## 4 armagh        61.4    26.1     737.    12
-## 5 oxford        54.8    28.5     658.    12</code></pre></li>
-<li><p>Summary statistics for rainfall data by weather station, sorted
-in ascending order according to average monthly sunshine duration.</p>
-<pre class="r"><code>climate %&gt;%
-  group_by(station) %&gt;% 
-  summarize(avg_rain = mean(rain),
-            sd_rain = sd(rain),
-            sum_rain = sum(rain),
-            avg_sun = mean(sun)) %&gt;% 
-  arrange(avg_sun) </code></pre>
-<pre><code>## # A tibble: 5 × 5
-##   station   avg_rain sd_rain sum_rain avg_sun
-##   &lt;chr&gt;        &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;
-## 1 lerwick      101.     45.6    1218.    101.
-## 2 armagh        61.4    26.1     737.    104.
-## 3 sheffield     65.6    30.5     788.    113.
-## 4 camborne      95.6    59.4    1147.    120.
-## 5 oxford        54.8    28.5     658.    131.</code></pre></li>
-<li><p>Weather station with largest median number of monthly sunshine
-hours over the months April to September was Oxford:</p>
-<pre class="r"><code>climate %&gt;% 
-  filter(month %in% 4:9) %&gt;% 
-  group_by(station) %&gt;% 
-  summarize(med_sun = median(sun)) %&gt;% 
-  arrange(desc(med_sun))</code></pre>
-<pre><code>## # A tibble: 5 × 2
-##   station   med_sun
-##   &lt;chr&gt;       &lt;dbl&gt;
-## 1 oxford       183.
-## 2 camborne     166 
-## 3 sheffield    160.
-## 4 lerwick      132.
-## 5 armagh       124.</code></pre></li>
-<li><p>For each weather station apart from Armagh, the total rainfall
-(in cm) and duration of sunshine (in days) in the months with no days of
-air frost.</p>
-<pre class="r"><code>climate %&gt;% 
-  group_by(station) %&gt;% 
-  filter(station != &quot;armagh&quot;, af == 0) %&gt;% 
-  summarize(total_rain = sum(rain)/10,
-            total_sun = sum(sun)/24)</code></pre>
-<pre><code>## # A tibble: 4 × 3
-##   station   total_rain total_sun
-##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;
-## 1 camborne       115.       59.9
-## 2 lerwick         64.4      33.3
-## 3 oxford          29.8      40.0
-## 4 sheffield       35.4      35.0</code></pre></li>
-<li><p>For each month: Number of stations with at least two days of air
-frost or more than 95 mm rain, and the average sunshine duration for
-these stations.</p>
-<pre class="r"><code>climate %&gt;%
-  filter(af &gt;= 2 | rain &gt; 95) %&gt;% 
-  group_by(month) %&gt;% 
-  summarize(count = n(), avg_sun = mean(sun))</code></pre>
-<pre><code>## # A tibble: 10 × 3
-##    month count avg_sun
-##    &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt;
-##  1     1     5    45.3
-##  2     2     5    86.2
-##  3     3     4   106. 
-##  4     4     2   148. 
-##  5     6     2   103. 
-##  6     7     1    80.5
-##  7     8     1    92.2
-##  8     9     2   105. 
-##  9    11     5    68.0
-## 10    12     3    43.9</code></pre></li>
-<li><p>Many solutions were already made with the pipe operator.</p></li>
-</ol>
 </div>
 
 
