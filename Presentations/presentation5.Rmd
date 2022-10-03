@@ -11,7 +11,7 @@ output:
 knitr::opts_chunk$set(echo = TRUE, eval = TRUE, warning = FALSE)
 ```
 
-## Structure of a biostatistical analysis in R
+## Structure of a Biostatistical Analysis in R
 
 The very basic structure of an R script doing a classical statistical analysis is as follows:
 
