@@ -183,8 +183,9 @@ To change the y-axis to be logarithmic we add `scale_y_log10()`. Please note, th
 
 
 ```{r ch13, fig.width=6, fig.asp=0.6}
-p <- ggplot(downloads, aes(x = machineName, y = size, fill=machineName)) + 
-  geom_boxplot() + 
+p <-
+  ggplot(downloads, aes(x = machineName, y = size, fill = machineName)) +
+  geom_boxplot() +
   scale_y_log10()
 p
 ```
@@ -202,14 +203,15 @@ p1
 
 ```
 
+### A Violin plot
 
 Now let's make a violin plot, which is a boxplot that shows the distribution of points. We will log-scale it again, and this time we will change the colors as well.
 
 We can add the point to the violin outline and specify custom colors manually, like this:
 ```{r ch15, fig.width=6, fig.asp=0.6}
 p <- ggplot(downloads, aes(x = machineName, y = size, fill=machineName)) + 
-  geom_violin(trim = TRUE) + scale_y_log10() 
-
+  geom_violin(trim = TRUE) + 
+  scale_y_log10() 
 p
 
 p2 <- p + geom_jitter(size = 0.1, alpha = 0.05, width = 0.4) + 
@@ -253,7 +255,7 @@ p
 
 
 
-## Points colored by machine
+### Points colored by machine
 
 Remember, that *p* presently encodes a scatterplot, which is made using `geom_point()`. To color the points according to *machineName* we simply add this as an aesthetic.
 
@@ -262,7 +264,7 @@ p + aes(color = machineName)
 ```
 
 
-## Points shaped by machine
+### Points shaped by machine
 
 Alternatively, we can visualize the 6 different machines by different plotting symbols. This is done by adding a *shape* aesthetic instead.
 
@@ -352,15 +354,17 @@ You can modify saved ggplot objects, arrange, align and label plots individual p
 
 ```{r ch26, fig.width=8, fig.asp=0.6}
 
-figure <- ggarrange(p1 + theme_bw(),
-                    p3 + theme_bw() + 
-                      scale_color_manual(values=c("#2A2D43", "#91A6FF", "#AD8350")),
-                    p4 + theme_bw()+
-                      scale_color_manual(values=c("#2A2D43", "#91A6FF", "#C7EDE4", "#AFA060", "#AD8350")), 
-                    p2 + theme_bw(), 
-                    align = "hv",
-                    labels = c ("A", "B", "C", "D"),
-                    ncol = 2, nrow = 2)
+figure <- ggarrange(
+  p1 + theme_bw(),
+  p3 + theme_bw() +
+    scale_color_manual(values = c("#2A2D43", "#91A6FF", "#AD8350")),
+  p4 + theme_bw() +
+    scale_color_manual(values = c( "#2A2D43", "#91A6FF", "#C7EDE4", "#AFA060", "#AD8350")),
+  p2 + theme_bw(),
+  align = "hv",
+  labels = c ("A", "B", "C", "D"),
+  ncol = 2, nrow = 2)
+
 figure
 ```
 
