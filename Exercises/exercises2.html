@@ -364,7 +364,7 @@ pre code {
 
 <h1 class="title toc-ignore">II. Working with data in R (exercises)</h1>
 <h4 class="author">Data Science Lab, University of Copenhagen</h4>
-<h4 class="date">27 September, 2022</h4>
+<h4 class="date">28 September, 2022</h4>
 
 </div>
 
@@ -482,9 +482,10 @@ annual rainfall.</p></li>
 <h3>Manipulating the data</h3>
 <ol start="10" style="list-style-type: decimal">
 <li><p>Create a new copy of the climate dataset to which you have added
-a column that states the amount of hours with no sunshine for each
-month. A month has on average 730 hours, you can use the same amount of
-hours for all of them to calculate the new column.</p></li>
+a column that states the amount of hours where there was no sunshine for
+each month. Months have either 720 hours (30 days) or 744 hours (31
+days), excluding February, but you can use 730 hours for all months to
+calculate the new column.</p></li>
 <li><p>Add another column to your new dataset that says whether the
 weather this month was good. We consider a month to be good if it had at
 least 50 hours of sunlight and less than 100 mm of rain. Otherwise the

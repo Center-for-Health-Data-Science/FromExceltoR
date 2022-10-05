@@ -1,4 +1,4 @@
-# Let's check if everything you need for tomorrow is installed
+# Let's check if everything you need for the course is installed
 
 # If there are packages missing, they will be installed by this script.
 
@@ -26,7 +26,7 @@ if(as.numeric(base::version$major) < 4){
 #####################
 
 # list package names that are needed from CRAN
-packages_needed = c("tidyverse","readxl","ggplot2",
+packages_needed = c("tidyverse","readxl","ggplot2", "writexl",
                     "table1","knitr","GGally","emmeans","BiocManager")
 # list needed packages that require different installation
 packages_needed_biocmanager = c("DESeq2","EDASeq")

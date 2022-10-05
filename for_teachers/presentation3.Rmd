@@ -1,9 +1,10 @@
 ---
-title: "VI. Bioinformatics in R (presentation)"
+title: "III.\\ Graphics with ggplot2"
+author: "Science Data Lab & Center for Health Data Science"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
-  #pdf_document: default
   html_document: default
+  #pdf_document: default
 ---
 
 ```{r ch0, setup, include=FALSE}
