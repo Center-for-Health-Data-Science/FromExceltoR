@@ -255,6 +255,7 @@ if (window.hljs) {
 
 
 
+
 <style type="text/css">
 .main-container {
   max-width: 940px;
@@ -275,6 +276,9 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
 }
 pre code {
   padding: 0;
@@ -361,7 +365,7 @@ pre code {
 <h1 class="title toc-ignore">III. Graphics with ggplot2 (exercises)</h1>
 <h4 class="author">Science Data Lab &amp; Center for Health Data
 Science</h4>
-<h4 class="date">19 September, 2022</h4>
+<h4 class="date">05 October, 2022</h4>
 
 </div>
 
@@ -420,7 +424,7 @@ imported the data, there is no need to import it again (unless you have
 made changes to the data assigned to <code>climate</code> since the
 original data set was imported).</p>
 <p><strong>Need a little help?</strong> Consult the ggplot2 cheat sheet
-here: <a href="https://rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf" class="uri">https://rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf</a></p>
+here: <a href="https://www.rstudio.com/resources/cheatsheets/" class="uri">https://www.rstudio.com/resources/cheatsheets/</a></p>
 <div id="scatter-plot-i" class="section level3">
 <h3>Scatter plot I</h3>
 <ol style="list-style-type: decimal">
@@ -440,19 +444,19 @@ to your code.</p></li>
 <h3>Graphic files</h3>
 <ol start="5" style="list-style-type: decimal">
 <li>Make sure that the working directory is pointing to the place, where
-you want to save the graphic files. You may check this my executing the
+you want to save the graphic files. You may check this by executing the
 code</li>
 </ol>
 <pre class="r"><code>getwd()</code></pre>
 <p>If necessary you may change the working directory via the function
 <code>?setwd</code>.</p>
 <ol start="6" style="list-style-type: decimal">
-<li><p>Use <code>ggsave(file=&quot;weather.jpeg&quot;)</code> to remake the last
-gg-plot as a jpeg-file. Locate this file on your computer and open
+<li><p>Use <code>ggsave(file=&quot;weather.jpeg&quot;)</code> to save the last
+ggplot as a jpeg-file. Locate this file on your computer and open
 it.</p></li>
 <li><p>Use
 <code>ggsave(file=&quot;weather.png&quot;,width=10,height=8,units=&quot;cm&quot;)</code> to
-remake the last gg-plot as a png-file. What does the three other options
+save the last ggplot as a png-file. What does the three other options
 do? Look at the help page <code>?ggsave</code> to get an overview of the
 possible options.</p></li>
 </ol>
@@ -465,8 +469,8 @@ possible options.</p></li>
 <pre class="r"><code>climate %&gt;%
   group_by(month) %&gt;% 
   summarize(sun_avg = mean(sun), sun_sd = sd(sun))</code></pre>
-<p>Make sure you understand the output, and save it to a vector named
-<code>summary_stats</code>.</p>
+<p>Make sure you understand the output, and save it to a
+<code>tibble</code> named <code>summary_stats</code>.</p>
 <ol start="9" style="list-style-type: decimal">
 <li><p>Make a scatter plot with month on the x-axis, and the average
 number of sunshine hours on the y-axis.</p></li>
@@ -497,17 +501,19 @@ using the code below.</li>
 with the <code>geom_point</code> function.</p>
 <ol start="14" style="list-style-type: decimal">
 <li>Run the following code and observe what changes in the plot. In the
-code, <code>geom_point</code> has been replaced by
-<code>geom_text</code>, and an additional aesthetic
-<code>label = Z</code> has been inserted.</li>
+code, <code>geom_text</code> has been added to <code>geom_point</code>,
+and an additional aesthetic <code>label = Z</code> has been
+inserted.</li>
 </ol>
-<pre class="r"><code>ggplot() + 
+<pre class="r"><code>ggplot() +
+  geom_point(mapping = aes(x = X, y = Y), data = example_data) +
   geom_text(mapping = aes(x = X, y = Y, label = Z), data = example_data)</code></pre>
 <ol start="15" style="list-style-type: decimal">
 <li>What happens when <code>nudge_y = 0.3</code> is added as an argument
 to <code>geom_text</code> (as in the code below)?</li>
 </ol>
-<pre class="r"><code>ggplot() + 
+<pre class="r"><code>ggplot() +
+  geom_point(mapping = aes(x = X, y = Y), data = example_data) +
   geom_text(mapping = aes(x = X, y = Y, label = Z), data = example_data, nudge_y = 0.3)</code></pre>
 </div>
 <div id="line-plot-also-known-as-a-spaghetti-plot" class="section level3">
@@ -564,7 +570,7 @@ and add a different legend title with
 <code>theme_minimal()</code>, <code>theme_dark()</code>, or
 <code>theme_void()</code>.</p></li>
 <li><p>Instead of the colours automatically chosen when you use
-<code>fill = station</code>, try so pick your own colors. Use the
+<code>fill = station</code>, try to pick your own colors. Use the
 <code>scale_fill_manual()</code>. You will need five colors, one for
 each station. What happens if you choose too few colours?</p></li>
 <li><p>Change the boxplot to a <strong>violin plot</strong>. Add the
@@ -628,7 +634,8 @@ example, try widths of 0.1, 0.5, and 1.</li>
 weather station.</p></li>
 <li><p>Run the following code:</p></li>
 </ol>
-<pre class="r"><code>climate %&gt;% 
+<pre class="r"><code>annual_rain &lt;- 
+  climate %&gt;%
   group_by(station) %&gt;% 
   summarize(rain = sum(rain)) %&gt;% 
   arrange(rain)</code></pre>
@@ -640,8 +647,8 @@ output as <code>annual_rain</code>. <!-- 1. Run the code -->
 <!-- and then run the code for the bar chart again. What has changed? Why? --></p>
 <ol start="41" style="list-style-type: decimal">
 <li>Use the <code>annual_rain</code> data to make a bar chart of the
-annual rainfall recorded at each weather station (just like in question
-1.) but this time add:</li>
+annual rainfall recorded at each weather station in increasing order
+(just like in question 1.) but this time add:</li>
 </ol>
 <pre class="r"><code>geom_text(mapping = aes(x = station, y = rain, label = rain), data = annual_rain)</code></pre>
 <p>to the code for the bar chart, and update the plot. Understand what
