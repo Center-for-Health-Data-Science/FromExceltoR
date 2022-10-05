@@ -31,7 +31,7 @@ The spreadsheet contains data from five UK weather stations in 2016. The followi
 The data set is the same as the one used for the exercises **II. Working with data in R**. If you have already imported the data, there is no need to import it again (unless you have made changes to the data assigned to `climate` since the original data set was imported).
 
 
-**Need a little help?** Consult the ggplot2 cheat sheet here: https://rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf   
+**Need a little help?** Consult the ggplot2 cheat sheet here: https://www.rstudio.com/resources/cheatsheets/
 
 ### Scatter plot I
 1. Make a scatter plot of **rain** against **sun**. HINT: Try `geom_point`.
@@ -44,15 +44,15 @@ The data set is the same as the one used for the exercises **II. Working with da
 
 
 ### Graphic files
-5. Make sure that the working directory is pointing to the place, where you want to save the graphic files. You may check this my executing the code
+5. Make sure that the working directory is pointing to the place, where you want to save the graphic files. You may check this by executing the code
 ```{r}
 getwd()
 ```
 If necessary you may change the working directory via the function `?setwd`.
 
-6. Use `ggsave(file="weather.jpeg")` to remake the last gg-plot as a jpeg-file. Locate this file on your computer and open it.
+6. Use `ggsave(file="weather.jpeg")` to save the last ggplot as a jpeg-file. Locate this file on your computer and open it.
 
-7. Use `ggsave(file="weather.png",width=10,height=8,units="cm")` to remake the last gg-plot as a png-file. What does the three other options do? Look at the help page `?ggsave` to get an overview of the possible options.
+7. Use `ggsave(file="weather.png",width=10,height=8,units="cm")` to save the last ggplot as a png-file. What does the three other options do? Look at the help page `?ggsave` to get an overview of the possible options.
 
 
 ### Scatter plot II
@@ -63,7 +63,7 @@ climate %>%
   group_by(month) %>% 
   summarize(sun_avg = mean(sun), sun_sd = sd(sun))
 ```
-Make sure you understand the output, and save it to a vector named `summary_stats`.
+Make sure you understand the output, and save it to a `tibble` named `summary_stats`.
 
 9. Make a scatter plot with month on the x-axis, and the average number of sunshine hours on the y-axis.
 
@@ -89,15 +89,17 @@ ggplot() +
 ```
 Note that the data set and aesthetics are specified "locally" for use with the `geom_point` function.
 
-14. Run the following code and observe what changes in the plot. In the code, `geom_point` has been replaced by `geom_text`, and an additional aesthetic `label = Z` has been inserted.
+14. Run the following code and observe what changes in the plot. In the code, `geom_text` has been added to `geom_point`, and an additional aesthetic `label = Z` has been inserted.
 ```{r}
-ggplot() + 
+ggplot() +
+  geom_point(mapping = aes(x = X, y = Y), data = example_data) +
   geom_text(mapping = aes(x = X, y = Y, label = Z), data = example_data)
 ```
 
 15. What happens when `nudge_y = 0.3` is added as an argument to `geom_text` (as in the code below)?
 ```{r}
-ggplot() + 
+ggplot() +
+  geom_point(mapping = aes(x = X, y = Y), data = example_data) +
   geom_text(mapping = aes(x = X, y = Y, label = Z), data = example_data, nudge_y = 0.3)
 ```
 
@@ -141,7 +143,7 @@ There are many ways in which you can manipulate the look of your plot. For this 
 
 26. Change the theme of the ggplot grid. You could try `theme_minimal()`, `theme_dark()`, or `theme_void()`.   
 
-27. Instead of the colours automatically chosen when you use `fill = station`, try so pick your own colors. Use the `scale_fill_manual()`. 
+27. Instead of the colours automatically chosen when you use `fill = station`, try to pick your own colors. Use the `scale_fill_manual()`. 
 You will need five colors, one for each station. What happens if you choose too few colours? 
 
 28. Change the boxplot to a **violin plot**.
@@ -191,7 +193,8 @@ geom_errorbar(aes(ymin = sun_avg - sun_sd, ymax = sun_avg + sun_sd), width = 0.2
 
 40. Run the following code:
 ```{r}
-climate %>% 
+annual_rain <- 
+  climate %>%
   group_by(station) %>% 
   summarize(rain = sum(rain)) %>% 
   arrange(rain)
@@ -203,7 +206,7 @@ What is the connection between the output and the bar chart? Save the output as 
 <!-- ``` -->
 <!-- and then run the code for the bar chart again. What has changed? Why? -->
 
-41. Use the `annual_rain` data to make a bar chart of the annual rainfall recorded at each weather station (just like in question 1.) but this time add: 
+41. Use the `annual_rain` data to make a bar chart of the annual rainfall recorded at each weather station in increasing order (just like in question 1.) but this time add:
 ```{r}
 geom_text(mapping = aes(x = station, y = rain, label = rain), data = annual_rain)
 ```
