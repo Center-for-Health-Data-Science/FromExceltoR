@@ -76,7 +76,7 @@ The next few questions build on each other, each adding a piece of code:
 
 ### Manipulating the data
 
-10. Create a new copy of the climate dataset to which you have added a column that states the amount of hours with no sunshine for each month. A month has on average 730 hours, you can use the same amount of hours for all of them to calculate the new column.
+10. Create a new copy of the climate dataset to which you have added a column that states the amount of hours where there was no sunshine for each month. Months have either 720 hours (30 days) or 744 hours (31 days), excluding February, but you can use 730 hours for all months to calculate the new column.
 
 11. Add another column to your new dataset that says whether the weather this month was good. We consider a month to be good if it had at least 50 hours of sunlight and less than 100 mm of rain. Otherwise the weather was bad.
 
