@@ -1,6 +1,6 @@
 ---
 title: "IV. R Markdown (presentation)"
-subtitle: "Center for Health Data Science, University of Copenhagen"
+author: "Center for Health Data Science, University of Copenhagen"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
   html_document: default
