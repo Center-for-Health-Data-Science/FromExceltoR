@@ -1,257 +1,147 @@
 ---
-title: "VI. Bioinformatics in R (exercises)"
-author: "Center for Health Data Science, University of Copenhagen"
+title: "Data Exercise in R"
+author: "HeaDS Data Lab"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
-output:
-  #pdf_document: default
-  html_document: default
+output: 
+      html_document
+      #pdf_document
 ---
-
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(warning=FALSE, message=FALSE)
+knitr::opts_chunk$set(echo = TRUE)
 ```
 
-&nbsp;
+## Introduction:
 
----
+If you don't have your own data to work on you can practice your newly acquired R skills using one of the publicly available datasets we have collected. They are located in the **Exercises/data folder**. Please see below for a brief description of each dataset:
 
-In this exercise you will perform differential expression analysis using the `DESeq2` package for R on an RNAseq expression dataset from airway smooth muscle cells. 
-You will effectively be performing the same work flow of analysis as the one provided in **presentation 6**, with some variation along the way.   
-
-**About the Dataset**   
-Common medicine for treatment of astma are beta2-agonists and glucocorticosteroids, which mainly target the airway smooth muscle.  
-The dataset `airway` contains mRNA profiles from bulk RNAseq of smooth muscle cells from four male donors. 
-The cell lines were treated with dexamethasone and albuterol, or were left untreated (controls). See original data and summary of intent [here](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE52778).
-
-
-&nbsp;
-
----
-
-### PART 1 - Preliminary Analysis
-
-For this exercise you will need five R-packages: `tidyverse`, `ggplot2`,  `readxl`, `BiocManager`, `DESeq2`  and `EDASeq`. You should already have these installed!    
-Copy the chunk below to your .R or .Rmd file to load packages you need.    
-  **N.B** If you do get an error when trying to load one of the packages below, you can try to install the missing package using `install.packages('my.package')`:   
-
-
-```{r, eval=FALSE}
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
 library(tidyverse)
-library(ggplot2)
-library(readxl)
-library(BiocManager)
-library(DESeq2)
-library(EDASeq)
 ```
 
+&nbsp;
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+
+datasets <-  tibble(
+  Name = c("HealthPrimaryCare", "CrohnsDisease", "StrokeData"),
+  Description=c("[Here](https://vincentarelbundock.github.io/Rdatasets/doc/mosaicData/HELPrct.html)", "[Here](https://vincentarelbundock.github.io/Rdatasets/doc/robustbase/CrohnD.html)", "[Here](https://www.kaggle.com/datasets/fedesoriano/stroke-prediction-dataset)"),
+  Variables=c(29, 9, 12),
+  Observations = c(453, 117, 5110))
+
+knitr::kable(datasets)
+
+```
 
 &nbsp;
+
+The sections which follow serve as inspiration for what you could do with the dataset at hand. You do not need to adhere to these, it is completely up to you what you would like to try out!
 
 ---
 
+### Read in the Dataset:
 
-1. In the exercises folder you will find two files: `airway_counts.xlsx` (RNAseq count data) and `airway_metadata.xlsx` (sample information). Read in these two files and name them **_airDat_** and **_airMet_**, respectively. 
+When you have chosen a dataset for analysis the first thing is to read it into R. If you use one of our datasets or data in an excel sheet you can do this the way we did before, using the `read_excel()` function from `readxl`. 
 
-2. What kind of information do you have in the first four columns of the airDat? How many samples and genes are there in your count data?   
+If you are using your own dataset you will have to figure out which read function you need to get your data into R. There is a function for reading in *almost* any type of text file, `read.csv()`, `read.table()`, `read.delim()`, etc. You can either google your way to an answer or ask one of the course instructors. 
 
+Name your dataset something logical.  
 
-3. In your **airMet** tibble you have four variables, all characters, convert _condition_ and _celltype_ into factors for further analysis.   
-
-
-&nbsp;
-
-**Copy and run the code below**. This line of code will give you a new column in your **airDat** tibble named _nzeros_ (sum of 0 across samples for each gene).   
-First we temporarily de-select the columns with gene information, then we count 0s across samples.
-
-```{r, eval=FALSE}
-airDat <- airDat %>% 
-  mutate(nzeros = rowSums(dplyr::select(., -Ensgene, -GeneSymbol, -GC, -Length)==0))
-```
-
-&nbsp;
-
-4. We do not want any genes where less than half of the samples have a count above 0. Filter out the genes for which this is the case, and remove the column _nzeros_ from your tibble after filtering.
-Check how many genes you are left with. *N.B* Name the filtered dataset _airDatFilt_.
-   
-
-5. To get an idea of sample library sizes make a boxplot of gene counts, one for each sample.
-You will need to `gather()` the gene counts across samples into one column and the sample IDs into another column. Assign this output to a new variable named `airPlot`.   
-  **HINT 1:** First remove the columns with information on genes (there are four) and next use this: `gather(key = ID, value=geneCount)` to gather the counts into one column.   
-  **HINT 2:** Use `geom_boxplot()` to make a boxplot with ggplot2. Extra: To tilt your x-axis labels 90 degrees, add `theme(axis.text.x = element_text(angle = 90))` to your ggplot code.   
-
-
-6. You will see that boxplots are squeezed due to difference in count range between genes. Which type of data transformation could you use to overcome this problem?   
-Remake the boxplot with transformed counts.   
-  **HINT** remember to add 1.0 pseudo count to all counts before transformation to handle counts which are 0.
-
-
-&nbsp;
-
-
-#### Adjusting for GC content and gene length:
-
-It is well-established that gene length and GC-content will affect the number of reads obtained. It is therefore standard practice to check for such biases and correct accordingly. You already have information on length and GC content in the **airDatFilt** tibble.
-
-The `EDAseq` package can help you correct for gene length and GC content.
-`EDAseq` provides a `biasPlot` showing you if GC content and gene length are a problem. To use this function your data must be in a format that `biasPlot` accepts, e.g. an `EDAseq` object.   
-
-7. Copy the code from both chunks below and run it. Have a look at the object you created, named _EDAobj_, and importantly, look at the plots created, does there appear to be a GC and/or gene length bias in your data?
-  **HINT 1:** An unbias dataset should not show any trend in GC content or gene length across gene counts.   
-
-```{r, eval=FALSE}
-# Converts tibble to matrix of expression counts and removes gene information:
-airDatM <- airDatFilt %>% 
-  dplyr::select(-Ensgene, -GeneSymbol, -GC, -Length) %>% 
-  as.matrix() %>% 
-  unname()
-
-# Make EDASeq object 
-EDAobj <- newSeqExpressionSet(airDatM, 
-                              phenoData=AnnotatedDataFrame(data.frame(condition=airMet$condition, 
-                                                                      celltype=airMet$celltype)),
-                              featureData=AnnotatedDataFrame(data.frame(GC=airDatFilt$GC, 
-                                                                        Length=airDatFilt$Length)))
-```
-
-```{r, eval=FALSE}
-# Bias plots
-par(mfrow=c(1,2))
-biasPlot(EDAobj, "GC", log=TRUE, ylim=c(0,10))
-biasPlot(EDAobj, "Length", log=TRUE, ylim=c(0,10))
-```
-
-&nbsp;
-
-If you observe a bias in your data, you can correct for this with the function `withinLaneNormalization` from `EDASeq`. You can have a look at the [EDASeq documentation](https://www.bioconductor.org/packages/devel/bioc/vignettes/EDASeq/inst/doc/EDASeq.html#retrieving-gene-length-and-gc-content) under point 5 for more info on this function.   
-
-8. Copy and run the code in below to normalize your _EDAobj_ object for GC content and gene length.
-Remake the `biasPlot` from above with the _EDAobjNorm_ object. Are the biases removed?
-
-
-```{r, eval=FALSE}
-EDAobjNorm <- withinLaneNormalization(EDAobj, "GC", which="full", offset=TRUE) %>% 
-  withinLaneNormalization(., "Length", which="full", offset=TRUE)
-```
-
-
-&nbsp;
 ---
 
-### PART 2 - Differential Expression Analysis with DESeq2
+### Exploratory Analysis
 
-Now we we begin our differential expression analysis in `DESeq2`. First, we use the function `DESeqDataSetFromMatrix` to make a `DESeq2 object` (just as shown in the presentation). 
+Before making any statistical models it is necessary to have a good understanding of the dataset.   
+You could start by looking at:
 
-9. Fill in the DESeq2 object below. We want our design matrix to include _celltype_ and _condition_ from the metadata, (**airMet**). Fill in the _countData_, _colData_ and _design_ (rowData is optional).  
-  **HINT** Your countData must only contain counts, no gene IDs etc., so you should filter/slice these these columns out before adding the counts to the object.
+- How many variables and observations are there in the data? Which data types are the variables?
 
+- Are there any missing values (`NA`), and how many? If you don't know how to do this we recommend that you google it. You will find many useful answers!  
 
-```{r, eval=FALSE}
+- Make some preliminary plots of your data. These do not have to be beautiful, but they should be informative to you. You could try histograms, boxplots, barplots or something else you would like.   
 
-exprObj <- DESeqDataSetFromMatrix(countData = ,
-                              rowData = ,
-                              colData = ,
-                              design=~)
+- Looks at your plots, do you appear to have any outlier data points in your dataset?   
+
+- Get some summary statistics for your variables, i.e. means, medians, sd, sums (for numerical types) and counts per group (for categorical or factor types).
+
+- Plot the summary stats as well if you think it makes sense.
+
+---
+
+### Scientific Question
+
+Now that you have an overview of your dataset and the variables in it, try to think about and formulate a simple scientific hypothesis/question which you would like to explore. 
+
+Lets use an example of a dataset containing information on patients with breast cancer. Lets say that we follow these patients from diagnosis, though treatment, and 10 years after treatment ends, as follow-up:   
+
+&nbsp;
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+library(tidyverse)
+
+BC_dataset <-  tibble(
+  Age = c("60", "51", "58", "..."),
+  BC.subtype = c("luminal", "basal", "luminal", "..."),
+  Treatment = c("chemotherapy", "chemotherapy", "immunotherapy", "..."),
+  Survival = c("alive", "alive", "dead", "..."),
+  Stage = c("2", "3", "4", "..."),
+  Smoker = c("no","no", "yes", "..."),
+  Familial.BC = c("no", "yes", "no", "..."))
+
+knitr::kable(BC_dataset)
 ```
 
 
 &nbsp;
-
-10. If we are to be correct, you should "feed" the function `DESeqDataSetFromMatrix` the normalized counts from the `EDASeq` analysis, where you corrected for GC content and gene Length. This is tricky, so we have provided you with the code needed for this. Copy and run the code below. 
-
-
-```{r, eval=FALSE}
-exprObj <- DESeqDataSetFromMatrix(countData = counts(EDAobjNorm),
-                             colData = pData(EDAobjNorm),
-                             design = ~celltype+condition)
-
-normFactors <- exp(-1 * offst(EDAobjNorm))
-normFactors <- normFactors / exp(rowMeans(log(normFactors)))
-normalizationFactors(exprObj) <- normFactors
-
-```
-
-&nbsp;
-
-In question 5., we made a ggplot2 boxplots to see the difference in library sizes and variances of samples. Based on this plot it seems like variance stabilizing transformation might improve our dataset for DEA analysis. Copy and run the code below to perform vst transformation.   
-  **Extra (optional)**: Make a boxplot with the vst counts.
+We need to decide on:
 
 
-```{r, eval=FALSE}
-exprObjvst <- vst(exprObj,blind=FALSE)
-```
+- What is our **response/outcome variable (y)**. Using the example dataset above this might be patient survival or patient subgroup (BC.subtype).   
+**Q:** Which variable in your chosen dataset will you use as the response variable? And what type is it, e.g. a categorical (two or more discrete types of outcome) or a continuous variable?   
 
-&nbsp;
+- Decide on our **predictive/explanatory variable(s) (x)**. These are measurements or information such as i.e. age, smoking status or the treatment we want to use to explain or predict the outcome. Some variables like age might modulate the response but not be directly explanatory. We often call these covariates. We do not know whether they truly are covariates or actually explanatory, but using our previous knowledge we hypothesize that these variables influence the effect of treatment on survival. 
+**Q:** Which predictive variable(s) (x) do you have in your datatset? Do you have variable(s) you would like to add as covariates?
 
-We would like to use a PCA plot to inspect if the vst transformation has improved the clustering of our samples by group. For this we will first perform principal component analysis using both the 'raw' counts and vst-transformed counts. We extract counts from the DESeq2 objects using the function `assay()`.
+---
 
+### Data Wrangling
 
-11. Copy and run the two chunks of code below.   
-In the second chunk we are using three different functions: `t()`, `dist()` and `cmdscale()`. Use **?** to figure out what each of them do! What inputs do they take? and what are the default values?
+After familiarizing yourself with your dataset and deciding on which variables may be of interest to include in your analysis you might consider whether you need to do any data wrangling/management before defining your statistical model. Here we mean things like:
 
-```{r, eval=FALSE}
-# un-transformed counts
-unTrf <- assay(exprObj) %>% 
-  t() %>% 
-  dist() %>% 
-  cmdscale(., eig=TRUE, k=2)
+- Do you need all variables in the dataset? Maybe some are redundant or uninteresting so you could remove them from the tibble.   
 
-unTrf <- tibble(PC1=unTrf$points[,1],PC2=unTrf$points[,2])
+- If you have missing values for some observations, do you want to filter out these rows before continuing analysis? There could also be other filtering criteria to think about, such as removing rows with zeros or rows containing measurements that you think are outliers.   
 
+- Maybe you want to make new columns combining some existing ones? An example of this, could be as we did with the downloads dataset where you converted sizes from bytes to megabytes and added the result as a new column to your tibble.   
 
-# vst transformed counts
+- Do you want to rename the observations of a variables to something more suited for modeling? An examples of this could be converting a categorical variable like status of smoking (noted as _smoker_ or _non-smoker_) to integer values (_1_ or _0_).
 
-vstTrf <- assay(exprObjvst) %>% 
-  t() %>% 
-  dist() %>% 
-  cmdscale(., eig=TRUE, k=2)
+---
 
-vstTrf <- tibble(PC1=vstTrf$points[,1],PC2=vstTrf$points[,2])
+### Modelling
 
-```
+Now you have a *tidy* dataset ready for analysis. You have decided on your response and predictive variables and you know which datatypes they are. The latter is important as this will determine which type of model you can make.  
 
-&nbsp;
-
-You now have two datasets containing the first two principal components (PC1 & PC2) for both 'raw' (un-transformed) counts, _unTrf_, and vst-transformed counts, _vstTrf_.   
-
-12. Make a PCA plot for each set using ggplot2. Color the samples by condition and label them by _celltype_ (**airMet** has this information).   
-  **HINT** A PCA plot is just a `geom_point()` plot with x=PC1 and y=PC2.
-Would you say that the transformation improved the partitioning of control and treated samples?
-
-
-&nbsp;
-
-Next, we use `DEseq()` to estimate dispersion, gene-wise and mean-dispersion, fitting model(s). Copy the code below and run it.
+In the statistics exercise we tried out the `lm()` function to do one-way ANOVA. Use this function again to make a simple statistical model.   
+If the outcome variable you are interested in is continuous, then you will be doing linear regression. On the other hand if the outcome is categorical, you are performing ANOVA (if you only have two groups, this will effectively be a t-test). **N.B** the function and annotation in R is the same for these models.
+Have a look a the statics exercise/presentation and the pseudo code below:
 
 ```{r, eval=FALSE}
-# Fitting gene-wise glm models:
-exprObj <- DESeq(exprObj)
+model1 <- lm(resp ~ pred1, data=name_of_dataset)
 ```
 
-&nbsp;
+- Begin with a simple model, use just one predictive variable.   
 
-We now have our model(s) ready and we want to contrast our condition groups, e.g. treated vs control.   
-
-13. Use the `DESeq2` function `results()` to do the post hoc test (just like we did in the presentation). Figure out what arguments it takes. As a minimum you will have to specify a DESeq2 model object (denoted by '.' below) and a contrast of interest. When you have run the function, have a look at the output.   
-
-
+- Test whether your data fulfills the model assumptions by making residual plots and evaluating these, just like in the presentation and exercise:
 ```{r, eval=FALSE}
-resTC <- results(. , contrast = c(), independentFiltering = FALSE)
+par(mfrow=c(2,2)) # makes room for 4=2x2 plots.
+plot(model1)
 ```
 
-14. Use the function `summary()` to see the number of identified differentially expressed gene. Use the `plotMA()` function to visualize these.   
+- If model assumptions are not appropriate could you perform some sort of transformation to help alleviate the problem?   
 
-15. Convert your results from `DESeq2` to a tibble and do the following:
-    (a) Add two new columns to it (using `mutate`): _dir_ indicating directionality of the logFC. The column _dir_ can be made using the following syntax: `dir=factor(ifelse(log2FoldChange >= 1.0, "Up", "Down"), levels=c("Up", "Down"))` and one named _geneSymbols_ with gene symbols from _airDatFilt_.
-    (b) Filter your results to only include genes with log2FoldChange of more than 1 or less than -1 and a _padj_ (adjusted p-value) of less than 0.05. 
-    (c) Arrange by _padj_ (ascending) and the **absolute** _log2FoldChange_ (descending). **HINT:** use the function `abs()` to get the absolute log2FoldChange before arranging.
-    (d) Extract the top 50 most significant DE genes based on _log2FoldChange_ and _padj_.   
-    
-&nbsp;
+- Get some summary statistics from your model. Can you extract the confidence intervals of your estimate? HINT: `summary()`, `confint()`.     
 
-16. Make a lollipop plot (https://www.r-graph-gallery.com/lollipop-plot.html) of the top 50 most significant DE genes:
-    (a) You will need two ggplot geoms for this: `geom_segment()` and `geom_point()`.
-    (b) The size of the point should reflect the log2FoldChange and the shade of the point should reflect the significance (e.g. the padj). *N.B* you may have to scale one or both of these to get a nicer plot.
-    (c) Change the color scheme to one you would like, try `scale_colour_gradient2()`.
-    (d) Play around with the look/theme of the plot, remove legends you dont need, grid lines etc.
-    (e) Based on your plot, which genes seem to be most effected by treatment with dexamethasone and albuterol?
+- Try making a model with more than one predictive variable. Remake the residual plots for you new more complex model.   
+
+- Which model is best? How could you test this? HINT: `drop1()`, `anova()`.   
