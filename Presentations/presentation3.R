@@ -122,7 +122,7 @@ p + aes(color = machineName)
 
 p + aes(shape = machineName)
 
-## >p + aes(shape = factor(size_mb))
+## p + aes(shape = factor(size_mb))
 ## Warning messages:
 ## 1: The shape palette can deal with a maximum of 6 discrete values because more than 6 becomes difficult to
 ## discriminate; you have 337. Consider specifying shapes manually if you must have them.
