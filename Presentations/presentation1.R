@@ -17,7 +17,6 @@
 
 # set working directory (absolute path)
 setwd('/Users/kgx936/Desktop/HeaDS/GitHub_repos/FromExceltoR')
-setwd('~/Desktop/HeaDS/GitHub_repos/FromExceltoR')
 
 # where am I now?
 getwd()
@@ -29,7 +28,7 @@ setwd('./Presentations')
 
 ### Variable assignment
 
-# In R we use an arrow for variable assigment. You may call your almost variables whatever you like.
+# In R we use an arrow for variable assignment. You may call your almost variables whatever you like.
 # DO NOT: use special characters in variable names, i.e. &, ), $ etc. or make spaces in naming.
 
 
@@ -57,7 +56,7 @@ num1
 
 # Or I use the function mean.
 # x (which is some numbers/values) is the input argument and mean is the output. 
-mean(x=num1)
+mean(num1)
 
 
 
@@ -235,9 +234,10 @@ dim(CakeDF)
 # This may be done with the '$' symbol:
 
 # Extract variable with $ symbol
-cakeSlice <- CakeDF$cakeSlice
-groupMem <- CakeDF$groupMem
+CakeT$cakeSlice
 
+cakeSlice2 <- CakeT$cakeSlice
+cakeSlice2
 
 
 # Only interested in a specific subset of either rows or columns from an R data object?, use a 'slice'.
@@ -245,10 +245,11 @@ groupMem <- CakeDF$groupMem
 
 
 # Specific rows/columns of an R object (a slice):
-CakeDF[1:5, 1:2]
+CakeT[1:5, 1:2]
+CakeT[, 1:2]
 
 groupMem[3:9]
-groupMem[c(1:3, 5, 9, 11)]
+
 
 
 
