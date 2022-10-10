@@ -275,7 +275,7 @@ p + aes(shape = machineName)
 Please note that *ggplot2* only contains 6 different plotting symbols. If you using the *shape* aesthetic on a categorical variable with more than 6 levels, then you get the following error message:
 
 ```{r ch20, eval=FALSE}
->p + aes(shape = factor(size_mb))
+p + aes(shape = factor(size_mb))
 Warning messages:
 1: The shape palette can deal with a maximum of 6 discrete values because more than 6 becomes difficult to
 discriminate; you have 337. Consider specifying shapes manually if you must have them. 
