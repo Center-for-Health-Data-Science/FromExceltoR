@@ -60,7 +60,7 @@ You could start by looking at:
 
 - Make some preliminary plots of your data. These do not have to be beautiful, but they should be informative to you. You could try histograms, boxplots, barplots or something else you would like.   
 
-- Looks at your plots, do you appear to have any outlier data points in your dataset?   
+- Look at your plots, do you appear to have any outlier data points in your dataset?   
 
 - Get some summary statistics for your variables, i.e. means, medians, sd, sums (for numerical types) and counts per group (for categorical or factor types).
 

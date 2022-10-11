@@ -17,6 +17,8 @@
 
 # set working directory (absolute path)
 setwd('/Users/kgx936/Desktop/HeaDS/GitHub_repos/FromExceltoR')
+setwd("~/Desktop/HeaDS/GitHub_repos/FromExceltoR/Presentations")
+
 
 # where am I now?
 getwd()
@@ -227,7 +229,7 @@ view(CakeT)
 
 # `dim()`, short for dimensions, which returns the number of rows and columns of an R object.
 
-dim(CakeDF)
+dim(CakeT)
 
 
 # Often we would like to pull out a single column from a dataframe or tibble to work with. 
