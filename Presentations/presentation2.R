@@ -118,15 +118,20 @@ arrange(crohns, sex, desc(age))
 # but it is very useful for complex commands
 
 # Tidyverse syntax looks like this:
+# 1. The name of the new object you are creating. Can omit if you don't want to save the result. 
+# 2. The dataset we are working on. 
+# 3. The function you want to perform on the dataset.
 
-new_object <-  # the name of the new object you are creating. Can omit if you don't want to save the result
-  dataset %>%  # the dataset we are working on
-  the_function(arguments...) # the function you want to perform on the dataset
+# new_object <-
+#   dataset %>%
+#   the_function(arguments...)
 
 # Often assignment is done on the same line as we name the dataset, i.e.:
+# 1. The name of the new object you are creating.
+# 2. The function you want to perform on the dataset.
 
-new_object <- dataset %>%
-  my_function(arguments...) # the function you want to perform on the dataset
+# new_object <- dataset %>%
+#   my_function(arguments...) 
 
 
 ########################
