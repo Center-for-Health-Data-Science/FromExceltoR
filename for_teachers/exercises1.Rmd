@@ -66,7 +66,7 @@ Let's also try to make some plots using the base graphics system in R (in *Prese
 6. First we need something to plot, that is a dataset. R has some built in datasets, which may be loaded using the command `data`. Insert the following two commands in your R script, and execute them (if you forgot how to do this, then see question 3 above) to learn about the *trees* dataset. Here the prefix `?` in the second command opens a help page in the lower-right window.
 ```{r eval=FALSE}
 data(trees)
-view(trees)
+View(trees)
 ?trees
 ```
 \
@@ -82,13 +82,13 @@ plot(log(Volume)~log(Height), data=trees)
 
 ## Shut down R
 
-8. Close RStudio. If changes were made either to the R script (shown in the upper-left window) or to the workspace (called 'Global Environment' in the upper-right window) you will be prompted if you like to save those. Answer *Yes* to that; in particular it is important that you save your R scripts (or Markdown documents) as they contain all relevant commands to reproduce your output and plots. In ERDA you can choose to open a new R session (or you can close the window if you don't want to continue working).
+8. Close RStudio. If changes were made either to the R script (shown in the upper-left window) or to the workspace (called 'Global Environment' in the upper-right window) you will be prompted if you would like to save those. Answer *Yes* to that. It is **important** that you save your R scripts (or Markdown documents) as they contain all relevant commands to reproduce your output and plots.
 \
 
 9. Locate the R script that you saved in question 5 (and that presumably was re-saved in question 8); that would be the file *solution1.R* if you followed our name suggestion in question 5. Start RStudio again, and open the file (via the File menu). Check that you can run it again. 
 \
 
-Remark - when you work locally on your laptop you can also start RStudio by double clicking on a file with .R (or .Rmd) extension. One advantage of this is that the workspace and the R history will be saved to the same folder as the R script when you later close RStudio, since the _working directory_ will be set to the map where the file is located. 
+Remark - when you work locally on your laptop you can also start RStudio by double clicking on a file with .R (or .Rmd) extension. One advantage of this is that the workspace and the R history will be saved to the same folder as the R script when you later close RStudio, since the _working directory_ will be set to the folder where the file is located. 
 \
 
 <!-- - Requires that *.R* files are associated to RStudio. If *.R* files are not associated to RStudio, then you can achieve this by right clicking on the file. -->
@@ -98,17 +98,17 @@ Remark - when you work locally on your laptop you can also start RStudio by doub
 
 R is born with a lot of functionalities, but the enormous community of R users also contributes to R all the time by developing code and sharing it in R packages. An R package is a collection of R functions and/or datasets (including documentation).
 
-An R package should be _downloaded_ and _loaded_ before you can use its functionalities. You only have to download a package once (until you re-install R), whereas you have to load it in every R session you want to use it. 
+An R package needs be _downloaded_, _installed_ and _loaded_ before you can use its functionalities. You only have to download and install a package once (until you re-install R), whereas you have to load it in every R session you want to use it. 
 \
 
-10. Installation. There are a couple of ways to do this, you can either (a) click your way to an installation, or (b) run the command `install.packages("PackageName")`:   
-a. Click _Tools_ in the top menu bar, choose _CRAN_ in the first drop-down menu, write `tidyverse` in _Packages_, and click _Install_.   
-b. Type or copy `install.packages("tidyverse")` into the console directly and hit enter. You do not need to save this command as package installation is usually a one time thing, but, if you would like to, simply add it to your R script.   
+10. Installation. There are a couple of ways to do this. You can either (a) click your way to an installation, or (b) run the command `install.packages("PackageName")`:   
+a. Click on the _Packages_ tab (next to the _Plots_ tab where your plot of the trees data shoould have appeared), then click _Install_. You will get a little pop-up window. In the first drop-down menu choose _CRAN_ as your source, then write the package name i.e. `vegan` into _Packages_, and click _Install_.   
+b. Type or copy `install.packages("vegan")` into the console directly and hit enter. You do not need to save this command as package installation is usually a one time thing, but, if you would like to, simply add it to your R script.   
 
 A lot of red text is written in the console while the installation goes on. In the end, the package is installed. 
 \
 
-11. Loading: Load the package with the command `library(tidyverse)`. If everything went well, you should now able to run the command `starwars`. This shows a dataset which in included in the `tidyverse` package and contains information on STAR WARS characters. 
+11. Loading: Load the package with the command `library(vegan)`. If everything went well, you should now able to run the command `data(package = 'vegan')` which will show you an overview of the datasets included in the package.
 \
 
 ## Functions & Help Pages
@@ -139,11 +139,11 @@ median(x, na.rm=TRUE)
 **N.B** first you will need to extract and save these variables as vectors, we do this using the `$` symbol as shown below for the variable `Height`:
 
 ```{r}
-height <- trees$Height
+height_vector <- trees$Height
 ```
 \
 
-15. Bonus questions. How do you extract only elements/values `2 to 5` from the `Girth` variable in the trees dataset?
+15. Bonus questions. How do you extract only elements/values `2 to 5` from the `Girth` variable in the trees dataset? Hint: Use the dollar operator and slicing.
 \
 
 R help pages are sometimes difficult to read, but be aware that there are examples of commands in the bottom of each help page. For more complicated functions, these examples can be very useful while trying to get to know the function and its functionalities. 

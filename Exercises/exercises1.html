@@ -255,6 +255,7 @@ if (window.hljs) {
 
 
 
+
 <style type="text/css">
 .main-container {
   max-width: 940px;
@@ -276,6 +277,9 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+details > summary > p:only-child {
+  display: inline;
+}
 pre code {
   padding: 0;
 }
@@ -295,8 +299,8 @@ pre code {
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -304,16 +308,9 @@ pre code {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -361,7 +358,7 @@ pre code {
 <h1 class="title toc-ignore">I. Working with data in R (exercises)</h1>
 <h4 class="author">Science Data Lab &amp; Center for Health Data
 Science</h4>
-<h4 class="date">19 September, 2022</h4>
+<h4 class="date">25 januar, 2023</h4>
 
 </div>
 
@@ -455,7 +452,7 @@ you forgot how to do this, then see question 3 above) to learn about the
 command opens a help page in the lower-right window.</li>
 </ol>
 <pre class="r"><code>data(trees)
-view(trees)
+View(trees)
 ?trees</code></pre>
 <p><br />
 </p>
@@ -476,12 +473,11 @@ plot(log(Volume)~log(Height), data=trees)</code></pre>
 <ol start="8" style="list-style-type: decimal">
 <li><p>Close RStudio. If changes were made either to the R script (shown
 in the upper-left window) or to the workspace (called ‘Global
-Environment’ in the upper-right window) you will be prompted if you like
-to save those. Answer <em>Yes</em> to that; in particular it is
-important that you save your R scripts (or Markdown documents) as they
-contain all relevant commands to reproduce your output and plots. In
-ERDA you can choose to open a new R session (or you can close the window
-if you don’t want to continue working).<br />
+Environment’ in the upper-right window) you will be prompted if you
+would like to save those. Answer <em>Yes</em> to that. It is
+<strong>important</strong> that you save your R scripts (or Markdown
+documents) as they contain all relevant commands to reproduce your
+output and plots.<br />
 </p></li>
 <li><p>Locate the R script that you saved in question 5 (and that
 presumably was re-saved in question 8); that would be the file
@@ -494,8 +490,8 @@ you can run it again.<br />
 RStudio by double clicking on a file with .R (or .Rmd) extension. One
 advantage of this is that the workspace and the R history will be saved
 to the same folder as the R script when you later close RStudio, since
-the <em>working directory</em> will be set to the map where the file is
-located.<br />
+the <em>working directory</em> will be set to the folder where the file
+is located.<br />
 </p>
 <!-- - Requires that *.R* files are associated to RStudio. If *.R* files are not associated to RStudio, then you can achieve this by right clicking on the file. -->
 </div>
@@ -505,36 +501,38 @@ located.<br />
 of R users also contributes to R all the time by developing code and
 sharing it in R packages. An R package is a collection of R functions
 and/or datasets (including documentation).</p>
-<p>An R package should be <em>downloaded</em> and <em>loaded</em> before
-you can use its functionalities. You only have to download a package
-once (until you re-install R), whereas you have to load it in every R
-session you want to use it.<br />
+<p>An R package needs be <em>downloaded</em>, <em>installed</em> and
+<em>loaded</em> before you can use its functionalities. You only have to
+download and install a package once (until you re-install R), whereas
+you have to load it in every R session you want to use it.<br />
 </p>
 <ol start="10" style="list-style-type: decimal">
-<li>Installation. There are a couple of ways to do this, you can either
+<li>Installation. There are a couple of ways to do this. You can either
 (a) click your way to an installation, or (b) run the command
 <code>install.packages(&quot;PackageName&quot;)</code>:<br />
 </li>
 </ol>
 <ol style="list-style-type: lower-alpha">
-<li>Click <em>Tools</em> in the top menu bar, choose <em>CRAN</em> in
-the first drop-down menu, write <code>tidyverse</code> in
-<em>Packages</em>, and click <em>Install</em>.<br />
+<li>Click on the <em>Packages</em> tab (next to the <em>Plots</em> tab
+where your plot of the trees data shoould have appeared), then click
+<em>Install</em>. You will get a little pop-up window. In the first
+drop-down menu choose <em>CRAN</em> as your source, then write the
+package name i.e. <code>vegan</code> into <em>Packages</em>, and click
+<em>Install</em>.<br />
 </li>
-<li>Type or copy <code>install.packages(&quot;tidyverse&quot;)</code> into the
-console directly and hit enter. You do not need to save this command as
-package installation is usually a one time thing, but, if you would like
-to, simply add it to your R script.</li>
+<li>Type or copy <code>install.packages(&quot;vegan&quot;)</code> into the console
+directly and hit enter. You do not need to save this command as package
+installation is usually a one time thing, but, if you would like to,
+simply add it to your R script.</li>
 </ol>
 <p>A lot of red text is written in the console while the installation
 goes on. In the end, the package is installed.<br />
 </p>
 <ol start="11" style="list-style-type: decimal">
 <li>Loading: Load the package with the command
-<code>library(tidyverse)</code>. If everything went well, you should now
-able to run the command <code>starwars</code>. This shows a dataset
-which in included in the <code>tidyverse</code> package and contains
-information on STAR WARS characters.<br />
+<code>library(vegan)</code>. If everything went well, you should now
+able to run the command <code>data(package = &#39;vegan&#39;)</code> which will
+show you an overview of the datasets included in the package.<br />
 </li>
 </ol>
 </div>
@@ -576,13 +574,13 @@ dataset.<br />
 variables as vectors, we do this using the <code>$</code> symbol as
 shown below for the variable <code>Height</code>:</li>
 </ol>
-<pre class="r"><code>height &lt;- trees$Height</code></pre>
+<pre class="r"><code>height_vector &lt;- trees$Height</code></pre>
 <p><br />
 </p>
 <ol start="15" style="list-style-type: decimal">
 <li>Bonus questions. How do you extract only elements/values
 <code>2 to 5</code> from the <code>Girth</code> variable in the trees
-dataset?<br />
+dataset? Hint: Use the dollar operator and slicing.<br />
 </li>
 </ol>
 <p>R help pages are sometimes difficult to read, but be aware that there
