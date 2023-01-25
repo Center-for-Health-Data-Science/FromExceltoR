@@ -299,8 +299,8 @@ pre code {
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -308,16 +308,9 @@ pre code {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -365,7 +358,7 @@ pre code {
 <h1 class="title toc-ignore">II. Working with data in R (solution)</h1>
 <h4 class="author">Science Data Lab &amp; Center for Health Data
 Science</h4>
-<h4 class="date">27 September, 2022</h4>
+<h4 class="date">25 januar, 2023</h4>
 
 </div>
 
@@ -377,11 +370,11 @@ library(readxl)</code></pre>
 <div id="importing-data" class="section level3">
 <h3>Importing data</h3>
 <p>1-2. Use the ’<code>read_excel</code> function from package
-<code>readxl</code> to import that data:</p>
+<code>readxl</code> to import that data. My working directory is set to
+<code>Solutions</code> where this Rmarkdown is so I need to go one
+directory up.</p>
 <pre class="r"><code>library(readxl)
-# point to the file if it&#39;s not in your current working directory
-full_path &lt;- &#39;~/Documents/Heads_center_management/courses/excel_to_r/oct2022/FromExceltoR/Exercises/data/&#39;
-climate &lt;- read_excel(paste0(full_path,&quot;climate.xlsx&quot;))
+climate &lt;- read_excel(&quot;../Exercises/data/climate.xlsx&quot;)
 climate</code></pre>
 <pre><code>## # A tibble: 60 × 7
 ##    station  year month    af  rain   sun device         
@@ -396,8 +389,7 @@ climate</code></pre>
 ##  8 armagh   2016     8     0  52.5 135.  Campbell Stokes
 ##  9 armagh   2016     9     0  65.4  91.1 Campbell Stokes
 ## 10 armagh   2016    10     0  37.1  89.8 Campbell Stokes
-## # … with 50 more rows
-## # ℹ Use `print(n = ...)` to see more rows</code></pre>
+## # … with 50 more rows</code></pre>
 <p>3.a) How many observations are there?</p>
 <pre class="r"><code>dim(climate)</code></pre>
 <pre><code>## [1] 60  7</code></pre>
@@ -441,8 +433,26 @@ climate</code></pre>
 <div id="working-with-the-data" class="section level3">
 <h3>Working with the data</h3>
 <pre class="r"><code>library(tidyverse)</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li>Count the number of months per station that did not have any days
+with air frost.</li>
+</ol>
+<pre class="r"><code>climate %&gt;%
+  count(station, af == 0)</code></pre>
+<pre><code>## # A tibble: 9 × 3
+##   station   `af == 0`     n
+##   &lt;chr&gt;     &lt;lgl&gt;     &lt;int&gt;
+## 1 armagh    FALSE         6
+## 2 armagh    TRUE          6
+## 3 camborne  TRUE         12
+## 4 lerwick   FALSE         5
+## 5 lerwick   TRUE          7
+## 6 oxford    FALSE         6
+## 7 oxford    TRUE          6
+## 8 sheffield FALSE         6
+## 9 sheffield TRUE          6</code></pre>
 <p>Select from the climate dataset:</p>
-<p>4.a) all rows from the station in Oxford</p>
+<p>5.a) all rows from the station in Oxford</p>
 <pre class="r"><code>climate %&gt;%
   filter(station == &#39;oxford&#39;)</code></pre>
 <pre><code>## # A tibble: 12 × 7
@@ -460,7 +470,7 @@ climate</code></pre>
 ## 10 oxford   2016    10     0  26.5 112.  Campbell Stokes
 ## 11 oxford   2016    11     3  76.1  88.3 Campbell Stokes
 ## 12 oxford   2016    12    10  25.8  62.3 Campbell Stokes</code></pre>
-<p>4.b) all rows from the station in Oxford when there were at least 100
+<p>5.b) all rows from the station in Oxford when there were at least 100
 hours of sunlight</p>
 <pre class="r"><code>climate %&gt;%
   filter(station == &#39;oxford&#39; &amp; sun &gt;= 100)</code></pre>
@@ -476,7 +486,7 @@ hours of sunlight</p>
 ## 7 oxford   2016     8     0  41.2  204. Campbell Stokes
 ## 8 oxford   2016     9     0  44.6  113. Campbell Stokes
 ## 9 oxford   2016    10     0  26.5  112. Campbell Stokes</code></pre>
-<p>4.c) all rows from the stations in Oxford and Camborne when there
+<p>5.c) all rows from the stations in Oxford and Camborne when there
 were at least 100 hours of sunlight</p>
 <pre class="r"><code>climate %&gt;%
   filter(station %in% c(&#39;oxford&#39;,&#39;camborne&#39;) &amp; sun &gt;= 100)</code></pre>
@@ -500,7 +510,7 @@ were at least 100 hours of sunlight</p>
 ## 15 oxford    2016     8     0  41.2  204. Campbell Stokes
 ## 16 oxford    2016     9     0  44.6  113. Campbell Stokes
 ## 17 oxford    2016    10     0  26.5  112. Campbell Stokes</code></pre>
-<p>4.d) a subset that only contains the station, year and rain
+<p>5.d) a subset that only contains the station, year and rain
 columns</p>
 <pre class="r"><code>sub &lt;- climate %&gt;%
   select(station, year, rain)
@@ -518,9 +528,8 @@ sub</code></pre>
 ##  8 armagh   2016  52.5
 ##  9 armagh   2016  65.4
 ## 10 armagh   2016  37.1
-## # … with 50 more rows
-## # ℹ Use `print(n = ...)` to see more rows</code></pre>
-<ol start="5" style="list-style-type: decimal">
+## # … with 50 more rows</code></pre>
+<ol start="6" style="list-style-type: decimal">
 <li>Compute the average rainfall over the full dataset by using the
 <code>summarize</code> function.</li>
 </ol>
@@ -530,16 +539,16 @@ sub</code></pre>
 ##   avg_rain
 ##      &lt;dbl&gt;
 ## 1     75.8</code></pre>
-<ol start="6" style="list-style-type: decimal">
+<ol start="7" style="list-style-type: decimal">
 <li>Calculate average rainfall, the standard deviation of the monthly
-rainfall as well as the total rainfall nad put them in the same
+rainfall as well as the total rainfall and put them in the same
 table.</li>
 </ol>
 <pre class="r"><code>rain_stats &lt;- climate %&gt;%
   summarize(avg_rain = mean(rain),
           sd_rain = sd(rain),
           sum_rain = sum(rain))</code></pre>
-<ol start="7" style="list-style-type: decimal">
+<ol start="8" style="list-style-type: decimal">
 <li>Summary statistics for rainfall data grouped by weather
 station.</li>
 </ol>
@@ -556,7 +565,7 @@ station.</li>
 ## 3 lerwick      101.     45.6    1218.
 ## 4 oxford        54.8    28.5     658.
 ## 5 sheffield     65.6    30.5     788.</code></pre>
-<ol start="8" style="list-style-type: decimal">
+<ol start="9" style="list-style-type: decimal">
 <li>Including number of observations for each station.</li>
 </ol>
 <pre class="r"><code>climate %&gt;%
@@ -573,7 +582,7 @@ station.</li>
 ## 3 lerwick      101.     45.6    1218.    12
 ## 4 oxford        54.8    28.5     658.    12
 ## 5 sheffield     65.6    30.5     788.    12</code></pre>
-<ol start="9" style="list-style-type: decimal">
+<ol start="10" style="list-style-type: decimal">
 <li>Sorted in descending order according to annual rainfall.</li>
 </ol>
 <pre class="r"><code>climate %&gt;%
@@ -594,59 +603,39 @@ station.</li>
 </div>
 <div id="manipulating-the-data" class="section level3">
 <h3>Manipulating the data</h3>
-<ol start="10" style="list-style-type: decimal">
-<li>Create a new copy of the climate dataset to which you have added a
-column that states the amount of hours with no sunshine for each month.
-A month has on average 730 hours, you can use the same amount of hours
-for all of them to calculate the new column.</li>
+<ol start="11" style="list-style-type: decimal">
+<li>Create a new column in <code>climate</code> with the number of days
+in each month that had no air frost (complementing the <code>af</code>
+column).</li>
 </ol>
 <pre class="r"><code>climate_plus &lt;- climate %&gt;%
-  mutate(no_sun = 730 - sun)</code></pre>
-<ol start="11" style="list-style-type: decimal">
+  mutate(no_af = 30 - af)</code></pre>
+<ol start="12" style="list-style-type: decimal">
 <li>Add another column to your new dataset that says whether the weather
 this month was good. We consider a month to be good if it had at least
-50 hours of sunlight and less than 100 mm of rain. Otherwise the weather
-was bad.</li>
+100 hours of sunlight and less than 100 mm of rain. Otherwise the
+weather was bad.</li>
 </ol>
 <pre class="r"><code>climate_plus &lt;- climate_plus %&gt;%
   mutate(good_weather = ifelse(sun &gt; 100 &amp; rain &lt; 100, &quot;Yes&quot;, &quot;No&quot;))
 climate_plus</code></pre>
 <pre><code>## # A tibble: 60 × 9
-##    station  year month    af  rain   sun device          no_sun good_weather
-##    &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;            &lt;dbl&gt; &lt;chr&gt;       
-##  1 armagh   2016     1     5 132.   44.5 Campbell Stokes   686. No          
-##  2 armagh   2016     2    10  62.6  71.3 Campbell Stokes   659. No          
-##  3 armagh   2016     3     4  43.8 117.  Campbell Stokes   613. Yes         
-##  4 armagh   2016     4     5  54   140.  Campbell Stokes   590. Yes         
-##  5 armagh   2016     5     0  41.4 210.  Campbell Stokes   520. Yes         
-##  6 armagh   2016     6     0  75.1 114.  Campbell Stokes   616. Yes         
-##  7 armagh   2016     7     0  80.6 113.  Campbell Stokes   617. Yes         
-##  8 armagh   2016     8     0  52.5 135.  Campbell Stokes   595. Yes         
-##  9 armagh   2016     9     0  65.4  91.1 Campbell Stokes   639. No          
-## 10 armagh   2016    10     0  37.1  89.8 Campbell Stokes   640. No          
-## # … with 50 more rows
-## # ℹ Use `print(n = ...)` to see more rows</code></pre>
-<ol start="12" style="list-style-type: decimal">
-<li>Count the number of months per station that did not have any days
-with air frost.</li>
-</ol>
-<pre class="r"><code>climate %&gt;%
-  count(station, af == 0)</code></pre>
-<pre><code>## # A tibble: 9 × 3
-##   station   `af == 0`     n
-##   &lt;chr&gt;     &lt;lgl&gt;     &lt;int&gt;
-## 1 armagh    FALSE         6
-## 2 armagh    TRUE          6
-## 3 camborne  TRUE         12
-## 4 lerwick   FALSE         5
-## 5 lerwick   TRUE          7
-## 6 oxford    FALSE         6
-## 7 oxford    TRUE          6
-## 8 sheffield FALSE         6
-## 9 sheffield TRUE          6</code></pre>
+##    station  year month    af  rain   sun device          no_af good_weather
+##    &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;           &lt;dbl&gt; &lt;chr&gt;       
+##  1 armagh   2016     1     5 132.   44.5 Campbell Stokes    25 No          
+##  2 armagh   2016     2    10  62.6  71.3 Campbell Stokes    20 No          
+##  3 armagh   2016     3     4  43.8 117.  Campbell Stokes    26 Yes         
+##  4 armagh   2016     4     5  54   140.  Campbell Stokes    25 Yes         
+##  5 armagh   2016     5     0  41.4 210.  Campbell Stokes    30 Yes         
+##  6 armagh   2016     6     0  75.1 114.  Campbell Stokes    30 Yes         
+##  7 armagh   2016     7     0  80.6 113.  Campbell Stokes    30 Yes         
+##  8 armagh   2016     8     0  52.5 135.  Campbell Stokes    30 Yes         
+##  9 armagh   2016     9     0  65.4  91.1 Campbell Stokes    30 No          
+## 10 armagh   2016    10     0  37.1  89.8 Campbell Stokes    30 No          
+## # … with 50 more rows</code></pre>
 <ol start="13" style="list-style-type: decimal">
 <li>Count the number of months with good weather per station (use the
-column you made in 10). What’s the place with the best weather in
+column you made in 11). What’s the place with the best weather in
 England?</li>
 </ol>
 <pre class="r"><code>climate_plus %&gt;%
@@ -668,25 +657,6 @@ England?</li>
 <p>The final questions require that you combine commands and variables
 of the type above.</p>
 <ol start="14" style="list-style-type: decimal">
-<li>Identify the weather station for which the median number of monthly
-sunshine hours over the months April to September was largest.</li>
-</ol>
-<pre class="r"><code>climate %&gt;% 
-  filter(month %in% 4:9) %&gt;% 
-  group_by(station) %&gt;% 
-  summarize(med_sun = median(sun)) %&gt;% 
-  arrange(desc(med_sun))</code></pre>
-<pre><code>## # A tibble: 5 × 2
-##   station   med_sun
-##   &lt;chr&gt;       &lt;dbl&gt;
-## 1 oxford       183.
-## 2 camborne     166 
-## 3 sheffield    160.
-## 4 lerwick      132.
-## 5 armagh       124.</code></pre>
-<p>Weather station with largest median number of monthly sunshine hours
-over the months April to September was Oxford</p>
-<ol start="15" style="list-style-type: decimal">
 <li>For each weather station apart from the one in Armagh, compute the
 total rainfall and sunshine duration during the months with no days of
 air frost. Present the totals in centimetres and days,
@@ -704,6 +674,25 @@ respectively.</li>
 ## 2 lerwick         64.4      33.3
 ## 3 oxford          29.8      40.0
 ## 4 sheffield       35.4      35.0</code></pre>
+<ol start="15" style="list-style-type: decimal">
+<li>Identify the weather station for which the median number of monthly
+sunshine hours over the months April to September was largest.</li>
+</ol>
+<pre class="r"><code>climate %&gt;% 
+  filter(month %in% 4:9) %&gt;% 
+  group_by(station) %&gt;% 
+  summarize(med_sun = median(sun)) %&gt;% 
+  arrange(desc(med_sun))</code></pre>
+<pre><code>## # A tibble: 5 × 2
+##   station   med_sun
+##   &lt;chr&gt;       &lt;dbl&gt;
+## 1 oxford       183.
+## 2 camborne     166 
+## 3 sheffield    160.
+## 4 lerwick      132.
+## 5 armagh       124.</code></pre>
+<p>The weather station with largest median number of monthly sunshine
+hours over the months April to September was Oxford.</p>
 <ol start="16" style="list-style-type: decimal">
 <li>For each month, count how many stations recorded at least two days
 of air frost or more than 95 mm rain. Tip: Think about how you can do
@@ -714,7 +703,8 @@ by month.</li>
 <pre class="r"><code>climate %&gt;%
   filter(af &gt;= 2 | rain &gt; 95) %&gt;% 
   group_by(month) %&gt;% 
-  summarize(count = n(), avg_sun = mean(sun))</code></pre>
+  summarize(count = n(), 
+            avg_sun = mean(sun))</code></pre>
 <pre><code>## # A tibble: 10 × 3
 ##    month count avg_sun
 ##    &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt;

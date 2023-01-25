@@ -21,7 +21,7 @@ trees
 ?trees
 ```
 
-7. Scatter plot of tree Volume as a function of tree height:
+7. Scatter plot of tree Volume as a function of tree height. We use `par` here to show all plots on the same page.
 
 ```{r}
 par(mfrow=c(2,2))
@@ -32,12 +32,12 @@ plot(log(Volume)~log(Height), data=trees)
     
 10. Install the tidyverse package:    
 ```{r, eval=FALSE}
-install.packages(tidyverse)
+install.packages(vegan)
 ```
 
 11. Load the tidyverse package:    
 ```{r}
-library(tidyverse)
+library(vegan)
 ```
 
 
@@ -57,11 +57,10 @@ median(x, na.rm=TRUE)
 
 14. Extract variables `Girth, Height, and Volume` from the `trees` dataset and get some summary statistics:   
 
-Extract variables:
+Extract variable:
 ```{r}
 height <- trees$Height
 volume <- trees$Volume
-girth <- trees$Girth
 ```
 
 Summary statistics:
@@ -85,8 +84,10 @@ summary(trees)
 15. Bonus questions. How do you extract only elements/values `2 to 5` from the `Girth` variable in the trees dataset?
 
 ```{r}
-girth[2:5]
-girth[c(2,3,4,5)]
+my_data <- trees$Girth[2:5]
+my_data2 <- trees$girth[c(2,3,4,5)]
+#for comparsion the entire vector:
+trees$Girth
 ```
 \
 

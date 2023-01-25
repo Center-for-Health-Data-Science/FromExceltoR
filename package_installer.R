@@ -27,7 +27,7 @@ if(as.numeric(base::version$major) < 4){
 
 # list package names that are needed from CRAN
 packages_needed = c("tidyverse","readxl","ggplot2", "writexl",
-                    "table1","knitr","GGally","emmeans","BiocManager")
+                    "table1","knitr","GGally","emmeans")
 
 finished = FALSE
 
