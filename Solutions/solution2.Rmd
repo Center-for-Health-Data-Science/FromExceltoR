@@ -1,10 +1,10 @@
 ---
-title: "II\\. Working with data in R (solution)"
+title: "II. Working with data in R (solution)"
 author: "Science Data Lab & Center for Health Data Science"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
-  #pdf_document: default
   html_document: default
+  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -20,13 +20,11 @@ library(readxl)
 
 ### Importing data
 
-1-2. Use the '`read_excel` function from package `readxl` to import that data: 
+1-2. Use the '`read_excel` function from package `readxl` to import that data. My working directory is set to `Solutions` where this Rmarkdown is so I need to go one directory up.  
 
 ```{r}
 library(readxl)
-# point to the file if it's not in your current working directory
-full_path <- '~/Documents/Heads_center_management/courses/excel_to_r/oct2022/FromExceltoR/Exercises/data/'
-climate <- read_excel(paste0(full_path,"climate.xlsx"))
+climate <- read_excel("../Exercises/data/climate.xlsx")
 climate
 ```
 
@@ -61,16 +59,25 @@ count(climate,station)
 library(tidyverse)
 ```
 
+4. Count the number of months per station that did not have any days with air frost.
+
+```{r}
+climate %>%
+  count(station, af == 0)
+```
+
+
+
 Select from the climate dataset:
 
-4.a) all rows from the station in Oxford
+5.a) all rows from the station in Oxford
 
 ```{r}
 climate %>%
   filter(station == 'oxford')
 ```
 
-4.b) all rows from the station in Oxford when there were at least 100 hours of sunlight
+5.b) all rows from the station in Oxford when there were at least 100 hours of sunlight
 
 ```{r}
 climate %>%
@@ -78,14 +85,14 @@ climate %>%
 ```
 
 
-4.c) all rows from the stations in Oxford and Camborne when there were at least 100 hours of sunlight 
+5.c) all rows from the stations in Oxford and Camborne when there were at least 100 hours of sunlight 
 
 ```{r}
 climate %>%
   filter(station %in% c('oxford','camborne') & sun >= 100)
 ```
 
-4.d) a subset that only contains the station, year and rain columns
+5.d) a subset that only contains the station, year and rain columns
 
 ```{r}
 sub <- climate %>%
@@ -93,14 +100,14 @@ sub <- climate %>%
 sub
 ```
 
-5. Compute the average rainfall over the full dataset by using the `summarize` function.
+6. Compute the average rainfall over the full dataset by using the `summarize` function.
 
 ```{r}
 climate %>%
   summarize(avg_rain = mean(rain))
 ```
 
-6. Calculate average rainfall, the standard deviation of the monthly rainfall as well as the total rainfall nad put them in the same table. 
+7. Calculate average rainfall, the standard deviation of the monthly rainfall as well as the total rainfall and put them in the same table. 
 
 ```{r}
 rain_stats <- climate %>%
@@ -109,7 +116,7 @@ rain_stats <- climate %>%
           sum_rain = sum(rain))
 ```
 
-7. Summary statistics for rainfall data grouped by weather station.
+8. Summary statistics for rainfall data grouped by weather station.
 
 ```{r}
 climate %>%
@@ -119,7 +126,7 @@ climate %>%
             sum_rain = sum(rain))
 ```
 
-8. Including number of observations for each station.
+9. Including number of observations for each station.
 
 ```{r}
 climate %>%
@@ -130,7 +137,7 @@ climate %>%
             n=n())
 ```
     
-9. Sorted in descending order according to annual rainfall.    
+10. Sorted in descending order according to annual rainfall.    
  
 ```{r}
 climate %>%
@@ -147,14 +154,14 @@ climate %>%
 
 
 
-10. Create a new copy of the climate dataset to which you have added a column that states the amount of hours with no sunshine for each month. A month has on average 730 hours, you can use the same amount of hours for all of them to calculate the new column.
+11. Create a new column in `climate` with the number of days in each month that had no air frost (complementing the `af` column).
 
 ```{r}
 climate_plus <- climate %>%
-  mutate(no_sun = 730 - sun)
+  mutate(no_af = 30 - af)
 ```
 
-11. Add another column to your new dataset that says whether the weather this month was good. We consider a month to be good if it had at least 50 hours of sunlight and less than 100 mm of rain. Otherwise the weather was bad.
+12. Add another column to your new dataset that says whether the weather this month was good. We consider a month to be good if it had at least 100 hours of sunlight and less than 100 mm of rain. Otherwise the weather was bad.
 
 ```{r}
 climate_plus <- climate_plus %>%
@@ -162,15 +169,7 @@ climate_plus <- climate_plus %>%
 climate_plus
 ```
 
-12. Count the number of months per station that did not have any days with air frost.
-
-```{r}
-climate %>%
-  count(station, af == 0)
-```
-
-
-13. Count the number of months with good weather per station (use the column you made in 10). What’s the place with the best weather in England?
+13. Count the number of months with good weather per station (use the column you made in 11). What’s the place with the best weather in England?
 
 
 ```{r}
@@ -186,20 +185,7 @@ Oxford has the most months with good weather (9).
 
 The final questions require that you combine commands and variables of the type above.
 
-14. Identify the weather station for which the median number of monthly sunshine hours over the months April to September was largest.
-
-
-```{r}
-climate %>% 
-  filter(month %in% 4:9) %>% 
-  group_by(station) %>% 
-  summarize(med_sun = median(sun)) %>% 
-  arrange(desc(med_sun))
-```
-
-Weather station with largest median number of monthly sunshine hours over the months April to September was Oxford
-
-15. For each weather station apart from the one in Armagh, compute the total rainfall and sunshine duration during the months with no days of air frost. Present the totals in centimetres and days, respectively.
+14. For each weather station apart from the one in Armagh, compute the total rainfall and sunshine duration during the months with no days of air frost. Present the totals in centimetres and days, respectively.
 
 
 ```{r}
@@ -211,6 +197,20 @@ climate %>%
 ```
 
 
+15. Identify the weather station for which the median number of monthly sunshine hours over the months April to September was largest.
+
+
+```{r}
+climate %>% 
+  filter(month %in% 4:9) %>% 
+  group_by(station) %>% 
+  summarize(med_sun = median(sun)) %>% 
+  arrange(desc(med_sun))
+```
+
+The weather station with largest median number of monthly sunshine hours over the months April to September was Oxford.
+
+
 16. For each month, count how many stations recorded at least two days of air frost or more than 95 mm rain. Tip: Think about how you can do that with `filter` and `summarize`. Then, for these data lines compute the average number of sunshine hours split up by month.
 
    
@@ -218,5 +218,6 @@ climate %>%
 climate %>%
   filter(af >= 2 | rain > 95) %>% 
   group_by(month) %>% 
-  summarize(count = n(), avg_sun = mean(sun))
+  summarize(count = n(), 
+            avg_sun = mean(sun))
 ```
