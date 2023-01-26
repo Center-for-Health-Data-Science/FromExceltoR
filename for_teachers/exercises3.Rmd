@@ -72,7 +72,7 @@ Make sure you understand the output, and save it to a `tibble` named `summary_st
 geom_errorbar(aes(ymin = sun_avg - sun_sd, ymax = sun_avg + sun_sd), width = 0.2)
 ```
 
-11. Could you have made a plot with horizontal error bars instead? How?
+11. How could make the plot with horizontal error bars instead? Tip: Think about which of the two variables, month and average sunshine hours, can meaningfully have an error.
 
 
 ### Scatter plot III
@@ -111,7 +111,7 @@ ggplot() +
 ```{r}
 climate <- mutate(climate, month = factor(month))
 ```
-Make the line plot again. What has changed?
+Make the line plot again. What has changed? Is this a better representation of the data?
  
 18. Use `theme(legend.position = "top")` to move the colour legend to the top of the plot.
 
