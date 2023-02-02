@@ -11,3 +11,7 @@ The introduction presentation is made by, and the course material is edited by T
 Contact: thilde.terkelsen@sund.ku.dk or andrejeva@sund.ku.dk 
 
 The material in this repository is for teaching purposes only and not to be distributed commercially.
+
+
+
+![image](https://github.com/Center-for-Health-Data-Science/FromExceltoR/blob/March_2023/program_march2023_figure.png)
