@@ -11,14 +11,13 @@
 
 
 
-## The term 'path' refers to the trajectory you need to follow from the place you are "located" on your computer to the place you want to work from. 
+## The term 'path' refers to the trajectory you need to follow from the place 
+## you are "located" on your computer to the place you want to work from. 
 ## As you will see below, a path can be either relative or absolute.
 
 
 # set working directory (absolute path)
-setwd('/Users/kgx936/Desktop/HeaDS/GitHub_repos/FromExceltoR')
-setwd("~/Desktop/HeaDS/GitHub_repos/FromExceltoR/Presentations")
-
+setwd("~/HeaDS/Courses/Excel_to_R/Mar_2023/FromExceltoR")
 
 # where am I now?
 getwd()
@@ -136,30 +135,29 @@ library(tidyverse)
 
 
 # A vector of characters:
-groupMem <- c("Diana", "Tugce", "Henrike", "Thilde", "Alex", "Jennie", "Viki", "Yuhu", "Inigo", "Jonas", "Conor", "Marilena", "Chloe", "Anders")
-groupMem
+people <- c("Diana", "Tugce", "Gerardo", "Alex", "Inigo", "Valentina", "Sara")
+people
 
 # A vector of numeric values:
-cakeSlice <- c(44.67, 35.43, 30.13, 44.94, 45.0, 39.37, 32.79, 43.92, 44.61, 40.88, 32.28, 42.79, 39.17, 55.41)
-cakeSlice
-
-
+joined_year <- c(2020, 2020, 2022, 2021, 2021, 2022, 2023)
+joined_year
 
 ############
 
 
 # Want to know what data type or structure you have, try the function class.
-class(cakeSlice)
-class(groupMem)
+class(people)
+class(joined_year)
 
 
-# Convert cakeSlice to character values
-cakeSlice <- as.character(cakeSlice)
-cakeSlice
+# Convert joined_year to character values
+joined_year <- as.character(joined_year)
+joined_year
+class(joined_year)
 
 # Convert cakeSlice back to numeric values
-cakeSlice <- as.numeric(cakeSlice)
-cakeSlice
+joined_year <- as.numeric(joined_year)
+joined_year
 
 
 # Other examples of 'as.' functions for type conversion:
@@ -179,17 +177,17 @@ cakeSlice
 
 # Lets make a tibble:
 
-CakeT <- tibble(groupMem = groupMem, 
-                     cakeSlice = cakeSlice)
-CakeT
-
+my_data <- tibble(name = people, 
+                  joined_year = joined_year)
+my_data
+class(my_data)
 
 
 # Just like you can convert between different data types, you can convert between data structures/objects:
 
 # Convert tibble to dataframe:
-as.data.frame(CakeT)
-
+as.data.frame(my_data)
+class(my_data)
 
 # Other examples of 'as.' function for structure/object conversion
 # as.data.frame()
@@ -218,28 +216,28 @@ as.data.frame(CakeT)
     # 3. To see the data in a tabular excel style format you can use `view()`
 
 # Look at the "head" of an object, default is print first 6 lines:
-head(CakeT, n=8)
+head(my_data, n=8)
 
 # Look at the "tail" of an object, default is print last 6 lines:
-tail(CakeT, n=8)
+tail(my_data, n=8)
 
 # opens table as a table, excel style
-view(CakeT)
+view(my_data)
 
 
 # `dim()`, short for dimensions, which returns the number of rows and columns of an R object.
 
-dim(CakeT)
+dim(my_data)
 
 
 # Often we would like to pull out a single column from a dataframe or tibble to work with. 
 # This may be done with the '$' symbol:
 
 # Extract variable with $ symbol
-CakeT$cakeSlice
+my_data$joined_year
 
-cakeSlice2 <- CakeT$cakeSlice
-cakeSlice2
+year <- my_data$joined_year
+year
 
 
 # Only interested in a specific subset of either rows or columns from an R data object?, use a 'slice'.
@@ -247,10 +245,10 @@ cakeSlice2
 
 
 # Specific rows/columns of an R object (a slice):
-CakeT[1:5, 1:2]
-CakeT[, 1:2]
+my_data[1:5, 1:2]
+my_data[, 1:2]
 
-groupMem[3:9]
+people[3:9]
 
 
 
