@@ -20,7 +20,8 @@ library(tidyverse)
 library(readxl)
 
 #set working directory absolute path
-setwd("~/Documents/Heads_center_management/courses/excel_to_r/oct2022/FromExceltoR/Presentations")
+#setwd("~/Documents/Heads_center_management/courses/excel_to_r/oct2022/FromExceltoR/Presentations")
+setwd('./Presentations')
 
 # This command is generated via the Import data facility
 crohns <- read_excel("data/crohns_disease.xlsx")
