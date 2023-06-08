@@ -7,6 +7,8 @@ output:
   pdf_document: default
 ---
 
+This document does not include much, because we will simply review some features along the way. You are encouraged to work with the exercises (which include explanations) and ask us questions either during the course or later.
+
 <!-- this is an Rmd comment  and it will NOT appear in the final output document -->
 
 <!-- Below is a code chunk starting with ```{r  -->
@@ -31,14 +33,12 @@ knitr::opts_chunk$set(echo = TRUE)
 # More details on Rmarkdown here https://raw.githubusercontent.com/rstudio/cheatsheets/master/rmarkdown-2.0.pdf 
 ```
 
-This document does not include much, because we will simply review some features along the way. You are encouraged to work with the exercises (which include explanations) and ask us questions either during the course or later.   
-
 <!-- you can include links like this: [text](url) -->
 The [R Markdown cheat sheet](https://rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf)
 
 The [R Markdown tutorial by R Studio](https://rmarkdown.rstudio.com/lesson-1.html)
 
-The exercise you will do with R markdown will cover the following:
+The tutorial we are going through now, and the exercise you will do with R markdown will cover the following:
 
 <!-- unordered list of items -->
 * Open new markdown document, look at its structure. Knit!
