@@ -56,7 +56,7 @@ library(readxl)
 library(emmeans)
 ```
 
-Now, we are done preparing for our analyses. Next, we will look specifically at the possible association between GeneD expression and psoriasis. Finally, we conclude with a brief outlook on other statistical models in R.
+Now, we are done preparing for our analyses. Next, we will look specifically at the possible association between GeneD expression and psoriasis.
 
 Please refer to the 'STATS CHEAT SHEET' provided in the slides for hints as well as other cheat sheets provided in other sessions where necessary.
 
