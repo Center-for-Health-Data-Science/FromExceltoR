@@ -1,10 +1,9 @@
 ---
-title: "V. Applied Statistics in R (presentation)"
-author: "Center for Health Data Science, University of Copenhagen"
+title: "V.\ Applied Statistics in R (presentation)"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
+  #pdf_document: default
   html_document: default
-  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -19,10 +18,10 @@ The very basic structure of an R script doing a classical statistical analysis i
 *  Read the dataset to be analyzed. Possibly also do some data cleaning and manipulation.   
 *  Visualize the dataset by graphics and other descriptive statistics.   
 *  Fit and validate a statistical model.   
-*  Hypothesis testing. Possibly also post hoc testing.
+*  Hypothesis testing. Possibly also post hoc testing.   
 
 Of course there are variants of this set-up, and in practice there will often be some iterations of the steps.   
-In this manuscript, we will exemplify the proposed steps in the analysis of a simple dataset:   
+In this manuscript we will exemplify the proposed steps in the analysis of a simple dataset:   
 
 * In our current scenario, you are a researcher investigating psoriasis, an inflammatory skin disease. You have data on the expression of a number genes that are suspected to have something to do with the disease, but you cannot be sure until you perform some formal statistical analysis. 
 * This is a great example where R skills would come very handy! 
@@ -50,7 +49,7 @@ library(readxl)
 library(emmeans)
 ```
 
-Now, we are done preparing for our analyses. Next, we will look specifically at the possible association between IGFL4 gene expression and psoriasis. 
+Now, we are done preparing for our analyses. Next, we will look specifically at the possible association between IGFL4 gene expression and psoriasis. Finally, we conclude with a brief outlook on other statistical models in R.
 
 Please refer to the 'STATS CHEAT SHEET' provided in the slides for hints as well as other cheat sheets provided in other sessions where necessary.
 
@@ -65,7 +64,7 @@ The data are saved in the file **psoriasis.xlsx**. At first the variable named `
 
 ```{r}
 # Read in the data from Excel file and call it psoriasisData
-psoriasisData <- read_excel("./data/psoriasis.xlsx")
+psoriasisData <- read_excel("~/Documents/GitHub/FromExceltoR/Presentations/data/psoriasis.xlsx")
 
 # View the top rows of the dataset
 head(psoriasisData)
@@ -74,24 +73,23 @@ head(psoriasisData)
 psorData  <- select(psoriasisData, type, IGFL4)
 
 # View the top rows of the dataset psorData
+head(psorData)
 
+# Just a bonus script in case you would like to select all data columns except for IGFL4
+# psorDataG <- select(psoriasisData, -IGFL4)
 
 # Change variable named 'type' to factor so that we can use in our analysis in the next steps
 # First let's check if it is character
 is.character(psorData$type)
-
 # Now change to factor
 psorData <- mutate(psorData, type = factor(type))
 # Again, let's check if it is factor now
-
+is.factor(psorData$type)
 
 # Check that there are 15, 15 and 7 skin samples in the three groups. Hint: count()
-
+count(psorData, type)
 ```
-
-
-QUESTION 1: Are there 15, 15 and 7 skin samples in the three groups? Please share your answer here: https://www.menti.com/alhf674h4r88
-
+QUESTION 1: Are there 15, 15 and 7 skin samples in the three groups? Please share your answer here:
 
 
 
@@ -106,13 +104,23 @@ ggplot(psorData, aes(x=type, y=IGFL4)) +
   labs(x="Skin type", y="IGFL4")
 
 # (2) a boxplot for the same group-wise comparison. Hint: geom_boxplot()
-
+ggplot(psorData, aes(x=type, y=IGFL4)) +
+  geom_boxplot() + 
+  labs(x="Skin type", y="IGFL4")
 
 # And finally, obtain the group-wise (healthy, psne, psor) descriptive statistics (mean, median and standard deviation). Hint: group_by()
+psorData %>% 
+  group_by(type) %>% 
+  summarise(avg=mean(IGFL4), 
+            median=median(IGFL4), 
+            sd=sd(IGFL4))
 
+# Alternatively. Notice how the column names can be changed as seen above.
+  group_by(psorData, type) %>% 
+  summarise(mean(IGFL4), median(IGFL4), sd(IGFL4))
 ```
 
-QUESTION 2: Please rank the three groups by their mean/average IGFL4 expression (descending order). Just visually assess the values and write down the order of the groups. Please share your answer here: https://www.menti.com/alhf674h4r88
+QUESTION 2: Please rank the three groups by their mean/average IGFL4 expression (descending order). Please share your answer here:
 
 
 
@@ -125,34 +133,51 @@ The scientific question is whether the gene expression level of IGFL4 differs be
 oneway <- lm(log(IGFL4) ~ type, data=psorData)
 
 # View the model coefficients
-
+oneway
 ```
 
-QUESTION 3: Are you done? Please share how you feel here: https://www.menti.com/aldoypm5u6wr 
+
+QUESTION 3: Are you done? Please share how you feel here:
 
 
 
 #### Step 4: Hypothesis test + Post hoc tests
 
-It is standard to carry out an $F$-test for the overall effect of the explanatory (i.e. independent) variable. To be precise, the hypothesis is that the expected values are the same in _all_ groups. The most easy way to do this test is to use `drop1`. The option `test="F"` is needed to get the $F$-test using that function:
+It is standard to carry out an $F$-test for the overall effect of the explanatory (i.e. independent) variable. To be precise, the hypothesis is that the expected values are the same in _all_ groups. The most easy way to do this test is to use `drop1`. The option `test="F"` is needed to get the $F$-test using that function.
 
 ```{r}
 # Carry out an $F$-test for the overall effect of the explanatory (i.e. independent) variable
+drop1(oneway,test="F")
 
 ```
 
-QUESTION 4: What is your conclusion from the $F$-test result? Please share your answer here: https://www.menti.com/ali6bnwoiky7
+QUESTION: What is your conclusion from the $F$-test result? Please share your answer here: 
 
 
-
-It might be that the gene expression in two of the three groups may or may not be significantly different. To investigate that we do post hoc testing. This is nicely done within the framework of *estimated marginal means* using the **emmeans** package. Here `emmeans` makes the estimated marginal means (that is the predicted gene expression IGFL4 on the log scale), and the pairs() command provide post hoc pairwise comparisons (package automatically adjusts for multiple comparisons using the default tukey method):
+Thus, the overall test for homogeneity between the groups show, that the groups are not all the same. But it might be that the gene expression in two of the three groups, say, are not significantly different. To investigate that we do post hoc testing. This is nicely done within the framework of *estimated marginal means* using the **emmeans** package. Here `emmeans` makes the estimated marginal means (that is the predicted gene expression IGFL4 on the log scale), and the pairs() command provide post hoc pairwise comparisons (package automatically adjusts for multiple comparisons using the default tukey method):
 
 ```{r}
 # Run emmeans
 emmeans(oneway,~type)
 
 # Perform post hoc pairwise comparisons
-
+pairs(emmeans(oneway,~type))
 ```
 
-QUESTION 5: What is your conclusion from the pairwise comparisons? Please share your answer here: https://www.menti.com/ali6bnwoiky7
+QUESTION: What is your conclusion from the pairwise comparisons? Please share your answer here:
+
+IGFL4 gene expression levels are not significantly different between healthy/control skin samples (healthy) and psoriasis-free patient skin samples (psne; healthy - psne; p-value > 0.05).
+
+IGFL4 gene expression levels are significantly different between healthy/control skin samples (healthy), psoriasis-free patient skin samples (psne) and psoriasis-affected patient skin samples (psor; healthy - psor and psne - psor; both p-values < 0.05)
+
+
+
+## Outlook: Other analyses
+
+The `lm` function is used for linear models, that is, models where data points are assumed to be independent with a Gaussian (i.e. normal) distribution (and typically also with the same variance). Obviously, these models are not always appropriate, and there exists functions for many, many more situations and data types. Here, we just mention a few functions corresponding to common data types and statistical problems. 
+
+* `glm`: For independent, but non-Gaussian data. Examples are binary outcomes (logistic regression) and outcomes that are counts (Poisson regression). glm is short for generalized linear models, and the `glm` function is part of the base installation of R.
+* `lmer` and `glmer`: For data with dependence structures that can be described by random effects, e.g., block designs. lme is short for linear mixed effects  (Gaussian data), glmer is short for generalized linear mixed effects  (binary or count data). Both functions are part of the **lme4** package. 
+* `nls`: For non-linear regression, e.g., dose-response analysis. nls is short for non-linear least squares. The function is included in the base installation of R.
+
+The functions mentioned above are used in a similar way as `lm`: a model is fitted with the function in question, and the model object subsequently examined with respect to model validation, estimation, computation of confidence limits, hypothesis tests, prediction, etc. with functions `summary`, `confint`, `drop1`, `emmeans`, `pairs` as mostly indicated above. 
