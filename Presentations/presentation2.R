@@ -9,19 +9,22 @@
 # Load tidyverse package
 library(tidyverse)
 
-########################
-### 1. Importing data
-########################
-
-## Often we will work with large datasets that already exist in i.e. an excel sheet or
-## a tab separated file. We can easily load that data into R: 
-
 # Load a package that can read excel files
 library(readxl)
 
 #set working directory absolute path
 #setwd("~/Documents/Heads_center_management/courses/excel_to_r/oct2022/FromExceltoR/Presentations")
 setwd('./Presentations')
+
+########################
+### 1. Importing data
+########################
+
+## Often we will work with large datasets that already exist in i.e. an excel sheet or
+## a tab separated file. 
+
+## We can easily load that data into R, either with the read_excel function or by clicking 
+## on 'Import Dataset' in the Environment tab (right). 
 
 # This command is generated via the Import data facility
 crohns <- read_excel("data/crohns_disease.xlsx")
@@ -66,51 +69,9 @@ class(crohns_df)
 
 ###############
 
-########################
-### 3. Count, distinct, sort
-########################
-
-# Count and distinct are very useful to get information about your dataset!
-
-# Variables (columns) can be numeric or categorical (characters, factors)  
-str(crohns)
-
-### Distinct tells us how many different levels a categorical variable has
-
-# How many different treatments do we have?
-distinct(crohns, treat)
-
-#From how many different countries do we have data?
-distinct(crohns, country)
-
-### Counting: tabulation of categorical variables
-
-# Total number of observations, i.e. patients in the current dataset
-count(crohns)
-
-# How many observations, i.e. patients do we have per treatment?
-count(crohns, treat)
-# Is our dataset balanced?
-
-# How many patients are older than 65?
-count(crohns, age>65)
-
-### Sorting data: arrange
-
-# Sort by age
-arrange(crohns, age)
-
-# Sort according to age size in descending order
-arrange(crohns, desc(age))
-
-# We can also sort after sex first and then according to age size in descending order
-arrange(crohns, sex, desc(age))
-
-# Note we haven't saved anything here, we just get output to the console sorted in a certain way. 
-# This helps us to check if the data looks correct and get an impression.
 
 ########################
-### 4. The anatomy of tidyverse
+### 3. The anatomy of tidyverse
 ########################
 
 ### Let's try some tidyverse commands.
@@ -133,6 +94,62 @@ arrange(crohns, sex, desc(age))
 
 # new_object <- dataset %>%
 #   my_function(arguments...) 
+
+########################
+### 4. Count, distinct, sort
+########################
+
+# Count and distinct are very useful to get information about your dataset!
+
+# Variables (columns) can be numeric or categorical (characters, factors)  
+str(crohns)
+
+### Distinct tells us how many different levels a categorical variable has
+
+# How many different treatments do we have?
+crohns %>%
+  distinct(treat)
+
+#From how many different countries do we have data?
+crohns %>%
+  distinct(country)
+
+### Counting: tabulation of categorical variables
+
+# Total number of lines, i.e. patients in the current dataset
+# Observe, this matches with the number of lines you can see in the Environment tab
+crohns %>% 
+  count()
+
+# How many lines, i.e. patients do we have per treatment?
+crohns %>% 
+  count(treat)
+# Is our dataset balanced?
+
+# How many patients do we have for each age?
+crohns %>% 
+  count(age)
+
+# Perhaps this is more useful: How many patients are older than 65?
+crohns %>% 
+  count(age>65)
+
+### Sorting data: arrange
+
+# Display dataframe sorted by age
+crohns %>%
+  arrange(age)
+
+# Sort according to age size in descending order, i.e. oldest first
+crohns %>%
+  arrange(desc(age))
+
+# We can also sort after sex first and then according to age size in descending order
+crohns %>%
+  arrange(sex, desc(age))
+
+# Note we haven't saved anything here, we just get output to the console sorted in a certain way. 
+# This helps us to check if the data looks correct and get an impression.
 
 
 ########################
@@ -162,22 +179,44 @@ seniors <- crohns %>%
 seniors 
 
 # Do we still have all three treatment groups in our subset?
-distinct(seniors, treat)
+seniors %>%
+  distinct(treat)
+
 # How many patients with each treatment?
-count(seniors, treat)
+seniors %>%
+  count(treat)
+
+### The world of conditional operators 
+
+# Now we get lines that fit certain conditions 
+# but what if I want to filter on more than one condition? Enter conditional operators!
+
+# The 'and' operator: &
 
 # We can also subset on several conditions. 
 # Here are younger patients who received drug 1:
 crohns %>% 
   filter(age <= 65 & treat == 'd1')
 
+# The 'or' operator: |
+
+# get patients that were treated with either drug 1 or the placebo
+crohns %>% 
+  filter(treat == 'placebo' | treat == 'd1')
+
+# The 'not' operator: !
+
+# get patients that were not treated with the placebo:
+crohns %>% 
+  filter(treat != 'placebo')
+
 # other conditional operators can be found in the first presentation!
 # or just google it
 
 ?dplyr::filter
 
-# what if you want to filter multiple arguments in a variable?
-# here are the young patients who go treatment with either drug 1 or 2:
+# what if you want to allow multiple arguments in a variable?
+# here are the young patients who got treatment with either drug 1 or 2:
 crohns %>% 
   filter(age <= 65 & treat %in% c("d1","d2"))
 
@@ -256,6 +295,22 @@ crohns %>%
   summarize(mean(age),
             max(age))
 
+# We can also specify names for the new columns:
+crohns %>% 
+  summarize(mean_age = mean(age),
+            max_age = max(age))
+
+# what kind of things can you summarize? 
+# Have a look at the help by typing '?summarize' into the console, or 'summarize'
+# into the help panel and scroll down to 'Useful functions'.
+
+# A useful summarize function is 'n()' which counts the number of lines
+
+crohns %>% 
+  summarize(mean_age = mean(age),
+            max_age = max(age),
+            number_lines = n())
+
 # Note that R is tolerant of BE/AE spelling differences. 
 # 'summarise' and 'summarize' are the same function, likewise with 'color' and 'colour'.
 
@@ -270,7 +325,7 @@ crohns %>%                      # the dataset
             stdev = sd(age),    # calc standard dev.
             n = n())            # get the number of observations
 
-# note that we have also named the columns of the resulting tibble with the = operator
+# Now we see why 'n()' is useful: It tells us how many lines, i.e. patients are in each group.
 
 
 # Group by sex and treatment, and calculate stats for the number of adverse events
