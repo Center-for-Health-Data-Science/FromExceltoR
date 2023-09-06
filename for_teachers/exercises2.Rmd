@@ -11,13 +11,19 @@ output:
 knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
 ```
 
+### Setting up
 
-### Importing data
+
+0. For working on the exercise, create a new Rscript with a descriptive name and save it where you can find it again, i.e. in the folder where you downloaded the teaching material. You can use the commands shown in Presentation2.R to solve this exercise. There is no shame in outright copying from the Presentation2.R script, provided you understand what the command is doing.
+
+You will need to load the packages `tidyverse` and `readxl` for this exercise.
+
+### Importing data and a first look at the dataset
 
 
 The data set used in these exercises was compiled from data downloaded from the website of the UK's national weather service, the [*Met Office*](http://www.metoffice.gov.uk/public/weather/climate-historic/). It is saved in the file 
-**climate.xlsx**^[Contains public sector information licensed under the [Open Government Licence v3.0](http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/).].
-The spreadsheet contains data from five UK weather stations. The following variables are included in the data set:
+**climate.xlsx**^[Contains public sector information licensed under the [Open Government Licence v3.0](http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/).] which can be found in the folder `Exercises/Data/`.
+The spreadsheet contains monthly data from five UK weather stations for the following variables:
 
 | Variable name | Explanation |
 |-|-|
@@ -29,39 +35,64 @@ The spreadsheet contains data from five UK weather stations. The following varia
 | **sun** | Sunshine duration in hours |
 | **device** | Brand of sunshine recorder / sensor |
 
+1. Start by importing the dataset using either the `read_excel()` function or the `Import Dataset` button and name it `climate`. If you load with `Import Dataset` it is a good idea to copy the command into your script so that the next time you run your script you can just execute that line instead of having to find the file again. 
 
-1.  You should have already imported the data set from the small exercises during the lecture. If not, read it in now using the `read_excel()` function, N.B. make sure you have the `readxl` package loaded and that R can "see" the excel file, i.e. either set your working directory or specify the path to the file. 
+2.  Write the name of the dataframe, i.e. `climate`, into the console and press enter to see the first lines of the dataset. You can also click on the `climate` object in the Environment panel.
 
-2.  Write the name of the dataframe, i.e. `climate` and press enter to see the first lines of the dataset. You can also click on the `climate` object in the Environment panel.
+3. Explore your dataset and understand what data you have.
+
+    a. How many observations, i.e. lines are there?
+    
+    b. What timeframe does each line represent?
+
+    c. How many data columns are there and what are their types?
+
+    d. How many different stations are there?
+
+    e. How many lines per station?
+
 
 ### Working with the data
 
 Before you proceed with the exercises in this document, make sure you load the `tidyverse` in order to use the functions from this package.
 
-3. Select only months from the Oxford station where there were no days with airfrost. Assign this new dataset to the variable name `oxford_af`. 
+4. Count the number of lines per station that did not have any days with air frost. 
 
-4. Compute the average rainfall over all stations and months by using the `summarize` function. You can look at the examples we did at the end of presentation 2.
+5. Select from the climate dataset:
 
-5. Now, calculate the standard deviation of the monthly rainfall as well as the total rainfall (the sum), in addition to the average rainfall as above. I.e. all three measures should be inside the same resulting table. Have a look at the tidyverse lecture if you have trouble with this.
+    a. all rows from the station in Oxford
 
-6. Now, use `group_by` before `summarize` in order to compute group summary statistics (average, standard deviation, and sum) for the monthly rainfall observations from each of the five weather stations. 
+    b. all rows from the station in Oxford when there were at least 100 hours of sunlight
 
-7. Include a column in the summary statistics which shows how many observations the data set contains for each station.
+    c. all rows from the stations in Oxford and Camborne when there were at least 100 hours of sunlight
+
+    d. a subset that only contains the `station`, `year` and `rain` columns
+
+The next few questions build on each other, each adding a piece of code:
+
+6. Compute the average rainfall over the full dataset by using the `summarize` function. You can look at the examples we did at the end of presentation 2.
+
+7. Now, compute the average rainfall, standard deviation of the rainfall and the total rainfall (the sum) on the full dataset. I.e. all three measures should be inside the same resulting table. Have a look at the tidyverse lecture if you have trouble with this.
+
+8. Now, use `group_by` before `summarize` in order to compute group summary statistics (average, standard deviation, and sum) but split up into each of the five weather stations.
+
+9. Include a column in the summary statistics which shows how many observations, i.e. lines, the data set contains for each station.
     
-8. Sort the rows in the output in descending order according to annual rainfall.
+10. Sort the rows in the output in descending order according to annual rainfall.
+
+### Manipulating the data
+
+11. Create a new column in `climate` and save the resulting dataset in new variable so you don’t overwrite your original `climate` data. The new column should be the number of days in each month that had no air frost (complementing the `af` column). For this question you can assume that each month has 30 days though we know that is not accurate. Think about what information is given in the `af` column and what you need to do it to get the number of days without air frost. 
+
+12. Add another column to your new dataset that says whether the weather this month was good. We consider a month to be good if it had at least 100 hours of sunshine and less than 100 mm of rain. Otherwise the weather was bad.
+
+13. Count the number of months, i.e. lines, with good weather per station (use the column you made in 12). What’s the place with the best weather in England?
+
+### Complex operations
 
 The final questions require that you combine commands and variables of the type above.
 
-9. Like in the previous question, compute group summary statistics (average, standard deviation, and sum) for the rainfall observations from all five weather stations. This time, sort the output in ascending order according to the stations' average monthly sunshine duration.
+14. For each weather station apart from the one in Armagh, compute the total rainfall and sunshine duration for months that had no days of air frost. Present the totals in centimetres and days, respectively.
 
-10. Identify the weather station for which the median number of monthly sunshine hours over the months April to September was largest.
+15. Identify the weather station for which the median number of monthly sunshine hours over the months April to September was largest.
 
-11. For each weather station apart from the one in Armagh, compute the total rainfall and sunshine duration during the months with no days of air frost. Present the totals in centimetres and days, respectively.
-
-12. For each of the months in the year 2016: 
-
-    a. Count how many stations recorded at least two days of air frost *or* more than 95 mm rain.
-        
-    b. Compute the average number of sunshine hours for these stations, for the month in question.
-
-13. Go through your solutions again. Figure out where you could have used the pipe operator `%>%` to make your R-code more readable (instead of saving intermediate data sets). Solve these questions again, this time using the pipe operator.

@@ -357,7 +357,7 @@ pre code {
 
 <h1 class="title toc-ignore">II. Working with data in R (exercises)</h1>
 <h4 class="author">Data Science Lab, University of Copenhagen</h4>
-<h4 class="date">25 januar, 2023</h4>
+<h4 class="date">06 september, 2023</h4>
 
 </div>
 
@@ -381,8 +381,8 @@ the command is doing.</li>
 downloaded from the website of the UK’s national weather service, the <a href="http://www.metoffice.gov.uk/public/weather/climate-historic/"><em>Met
 Office</em></a>. It is saved in the file <strong>climate.xlsx</strong><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> which can
 be found in the folder <code>Exercises/Data/</code>. The spreadsheet
-contains data from five UK weather stations. The following variables are
-included in the data set:</p>
+contains monthly data from five UK weather stations for the following
+variables:</p>
 <table>
 <thead>
 <tr class="header">
@@ -422,36 +422,35 @@ included in the data set:</p>
 </tbody>
 </table>
 <ol style="list-style-type: decimal">
-<li><p>Start by importing the dataset using the
-<code>read_excel()</code> function. Make sure you have the
-<code>readxl</code> package loaded in your new script and have executed
-the line. You can press the tab key to complete paths while typing the
-path to the file. I.e. you can write <code>read_excel(&#39;Exer&#39;)</code> and
-press tab to complete to the ‘Exercises’ directory name, assuming this
-directory is visible from your current working directory. Check the
-<em>Files</em> tab if you’re not sure and check what your current
-working directory is with <code>getwd()</code>.</p></li>
-<li><p>Write the name you have given the dataframe,
-i.e. <code>climate</code>, into the console and press enter to see the
-first lines of the dataset. You can also click on the
-<code>climate</code> object in the Environment panel.</p></li>
-<li><p>Explore your dataset and understand what data you have.</p>
+<li><p>Start by importing the dataset using either the
+<code>read_excel()</code> function or the <code>Import Dataset</code>
+button and name it <code>climate</code>. If you load with
+<code>Import Dataset</code> it is a good idea to copy the command into
+your script so that the next time you run your script you can just
+execute that line instead of having to find the file again.</p></li>
+<li><p>Write the name of the dataframe, i.e. <code>climate</code>, into
+the console and press enter to see the first lines of the dataset. You
+can also click on the <code>climate</code> object in the Environment
+panel.</p></li>
+<li><p>Explore your dataset and understand what data you have. This
+dataset is small enough to just look at it.</p>
 <ol style="list-style-type: lower-alpha">
-<li><p>How many observations are there?</p></li>
+<li><p>How many observations, i.e. lines are there?</p></li>
+<li><p>What timeframe does each line represent?</p></li>
 <li><p>How many data columns are there and what are their
 types?</p></li>
 <li><p>How many different stations are there?</p></li>
-<li><p>How many observations per station?</p></li>
+<li><p>How many lines per station?</p></li>
 </ol></li>
 </ol>
 </div>
 <div id="working-with-the-data" class="section level3">
 <h3>Working with the data</h3>
 <p>Before you proceed with the exercises in this document, make sure you
-have loaded <code>tidyverse</code> in order to use the functions from
-this package.</p>
+load the <code>tidyverse</code> in order to use the functions from this
+package.</p>
 <ol start="4" style="list-style-type: decimal">
-<li><p>Count the number of months per station that did not have any days
+<li><p>Count the number of lines per station that did not have any days
 with air frost.</p></li>
 <li><p>Select from the climate dataset:</p>
 <ol style="list-style-type: lower-alpha">
@@ -475,13 +474,13 @@ rainfall and the total rainfall (the sum) on the full dataset. I.e. all
 three measures should be inside the same resulting table. Have a look at
 the tidyverse lecture if you have trouble with this.</p></li>
 <li><p>Now, use <code>group_by</code> before <code>summarize</code> in
-order to compute the same group summary statistics (average, standard
-deviation, and sum) but split up into each of the five weather
-stations.</p></li>
+order to compute group summary statistics (average, standard deviation,
+and sum) but split up into each of the five weather stations.</p></li>
 <li><p>Include a column in the summary statistics which shows how many
-observations the data set contains for each station.</p></li>
+observations, i.e. lines, the data set contains for each
+station.</p></li>
 <li><p>Sort the rows in the output in descending order according to
-total rainfall.</p></li>
+annual rainfall.</p></li>
 </ol>
 </div>
 <div id="manipulating-the-data" class="section level3">
@@ -492,14 +491,16 @@ resulting dataset in new variable so you don’t overwrite your original
 <code>climate</code> data. The new column should be the number of days
 in each month that had no air frost (complementing the <code>af</code>
 column). For this question you can assume that each month has 30 days
-though we know that is not accurate.</p></li>
+though we know that is not accurate. Think about what information is
+given in the <code>af</code> column and what you need to do it to get
+the number of days without air frost.</p></li>
 <li><p>Add another column to your new dataset that says whether the
 weather this month was good. We consider a month to be good if it had at
 least 100 hours of sunshine and less than 100 mm of rain. Otherwise the
 weather was bad.</p></li>
-<li><p>Count the number of months with good weather per station (use the
-column you made in 11). What’s the place with the best weather in
-England?</p></li>
+<li><p>Count the number of months, i.e. lines, with good weather per
+station (use the column you made in 12). What’s the place with the best
+weather in England?</p></li>
 </ol>
 </div>
 <div id="complex-operations" class="section level3">
@@ -508,18 +509,12 @@ England?</p></li>
 of the type above.</p>
 <ol start="14" style="list-style-type: decimal">
 <li><p>For each weather station apart from the one in Armagh, compute
-the total rainfall and sunshine duration during the months with no days
-of air frost. Present the totals in centimetres and days,
+the total rainfall and sunshine duration for months that had no days of
+air frost. Present the totals in centimetres and days,
 respectively.</p></li>
 <li><p>Identify the weather station for which the median number of
 monthly sunshine hours over the months April to September was
 largest.</p></li>
-<li><p>Count how many stations recorded at least two days of air frost
-or at least 95 mm of rain, split up by month. This means you should end
-up with one number per month which is the number of stations so between
-0 and 5. Tip: Think about how you can do that with <code>filter</code>
-and <code>summarize</code>. Then, for these data lines compute also the
-average number of sunshine hours split up by month.</p></li>
 </ol>
 </div>
 <div class="footnotes footnotes-end-of-document">
