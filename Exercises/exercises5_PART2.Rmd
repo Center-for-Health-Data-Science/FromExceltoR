@@ -1,5 +1,5 @@
 ---
-title: "V. Applied Statistics in R (exercises)"
+title: "V. Applied Statistics in R (Exercises Part 2)"
 author: "Center for Health Data Science, University of Copenhagen"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
