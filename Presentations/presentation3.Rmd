@@ -1,5 +1,5 @@
 ---
-title: "IV. R Markdown (presentation)"
+title: "IV. R Markdown (Presentation)"
 author: "Center for Health Data Science, University of Copenhagen"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
