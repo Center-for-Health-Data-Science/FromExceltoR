@@ -73,8 +73,6 @@ b.  Using the graphical interface:
 
 A lot of red text will be written in the console while the installation goes on. This usually does not mean there was a problem, unless the text reads 'error' or 'exit'. In the end, the package is installed, or you will see an explanation of what went wrong.
 
-Notice - if you have a SCIENCE-PC: There is sometimes problems with installation of packages on SCIENCE-PC’s, because R tries to install files to a place, where you don’t have permissions to save and edit files. There is a work-around that (sometimes) works, so talk to us if you have the problem.
-
 7.  Loading: Load the package you just installed with the command `library(emmeans)`. If everything went well, you should now able to run the command `oranges`. This shows a dataset which in included in the package.
 
 ## Basic R commands
@@ -103,7 +101,7 @@ summary(trees)
 
 11.  How many trees do we have data for?
     
-12.  Now, extract the column called `volume` from the dataset and assign it to a new variable called `volume_col`.
+12.  Now, extract the column called `Volume` from the dataset and assign it to a new variable called `volume_col`.
     
 13.  Display the volume of the first 10 trees.
     
@@ -119,22 +117,21 @@ Next, let’s also try to make some plots using the base graphics system in R (i
 
 16.  The dataset `trees` contains 31 observations of 3 variables (diameter, height and volume of black cherry trees). Insert the following two commands in your R script, and execute them to make two plots.
 
-    plot(Volume~Height, data=trees)
-    plot(Volume~Height, data=trees, log="xy")
-
+```{r}
+plot(Volume~Height, data=trees)
+plot(Volume~Height, data=trees, log="y")
+```
+    
 17.  The plots will appear in the _“Plots”_ window on the lower right. Click on _“Plots”_ if you still have the _“Help”_ tab selected. Use the blue arrows to toggle between the two plots you just made. What is the difference between the two plots?
 
 ## Shut down R
 
 18. Close RStudio. If changes were made either to the R script (shown in the upper-left window) or to the workspace (called 'Global Environment' in the upper-right window) you will be prompted if you like to save those. Answer *Yes* to that; in particular it is important that you save your R scripts (or Markdown documents) as they contain all relevant commands to reproduce your output and plots. In ERDA you can choose to open a new R session (or you can close the window if you don't want to continue working).
 
+19. Locate the R script that you saved in question 5; that would be the file *solution1.R* if you followed our name suggestion in question 5. Start RStudio again, and open the file (via the File menu). Check that you can run it again. 
 
-
-19. Locate the R script that you saved in question 5 (and that presumably was re-saved in question 8); that would be the file *solution1.R* if you followed our name suggestion in question 5. Start RStudio again, and open the file (via the File menu). Check that you can run it again. 
-
-Remark - if you work locally on your laptop (not ERDA): You can also start RStudio by double clicking on a file with .R (or .Rmd) extension. One advantage of this is that the workspace and the R history will be saved to the same folder as the R script when you later close RStudio, since the _working directory_ will be set to the map where the file is located. 
-
-<!-- - Requires that *.R* files are associated to RStudio. If *.R* files are not associated to RStudio, then you can achieve this by right clicking on the file. -->
+Remark - You can also start RStudio by double clicking on a file with the .R or .Rmd extension. One advantage of this is that the workspace and the R history will be saved to the same folder as the R script when you later close RStudio, since the _working directory_ will be set to the map where the file is located. 
+This requires that *.R* files are associated to RStudio. If *.R* files are not associated to RStudio, then you can achieve this by right clicking on the file and selecting 'Open with'.
 
 
 ## Getting help in R
