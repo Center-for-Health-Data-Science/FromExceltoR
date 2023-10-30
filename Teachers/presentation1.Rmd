@@ -30,7 +30,7 @@ Set working directory:
 
 ```{r}
 # set working directory (absolute path)
-setwd("~/HeaDS/Courses/Excel_to_R/Mar_2023/FromExceltoR")
+setwd("~/Desktop/HeaDS/GitHub_repos/FromExceltoR")
 
 # where am I now?
 getwd()
@@ -152,13 +152,11 @@ We will need to work with a variety of data types and structures in R and often 
 
 ```{r}
 # A vector of characters:
-people <- c("Diana", "Tugce", "Gerardo", "Alex", "Inigo", "Valentina", "Sara")
+people <- c("Anders", "Diana", "Tugce", "Alex", "Inigo", "Valentina", "Rita")
 people
 
-
-
 # A vector of numeric values:
-joined_year <- c(2020, 2020, 2022, 2021, 2021, 2022, 2023)
+joined_year <- c(2019, 2020, 2020, 2021, 2021, 2022, 2023)
 joined_year
 ```
 
@@ -229,7 +227,7 @@ If you would like to see your data in a tabular excel style format you can use `
 ```{r}
 # Look at the "head" of an object, default is print first 6 lines:
 head(my_data)
-head(my_data, n=8)
+head(my_data, n=4)
 
 
 
@@ -262,8 +260,9 @@ If we are only interested in a specific subset of either rows or columns from an
 
 ```{r}
 # Specific rows/columns of an R object (a slice):
-my_data[1:3, 1:2]
+my_data[1:5, 1:2]
 my_data[, 1:2]
+my_data[, 1]
 
 people[3:5]
 
