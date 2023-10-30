@@ -11,19 +11,25 @@
 
 
 
-## The term 'path' refers to the trajectory you need to follow from the place 
-## you are "located" on your computer to the place you want to work from. 
+## The term 'path' refers to the trajectory you need to follow from the place you are "located" on your computer to the place you want to work from. 
 ## As you will see below, a path can be either relative or absolute.
 
 
 # set working directory (absolute path)
-setwd("~/HeaDS/Courses/Excel_to_R/Mar_2023/FromExceltoR")
+setwd("~/Desktop/HeaDS/GitHub_repos/FromExceltoR")
 
 # where am I now?
 getwd()
 
+
+
 # set working directory (relative path)
 setwd('./Presentations')
+getwd()
+
+setwd('.')
+getwd()
+
 
 
 
@@ -134,11 +140,11 @@ library(tidyverse)
 
 
 # A vector of characters:
-people <- c("Diana", "Tugce", "Gerardo", "Alex", "Inigo", "Valentina", "Sara")
+people <- c("Anders", "Diana", "Tugce", "Alex", "Inigo", "Valentina", "Rita")
 people
 
 # A vector of numeric values:
-joined_year <- c(2020, 2020, 2022, 2021, 2021, 2022, 2023)
+joined_year <- c(2019, 2020, 2020, 2021, 2021, 2022, 2023)
 joined_year
 
 ############
@@ -215,10 +221,10 @@ class(my_data)
     # 3. To see the data in a tabular excel style format you can use `view()`
 
 # Look at the "head" of an object, default is print first 6 lines:
-head(my_data, n=8)
+head(my_data, n=4)
 
 # Look at the "tail" of an object, default is print last 6 lines:
-tail(my_data, n=8)
+tail(my_data, n=4)
 
 # opens table as a table, excel style
 view(my_data)
@@ -246,8 +252,9 @@ year
 # Specific rows/columns of an R object (a slice):
 my_data[1:5, 1:2]
 my_data[, 1:2]
+my_data[, 1]
 
-people[3:9]
+people[3:5]
 
 
 
