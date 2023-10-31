@@ -14,4 +14,4 @@ The material in this repository is for teaching purposes only and not to be dist
 
 
 ## Program September 2023
-![image](https://github.com/Center-for-Health-Data-Science/FromExceltoR/blob/March_2023/Program.pdf)
+![image](https://github.com/Center-for-Health-Data-Science/FromExceltoR/blob/March_2023/Program.png)
