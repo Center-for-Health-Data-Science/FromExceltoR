@@ -27,7 +27,7 @@ getwd()
 setwd('./Presentations')
 getwd()
 
-setwd('.')
+setwd('..')
 getwd()
 
 
