@@ -9,7 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Science Data Lab &amp; Center for Health Data Science" />
+<meta name="author" content="Data Science Lab, University of Copenhagen" />
 
 
 <title>I. Working with data in R (exercises)</title>
@@ -356,9 +356,8 @@ pre code {
 
 
 <h1 class="title toc-ignore">I. Working with data in R (exercises)</h1>
-<h4 class="author">Science Data Lab &amp; Center for Health Data
-Science</h4>
-<h4 class="date">25 januar, 2023</h4>
+<h4 class="author">Data Science Lab, University of Copenhagen</h4>
+<h4 class="date">21 februar, 2024</h4>
 
 </div>
 
@@ -367,9 +366,9 @@ Science</h4>
 <h2>Getting started</h2>
 <ul>
 <li><p>Start RStudio.</p></li>
-<li><p>Make a new <em>R-project</em>. You can either make one in a brand
-new folder or make one in an already existing folder. For this exercise
-purpose, we will create a new folder.<br />
+<li><p>Make a new <em>R-project</em>. There are a couple of ways to do
+this. You can make one in a brand new folder or make one in an already
+existing folder. We will create a new folder.<br />
 Go to the menu bar and click <em>file</em> → <em>New project…</em> →
 <em>New Directory</em> → <em>New Project</em>. <strong>NOW</strong>,
 make sure you know where you place your folder. Name your directory
@@ -381,8 +380,7 @@ parenthesis).</p></li>
 <li><p><em>IF</em> you want to change your working directory you can do
 this with <code>setwd(&quot;path/my.folder&quot;)</code> or by clicking
 <em>Session</em> → <em>Set Working Directory</em> → <em>Choose
-Directory…</em>.<br />
-</p></li>
+Directory…</em>.</p></li>
 </ul>
 </div>
 <div id="write-commands-at-the-prompt" class="section level2">
@@ -398,34 +396,30 @@ x + 7</code></pre>
 <p>Notice how a new object, <em>x</em>, appears in the Global
 Environment window (upper right window) and can be used for new
 computations.</p>
-<p><strong>Commands written in the console are not saved for later
-use!</strong> It is totally fine to write commands that should not be
-used again or quickly tested at the directly in the console, but in
+<p><strong>Commands written at the prompt are not saved for later
+use!</strong> It is fine to write commands that should never be used
+again at the prompt, and it is fine “to play at the prompt”, but in
 general you must organize your commands in R scripts (or R Markdown
-files, which will be introduced in Lesson IV).<br />
-</p>
+files, which will be introduced in Lesson IV).</p>
 </div>
 <div id="working-with-r-scripts" class="section level2">
 <h2>Working with R scripts</h2>
-<p>One option is to write your commands in an R script. An R script is
-just a file with R commands and it usually has file extension .R.<br />
-</p>
+<p>One option is to write your commands in a so-called R script. An R
+script is just a file with R commands and it usually has file extension
+.R.</p>
 <ol start="2" style="list-style-type: decimal">
 <li><p>Start by opening a new R script by clicking <em>File</em> →
-<em>New File</em> → <em>R Script</em>. (You can also make new script
+<em>New File</em> → <em>R Script</em>. You can also make a new script
 simply by clicking the <em>icon with the green plus</em> at the top most
-right of the Rstudio editor).<br />
-</p></li>
+right of the Rstudio editor.</p></li>
 <li><p>Write a command in the file, similar to one of those from above.
 Click <em>Run</em> - or even easier - type <em>Ctrl + Enter</em>. Then
-the command is transferred to the console window and executed, just as
-if you write the command at the prompt directly. Try with a new command
-in a new line.<br />
-</p></li>
+the command is transferred to the prompt and executed, just as if you
+write the command at the prompt. Try with a new command in a new
+line.</p></li>
 <li><p>Put a hashtag (#) before one of the commands and run it. Nothing
 happens! Hence, you can use hashtags for writing comments in your
-scripts.<br />
-</p></li>
+scripts.</p></li>
 <li><p>Save the document in the folder you have designated for your R
 work (<em>File</em> → <em>Save As</em>) so that you can use it another
 time. When you save an R script it should be given the file extension
@@ -434,116 +428,137 @@ time. When you save an R script it should be given the file extension
 </ol>
 <p><strong>Save your files often.</strong> It happens that you ask R for
 something so weird that it shuts down, and then it is a pity to have
-lost your work.<br />
-</p>
-</div>
-<div id="making-some-graphics" class="section level2">
-<h2>Making some graphics</h2>
-<p>Let’s also try to make some plots using the base graphics system in R
-(in <em>Presentation III</em> you will learn to make graphics using the
-<em>ggplot2</em>-package).<br />
-</p>
-<ol start="6" style="list-style-type: decimal">
-<li>First we need something to plot, that is a dataset. R has some built
-in datasets, which may be loaded using the command <code>data</code>.
-Insert the following two commands in your R script, and execute them (if
-you forgot how to do this, then see question 3 above) to learn about the
-<em>trees</em> dataset. Here the prefix <code>?</code> in the second
-command opens a help page in the lower-right window.</li>
-</ol>
-<pre class="r"><code>data(trees)
-View(trees)
-?trees</code></pre>
-<p><br />
-</p>
-<ol start="7" style="list-style-type: decimal">
-<li>The dataset <em>trees</em> contains 31 observations of 3 variables
-(diameter, height and volume of black cherry trees). Insert the
-following two commands in your R script, and execute them to make two
-plots. Thereafter click <em>“Plots”</em> in the lower-right window, and
-use the arrows to toggle between the two plots you just made. What is
-the difference between these three plots?</li>
-</ol>
-<pre class="r"><code>plot(Volume~Height, data=trees)
-plot(Volume~Height, data=trees, log=&quot;xy&quot;)
-plot(log(Volume)~log(Height), data=trees)</code></pre>
-</div>
-<div id="shut-down-r" class="section level2">
-<h2>Shut down R</h2>
-<ol start="8" style="list-style-type: decimal">
-<li><p>Close RStudio. If changes were made either to the R script (shown
-in the upper-left window) or to the workspace (called ‘Global
-Environment’ in the upper-right window) you will be prompted if you
-would like to save those. Answer <em>Yes</em> to that. It is
-<strong>important</strong> that you save your R scripts (or Markdown
-documents) as they contain all relevant commands to reproduce your
-output and plots.<br />
-</p></li>
-<li><p>Locate the R script that you saved in question 5 (and that
-presumably was re-saved in question 8); that would be the file
-<em>solution1.R</em> if you followed our name suggestion in question 5.
-Start RStudio again, and open the file (via the File menu). Check that
-you can run it again.<br />
-</p></li>
-</ol>
-<p>Remark - when you work locally on your laptop you can also start
-RStudio by double clicking on a file with .R (or .Rmd) extension. One
-advantage of this is that the workspace and the R history will be saved
-to the same folder as the R script when you later close RStudio, since
-the <em>working directory</em> will be set to the folder where the file
-is located.<br />
-</p>
-<!-- - Requires that *.R* files are associated to RStudio. If *.R* files are not associated to RStudio, then you can achieve this by right clicking on the file. -->
+lost your work.</p>
 </div>
 <div id="r-packages" class="section level2">
 <h2>R Packages</h2>
 <p>R is born with a lot of functionalities, but the enormous community
 of R users also contributes to R all the time by developing code and
-sharing it in R packages. An R package is a collection of R functions
-and/or datasets (including documentation).</p>
-<p>An R package needs be <em>downloaded</em>, <em>installed</em> and
-<em>loaded</em> before you can use its functionalities. You only have to
-download and install a package once (until you re-install R), whereas
-you have to load it in every R session you want to use it.<br />
-</p>
-<ol start="10" style="list-style-type: decimal">
-<li>Installation. There are a couple of ways to do this. You can either
-(a) click your way to an installation, or (b) run the command
-<code>install.packages(&quot;PackageName&quot;)</code>:<br />
-</li>
+sharing it in R packages. An R package is simply a collection of R
+functions and/or datasets (including documentation). As of August 20,
+2020, there are 16153 packaged available at the CRAN repository (and
+there are many other repositories).</p>
+<p>An R package needs be <em>installed</em> and <em>loaded</em> before
+you can use its functionalities. You only have to download and install a
+package once (until you re-install R), whereas you have to load it in
+every R session you want to use it. As an example, let’s install the
+package <code>MASS</code>.</p>
+<ol start="6" style="list-style-type: decimal">
+<li>Choose one of the two installation methods:</li>
 </ol>
 <ol style="list-style-type: lower-alpha">
-<li>Click on the <em>Packages</em> tab (next to the <em>Plots</em> tab
-where your plot of the trees data shoould have appeared), then click
-<em>Install</em>. You will get a little pop-up window. In the first
-drop-down menu choose <em>CRAN</em> as your source, then write the
-package name i.e. <code>vegan</code> into <em>Packages</em>, and click
-<em>Install</em>.<br />
-</li>
-<li>Type or copy <code>install.packages(&quot;vegan&quot;)</code> into the console
-directly and hit enter. You do not need to save this command as package
-installation is usually a one time thing, but, if you would like to,
-simply add it to your R script.</li>
+<li>Using the command line:</li>
 </ol>
-<p>A lot of red text is written in the console while the installation
-goes on. In the end, the package is installed.<br />
-</p>
-<ol start="11" style="list-style-type: decimal">
-<li>Loading: Load the package with the command
-<code>library(vegan)</code>. If everything went well, you should now
-able to run the command <code>data(package = &#39;vegan&#39;)</code> which will
-show you an overview of the datasets included in the package.<br />
-</li>
+<pre class="r"><code>install.packages(&quot;MASS&quot;)</code></pre>
+<p>Note that for this approach you need to know the name of the package
+and spell it correctly, including capitalization!</p>
+<ol start="2" style="list-style-type: lower-alpha">
+<li><p>Using the graphical interface:</p>
+<p>Look at lower right of your Rstudio window where you have a window
+with several tabs. Click on <em>Packages</em>. You will see a list of
+your currently installed packages and their versions. To install
+<code>MASS</code>, click on <em>Install</em> and start to type the name.
+You will notice a drop down list appears from which you can select the
+correct package. This is useful if you are not quite sure of the correct
+spelling.</p></li>
+</ol>
+<p>A lot of red text will be written in the console while the
+installation goes on. This usually does not mean there was a problem,
+unless the text reads ‘error’ or ‘exit’. In the end, the package is
+installed, or you will see an explanation of what went wrong.</p>
+<ol start="7" style="list-style-type: decimal">
+<li>Loading: Load the package you just installed with the command
+<code>library(MASS)</code>. If everything went well, you should now able
+to run the command <code>data(package = &#39;MASS)</code> which will show
+you an overview of the datasets included in the package.</li>
 </ol>
 </div>
-<div id="functions-help-pages" class="section level2">
-<h2>Functions &amp; Help Pages</h2>
+<div id="basic-r-commands" class="section level2">
+<h2>Basic R commands</h2>
+<p>We will now have a look at basic commands in R that you just learned
+about. We will use an in-build dataset of R called
+<code>trees</code>.</p>
+<ol start="8" style="list-style-type: decimal">
+<li>To start with, load the <code>tidyverse</code> package.</li>
+</ol>
+<pre class="r"><code>library(tidyverse)</code></pre>
+<ol start="9" style="list-style-type: decimal">
+<li>Now, load the <code>trees</code> dataset by copying and executing
+the following commands:</li>
+</ol>
+<pre class="r"><code>data(&quot;trees&quot;)
+view(trees)
+?trees</code></pre>
+<ol start="10" style="list-style-type: decimal">
+<li>Check what information is contained in the <code>trees</code>
+dataset by calling the <code>summary</code> function on it:</li>
+</ol>
+<pre class="r"><code>summary(trees)</code></pre>
+<ol start="11" style="list-style-type: decimal">
+<li><p>How many trees do we have data for?</p></li>
+<li><p>Now, extract the column called <code>Volume</code> from the
+dataset and assign it to a new variable called
+<code>volume_col</code>.</p></li>
+<li><p>Display the volume of the first 10 trees.</p></li>
+<li><p>Find the minimum, maximum and mean volume from the column you
+just extracted. Does it match what was stated in the
+<code>summary</code>?</p></li>
+<li><p>What class of datastructure is <code>trees</code>? Make it into a
+tibble.</p></li>
+</ol>
+</div>
+<div id="making-some-graphics" class="section level2">
+<h2>Making some graphics</h2>
+<p>Next, let’s also try to make some plots using the base graphics
+system in R (in <em>Presentation III</em> you will learn to make
+graphics using the <em>ggplot2</em>-package). We will continue to use
+the <code>trees</code> dataset.</p>
+<ol start="16" style="list-style-type: decimal">
+<li>The dataset <code>trees</code> contains 31 observations of 3
+variables (diameter, height and volume of black cherry trees). Insert
+the following two commands in your R script, and execute them to make
+two plots.</li>
+</ol>
+<pre class="r"><code>plot(Volume~Height, data=trees)
+plot(Volume~Height, data=trees, log=&quot;y&quot;)</code></pre>
+<ol start="17" style="list-style-type: decimal">
+<li>The plots will appear in the <em>“Plots”</em> window on the lower
+right. Click on <em>“Plots”</em> if you still have the <em>“Help”</em>
+tab selected. Use the blue arrows to toggle between the two plots you
+just made. What is the difference between the two plots?</li>
+</ol>
+</div>
+<div id="shut-down-r" class="section level2">
+<h2>Shut down R</h2>
+<ol start="18" style="list-style-type: decimal">
+<li><p>Close RStudio. If changes were made either to the R script (shown
+in the upper-left window) or to the workspace (called ‘Global
+Environment’ in the upper-right window) you will be prompted if you like
+to save those. Answer <em>Yes</em> to that; in particular it is
+important that you save your R scripts (or Markdown documents) as they
+contain all relevant commands to reproduce your output and
+plots.</p></li>
+<li><p>Locate the R script that you saved in question 5; that would be
+the file <em>solution1.R</em> if you followed our name suggestion. Start
+RStudio again, and open the file (via the File menu). Check that you can
+run it again.</p></li>
+</ol>
+<p>Remark - You can also start RStudio by double clicking on a file with
+the .R or .Rmd extension. One advantage of this is that the workspace
+and the R history will be saved to the same folder as the R script when
+you later close RStudio, since the <em>working directory</em> will be
+set to the map where the file is located. This requires that <em>.R</em>
+files are associated to RStudio. If <em>.R</em> files are not associated
+to RStudio, then you can achieve this by right clicking on the file and
+selecting ‘Open with’.</p>
+</div>
+<div id="getting-help-in-r" class="section level2">
+<h2>Getting help in R</h2>
 <p>Every R function comes with a help page, that gives a brief
 description of the function and describes its usage (input/arguments and
 output/value). Let’s use the function <code>median</code> as example. It
-is, no surprise, computing the median from a vector of numbers.<br />
-</p>
-<ol start="12" style="list-style-type: decimal">
+is, no surprise, computing the median from a vector of numbers.</p>
+<ol start="20" style="list-style-type: decimal">
 <li>Try these commands:</li>
 </ol>
 <pre class="r"><code>x &lt;- c(1,3,8,9,100,NA)
@@ -553,46 +568,28 @@ median(x)</code></pre>
 last number is missing (NA = Not Available). Since the last number is
 missing, <code>median</code> returns <code>NA</code>. However, could we
 make <code>median</code> find the median of the remaining numbers.
-Perhaps the help page can help out!<br />
-</p>
-<ol start="13" style="list-style-type: decimal">
-<li>Try the command</li>
+Perhaps the help page can help out!</p>
+<ol start="21" style="list-style-type: decimal">
+<li>Look at the help for the <code>median</code> function:</li>
 </ol>
 <pre class="r"><code>?median</code></pre>
-<p>Then the help page for <code>median</code> appears in the lower left
+<p>The help page for <code>median</code> appears in the lower right
 window. If we read it carefully, then we realize that the extra argument
 (input) <code>na.rm</code> may help us. We therefore try this:</p>
 <pre class="r"><code>median(x, na.rm=TRUE)</code></pre>
-<p><br />
-</p>
-<ol start="14" style="list-style-type: decimal">
-<li>Have a look at <strong>slides 16-17 in the slideshow</strong>, and
-try out some of the functions (<code>sum</code>, <code>log</code>,
-<code>var</code>, etc.) on one, or more, of the variables from the trees
-dataset.<br />
-<strong>N.B</strong> first you will need to extract and save these
-variables as vectors, we do this using the <code>$</code> symbol as
-shown below for the variable <code>Height</code>:</li>
-</ol>
-<pre class="r"><code>height_vector &lt;- trees$Height</code></pre>
-<p><br />
-</p>
-<ol start="15" style="list-style-type: decimal">
-<li>Bonus questions. How do you extract only elements/values
-<code>2 to 5</code> from the <code>Girth</code> variable in the trees
-dataset? Hint: Use the dollar operator and slicing.<br />
-</li>
-</ol>
-<p>R help pages are sometimes difficult to read, but be aware that there
-are examples of commands in the bottom of each help page. For more
-complicated functions, these examples can be very useful while trying to
-get to know the function and its functionalities.</p>
+<p>Admittedly, R help pages are often quite difficult to read, but be
+aware that there are examples of commands in the bottom of each help
+page. For more complicated functions, these examples can be very useful
+while trying to get to know the function and its functionalities.</p>
 <p>In order to use the help pages as above, you need to know the name of
 the function, which obviously may not be the case: You want to compute
 the median but have no idea what function to use. The best way to
 proceed: Google! Use “R whatever-you-want-to-search-for”, and you often
-get exactly what you need.<br />
-</p>
+get exactly what you need.</p>
+<p>While working with R, you will get a lot of error messages. Some are
+easy to understand, and you will readily be able to fix the problems,
+while others… Again, the best answer is: Google! Copy the error message
+into Google, and you will often find help.</p>
 </div>
 <div id="lessons-learnt" class="section level2">
 <h2>Lessons learnt</h2>

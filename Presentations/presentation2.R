@@ -14,7 +14,7 @@ library(readxl)
 
 #set working directory absolute path
 #setwd("~/Documents/Heads_center_management/courses/excel_to_r/oct2022/FromExceltoR/Presentations")
-setwd('./Presentations')
+setwd('./FromExceltoR/Presentations')
 
 ########################
 ### 1. Importing data

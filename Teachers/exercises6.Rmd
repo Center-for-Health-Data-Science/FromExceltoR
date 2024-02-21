@@ -11,7 +11,9 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Introduction:
+# Introduction:
+
+In this exercise you will practice your newly acquired R skills on an example dataset.
 
 If you don't have your own data to work on, you can practice your newly acquired R skills, using one of the available datasets located in the **Exercises folder**. Please see below for a brief description of each dataset:
 
@@ -33,13 +35,11 @@ knitr::kable(datasets)
 
 ```
 
-&nbsp;
-
-The sections which follow serve as inspiration for what you could do with the dataset at hand, but you do not need to adhere to these, it is completely up to you what you would like to try out!
-
 ---
 
 ### Read in the Dataset:
+
+First, read in the dataset. 
 
 When you have chosen a dataset for analysis, see summary above, the first thing is to read it into R. You can do this the usual way using the `read_excel()` function from `readxl`, as all datasets we have are in the form of excel sheets. Name your dataset something logical.   
 
@@ -47,20 +47,40 @@ If you are using your own dataset you will have to figure out which read functio
 
 ---
 
-### Exploratory Analysis
+## Exploratory Analysis
 
-Before making any statistical models, it is necessary to have a good understanding of ones dataset.   
-So, you could start by looking at:
+### The Basics
 
-- How many variables and observations are there in the data? Which data types are the variables.   
+Before making any statistical models, it is necessary to have a good understanding of what the data is. Start by looking at:
+
+- How many variables and observations are there in the data? 
+
+- What was measured, i.e. what do each of the variables describe? You can rename variables via the `colnames` if you want to.
+
+- Which data types are the variables and does that make sense? Should you change the type of any variables?
+
+- What is our response/outcome variable (y)?
 
 - Are there any missing values (`NA`), and how many?   
 
-- Make some preliminary plots of your data, i.e. these do not have to be beautiful, but they should be informative to you. You could try histograms, boxplots, barplots or something else you would like.   
+- Is the outcome variable balanced?
 
-- Looks at your plots, do you appear to have any outlier data points in your dataset?   
+### Distributions
 
-- Get some summary statistics for your variables, i.e. means, medians, sd, sums (for numerical types) and counts per group (for categorical or factor types).
+Next, have a look at the distributions of your variables. The plots you make here are preliminary so they do not have to be beautiful, but they should be informative to you.
+
+histograms, boxplots, barplots
+
+
+- Do you variables appear normally distributed? Would you expect them to be?
+
+- Do you see outliers in your dataset?
+
+
+- Calculate summary statistics for your numerical variables, i.e. means, medians, sd, sums and counts per group for categorical or factor types.
+
+
+
 
 
 ---
