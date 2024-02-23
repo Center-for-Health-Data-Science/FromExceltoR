@@ -11,39 +11,37 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# Introduction:
+## Introduction:
 
 In this exercise you will practice your newly acquired R skills on an example dataset.
 
-If you don't have your own data to work on, you can practice your newly acquired R skills, using one of the available datasets located in the **Exercises folder**. Please see below for a brief description of each dataset:
+If you have your own data to work on, you can still follow the steps in the exercise where they apply.
+
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 library(tidyverse)
 ```
 
-&nbsp;
-
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-
-datasets <-  tibble(
-  Name = c("HealthPrimaryCare", "CrohnsDisease", "StrokeData"),
-  Description=c("[Here](https://vincentarelbundock.github.io/Rdatasets/doc/mosaicData/HELPrct.html)", "[Here](https://vincentarelbundock.github.io/Rdatasets/doc/robustbase/CrohnD.html)", "[Here](https://www.kaggle.com/datasets/fedesoriano/stroke-prediction-dataset)"),
-  Variables=c(29, 9, 12),
-  Observations = c(453, 117, 5110))
-
-knitr::kable(datasets)
-
-```
 
 ---
 
-### Read in the Dataset:
+## Getting the Dataset:
 
-First, read in the dataset. 
+For this exercise, we'll use the birthweight dataset from the package `MASS`. It contains the birthweight of infants and some information about the mother. 
 
-When you have chosen a dataset for analysis, see summary above, the first thing is to read it into R. You can do this the usual way using the `read_excel()` function from `readxl`, as all datasets we have are in the form of excel sheets. Name your dataset something logical.   
+To get it we have to load the package and then the data. We will also display the help so we can read some background info about the data and what the columns are
 
-If you are using your own dataset you will have to figure out which read function you need to get your data into R. There is a function for reading in *almost* any type of text file, `read.csv()`, `read.table()`, `read.delim()`, etc. You can either google your way to an answer or ask one of the course instructors. 
+```{r message=FALSE, warning=FALSE}
+library(MASS)
+data(birthwt)
+?birthwt #display help page
+```
+
+If it says `<Promise>` after `birthwt` in your global environment just click on it and the dataframe will be loaded properly.   
+
+Now, check the class of the dataset. We'll be using tidyverse to do our anaylsis, so if it isn't already a tibble, make it into one.
+
+If you want to read in your own dataset you can again use `read_excel()` for excel sheets. For other formats, have a look at `read.csv()`, `read.table()`, `read.delim()`, etc. You can either google your way to an answer or ask one of the course instructors. 
 
 ---
 
@@ -59,106 +57,129 @@ Before making any statistical models, it is necessary to have a good understandi
 
 - Which data types are the variables and does that make sense? Should you change the type of any variables?
 
-- What is our response/outcome variable (y)?
+- What is our response/outcome variable(s)? There can be several.
 
-- Are there any missing values (`NA`), and how many?   
+- Is the (categorical) outcome variable balanced?
 
-- Is the outcome variable balanced?
+- Are there any missing values (`NA`), if yes and how many?   
 
-### Distributions
+## Diving into the data
 
-Next, have a look at the distributions of your variables. The plots you make here are preliminary so they do not have to be beautiful, but they should be informative to you.
+### Numeric variables
 
-histograms, boxplots, barplots
+Some of the measured variables in our data are numeric, i.e. continuous. For these do:
 
+- Calculate summary statistics (mean, median, sd, min, max)
 
-- Do you variables appear normally distributed? Would you expect them to be?
+- Now make boxplots, one for each numeric variable. Compare what you see to the results for the summary statistics.
 
 - Do you see outliers in your dataset?
 
-
-- Calculate summary statistics for your numerical variables, i.e. means, medians, sd, sums and counts per group for categorical or factor types.
-
+- Now remake the boxplot with two different colors, depending on the (categorical) outcome variable.
 
 
+### Categorical variables
 
+Other columns describe variables that are categorical. Some of these may have been initially interpreted by R as numerical, especially if they are coded with 0/1. 
 
----
+- If you haven't changed their datatype to factor yet, do so now. You can see how in presentation5.Rmd. 
 
-### Scientific Question
+- When you are done, make barplots of each categorical variable. 
 
-Now that you have got en overview of your dataset and the variables in it, try to think about and formulate a simple scientific hypothesis/question which you would like to explore. 
+- Then, split up the barplot for `smoke` so you have two different colors for the two different values of the outcome variable (the same way you did it above for the boxplots). 
 
-Lets use an example of a dataset containing information on patients with breast cancer. Lets say that we follow these patients from diagnosis, though treatment, and 10 years after treatment ends, as follow-up:   
+- Now, add the argument `position ='dodge'` to geom_bar and remake the plot. What has changed? Then remake it once again with `position ='fill'`. What information do the different barplots show. Compare to the counts you get from the `smoke` column when you group the dataframe by the outcome variable.  
 
-&nbsp;
+## Subsetting the data
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-library(tidyverse)
-
-BC_dataset <-  tibble(
-  Age = c("60", "51", "58", "..."),
-  BC.subtype = c("luminal", "basal", "luminal", "..."),
-  Treatment = c("chemotherapy", "chemotherapy", "immunotherapy", "..."),
-  Survival = c("alive", "alive", "dead", "..."),
-  Stage = c("2", "3", "4", "..."),
-  Smoker = c("no","no", "yes", "..."),
-  Familial.BC = c("no", "yes", "no", "..."))
-
-knitr::kable(BC_dataset)
-```
-
-
-&nbsp;
-We need to decide on:
-
-
-- What is our **response/outcome variable (y)**. Using the example dataset above this might be patient survival or patient subgroup (BC.subtype).   
-**Q:** Which variable in your chosen dataset will you use as response variable? and what type is it, e.g. a categorical (two or more discrete types of outcome) or a continuous variable?   
-
-- Decide on our **predictive/explanatory variable (x)**. Which variable in the dataset is predictive of the outcome, in the example above, we might think treatment is predictive of patient survival? Could there be other variables of interest, i.e. covariates, which are predictive of patient survival in addition to treatment?   
-**Q:** Which predictive variables (x) do you have in your datatset?
+Based on what you have observed in the last two section, now choose two numeric variables and two categorical variables to move forward with. Create a subset of the dataframe with only these variables and the categorical outcome. 
 
 ---
 
-### Data Wrangling
+## Modelling
 
-After familiarizing yourself with your dataset and deciding on which variables may be of interest to include in an analysis, you might consider weather you need to do any data wrangling/management before defining your statistical model. Here we mean things like:
+You now have a prepared dataset on which we can do some modelling. 
 
-- Do you need all variables in the dataset? Maybe some are redundant or uninteresting so you could remove them from the tibble.   
+## Regression Model
 
-- If you have missing values for some observations, do you want to filter out these rows before continuing analysis? There could also be other filtering criteria to thing about, removing rows with > than some number of zeros or some boundary value.   
+In the Applied statistics session you've tried out an analysis with one way ANOVA, where you compared the effect of categorical variables (skin type) on the outcome (gene counts). 
 
-- Maybe you want to make new columns combining some existing ones? An example of this, could be as we did with the downloads dataset where you converted sizes from bytes to megabytes and added the result as a new column to your tibble.   
+We'll do something similar here but instead we will use the numerical variables as predictors and the measured birthweight as the (numerical) outcome. This analysis is called linear regression. 
 
-- Do you want to rename the observations of a variables to something more suited for modeling? An examples of this could be converting a categorical variable like status of smoking (noted as _smoker_ or _non-smoker_) to integer values (_1_ or _0_).
+![](Figures/lin_regression.jpg)
 
----
+We can also do this with `lm()` and follow the same syntax as before:
 
-### Modelling
-
-You have a *tidy* dataset ready for analysis. You have decided on your response and predictive variables and you know which datatypes they are. The latter is important as this will determine which type of model you can make.  
-
-In the statistics exercise we tried out the `lm()` function to do one-way ANOVA. Use this function again to make a simple statistical model.   
-If the outcome variable you are interested in is continuous, then you will be doing linear regression, however, if the outcome is categorical, you are performing ANOVA (if you only have two groups, this will effectively be a t-test). **N.B** the function and annotation in R is the same for these models.
-Have a look a the statics exercise/presentation and the pseudo code below:
 
 ```{r, eval=FALSE}
 model1 <- lm(resp ~ pred1, data=name_of_dataset)
 ```
 
-- Begin with a simple model, just one predictive variable.   
+Simply, if the outcome variable we are interested in is continuous, then `lm()` will functionally be doing a linear regression. If the outcome is categorical, it will be performing ANOVA (which if you only have two groups is effectively a t-test). Have a look at [this video](https://www.youtube.com/watch?v=NF5_btOaCig&list=PLblh5JKOoLUIzaEkCLIUxQFjPIlapw8nU&index=5) if you want to understand why you can do a t-test / ANOVA with a linear model.
 
-- Test whether your data fulfills the model assumptions by making residual plots and evaluating these, just like in the presentation and exercise:
-```{r, eval=FALSE}
-par(mfrow=c(2,2)) # makes room for 4=2x2 plots.
-plot(model1)
+* Now, pick one of your numeric variables and use it to model the (numeric/continuous) outcome. 
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+
+mod <- lm(bwt ~ lwt, data = birthwt)
+
 ```
 
-- If model assumptions are not appropriate could you perform some sort of transformation to help alleviate the problem?   
+* Investigate the model you have made by writing its name, i.e.
 
-- Get some summary statistics from your model. Can you extract the confidence intervals of your estimate? HINT: `summary()`, `confint()`.     
+```{r, eval = FALSE}
+model1
+```
 
-- Try making a model with more than one predictive variable. Remake the residual plots for you new more complex model.   
+* What does this mean? Compare to the linear model illustration above.
 
-- Which model is best? How could you test this? HINT: `drop1()`, `anova()`.   
+* We'll now make a plot of your model to help us better visualize what has happened. Make a scatter plot with your predictor variable on the x-axis and the outcome variable on the y-axis. 
+
+* Now add the regression line to the plot by using:
+```{r, eval = FALSE}
+
++ geom_abline(slope=???, intercept = ???, color = 'red')
+
+```
+
+For the slope and intercept, enter the values you found when you inspected the model. 
+
+* Do this look like a good fit? 
+
+* Now repeat the process with the other numeric variable you picked. 
+
+Sometimes the variables we have measured are not good at explaining the outcome and we have to accept that.
+
+### ANOVA/t-test
+
+Now, we will instead look at the two categorical variables you picked. Make a model of the outcome variable depending on one the categorical variable
+
+* Pick one of the two categorical variables and use it to model the (numeric) outcome, just as during the Applied Stats session:
+
+```{r, eval=FALSE}
+model2 <- lm(resp ~ pred1, data=name_of_dataset)
+```
+
+* inspect the output by calling `summary()` on the model
+
+
+```{r, eval=FALSE}
+summary(model2)
+```
+
+You can have a look at [this website](https://www.learnbymarketing.com/tutorials/explaining-the-lm-summary-in-r/) to help you understand the output of summary. 
+
+
+### Short detour: The meaning of the intercept in an ANOVA
+
+The intercept is the estimate of the outcome variable that you would get when all explanatory variables are 0. 
+
+So if we have the model `lm(bwt ~ smoke, data = birthData)` and smoke is coded as 0 for non-smokers and 1 for smokers, the intercept is the estimate birthweight of a baby of a non-smoker. It will be significant because it is significantly different from 0, but that doesn't mean much since we would usually expect babies to weight more than 0. 
+
+
+---
+
+## Bonus
+
+You can now make some other models, including several predictors and see what you get. 
+
