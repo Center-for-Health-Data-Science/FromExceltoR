@@ -2,7 +2,7 @@
 
 This repository contains the course material for the course `From Excel to R`.
 
-Course participants, it would greatly help us if fill out our feedback form (September 2023): https://forms.office.com/e/DsLRfQeMgg
+Course participants, it would greatly help us if fill out our feedback form (March 2024): https://forms.office.com/e/4RL8XE0s2C
 
 The course material is originally made by Professor Helle Sørensen and Associate Professor Bo Markussen, SCIENCE data lab, Department of Mathematical Sciences at the University of Copenhagen.
 Contact: helle@math.ku.dk or bomar@math.ku.dk   
