@@ -9,7 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Science Data Lab &amp; Center for Health Data Science" />
+<meta name="author" content="Data Science Lab, University of Copenhagen" />
 
 
 <title>III. Graphics with ggplot2 (exercises)</title>
@@ -356,9 +356,8 @@ pre code {
 
 
 <h1 class="title toc-ignore">III. Graphics with ggplot2 (exercises)</h1>
-<h4 class="author">Science Data Lab &amp; Center for Health Data
-Science</h4>
-<h4 class="date">26 januar, 2023</h4>
+<h4 class="author">Data Science Lab, University of Copenhagen</h4>
+<h4 class="date">26 februar, 2024</h4>
 
 </div>
 
@@ -411,128 +410,109 @@ The following variables are included in the data set:</p>
 </tr>
 </tbody>
 </table>
-<p>The data set is the same as the one used for the exercises
-<strong>II. Working with data in R</strong>. If you have already
-imported the data, there is no need to import it again (unless you have
-made changes to the data assigned to <code>climate</code> since the
-original data set was imported).</p>
+<p>The data set is the same as the one used for the Tidyverse exercise.
+If you have already imported the data, there is no need to import it
+again, unless you have made changes to the data assigned to
+<code>climate</code> since the original data set was imported.</p>
 <p><strong>Need a little help?</strong> Consult the ggplot2 cheat sheet
-here: <a href="https://www.rstudio.com/resources/cheatsheets/" class="uri">https://www.rstudio.com/resources/cheatsheets/</a></p>
+here: <a href="https://rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf" class="uri">https://rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf</a></p>
 <div id="scatter-plot-i" class="section level3">
 <h3>Scatter plot I</h3>
 <ol style="list-style-type: decimal">
-<li><p>Make a scatter plot of <strong>rain</strong> against
-<strong>sun</strong>. HINT: Try <code>geom_point</code>.</p></li>
+<li><p>Make a scatter (point) plot of <strong>rain</strong> against
+<strong>sun</strong>.</p></li>
 <li><p>Colour the points in the scatter plot according to weather
-station.</p></li>
-<li><p>Add the command <code>facet_wrap(~station)</code> to the code for
-the scatter plot, and update the plot. (Remember to put a <code>+</code>
-in between the old and the new code.) What happens?</p></li>
-<li><p>Is it necessary to have a legend in the faceted plot? You can
-remove the legend by adding <code>theme(legend.position = &quot;none&quot;)</code>
-to your code.</p></li>
+station. Save the plot in an object.</p></li>
+<li><p>Add the segment <code>+ facet_wrap(~station)</code> to the saved
+plot object from above, and update the plot. What happens?</p></li>
+<li><p>Is it necessary to have a legend in the faceted plot? How can you
+remove this legend? Hint: try adding a <code>theme()</code> with
+<code>legend.position = &quot;none&quot;</code> inside it.</p></li>
+</ol>
+</div>
+<div id="scatter-plot-ii-labels" class="section level3">
+<h3>Scatter plot II: labels</h3>
+<ol start="5" style="list-style-type: decimal">
+<li>Now, let’s label each point with the month it corresponds to. This
+is done by using the geom <code>geom_text</code>. Have a look at the
+help:</li>
+</ol>
+<pre class="r"><code>?geom_text</code></pre>
+<p>You need to tell the aesthetics mapping which column contains your
+labels, just like when you define which column is on the x-axis or which
+column to color by. The relevant aes keyword is <code>label</code>. You
+can add it to the geom_text or in the <code>ggplot</code> call on top
+where you define the rest of the aes keywords:</p>
+<ol start="6" style="list-style-type: decimal">
+<li><p>You might find that your labels are on top of your points and not
+very readable. Let’s put them a bit higher by adding
+<code>nudge_y = 15</code> to the geom_text.</p></li>
+<li><p>Change <code>geom_text</code> to
+<code>geom_label</code>.</p></li>
 </ol>
 </div>
 <div id="graphic-files" class="section level3">
 <h3>Graphic files</h3>
-<ol start="5" style="list-style-type: decimal">
-<li>Make sure that the working directory is pointing to the place, where
-you want to save the graphic files. You may check this by executing the
-code</li>
-</ol>
-<pre class="r"><code>getwd()</code></pre>
-<p>If necessary you may change the working directory via the function
-<code>?setwd</code>.</p>
-<ol start="6" style="list-style-type: decimal">
-<li><p>Use <code>ggsave(file=&quot;weather.jpeg&quot;)</code> to save the last
-ggplot as a jpeg-file. Locate this file on your computer and open
-it.</p></li>
+<ol start="7" style="list-style-type: decimal">
+<li><p>Make sure that the working directory is pointing to the place,
+where you want to save the graphic files.</p></li>
+<li><p>Use <code>ggsave(file=&quot;weather.jpeg&quot;)</code> to remake the last
+gg-plot as a jpeg-file and save it. Locate this file on your computer
+and open it.</p></li>
 <li><p>Use
 <code>ggsave(file=&quot;weather.png&quot;,width=10,height=8,units=&quot;cm&quot;)</code> to
-save the last ggplot as a png-file. What does the three other options
-do? Look at the help page <code>?ggsave</code> to get an overview of the
-possible options.</p></li>
+remake the last gg-plot as a png-file and save it. What do the three
+other options do? Look at the help page <code>?ggsave</code> to get an
+overview of the possible options.</p></li>
 </ol>
 </div>
-<div id="scatter-plot-ii" class="section level3">
-<h3>Scatter plot II</h3>
-<ol start="8" style="list-style-type: decimal">
-<li>Run the following command</li>
-</ol>
-<pre class="r"><code>climate %&gt;%
-  group_by(month) %&gt;% 
-  summarize(sun_avg = mean(sun), sun_sd = sd(sun))</code></pre>
-<p>Make sure you understand the output, and save it to a
-<code>tibble</code> named <code>summary_stats</code>.</p>
-<ol start="9" style="list-style-type: decimal">
-<li><p>Make a scatter plot with month on the x-axis, and the average
-number of sunshine hours on the y-axis.</p></li>
+<div id="scatter-plot-iii-error-bars" class="section level3">
+<h3>Scatter plot III: error bars</h3>
+<ol start="10" style="list-style-type: decimal">
+<li><p>Calculate the average and standard deviation for sunshine in each
+month and save it to a table called <code>summary_stats</code>. You will
+need group_by and summarize. Recall how to do this from the tidyverse
+exercise.</p></li>
+<li><p>Make a scatter plot of the summary_stats with month on the
+x-axis, and the average number of sunshine hours on the y-axis.</p></li>
 <li><p>Add error bars to the plot, which represent the average number of
 sunshine hours plus/minus the standard deviation of the observations.
-Try:</p></li>
+The relevant geom is called <code>geom_errorbar</code>.</p></li>
 </ol>
+<p>Hint:</p>
 <pre class="r"><code>geom_errorbar(aes(ymin = sun_avg - sun_sd, ymax = sun_avg + sun_sd), width = 0.2)</code></pre>
-<ol start="11" style="list-style-type: decimal">
+<ol start="13" style="list-style-type: decimal">
 <li>How could make the plot with horizontal error bars instead? Tip:
 Think about which of the two variables, month and average sunshine
 hours, can meaningfully have an error.</li>
 </ol>
 </div>
-<div id="scatter-plot-iii" class="section level3">
-<h3>Scatter plot III</h3>
-<ol start="12" style="list-style-type: decimal">
-<li>Run the following code, which makes a simple example data set.</li>
-</ol>
-<pre class="r"><code>example_data &lt;- tibble(X = 1:5, Y = 2*X, Z = letters[1:5])
-example_data</code></pre>
-<ol start="13" style="list-style-type: decimal">
-<li>Make a simple scatter plot of <code>Y</code> against <code>X</code>
-using the code below.</li>
-</ol>
-<pre class="r"><code>ggplot() + 
-  geom_point(mapping = aes(x = X, y = Y), data = example_data)</code></pre>
-<p>Note that the data set and aesthetics are specified “locally” for use
-with the <code>geom_point</code> function.</p>
-<ol start="14" style="list-style-type: decimal">
-<li>Run the following code and observe what changes in the plot. In the
-code, <code>geom_text</code> has been added to <code>geom_point</code>,
-and an additional aesthetic <code>label = Z</code> has been
-inserted.</li>
-</ol>
-<pre class="r"><code>ggplot() +
-  geom_point(mapping = aes(x = X, y = Y), data = example_data) +
-  geom_text(mapping = aes(x = X, y = Y, label = Z), data = example_data)</code></pre>
-<ol start="15" style="list-style-type: decimal">
-<li>What happens when <code>nudge_y = 0.3</code> is added as an argument
-to <code>geom_text</code> (as in the code below)?</li>
-</ol>
-<pre class="r"><code>ggplot() +
-  geom_point(mapping = aes(x = X, y = Y), data = example_data) +
-  geom_text(mapping = aes(x = X, y = Y, label = Z), data = example_data, nudge_y = 0.3)</code></pre>
-</div>
 <div id="line-plot-also-known-as-a-spaghetti-plot" class="section level3">
 <h3>Line plot (also known as a spaghetti plot)</h3>
-<ol start="16" style="list-style-type: decimal">
-<li><p>Make a line plot of the rainfall observations over time, in which
-observations from the same station are connected. (Put month on the
-x-axis.) Colour the lines according to weather station as well.</p></li>
+<ol start="14" style="list-style-type: decimal">
+<li><p>Make a line plot of the rainfall observations over time (month),
+such that observations from the same station are connected in one line.
+Put month on the x-axis. Colour the lines according to weather station
+as well.</p></li>
 <li><p>The <strong>month</strong> variable was read into R as a
-numerical variable. Run the following command, which overwrites the
-numerical <strong>month</strong> variable in the climate data set with a
-factor (categorical variable) of the same name.</p></li>
+numerical variable. Convert this variable to a factor and make the line
+plot again. What has changed?</p></li>
+<li><p>Use <code>theme(legend.position = ???)</code> to move the colour
+legend to the top of the plot.</p></li>
 </ol>
-<pre class="r"><code>climate &lt;- mutate(climate, month = factor(month))</code></pre>
-<p>Make the line plot again. What has changed? Is this a better
-representation of the data?</p>
-<ol start="18" style="list-style-type: decimal">
-<li><p>Use <code>theme(legend.position = &quot;top&quot;)</code> to move the
-colour legend to the top of the plot.</p></li>
-<li><p>Use <code>geom_point()</code> to add the monthly rainfall data
-points to the line plot.</p></li>
-<li><p>Now, insert
+</div>
+<div id="layering" class="section level3">
+<h3>Layering</h3>
+<p>We can add several geoms to the same plot to show several things at
+once.</p>
+<ol start="17" style="list-style-type: decimal">
+<li><p>Make a line plot of monthly rainfall and add
+<code>geom_point()</code> to it.</p></li>
+<li><p>Now, add
 <code>geom_hline(yintercept = mean(climate$rain), linetype = &quot;dashed&quot;)</code>
 at the end of your code for the line plot, and update the plot again.
-What have you just added to the plot?</p></li>
+What have you just added to the plot, try to understand the ggplot2
+segment.</p></li>
 <li><p>Finally, try adding</p></li>
 </ol>
 <pre class="r"><code>labs(x = &quot;X&quot;, y = &quot;Y&quot;, colour = &quot;COL&quot;)</code></pre>
@@ -545,11 +525,7 @@ suitable (informative) text.</p>
 <ol start="22" style="list-style-type: decimal">
 <li><p>Make a box plot of the sunshine observations by weather
 station.</p></li>
-<li><p>Add <code>geom_boxplot(fill = &quot;lightgreen&quot;)</code> to your code
-to colour the boxes light green.</p></li>
-<li><p>Try colouring the boxes according to weather station instead, by
-using <code>geom_boxplot(aes(fill = station))</code>. Remove the
-superfluous plot legend.</p></li>
+<li><p>Colour the boxes according to weather station.</p></li>
 </ol>
 </div>
 <div id="box-plot-ii---aesthetics" class="section level3">
@@ -557,102 +533,69 @@ superfluous plot legend.</p></li>
 <p>There are many ways in which you can manipulate the look of your
 plot. For this we will use the boxplot you made in the exercise
 above.</p>
-<ol start="25" style="list-style-type: decimal">
-<li><p>Move the legend with <code>theme(legend.position=&quot;top&quot;)</code>
-and add a different legend title with
+<ol start="24" style="list-style-type: decimal">
+<li><p>Add a different legend title with
 <code>labs(fill = &quot;Custom Title&quot;)</code>.</p></li>
-<li><p>Change the theme of the ggplot grid. You could try
-<code>theme_minimal()</code>, <code>theme_dark()</code>, or
-<code>theme_void()</code>.</p></li>
+<li><p>Change the theme of the ggplot grid. Suggestions:
+<code>theme_minimal()</code>, <code>theme_bw()</code>,
+<code>theme_dark()</code>, <code>theme_void()</code>.</p></li>
 <li><p>Instead of the colours automatically chosen when you use
-<code>fill = station</code>, try to pick your own colors. Use the
+<code>fill = station</code>, pick your own colors. Use the
 <code>scale_fill_manual()</code>. You will need five colors, one for
 each station. What happens if you choose too few colours?</p></li>
 <li><p>Change the boxplot to a <strong>violin plot</strong>. Add the
-sunshine observations as scatter points to the plot. Include the a
-boxplot inside the violin plot, use <code>geom_boxplot(width=.1)</code>
-to do this.</p></li>
+sunshine observations as scatter points to the plot. Include a boxplot
+inside the violin plot, use <code>geom_boxplot(width=.1)</code> to do
+this.</p></li>
 </ol>
 </div>
 <div id="histogram" class="section level3">
 <h3>Histogram</h3>
-<ol start="29" style="list-style-type: decimal">
-<li>Run the code</li>
-</ol>
-<pre class="r"><code>ggplot(climate, aes(x = rain)) +
-  geom_histogram()</code></pre>
-<p>What does this plot show?</p>
-<ol start="30" style="list-style-type: decimal">
+<ol start="28" style="list-style-type: decimal">
+<li><p>Make a histogram (find the correct geom_ for this) of rain from
+the climate dataset. Interpret the plot, what does it show?</p></li>
 <li><p>R suggests that you choose a different number of bins/bin width
-for the histogram. Use <code>geom_histogram(binwidth = ...)</code> to
-experiment with different values of bin width in place of
-<code>...</code>, e.g. 5, 15, 25, and 35. See how the histogram
-changes.</p></li>
-<li><p>Add some colour to the histogram by inserting
-<code>colour = &quot;white&quot;</code> and <code>fill = &quot;orange&quot;</code> as
-additional arguments to <code>geom_histogram</code>. Try making the
-border of the boxes red instead.</p></li>
+for the histogram. Use <code>binwidth =</code> inside the histogram geom
+to experiment with different values of bin width. Look at how the
+histogram changes.</p></li>
+<li><p>Add some colour to the histogram by playing around with
+<code>colour</code> and <code>fill</code>. N.B. here you should note
+that as you are not coloring/filling according to any attribute, these
+two arguments should NOT be within <code>aes()</code>.</p></li>
 </ol>
 </div>
 <div id="bar-chart-i" class="section level3">
 <h3>Bar chart I</h3>
 <ol start="32" style="list-style-type: decimal">
-<li><p>Make a bar chart which visualizes the sunshine hours recorded at
-the five weather stations during each month of the year 2016.
-<em>HINT:</em> use <code>geom_col()</code>.</p></li>
-<li><p>Colour the bars according to weather station.</p></li>
+<li><p>Make a bar chart (<code>geom_col()</code>) which visualizes the
+sunshine hours per month. You might get a better result by treating the
+month as a factor (instead of numeric).</p></li>
+<li><p>Colour, i.e. divide the bars according to weather
+station.</p></li>
+<li><p>For better comparison, place the bars for each station next to
+each other instead of stacking them.</p></li>
 <li><p>Make the axis labels and legend title of the plot more
 informative by customizing them like you did for the line plot
 above.</p></li>
 </ol>
 </div>
-<div id="bar-chart-ii" class="section level3">
-<h3>Bar chart II</h3>
-<ol start="35" style="list-style-type: decimal">
-<li><p>Use the <code>summary_stats</code> data (from Scatter plot II
-section above) to make a bar chart with month on the x-axis, where the
-heights of the bars represent the average number of sunshine
-hours.</p></li>
-<li><p>Colour the bars light yellow.</p></li>
-<li><p>Add the following layer to the plot:</p></li>
-</ol>
-<pre class="r"><code>geom_errorbar(aes(ymin = sun_avg - sun_sd, ymax = sun_avg + sun_sd), width = 0.2)</code></pre>
-<ol start="38" style="list-style-type: decimal">
-<li>Experiment with different widths for the ends of the whiskers. For
-example, try widths of 0.1, 0.5, and 1.</li>
-</ol>
-</div>
-<div id="bar-chart-iii" class="section level3">
-<h3>Bar chart III</h3>
+<div id="bar-chart-ii-sorting-bars" class="section level3">
+<h3>Bar chart II: Sorting bars</h3>
 <ol start="39" style="list-style-type: decimal">
 <li><p>Make a new bar chart showing the annual rainfall recorded at each
 weather station.</p></li>
-<li><p>Run the following code:</p></li>
-</ol>
-<pre class="r"><code>annual_rain &lt;- 
-  climate %&gt;%
-  group_by(station) %&gt;% 
-  summarize(rain = sum(rain)) %&gt;% 
-  arrange(rain)</code></pre>
-<p>What is the connection between the output and the bar chart? Save the
-output as <code>annual_rain</code>. <!-- 1. Run the code -->
-<!--     ```{r} -->
-<!-- climate <- mutate(climate, station = factor(station, levels = annual_rain$station)) -->
-<!-- ``` -->
-<!-- and then run the code for the bar chart again. What has changed? Why? --></p>
-<ol start="41" style="list-style-type: decimal">
-<li>Use the <code>annual_rain</code> data to make a bar chart of the
-annual rainfall recorded at each weather station in increasing order
-(just like in question 1.) but this time add:</li>
-</ol>
-<pre class="r"><code>geom_text(mapping = aes(x = station, y = rain, label = rain), data = annual_rain)</code></pre>
-<p>to the code for the bar chart, and update the plot. Understand what
-has been added to the plot.</p>
-<ol start="42" style="list-style-type: decimal">
+<li><p>Sort the stations in accordance to rainfall, either ascending or
+descending. This was shown in the ggplot lecture. <strong>HINT</strong>:
+You will need to first make a new dataframe with summed up rain data per
+station and sort it by that sum. Then re-arrange the ‘station’ column by
+making it a factor whose levels correspond to the order in the new
+dataframe.</p></li>
+<li><p>Add labels to each bar that state the sum of the rainfall. You
+can do this by using the summarized dataframe created above and passing
+it to <code>geom_label</code> as data, together with a suitable aes
+mapping.</p></li>
 <li><p>Adjust the label positions so that the labels are positioned
 immediately above the bars.</p></li>
-<li><p>Replace <code>geom_text</code> with <code>geom_label</code>, and
-see how the labels change.</p></li>
 </ol>
 </div>
 <div class="footnotes footnotes-end-of-document">

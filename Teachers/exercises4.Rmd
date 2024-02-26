@@ -38,7 +38,7 @@ The data set is the same as the one used for the Tidyverse exercise. If you have
 
 2. Colour the points in the scatter plot according to weather station. Save the plot in an object.
 
-3. Add the segment `facet_wrap(~station)` to the saved plot object from above, and update the plot. What happens?
+3. Add the segment `+ facet_wrap(~station)` to the saved plot object from above, and update the plot. What happens?
 
 4. Is it necessary to have a legend in the faceted plot? How can you remove this legend? Hint: try adding a `theme()` with `legend.position = "none"` inside it. 
 
@@ -86,9 +86,7 @@ Hint:
 geom_errorbar(aes(ymin = sun_avg - sun_sd, ymax = sun_avg + sun_sd), width = 0.2)
 ```
 
-13. Could you have made a plot with horizontal error bars instead? How?
-
-
+13. How could make the plot with horizontal error bars instead? Tip: Think about which of the two variables, month and average sunshine hours, can meaningfully have an error.
 
 
 
