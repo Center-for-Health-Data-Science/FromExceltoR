@@ -61,7 +61,7 @@ Before making any statistical models, it is necessary to have a good understandi
 
 - Is the (categorical) outcome variable balanced?
 
-- Are there any missing values (`NA`), if yes and how many?   
+- Are there any missing values (`NA`), if yes and how many? Google how to check this if you don't know.   
 
 ## Diving into the data
 
@@ -92,7 +92,7 @@ Other columns describe variables that are categorical. Some of these may have be
 
 ## Subsetting the data
 
-Based on what you have observed in the last two section, now choose two numeric variables and two categorical variables to move forward with. Create a subset of the dataframe with only these variables and the categorical outcome. 
+Based on what you have observed in the last two section, now choose two numeric variables and two categorical variables to move forward with. Create a subset of the dataframe with only these variables and the categorical and numeric outcome. 
 
 ---
 
@@ -118,12 +118,6 @@ model1 <- lm(resp ~ pred1, data=name_of_dataset)
 Simply, if the outcome variable we are interested in is continuous, then `lm()` will functionally be doing a linear regression. If the outcome is categorical, it will be performing ANOVA (which if you only have two groups is effectively a t-test). Have a look at [this video](https://www.youtube.com/watch?v=NF5_btOaCig&list=PLblh5JKOoLUIzaEkCLIUxQFjPIlapw8nU&index=5) if you want to understand why you can do a t-test / ANOVA with a linear model.
 
 * Now, pick one of your numeric variables and use it to model the (numeric/continuous) outcome. 
-
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-
-mod <- lm(bwt ~ lwt, data = birthwt)
-
-```
 
 * Investigate the model you have made by writing its name, i.e.
 

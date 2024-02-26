@@ -4,13 +4,7 @@
 library(readxl)
 library(tidyverse)
 
-#Get a path to FromExceltoR folder
-#my_path <- gsub("/for_teachers.*", "", getwd())
-#Get a path to data folder
-#path <- paste0(my_path, "/Presentations/data/")
-
 downloads <-
-  #read_excel(paste0(path, "downloads.xlsx")) %>%
   read_excel("FromExceltoR/Presentations/data/downloads.xlsx") %>%
   filter(size > 0)
 downloads
