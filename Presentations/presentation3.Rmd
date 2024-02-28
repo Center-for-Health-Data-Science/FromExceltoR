@@ -116,8 +116,12 @@ table1(~ size + time | machineName, data=downloads)
 ```
 
 Notice that the table1 function generates html-output only, and it cannot be used with MS Word or pdf output. Therefore, look at the corresponding html file to see the content.
+```{r}
+library(tidyverse)
+climate <- read_excel("./data/climate.xlsx")
+climate %>% group_by(station) %>% summarize(avg_rain = mean(rain),
+            sd_rain = sd(rain),
+            sum_rain = sum(rain))
 
-
-
-
+```
 
