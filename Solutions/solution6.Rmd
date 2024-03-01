@@ -13,6 +13,8 @@ Import necessary libraries:
 
 ```{r, warning=FALSE, message=FALSE}
 library(tidyverse)
+library(ggplot2)
+library(MASS)
 ```
 
 
@@ -21,7 +23,6 @@ library(tidyverse)
 We load the data as described:
 
 ```{r message=FALSE, warning=FALSE}
-library(MASS)
 data(birthwt)
 ?birthwt #display help page
 ```
@@ -50,7 +51,7 @@ birthwt <- as_tibble(birthwt)
 
 - Find the description of the column in the help, i.e. `?birthwt`. 
 
-Renaming columns example:
+Renaming columns example. **N.B** for the subsequent analysis we use the original names, this chunk is just to show how to rename variables:
 
 ```{r  eval=FALSE}
 colnames(birthwt) <- c("low", "age", "mother_wt", "race", "smoke", "prev_premie", "ht", "ui", "doctor_visits", "baby_wt")
@@ -87,7 +88,13 @@ birthwt %>% count(low)
 - There are no missing values. There are several ways to check, i.e. 
 
 ```{r}
-any(is.na(birthwt))
+
+# Across the whole tibble
+sum(is.na(birthwt))
+
+# Get a NA count for each variable (column)
+birthwt %>% summarise(across(everything(), ~ sum(is.na(.))))
+
 ```
 
 ## Diving into the data
@@ -110,6 +117,11 @@ birthwt %>%
             sd_wt = sd(lwt), 
             min_wt = min(lwt), 
             max_wt = max(lwt))
+
+# or simply BUT less controlled
+
+summary(birthwt)
+
 ```
 
 - boxplots
@@ -173,6 +185,15 @@ ggplot(birthwt, aes(x=smoke, fill = low)) +
   geom_bar(position = 'fill')
 ```
 
+
+
+```{r}
+ggplot(birthwt, aes(x=bwt, fill=smoke)) + 
+  geom_density()
+```
+
+
+
 ## Subsetting the data
 
 One example:
@@ -180,7 +201,8 @@ One example:
 ```{r}
 subset <- birthwt %>%
   #may need to specify that we want dplyr's select function since we also loaded MASS
-  dplyr::select(low, bwt, age, lwt, smoke, ht)
+  dplyr::select(low, bwt, age, lwt, smoke, ht, ftv) %>%
+  mutate(ftv=as.factor(ftv))
 
 head(subset)
 ```
@@ -190,7 +212,7 @@ head(subset)
 ## Modelling
 
 
-## Regression Model
+### Regression Model 1
 
 We'll make the model on our subset: 
 
@@ -212,16 +234,56 @@ ggplot(subset, aes(x = lwt, y = bwt)) +
   geom_abline(slope=4.429, intercept = 2369, color = 'red')
 ```
 
+```{r}
+ggplot(subset, aes(x = lwt, y = bwt)) +
+  geom_point() +
+  geom_smooth(method = 'lm')
+```
+
+Inspect the model in more detail with `summary()`
+
+```{r}
+summary(model1)
+```
+
+
+### Regression Model 2
+
+Remake the model (model2) but this time add an additional explanatory variable to the model in addition to `lwt`
+
+```{r}
+model2 <- lm(bwt ~ lwt+ht+smoke, data = subset)
+model2 <- lm(bwt ~ lwt+ht, data = subset)
+model2 <- lm(bwt ~ lwt+smoke, data = subset)
+```
+
 There might be a trend in the data but the error is large. See how far most data points are from the regression line. 
 
-Repeat for the age variable
 
-### ANOVA/t-test
+95% confidence intervals for model2
+
+```{r}
+confint(model2)
+```
+
+Predict birth weight for a mother weighing 100 lbs, and who is a smoker.
+```{r}
+newData <- data.frame(lwt=100, smoke=as.factor(1))
+newData
+predict(model2, newData)
+predict(model2, newData, interval="prediction")
+```
+
+Output is the estimate for the baby's birth weight along with the 95% confidence interval of this estimate.
+
+
+
+### Bonus Exercise - ANOVA
 
 Model with categorical variable as predictor. 
 
 ```{r}
-model2 <- lm(bwt ~ smoke, data = subset)
+model3 <- lm(bwt ~ smoke, data = subset)
 ```
 
 Now we essentially compare whether the distribution of the outcome, `bwt` differs depending on the level of smoke (0 or 1). Which is why this is a t-test. 
@@ -230,7 +292,7 @@ Inspecting the model
 
 
 ```{r}
-model2
+model3
 ```
 
 The coefficient of -283 means that the estimate for the mean birthweight decreases by 283 gram when smoke is 1 instead of 0. 
@@ -239,7 +301,7 @@ The intercept is the mean estimate for birthweight when smoke is 0.
 
 
 ```{r}
-summary(model2)
+summary(model3)
 ```
 
 There seems to be an effect of smoke since the estimate for the coefficient is significant. The intercept is significantly different from 0 which we do not find surprising or noteworthy since babies usually weigh more than 0 gram. 
