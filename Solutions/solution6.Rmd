@@ -234,11 +234,15 @@ ggplot(subset, aes(x = lwt, y = bwt)) +
   geom_abline(slope=4.429, intercept = 2369, color = 'red')
 ```
 
+There might be a trend in the data but the error is large. See how far most data points are from the regression line. 
+
 ```{r}
 ggplot(subset, aes(x = lwt, y = bwt)) +
   geom_point() +
   geom_smooth(method = 'lm')
 ```
+
+The confidence interval is larger in regions with few data points (i.e. at high values of `lwt`). But even where it is relatively tight the error is still huge.
 
 Inspect the model in more detail with `summary()`
 
@@ -252,13 +256,17 @@ summary(model1)
 Remake the model (model2) but this time add an additional explanatory variable to the model in addition to `lwt`
 
 ```{r}
+#Some examples
 model2 <- lm(bwt ~ lwt+ht+smoke, data = subset)
 model2 <- lm(bwt ~ lwt+ht, data = subset)
 model2 <- lm(bwt ~ lwt+smoke, data = subset)
 ```
 
-There might be a trend in the data but the error is large. See how far most data points are from the regression line. 
+```{r}
+summary(model2)
+```
 
+Compare Residual standard error and Adjusted R-squared to `model1`. We see slight improvements but not very much.
 
 95% confidence intervals for model2
 

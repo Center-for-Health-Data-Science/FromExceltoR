@@ -20,6 +20,7 @@ If you have your own data to work on, you can still follow the steps in the exer
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 library(tidyverse)
+library(MASS)
 ```
 
 ---
@@ -102,16 +103,16 @@ Other columns describe variables that are categorical. Some of these may have be
 
 - Then, split up the barplot for `smoke` so you have two different colors for the two different values of the outcome variable (the same way you did it above for the boxplots). 
 
-- Now, add the argument `position ='dodge'` to geom_bar and remake the plot. What has changed? Then remake it once again with `position ='fill'`. What information do the different barplots show. Compare to the counts you get from the `smoke` column when you group the dataframe by the outcome variable.  
+- Now, add the argument `position ='dodge'` to geom_bar and remake the plot. What has changed? Then remake it once again with `position ='fill'`. What information do the different barplots show? Compare to the counts you get from the `smoke` column when you group the dataframe by the outcome variable.  
 
-- Lastly, make a density plot of the the two continuous variables `lwt` and `bwt`, split it up by `smoke`.   
+- Lastly, make a density plot of the two continuous variables `lwt` and `bwt`, split it up by `smoke`.   
 
 Extra: Pick custom colors for your plots (look into `scale_fill_manual()`).  
 
 
 ### Subsetting the data
 
-Based on what you have observed in the last two section, now choose two numeric variables and two categorical variables to move forward with. Create a subset of the dataframe with only these variables and the categorical and numeric outcome. 
+Based on what you have observed in the last two sections, now choose two numeric variables and two categorical variables to move forward with. Create a subset of the dataframe with only these variables and the categorical and numeric outcome. 
 
 ---
 
@@ -162,7 +163,7 @@ model1
 Sometimes the variables we have measured are not good at explaining the outcome and we have to accept that.
 
 
-- Instead of the `geom_abline()`, try `geom_smooth()` which provides you with a confidence interval in addition to the regression line, look up this geom before trying it to figure out what argument it needs to work!   
+- Instead of the `geom_abline()`, try `geom_smooth()` which provides you with a confidence interval in addition to the regression line. Look at the help for this geom (or google) to figure out what argument it needs to work!   
 
 - Inspect your model in more detail with `summary()`. Look at the output, what additional information do you get about the model. Pay attention to the `Residual standard error (RSE)` and `Adjusted R-squared (R2adj)` at the bottom of the output. We would like `RSE` to be as small as possible (goes towards 0 when model improves) while we would like the `R2adj` to be large (goes towards 1 when model improves). 
 
@@ -176,7 +177,7 @@ summary(model1)
 
 ### Regression Model 2
 
-- Remake your model (call it `model2`) but this time add an additional explanatory variable to the model in addition to `lwt` (`smoke` might be interesting, but you could also try either `age` and/or `ht`). Does adding another exploratory variable improve the metrics `RSE` and/or `R2adj`?
+- Remake your model (call it `model2`) but this time add an additional explanatory variable to the model in addition to `lwt`. This should be one of the categorical variable you selected to be in your subset. (`smoke` might be interesting, but you could also try either `age` and/or `ht`). Does adding this second exploratory variable improve the metrics `RSE` and/or `R2adj`?
 
 ```{r, eval = FALSE}
 model2 <- lm(resp ~ pred1 + pred2, data=name_of_dataset)
