@@ -13,6 +13,7 @@ This document does not include much, because we will simply review some features
 
 The tutorial we are going through now, and the exercise you will do with R markdown will cover the following:
 <!-- unordered list of items -->
+
 * Open new markdown document, look at its structure. Knit!
 * Change some text, headers, etc.
 * R chunks: Knit, run code without knitting, good practice
