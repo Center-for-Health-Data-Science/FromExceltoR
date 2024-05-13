@@ -357,7 +357,7 @@ pre code {
 
 <h1 class="title toc-ignore">III. Graphics with ggplot2 (exercises)</h1>
 <h4 class="author">Data Science Lab, University of Copenhagen</h4>
-<h4 class="date">26 februar, 2024</h4>
+<h4 class="date">13 maj, 2024</h4>
 
 </div>
 
@@ -434,15 +434,14 @@ remove this legend? Hint: try adding a <code>theme()</code> with
 <h3>Scatter plot II: labels</h3>
 <ol start="5" style="list-style-type: decimal">
 <li>Now, let’s label each point with the month it corresponds to. This
-is done by using the geom <code>geom_text</code>. Have a look at the
-help:</li>
+is done by using the geom <code>geom_text</code>. Add the following line
+to your plot:</li>
 </ol>
+<pre class="r"><code>p + geom_text(aes(label = month))</code></pre>
+<p>What do the different parts of this line do? Have a look at the
+help:</p>
 <pre class="r"><code>?geom_text</code></pre>
-<p>You need to tell the aesthetics mapping which column contains your
-labels, just like when you define which column is on the x-axis or which
-column to color by. The relevant aes keyword is <code>label</code>. You
-can add it to the geom_text or in the <code>ggplot</code> call on top
-where you define the rest of the aes keywords:</p>
+<p>What is the aesthetic we have added?</p>
 <ol start="6" style="list-style-type: decimal">
 <li><p>You might find that your labels are on top of your points and not
 very readable. Let’s put them a bit higher by adding
