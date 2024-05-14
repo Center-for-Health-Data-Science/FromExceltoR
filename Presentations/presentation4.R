@@ -61,8 +61,8 @@ p +  geom_col()
 
 ### Some other bar chart options ----
 
-p + geom_col(position = "dodge") ## Left/first plot
-p + geom_col(position = "fill") ## Right/second plot
+p + geom_col(position = "dodge") ## Side by side bars
+p + geom_col(position = "fill") ## Fractional plot
 
 p +  geom_col() + facet_grid(vars(month))
 p +  geom_col() + facet_wrap(vars(month))
