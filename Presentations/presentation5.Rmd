@@ -89,8 +89,7 @@ psorData <- mutate(psorData, type = factor(type))
 
 ```
 
-
-QUESTION 1: Are there 15, 15 and 7 skin samples in the three groups? Please share your answer here: https://www.menti.com/alhf674h4r88
+QUESTION 1: According to your count summary table, are there 15 (psor), 15 (psne) and 7 (healthy) skin samples in the three groups? Please share your answer here: https://www.menti.com/alhf674h4r88
 
 
 
