@@ -103,7 +103,7 @@ library(table1)
 library(readxl)
 downloads <- read_excel("./data/downloads.xlsx")
 
-# IMPORTANT: If you do not run this code chunk to have necessary packages in your work space, then the code chunk below will not work. R Markdown works in "top to bottom" fashion. 
+# IMPORTANT: If you do not run this code chunk to have necessary packages in your workspace, then the code chunk below will not work. R Markdown works in "top to bottom" fashion. 
 ```
 
 
