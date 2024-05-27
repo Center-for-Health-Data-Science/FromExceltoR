@@ -191,8 +191,8 @@ class(my_data)
 # Just like you can convert between different data types, you can convert between data structures/objects:
 
 # Convert tibble to dataframe:
-as.data.frame(my_data)
-class(my_data)
+my_data2 <- as.data.frame(my_data)
+class(my_data2)
 
 # Other examples of 'as.' function for structure/object conversion
 # as.data.frame()
