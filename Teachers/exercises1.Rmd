@@ -73,7 +73,7 @@ b.  Using the graphical interface:
 
 A lot of red text will be written in the console while the installation goes on. This usually does not mean there was a problem, unless the text reads 'error' or 'exit'. In the end, the package is installed, or you will see an explanation of what went wrong.
 
-7.  Loading: Load the package you just installed with the command `library(MASS)`. If everything went well, you should now able to run the command `data(package = 'MASS)` which will show you an overview of the datasets included in the package.
+7.  Loading: Load the package you just installed with the command `library(MASS)`. If everything went well, you should now able to run the command `data(package = 'MASS')` which will show you an overview of the datasets included in the package.
 
 ## Basic R commands
 
