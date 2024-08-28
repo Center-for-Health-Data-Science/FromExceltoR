@@ -2,6 +2,7 @@
 ## Importing libraries and data ----
 
 library(readxl)
+library(writexl)
 library(tidyverse)
 
 downloads <-
