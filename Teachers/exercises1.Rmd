@@ -55,25 +55,25 @@ One option is to write your commands in a so-called R script. An R script is jus
 
 R is born with a lot of functionalities, but the enormous community of R users also contributes to R all the time by developing code and sharing it in R packages. An R package is simply a collection of R functions and/or datasets (including documentation). As of August 20, 2020, there are 16153 packaged available at the CRAN repository (and there are many other repositories).
 
-An R package needs be _installed_ and _loaded_ before you can use its functionalities. You only have to download and install a package once (until you re-install R), whereas you have to load it in every R session you want to use it. As an example, let's install the package `MASS`.
+An R package needs be _installed_ and _loaded_ before you can use its functionalities. You only have to download and install a package once (until you re-install R), whereas you have to load it in every R session you want to use it. As an example, let's install the package `ContaminatedMixt`.
 
 6.  Choose one of the two installation methods:
 
 a.  Using the command line:
     
 ```{r}
-install.packages("MASS")
+install.packages("ContaminatedMixt")
 ```
     
 Note that for this approach you need to know the name of the package and spell it correctly, including capitalization!
 
 b.  Using the graphical interface:
 
-    Look at lower right of your Rstudio window where you have a window with several tabs. Click on _Packages_. You will see a list of your currently installed packages and their versions. To install `MASS`, click on _Install_ and start to type the name. You will notice a drop down list appears from which you can select the correct package. This is useful if you are not quite sure of the correct spelling.
+    Look at lower right of your Rstudio window where you have a window with several tabs. Click on _Packages_. You will see a list of your currently installed packages and their versions. To install `ContaminatedMixt`, click on _Install_ and start to type the name. You will notice a drop down list appears from which you can select the correct package. This is useful if you are not quite sure of the correct spelling.
 
 A lot of red text will be written in the console while the installation goes on. This usually does not mean there was a problem, unless the text reads 'error' or 'exit'. In the end, the package is installed, or you will see an explanation of what went wrong.
 
-7.  Loading: Load the package you just installed with the command `library(MASS)`. If everything went well, you should now able to run the command `data(package = 'MASS')` which will show you an overview of the datasets included in the package.
+7.  Loading: Load the package you just installed with the command `library(ContaminatedMixt)`. If everything went well, you should now able to run the command `data(package = 'ContaminatedMixt')` which will show you an overview of the datasets included in the package.
 
 ## Basic R commands
 
