@@ -6,7 +6,7 @@ library(writexl)
 library(tidyverse)
 
 downloads <-
-  read_excel("FromExceltoR/Presentations/data/downloads.xlsx") %>%
+  read_excel("FromExceltoR/Data/downloads.xlsx") %>%
   filter(size > 0)
 downloads
 

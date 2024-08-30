@@ -13,7 +13,7 @@ library(tidyverse)
 library(readxl)
 
 #set working directory 
-setwd('./FromExceltoR/Presentations')
+setwd('./FromExceltoR')
 
 ########################
 ### 1. Importing data
@@ -26,7 +26,7 @@ setwd('./FromExceltoR/Presentations')
 ## on 'Import Dataset' in the Environment tab (right). 
 
 # This command is generated via the Import data facility
-crohns <- read_excel("data/crohns_disease.xlsx")
+crohns <- read_excel("Data/crohns_disease.xlsx")
 
 ########################
 ### 2. A first look at the data
@@ -53,20 +53,6 @@ str(crohns)
 crohns[1:5,]
 # first five rows and first 3 columns
 crohns[1:5, 1:3]
-
-###############
-
-### Data structures
-
-# In tidyverse we work with tibbles which are a spiced up version of dataframes.
-class(crohns)
-
-# You can always convert your tibble back to dataframe if you desire:
-crohns_df <- as.data.frame(crohns)
-head(crohns_df) # head/top of object
-class(crohns_df)
-
-###############
 
 
 ########################
@@ -101,7 +87,8 @@ class(crohns_df)
 # Count and distinct are very useful to get information about your dataset!
 
 # Variables (columns) can be numeric or categorical (characters, factors)  
-str(crohns)
+crohns %>%
+  str()
 
 ### Distinct tells us how many different levels a categorical variable has
 
@@ -260,28 +247,14 @@ crohns <- crohns %>%
 crohns
 
 #How many patients are underweight?
-count(crohns, underweight)
+crohns %>%
+  count(underweight)
 
 ?mutate
 
-########################
-### 7. Grouping: group_by
-########################
-
-### group_by imposes a grouping on a tibble (not saved!):
-  
-# Group according to sex
-group_by(crohns, sex)
-
-# We also group according to several variables!
-# How many groups will we get?
-group_by(crohns, sex, treat)
-
-# By itself, group_by does nothing, we still get the same dataset returned. 
-# But it is very useful in combination with other commands (more below).
 
 ########################
-### 8. Summary statistics, revisited: The `summarize` function
+### 7. Summary statistics, revisited: The `summarize` function
 ########################
 
 # Methods from before  
@@ -312,6 +285,25 @@ crohns %>%
 
 # Note that R is tolerant of BE/AE spelling differences. 
 # 'summarise' and 'summarize' are the same function, likewise with 'color' and 'colour'.
+
+
+########################
+### 8. Grouping: group_by
+########################
+
+### group_by imposes a grouping on a tibble (not saved!):
+
+# Group according to sex
+crohns %>%
+  group_by(sex)
+
+# We also group according to several variables!
+# How many groups will we get?
+crohns %>%
+  group_by(sex, treat)
+
+# By itself, group_by does nothing, we still get the same dataset returned. 
+# But it is very useful in combination with other commands!
 
 # The reason we want to do it this is way is that we can first impose grouping 
 # with group_by and then pipe the resulting tibble into summarize which will 
