@@ -12,8 +12,7 @@ library(tidyverse)
 # Load a package that can read excel files
 library(readxl)
 
-#set working directory absolute path
-#setwd("~/Documents/Heads_center_management/courses/excel_to_r/oct2022/FromExceltoR/Presentations")
+#set working directory 
 setwd('./FromExceltoR/Presentations')
 
 ########################
