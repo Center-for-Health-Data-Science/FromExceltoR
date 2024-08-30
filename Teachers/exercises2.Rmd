@@ -37,26 +37,26 @@ The spreadsheet contains monthly data from five UK weather stations for the foll
 
 1. Start by importing the dataset using either the `read_excel()` function or the `Import Dataset` button and name it `climate`. If you load with `Import Dataset` it is a good idea to copy the command into your script so that the next time you run your script you can just execute that line instead of having to find the file again. 
 
-2.  Write the name of the dataframe, i.e. `climate`, into the console and press enter to see the first lines of the dataset. You can also click on the `climate` object in the Environment panel.
+2.  Write the name of the dataframe, i.e. `climate`, into the console and press enter to see the first rows of the dataset. You can also click on the `climate` object in the Environment panel.
 
-3. Explore your dataset and understand what data you have.
+3. Explore your dataset and understand what data you have. This dataset is small enough to just look at it.
 
-    a. How many observations, i.e. lines are there?
+    a. How many observations, i.e. rows are there?
     
-    b. What timeframe does each line represent?
+    b. How many data columns are there and what are their types?
 
-    c. How many data columns are there and what are their types?
+    c. What is the information in each row and column?
 
     d. How many different stations are there?
 
-    e. How many lines per station?
+    e. How many rows per station?
 
 
 ### Working with the data
 
 Before you proceed with the exercises in this document, make sure you load the `tidyverse` in order to use the functions from this package.
 
-4. Count the number of lines per station that did not have any days with air frost. 
+4. Count the number of rows per station that did not have any days with air frost. 
 
 5. Select from the climate dataset:
 
@@ -76,7 +76,7 @@ The next few questions build on each other, each adding a piece of code:
 
 8. Now, use `group_by` before `summarize` in order to compute group summary statistics (average, standard deviation, and sum) but split up into each of the five weather stations.
 
-9. Include a column in the summary statistics which shows how many observations, i.e. lines, the data set contains for each station.
+9. Include a column in the summary statistics which shows how many observations, i.e. rows, the data set contains for each station.
     
 10. Sort the rows in the output in descending order according to annual rainfall.
 

@@ -12,7 +12,7 @@
 <meta name="author" content="Data Science Lab, University of Copenhagen" />
 
 
-<title>III. Graphics with ggplot2 (exercises)</title>
+<title>VI. Graphics with ggplot2 (exercises)</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -355,9 +355,9 @@ pre code {
 
 
 
-<h1 class="title toc-ignore">III. Graphics with ggplot2 (exercises)</h1>
+<h1 class="title toc-ignore">VI. Graphics with ggplot2 (exercises)</h1>
 <h4 class="author">Data Science Lab, University of Copenhagen</h4>
-<h4 class="date">13 maj, 2024</h4>
+<h4 class="date">30 august, 2024</h4>
 
 </div>
 
@@ -430,29 +430,9 @@ remove this legend? Hint: try adding a <code>theme()</code> with
 <code>legend.position = &quot;none&quot;</code> inside it.</p></li>
 </ol>
 </div>
-<div id="scatter-plot-ii-labels" class="section level3">
-<h3>Scatter plot II: labels</h3>
-<ol start="5" style="list-style-type: decimal">
-<li>Now, let’s label each point with the month it corresponds to. This
-is done by using the geom <code>geom_text</code>. Add the following line
-to your plot:</li>
-</ol>
-<pre class="r"><code>p + geom_text(aes(label = month))</code></pre>
-<p>What do the different parts of this line do? Have a look at the
-help:</p>
-<pre class="r"><code>?geom_text</code></pre>
-<p>What is the aesthetic we have added?</p>
-<ol start="6" style="list-style-type: decimal">
-<li><p>You might find that your labels are on top of your points and not
-very readable. Let’s put them a bit higher by adding
-<code>nudge_y = 15</code> to the geom_text.</p></li>
-<li><p>Change <code>geom_text</code> to
-<code>geom_label</code>.</p></li>
-</ol>
-</div>
 <div id="graphic-files" class="section level3">
 <h3>Graphic files</h3>
-<ol start="7" style="list-style-type: decimal">
+<ol start="5" style="list-style-type: decimal">
 <li><p>Make sure that the working directory is pointing to the place,
 where you want to save the graphic files.</p></li>
 <li><p>Use <code>ggsave(file=&quot;weather.jpeg&quot;)</code> to remake the last
@@ -465,9 +445,9 @@ other options do? Look at the help page <code>?ggsave</code> to get an
 overview of the possible options.</p></li>
 </ol>
 </div>
-<div id="scatter-plot-iii-error-bars" class="section level3">
-<h3>Scatter plot III: error bars</h3>
-<ol start="10" style="list-style-type: decimal">
+<div id="scatter-plot-ii-error-bars" class="section level3">
+<h3>Scatter plot II: error bars</h3>
+<ol start="8" style="list-style-type: decimal">
 <li><p>Calculate the average and standard deviation for sunshine in each
 month and save it to a table called <code>summary_stats</code>. You will
 need group_by and summarize. Recall how to do this from the tidyverse
@@ -480,7 +460,7 @@ The relevant geom is called <code>geom_errorbar</code>.</p></li>
 </ol>
 <p>Hint:</p>
 <pre class="r"><code>geom_errorbar(aes(ymin = sun_avg - sun_sd, ymax = sun_avg + sun_sd), width = 0.2)</code></pre>
-<ol start="13" style="list-style-type: decimal">
+<ol start="11" style="list-style-type: decimal">
 <li>How could make the plot with horizontal error bars instead? Tip:
 Think about which of the two variables, month and average sunshine
 hours, can meaningfully have an error.</li>
@@ -488,7 +468,7 @@ hours, can meaningfully have an error.</li>
 </div>
 <div id="line-plot-also-known-as-a-spaghetti-plot" class="section level3">
 <h3>Line plot (also known as a spaghetti plot)</h3>
-<ol start="14" style="list-style-type: decimal">
+<ol start="12" style="list-style-type: decimal">
 <li><p>Make a line plot of the rainfall observations over time (month),
 such that observations from the same station are connected in one line.
 Put month on the x-axis. Colour the lines according to weather station
@@ -504,14 +484,14 @@ legend to the top of the plot.</p></li>
 <h3>Layering</h3>
 <p>We can add several geoms to the same plot to show several things at
 once.</p>
-<ol start="17" style="list-style-type: decimal">
-<li><p>Make a line plot of monthly rainfall and add
+<ol start="15" style="list-style-type: decimal">
+<li><p>(Re)Make the line plot of monthly rainfall and add
 <code>geom_point()</code> to it.</p></li>
 <li><p>Now, add
 <code>geom_hline(yintercept = mean(climate$rain), linetype = &quot;dashed&quot;)</code>
 at the end of your code for the line plot, and update the plot again.
-What have you just added to the plot, try to understand the ggplot2
-segment.</p></li>
+Have a look at the code again and understand what it does and
+how.</p></li>
 <li><p>Finally, try adding</p></li>
 </ol>
 <pre class="r"><code>labs(x = &quot;X&quot;, y = &quot;Y&quot;, colour = &quot;COL&quot;)</code></pre>
@@ -521,9 +501,8 @@ suitable (informative) text.</p>
 </div>
 <div id="box-plot-i" class="section level3">
 <h3>Box plot I</h3>
-<ol start="22" style="list-style-type: decimal">
-<li><p>Make a box plot of the sunshine observations by weather
-station.</p></li>
+<ol start="18" style="list-style-type: decimal">
+<li><p>Make a box plot of sunshine per weather station.</p></li>
 <li><p>Colour the boxes according to weather station.</p></li>
 </ol>
 </div>
@@ -532,43 +511,42 @@ station.</p></li>
 <p>There are many ways in which you can manipulate the look of your
 plot. For this we will use the boxplot you made in the exercise
 above.</p>
-<ol start="24" style="list-style-type: decimal">
+<ol start="20" style="list-style-type: decimal">
 <li><p>Add a different legend title with
 <code>labs(fill = &quot;Custom Title&quot;)</code>.</p></li>
 <li><p>Change the theme of the ggplot grid. Suggestions:
 <code>theme_minimal()</code>, <code>theme_bw()</code>,
 <code>theme_dark()</code>, <code>theme_void()</code>.</p></li>
-<li><p>Instead of the colours automatically chosen when you use
-<code>fill = station</code>, pick your own colors. Use the
-<code>scale_fill_manual()</code>. You will need five colors, one for
-each station. What happens if you choose too few colours?</p></li>
+<li><p>Instead of automatically chosen colours, pick your own colors for
+<code>fill = station</code> by adding the
+<code>scale_fill_manual()</code> command. You will need five colors, one
+for each station. What happens if you choose too few colours?</p></li>
 <li><p>Change the boxplot to a <strong>violin plot</strong>. Add the
 sunshine observations as scatter points to the plot. Include a boxplot
-inside the violin plot, use <code>geom_boxplot(width=.1)</code> to do
-this.</p></li>
+inside the violin plot with
+<code>geom_boxplot(width=.1)</code>.</p></li>
 </ol>
 </div>
 <div id="histogram" class="section level3">
 <h3>Histogram</h3>
-<ol start="28" style="list-style-type: decimal">
+<ol start="24" style="list-style-type: decimal">
 <li><p>Make a histogram (find the correct geom_ for this) of rain from
 the climate dataset. Interpret the plot, what does it show?</p></li>
 <li><p>R suggests that you choose a different number of bins/bin width
 for the histogram. Use <code>binwidth =</code> inside the histogram geom
 to experiment with different values of bin width. Look at how the
 histogram changes.</p></li>
-<li><p>Add some colour to the histogram by playing around with
-<code>colour</code> and <code>fill</code>. N.B. here you should note
-that as you are not coloring/filling according to any attribute, these
-two arguments should NOT be within <code>aes()</code>.</p></li>
+<li><p>Colour the entire histogram. Here we are not coloring/filling
+according to any attribute, just the entire thing so the argument needs
+to be <strong>outside</strong> <code>aes()</code>.</p></li>
 </ol>
 </div>
 <div id="bar-chart-i" class="section level3">
 <h3>Bar chart I</h3>
-<ol start="32" style="list-style-type: decimal">
+<ol start="27" style="list-style-type: decimal">
 <li><p>Make a bar chart (<code>geom_col()</code>) which visualizes the
-sunshine hours per month. You might get a better result by treating the
-month as a factor (instead of numeric).</p></li>
+sunshine hours per month. If you have not done so in question 13,
+convert month to a factor now and remake the plot.</p></li>
 <li><p>Colour, i.e. divide the bars according to weather
 station.</p></li>
 <li><p>For better comparison, place the bars for each station next to
@@ -580,21 +558,24 @@ above.</p></li>
 </div>
 <div id="bar-chart-ii-sorting-bars" class="section level3">
 <h3>Bar chart II: Sorting bars</h3>
-<ol start="39" style="list-style-type: decimal">
-<li><p>Make a new bar chart showing the annual rainfall recorded at each
-weather station.</p></li>
+<ol start="31" style="list-style-type: decimal">
+<li><p>Make a new bar chart showing the (total) annual rainfall recorded
+at each weather station. You will need to calculate this first. The
+format we need is a dataframe with summed up rain data per
+station.</p></li>
 <li><p>Sort the stations in accordance to rainfall, either ascending or
-descending. This was shown in the ggplot lecture. <strong>HINT</strong>:
-You will need to first make a new dataframe with summed up rain data per
-station and sort it by that sum. Then re-arrange the ‘station’ column by
-making it a factor whose levels correspond to the order in the new
-dataframe.</p></li>
+descending. This was shown in the ggplot lecture. Sort your rain
+dataframe from the question above by sum, then re-arrange the
+factor-levels of the ‘station’ as shown in the lecture.</p></li>
 <li><p>Add labels to each bar that state the sum of the rainfall. You
-can do this by using the summarized dataframe created above and passing
-it to <code>geom_label</code> as data, together with a suitable aes
-mapping.</p></li>
+can do this by adding the <code>label</code> keyword to the
+<code>aes()</code> and adding <code>geom_label()</code> to the plot.
+Just like geoms like <code>geom_scatter</code> look at the
+<code>aes()</code> for knowing what to plot on the x and y axis,
+<code>geom_label</code> looks at it to know what to use for
+labels.</p></li>
 <li><p>Adjust the label positions so that the labels are positioned
-immediately above the bars.</p></li>
+above the bars instead of inside them.</p></li>
 </ol>
 </div>
 <div class="footnotes footnotes-end-of-document">

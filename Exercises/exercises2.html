@@ -357,7 +357,7 @@ pre code {
 
 <h1 class="title toc-ignore">II. Working with data in R (exercises)</h1>
 <h4 class="author">Data Science Lab, University of Copenhagen</h4>
-<h4 class="date">06 september, 2023</h4>
+<h4 class="date">30 august, 2024</h4>
 
 </div>
 
@@ -429,18 +429,18 @@ button and name it <code>climate</code>. If you load with
 your script so that the next time you run your script you can just
 execute that line instead of having to find the file again.</p></li>
 <li><p>Write the name of the dataframe, i.e. <code>climate</code>, into
-the console and press enter to see the first lines of the dataset. You
+the console and press enter to see the first rows of the dataset. You
 can also click on the <code>climate</code> object in the Environment
 panel.</p></li>
 <li><p>Explore your dataset and understand what data you have. This
 dataset is small enough to just look at it.</p>
 <ol style="list-style-type: lower-alpha">
-<li><p>How many observations, i.e. lines are there?</p></li>
-<li><p>What timeframe does each line represent?</p></li>
+<li><p>How many observations, i.e. rows are there?</p></li>
 <li><p>How many data columns are there and what are their
 types?</p></li>
+<li><p>What is the information in each row and column?</p></li>
 <li><p>How many different stations are there?</p></li>
-<li><p>How many lines per station?</p></li>
+<li><p>How many rows per station?</p></li>
 </ol></li>
 </ol>
 </div>
@@ -450,7 +450,7 @@ types?</p></li>
 load the <code>tidyverse</code> in order to use the functions from this
 package.</p>
 <ol start="4" style="list-style-type: decimal">
-<li><p>Count the number of lines per station that did not have any days
+<li><p>Count the number of rows per station that did not have any days
 with air frost.</p></li>
 <li><p>Select from the climate dataset:</p>
 <ol style="list-style-type: lower-alpha">
@@ -477,7 +477,7 @@ the tidyverse lecture if you have trouble with this.</p></li>
 order to compute group summary statistics (average, standard deviation,
 and sum) but split up into each of the five weather stations.</p></li>
 <li><p>Include a column in the summary statistics which shows how many
-observations, i.e. lines, the data set contains for each
+observations, i.e. rows, the data set contains for each
 station.</p></li>
 <li><p>Sort the rows in the output in descending order according to
 annual rainfall.</p></li>
@@ -498,9 +498,9 @@ the number of days without air frost.</p></li>
 weather this month was good. We consider a month to be good if it had at
 least 100 hours of sunshine and less than 100 mm of rain. Otherwise the
 weather was bad.</p></li>
-<li><p>Count the number of months, i.e. lines, with good weather per
-station (use the column you made in 12). What’s the place with the best
-weather in England?</p></li>
+<li><p>How many months are there with good weather (use the column you
+made in 12) for each station? Find the station that has the most months
+with good weather.</p></li>
 </ol>
 </div>
 <div id="complex-operations" class="section level3">
