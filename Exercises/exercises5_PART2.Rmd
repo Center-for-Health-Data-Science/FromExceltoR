@@ -51,7 +51,7 @@ summary(birthData)
 ```
 
 
-5. Make groupwise boxplots of `bwt` by `visits`, i.e., boxplots of birht weight for those women who did not see their doctor, those who saw their doctor once, and those who saw their doctor more than once during the first trimester - all boxplots in one graph. Do the same thing for `smoke` (instead of `visits`).   
+5. Make groupwise boxplots of `bwt` by `visits`, i.e., boxplots of birth weight for those women who did not see their doctor, those who saw their doctor once, and those who saw their doctor more than once during the first trimester - all boxplots in one graph. Do the same thing for `smoke` (instead of `visits`).   
 
 6. You may also make groupwise boxplots for each combination of `smoke` and `visits`. You add a combination term with a `:`, e.g. `smoke:visits`.
 What is your initial impression about potential associations? 
