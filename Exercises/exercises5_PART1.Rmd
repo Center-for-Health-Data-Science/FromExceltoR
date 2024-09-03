@@ -65,7 +65,7 @@ Please refer to the 'STATS CHEAT SHEET' provided in the slides for hints as well
 
 #### Step 1: Data
 
-Psoriasis is an immune-mediated disease that affects the skin. You, as a researcher, carried out a micro-array experiment with skin from 37 people in order to examine a potential association between the disease and a certain gene (GeneD). For each of the 37 samples the gene expression was measured. Fifteen skin samples were from psoriasis patients and from a part of the body affected by the disease (`psor`); 15 samples were from psoriasis patients but from a part of the body not affected by the disease (`psne`); and 7 skin samples were from healthy people (`control`).  
+Psoriasis is an immune-mediated disease that affects the skin. You, as a researcher, carried out a micro-array experiment with skin from 37 people in order to examine a potential association between the disease and a certain gene (GeneD). For each of the 37 samples the gene expression was measured. 15 skin samples were from psoriasis patients and from a part of the body affected by the disease (`psor`); 15 samples were from psoriasis patients but from a part of the body not affected by the disease (`psne`); and 7 skin samples were from healthy people (`control`).  
 
 The data are saved in the file **psoriasis.xlsx**. At first the variable named `type` (i.e. skin sample type) is stored as a character variable, we change it to a factor (and check that indeed there are 15, 15 and 7 skin samples in the three groups).
 
@@ -82,7 +82,7 @@ The data are saved in the file **psoriasis.xlsx**. At first the variable named `
 # View the top rows of the dataset psorData
 
 
-# Change variable named 'type' to factor so that we can use in our analysis in the nextt steps
+# Change variable named 'type' to factor so that we can use in our analysis in the next steps
 # First let's check if it is character
 
 # Now change to factor
@@ -90,7 +90,7 @@ The data are saved in the file **psoriasis.xlsx**. At first the variable named `
 # Again, let's check if it is factor now
 
 
-# Check that there are 15, 15 and 7 skin samples in the three groups. Hint: count()
+# Check that there are 15, 15 and 7 skin samples in the three groups. Hint: summary()
 
 ```
 
@@ -102,7 +102,7 @@ QUESTION 1: Are there 15, 15 and 7 skin samples in the three groups?
 
 #### Step 2: Descriptive plots and statistics
 
-To get an impression of the data, we make two plots, and compute group-wise means and standard deviations. Make (1) a plot showing three groups of skin samples (healthy, psne, psor) and GeneeD expression levels from each skin sample so that we can visually compare each group of samples with regards to GeneD expression levels; (2) a boxplot for the same group-wise comparison. And finally, obtain the group-wise (healthy, psne, psor) descriptive statistics (mean, median and standard deviation). Hint: Consider using ggplot and tidyverse!
+To get an impression of the data, we make two plots, and compute group-wise means and standard deviations. Make (1) a plot showing three groups of skin samples (healthy, psne, psor) and GeneD expression levels from each skin sample so that we can visually compare each group of samples with regards to GeneD expression levels; (2) a boxplot for the same group-wise comparison. And finally, obtain the group-wise (healthy, psne, psor) descriptive statistics (mean, median and standard deviation). Hint: Consider using ggplot and tidyverse!
 
 ```{r}
 # (1) a plot showing three groups of skin samples (healthy, psne, psor) and GeneD expression levels from each skin sample
