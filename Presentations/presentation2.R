@@ -47,14 +47,6 @@ nrow(crohns)
 summary(crohns)
 str(crohns)
 
-# Subsetting/ Slicing tibbles and vectors:
-# We will usually want to subset based on content not position so we will use tidyverse functions for that
-# first 5 rows, all columns
-crohns[1:5,]
-# first five rows and first 3 columns
-crohns[1:5, 1:3]
-
-
 ########################
 ### 3. The anatomy of tidyverse
 ########################
@@ -129,10 +121,6 @@ crohns %>%
 # Sort according to age size in descending order, i.e. oldest first
 crohns %>%
   arrange(desc(age))
-
-# We can also sort after sex first and then according to age size in descending order
-crohns %>%
-  arrange(sex, desc(age))
 
 # Note we haven't saved anything here, we just get output to the console sorted in a certain way. 
 # This helps us to check if the data looks correct and get an impression.
@@ -353,4 +341,6 @@ crohns %>%                              # the dataset
 # What if I want to do the same analysis but with only obese patients?
 # The CDC lists a BMI of > 30 as obese.
 
+########## Talk in groups ########## 
+# How would we make sure to find the summary above without having to write the code again?
 

@@ -72,8 +72,6 @@ mean(num1)
 num2 <- c(0,3,4,9,1,2,7,10,2,11)
 
 mean(num2)
-# or
-mean(c(0,3,4,9,1,2,7,10,2,11))
 
 
 
@@ -160,7 +158,7 @@ joined_year <- as.character(joined_year)
 joined_year
 class(joined_year)
 
-# Convert cakeSlice back to numeric values
+# Convert joined_year back to numeric values
 joined_year <- as.numeric(joined_year)
 joined_year
 
@@ -223,9 +221,6 @@ class(my_data2)
 # Look at the "head" of an object, default is print first 6 lines:
 head(my_data, n=4)
 
-# Look at the "tail" of an object, default is print last 6 lines:
-tail(my_data, n=4)
-
 # opens table as a table, excel style
 view(my_data)
 
@@ -244,17 +239,6 @@ my_data$joined_year
 year <- my_data$joined_year
 year
 
-
-# Only interested in a specific subset of either rows or columns from an R data object?, use a 'slice'.
-# A 'slice' is defined as square parentheses with the selection of rows/columns inside it. 
-
-
-# Specific rows/columns of an R object (a slice):
-my_data[1:5, 1:2]
-my_data[, 1:2]
-my_data[, 1]
-
-people[3:5]
 
 
 
