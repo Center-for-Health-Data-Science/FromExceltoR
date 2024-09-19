@@ -1,0 +1,40 @@
+---
+title: "Video test"
+format: html
+editor: visual
+---
+
+## My First Quarto Document
+
+Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+
+## Adding numbers together
+
+Define variables
+
+```{r}
+a = 1
+b = 3
+```
+
+Look at the variables
+
+```{r}
+print(a)
+print(b)
+```
+
+Making a new variable, c, which is the sum of a and b
+
+```{r}
+# This line will not be excecuted because of the hashtag
+c = a + b 
+```
+
+Look at the newly defined variable, c
+
+```{r}
+print(c)
+```
+
+## 

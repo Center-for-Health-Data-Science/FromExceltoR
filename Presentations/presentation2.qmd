@@ -1,0 +1,374 @@
+---
+title: "Presentation 2"
+format: html
+editor: visual
+---
+
+## Working with data in R
+
+## Load packages
+
+```{r, message=FALSE}
+# Load tidyverse package
+library(tidyverse)
+# Load a package that can read excel files
+library(readxl)
+```
+
+## Check working directory
+
+Check working directory so you know from where you work.
+
+```{r}
+getwd()
+```
+
+## Importing data
+
+Often we will work with large datasets that already exist in i.e. an excel sheet or a tab separated file (.tsv). We can easily load that data into R, either with the read_excel function or by clicking on 'Import Dataset' in the Environment tab (right). We can also load data in via a command. Let's do this now. Navigate to the data from your working directory. Use the tap-button to check what your options are.
+
+```{r}
+crohns <- read_excel("../Data/crohns_disease.xlsx")
+```
+
+## A first look at the data
+
+**Print first few lines of your dataset**
+
+```{r}
+head(crohns) 
+```
+
+**Get the dimension of your dataset**
+
+```{r}
+dim(crohns)
+```
+
+**How many observations (rows) do have?**
+
+```{r}
+nrow(crohns)
+```
+
+How many data columns are there and what are their types? Both 'str' and 'summary' will you what column types you have. Summary has some extra summary stats on numeric columns.
+
+```{r}
+summary(crohns)
+str(crohns)
+```
+
+## The anatomy of tidyverse
+
+Tidyverse is a collection of R packages that are great for data wrangling and visualizations. Tidyverse is often coded in a specific syntax that we will go through now.
+
+1.  The name of the new object you are creating. Can omit if you don't want to save the result.
+
+2.  The dataset we are working on.
+
+3.  The function you want to perform on the dataset.
+
+In tidyverse we use the pipe symbol `%>%`. Always make a new line after the pipe symbol for good structure.
+
+```{r}
+# new_object <- dataset %>%
+#   function1(arguments...) %>% 
+#   function2(arguments...)
+```
+
+## Count, distinct, sort
+
+Count and distinct are very useful to get information about your dataset!
+
+Variables (columns) can be numeric or categorical (characters, factors). Use the `str()` function to see the structure of your dataset.
+
+```{r}
+crohns %>%
+  str()
+```
+
+`distinct()` tells us how many different levels a categorical variable has.
+
+```{r}
+# How many different treatments do we have? 
+crohns %>%
+  distinct(treat)
+
+# How many different treatments do we have?
+crohns %>%
+  distinct(treat)
+
+#From how many different countries do we have data?
+crohns %>%
+  distinct(country)
+```
+
+`count()` does tabulation of categorical variables. Total number of lines, i.e. patients in the current dataset. Observe, this matches with the number of lines you can see in the Environment tab.
+
+```{r}
+crohns %>% 
+  count()
+```
+
+```{r}
+# How many lines, i.e. patients do we have per treatment?
+crohns %>% 
+  count(treat)
+# Is our dataset balanced?
+
+# How many patients do we have for each age?
+crohns %>% 
+  count(age)
+
+# Perhaps this is more useful: How many patients are older than 65?
+crohns %>% 
+  count(age > 65)
+```
+
+Note we haven't saved anything here, we just get output to the console sorted in a certain way. This helps us to check if the data looks correct and get an impression.
+
+## Filtering data (selecting rows) with `filter()`
+
+How we subset dataset into subsets we find interesting. For example only female patients:
+
+```{r}
+crohns %>% 
+  filter(sex == 'F') # processed from left to right
+```
+
+A great about tidyverse: write code the way you think. You always filter by defining conditions. If the condition evaluates to 'TRUE' the line is included. See only data lines for patients over 65:
+
+```{r}
+crohns %>% 
+  filter(age > 65)
+```
+
+From the above commands we are getting the result printed to the console. This is useful to check something. To save the result, we need to re-assign:
+
+```{r}
+seniors <- crohns %>% 
+  filter(age > 65)
+```
+
+View newly created data frame:
+
+```{r}
+seniors
+```
+
+Do we still have all three treatment groups in our subset?
+
+```{r}
+seniors %>%
+  count(treat)
+```
+
+## The world of conditional operators
+
+Now we get lines that fit certain conditions but what if I want to filter on more than one condition? Enter conditional operators!
+
+**The 'and' operator: `&`**
+
+We can also subset on several conditions. Here are younger patients who received drug 1:
+
+```{r}
+crohns %>% 
+  filter(age <= 65 & treat == 'd1')
+```
+
+**The 'or' operator: `|`**
+
+Get patients that were treated with either drug 1 or the placebo:
+
+```{r}
+crohns %>% 
+  filter(treat == 'placebo' | treat == 'd1')
+```
+
+**The 'not' operator: `!`**
+
+```{r}
+crohns %>% 
+  filter(treat != 'placebo')
+```
+
+Other conditional operators can be found in the first presentation or when querying the function (or just google it).
+
+```{r}
+?dplyr::filter
+```
+
+You can also allow multiple arguments in a variable. Here are the young patients who got treatment with either drug 1 or 2:
+
+```{r}
+crohns %>% 
+  filter(age <= 65 & treat %in% c("d1","d2"))
+
+```
+
+## Selecting variables (columns) with `select()`
+
+We can choose to only include certain columns. Here, we select only BMI, age and the number of adverse events:
+
+```{r}
+crohns %>% 
+  select(nrAdvE, BMI, age)
+```
+
+We can also make a negative selection that excludes the named column(s). The ID doesn't give us any information since the data is anonymized:
+
+```{r}
+without_id <- crohns %>% 
+  select(-ID)
+```
+
+We have saved the dataset without the ID column in at new variable. Let's have a look at this:
+
+```{r}
+without_id
+```
+
+## Transformation of data with `mutate()` 
+
+We can create new columns based on other columns with the `mutate()` function.
+
+This is our original tibble:
+
+```{r}
+crohns
+```
+
+We want to add height in meters in a new column. It is important to reassign the dataframe if you want to save the new column.
+
+```{r}
+crohns <- crohns %>% 
+  mutate(height_m = height/100)
+
+crohns
+```
+
+We can also create columns based on TRUE/FALSE conditions. According to the CDC, a person with a BMI \< 18.5 is underweight:
+
+```{r}
+crohns <- crohns %>% 
+  mutate(underweight = ifelse(BMI < 18.5, "Yes", "No"))
+
+crohns
+```
+
+How many patients are underweight?
+
+```{r}
+crohns %>%
+  count(underweight)
+```
+
+Have a look at the `mutate()` function:
+
+```{r}
+?mutate
+```
+
+## Summary statistics, revisited with `summarize()` 
+
+Methods from before:
+
+```{r}
+mean(crohns$age)
+max(crohns$age)
+summary(crohns)
+```
+
+The `summarize()` function does the same but in a tidyverse way and gives the result in a table which you can export and send to your colleagues.
+
+```{r}
+crohns %>% 
+  summarize(mean(age),
+            max(age))
+```
+
+We can also specify names for the new columns:
+
+```{r}
+crohns %>% 
+  summarize(mean_age = mean(age),
+            max_age = max(age))
+```
+
+What kind of things can you summarize? Have a look at the help by typing `?summarize` into the console, or 'summarize' into the help panel and scroll down to 'Useful functions'.
+
+A useful summarize function is `n()` which counts the number of lines.
+
+```{r}
+crohns %>% 
+  summarize(mean_age = mean(age),
+            max_age = max(age),
+            number_lines = n())
+```
+
+Note that R is tolerant of BE/AE spelling differences. `summarise()` and `summarize()` are the same function, likewise with `color` and `colour`.
+
+## Grouping with `group_by()`
+
+The function `group_by()` imposes a grouping on a tibble. Group according to sex:
+
+```{r}
+crohns %>%
+  group_by(sex)
+```
+
+We can also group according to several variables. How many groups will we get?
+
+```{r}
+crohns %>%
+  group_by(sex, treat)
+```
+
+By itself, group_by does nothing, we still get the same dataset returned. But it is very useful in combination with other commands! The reason we want to do it this is way is that we can first impose grouping with `group_by()` and then pipe, `%>%`, the resulting tibble into summarize which will respect our grouping. So smart!
+
+```{r}
+crohns %>%                      # the dataset
+  group_by(sex) %>%             # grouped by sex
+  summarise(avg = mean(age),    # calculate mean of the age
+            med = median(age),  # calc median
+            stdev = sd(age),    # calc standard dev.
+            n = n())            # get the number of observations
+```
+
+Now we see why `n()` is useful: It tells us how many lines, i.e. patients are in each group.
+
+Group by sex and treatment, and calculate stats for the number of adverse events.
+
+```{r}
+crohns %>%                              # the dataset
+  group_by(sex, treat) %>%              # grouped by sex
+  summarise(avg = mean(nrAdvE),         # calculate mean number of adverse events
+            med = median(nrAdvE),       # calc median
+            max = max(nrAdvE),          # calc max 
+            stdev = sd(nrAdvE),         # calc standard dev.
+            total_events = sum(nrAdvE), # calc cumulative sum 
+            n = n())                    # get the number of observations
+```
+
+## The might of the pipe operator: `%>%`
+
+Many commands can be combined with the pipe operator to pipe data through an analysis workflow.
+
+```{r}
+crohns %>%                              # the dataset
+  filter(age > 65) %>%                  # filtered to only people over 65
+  group_by(sex, treat) %>%              # Grouping 
+  summarise(avg = mean(nrAdvE),         # calculate mean number of adverse events
+            med = median(nrAdvE),       # calc median
+            max = max(nrAdvE),          # calc max 
+            stdev = sd(nrAdvE),         # calc standard dev.
+            total_events = sum(nrAdvE), # calc cumulative sum 
+            n = n()) %>%                # get the number of observations
+  arrange(avg)                          # Sort output by the mean
+```
+
+What if I want to do the same analysis but with only obese patients? The CDC lists a BMI of \> 30 as obese.
+
+```{r}
+
+```
