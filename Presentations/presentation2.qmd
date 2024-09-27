@@ -203,7 +203,6 @@ You can also allow multiple arguments in a variable. Here are the young patients
 ```{r}
 crohns %>% 
   filter(age <= 65 & treat %in% c("d1","d2"))
-
 ```
 
 ## Selecting variables (columns) with `select()`
@@ -228,7 +227,7 @@ We have saved the dataset without the ID column in at new variable. Let's have a
 without_id
 ```
 
-## Transformation of data with `mutate()` 
+## Transformation of data with `mutate()`
 
 We can create new columns based on other columns with the `mutate()` function.
 
@@ -269,7 +268,7 @@ Have a look at the `mutate()` function:
 ?mutate
 ```
 
-## Summary statistics, revisited with `summarize()` 
+## Summary statistics, revisited with `summarize()`
 
 Methods from before:
 

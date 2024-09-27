@@ -1,0 +1,110 @@
+---
+title: "Presentation 4"
+format: html
+---
+
+### ggplot2 additive structure
+
+```{r}
+set.seed(123)
+
+df = data.frame(sample = sample(x = c('A','B','C','D'), size = 100, replace = T), 
+                measure = sample(x = 1:20, size = 100, replace = T))
+
+head(df)
+```
+
+```{r}
+ggplot(df, 
+       aes(x = sample, 
+           y = measure))
+ggsave('material_for_slides/ggplot2_additive_structure_plot1.png')
+```
+
+```{r}
+ggplot(df, 
+       aes(x = sample, 
+           y = measure)) +
+  geom_boxplot()
+ggsave('material_for_slides/ggplot2_additive_structure_plot2.png')
+```
+
+```{r}
+ggplot(df, 
+       aes(x = sample, 
+           y = measure,
+           fill = sample)) +
+  geom_boxplot()
+ggsave('material_for_slides/ggplot2_additive_structure_plot3.png')
+```
+
+```{r}
+ggplot(df, 
+       aes(x = sample, 
+           y = measure,
+           fill = sample)) +
+  geom_boxplot() + 
+  labs(x = 'Sample', 
+       y = 'Measure (cm)', 
+       title = 'Boxplots of measurements stratified by sample')
+ggsave('material_for_slides/ggplot2_additive_structure_plot4.png')
+```
+
+```{r}
+ggplot(df, 
+       aes(x = sample, 
+           y = measure,
+           fill = sample)) +
+  geom_boxplot() + 
+  labs(x = 'Sample', 
+       y = 'Measure (cm)', 
+       title = 'Boxplots of measurements stratified by sample') + 
+  scale_fill_manual(values = c("pink", "lightgreen", "lavender", "lightblue"))
+
+ggsave('material_for_slides/ggplot2_additive_structure_plot5.png')
+```
+
+```{r}
+ggplot(df, 
+       aes(x = sample, 
+           y = measure,
+           fill = sample)) +
+  geom_boxplot() + 
+  labs(x = 'Sample', 
+       y = 'Measure (cm)', 
+       title = 'Boxplots of measurements stratified by sample') + 
+  scale_fill_manual(values = c("pink", "lightgreen", "lavender", "lightblue")) + 
+  theme_bw() 
+
+ggsave('material_for_slides/ggplot2_additive_structure_plot6.png')
+```
+
+### ggplot basic structure
+
+```{r}
+library(ContaminatedMixt)
+data('wine')
+
+set.seed(123)
+country <- sample(x = c('France', 'Italy'), size = nrow(wine), replace = TRUE)
+wine$Country <- country
+
+head(wine)
+```
+
+```{r}
+ggplot(wine,
+       aes(x = Type, 
+           y = Alcohol,
+           fill = Country)) + 
+  geom_col()
+ggsave('material_for_slides/ggplot2_basic_structure_plot1.png')
+```
+
+```{r}
+ggplot(wine,
+       aes(x = Type, 
+           y = Alcohol)) + 
+  geom_col(fill = 'hotpink')
+ggsave('material_for_slides/ggplot2_basic_structure_plot2.png')
+```

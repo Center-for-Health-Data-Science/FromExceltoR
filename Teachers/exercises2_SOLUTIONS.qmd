@@ -17,6 +17,11 @@ knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
 
 1.  **Load packages**. You will need to load the packages `tidyverse` and `readxl` for this exercise.
 
+```{r}
+library(tidyverse)
+library(readxl)
+```
+
 ### Importing data and a first look at the dataset
 
 The data set used in these exercises was compiled from data downloaded from the website of the UK's national weather service, the [*Met Office*](http://www.metoffice.gov.uk/public/weather/climate-historic/). It is saved in the file **climate.xlsx**[^1] which can be found in the folder `Exercises/Data/`. The spreadsheet contains monthly data from five UK weather stations for the following variables:
@@ -35,7 +40,15 @@ The data set used in these exercises was compiled from data downloaded from the 
 
 2.  **Load data**. Start by importing the dataset using either the `read_excel()` function or the `Import Dataset` button and name it `climate`. If you load with `Import Dataset` it is a good idea to copy the command into your script so that the next time you run your script you can just execute that line instead of having to find the file again.
 
+```{r}
+climate <- read_excel('../Data/climate.xlsx')
+```
+
 3.  **First look at data**. Write the name of the dataframe, i.e. `climate`, into the console and press enter to see the first rows of the dataset. You can also click on the `climate` object in the Environment panel.
+
+```{r}
+head(climate)
+```
 
 4.  Explore your dataset and understand what data you have.
 
@@ -49,13 +62,48 @@ The data set used in these exercises was compiled from data downloaded from the 
 
     e.  How many rows per station?
 
+```{r}
+# a: 60 rows
+nrow(climate)
+
+# b: 7 columns
+ncol(climate)
+str(climate)
+
+# c: af = air forst
+colnames(climate)
+
+# d: 5 different/unique stations
+climate %>% 
+  select(station) %>% 
+  distinct()
+
+# e: 12 rows per station
+climate %>% 
+  group_by(station) %>% 
+  count()
+```
+
 ### Working with the data
 
 Before you proceed with the exercises in this document, make sure you load the `tidyverse` in order to use the functions from this package.
 
 5.  Count the number of rows that did not have any days with air frost.
 
+```{r}
+climate %>% 
+  filter(af == 0) %>% 
+  count()
+```
+
 6.  Count the number of rows [per station]{.underline} that did not have any days with air frost.
+
+```{r}
+climate %>% 
+  group_by(station) %>% 
+  filter(af == 0) %>% 
+  count()
+```
 
 7.  Select from the climate dataset (remember to `filter` rows and `select` columns):
 
@@ -67,25 +115,111 @@ Before you proceed with the exercises in this document, make sure you load the `
 
     d.  a subset that only contains the `station`, `year` and `rain` columns
 
+```{r}
+# a
+climate %>% 
+  filter(station == 'oxford')
+```
+
+```{r}
+# b
+climate %>% 
+  filter(station == 'oxford' & sun > 100)
+```
+
+```{r}
+# c
+climate %>% 
+  filter((station == 'oxford' | station == 'camborne') & sun > 100)
+```
+
+```{r}
+# d
+climate %>% 
+  select(station, year, rain)
+```
+
 The next few questions build on each other, each adding a piece of code:
 
 8.  Compute the average rainfall over the full dataset by using the `summarize` function. You can look at the examples we did at the end of presentation 2.
 
+```{r}
+climate %>% 
+  summarize(rain_avg = mean(rain))
+```
+
 9.  Now, compute the average rainfall, standard deviation of the rainfall and the total rainfall (the sum) on the full dataset. I.e. all three measures should be inside the same resulting table. Have a look at the tidyverse lecture if you have trouble with this.
+
+```{r}
+climate %>% 
+  summarize(rain_avg = mean(rain),
+            rain_sd = sd(rain), 
+            rain_sum = sum(rain))
+```
 
 10. Now, use `group_by` before `summarize` in order to compute group summary statistics (average, standard deviation, and sum) but split up into each of the five weather stations.
 
+```{r}
+climate %>% 
+  group_by(station) %>% 
+  summarize(rain_avg = mean(rain),
+            rain_sd = sd(rain), 
+            rain_sum = sum(rain))
+```
+
 11. Include a column in the summary statistics which shows how many observations, i.e. rows, the data set contains for each station.
 
+```{r}
+climate %>% 
+  group_by(station) %>% 
+  summarize(rain_avg = mean(rain),
+            rain_sd = sd(rain), 
+            rain_sum = sum(rain),
+            n = n())
+```
+
 12. Sort the rows in the output in descending order according to average annual rainfall.
+
+```{r}
+climate %>% 
+  group_by(station) %>% 
+  summarize(rain_avg = mean(rain),
+            rain_sd = sd(rain), 
+            rain_sum = sum(rain),
+            n = n()) %>% 
+  arrange(desc(rain_avg))
+```
 
 ### Manipulating the data
 
 13. Create a new column in `climate` and save the new dataset in a different variable so you don’t overwrite your original `climate` data. The new column should count the number of days in each month without air frost, based on the existing `af` column. For this exercise, assume each month has 30 days. To find the number of days without air frost, subtract the value in the `af` column from 30.
 
+```{r}
+climate2 <- climate %>% 
+  mutate(no_af = 30 - af)
+
+head(climate2)
+```
+
 14. Add another column to your new dataset that says whether the weather this month was good. We consider a month to be good if it had at least 100 hours of sunshine and less than 100 mm of rain. Otherwise the weather was bad.
 
+```{r}
+climate2 <- climate2 %>% 
+  mutate(good_weather = if_else(sun > 100 & rain < 100, 'yes', 'no'))
+
+head(climate2)
+```
+
 15. How many months are there with good weather (use the column you made in 14) for each station? Find the station that has the most months with good weather.
+
+```{r}
+climate2 %>% 
+  filter(good_weather == 'yes') %>% 
+  group_by(station) %>% 
+  summarize(n = n()) %>% 
+  arrange(desc(n)) #%>% 
+  # head(n = 1) # to only get the first one
+```
 
 ### Complex operations
 
@@ -93,4 +227,23 @@ The final questions require that you combine commands and variables of the type 
 
 16. For each weather station apart from the one in Armagh, compute the total rainfall and sunshine duration for months that had no days of air frost. Present the totals in centimetres and days, respectively.
 
+```{r}
+climate2 %>% 
+  filter(station != 'armagh' & af == 0) %>% 
+  group_by(station) %>% 
+  summarize(total_rain = sum(rain),
+            total_sun = sum(sun)) %>% 
+  mutate(total_rain_cm = total_rain / 10, # 10 mm per cm
+         total_sun_days = total_sun / 24) # 24 h per day
+```
+
 17. Identify the weather station for which the median number of monthly sunshine hours over the months April to September was largest.
+
+```{r}
+climate2 %>% 
+  filter(month %in% c(4:9)) %>% 
+  group_by(station) %>% 
+  summarize(sun_median = median(sun)) %>% 
+  arrange(desc(sun_median)) #%>% 
+  # head(n = 1) # to only get the first/largest one
+```

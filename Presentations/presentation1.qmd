@@ -50,7 +50,7 @@ We can also make a list of things we like:
 
 ### Modes of Quarto
 
-There are two modes of Quarto: Source and Visual. The one that looks like Word is Visual. In the left part of the panel you can change to Source. If you have heard about Rmarkdown, the Source mode is essentially the same thing. Here you can see that headers are marked with hashtags. The more hashtags, the smaller the title. Some features can only be added when you are in Source mode. E.g [write blue text]{style="color:blue"} is coded like this in the source code `[write blue text\]{style="color:blue"}`. We will only spend time in the Visual mode since it is the nicest to look at and we don't need all of these fancy features in this course. Feel free to play around with it after the course!
+There are two modes of Quarto: **Source and Visual**. The one that looks like Word is Visual. In the left part of the panel you can change to Source. If you have heard about Rmarkdown, the Source mode is essentially the same thing. Here you can see that headers are marked with hashtags. The more hashtags, the smaller the title. Some features can only be added when you are in Source mode. E.g [write blue text]{style="color:blue"} is coded like this in the source code `[write blue text\]{style="color:blue"}`. We will only spend time in the Visual mode since it is the nicest to look at and we don't need all of these fancy features in this course. Feel free to play around with it after the course!
 
 ### Code chunks and structure
 
