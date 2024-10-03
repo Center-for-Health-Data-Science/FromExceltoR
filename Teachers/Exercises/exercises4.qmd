@@ -1,7 +1,6 @@
 ---
-title: "VI. Graphics with ggplot2 (exercises)"
+title: "Exercise 3: ggplot2"
 author: "Data Science Lab, University of Copenhagen"
-date: "`r format(Sys.time(), '%d %B, %Y')`"
 format: html
 project:
   type: website

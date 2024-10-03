@@ -1,5 +1,5 @@
 ---
-title: "Presentation 4"
+title: "Presentation 3: ggplot2"
 format: html
 editor: visual
 project:
@@ -7,9 +7,7 @@ project:
   output-dir: ../docs
 ---
 
-## Presentaion 4: ggplot2
-
-### Importing libraries and data
+## Importing libraries and data
 
 ```{r}
 library(readxl)
@@ -17,7 +15,7 @@ library(writexl)
 library(tidyverse)
 ```
 
-### Load data
+## Load data
 
 The iris dataset is a widely-used dataset in data science, containing 150 observations of iris flowers with features like sepal length, sepal width, petal length, and petal width. It includes three species: Setosa, Versicolor, and Virginica, making it ideal for classification tasks and data visualization.
 
@@ -30,7 +28,7 @@ head(iris)
 # some R code 
 ```
 
-### Data wranglig
+## Data wranglig
 
 Making the data more fun to plot.
 
@@ -53,7 +51,7 @@ iris$Flower.Color <- colors
 head(iris)
 ```
 
-### ggplot2: The basic concepts
+## ggplot2: The basic concepts
 
 This is the starting point of a ggplot. The dataframe and the columns we wish to plot are defined. We have not specified what type of plot we want, hence an empty plot is produced.
 
@@ -64,7 +62,7 @@ ggplot(iris,                    # dataframe
                                 # missing type of plot 
 ```
 
-### Scatter plot with `geom_point`
+## Scatter plot with `geom_point`
 
 A scatter plot is made with the `geom_point` function and is used to get an overview over the relationship between two numeric variables. Here we see the relationship between sepal length and width.
 
@@ -84,7 +82,7 @@ ggplot(iris,
   geom_point(color = 'hotpink') 
 ```
 
-### Scatter plot with `geom_point` with color stratification
+## Scatter plot with `geom_point` with color stratification
 
 To change colors based on a feature, you need to set it [inside]{.underline} `aes()`. Here we see the relationship between sepal length and width colored by species.
 
@@ -96,7 +94,7 @@ ggplot(iris,
   geom_point()
 ```
 
-### Boxplot with `geom_histogram`
+## Boxplot with `geom_histogram`
 
 Boxplots are great to get an overview of continues variables and spot outliers. Can be shown on either axis (x and y).
 
@@ -124,7 +122,7 @@ ggplot(iris,
   geom_boxplot()
 ```
 
-### Violin plot with `geom_violin`
+## Violin plot with `geom_violin`
 
 A violin plot shows the distribution of a continuous variable across different categories, combining the features of a box plot and a density plot. Also, the labels can be edited.
 
@@ -138,7 +136,7 @@ ggplot(iris,
        title = 'Violin plot of sepal length stratisfied by flower species')
 ```
 
-### Histogram with `geom_histogram`
+## Histogram with `geom_histogram`
 
 Histogram shows the distribution of a continuous variable. You will sometimes get a message that suggests to select another `binwidth`. Do what is says and you will often get nicer plot (something nothing changes).
 
@@ -149,7 +147,7 @@ ggplot(iris,
   # geom_histogram(binwidth = 0.5)
 ```
 
-### Bar chart with `geom_bar`
+## Bar chart with `geom_bar`
 
 A bar chart is made with the `geom_bar` function and is used to get an overview over the distribution of a single categorical variable, e.g. Flower.Color in this instance. Here we see the number of flowers of each Flower.Color. Notice that the Flower.Colors are sorted alphabetically.
 
@@ -282,7 +280,7 @@ p <- p +
   scale_fill_manual(values = color_palette) # set the fill color according to the color palette
 ```
 
-### Bar chart with `geom_col`
+## Bar chart with `geom_col`
 
 Summary of data:
 

@@ -18,7 +18,7 @@ website:
           - href: Presentations/presentation2.qmd
             text: "Presentation 2: Tidyverse"
           - href: Presentations/presentation4.qmd
-            text: "Presentation 4: ggplot2"
+            text: "Presentation 3: ggplot2"
             
       - section: "Exercises"
         contents:
@@ -27,7 +27,7 @@ website:
           - href: Exercises/exercises2.qmd
             text: "Exercise 2: Tidyverse"
           - href: Exercises/exercises4.qmd
-            text: "Exercise 4: ggplot2"
+            text: "Exercise 3: ggplot2"
             
       - section: "Cheat Sheets"
         contents:

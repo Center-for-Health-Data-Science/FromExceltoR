@@ -1,5 +1,5 @@
 ---
-title: "Presentation 1"
+title: "Presentation 1: Introduction"
 format: html
 project:
   type: website
@@ -21,8 +21,6 @@ This section will go through how the Quarto format works and how to code in here
 # This is the largest header (Header 1)
 
 ## This is the second largest header (Header 2)
-
-### This is the third largest header (Header 3)
 
 ###### This is the smallest header (Header 6)
 

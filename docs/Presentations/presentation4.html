@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Presentation 4 – FromExceltoR</title>
+<title>Presentation 3: ggplot2 – FromExceltoR</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -136,7 +136,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Presentations/presentation1.html">Presentations</a></li><li class="breadcrumb-item"><a href="../Presentations/presentation4.html">Presentation 4: ggplot2</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Presentations/presentation1.html">Presentations</a></li><li class="breadcrumb-item"><a href="../Presentations/presentation4.html">Presentation 3: ggplot2</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -172,7 +172,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../Presentations/presentation4.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Presentation 4: ggplot2</span></a>
+ <span class="menu-text">Presentation 3: ggplot2</span></a>
   </div>
 </li>
       </ul>
@@ -201,7 +201,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../Exercises/exercises4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Exercise 4: ggplot2</span></a>
+ <span class="menu-text">Exercise 3: ggplot2</span></a>
   </div>
 </li>
       </ul>
@@ -220,9 +220,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#presentaion-4-ggplot2" id="toc-presentaion-4-ggplot2" class="nav-link active" data-scroll-target="#presentaion-4-ggplot2">Presentaion 4: ggplot2</a>
-  <ul class="collapse">
-  <li><a href="#importing-libraries-and-data" id="toc-importing-libraries-and-data" class="nav-link" data-scroll-target="#importing-libraries-and-data">Importing libraries and data</a></li>
+  <li><a href="#importing-libraries-and-data" id="toc-importing-libraries-and-data" class="nav-link active" data-scroll-target="#importing-libraries-and-data">Importing libraries and data</a></li>
   <li><a href="#load-data" id="toc-load-data" class="nav-link" data-scroll-target="#load-data">Load data</a></li>
   <li><a href="#data-wranglig" id="toc-data-wranglig" class="nav-link" data-scroll-target="#data-wranglig">Data wranglig</a></li>
   <li><a href="#ggplot2-the-basic-concepts" id="toc-ggplot2-the-basic-concepts" class="nav-link" data-scroll-target="#ggplot2-the-basic-concepts">ggplot2: The basic concepts</a></li>
@@ -232,20 +230,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#violin-plot-with-geom_violin" id="toc-violin-plot-with-geom_violin" class="nav-link" data-scroll-target="#violin-plot-with-geom_violin">Violin plot with <code>geom_violin</code></a></li>
   <li><a href="#histogram-with-geom_histogram" id="toc-histogram-with-geom_histogram" class="nav-link" data-scroll-target="#histogram-with-geom_histogram">Histogram with <code>geom_histogram</code></a></li>
   <li><a href="#bar-chart-with-geom_bar" id="toc-bar-chart-with-geom_bar" class="nav-link" data-scroll-target="#bar-chart-with-geom_bar">Bar chart with <code>geom_bar</code></a></li>
-  </ul></li>
-  <li><a href="#extra-section" id="toc-extra-section" class="nav-link" data-scroll-target="#extra-section">Extra section</a>
-  <ul class="collapse">
+  <li><a href="#extra-section" id="toc-extra-section" class="nav-link" data-scroll-target="#extra-section">Extra section</a></li>
   <li><a href="#bar-chart-with-geom_col" id="toc-bar-chart-with-geom_col" class="nav-link" data-scroll-target="#bar-chart-with-geom_col">Bar chart with <code>geom_col</code></a></li>
-  </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Presentations/presentation1.html">Presentations</a></li><li class="breadcrumb-item"><a href="../Presentations/presentation4.html">Presentation 4: ggplot2</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Presentations/presentation1.html">Presentations</a></li><li class="breadcrumb-item"><a href="../Presentations/presentation4.html">Presentation 3: ggplot2</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Presentation 4</h1>
+<h1 class="title">Presentation 3: ggplot2</h1>
 </div>
 
 
@@ -262,10 +257,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="presentaion-4-ggplot2" class="level2">
-<h2 class="anchored" data-anchor-id="presentaion-4-ggplot2">Presentaion 4: ggplot2</h2>
-<section id="importing-libraries-and-data" class="level3">
-<h3 class="anchored" data-anchor-id="importing-libraries-and-data">Importing libraries and data</h3>
+<section id="importing-libraries-and-data" class="level2">
+<h2 class="anchored" data-anchor-id="importing-libraries-and-data">Importing libraries and data</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(writexl)</span>
@@ -284,8 +277,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="load-data" class="level3">
-<h3 class="anchored" data-anchor-id="load-data">Load data</h3>
+<section id="load-data" class="level2">
+<h2 class="anchored" data-anchor-id="load-data">Load data</h2>
 <p>The iris dataset is a widely-used dataset in data science, containing 150 observations of iris flowers with features like sepal length, sepal width, petal length, and petal width. It includes three species: Setosa, Versicolor, and Virginica, making it ideal for classification tasks and data visualization.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">'iris'</span>)</span>
@@ -304,8 +297,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># some R code </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="data-wranglig" class="level3">
-<h3 class="anchored" data-anchor-id="data-wranglig">Data wranglig</h3>
+<section id="data-wranglig" class="level2">
+<h2 class="anchored" data-anchor-id="data-wranglig">Data wranglig</h2>
 <p>Making the data more fun to plot.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define 5 colors and their respective ratios</span></span>
@@ -335,8 +328,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="ggplot2-the-basic-concepts" class="level3">
-<h3 class="anchored" data-anchor-id="ggplot2-the-basic-concepts">ggplot2: The basic concepts</h3>
+<section id="ggplot2-the-basic-concepts" class="level2">
+<h2 class="anchored" data-anchor-id="ggplot2-the-basic-concepts">ggplot2: The basic concepts</h2>
 <p>This is the starting point of a ggplot. The dataframe and the columns we wish to plot are defined. We have not specified what type of plot we want, hence an empty plot is produced.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(iris,                    <span class="co"># dataframe </span></span>
@@ -352,8 +345,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>                                <span class="co"># missing type of plot </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="scatter-plot-with-geom_point" class="level3">
-<h3 class="anchored" data-anchor-id="scatter-plot-with-geom_point">Scatter plot with <code>geom_point</code></h3>
+<section id="scatter-plot-with-geom_point" class="level2">
+<h2 class="anchored" data-anchor-id="scatter-plot-with-geom_point">Scatter plot with <code>geom_point</code></h2>
 <p>A scatter plot is made with the <code>geom_point</code> function and is used to get an overview over the relationship between two numeric variables. Here we see the relationship between sepal length and width.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(iris,                    <span class="co"># dataframe </span></span>
@@ -383,8 +376,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="scatter-plot-with-geom_point-with-color-stratification" class="level3">
-<h3 class="anchored" data-anchor-id="scatter-plot-with-geom_point-with-color-stratification">Scatter plot with <code>geom_point</code> with color stratification</h3>
+<section id="scatter-plot-with-geom_point-with-color-stratification" class="level2">
+<h2 class="anchored" data-anchor-id="scatter-plot-with-geom_point-with-color-stratification">Scatter plot with <code>geom_point</code> with color stratification</h2>
 <p>To change colors based on a feature, you need to set it <u>inside</u> <code>aes()</code>. Here we see the relationship between sepal length and width colored by species.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(iris,                   </span>
@@ -401,8 +394,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="boxplot-with-geom_histogram" class="level3">
-<h3 class="anchored" data-anchor-id="boxplot-with-geom_histogram">Boxplot with <code>geom_histogram</code></h3>
+<section id="boxplot-with-geom_histogram" class="level2">
+<h2 class="anchored" data-anchor-id="boxplot-with-geom_histogram">Boxplot with <code>geom_histogram</code></h2>
 <p>Boxplots are great to get an overview of continues variables and spot outliers. Can be shown on either axis (x and y).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(iris,                    </span>
@@ -445,8 +438,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="violin-plot-with-geom_violin" class="level3">
-<h3 class="anchored" data-anchor-id="violin-plot-with-geom_violin">Violin plot with <code>geom_violin</code></h3>
+<section id="violin-plot-with-geom_violin" class="level2">
+<h2 class="anchored" data-anchor-id="violin-plot-with-geom_violin">Violin plot with <code>geom_violin</code></h2>
 <p>A violin plot shows the distribution of a continuous variable across different categories, combining the features of a box plot and a density plot. Also, the labels can be edited.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(iris,                    </span>
@@ -465,8 +458,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="histogram-with-geom_histogram" class="level3">
-<h3 class="anchored" data-anchor-id="histogram-with-geom_histogram">Histogram with <code>geom_histogram</code></h3>
+<section id="histogram-with-geom_histogram" class="level2">
+<h2 class="anchored" data-anchor-id="histogram-with-geom_histogram">Histogram with <code>geom_histogram</code></h2>
 <p>Histogram shows the distribution of a continuous variable. You will sometimes get a message that suggests to select another <code>binwidth</code>. Do what is says and you will often get nicer plot (something nothing changes).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(iris,                    </span>
@@ -485,8 +478,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>  <span class="co"># geom_histogram(binwidth = 0.5)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="bar-chart-with-geom_bar" class="level3">
-<h3 class="anchored" data-anchor-id="bar-chart-with-geom_bar">Bar chart with <code>geom_bar</code></h3>
+<section id="bar-chart-with-geom_bar" class="level2">
+<h2 class="anchored" data-anchor-id="bar-chart-with-geom_bar">Bar chart with <code>geom_bar</code></h2>
 <p>A bar chart is made with the <code>geom_bar</code> function and is used to get an overview over the distribution of a single categorical variable, e.g.&nbsp;Flower.Color in this instance. Here we see the number of flowers of each Flower.Color. Notice that the Flower.Colors are sorted alphabetically.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save plot in p</span></span>
@@ -595,7 +588,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-</section>
 <section id="extra-section" class="level2">
 <h2 class="anchored" data-anchor-id="extra-section">Extra section</h2>
 <p><strong>(Should we exclude this? Is it too advanced? Is it used in the exercises?)</strong> We can order the columns such that the count goes from lowest to highest. This is actually not that easy in R.</p>
@@ -673,8 +665,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">fill =</span> Flower.Color) <span class="sc">+</span>                <span class="co"># add the fill ascetics </span></span>
 <span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> color_palette) <span class="co"># set the fill color according to the color palette</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="bar-chart-with-geom_col" class="level3">
-<h3 class="anchored" data-anchor-id="bar-chart-with-geom_col">Bar chart with <code>geom_col</code></h3>
+</section>
+<section id="bar-chart-with-geom_col" class="level2">
+<h2 class="anchored" data-anchor-id="bar-chart-with-geom_col">Bar chart with <code>geom_col</code></h2>
 <p>Summary of data:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>mean_sepal_length_pr_color <span class="ot">&lt;-</span> iris <span class="sc">%&gt;%</span></span>
@@ -709,7 +702,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->

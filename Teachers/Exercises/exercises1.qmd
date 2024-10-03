@@ -1,7 +1,6 @@
 ---
-title: "I. Working with data in R (exercises)"
+title: "Exersice 1: Introduction"
 author: "Data Science Lab, University of Copenhagen"
-date: "`r format(Sys.time(), '%d %B, %Y')`"
 format: html
 project:
   type: website
@@ -11,6 +10,7 @@ project:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
 ```
+
 
 ## Getting started
 

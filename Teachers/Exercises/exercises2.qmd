@@ -1,7 +1,6 @@
 ---
-title: "II. Working with data in R (exercises)"
+title: "Exersice 2: Tidyverse"
 author: "Data Science Lab, University of Copenhagen"
-date: "`r format(Sys.time(), '%d %B, %Y')`"
 format: html
 project:
   type: website
@@ -12,13 +11,13 @@ project:
 knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
 ```
 
-### Setting up
+## Setting up
 
 0.  **Create new Quarto document**. For working on the exercise, create a new Quarto document with a descriptive name and save it where you can find it again, i.e. in the folder where you downloaded the teaching material. You can use the commands shown in presentation2.qmd to solve this exercise. There is no shame in outright copying from the presentation2.qmd script, provided you understand what the command is doing.
 
 1.  **Load packages**. You will need to load the packages `tidyverse` and `readxl` for this exercise.
 
-### Importing data and a first look at the dataset
+## Importing data and a first look at the dataset
 
 The data set used in these exercises was compiled from data downloaded from the website of the UK's national weather service, the [*Met Office*](http://www.metoffice.gov.uk/public/weather/climate-historic/). It is saved in the file **climate.xlsx**[^1] which can be found in the folder `Exercises/Data/`. The spreadsheet contains monthly data from five UK weather stations for the following variables:
 
@@ -50,7 +49,7 @@ The data set used in these exercises was compiled from data downloaded from the 
 
     e.  How many rows per station?
 
-### Working with the data
+## Working with the data
 
 Before you proceed with the exercises in this document, make sure you load the `tidyverse` in order to use the functions from this package.
 
@@ -80,7 +79,7 @@ The next few questions build on each other, each adding a piece of code:
 
 12. Sort the rows in the output in descending order according to average annual rainfall.
 
-### Manipulating the data
+## Manipulating the data
 
 13. Create a new column in `climate` and save the new dataset in a different variable so you don’t overwrite your original `climate` data. The new column should count the number of days in each month without air frost, based on the existing `af` column. For this exercise, assume each month has 30 days. To find the number of days without air frost, subtract the value in the `af` column from 30.
 
@@ -88,7 +87,7 @@ The next few questions build on each other, each adding a piece of code:
 
 15. How many months are there with good weather (use the column you made in 14) for each station? Find the station that has the most months with good weather.
 
-### Complex operations
+## Complex operations
 
 The final questions require that you combine commands and variables of the type above.
 

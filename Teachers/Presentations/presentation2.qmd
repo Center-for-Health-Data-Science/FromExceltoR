@@ -1,12 +1,10 @@
 ---
-title: "Presentation 2"
+title: "Presentation 2: Tidyverse"
 format: html
 project:
   type: website
   output-dir: ../docs
 ---
-
-## Working with data in R
 
 ## Load packages
 

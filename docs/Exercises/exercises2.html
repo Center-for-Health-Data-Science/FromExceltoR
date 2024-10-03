@@ -8,7 +8,7 @@
 
 <meta name="author" content="Data Science Lab, University of Copenhagen">
 
-<title>II. Working with data in R (exercises) – FromExceltoR</title>
+<title>Exersice 2: Tidyverse – FromExceltoR</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -139,7 +139,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../Presentations/presentation4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Presentation 4: ggplot2</span></a>
+ <span class="menu-text">Presentation 3: ggplot2</span></a>
   </div>
 </li>
       </ul>
@@ -168,7 +168,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../Exercises/exercises4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Exercise 4: ggplot2</span></a>
+ <span class="menu-text">Exercise 3: ggplot2</span></a>
   </div>
 </li>
       </ul>
@@ -200,7 +200,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Exercises/exercises1.html">Exercises</a></li><li class="breadcrumb-item"><a href="../Exercises/exercises2.html">Exercise 2: Tidyverse</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">II. Working with data in R (exercises)</h1>
+<h1 class="title">Exersice 2: Tidyverse</h1>
 </div>
 
 
@@ -214,12 +214,6 @@ ul.task-list li input[type="checkbox"] {
           </div>
   </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">Invalid Date</p>
-    </div>
-  </div>
   
     
   </div>
@@ -229,15 +223,15 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="setting-up" class="level3">
-<h3 class="anchored" data-anchor-id="setting-up">Setting up</h3>
+<section id="setting-up" class="level2">
+<h2 class="anchored" data-anchor-id="setting-up">Setting up</h2>
 <ol start="0" type="1">
 <li><p><strong>Create new Quarto document</strong>. For working on the exercise, create a new Quarto document with a descriptive name and save it where you can find it again, i.e.&nbsp;in the folder where you downloaded the teaching material. You can use the commands shown in presentation2.qmd to solve this exercise. There is no shame in outright copying from the presentation2.qmd script, provided you understand what the command is doing.</p></li>
 <li><p><strong>Load packages</strong>. You will need to load the packages <code>tidyverse</code> and <code>readxl</code> for this exercise.</p></li>
 </ol>
 </section>
-<section id="importing-data-and-a-first-look-at-the-dataset" class="level3">
-<h3 class="anchored" data-anchor-id="importing-data-and-a-first-look-at-the-dataset">Importing data and a first look at the dataset</h3>
+<section id="importing-data-and-a-first-look-at-the-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="importing-data-and-a-first-look-at-the-dataset">Importing data and a first look at the dataset</h2>
 <p>The data set used in these exercises was compiled from data downloaded from the website of the UK’s national weather service, the <a href="http://www.metoffice.gov.uk/public/weather/climate-historic/"><em>Met Office</em></a>. It is saved in the file <strong>climate.xlsx</strong><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> which can be found in the folder <code>Exercises/Data/</code>. The spreadsheet contains monthly data from five UK weather stations for the following variables:</p>
 <table class="caption-top table">
 <thead>
@@ -290,8 +284,8 @@ ul.task-list li input[type="checkbox"] {
 </ol></li>
 </ol>
 </section>
-<section id="working-with-the-data" class="level3">
-<h3 class="anchored" data-anchor-id="working-with-the-data">Working with the data</h3>
+<section id="working-with-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="working-with-the-data">Working with the data</h2>
 <p>Before you proceed with the exercises in this document, make sure you load the <code>tidyverse</code> in order to use the functions from this package.</p>
 <ol start="5" type="1">
 <li><p>Count the number of rows that did not have any days with air frost.</p></li>
@@ -313,16 +307,16 @@ ul.task-list li input[type="checkbox"] {
 <li><p>Sort the rows in the output in descending order according to average annual rainfall.</p></li>
 </ol>
 </section>
-<section id="manipulating-the-data" class="level3">
-<h3 class="anchored" data-anchor-id="manipulating-the-data">Manipulating the data</h3>
+<section id="manipulating-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="manipulating-the-data">Manipulating the data</h2>
 <ol start="13" type="1">
 <li><p>Create a new column in <code>climate</code> and save the new dataset in a different variable so you don’t overwrite your original <code>climate</code> data. The new column should count the number of days in each month without air frost, based on the existing <code>af</code> column. For this exercise, assume each month has 30 days. To find the number of days without air frost, subtract the value in the <code>af</code> column from 30.</p></li>
 <li><p>Add another column to your new dataset that says whether the weather this month was good. We consider a month to be good if it had at least 100 hours of sunshine and less than 100 mm of rain. Otherwise the weather was bad.</p></li>
 <li><p>How many months are there with good weather (use the column you made in 14) for each station? Find the station that has the most months with good weather.</p></li>
 </ol>
 </section>
-<section id="complex-operations" class="level3">
-<h3 class="anchored" data-anchor-id="complex-operations">Complex operations</h3>
+<section id="complex-operations" class="level2">
+<h2 class="anchored" data-anchor-id="complex-operations">Complex operations</h2>
 <p>The final questions require that you combine commands and variables of the type above.</p>
 <ol start="16" type="1">
 <li><p>For each weather station apart from the one in Armagh, compute the total rainfall and sunshine duration for months that had no days of air frost. Present the totals in centimetres and days, respectively.</p></li>
