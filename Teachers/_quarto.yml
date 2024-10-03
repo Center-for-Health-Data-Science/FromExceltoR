@@ -8,6 +8,8 @@ website:
     left: 
       - href: index.qmd
         text: Home
+      - href: Presentations/presentation1.qmd
+        text: Presentations
   sidebar:
     style: "floating"
     right:
