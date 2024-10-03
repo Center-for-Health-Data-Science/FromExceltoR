@@ -19,15 +19,16 @@ website:
             text: "Presentation 2: Tidyverse"
           - href: Presentations/presentation4.qmd
             text: "Presentation 4: Visualization with ggplot2"
-      
+            
       - section: "Exercises"
+        contents:
           - href: Exercises/exercise1.qmd
             text: "Exercise 1: Introduction to R and Quarto"
           - href: Exercises/exercise2.qmd
             text: "Exercise 2: Tidyverse"
           - href: Exercises/exercise4.qmd
             text: "Presentation 4: Visualization with ggplot2"
-     
+            
       - section: "Cheat Sheets"
 
 format:

@@ -113,7 +113,7 @@
     "crumbs": [
       "Home",
       "Presentations",
-      "Presentation 1"
+      "Presentation 1: Introduction to R and Quarto"
     ]
   },
   {
@@ -125,7 +125,7 @@
     "crumbs": [
       "Home",
       "Presentations",
-      "Presentation 1"
+      "Presentation 1: Introduction to R and Quarto"
     ]
   },
   {
@@ -137,7 +137,7 @@
     "crumbs": [
       "Home",
       "Presentations",
-      "Presentation 1"
+      "Presentation 1: Introduction to R and Quarto"
     ]
   },
   {
@@ -149,7 +149,7 @@
     "crumbs": [
       "Home",
       "Presentations",
-      "Presentation 1"
+      "Presentation 1: Introduction to R and Quarto"
     ]
   },
   {
@@ -161,7 +161,7 @@
     "crumbs": [
       "Home",
       "Presentations",
-      "Presentation 1"
+      "Presentation 1: Introduction to R and Quarto"
     ]
   },
   {
@@ -173,7 +173,7 @@
     "crumbs": [
       "Home",
       "Presentations",
-      "Presentation 1"
+      "Presentation 1: Introduction to R and Quarto"
     ]
   },
   {
@@ -185,7 +185,7 @@
     "crumbs": [
       "Home",
       "Presentations",
-      "Presentation 1"
+      "Presentation 1: Introduction to R and Quarto"
     ]
   },
   {
@@ -197,7 +197,7 @@
     "crumbs": [
       "Home",
       "Presentations",
-      "Presentation 1"
+      "Presentation 1: Introduction to R and Quarto"
     ]
   },
   {
@@ -209,7 +209,7 @@
     "crumbs": [
       "Home",
       "Presentations",
-      "Presentation 1"
+      "Presentation 1: Introduction to R and Quarto"
     ]
   },
   {
@@ -221,7 +221,7 @@
     "crumbs": [
       "Home",
       "Presentations",
-      "Presentation 1"
+      "Presentation 1: Introduction to R and Quarto"
     ]
   },
   {
@@ -233,7 +233,7 @@
     "crumbs": [
       "Home",
       "Presentations",
-      "Presentation 1"
+      "Presentation 1: Introduction to R and Quarto"
     ]
   },
   {
@@ -280,7 +280,7 @@
     "crumbs": [
       "Home",
       "Presentations",
-      "Presentation 2"
+      "Presentation 2: Tidyverse"
     ]
   },
   {
@@ -292,7 +292,7 @@
     "crumbs": [
       "Home",
       "Presentations",
-      "Presentation 2"
+      "Presentation 2: Tidyverse"
     ]
   },
   {
@@ -304,7 +304,7 @@
     "crumbs": [
       "Home",
       "Presentations",
-      "Presentation 2"
+      "Presentation 2: Tidyverse"
     ]
   },
   {
@@ -316,7 +316,7 @@
     "crumbs": [
       "Home",
       "Presentations",
-      "Presentation 2"
+      "Presentation 2: Tidyverse"
     ]
   },
   {
@@ -328,7 +328,7 @@
     "crumbs": [
       "Home",
       "Presentations",
-      "Presentation 2"
+      "Presentation 2: Tidyverse"
     ]
   },
   {
@@ -340,7 +340,7 @@
     "crumbs": [
       "Home",
       "Presentations",
-      "Presentation 2"
+      "Presentation 2: Tidyverse"
     ]
   },
   {
@@ -352,7 +352,7 @@
     "crumbs": [
       "Home",
       "Presentations",
-      "Presentation 2"
+      "Presentation 2: Tidyverse"
     ]
   },
   {
@@ -364,7 +364,7 @@
     "crumbs": [
       "Home",
       "Presentations",
-      "Presentation 2"
+      "Presentation 2: Tidyverse"
     ]
   },
   {
@@ -376,7 +376,7 @@
     "crumbs": [
       "Home",
       "Presentations",
-      "Presentation 2"
+      "Presentation 2: Tidyverse"
     ]
   },
   {
@@ -388,7 +388,7 @@
     "crumbs": [
       "Home",
       "Presentations",
-      "Presentation 2"
+      "Presentation 2: Tidyverse"
     ]
   },
   {
@@ -400,7 +400,7 @@
     "crumbs": [
       "Home",
       "Presentations",
-      "Presentation 2"
+      "Presentation 2: Tidyverse"
     ]
   },
   {
@@ -412,7 +412,7 @@
     "crumbs": [
       "Home",
       "Presentations",
-      "Presentation 2"
+      "Presentation 2: Tidyverse"
     ]
   },
   {
@@ -424,7 +424,7 @@
     "crumbs": [
       "Home",
       "Presentations",
-      "Presentation 2"
+      "Presentation 2: Tidyverse"
     ]
   },
   {
@@ -432,21 +432,36 @@
     "href": "Presentations/presentation4.html",
     "title": "Presentation 4",
     "section": "",
-    "text": "library(readxl)\nlibrary(writexl)\nlibrary(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.1     ✔ tibble    3.2.1\n✔ lubridate 1.9.3     ✔ tidyr     1.3.1\n✔ purrr     1.0.2     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\n\n\n\n\nThe iris dataset is a widely-used dataset in data science, containing 150 observations of iris flowers with features like sepal length, sepal width, petal length, and petal width. It includes three species: Setosa, Versicolor, and Virginica, making it ideal for classification tasks and data visualization.\n\ndata('iris')\nhead(iris)\n\n  Sepal.Length Sepal.Width Petal.Length Petal.Width Species\n1          5.1         3.5          1.4         0.2  setosa\n2          4.9         3.0          1.4         0.2  setosa\n3          4.7         3.2          1.3         0.2  setosa\n4          4.6         3.1          1.5         0.2  setosa\n5          5.0         3.6          1.4         0.2  setosa\n6          5.4         3.9          1.7         0.4  setosa\n\n\n\n# some R code \n\n\n\n\nMaking the data more fun to plot.\n\n# Define 5 colors and their respective ratios\nset.seed(123)  # For reproducibility\ncolors &lt;- c(rep(\"Red\", 50),       # 50 rows with Red\n            rep(\"Blue\", 30),      # 30 rows with Blue\n            rep(\"Yellow\", 30),    # 30 rows with Yellow\n            rep(\"Green\", 20),     # 20 rows with Green\n            rep(\"Purple\", 20))    # 20 rows with Purple\n\n# Shuffle the colors to mix them randomly\ncolors &lt;- sample(colors)\n\n# Add the 'Flower.Color' column to the iris dataset\niris$Flower.Color &lt;- colors\n\n# View the first few rows to check the result\nhead(iris)\n\n  Sepal.Length Sepal.Width Petal.Length Petal.Width Species Flower.Color\n1          5.1         3.5          1.4         0.2  setosa          Red\n2          4.9         3.0          1.4         0.2  setosa          Red\n3          4.7         3.2          1.3         0.2  setosa        Green\n4          4.6         3.1          1.5         0.2  setosa          Red\n5          5.0         3.6          1.4         0.2  setosa       Purple\n6          5.4         3.9          1.7         0.4  setosa       Purple\n\n\n\n\n\nThis is the starting point of a ggplot. The dataframe and the columns we wish to plot are defined. We have not specified what type of plot we want, hence an empty plot is produced.\n\nggplot(iris,                    # dataframe \n       aes(x = Sepal.Length,    # x-value\n           y = Sepal.Width))    # y-value\n\n\n\n\n\n\n\n                                # missing type of plot \n\n\n\n\nA scatter plot is made with the geom_point function and is used to get an overview over the relationship between two numeric variables. Here we see the relationship between sepal length and width.\n\nggplot(iris,                    # dataframe \n       aes(x = Sepal.Length,    # x-value\n           y = Petal.Length)) + # y-value\n  geom_point()                  # type of plot\n\n\n\n\n\n\n\n\nChange color of entire plot by setting it outside aes().\n\nggplot(iris,                    \n       aes(x = Sepal.Length,    \n           y = Petal.Length)) + \n  geom_point(color = 'hotpink') \n\n\n\n\n\n\n\n\n\n\n\nTo change colors based on a feature, you need to set it inside aes(). Here we see the relationship between sepal length and width colored by species.\n\nggplot(iris,                   \n       aes(x = Sepal.Length,   \n           y = Petal.Length,     \n           color = Species)) +  \n  geom_point()\n\n\n\n\n\n\n\n\n\n\n\nBoxplots are great to get an overview of continues variables and spot outliers. Can be shown on either axis (x and y).\n\nggplot(iris,                    \n       aes(y = Sepal.Length)) + \n  geom_boxplot() \n\n\n\n\n\n\n\n\nSplit up by categorical variable like Species:\n\nggplot(iris,                    \n       aes(y = Sepal.Length,    \n           x = Species)) +      \n  geom_boxplot()              \n\n\n\n\n\n\n\n\n… or color.\n\nggplot(iris,                    \n       aes(y = Sepal.Length,    \n           fill = Species)) +  \n  geom_boxplot()\n\n\n\n\n\n\n\n\n\n\n\nA violin plot shows the distribution of a continuous variable across different categories, combining the features of a box plot and a density plot. Also, the labels can be edited.\n\nggplot(iris,                    \n       aes(y = Sepal.Length,    \n           x = Species)) +      \n  geom_violin() + \n  labs(y = 'Sepal Length', \n       x = 'Flower Species', \n       title = 'Violin plot of sepal length stratisfied by flower species')\n\n\n\n\n\n\n\n\n\n\n\nHistogram shows the distribution of a continuous variable. You will sometimes get a message that suggests to select another binwidth. Do what is says and you will often get nicer plot (something nothing changes).\n\nggplot(iris,                    \n       aes(x = Sepal.Length)) +     \n  geom_histogram()\n\n`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.\n\n\n\n\n\n\n\n\n  # geom_histogram(binwidth = 0.5)\n\n\n\n\nA bar chart is made with the geom_bar function and is used to get an overview over the distribution of a single categorical variable, e.g. Flower.Color in this instance. Here we see the number of flowers of each Flower.Color. Notice that the Flower.Colors are sorted alphabetically.\n\n# Save plot in p\np &lt;- ggplot(iris,                    \n            aes(x = Flower.Color)) + \n  geom_bar()                         \n\n# Show p\np\n\n\n\n\n\n\n\n# Show p with new labels \np + labs(x = 'Flower Color', y = 'Count')\n\n\n\n\n\n\n\n# Show p (nothing has changed)\np\n\n\n\n\n\n\n\n# Save p with new lables in p (overwrite / reassign)\np &lt;- p + labs(x = 'Flower Color', y = 'Count')\n\n# Show p (lables have changed)\np \n\n\n\n\n\n\n\n\nColor by species. The bars are stacked by default.\n\nggplot(iris,                    \n       aes(x = Flower.Color,   \n           fill = Species)) +   \n  geom_bar()                   \n\n\n\n\n\n\n\n\nAdd position = \"dodge\" for bars to be placed next to each other.\n\nggplot(iris,                   \n      aes(x = Flower.Color,    \n          fill = Species)) +   \n  geom_bar(position = \"dodge\") \n\n\n\n\n\n\n\n\nAdd position = \"fill\" for bars to be normalized such that heights of the bars to represent percentages rather than counts.\n\nggplot(iris,                   \n      aes(x = Flower.Color,   \n          fill = Species)) +   \n  geom_bar(position = \"fill\") + \n  theme_bw()\n\n\n\n\n\n\n\n  # theme_classic()  \n  # theme_minimal()\n  # theme_dark()\n\nUsing facet_wrap if you want a plot to be split up according to a categorical variable.\n\nggplot(iris,                   \n      aes(x = Flower.Color)) +\n  geom_bar()  + \n  facet_wrap(vars(Species))"
+    "text": "library(readxl)\nlibrary(writexl)\nlibrary(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.1     ✔ tibble    3.2.1\n✔ lubridate 1.9.3     ✔ tidyr     1.3.1\n✔ purrr     1.0.2     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\n\n\n\n\nThe iris dataset is a widely-used dataset in data science, containing 150 observations of iris flowers with features like sepal length, sepal width, petal length, and petal width. It includes three species: Setosa, Versicolor, and Virginica, making it ideal for classification tasks and data visualization.\n\ndata('iris')\nhead(iris)\n\n  Sepal.Length Sepal.Width Petal.Length Petal.Width Species\n1          5.1         3.5          1.4         0.2  setosa\n2          4.9         3.0          1.4         0.2  setosa\n3          4.7         3.2          1.3         0.2  setosa\n4          4.6         3.1          1.5         0.2  setosa\n5          5.0         3.6          1.4         0.2  setosa\n6          5.4         3.9          1.7         0.4  setosa\n\n\n\n# some R code \n\n\n\n\nMaking the data more fun to plot.\n\n# Define 5 colors and their respective ratios\nset.seed(123)  # For reproducibility\ncolors &lt;- c(rep(\"Red\", 50),       # 50 rows with Red\n            rep(\"Blue\", 30),      # 30 rows with Blue\n            rep(\"Yellow\", 30),    # 30 rows with Yellow\n            rep(\"Green\", 20),     # 20 rows with Green\n            rep(\"Purple\", 20))    # 20 rows with Purple\n\n# Shuffle the colors to mix them randomly\ncolors &lt;- sample(colors)\n\n# Add the 'Flower.Color' column to the iris dataset\niris$Flower.Color &lt;- colors\n\n# View the first few rows to check the result\nhead(iris)\n\n  Sepal.Length Sepal.Width Petal.Length Petal.Width Species Flower.Color\n1          5.1         3.5          1.4         0.2  setosa          Red\n2          4.9         3.0          1.4         0.2  setosa          Red\n3          4.7         3.2          1.3         0.2  setosa        Green\n4          4.6         3.1          1.5         0.2  setosa          Red\n5          5.0         3.6          1.4         0.2  setosa       Purple\n6          5.4         3.9          1.7         0.4  setosa       Purple\n\n\n\n\n\nThis is the starting point of a ggplot. The dataframe and the columns we wish to plot are defined. We have not specified what type of plot we want, hence an empty plot is produced.\n\nggplot(iris,                    # dataframe \n       aes(x = Sepal.Length,    # x-value\n           y = Sepal.Width))    # y-value\n\n\n\n\n\n\n\n                                # missing type of plot \n\n\n\n\nA scatter plot is made with the geom_point function and is used to get an overview over the relationship between two numeric variables. Here we see the relationship between sepal length and width.\n\nggplot(iris,                    # dataframe \n       aes(x = Sepal.Length,    # x-value\n           y = Petal.Length)) + # y-value\n  geom_point()                  # type of plot\n\n\n\n\n\n\n\n\nChange color of entire plot by setting it outside aes().\n\nggplot(iris,                    \n       aes(x = Sepal.Length,    \n           y = Petal.Length)) + \n  geom_point(color = 'hotpink') \n\n\n\n\n\n\n\n\n\n\n\nTo change colors based on a feature, you need to set it inside aes(). Here we see the relationship between sepal length and width colored by species.\n\nggplot(iris,                   \n       aes(x = Sepal.Length,   \n           y = Petal.Length,     \n           color = Species)) +  \n  geom_point()\n\n\n\n\n\n\n\n\n\n\n\nBoxplots are great to get an overview of continues variables and spot outliers. Can be shown on either axis (x and y).\n\nggplot(iris,                    \n       aes(y = Sepal.Length)) + \n  geom_boxplot() \n\n\n\n\n\n\n\n\nSplit up by categorical variable like Species:\n\nggplot(iris,                    \n       aes(y = Sepal.Length,    \n           x = Species)) +      \n  geom_boxplot()              \n\n\n\n\n\n\n\n\n… or color.\n\nggplot(iris,                    \n       aes(y = Sepal.Length,    \n           fill = Species)) +  \n  geom_boxplot()\n\n\n\n\n\n\n\n\n\n\n\nA violin plot shows the distribution of a continuous variable across different categories, combining the features of a box plot and a density plot. Also, the labels can be edited.\n\nggplot(iris,                    \n       aes(y = Sepal.Length,    \n           x = Species)) +      \n  geom_violin() + \n  labs(y = 'Sepal Length', \n       x = 'Flower Species', \n       title = 'Violin plot of sepal length stratisfied by flower species')\n\n\n\n\n\n\n\n\n\n\n\nHistogram shows the distribution of a continuous variable. You will sometimes get a message that suggests to select another binwidth. Do what is says and you will often get nicer plot (something nothing changes).\n\nggplot(iris,                    \n       aes(x = Sepal.Length)) +     \n  geom_histogram()\n\n`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.\n\n\n\n\n\n\n\n\n  # geom_histogram(binwidth = 0.5)\n\n\n\n\nA bar chart is made with the geom_bar function and is used to get an overview over the distribution of a single categorical variable, e.g. Flower.Color in this instance. Here we see the number of flowers of each Flower.Color. Notice that the Flower.Colors are sorted alphabetically.\n\n# Save plot in p\np &lt;- ggplot(iris,                    \n            aes(x = Flower.Color)) + \n  geom_bar()                         \n\n# Show p\np\n\n\n\n\n\n\n\n# Show p with new labels \np + labs(x = 'Flower Color', y = 'Count')\n\n\n\n\n\n\n\n# Show p (nothing has changed)\np\n\n\n\n\n\n\n\n# Save p with new lables in p (overwrite / reassign)\np &lt;- p + labs(x = 'Flower Color', y = 'Count')\n\n# Show p (lables have changed)\np \n\n\n\n\n\n\n\n\nColor by species. The bars are stacked by default.\n\nggplot(iris,                    \n       aes(x = Flower.Color,   \n           fill = Species)) +   \n  geom_bar()                   \n\n\n\n\n\n\n\n\nAdd position = \"dodge\" for bars to be placed next to each other.\n\nggplot(iris,                   \n      aes(x = Flower.Color,    \n          fill = Species)) +   \n  geom_bar(position = \"dodge\") \n\n\n\n\n\n\n\n\nAdd position = \"fill\" for bars to be normalized such that heights of the bars to represent percentages rather than counts.\n\nggplot(iris,                   \n      aes(x = Flower.Color,   \n          fill = Species)) +   \n  geom_bar(position = \"fill\") + \n  theme_bw()\n\n\n\n\n\n\n\n  # theme_classic()  \n  # theme_minimal()\n  # theme_dark()\n\nUsing facet_wrap if you want a plot to be split up according to a categorical variable.\n\nggplot(iris,                   \n      aes(x = Flower.Color)) +\n  geom_bar()  + \n  facet_wrap(vars(Species))",
+    "crumbs": [
+      "Home",
+      "Presentations",
+      "Presentation 4: Visualization with ggplot2"
+    ]
   },
   {
     "objectID": "Presentations/presentation4.html#presentaion-4-ggplot2",
     "href": "Presentations/presentation4.html#presentaion-4-ggplot2",
     "title": "Presentation 4",
     "section": "",
-    "text": "library(readxl)\nlibrary(writexl)\nlibrary(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.1     ✔ tibble    3.2.1\n✔ lubridate 1.9.3     ✔ tidyr     1.3.1\n✔ purrr     1.0.2     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\n\n\n\n\nThe iris dataset is a widely-used dataset in data science, containing 150 observations of iris flowers with features like sepal length, sepal width, petal length, and petal width. It includes three species: Setosa, Versicolor, and Virginica, making it ideal for classification tasks and data visualization.\n\ndata('iris')\nhead(iris)\n\n  Sepal.Length Sepal.Width Petal.Length Petal.Width Species\n1          5.1         3.5          1.4         0.2  setosa\n2          4.9         3.0          1.4         0.2  setosa\n3          4.7         3.2          1.3         0.2  setosa\n4          4.6         3.1          1.5         0.2  setosa\n5          5.0         3.6          1.4         0.2  setosa\n6          5.4         3.9          1.7         0.4  setosa\n\n\n\n# some R code \n\n\n\n\nMaking the data more fun to plot.\n\n# Define 5 colors and their respective ratios\nset.seed(123)  # For reproducibility\ncolors &lt;- c(rep(\"Red\", 50),       # 50 rows with Red\n            rep(\"Blue\", 30),      # 30 rows with Blue\n            rep(\"Yellow\", 30),    # 30 rows with Yellow\n            rep(\"Green\", 20),     # 20 rows with Green\n            rep(\"Purple\", 20))    # 20 rows with Purple\n\n# Shuffle the colors to mix them randomly\ncolors &lt;- sample(colors)\n\n# Add the 'Flower.Color' column to the iris dataset\niris$Flower.Color &lt;- colors\n\n# View the first few rows to check the result\nhead(iris)\n\n  Sepal.Length Sepal.Width Petal.Length Petal.Width Species Flower.Color\n1          5.1         3.5          1.4         0.2  setosa          Red\n2          4.9         3.0          1.4         0.2  setosa          Red\n3          4.7         3.2          1.3         0.2  setosa        Green\n4          4.6         3.1          1.5         0.2  setosa          Red\n5          5.0         3.6          1.4         0.2  setosa       Purple\n6          5.4         3.9          1.7         0.4  setosa       Purple\n\n\n\n\n\nThis is the starting point of a ggplot. The dataframe and the columns we wish to plot are defined. We have not specified what type of plot we want, hence an empty plot is produced.\n\nggplot(iris,                    # dataframe \n       aes(x = Sepal.Length,    # x-value\n           y = Sepal.Width))    # y-value\n\n\n\n\n\n\n\n                                # missing type of plot \n\n\n\n\nA scatter plot is made with the geom_point function and is used to get an overview over the relationship between two numeric variables. Here we see the relationship between sepal length and width.\n\nggplot(iris,                    # dataframe \n       aes(x = Sepal.Length,    # x-value\n           y = Petal.Length)) + # y-value\n  geom_point()                  # type of plot\n\n\n\n\n\n\n\n\nChange color of entire plot by setting it outside aes().\n\nggplot(iris,                    \n       aes(x = Sepal.Length,    \n           y = Petal.Length)) + \n  geom_point(color = 'hotpink') \n\n\n\n\n\n\n\n\n\n\n\nTo change colors based on a feature, you need to set it inside aes(). Here we see the relationship between sepal length and width colored by species.\n\nggplot(iris,                   \n       aes(x = Sepal.Length,   \n           y = Petal.Length,     \n           color = Species)) +  \n  geom_point()\n\n\n\n\n\n\n\n\n\n\n\nBoxplots are great to get an overview of continues variables and spot outliers. Can be shown on either axis (x and y).\n\nggplot(iris,                    \n       aes(y = Sepal.Length)) + \n  geom_boxplot() \n\n\n\n\n\n\n\n\nSplit up by categorical variable like Species:\n\nggplot(iris,                    \n       aes(y = Sepal.Length,    \n           x = Species)) +      \n  geom_boxplot()              \n\n\n\n\n\n\n\n\n… or color.\n\nggplot(iris,                    \n       aes(y = Sepal.Length,    \n           fill = Species)) +  \n  geom_boxplot()\n\n\n\n\n\n\n\n\n\n\n\nA violin plot shows the distribution of a continuous variable across different categories, combining the features of a box plot and a density plot. Also, the labels can be edited.\n\nggplot(iris,                    \n       aes(y = Sepal.Length,    \n           x = Species)) +      \n  geom_violin() + \n  labs(y = 'Sepal Length', \n       x = 'Flower Species', \n       title = 'Violin plot of sepal length stratisfied by flower species')\n\n\n\n\n\n\n\n\n\n\n\nHistogram shows the distribution of a continuous variable. You will sometimes get a message that suggests to select another binwidth. Do what is says and you will often get nicer plot (something nothing changes).\n\nggplot(iris,                    \n       aes(x = Sepal.Length)) +     \n  geom_histogram()\n\n`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.\n\n\n\n\n\n\n\n\n  # geom_histogram(binwidth = 0.5)\n\n\n\n\nA bar chart is made with the geom_bar function and is used to get an overview over the distribution of a single categorical variable, e.g. Flower.Color in this instance. Here we see the number of flowers of each Flower.Color. Notice that the Flower.Colors are sorted alphabetically.\n\n# Save plot in p\np &lt;- ggplot(iris,                    \n            aes(x = Flower.Color)) + \n  geom_bar()                         \n\n# Show p\np\n\n\n\n\n\n\n\n# Show p with new labels \np + labs(x = 'Flower Color', y = 'Count')\n\n\n\n\n\n\n\n# Show p (nothing has changed)\np\n\n\n\n\n\n\n\n# Save p with new lables in p (overwrite / reassign)\np &lt;- p + labs(x = 'Flower Color', y = 'Count')\n\n# Show p (lables have changed)\np \n\n\n\n\n\n\n\n\nColor by species. The bars are stacked by default.\n\nggplot(iris,                    \n       aes(x = Flower.Color,   \n           fill = Species)) +   \n  geom_bar()                   \n\n\n\n\n\n\n\n\nAdd position = \"dodge\" for bars to be placed next to each other.\n\nggplot(iris,                   \n      aes(x = Flower.Color,    \n          fill = Species)) +   \n  geom_bar(position = \"dodge\") \n\n\n\n\n\n\n\n\nAdd position = \"fill\" for bars to be normalized such that heights of the bars to represent percentages rather than counts.\n\nggplot(iris,                   \n      aes(x = Flower.Color,   \n          fill = Species)) +   \n  geom_bar(position = \"fill\") + \n  theme_bw()\n\n\n\n\n\n\n\n  # theme_classic()  \n  # theme_minimal()\n  # theme_dark()\n\nUsing facet_wrap if you want a plot to be split up according to a categorical variable.\n\nggplot(iris,                   \n      aes(x = Flower.Color)) +\n  geom_bar()  + \n  facet_wrap(vars(Species))"
+    "text": "library(readxl)\nlibrary(writexl)\nlibrary(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.1     ✔ tibble    3.2.1\n✔ lubridate 1.9.3     ✔ tidyr     1.3.1\n✔ purrr     1.0.2     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\n\n\n\n\nThe iris dataset is a widely-used dataset in data science, containing 150 observations of iris flowers with features like sepal length, sepal width, petal length, and petal width. It includes three species: Setosa, Versicolor, and Virginica, making it ideal for classification tasks and data visualization.\n\ndata('iris')\nhead(iris)\n\n  Sepal.Length Sepal.Width Petal.Length Petal.Width Species\n1          5.1         3.5          1.4         0.2  setosa\n2          4.9         3.0          1.4         0.2  setosa\n3          4.7         3.2          1.3         0.2  setosa\n4          4.6         3.1          1.5         0.2  setosa\n5          5.0         3.6          1.4         0.2  setosa\n6          5.4         3.9          1.7         0.4  setosa\n\n\n\n# some R code \n\n\n\n\nMaking the data more fun to plot.\n\n# Define 5 colors and their respective ratios\nset.seed(123)  # For reproducibility\ncolors &lt;- c(rep(\"Red\", 50),       # 50 rows with Red\n            rep(\"Blue\", 30),      # 30 rows with Blue\n            rep(\"Yellow\", 30),    # 30 rows with Yellow\n            rep(\"Green\", 20),     # 20 rows with Green\n            rep(\"Purple\", 20))    # 20 rows with Purple\n\n# Shuffle the colors to mix them randomly\ncolors &lt;- sample(colors)\n\n# Add the 'Flower.Color' column to the iris dataset\niris$Flower.Color &lt;- colors\n\n# View the first few rows to check the result\nhead(iris)\n\n  Sepal.Length Sepal.Width Petal.Length Petal.Width Species Flower.Color\n1          5.1         3.5          1.4         0.2  setosa          Red\n2          4.9         3.0          1.4         0.2  setosa          Red\n3          4.7         3.2          1.3         0.2  setosa        Green\n4          4.6         3.1          1.5         0.2  setosa          Red\n5          5.0         3.6          1.4         0.2  setosa       Purple\n6          5.4         3.9          1.7         0.4  setosa       Purple\n\n\n\n\n\nThis is the starting point of a ggplot. The dataframe and the columns we wish to plot are defined. We have not specified what type of plot we want, hence an empty plot is produced.\n\nggplot(iris,                    # dataframe \n       aes(x = Sepal.Length,    # x-value\n           y = Sepal.Width))    # y-value\n\n\n\n\n\n\n\n                                # missing type of plot \n\n\n\n\nA scatter plot is made with the geom_point function and is used to get an overview over the relationship between two numeric variables. Here we see the relationship between sepal length and width.\n\nggplot(iris,                    # dataframe \n       aes(x = Sepal.Length,    # x-value\n           y = Petal.Length)) + # y-value\n  geom_point()                  # type of plot\n\n\n\n\n\n\n\n\nChange color of entire plot by setting it outside aes().\n\nggplot(iris,                    \n       aes(x = Sepal.Length,    \n           y = Petal.Length)) + \n  geom_point(color = 'hotpink') \n\n\n\n\n\n\n\n\n\n\n\nTo change colors based on a feature, you need to set it inside aes(). Here we see the relationship between sepal length and width colored by species.\n\nggplot(iris,                   \n       aes(x = Sepal.Length,   \n           y = Petal.Length,     \n           color = Species)) +  \n  geom_point()\n\n\n\n\n\n\n\n\n\n\n\nBoxplots are great to get an overview of continues variables and spot outliers. Can be shown on either axis (x and y).\n\nggplot(iris,                    \n       aes(y = Sepal.Length)) + \n  geom_boxplot() \n\n\n\n\n\n\n\n\nSplit up by categorical variable like Species:\n\nggplot(iris,                    \n       aes(y = Sepal.Length,    \n           x = Species)) +      \n  geom_boxplot()              \n\n\n\n\n\n\n\n\n… or color.\n\nggplot(iris,                    \n       aes(y = Sepal.Length,    \n           fill = Species)) +  \n  geom_boxplot()\n\n\n\n\n\n\n\n\n\n\n\nA violin plot shows the distribution of a continuous variable across different categories, combining the features of a box plot and a density plot. Also, the labels can be edited.\n\nggplot(iris,                    \n       aes(y = Sepal.Length,    \n           x = Species)) +      \n  geom_violin() + \n  labs(y = 'Sepal Length', \n       x = 'Flower Species', \n       title = 'Violin plot of sepal length stratisfied by flower species')\n\n\n\n\n\n\n\n\n\n\n\nHistogram shows the distribution of a continuous variable. You will sometimes get a message that suggests to select another binwidth. Do what is says and you will often get nicer plot (something nothing changes).\n\nggplot(iris,                    \n       aes(x = Sepal.Length)) +     \n  geom_histogram()\n\n`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.\n\n\n\n\n\n\n\n\n  # geom_histogram(binwidth = 0.5)\n\n\n\n\nA bar chart is made with the geom_bar function and is used to get an overview over the distribution of a single categorical variable, e.g. Flower.Color in this instance. Here we see the number of flowers of each Flower.Color. Notice that the Flower.Colors are sorted alphabetically.\n\n# Save plot in p\np &lt;- ggplot(iris,                    \n            aes(x = Flower.Color)) + \n  geom_bar()                         \n\n# Show p\np\n\n\n\n\n\n\n\n# Show p with new labels \np + labs(x = 'Flower Color', y = 'Count')\n\n\n\n\n\n\n\n# Show p (nothing has changed)\np\n\n\n\n\n\n\n\n# Save p with new lables in p (overwrite / reassign)\np &lt;- p + labs(x = 'Flower Color', y = 'Count')\n\n# Show p (lables have changed)\np \n\n\n\n\n\n\n\n\nColor by species. The bars are stacked by default.\n\nggplot(iris,                    \n       aes(x = Flower.Color,   \n           fill = Species)) +   \n  geom_bar()                   \n\n\n\n\n\n\n\n\nAdd position = \"dodge\" for bars to be placed next to each other.\n\nggplot(iris,                   \n      aes(x = Flower.Color,    \n          fill = Species)) +   \n  geom_bar(position = \"dodge\") \n\n\n\n\n\n\n\n\nAdd position = \"fill\" for bars to be normalized such that heights of the bars to represent percentages rather than counts.\n\nggplot(iris,                   \n      aes(x = Flower.Color,   \n          fill = Species)) +   \n  geom_bar(position = \"fill\") + \n  theme_bw()\n\n\n\n\n\n\n\n  # theme_classic()  \n  # theme_minimal()\n  # theme_dark()\n\nUsing facet_wrap if you want a plot to be split up according to a categorical variable.\n\nggplot(iris,                   \n      aes(x = Flower.Color)) +\n  geom_bar()  + \n  facet_wrap(vars(Species))",
+    "crumbs": [
+      "Home",
+      "Presentations",
+      "Presentation 4: Visualization with ggplot2"
+    ]
   },
   {
     "objectID": "Presentations/presentation4.html#extra-section",
     "href": "Presentations/presentation4.html#extra-section",
     "title": "Presentation 4",
     "section": "Extra section",
-    "text": "Extra section\n(Should we exclude this? Is it too advanced? Is it used in the exercises?) We can order the columns such that the count goes from lowest to highest. This is actually not that easy in R.\nFirst, we see that the class of the Flower.Color is character. Characters are always sorted alphabetically like we saw above.\n\nclass(iris$Flower.Color)\n\n[1] \"character\"\n\n\nExtract the number of flowers for each Flower.Color.\n\ndl_Flower.Color &lt;- iris %&gt;%\n  group_by(Flower.Color) %&gt;%\n  summarise(n = n()) %&gt;% \n  arrange(desc(n))\n\ndl_Flower.Color\n\n# A tibble: 5 × 2\n  Flower.Color     n\n  &lt;chr&gt;        &lt;int&gt;\n1 Red             50\n2 Blue            30\n3 Yellow          30\n4 Green           20\n5 Purple          20\n\ndl_Flower.Color$Flower.Color\n\n[1] \"Red\"    \"Blue\"   \"Yellow\" \"Green\"  \"Purple\"\n\n\nChange the class of the Flower.Color feature to factor and add levels according to the number of flowers with each color.\n\niris$Flower.Color &lt;- factor(iris$Flower.Color,\n                            levels = dl_Flower.Color$Flower.Color)\n\nCheck class now\n\nclass(iris$Flower.Color)\n\n[1] \"factor\"\n\n\nNow we do the same plot as before and we see that the order has changed to range from largest to smallest Flower.Colors group. The plot is saved in the variable p.\n\np &lt;- ggplot(iris,                # dataframe \n       aes(x = Flower.Color)) +  # x-value\n  geom_bar()                     # type of plot \n\np\n\n\n\n\n\n\n\n\nWe can also flip the chart. We update the plot, p, be reassignment.\n\np &lt;- p + coord_flip()\n\nSince we are working with colors, we can change the colors of the bars to match the groups.\n\n# Define color palette\ncolor_palette &lt;- c(\"Red\" = \"red\", \n                   \"Blue\" = \"blue\", \n                   \"Yellow\" = \"yellow\", \n                   \"Green\" = \"green\", \n                   \"Purple\" = \"purple\")\n\np &lt;- p + \n  aes(fill = Flower.Color) +                # add the fill ascetics \n  scale_fill_manual(values = color_palette) # set the fill color according to the color palette\n\n\nBar chart with geom_col\nSummary of data:\n\nmean_sepal_length_pr_color &lt;- iris %&gt;%\n  group_by(Flower.Color) %&gt;%\n  summarize(mean_Sepal.Length = mean(Sepal.Length))\n\nhead(mean_sepal_length_pr_color)\n\n# A tibble: 5 × 2\n  Flower.Color mean_Sepal.Length\n  &lt;fct&gt;                    &lt;dbl&gt;\n1 Red                       5.91\n2 Blue                      6.02\n3 Yellow                    5.75\n4 Green                     5.92\n5 Purple                    5.48\n\n\nA bar chart with geom_bar is used to get an overview over the distribution of a categorical variable relative to a continues variable. Here we see the average Sepal.Length of the flowers for each Flower.Color.\n\nggplot(mean_sepal_length_pr_color,   # dataframe \n       aes(x = Flower.Color,         # x-value\n           y = mean_Sepal.Length)) + # y-value\n  geom_col()                         # type of plot"
+    "text": "Extra section\n(Should we exclude this? Is it too advanced? Is it used in the exercises?) We can order the columns such that the count goes from lowest to highest. This is actually not that easy in R.\nFirst, we see that the class of the Flower.Color is character. Characters are always sorted alphabetically like we saw above.\n\nclass(iris$Flower.Color)\n\n[1] \"character\"\n\n\nExtract the number of flowers for each Flower.Color.\n\ndl_Flower.Color &lt;- iris %&gt;%\n  group_by(Flower.Color) %&gt;%\n  summarise(n = n()) %&gt;% \n  arrange(desc(n))\n\ndl_Flower.Color\n\n# A tibble: 5 × 2\n  Flower.Color     n\n  &lt;chr&gt;        &lt;int&gt;\n1 Red             50\n2 Blue            30\n3 Yellow          30\n4 Green           20\n5 Purple          20\n\ndl_Flower.Color$Flower.Color\n\n[1] \"Red\"    \"Blue\"   \"Yellow\" \"Green\"  \"Purple\"\n\n\nChange the class of the Flower.Color feature to factor and add levels according to the number of flowers with each color.\n\niris$Flower.Color &lt;- factor(iris$Flower.Color,\n                            levels = dl_Flower.Color$Flower.Color)\n\nCheck class now\n\nclass(iris$Flower.Color)\n\n[1] \"factor\"\n\n\nNow we do the same plot as before and we see that the order has changed to range from largest to smallest Flower.Colors group. The plot is saved in the variable p.\n\np &lt;- ggplot(iris,                # dataframe \n       aes(x = Flower.Color)) +  # x-value\n  geom_bar()                     # type of plot \n\np\n\n\n\n\n\n\n\n\nWe can also flip the chart. We update the plot, p, be reassignment.\n\np &lt;- p + coord_flip()\n\nSince we are working with colors, we can change the colors of the bars to match the groups.\n\n# Define color palette\ncolor_palette &lt;- c(\"Red\" = \"red\", \n                   \"Blue\" = \"blue\", \n                   \"Yellow\" = \"yellow\", \n                   \"Green\" = \"green\", \n                   \"Purple\" = \"purple\")\n\np &lt;- p + \n  aes(fill = Flower.Color) +                # add the fill ascetics \n  scale_fill_manual(values = color_palette) # set the fill color according to the color palette\n\n\nBar chart with geom_col\nSummary of data:\n\nmean_sepal_length_pr_color &lt;- iris %&gt;%\n  group_by(Flower.Color) %&gt;%\n  summarize(mean_Sepal.Length = mean(Sepal.Length))\n\nhead(mean_sepal_length_pr_color)\n\n# A tibble: 5 × 2\n  Flower.Color mean_Sepal.Length\n  &lt;fct&gt;                    &lt;dbl&gt;\n1 Red                       5.91\n2 Blue                      6.02\n3 Yellow                    5.75\n4 Green                     5.92\n5 Purple                    5.48\n\n\nA bar chart with geom_bar is used to get an overview over the distribution of a categorical variable relative to a continues variable. Here we see the average Sepal.Length of the flowers for each Flower.Color.\n\nggplot(mean_sepal_length_pr_color,   # dataframe \n       aes(x = Flower.Color,         # x-value\n           y = mean_Sepal.Length)) + # y-value\n  geom_col()                         # type of plot",
+    "crumbs": [
+      "Home",
+      "Presentations",
+      "Presentation 4: Visualization with ggplot2"
+    ]
   },
   {
     "objectID": "Exercises/exercises1.html",
