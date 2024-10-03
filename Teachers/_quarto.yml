@@ -6,7 +6,7 @@ website:
   title: "FromExceltoR"
   navbar:
     left: 
-      - href: main_page.qmd
+      - href: index.qmd
         text: Home
   sidebar:
     style: "floating"
