@@ -14,9 +14,21 @@ website:
       - section: "Presentations"
         contents:
           - href: Presentations/presentation1.qmd
-            text: "Presentation 1"
+            text: "Presentation 1: Introduction to R and Quarto"
           - href: Presentations/presentation2.qmd
-            text: "Presentation 2"
+            text: "Presentation 2: Tidyverse"
+          - href: Presentations/presentation4.qmd
+            text: "Presentation 4: Visualization with ggplot2"
+      
+      - section: "Exercises"
+          - href: Exercises/exercise1.qmd
+            text: "Exercise 1: Introduction to R and Quarto"
+          - href: Exercises/exercise2.qmd
+            text: "Exercise 2: Tidyverse"
+          - href: Exercises/exercise4.qmd
+            text: "Presentation 4: Visualization with ggplot2"
+     
+      - section: "Cheat Sheets"
 
 format:
   html:
