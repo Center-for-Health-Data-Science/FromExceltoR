@@ -3,11 +3,11 @@ title: "FromExceltoR"
 format: html
 project:
   type: website
-  output-dir: docs
+  output-dir: ../docs
 ---
 
 ## Welcome to the main page
 
-This course is about going from Excel to R. 
+This course is about going from Excel to R.
 
 ![](images/god_knows.jpeg)

@@ -3,7 +3,7 @@ title: "Presentation 2"
 format: html
 project:
   type: website
-  output-dir: docs
+  output-dir: ../docs
 ---
 
 ## Working with data in R

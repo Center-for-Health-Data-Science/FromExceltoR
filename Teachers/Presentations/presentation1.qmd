@@ -3,7 +3,7 @@ title: "Presentation 1"
 format: html
 project:
   type: website
-  output-dir: docs
+  output-dir: ../docs
 ---
 
 ## Introduction
