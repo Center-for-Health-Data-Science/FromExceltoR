@@ -60,14 +60,24 @@
     "href": "Exercises/exercises2.html",
     "title": "II. Working with data in R (exercises)",
     "section": "",
-    "text": "Create new Quarto document. For working on the exercise, create a new Quarto document with a descriptive name and save it where you can find it again, i.e. in the folder where you downloaded the teaching material. You can use the commands shown in presentation2.qmd to solve this exercise. There is no shame in outright copying from the presentation2.qmd script, provided you understand what the command is doing.\nLoad packages. You will need to load the packages tidyverse and readxl for this exercise."
+    "text": "Create new Quarto document. For working on the exercise, create a new Quarto document with a descriptive name and save it where you can find it again, i.e. in the folder where you downloaded the teaching material. You can use the commands shown in presentation2.qmd to solve this exercise. There is no shame in outright copying from the presentation2.qmd script, provided you understand what the command is doing.\nLoad packages. You will need to load the packages tidyverse and readxl for this exercise.",
+    "crumbs": [
+      "Home",
+      "Exercises",
+      "Exercise 2: Tidyverse"
+    ]
   },
   {
     "objectID": "Exercises/exercises2.html#footnotes",
     "href": "Exercises/exercises2.html#footnotes",
     "title": "II. Working with data in R (exercises)",
     "section": "Footnotes",
-    "text": "Footnotes\n\n\nContains public sector information licensed under the Open Government Licence v3.0.↩︎"
+    "text": "Footnotes\n\n\nContains public sector information licensed under the Open Government Licence v3.0.↩︎",
+    "crumbs": [
+      "Home",
+      "Exercises",
+      "Exercise 2: Tidyverse"
+    ]
   },
   {
     "objectID": "Exercises/exercises2_SOLUTIONS.html",
@@ -241,14 +251,21 @@
     "href": "index.html",
     "title": "FromExceltoR",
     "section": "",
-    "text": "This course is about going from Excel to R.\n![../Program.png]"
+    "text": "This course is about going from Excel to R."
   },
   {
     "objectID": "index.html#welcome-to-the-main-page",
     "href": "index.html#welcome-to-the-main-page",
     "title": "FromExceltoR",
     "section": "",
-    "text": "This course is about going from Excel to R.\n![../Program.png]"
+    "text": "This course is about going from Excel to R."
+  },
+  {
+    "objectID": "index.html#code-memes",
+    "href": "index.html#code-memes",
+    "title": "FromExceltoR",
+    "section": "Code memes",
+    "text": "Code memes"
   },
   {
     "objectID": "Presentations/video_test.html",
@@ -468,77 +485,132 @@
     "href": "Exercises/exercises1.html",
     "title": "I. Working with data in R (exercises)",
     "section": "",
-    "text": "Start RStudio.\nMake a new Quarto document. Go to the menu bar and click File → New file… → Quarto document…. Give the Quarto document a title that makes sense to you.\nSave your document. Go to the menu bar and click File → Save as….\nCheck the working directory. Let’s check which working directory we are in with the getwd() function. When working with Quarto documents the working directory is always the same as where the file is located (where you saved it)."
+    "text": "Start RStudio.\nMake a new Quarto document. Go to the menu bar and click File → New file… → Quarto document…. Give the Quarto document a title that makes sense to you.\nSave your document. Go to the menu bar and click File → Save as….\nCheck the working directory. Let’s check which working directory we are in with the getwd() function. When working with Quarto documents the working directory is always the same as where the file is located (where you saved it).",
+    "crumbs": [
+      "Home",
+      "Exercises",
+      "Exercise 1: Introduction"
+    ]
   },
   {
     "objectID": "Exercises/exercises1.html#getting-started",
     "href": "Exercises/exercises1.html#getting-started",
     "title": "I. Working with data in R (exercises)",
     "section": "",
-    "text": "Start RStudio.\nMake a new Quarto document. Go to the menu bar and click File → New file… → Quarto document…. Give the Quarto document a title that makes sense to you.\nSave your document. Go to the menu bar and click File → Save as….\nCheck the working directory. Let’s check which working directory we are in with the getwd() function. When working with Quarto documents the working directory is always the same as where the file is located (where you saved it)."
+    "text": "Start RStudio.\nMake a new Quarto document. Go to the menu bar and click File → New file… → Quarto document…. Give the Quarto document a title that makes sense to you.\nSave your document. Go to the menu bar and click File → Save as….\nCheck the working directory. Let’s check which working directory we are in with the getwd() function. When working with Quarto documents the working directory is always the same as where the file is located (where you saved it).",
+    "crumbs": [
+      "Home",
+      "Exercises",
+      "Exercise 1: Introduction"
+    ]
   },
   {
     "objectID": "Exercises/exercises1.html#write-commands-at-the-prompt",
     "href": "Exercises/exercises1.html#write-commands-at-the-prompt",
     "title": "I. Working with data in R (exercises)",
     "section": "Write commands at the prompt",
-    "text": "Write commands at the prompt\n\nGo to the R console (lower left window) and write a few commands, one at a time. You could for example try these commands:\n\n\n6*12\nx &lt;- 100\nx + 7\n\nNotice how a new object, x, appears in the Global Environment window (upper right window) and can be used for new computations.\nCommands written at the prompt are not saved for later use! It is fine to write commands that should never be used again at the prompt, and it is fine “to play at the prompt”, but in general you must organize your commands in R scripts (or Quarto files, which will be introduced in Lesson IV)."
+    "text": "Write commands at the prompt\n\nGo to the R console (lower left window) and write a few commands, one at a time. You could for example try these commands:\n\n\n6*12\nx &lt;- 100\nx + 7\n\nNotice how a new object, x, appears in the Global Environment window (upper right window) and can be used for new computations.\nCommands written at the prompt are not saved for later use! It is fine to write commands that should never be used again at the prompt, and it is fine “to play at the prompt”, but in general you must organize your commands in R scripts (or Quarto files, which will be introduced in Lesson IV).",
+    "crumbs": [
+      "Home",
+      "Exercises",
+      "Exercise 1: Introduction"
+    ]
   },
   {
     "objectID": "Exercises/exercises1.html#working-with-quarto-documents",
     "href": "Exercises/exercises1.html#working-with-quarto-documents",
     "title": "I. Working with data in R (exercises)",
     "section": "Working with Quarto Documents",
-    "text": "Working with Quarto Documents\nTo save your code, you need to store it in a file. There are several file formats available for this purpose, and in this course, we are using Quarto, the latest format in the code reproducibility domain.\n\nCreate code chunk. In the Quarto document you just made, create a code chuck by pressing the green box with the white ‘C’ in the right of the panel.\nWrite code. Write a command in the code chunk, similar to one of those from above.\nRun code. Click on the green button in the top right of the code chunk - or simply type Ctrl + Enter/option + Enter. Then the command is transferred to the prompt in the console and executed, just as if you had written the command directly at the prompt. Try with a new command in a new line.\nCreate a comment. Put a hashtag (#) before one of the commands in the code chunk and run it. Nothing happens! Hence, you can use hashtags for writing comments in your code chunks.\nSave your files often. It happens that you ask R for something so weird that it shuts down, and then it is a pity to have lost your work."
+    "text": "Working with Quarto Documents\nTo save your code, you need to store it in a file. There are several file formats available for this purpose, and in this course, we are using Quarto, the latest format in the code reproducibility domain.\n\nCreate code chunk. In the Quarto document you just made, create a code chuck by pressing the green box with the white ‘C’ in the right of the panel.\nWrite code. Write a command in the code chunk, similar to one of those from above.\nRun code. Click on the green button in the top right of the code chunk - or simply type Ctrl + Enter/option + Enter. Then the command is transferred to the prompt in the console and executed, just as if you had written the command directly at the prompt. Try with a new command in a new line.\nCreate a comment. Put a hashtag (#) before one of the commands in the code chunk and run it. Nothing happens! Hence, you can use hashtags for writing comments in your code chunks.\nSave your files often. It happens that you ask R for something so weird that it shuts down, and then it is a pity to have lost your work.",
+    "crumbs": [
+      "Home",
+      "Exercises",
+      "Exercise 1: Introduction"
+    ]
   },
   {
     "objectID": "Exercises/exercises1.html#r-packages",
     "href": "Exercises/exercises1.html#r-packages",
     "title": "I. Working with data in R (exercises)",
     "section": "R Packages",
-    "text": "R Packages\nR is born with a lot of functionalities, but the enormous community of R users also contributes to R all the time by developing code and sharing it in R packages. An R package is simply a collection of R functions and/or datasets (including documentation). As of September 20, 2024, there are 21,361 packaged available at the CRAN repository (and there are many other repositories).\nAn R package needs be installed and loaded before you can use its functionalities. You only have to install a package once (until you re-install R), whereas you have to load it in every R session you want to use it. As an example, let’s install the package ContaminatedMixt.\n\nInstall. Choose one of the two installation methods:\n\n\n\nUsing the command line:\n\n\ninstall.packages(\"ContaminatedMixt\")\n\nNote that for this approach you need to know the name of the package and spell it correctly, including capitalization!\n\nUsing the graphical interface:\nLook at lower right of your Rstudio window where you have a window with several tabs. Click on Packages. You will see a list of your currently installed packages and their versions. To install ContaminatedMixt, click on Install and start to type the name. You will notice a drop down list appears from which you can select the correct package. This is useful if you are not quite sure of the correct spelling.\n\nA lot of red text will be written in the console while the installation goes on. This usually does not mean there was a problem, unless the text reads ‘error’ or ‘exit’. In the end, the package is installed, or you will see an explanation of what went wrong.\n\nLoading. Load the package you just installed with the command library(ContaminatedMixt). If everything went well, you should now able to run the command data(package = 'ContaminatedMixt') which will show you an overview of the datasets included in the package."
+    "text": "R Packages\nR is born with a lot of functionalities, but the enormous community of R users also contributes to R all the time by developing code and sharing it in R packages. An R package is simply a collection of R functions and/or datasets (including documentation). As of September 20, 2024, there are 21,361 packaged available at the CRAN repository (and there are many other repositories).\nAn R package needs be installed and loaded before you can use its functionalities. You only have to install a package once (until you re-install R), whereas you have to load it in every R session you want to use it. As an example, let’s install the package ContaminatedMixt.\n\nInstall. Choose one of the two installation methods:\n\n\n\nUsing the command line:\n\n\ninstall.packages(\"ContaminatedMixt\")\n\nNote that for this approach you need to know the name of the package and spell it correctly, including capitalization!\n\nUsing the graphical interface:\nLook at lower right of your Rstudio window where you have a window with several tabs. Click on Packages. You will see a list of your currently installed packages and their versions. To install ContaminatedMixt, click on Install and start to type the name. You will notice a drop down list appears from which you can select the correct package. This is useful if you are not quite sure of the correct spelling.\n\nA lot of red text will be written in the console while the installation goes on. This usually does not mean there was a problem, unless the text reads ‘error’ or ‘exit’. In the end, the package is installed, or you will see an explanation of what went wrong.\n\nLoading. Load the package you just installed with the command library(ContaminatedMixt). If everything went well, you should now able to run the command data(package = 'ContaminatedMixt') which will show you an overview of the datasets included in the package.",
+    "crumbs": [
+      "Home",
+      "Exercises",
+      "Exercise 1: Introduction"
+    ]
   },
   {
     "objectID": "Exercises/exercises1.html#basic-r-commands",
     "href": "Exercises/exercises1.html#basic-r-commands",
     "title": "I. Working with data in R (exercises)",
     "section": "Basic R commands",
-    "text": "Basic R commands\nWe will now have a look at basic commands in R that you just learned about. We will use an in-build dataset of R called trees. Copy-paste the commands into your document or write them yourself to get a hang of the coding! Start thinking about the structure of you document and when to create new code chunks.\n\nTo start with, load the tidyverse package.\n\n\nlibrary(tidyverse)\n\n\nNow, load the trees dataset by copying and executing the following commands:\n\n\ndata(\"trees\")\nview(trees)\n?trees\n\n\nCheck what information is contained in the trees dataset by calling the summary function on it:\n\n\nsummary(trees)\n\n\nHow many trees do we have data for?\nNow, extract the column called Volume from the dataset and assign it to a new variable called volume_col.\nDisplay the volume of the first 10 trees.\nFind the minimum, maximum and mean volume from the column you just extracted. Does it match what was stated in the summary?\nWhat class of data structure is trees? Make it into a tibble."
+    "text": "Basic R commands\nWe will now have a look at basic commands in R that you just learned about. We will use an in-build dataset of R called trees. Copy-paste the commands into your document or write them yourself to get a hang of the coding! Start thinking about the structure of you document and when to create new code chunks.\n\nTo start with, load the tidyverse package.\n\n\nlibrary(tidyverse)\n\n\nNow, load the trees dataset by copying and executing the following commands:\n\n\ndata(\"trees\")\nview(trees)\n?trees\n\n\nCheck what information is contained in the trees dataset by calling the summary function on it:\n\n\nsummary(trees)\n\n\nHow many trees do we have data for?\nNow, extract the column called Volume from the dataset and assign it to a new variable called volume_col.\nDisplay the volume of the first 10 trees.\nFind the minimum, maximum and mean volume from the column you just extracted. Does it match what was stated in the summary?\nWhat class of data structure is trees? Make it into a tibble.",
+    "crumbs": [
+      "Home",
+      "Exercises",
+      "Exercise 1: Introduction"
+    ]
   },
   {
     "objectID": "Exercises/exercises1.html#making-some-graphics",
     "href": "Exercises/exercises1.html#making-some-graphics",
     "title": "I. Working with data in R (exercises)",
     "section": "Making some graphics",
-    "text": "Making some graphics\nNext, let’s also try to make some plots using the base graphics system in R (in Presentation III you will learn to make graphics using the ggplot2-package). We will continue to use the trees dataset.\n\nThe dataset trees contains 31 observations of 3 variables (diameter, height and volume of black cherry trees). Insert the following two commands in a code chunk, and execute them to make two plots.\n\n\nplot(Volume~Height, data=trees)\nplot(Volume~Height, data=trees, log=\"y\")"
+    "text": "Making some graphics\nNext, let’s also try to make some plots using the base graphics system in R (in Presentation III you will learn to make graphics using the ggplot2-package). We will continue to use the trees dataset.\n\nThe dataset trees contains 31 observations of 3 variables (diameter, height and volume of black cherry trees). Insert the following two commands in a code chunk, and execute them to make two plots.\n\n\nplot(Volume~Height, data=trees)\nplot(Volume~Height, data=trees, log=\"y\")",
+    "crumbs": [
+      "Home",
+      "Exercises",
+      "Exercise 1: Introduction"
+    ]
   },
   {
     "objectID": "Exercises/exercises1.html#shut-down-r",
     "href": "Exercises/exercises1.html#shut-down-r",
     "title": "I. Working with data in R (exercises)",
     "section": "Shut down R",
-    "text": "Shut down R\n\nClose RStudio. If changes were made either to the Quarto document (shown in the upper-left window) or to the workspace (called ‘Global Environment’ in the upper-right window) you will be prompted if you like to save those. Answer Yes to that; in particular it is important that you save your documents as they contain all relevant commands to reproduce your output and plots.\nReopen file. Locate the Quarto document that you saved in question 4 (and question 10!). Start RStudio again, and open the file (via the File menu). Check that you can run it again.\n\nRemark - You can also start RStudio by double clicking on a file with the .qmd extension (or other R-readable formats). One advantage of this is that the workspace and the R history will be saved to the same folder as the R script when you later close RStudio, since the working directory will be set to the map where the file is located."
+    "text": "Shut down R\n\nClose RStudio. If changes were made either to the Quarto document (shown in the upper-left window) or to the workspace (called ‘Global Environment’ in the upper-right window) you will be prompted if you like to save those. Answer Yes to that; in particular it is important that you save your documents as they contain all relevant commands to reproduce your output and plots.\nReopen file. Locate the Quarto document that you saved in question 4 (and question 10!). Start RStudio again, and open the file (via the File menu). Check that you can run it again.\n\nRemark - You can also start RStudio by double clicking on a file with the .qmd extension (or other R-readable formats). One advantage of this is that the workspace and the R history will be saved to the same folder as the R script when you later close RStudio, since the working directory will be set to the map where the file is located.",
+    "crumbs": [
+      "Home",
+      "Exercises",
+      "Exercise 1: Introduction"
+    ]
   },
   {
     "objectID": "Exercises/exercises1.html#getting-help-in-r",
     "href": "Exercises/exercises1.html#getting-help-in-r",
     "title": "I. Working with data in R (exercises)",
     "section": "Getting help in R",
-    "text": "Getting help in R\nEvery R function comes with a help page, that gives a brief description of the function and describes its usage (input/arguments and output/value). Let’s use the function median() as example. It is, no surprise, computing the median from a vector of numbers.\n\nTry these commands:\n\n\nx &lt;- c(1, 3, 8, 9, 100, NA)\nx\nmedian(x)\n\nThe first command defines a vector with six elements, but where the last number is missing (NA = Not Available). Since the last number is missing, median returns NA. However, could we make median find the median of the remaining numbers. Perhaps the help page can help out!\n\nLook at the help for the median function:\n\n\n?median\n\nThe help page for median appears in the lower right window. If we read it carefully, then we realize that the extra argument (input) na.rm may help us. We therefore try this:\n\nmedian(x, na.rm=TRUE)\n\nAdmittedly, R help pages are often quite difficult to read, but be aware that there are examples of commands in the bottom of each help page. For more complicated functions, these examples can be very useful while trying to get to know the function and its functionalities.\nIn order to use the help pages as above, you need to know the name of the function, which obviously may not be the case: You want to compute the median but have no idea what function to use. The best way to proceed: Google! Use “R whatever-you-want-to-search-for”, and you often get exactly what you need.\nWhile working with R, you will get a lot of error messages. Some are easy to understand, and you will readily be able to fix the problems, while others… Again, the best answer is: Google and ChatGPT! Copy the error message into Google or ChatGPT, and you will often find help."
+    "text": "Getting help in R\nEvery R function comes with a help page, that gives a brief description of the function and describes its usage (input/arguments and output/value). Let’s use the function median() as example. It is, no surprise, computing the median from a vector of numbers.\n\nTry these commands:\n\n\nx &lt;- c(1, 3, 8, 9, 100, NA)\nx\nmedian(x)\n\nThe first command defines a vector with six elements, but where the last number is missing (NA = Not Available). Since the last number is missing, median returns NA. However, could we make median find the median of the remaining numbers. Perhaps the help page can help out!\n\nLook at the help for the median function:\n\n\n?median\n\nThe help page for median appears in the lower right window. If we read it carefully, then we realize that the extra argument (input) na.rm may help us. We therefore try this:\n\nmedian(x, na.rm=TRUE)\n\nAdmittedly, R help pages are often quite difficult to read, but be aware that there are examples of commands in the bottom of each help page. For more complicated functions, these examples can be very useful while trying to get to know the function and its functionalities.\nIn order to use the help pages as above, you need to know the name of the function, which obviously may not be the case: You want to compute the median but have no idea what function to use. The best way to proceed: Google! Use “R whatever-you-want-to-search-for”, and you often get exactly what you need.\nWhile working with R, you will get a lot of error messages. Some are easy to understand, and you will readily be able to fix the problems, while others… Again, the best answer is: Google and ChatGPT! Copy the error message into Google or ChatGPT, and you will often find help.",
+    "crumbs": [
+      "Home",
+      "Exercises",
+      "Exercise 1: Introduction"
+    ]
   },
   {
     "objectID": "Exercises/exercises1.html#wrapping-up",
     "href": "Exercises/exercises1.html#wrapping-up",
     "title": "I. Working with data in R (exercises)",
     "section": "Wrapping up",
-    "text": "Wrapping up\n\nImagine you need to send your code to a collaborator. Review your code to ensure it is clear and well-structured, so your collaborator can easily understand and follow your work."
+    "text": "Wrapping up\n\nImagine you need to send your code to a collaborator. Review your code to ensure it is clear and well-structured, so your collaborator can easily understand and follow your work.",
+    "crumbs": [
+      "Home",
+      "Exercises",
+      "Exercise 1: Introduction"
+    ]
   },
   {
     "objectID": "Exercises/exercises1.html#lessons-learnt",
     "href": "Exercises/exercises1.html#lessons-learnt",
     "title": "I. Working with data in R (exercises)",
     "section": "Lessons learnt",
-    "text": "Lessons learnt\n\nYou must write you code in a document, like the Quarto document, such that you can save the work and return to it some other day.\nSave your files often.\nIf you forget to save your files before you close RStudio, then RStudio will prompt you if you want to save your work.\nHave structure in your document by using headers, text, and code chunks (maybe with comments)."
+    "text": "Lessons learnt\n\nYou must write you code in a document, like the Quarto document, such that you can save the work and return to it some other day.\nSave your files often.\nIf you forget to save your files before you close RStudio, then RStudio will prompt you if you want to save your work.\nHave structure in your document by using headers, text, and code chunks (maybe with comments).",
+    "crumbs": [
+      "Home",
+      "Exercises",
+      "Exercise 1: Introduction"
+    ]
   },
   {
     "objectID": "Exercises/exercises4_SOLUTIONS.html",
@@ -559,13 +631,23 @@
     "href": "Exercises/exercises4.html",
     "title": "VI. Graphics with ggplot2 (exercises)",
     "section": "",
-    "text": "Before you proceed with the exercises in this document, make sure to run the command library(tidyverse) in order to load the core tidyverse packages (including ggplot2).\nThe data set used in these exercises, climate.xlsx1, was compiled from data downloaded in 2017 from the website of the UK’s national weather service, the Met Office.\nThe spreadsheet contains data from five UK weather stations in 2016. The following variables are included in the data set:\nThe data set is the same as the one used for the Tidyverse exercise. If you have already imported the data, there is no need to import it again, unless you have made changes to the data assigned to climate since the original data set was imported.\nNeed a little help? Consult the ggplot2 cheatsheet here: https://rstudio.github.io/cheatsheets/data-visualization.pdf"
+    "text": "Before you proceed with the exercises in this document, make sure to run the command library(tidyverse) in order to load the core tidyverse packages (including ggplot2).\nThe data set used in these exercises, climate.xlsx1, was compiled from data downloaded in 2017 from the website of the UK’s national weather service, the Met Office.\nThe spreadsheet contains data from five UK weather stations in 2016. The following variables are included in the data set:\nThe data set is the same as the one used for the Tidyverse exercise. If you have already imported the data, there is no need to import it again, unless you have made changes to the data assigned to climate since the original data set was imported.\nNeed a little help? Consult the ggplot2 cheatsheet here: https://rstudio.github.io/cheatsheets/data-visualization.pdf",
+    "crumbs": [
+      "Home",
+      "Exercises",
+      "Exercise 4: ggplot2"
+    ]
   },
   {
     "objectID": "Exercises/exercises4.html#footnotes",
     "href": "Exercises/exercises4.html#footnotes",
     "title": "VI. Graphics with ggplot2 (exercises)",
     "section": "Footnotes",
-    "text": "Footnotes\n\n\nContains public sector information licensed under the Open Government Licence v3.0.↩︎"
+    "text": "Footnotes\n\n\nContains public sector information licensed under the Open Government Licence v3.0.↩︎",
+    "crumbs": [
+      "Home",
+      "Exercises",
+      "Exercise 4: ggplot2"
+    ]
   }
 ]

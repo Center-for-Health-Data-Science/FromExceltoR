@@ -8,9 +8,12 @@ project:
 
 ## Welcome to the main page
 
-This course is about going from Excel to R. 
+This course is about going from Excel to R.
+
+![](../Program.png)
 
 
-![../Program.png]
+## Code memes
+![](images/god_knows.jpeg){width=300px}
+![](images/dog_chatgpt.jpeg){height=200px}
 
-![](images/god_knows.jpeg)
