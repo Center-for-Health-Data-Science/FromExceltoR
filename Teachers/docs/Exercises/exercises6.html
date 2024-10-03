@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="HeaDS Data Lab">
+<meta name="dcterms.date" content="2024-10-03">
 
-<title>FromExceltoR</title>
+<title>Data Exercise in R – FromExceltoR</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,25 +22,59 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -77,7 +113,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">FromExceltoR</span>
     </a>
   </div>
@@ -88,7 +124,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./main_page.qmd"> 
+    <a class="nav-link" href="../main_page.qmd"> 
 <span class="menu-text">FromExcel2R</span></a>
   </li>  
 </ul>
@@ -102,7 +138,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">FromExceltoR</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Data Exercise in R</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -121,14 +157,26 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">FromExceltoR</h1>
+<h1 class="title">Data Exercise in R</h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>HeaDS Data Lab </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 3, 2024</p>
+    </div>
+  </div>
   
     
   </div>
@@ -138,11 +186,167 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="welcome-to-the-main-page" class="level2">
-<h2 class="anchored" data-anchor-id="welcome-to-the-main-page">Welcome to the main page</h2>
-<p><img src="images/god_knows.jpeg" class="img-fluid"></p>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction:</h2>
+<p>In this exercise you will practice your newly acquired R skills on an example dataset.</p>
+<p>If you have your own data to work on, you can still follow the steps in the exercise where they apply.</p>
+<hr>
+</section>
+<section id="r-packages" class="level2">
+<h2 class="anchored" data-anchor-id="r-packages">R-packages</h2>
+<p>For the data wrangling and statistical modelling we will be doing in this exercise, you will need the following R-packages: <code>tidyverse</code>,<code>ggplot2</code>,<code>emmeans</code>, <code>MASS</code>.</p>
+<ul>
+<li>Make sure that these packages are installed and loaded into your R environment. You likely have the packages already installed and loaded (you used these in the previous exercises) try <code>sessionInfo()</code> and <code>require()</code> (look up what these function do). If the packages are not there install them and library them as in the previous exercises.</li>
+</ul>
+<hr>
+</section>
+<section id="getting-the-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="getting-the-dataset">Getting the Dataset</h2>
+<p>For this exercise, we’ll use the birthweight dataset from the package <code>MASS</code>. It contains the birthweight of infants and some information about the mother.</p>
+<p>To get it we have to load the package and then the data. We will also display the help so we can read some background info about the data and what the columns are:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(birthwt)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>?birthwt <span class="co">#display help page</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>N.B</strong> If it says <code>&lt;Promise&gt;</code> after <code>birthwt</code> in your global environment just click on it and the dataframe will be loaded properly.</p>
+<p><em>If you have a dataset of your own you would like yo look at instead of the example data we provide here, you are very welcome to. You can again use <code>read_excel()</code> for excel sheets. For other formats, have a look at <code>read.csv()</code>, <code>read.table()</code>, <code>read.delim()</code>, etc. You can either google your way to an answer or ask one of the course instructors.</em></p>
+<ul>
+<li>Now, check the class of the dataset. We’ll be using tidyverse to do our anaylsis, so if it isn’t already a tibble, make it into one.</li>
+</ul>
+<hr>
+</section>
+<section id="exploratory-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="exploratory-analysis">Exploratory Analysis</h2>
+<section id="the-basics" class="level3">
+<h3 class="anchored" data-anchor-id="the-basics">The Basics</h3>
+<p>Before performing any statistical analysis (modelling), it is necessary to have a good understanding of the data. Start by looking at:</p>
+<ul>
+<li><p>How many variables and observations are there in the data?</p></li>
+<li><p>What was measured, i.e.&nbsp;what do each of the variables describe? You can rename variables via the <code>colnames()</code> if you want to.</p></li>
+<li><p>Which data types are the variables and does that make sense? Should you change the type of any variables? <em>Hint:</em> Think about types <code>factor, numerical, integer, character, etc.</code></p></li>
+<li><p>What is our response/outcome variable(s)? There can be several.</p></li>
+<li><p>Is the (categorical) outcome variable balanced?</p></li>
+<li><p>Are there any missing values (<code>NA</code>), if yes and how many? Google how to check this if you don’t know.</p></li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="diving-into-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="diving-into-the-data">Diving into the data</h2>
+<section id="numeric-variables" class="level3">
+<h3 class="anchored" data-anchor-id="numeric-variables">Numeric variables</h3>
+<p>Some of the measured variables in our data are numeric, i.e.&nbsp;continuous. For these do:</p>
+<ul>
+<li><p>Calculate summary statistics (mean, median, sd, min, max)</p></li>
+<li><p>Create boxplots for each numeric variable using&nbsp;<code>ggplot2</code>, and apply&nbsp;<code>scale_x_discrete()</code>&nbsp;to prevent meaningless scaling of the boxplot widths.</p></li>
+<li><p>Do you see outliers in your dataset?</p></li>
+<li><p>Now remake the boxplot with two different colors, depending on the (categorical) outcome variable.</p></li>
+</ul>
+</section>
+<section id="categorical-variables" class="level3">
+<h3 class="anchored" data-anchor-id="categorical-variables">Categorical variables</h3>
+<p>Other columns describe variables that are categorical. Some of these may have been initially interpreted by R as numerical, especially if they are coded with 0/1.</p>
+<ul>
+<li><p>If you haven’t changed their datatype to factor yet, do so now. You can see how in presentation5.Rmd.</p></li>
+<li><p>When you are done, make barplots of each categorical variable.</p></li>
+<li><p>Then, split up the barplot for <code>smoke</code> so you have two different colors for the two different values of the outcome variable (the same way you did it above for the boxplots).</p></li>
+<li><p>Now, add the argument <code>position ='dodge'</code> to geom_bar and remake the plot. What has changed? Then remake it once again with <code>position ='fill'</code>. What information do the different barplots show? Compare to the counts you get from the <code>smoke</code> column when you group the dataframe by the outcome variable.</p></li>
+<li><p>Lastly, make a density plot of the two continuous variables <code>lwt</code> and <code>bwt</code>, split it up by <code>smoke</code>.</p></li>
+</ul>
+<p>Extra: Pick custom colors for your plots (look into <code>scale_fill_manual()</code>).</p>
+</section>
+<section id="subsetting-the-data" class="level3">
+<h3 class="anchored" data-anchor-id="subsetting-the-data">Subsetting the data</h3>
+<p>Based on what you have observed in the last two sections, now choose two numeric variables and two categorical variables to move forward with. Create a subset of the dataframe with only these variables and the categorical and numeric outcome.</p>
+<hr>
+</section>
+</section>
+<section id="modelling" class="level2">
+<h2 class="anchored" data-anchor-id="modelling">Modelling</h2>
+<p>You now have a prepared dataset on which we can do some modelling.</p>
+<section id="regression-model-1" class="level3">
+<h3 class="anchored" data-anchor-id="regression-model-1">Regression Model 1</h3>
+<p>In the Applied statistics session you’ve tried out an analysis with one way ANOVA, where you compared the effect of categorical variables (skin type) on the outcome (gene counts).</p>
+<p>We’ll do something similar here but instead we will use the numerical variables as predictors and the measured birthweight as the (numerical) outcome. This is what is known as linear regression.</p>
+<p><img src="Figures/lin_regression.jpg" class="img-fluid"></p>
+<p>We can also do this with <code>lm()</code> and follow the same syntax as before:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(resp <span class="sc">~</span> pred1, <span class="at">data=</span>name_of_dataset)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Simply, if the outcome variable we are interested in is continuous, then <code>lm()</code> will functionally be doing a linear regression. If the outcome is categorical, it will be performing ANOVA (which if you only have two groups is effectively a t-test). Have a look at <a href="https://www.youtube.com/watch?v=NF5_btOaCig&amp;list=PLblh5JKOoLUIzaEkCLIUxQFjPIlapw8nU&amp;index=5">this video</a> if you want to understand why you can do a t-test / ANOVA with a linear model.</p>
+<ul>
+<li><p>Now, pick one of your numeric variables and use it to model the (numeric/continuous) outcome.</p></li>
+<li><p>Investigate the model you have made by writing its name, i.e.</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>model1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li><p>What does this mean? Compare to the linear model illustration above.</p></li>
+<li><p>We’ll now make a plot of your model to help us better visualize what has happened. Make a scatter plot with your predictor variable on the x-axis and the outcome variable on the y-axis.</p></li>
+<li><p>Now add the regression line to the plot by using the code below. For the slope and intercept, enter the values you found when you inspected the model. Does this look like a good fit?</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="sc">+</span> <span class="fu">geom_abline</span>(<span class="at">slope=</span>???, <span class="at">intercept =</span> ???, <span class="at">color =</span> <span class="st">'red'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Repeat the process with the other numeric variable you picked.</li>
+</ul>
+<p>Sometimes the variables we have measured are not good at explaining the outcome and we have to accept that.</p>
+<ul>
+<li><p>Instead of the <code>geom_abline()</code>, try <code>geom_smooth()</code> which provides you with a confidence interval in addition to the regression line. Look at the help for this geom (or google) to figure out what argument it needs to work!</p></li>
+<li><p>Inspect your model in more detail with <code>summary()</code>. Look at the output, what additional information do you get about the model. Pay attention to the <code>Residual standard error (RSE)</code> and <code>Adjusted R-squared (R2adj)</code> at the bottom of the output. We would like <code>RSE</code> to be as small as possible (goes towards 0 when model improves) while we would like the <code>R2adj</code> to be large (goes towards 1 when model improves).</p></li>
+</ul>
+<p><strong>N.B</strong> if you want to understand the output of a linear regression summary in greater detail have a look <a href="https://feliperego.github.io/blog/2015/10/23/Interpreting-Model-Output-In-R">here</a>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="regression-model-2" class="level3">
+<h3 class="anchored" data-anchor-id="regression-model-2">Regression Model 2</h3>
+<ul>
+<li>Remake your model (call it <code>model2</code>) but this time add an additional explanatory variable to the model in addition to <code>lwt</code>. This should be one of the categorical variable you selected to be in your subset. (<code>smoke</code> might be interesting, but you could also try either <code>age</code> and/or <code>ht</code>). Does adding this second exploratory variable improve the metrics <code>RSE</code> and/or <code>R2adj</code>?</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(resp <span class="sc">~</span> pred1 <span class="sc">+</span> pred2, <span class="at">data=</span>name_of_dataset)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li><p>Find the 95% confidence intervals for model2, by using the <code>confint()</code> function. If you are not familiar with confidence intervals, have a look <a href="https://sphweb.bumc.bu.edu/otlt/mph-modules/bs/bs704_confidence_intervals/bs704_confidence_intervals_print.html">here</a>.</p></li>
+<li><p>Try the following commands (or a variation of it, depending on which variables you have included in model2), and see if you can figure out what the outcome means.</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>newData <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">lwt=</span><span class="dv">100</span>, <span class="at">smoke=</span><span class="fu">as.factor</span>(<span class="dv">1</span>))</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>newData</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(model2, newData)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(model2, newData, <span class="at">interval=</span><span class="st">"prediction"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
+</section>
+<section id="bonus-exercise---anova" class="level3">
+<h3 class="anchored" data-anchor-id="bonus-exercise---anova">Bonus Exercise - ANOVA</h3>
+<p>Now, we will instead look at the two categorical variables you picked. Make a model of the outcome variable depending on one the categorical variable</p>
+<ul>
+<li>Pick one of the two categorical variables and use it to model the (numeric) outcome, just as during the Applied Stats session:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>model3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(resp <span class="sc">~</span> pred1, <span class="at">data=</span>name_of_dataset)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>inspect the output by calling <code>summary()</code> on the model</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>You can have a look at <a href="https://www.learnbymarketing.com/tutorials/explaining-the-lm-summary-in-r/">this website</a> to help you understand the output of summary.</p>
+</section>
+<section id="short-detour-the-meaning-of-the-intercept-in-an-anova" class="level3">
+<h3 class="anchored" data-anchor-id="short-detour-the-meaning-of-the-intercept-in-an-anova">Short detour: The meaning of the intercept in an ANOVA</h3>
+<p>The intercept is the estimate of the outcome variable that you would get when all explanatory variables are 0.</p>
+<p>So if we have the model <code>lm(bwt ~ smoke, data = birthData)</code> and smoke is coded as 0 for non-smokers and 1 for smokers, the intercept is the estimate birthweight of a baby of a non-smoker. It will be significant because it is significantly different from 0, but that doesn’t mean much since we would usually expect babies to weight more than 0.</p>
+<p>You can now make some other models, including several predictors and see what you get.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

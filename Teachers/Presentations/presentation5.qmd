@@ -65,7 +65,7 @@ The data are saved in the file **psoriasis.xlsx**. At first the variable named `
 
 ```{r}
 # Read in the data from Excel file and call it psoriasisData
-psoriasisData <- read_excel("./data/psoriasis.xlsx")
+psoriasisData <- read_excel("../../Data/psoriasis.xlsx")
 
 # View the top rows of the dataset
 head(psoriasisData)

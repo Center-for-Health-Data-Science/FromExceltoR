@@ -1,0 +1,11 @@
+---
+title: "FromExceltoR"
+format: html
+project:
+  type: website
+  output-dir: docs
+---
+
+## Welcome to the main page
+
+![](images/god_knows.jpeg)

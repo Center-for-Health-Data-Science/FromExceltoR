@@ -1,0 +1,1347 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Presentation 2 – FromExceltoR</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">FromExceltoR</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../main_page.qmd"> 
+<span class="menu-text">FromExcel2R</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Presentation 2</li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Presentation 2</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="working-with-data-in-r" class="level2">
+<h2 class="anchored" data-anchor-id="working-with-data-in-r">Working with data in R</h2>
+</section>
+<section id="load-packages" class="level2">
+<h2 class="anchored" data-anchor-id="load-packages">Load packages</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load tidyverse package</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Load a package that can read excel files</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="check-working-directory" class="level2">
+<h2 class="anchored" data-anchor-id="check-working-directory">Check working directory</h2>
+<p>Check working directory so you know from where you work.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "/Users/srz223/Desktop/DataLab/FromExceltoR/Teachers/Presentations"</code></pre>
+</div>
+</div>
+</section>
+<section id="importing-data" class="level2">
+<h2 class="anchored" data-anchor-id="importing-data">Importing data</h2>
+<p>Often we will work with large datasets that already exist in i.e.&nbsp;an excel sheet or a tab separated file (.tsv). We can easily load that data into R, either with the read_excel function or by clicking on ‘Import Dataset’ in the Environment tab (right). We can also load data in via a command. Let’s do this now. Navigate to the data from your working directory. Use the tap-button to check what your options are.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>crohns <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"../../Data/crohns_disease.xlsx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="a-first-look-at-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="a-first-look-at-the-data">A first look at the data</h2>
+<p><strong>Print first few lines of your dataset</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(crohns) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 9
+     ID nrAdvE   BMI height country sex     age weight treat  
+  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;  
+1 19908      4  25.2    163 c1      F        47     67 placebo
+2 19909      4  23.8    164 c1      F        53     64 d1     
+3 19910      1  23.0    164 c1      F        68     62 placebo
+4 20908      1  25.7    165 c1      F        48     70 d2     
+5 20909      2  26.0    170 c1      F        67     75 placebo
+6 20910      2  28.7    168 c1      F        54     81 d1     </code></pre>
+</div>
+</div>
+<p><strong>Get the dimension of your dataset</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(crohns)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 117   9</code></pre>
+</div>
+</div>
+<p><strong>How many observations (rows) do have?</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(crohns)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 117</code></pre>
+</div>
+</div>
+<p>How many data columns are there and what are their types? Both ‘str’ and ‘summary’ will you what column types you have. Summary has some extra summary stats on numeric columns.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(crohns)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       ID            nrAdvE            BMI            height     
+ Min.   :19908   Min.   : 0.000   Min.   :16.00   Min.   :124.0  
+ 1st Qu.:23909   1st Qu.: 0.000   1st Qu.:23.05   1st Qu.:157.0  
+ Median :25919   Median : 1.000   Median :25.15   Median :162.0  
+ Mean   :34103   Mean   : 2.034   Mean   :26.06   Mean   :162.7  
+ 3rd Qu.:51909   3rd Qu.: 3.000   3rd Qu.:28.40   3rd Qu.:166.0  
+ Max.   :54937   Max.   :12.000   Max.   :44.06   Max.   :182.0  
+   country              sex                 age            weight      
+ Length:117         Length:117         Min.   :19.00   Min.   : 36.00  
+ Class :character   Class :character   1st Qu.:48.00   1st Qu.: 59.00  
+ Mode  :character   Mode  :character   Median :56.00   Median : 68.00  
+                                       Mean   :54.66   Mean   : 69.03  
+                                       3rd Qu.:62.00   3rd Qu.: 76.00  
+                                       Max.   :75.00   Max.   :117.00  
+    treat          
+ Length:117        
+ Class :character  
+ Mode  :character  
+                   
+                   
+                   </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(crohns)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>tibble [117 × 9] (S3: tbl_df/tbl/data.frame)
+ $ ID     : num [1:117] 19908 19909 19910 20908 20909 ...
+ $ nrAdvE : num [1:117] 4 4 1 1 2 2 3 0 1 0 ...
+ $ BMI    : num [1:117] 25.2 23.8 23.1 25.7 25.9 ...
+ $ height : num [1:117] 163 164 164 165 170 168 161 168 154 157 ...
+ $ country: chr [1:117] "c1" "c1" "c1" "c1" ...
+ $ sex    : chr [1:117] "F" "F" "F" "F" ...
+ $ age    : num [1:117] 47 53 68 48 67 54 53 53 47 58 ...
+ $ weight : num [1:117] 67 64 62 70 75 81 69 74 76 82 ...
+ $ treat  : chr [1:117] "placebo" "d1" "placebo" "d2" ...</code></pre>
+</div>
+</div>
+</section>
+<section id="the-anatomy-of-tidyverse" class="level2">
+<h2 class="anchored" data-anchor-id="the-anatomy-of-tidyverse">The anatomy of tidyverse</h2>
+<p>Tidyverse is a collection of R packages that are great for data wrangling and visualizations. Tidyverse is often coded in a specific syntax that we will go through now.</p>
+<ol type="1">
+<li><p>The name of the new object you are creating. Can omit if you don’t want to save the result.</p></li>
+<li><p>The dataset we are working on.</p></li>
+<li><p>The function you want to perform on the dataset.</p></li>
+</ol>
+<p>In tidyverse we use the pipe symbol <code>%&gt;%</code>. Always make a new line after the pipe symbol for good structure.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># new_object &lt;- dataset %&gt;%</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co">#   function1(arguments...) %&gt;% </span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co">#   function2(arguments...)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="count-distinct-sort" class="level2">
+<h2 class="anchored" data-anchor-id="count-distinct-sort">Count, distinct, sort</h2>
+<p>Count and distinct are very useful to get information about your dataset!</p>
+<p>Variables (columns) can be numeric or categorical (characters, factors). Use the <code>str()</code> function to see the structure of your dataset.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>crohns <span class="sc">%&gt;%</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>tibble [117 × 9] (S3: tbl_df/tbl/data.frame)
+ $ ID     : num [1:117] 19908 19909 19910 20908 20909 ...
+ $ nrAdvE : num [1:117] 4 4 1 1 2 2 3 0 1 0 ...
+ $ BMI    : num [1:117] 25.2 23.8 23.1 25.7 25.9 ...
+ $ height : num [1:117] 163 164 164 165 170 168 161 168 154 157 ...
+ $ country: chr [1:117] "c1" "c1" "c1" "c1" ...
+ $ sex    : chr [1:117] "F" "F" "F" "F" ...
+ $ age    : num [1:117] 47 53 68 48 67 54 53 53 47 58 ...
+ $ weight : num [1:117] 67 64 62 70 75 81 69 74 76 82 ...
+ $ treat  : chr [1:117] "placebo" "d1" "placebo" "d2" ...</code></pre>
+</div>
+</div>
+<p><code>distinct()</code> tells us how many different levels a categorical variable has.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># How many different treatments do we have? </span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>crohns <span class="sc">%&gt;%</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(treat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 1
+  treat  
+  &lt;chr&gt;  
+1 placebo
+2 d1     
+3 d2     </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># How many different treatments do we have?</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>crohns <span class="sc">%&gt;%</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(treat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 1
+  treat  
+  &lt;chr&gt;  
+1 placebo
+2 d1     
+3 d2     </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">#From how many different countries do we have data?</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>crohns <span class="sc">%&gt;%</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(country)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 1
+  country
+  &lt;chr&gt;  
+1 c1     
+2 c2     </code></pre>
+</div>
+</div>
+<p><code>count()</code> does tabulation of categorical variables. Total number of lines, i.e.&nbsp;patients in the current dataset. Observe, this matches with the number of lines you can see in the Environment tab.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>crohns <span class="sc">%&gt;%</span> </span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+      n
+  &lt;int&gt;
+1   117</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># How many lines, i.e. patients do we have per treatment?</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>crohns <span class="sc">%&gt;%</span> </span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(treat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  treat       n
+  &lt;chr&gt;   &lt;int&gt;
+1 d1         39
+2 d2         39
+3 placebo    39</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Is our dataset balanced?</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="co"># How many patients do we have for each age?</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>crohns <span class="sc">%&gt;%</span> </span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(age)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 43 × 2
+     age     n
+   &lt;dbl&gt; &lt;int&gt;
+ 1    19     1
+ 2    28     1
+ 3    29     1
+ 4    30     1
+ 5    33     1
+ 6    35     1
+ 7    36     1
+ 8    38     1
+ 9    39     3
+10    40     2
+# ℹ 33 more rows</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Perhaps this is more useful: How many patients are older than 65?</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>crohns <span class="sc">%&gt;%</span> </span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(age <span class="sc">&gt;</span> <span class="dv">65</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 2
+  `age &gt; 65`     n
+  &lt;lgl&gt;      &lt;int&gt;
+1 FALSE         96
+2 TRUE          21</code></pre>
+</div>
+</div>
+<p>Note we haven’t saved anything here, we just get output to the console sorted in a certain way. This helps us to check if the data looks correct and get an impression.</p>
+</section>
+<section id="filtering-data-selecting-rows-with-filter" class="level2">
+<h2 class="anchored" data-anchor-id="filtering-data-selecting-rows-with-filter">Filtering data (selecting rows) with <code>filter()</code></h2>
+<p>How we subset dataset into subsets we find interesting. For example only female patients:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>crohns <span class="sc">%&gt;%</span> </span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(sex <span class="sc">==</span> <span class="st">'F'</span>) <span class="co"># processed from left to right</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 100 × 9
+      ID nrAdvE   BMI height country sex     age weight treat  
+   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;  
+ 1 19908      4  25.2    163 c1      F        47     67 placebo
+ 2 19909      4  23.8    164 c1      F        53     64 d1     
+ 3 19910      1  23.0    164 c1      F        68     62 placebo
+ 4 20908      1  25.7    165 c1      F        48     70 d2     
+ 5 20909      2  26.0    170 c1      F        67     75 placebo
+ 6 20910      2  28.7    168 c1      F        54     81 d1     
+ 7 21908      3  26.6    161 c1      F        53     69 d1     
+ 8 21909      0  26.2    168 c1      F        53     74 placebo
+ 9 21910      1  32.0    154 c1      F        47     76 d2     
+10 21911      0  33.3    157 c1      F        58     82 placebo
+# ℹ 90 more rows</code></pre>
+</div>
+</div>
+<p>A great about tidyverse: write code the way you think. You always filter by defining conditions. If the condition evaluates to ‘TRUE’ the line is included. See only data lines for patients over 65:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>crohns <span class="sc">%&gt;%</span> </span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(age <span class="sc">&gt;</span> <span class="dv">65</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 21 × 9
+      ID nrAdvE   BMI height country sex     age weight treat  
+   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;  
+ 1 19910      1  23.0    164 c1      F        68     62 placebo
+ 2 20909      2  26.0    170 c1      F        67     75 placebo
+ 3 22908      5  18.2    159 c1      F        66     46 d2     
+ 4 22909      8  30.8    156 c1      M        71     75 placebo
+ 5 22911      3  24.8    182 c1      M        68     82 d2     
+ 6 22914      3  25.2    157 c1      F        75     62 d2     
+ 7 24912      0  25.2    162 c1      F        69     66 placebo
+ 8 25920      1  27.9    164 c1      F        69     75 d1     
+ 9 26908      0  25.8    150 c1      F        73     58 d1     
+10 26910      0  19.1    165 c1      F        66     52 d1     
+# ℹ 11 more rows</code></pre>
+</div>
+</div>
+<p>From the above commands we are getting the result printed to the console. This is useful to check something. To save the result, we need to re-assign:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>seniors <span class="ot">&lt;-</span> crohns <span class="sc">%&gt;%</span> </span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(age <span class="sc">&gt;</span> <span class="dv">65</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>View newly created data frame:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>seniors</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 21 × 9
+      ID nrAdvE   BMI height country sex     age weight treat  
+   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;  
+ 1 19910      1  23.0    164 c1      F        68     62 placebo
+ 2 20909      2  26.0    170 c1      F        67     75 placebo
+ 3 22908      5  18.2    159 c1      F        66     46 d2     
+ 4 22909      8  30.8    156 c1      M        71     75 placebo
+ 5 22911      3  24.8    182 c1      M        68     82 d2     
+ 6 22914      3  25.2    157 c1      F        75     62 d2     
+ 7 24912      0  25.2    162 c1      F        69     66 placebo
+ 8 25920      1  27.9    164 c1      F        69     75 d1     
+ 9 26908      0  25.8    150 c1      F        73     58 d1     
+10 26910      0  19.1    165 c1      F        66     52 d1     
+# ℹ 11 more rows</code></pre>
+</div>
+</div>
+<p>Do we still have all three treatment groups in our subset?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>seniors <span class="sc">%&gt;%</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(treat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  treat       n
+  &lt;chr&gt;   &lt;int&gt;
+1 d1          6
+2 d2          5
+3 placebo    10</code></pre>
+</div>
+</div>
+</section>
+<section id="the-world-of-conditional-operators" class="level2">
+<h2 class="anchored" data-anchor-id="the-world-of-conditional-operators">The world of conditional operators</h2>
+<p>Now we get lines that fit certain conditions but what if I want to filter on more than one condition? Enter conditional operators!</p>
+<p><strong>The ‘and’ operator: <code>&amp;</code></strong></p>
+<p>We can also subset on several conditions. Here are younger patients who received drug 1:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>crohns <span class="sc">%&gt;%</span> </span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(age <span class="sc">&lt;=</span> <span class="dv">65</span> <span class="sc">&amp;</span> treat <span class="sc">==</span> <span class="st">'d1'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 33 × 9
+      ID nrAdvE   BMI height country sex     age weight treat
+   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;
+ 1 19909      4  23.8    164 c1      F        53     64 d1   
+ 2 20910      2  28.7    168 c1      F        54     81 d1   
+ 3 21908      3  26.6    161 c1      F        53     69 d1   
+ 4 21916      0  23.9    177 c1      M        56     75 d1   
+ 5 22916      2  30.9    163 c1      F        53     82 d1   
+ 6 23908      0  30.4    158 c1      F        55     76 d1   
+ 7 23909      0  23.4    156 c1      F        44     57 d1   
+ 8 23910      0  26.7    156 c1      F        59     65 d1   
+ 9 23912      0  16      150 c1      F        28     36 d1   
+10 24909      0  22.5    155 c1      F        52     54 d1   
+# ℹ 23 more rows</code></pre>
+</div>
+</div>
+<p><strong>The ‘or’ operator: <code>|</code></strong></p>
+<p>Get patients that were treated with either drug 1 or the placebo:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>crohns <span class="sc">%&gt;%</span> </span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(treat <span class="sc">==</span> <span class="st">'placebo'</span> <span class="sc">|</span> treat <span class="sc">==</span> <span class="st">'d1'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 78 × 9
+      ID nrAdvE   BMI height country sex     age weight treat  
+   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;  
+ 1 19908      4  25.2    163 c1      F        47     67 placebo
+ 2 19909      4  23.8    164 c1      F        53     64 d1     
+ 3 19910      1  23.0    164 c1      F        68     62 placebo
+ 4 20909      2  26.0    170 c1      F        67     75 placebo
+ 5 20910      2  28.7    168 c1      F        54     81 d1     
+ 6 21908      3  26.6    161 c1      F        53     69 d1     
+ 7 21909      0  26.2    168 c1      F        53     74 placebo
+ 8 21911      0  33.3    157 c1      F        58     82 placebo
+ 9 21914      6  28.4    170 c1      M        58     82 placebo
+10 21916      0  23.9    177 c1      M        56     75 d1     
+# ℹ 68 more rows</code></pre>
+</div>
+</div>
+<p><strong>The ‘not’ operator: <code>!</code></strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>crohns <span class="sc">%&gt;%</span> </span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(treat <span class="sc">!=</span> <span class="st">'placebo'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 78 × 9
+      ID nrAdvE   BMI height country sex     age weight treat
+   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;
+ 1 19909      4  23.8    164 c1      F        53     64 d1   
+ 2 20908      1  25.7    165 c1      F        48     70 d2   
+ 3 20910      2  28.7    168 c1      F        54     81 d1   
+ 4 21908      3  26.6    161 c1      F        53     69 d1   
+ 5 21910      1  32.0    154 c1      F        47     76 d2   
+ 6 21912      5  32.5    152 c1      F        63     75 d2   
+ 7 21913      2  37.6    159 c1      F        54     95 d2   
+ 8 21915      0  23.0    160 c1      F        54     59 d2   
+ 9 21916      0  23.9    177 c1      M        56     75 d1   
+10 21917      0  36.4    164 c1      F        51     98 d2   
+# ℹ 68 more rows</code></pre>
+</div>
+</div>
+<p>Other conditional operators can be found in the first presentation or when querying the function (or just google it).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>?dplyr<span class="sc">::</span>filter</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>You can also allow multiple arguments in a variable. Here are the young patients who got treatment with either drug 1 or 2:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>crohns <span class="sc">%&gt;%</span> </span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(age <span class="sc">&lt;=</span> <span class="dv">65</span> <span class="sc">&amp;</span> treat <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"d1"</span>,<span class="st">"d2"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 67 × 9
+      ID nrAdvE   BMI height country sex     age weight treat
+   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;
+ 1 19909      4  23.8    164 c1      F        53     64 d1   
+ 2 20908      1  25.7    165 c1      F        48     70 d2   
+ 3 20910      2  28.7    168 c1      F        54     81 d1   
+ 4 21908      3  26.6    161 c1      F        53     69 d1   
+ 5 21910      1  32.0    154 c1      F        47     76 d2   
+ 6 21912      5  32.5    152 c1      F        63     75 d2   
+ 7 21913      2  37.6    159 c1      F        54     95 d2   
+ 8 21915      0  23.0    160 c1      F        54     59 d2   
+ 9 21916      0  23.9    177 c1      M        56     75 d1   
+10 21917      0  36.4    164 c1      F        51     98 d2   
+# ℹ 57 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="selecting-variables-columns-with-select" class="level2">
+<h2 class="anchored" data-anchor-id="selecting-variables-columns-with-select">Selecting variables (columns) with <code>select()</code></h2>
+<p>We can choose to only include certain columns. Here, we select only BMI, age and the number of adverse events:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>crohns <span class="sc">%&gt;%</span> </span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(nrAdvE, BMI, age)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 117 × 3
+   nrAdvE   BMI   age
+    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+ 1      4  25.2    47
+ 2      4  23.8    53
+ 3      1  23.0    68
+ 4      1  25.7    48
+ 5      2  26.0    67
+ 6      2  28.7    54
+ 7      3  26.6    53
+ 8      0  26.2    53
+ 9      1  32.0    47
+10      0  33.3    58
+# ℹ 107 more rows</code></pre>
+</div>
+</div>
+<p>We can also make a negative selection that excludes the named column(s). The ID doesn’t give us any information since the data is anonymized:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>without_id <span class="ot">&lt;-</span> crohns <span class="sc">%&gt;%</span> </span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>ID)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We have saved the dataset without the ID column in at new variable. Let’s have a look at this:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>without_id</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 117 × 8
+   nrAdvE   BMI height country sex     age weight treat  
+    &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;  
+ 1      4  25.2    163 c1      F        47     67 placebo
+ 2      4  23.8    164 c1      F        53     64 d1     
+ 3      1  23.0    164 c1      F        68     62 placebo
+ 4      1  25.7    165 c1      F        48     70 d2     
+ 5      2  26.0    170 c1      F        67     75 placebo
+ 6      2  28.7    168 c1      F        54     81 d1     
+ 7      3  26.6    161 c1      F        53     69 d1     
+ 8      0  26.2    168 c1      F        53     74 placebo
+ 9      1  32.0    154 c1      F        47     76 d2     
+10      0  33.3    157 c1      F        58     82 placebo
+# ℹ 107 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="transformation-of-data-with-mutate" class="level2">
+<h2 class="anchored" data-anchor-id="transformation-of-data-with-mutate">Transformation of data with <code>mutate()</code></h2>
+<p>We can create new columns based on other columns with the <code>mutate()</code> function.</p>
+<p>This is our original tibble:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>crohns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 117 × 9
+      ID nrAdvE   BMI height country sex     age weight treat  
+   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;  
+ 1 19908      4  25.2    163 c1      F        47     67 placebo
+ 2 19909      4  23.8    164 c1      F        53     64 d1     
+ 3 19910      1  23.0    164 c1      F        68     62 placebo
+ 4 20908      1  25.7    165 c1      F        48     70 d2     
+ 5 20909      2  26.0    170 c1      F        67     75 placebo
+ 6 20910      2  28.7    168 c1      F        54     81 d1     
+ 7 21908      3  26.6    161 c1      F        53     69 d1     
+ 8 21909      0  26.2    168 c1      F        53     74 placebo
+ 9 21910      1  32.0    154 c1      F        47     76 d2     
+10 21911      0  33.3    157 c1      F        58     82 placebo
+# ℹ 107 more rows</code></pre>
+</div>
+</div>
+<p>We want to add height in meters in a new column. It is important to reassign the dataframe if you want to save the new column.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>crohns <span class="ot">&lt;-</span> crohns <span class="sc">%&gt;%</span> </span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">height_m =</span> height<span class="sc">/</span><span class="dv">100</span>)</span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>crohns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 117 × 10
+      ID nrAdvE   BMI height country sex     age weight treat   height_m
+   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;      &lt;dbl&gt;
+ 1 19908      4  25.2    163 c1      F        47     67 placebo     1.63
+ 2 19909      4  23.8    164 c1      F        53     64 d1          1.64
+ 3 19910      1  23.0    164 c1      F        68     62 placebo     1.64
+ 4 20908      1  25.7    165 c1      F        48     70 d2          1.65
+ 5 20909      2  26.0    170 c1      F        67     75 placebo     1.7 
+ 6 20910      2  28.7    168 c1      F        54     81 d1          1.68
+ 7 21908      3  26.6    161 c1      F        53     69 d1          1.61
+ 8 21909      0  26.2    168 c1      F        53     74 placebo     1.68
+ 9 21910      1  32.0    154 c1      F        47     76 d2          1.54
+10 21911      0  33.3    157 c1      F        58     82 placebo     1.57
+# ℹ 107 more rows</code></pre>
+</div>
+</div>
+<p>We can also create columns based on TRUE/FALSE conditions. According to the CDC, a person with a BMI &lt; 18.5 is underweight:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>crohns <span class="ot">&lt;-</span> crohns <span class="sc">%&gt;%</span> </span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">underweight =</span> <span class="fu">ifelse</span>(BMI <span class="sc">&lt;</span> <span class="fl">18.5</span>, <span class="st">"Yes"</span>, <span class="st">"No"</span>))</span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a>crohns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 117 × 11
+      ID nrAdvE   BMI height country sex     age weight treat   height_m
+   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;      &lt;dbl&gt;
+ 1 19908      4  25.2    163 c1      F        47     67 placebo     1.63
+ 2 19909      4  23.8    164 c1      F        53     64 d1          1.64
+ 3 19910      1  23.0    164 c1      F        68     62 placebo     1.64
+ 4 20908      1  25.7    165 c1      F        48     70 d2          1.65
+ 5 20909      2  26.0    170 c1      F        67     75 placebo     1.7 
+ 6 20910      2  28.7    168 c1      F        54     81 d1          1.68
+ 7 21908      3  26.6    161 c1      F        53     69 d1          1.61
+ 8 21909      0  26.2    168 c1      F        53     74 placebo     1.68
+ 9 21910      1  32.0    154 c1      F        47     76 d2          1.54
+10 21911      0  33.3    157 c1      F        58     82 placebo     1.57
+# ℹ 107 more rows
+# ℹ 1 more variable: underweight &lt;chr&gt;</code></pre>
+</div>
+</div>
+<p>How many patients are underweight?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>crohns <span class="sc">%&gt;%</span></span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(underweight)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 2
+  underweight     n
+  &lt;chr&gt;       &lt;int&gt;
+1 No            113
+2 Yes             4</code></pre>
+</div>
+</div>
+<p>Have a look at the <code>mutate()</code> function:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>?mutate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="summary-statistics-revisited-with-summarize" class="level2">
+<h2 class="anchored" data-anchor-id="summary-statistics-revisited-with-summarize">Summary statistics, revisited with <code>summarize()</code></h2>
+<p>Methods from before:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(crohns<span class="sc">$</span>age)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 54.65812</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(crohns<span class="sc">$</span>age)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 75</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(crohns)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       ID            nrAdvE            BMI            height     
+ Min.   :19908   Min.   : 0.000   Min.   :16.00   Min.   :124.0  
+ 1st Qu.:23909   1st Qu.: 0.000   1st Qu.:23.05   1st Qu.:157.0  
+ Median :25919   Median : 1.000   Median :25.15   Median :162.0  
+ Mean   :34103   Mean   : 2.034   Mean   :26.06   Mean   :162.7  
+ 3rd Qu.:51909   3rd Qu.: 3.000   3rd Qu.:28.40   3rd Qu.:166.0  
+ Max.   :54937   Max.   :12.000   Max.   :44.06   Max.   :182.0  
+   country              sex                 age            weight      
+ Length:117         Length:117         Min.   :19.00   Min.   : 36.00  
+ Class :character   Class :character   1st Qu.:48.00   1st Qu.: 59.00  
+ Mode  :character   Mode  :character   Median :56.00   Median : 68.00  
+                                       Mean   :54.66   Mean   : 69.03  
+                                       3rd Qu.:62.00   3rd Qu.: 76.00  
+                                       Max.   :75.00   Max.   :117.00  
+    treat              height_m     underweight       
+ Length:117         Min.   :1.240   Length:117        
+ Class :character   1st Qu.:1.570   Class :character  
+ Mode  :character   Median :1.620   Mode  :character  
+                    Mean   :1.627                     
+                    3rd Qu.:1.660                     
+                    Max.   :1.820                     </code></pre>
+</div>
+</div>
+<p>The <code>summarize()</code> function does the same but in a tidyverse way and gives the result in a table which you can export and send to your colleagues.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>crohns <span class="sc">%&gt;%</span> </span>
+<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="fu">mean</span>(age),</span>
+<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a>            <span class="fu">max</span>(age))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+  `mean(age)` `max(age)`
+        &lt;dbl&gt;      &lt;dbl&gt;
+1        54.7         75</code></pre>
+</div>
+</div>
+<p>We can also specify names for the new columns:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>crohns <span class="sc">%&gt;%</span> </span>
+<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_age =</span> <span class="fu">mean</span>(age),</span>
+<span id="cb72-3"><a href="#cb72-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">max_age =</span> <span class="fu">max</span>(age))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+  mean_age max_age
+     &lt;dbl&gt;   &lt;dbl&gt;
+1     54.7      75</code></pre>
+</div>
+</div>
+<p>What kind of things can you summarize? Have a look at the help by typing <code>?summarize</code> into the console, or ‘summarize’ into the help panel and scroll down to ‘Useful functions’.</p>
+<p>A useful summarize function is <code>n()</code> which counts the number of lines.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a>crohns <span class="sc">%&gt;%</span> </span>
+<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_age =</span> <span class="fu">mean</span>(age),</span>
+<span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">max_age =</span> <span class="fu">max</span>(age),</span>
+<span id="cb74-4"><a href="#cb74-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">number_lines =</span> <span class="fu">n</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 3
+  mean_age max_age number_lines
+     &lt;dbl&gt;   &lt;dbl&gt;        &lt;int&gt;
+1     54.7      75          117</code></pre>
+</div>
+</div>
+<p>Note that R is tolerant of BE/AE spelling differences. <code>summarise()</code> and <code>summarize()</code> are the same function, likewise with <code>color</code> and <code>colour</code>.</p>
+</section>
+<section id="grouping-with-group_by" class="level2">
+<h2 class="anchored" data-anchor-id="grouping-with-group_by">Grouping with <code>group_by()</code></h2>
+<p>The function <code>group_by()</code> imposes a grouping on a tibble. Group according to sex:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a>crohns <span class="sc">%&gt;%</span></span>
+<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sex)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 117 × 11
+# Groups:   sex [2]
+      ID nrAdvE   BMI height country sex     age weight treat   height_m
+   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;      &lt;dbl&gt;
+ 1 19908      4  25.2    163 c1      F        47     67 placebo     1.63
+ 2 19909      4  23.8    164 c1      F        53     64 d1          1.64
+ 3 19910      1  23.0    164 c1      F        68     62 placebo     1.64
+ 4 20908      1  25.7    165 c1      F        48     70 d2          1.65
+ 5 20909      2  26.0    170 c1      F        67     75 placebo     1.7 
+ 6 20910      2  28.7    168 c1      F        54     81 d1          1.68
+ 7 21908      3  26.6    161 c1      F        53     69 d1          1.61
+ 8 21909      0  26.2    168 c1      F        53     74 placebo     1.68
+ 9 21910      1  32.0    154 c1      F        47     76 d2          1.54
+10 21911      0  33.3    157 c1      F        58     82 placebo     1.57
+# ℹ 107 more rows
+# ℹ 1 more variable: underweight &lt;chr&gt;</code></pre>
+</div>
+</div>
+<p>We can also group according to several variables. How many groups will we get?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>crohns <span class="sc">%&gt;%</span></span>
+<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sex, treat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 117 × 11
+# Groups:   sex, treat [6]
+      ID nrAdvE   BMI height country sex     age weight treat   height_m
+   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;      &lt;dbl&gt;
+ 1 19908      4  25.2    163 c1      F        47     67 placebo     1.63
+ 2 19909      4  23.8    164 c1      F        53     64 d1          1.64
+ 3 19910      1  23.0    164 c1      F        68     62 placebo     1.64
+ 4 20908      1  25.7    165 c1      F        48     70 d2          1.65
+ 5 20909      2  26.0    170 c1      F        67     75 placebo     1.7 
+ 6 20910      2  28.7    168 c1      F        54     81 d1          1.68
+ 7 21908      3  26.6    161 c1      F        53     69 d1          1.61
+ 8 21909      0  26.2    168 c1      F        53     74 placebo     1.68
+ 9 21910      1  32.0    154 c1      F        47     76 d2          1.54
+10 21911      0  33.3    157 c1      F        58     82 placebo     1.57
+# ℹ 107 more rows
+# ℹ 1 more variable: underweight &lt;chr&gt;</code></pre>
+</div>
+</div>
+<p>By itself, group_by does nothing, we still get the same dataset returned. But it is very useful in combination with other commands! The reason we want to do it this is way is that we can first impose grouping with <code>group_by()</code> and then pipe, <code>%&gt;%</code>, the resulting tibble into summarize which will respect our grouping. So smart!</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a>crohns <span class="sc">%&gt;%</span>                      <span class="co"># the dataset</span></span>
+<span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sex) <span class="sc">%&gt;%</span>             <span class="co"># grouped by sex</span></span>
+<span id="cb80-3"><a href="#cb80-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avg =</span> <span class="fu">mean</span>(age),    <span class="co"># calculate mean of the age</span></span>
+<span id="cb80-4"><a href="#cb80-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">med =</span> <span class="fu">median</span>(age),  <span class="co"># calc median</span></span>
+<span id="cb80-5"><a href="#cb80-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">stdev =</span> <span class="fu">sd</span>(age),    <span class="co"># calc standard dev.</span></span>
+<span id="cb80-6"><a href="#cb80-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">n =</span> <span class="fu">n</span>())            <span class="co"># get the number of observations</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 5
+  sex     avg   med stdev     n
+  &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;
+1 F      54.7    55  10.8   100
+2 M      54.3    56  10.4    17</code></pre>
+</div>
+</div>
+<p>Now we see why <code>n()</code> is useful: It tells us how many lines, i.e.&nbsp;patients are in each group.</p>
+<p>Group by sex and treatment, and calculate stats for the number of adverse events.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a>crohns <span class="sc">%&gt;%</span>                              <span class="co"># the dataset</span></span>
+<span id="cb82-2"><a href="#cb82-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sex, treat) <span class="sc">%&gt;%</span>              <span class="co"># grouped by sex</span></span>
+<span id="cb82-3"><a href="#cb82-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avg =</span> <span class="fu">mean</span>(nrAdvE),         <span class="co"># calculate mean number of adverse events</span></span>
+<span id="cb82-4"><a href="#cb82-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">med =</span> <span class="fu">median</span>(nrAdvE),       <span class="co"># calc median</span></span>
+<span id="cb82-5"><a href="#cb82-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">max =</span> <span class="fu">max</span>(nrAdvE),          <span class="co"># calc max </span></span>
+<span id="cb82-6"><a href="#cb82-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">stdev =</span> <span class="fu">sd</span>(nrAdvE),         <span class="co"># calc standard dev.</span></span>
+<span id="cb82-7"><a href="#cb82-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">total_events =</span> <span class="fu">sum</span>(nrAdvE), <span class="co"># calc cumulative sum </span></span>
+<span id="cb82-8"><a href="#cb82-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">n =</span> <span class="fu">n</span>())                    <span class="co"># get the number of observations</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by 'sex'. You can override using the `.groups`
+argument.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 8
+# Groups:   sex [2]
+  sex   treat     avg   med   max stdev total_events     n
+  &lt;chr&gt; &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;        &lt;dbl&gt; &lt;int&gt;
+1 F     d1       1.5      0     7  2.08           51    34
+2 F     d2       2.12     1     9  2.71           72    34
+3 F     placebo  2.16     1    12  3.09           69    32
+4 M     d1       2        0     9  3.94           10     5
+5 M     d2       2.2      2     6  2.49           11     5
+6 M     placebo  3.57     3     8  3.41           25     7</code></pre>
+</div>
+</div>
+</section>
+<section id="the-might-of-the-pipe-operator" class="level2">
+<h2 class="anchored" data-anchor-id="the-might-of-the-pipe-operator">The might of the pipe operator: <code>%&gt;%</code></h2>
+<p>Many commands can be combined with the pipe operator to pipe data through an analysis workflow.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a>crohns <span class="sc">%&gt;%</span>                              <span class="co"># the dataset</span></span>
+<span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(age <span class="sc">&gt;</span> <span class="dv">65</span>) <span class="sc">%&gt;%</span>                  <span class="co"># filtered to only people over 65</span></span>
+<span id="cb85-3"><a href="#cb85-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sex, treat) <span class="sc">%&gt;%</span>              <span class="co"># Grouping </span></span>
+<span id="cb85-4"><a href="#cb85-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avg =</span> <span class="fu">mean</span>(nrAdvE),         <span class="co"># calculate mean number of adverse events</span></span>
+<span id="cb85-5"><a href="#cb85-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">med =</span> <span class="fu">median</span>(nrAdvE),       <span class="co"># calc median</span></span>
+<span id="cb85-6"><a href="#cb85-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">max =</span> <span class="fu">max</span>(nrAdvE),          <span class="co"># calc max </span></span>
+<span id="cb85-7"><a href="#cb85-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">stdev =</span> <span class="fu">sd</span>(nrAdvE),         <span class="co"># calc standard dev.</span></span>
+<span id="cb85-8"><a href="#cb85-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">total_events =</span> <span class="fu">sum</span>(nrAdvE), <span class="co"># calc cumulative sum </span></span>
+<span id="cb85-9"><a href="#cb85-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">n =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span>                <span class="co"># get the number of observations</span></span>
+<span id="cb85-10"><a href="#cb85-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(avg)                          <span class="co"># Sort output by the mean</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by 'sex'. You can override using the `.groups`
+argument.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 8
+# Groups:   sex [2]
+  sex   treat     avg   med   max stdev total_events     n
+  &lt;chr&gt; &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;        &lt;dbl&gt; &lt;int&gt;
+1 F     d1       1.83   0.5     6  2.56           11     6
+2 F     placebo  2.22   1      12  3.73           20     9
+3 F     d2       3      3       5  2               9     3
+4 M     d2       4.5    4.5     6  2.12            9     2
+5 M     placebo  8      8       8 NA               8     1</code></pre>
+</div>
+</div>
+<p>What if I want to do the same analysis but with only obese patients? The CDC lists a BMI of &gt; 30 as obese.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

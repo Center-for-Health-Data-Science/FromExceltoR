@@ -3,6 +3,10 @@ title: "Presentation 4"
 format: html
 ---
 
+```{r}
+library(tidyverse)
+```
+
 ### ggplot2 additive structure
 
 ```{r}

@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Data Science Lab, University of Copenhagen">
+<meta name="dcterms.date" content="2024-10-03">
 
-<title>FromExceltoR</title>
+<title>VI. Graphics with ggplot2 (exercises) – FromExceltoR</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,25 +22,59 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -77,7 +113,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">FromExceltoR</span>
     </a>
   </div>
@@ -88,7 +124,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./main_page.qmd"> 
+    <a class="nav-link" href="../main_page.qmd"> 
 <span class="menu-text">FromExcel2R</span></a>
   </li>  
 </ul>
@@ -102,7 +138,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">FromExceltoR</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">VI. Graphics with ggplot2 (exercises)</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -121,14 +157,26 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">FromExceltoR</h1>
+<h1 class="title">VI. Graphics with ggplot2 (exercises)</h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Data Science Lab, University of Copenhagen </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 3, 2024</p>
+    </div>
+  </div>
   
     
   </div>
@@ -138,14 +186,153 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="welcome-to-the-main-page" class="level2">
-<h2 class="anchored" data-anchor-id="welcome-to-the-main-page">Welcome to the main page</h2>
-<p><img src="images/god_knows.jpeg" class="img-fluid"></p>
+<p>Before you proceed with the exercises in this document, make sure to run the command <code>library(tidyverse)</code> in order to load the core <strong>tidyverse</strong> packages (including <strong>ggplot2</strong>).</p>
+<p>The data set used in these exercises, <strong>climate.xlsx</strong><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, was compiled from data downloaded in 2017 from the website of the UK’s national weather service, the <a href="http://www.metoffice.gov.uk/public/weather/climate-historic/"><em>Met Office</em></a>.</p>
+<p>The spreadsheet contains data from five UK weather stations in 2016. The following variables are included in the data set:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Variable name</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>station</strong></td>
+<td>Location of weather station</td>
+</tr>
+<tr class="even">
+<td><strong>year</strong></td>
+<td>Year</td>
+</tr>
+<tr class="odd">
+<td><strong>month</strong></td>
+<td>Month</td>
+</tr>
+<tr class="even">
+<td><strong>af</strong></td>
+<td>Days of air frost</td>
+</tr>
+<tr class="odd">
+<td><strong>rain</strong></td>
+<td>Rainfall in mm</td>
+</tr>
+<tr class="even">
+<td><strong>sun</strong></td>
+<td>Sunshine duration in hours</td>
+</tr>
+<tr class="odd">
+<td><strong>device</strong></td>
+<td>Brand of sunshine recorder / sensor</td>
+</tr>
+</tbody>
+</table>
+<p>The data set is the same as the one used for the Tidyverse exercise. If you have already imported the data, there is no need to import it again, unless you have made changes to the data assigned to <code>climate</code> since the original data set was imported.</p>
+<p><strong>Need a little help?</strong> Consult the ggplot2 cheatsheet here: <a href="https://rstudio.github.io/cheatsheets/data-visualization.pdf" class="uri">https://rstudio.github.io/cheatsheets/data-visualization.pdf</a></p>
+<section id="scatter-plot-i" class="level3">
+<h3 class="anchored" data-anchor-id="scatter-plot-i">Scatter plot I</h3>
+<ol type="1">
+<li><p>Make a scatter (point) plot of <strong>rain</strong> against <strong>sun</strong>.</p></li>
+<li><p>Color the points in the scatter plot according to weather station. Save the plot in an object.</p></li>
+<li><p>Add the segment <code>+ facet_wrap(vars(station))</code> to the saved plot object from above, and update the plot. What happens?</p></li>
+<li><p>Is it necessary to have a legend in the faceted plot? How can you remove this legend? Hint: try adding a <code>theme()</code> with <code>legend.position = "none"</code> inside it.</p></li>
+</ol>
+</section>
+<section id="graphic-files" class="level3">
+<h3 class="anchored" data-anchor-id="graphic-files">Graphic files</h3>
+<ol start="5" type="1">
+<li><p>Use <code>ggsave(file="weather.jpeg")</code> to remake the last ggplot as a jpeg-file and save it. The file will be saved on your working directory. Locate this file on your computer and open it.</p></li>
+<li><p>Use <code>ggsave(file="weather.png", width=10, height=8, units="cm")</code> to remake the last ggplot as a png-file and save it. What do the three other options do? Look at the help page <code>?ggsave</code> to get an overview of the possible options.</p></li>
+</ol>
+</section>
+<section id="scatter-plot-ii-error-bars" class="level3">
+<h3 class="anchored" data-anchor-id="scatter-plot-ii-error-bars">Scatter plot II: error bars</h3>
+<ol start="7" type="1">
+<li><p>Calculate the average and standard deviation for sunshine in each month and save it to a table called <code>summary_stats</code>. You will need <code>group_by</code> and <code>summarize</code>. Recall how to do this from the tidyverse exercise.</p></li>
+<li><p>Make a scatter plot of the summary_stats with month on the x-axis, and the average number of sunshine hours on the y-axis.</p></li>
+<li><p>Add error bars to the plot, which represent the average number of sunshine hours plus/minus the standard deviation of the observations. The relevant geom is called <code>geom_errorbar</code>.</p></li>
+</ol>
+<p>Hint:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> sun_avg <span class="sc">-</span> sun_sd, <span class="at">ymax =</span> sun_avg <span class="sc">+</span> sun_sd), <span class="at">width =</span> <span class="fl">0.2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="10" type="1">
+<li>How could make the plot with horizontal error bars instead? Tip: Think about which of the two variables, month and average sunshine hours, can meaningfully have an error.</li>
+</ol>
+</section>
+<section id="line-plot-also-known-as-a-spaghetti-plot" class="level3">
+<h3 class="anchored" data-anchor-id="line-plot-also-known-as-a-spaghetti-plot">Line plot (also known as a spaghetti plot)</h3>
+<ol start="11" type="1">
+<li><p>Make a line plot (find the correct <code>geom_</code> for this) of the rainfall observations over time (month), such that observations from the same station are connected in one line. Put month on the x-axis. Color the lines according to weather station as well.</p></li>
+<li><p>The <strong>month</strong> variable was read into R as a numerical variable. Convert this variable to a factor and make the line plot again. What has changed?</p></li>
+<li><p>Use <code>theme(legend.position = ???)</code> to move the color legend to the top of the plot.</p></li>
+</ol>
+</section>
+<section id="layering" class="level3">
+<h3 class="anchored" data-anchor-id="layering">Layering</h3>
+<p>We can add several geoms to the same plot to show several things at once.</p>
+<ol start="14" type="1">
+<li><p>(Re)Make the line plot of monthly rainfall and add <code>geom_point()</code> to it.</p></li>
+<li><p>Now, add <code>geom_hline(yintercept = mean(climate$rain), linetype = "dashed")</code> at the end of your code for the line plot, and update the plot again. Have a look at the code again and understand what it does and how. What do you think ‘h’ in hline stands for?</p></li>
+<li><p>Finally, try adding the following code and update the plot. What changed? Replace <code>X</code>, <code>Y</code>, <code>COL</code>, and <code>TITLE</code> with some more suitable (informative) text.</p></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"X"</span>, <span class="at">y =</span> <span class="st">"Y"</span>, <span class="at">color =</span> <span class="st">"COL"</span>, <span class="at">title =</span> <span class="st">"TITLE"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="box-plot-i" class="level3">
+<h3 class="anchored" data-anchor-id="box-plot-i">Box plot I</h3>
+<ol start="17" type="1">
+<li><p>Make a box plot of sunshine per weather station.</p></li>
+<li><p>Color the boxes according to weather station.</p></li>
+</ol>
+</section>
+<section id="box-plot-ii---aesthetics" class="level3">
+<h3 class="anchored" data-anchor-id="box-plot-ii---aesthetics">Box plot II - Aesthetics</h3>
+<p>There are many ways in which you can manipulate the look of your plot. For this we will use the boxplot you made in the exercise above.</p>
+<ol start="19" type="1">
+<li><p>Add a different legend title with <code>labs(fill = "Custom Title")</code>.</p></li>
+<li><p>Change the theme of the ggplot grid. Suggestions: <code>theme_minimal()</code>, <code>theme_bw()</code>, <code>theme_dark()</code>, <code>theme_void()</code>.</p></li>
+<li><p>Instead of automatically chosen colors, pick your own colors for <code>fill = station</code> by adding the <code>scale_fill_manual()</code> command. You will need five colors, one for each station. What happens if you choose too few colors?</p></li>
+<li><p>Change the boxplot to a <strong>violin plot</strong>. Add the sunshine observations as scatter points to the plot. Include a boxplot inside the violin plot with <code>geom_boxplot(width=.1)</code>.</p></li>
+</ol>
+</section>
+<section id="histogram" class="level3">
+<h3 class="anchored" data-anchor-id="histogram">Histogram</h3>
+<ol start="23" type="1">
+<li><p>Make a histogram (find the correct <code>geom_</code> for this) of rain from the climate dataset. Interpret the plot, what does it show?</p></li>
+<li><p>R suggests that you choose a different number of bins/bin width for the histogram. Use <code>binwidth =</code> inside the histogram geom to experiment with different values of bin width. Look at how the histogram changes.</p></li>
+<li><p>Color the entire histogram. Here we are not coloring/filling according to any attribute, just the entire thing so the argument needs to be <strong>outside</strong> <code>aes()</code>.</p></li>
+</ol>
+</section>
+<section id="bar-chart-i" class="level3">
+<h3 class="anchored" data-anchor-id="bar-chart-i">Bar chart I</h3>
+<ol start="26" type="1">
+<li><p>Make a bar chart (<code>geom_col()</code>) which visualizes the sunshine hours per month. If you have not done so in question 13, convert month to a factor now and remake the plot.</p></li>
+<li><p>Color, i.e.&nbsp;divide the bars according to weather station.</p></li>
+<li><p>For better comparison, place the bars for each station next to each other instead of stacking them.</p></li>
+<li><p>Make the axis labels, legend title, and title of the plot more informative by customizing them like you did for the line plot above.</p></li>
+</ol>
+</section>
+<section id="bar-chart-ii-sorting-bars" class="level3">
+<h3 class="anchored" data-anchor-id="bar-chart-ii-sorting-bars">Bar chart II: Sorting bars</h3>
+<ol start="30" type="1">
+<li><p>Make a new bar chart showing the (total) annual rainfall recorded at each weather station. You will need to calculate this first. The format we need is a dataframe with summed up rain data per station.</p></li>
+<li><p>Sort the stations in accordance to rainfall, either ascending or descending. This was shown in the ggplot lecture. Sort your rain dataframe from the question above by sum, then re-arrange the factor-levels of the ‘station’ as shown in the lecture.</p></li>
+<li><p>Add labels to each bar that state the sum of the rainfall. You can do this by adding the <code>label</code> keyword to the <code>aes()</code> and adding <code>geom_label()</code> to the plot. Just like geoms like <code>geom_scatter</code> look at the <code>aes()</code> for knowing what to plot on the x and y axis, <code>geom_label</code> looks at it to know what to use for labels.</p></li>
+<li><p>Adjust the label positions so that the labels are positioned above the bars instead of inside them.</p></li>
+</ol>
 
 
 </section>
 
-</main> <!-- /main -->
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Contains public sector information licensed under the <a href="http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/">Open Government Licence v3.0</a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

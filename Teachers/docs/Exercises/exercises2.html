@@ -2,12 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.555">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Data Science Lab, University of Copenhagen">
+<meta name="dcterms.date" content="2024-10-03">
 
-<title>Video test</title>
+<title>II. Working with data in R (exercises) – FromExceltoR</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,73 +22,127 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
-<script src="video_test_files/libs/clipboard/clipboard.min.js"></script>
-<script src="video_test_files/libs/quarto-html/quarto.js"></script>
-<script src="video_test_files/libs/quarto-html/popper.min.js"></script>
-<script src="video_test_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="video_test_files/libs/quarto-html/anchor.min.js"></script>
-<link href="video_test_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="video_test_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="video_test_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="video_test_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="video_test_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
 
 
 </head>
 
-<body class="fullcontent">
+<body class="nav-sidebar floating nav-fixed fullcontent">
 
-<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">FromExceltoR</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../main_page.qmd"> 
+<span class="menu-text">FromExcel2R</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">II. Working with data in R (exercises)</li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    
+<!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Video test</h1>
+<h1 class="title">II. Working with data in R (exercises)</h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Data Science Lab, University of Copenhagen </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 3, 2024</p>
+    </div>
+  </div>
   
     
   </div>
@@ -96,43 +152,116 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="my-first-quarto-document" class="level2">
-<h2 class="anchored" data-anchor-id="my-first-quarto-document">My First Quarto Document</h2>
-<p>Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <a href="https://quarto.org" class="uri">https://quarto.org</a>.</p>
+<section id="setting-up" class="level3">
+<h3 class="anchored" data-anchor-id="setting-up">Setting up</h3>
+<ol start="0" type="1">
+<li><p><strong>Create new Quarto document</strong>. For working on the exercise, create a new Quarto document with a descriptive name and save it where you can find it again, i.e.&nbsp;in the folder where you downloaded the teaching material. You can use the commands shown in presentation2.qmd to solve this exercise. There is no shame in outright copying from the presentation2.qmd script, provided you understand what the command is doing.</p></li>
+<li><p><strong>Load packages</strong>. You will need to load the packages <code>tidyverse</code> and <code>readxl</code> for this exercise.</p></li>
+</ol>
 </section>
-<section id="adding-numbers-together" class="level2">
-<h2 class="anchored" data-anchor-id="adding-numbers-together">Adding numbers together</h2>
-<p>Define variables</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">=</span> <span class="dv">1</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">=</span> <span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Look at the variables</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(a)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 1</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 3</code></pre>
-</div>
-</div>
-<p>Making a new variable, c, which is the sum of a and b</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>c <span class="ot">=</span> a <span class="sc">+</span> b </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Look at the newly defined variable, c</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(c)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 4</code></pre>
-</div>
-</div>
+<section id="importing-data-and-a-first-look-at-the-dataset" class="level3">
+<h3 class="anchored" data-anchor-id="importing-data-and-a-first-look-at-the-dataset">Importing data and a first look at the dataset</h3>
+<p>The data set used in these exercises was compiled from data downloaded from the website of the UK’s national weather service, the <a href="http://www.metoffice.gov.uk/public/weather/climate-historic/"><em>Met Office</em></a>. It is saved in the file <strong>climate.xlsx</strong><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> which can be found in the folder <code>Exercises/Data/</code>. The spreadsheet contains monthly data from five UK weather stations for the following variables:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Variable name</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>station</strong></td>
+<td>Location of weather station</td>
+</tr>
+<tr class="even">
+<td><strong>year</strong></td>
+<td>Year</td>
+</tr>
+<tr class="odd">
+<td><strong>month</strong></td>
+<td>Month</td>
+</tr>
+<tr class="even">
+<td><strong>af</strong></td>
+<td>Days of air frost</td>
+</tr>
+<tr class="odd">
+<td><strong>rain</strong></td>
+<td>Rainfall in mm</td>
+</tr>
+<tr class="even">
+<td><strong>sun</strong></td>
+<td>Sunshine duration in hours</td>
+</tr>
+<tr class="odd">
+<td><strong>device</strong></td>
+<td>Brand of sunshine recorder / sensor</td>
+</tr>
+</tbody>
+</table>
+<ol start="2" type="1">
+<li><p><strong>Load data</strong>. Start by importing the dataset using either the <code>read_excel()</code> function or the <code>Import Dataset</code> button and name it <code>climate</code>. If you load with <code>Import Dataset</code> it is a good idea to copy the command into your script so that the next time you run your script you can just execute that line instead of having to find the file again.</p></li>
+<li><p><strong>First look at data</strong>. Write the name of the dataframe, i.e.&nbsp;<code>climate</code>, into the console and press enter to see the first rows of the dataset. You can also click on the <code>climate</code> object in the Environment panel.</p></li>
+<li><p>Explore your dataset and understand what data you have.</p>
+<ol type="a">
+<li><p>How many observations, i.e.&nbsp;rows are there?</p></li>
+<li><p>How many data columns are there and what are their types?</p></li>
+<li><p>What is the information in each row and column?</p></li>
+<li><p>How many different stations are there?</p></li>
+<li><p>How many rows per station?</p></li>
+</ol></li>
+</ol>
+</section>
+<section id="working-with-the-data" class="level3">
+<h3 class="anchored" data-anchor-id="working-with-the-data">Working with the data</h3>
+<p>Before you proceed with the exercises in this document, make sure you load the <code>tidyverse</code> in order to use the functions from this package.</p>
+<ol start="5" type="1">
+<li><p>Count the number of rows that did not have any days with air frost.</p></li>
+<li><p>Count the number of rows <u>per station</u> that did not have any days with air frost.</p></li>
+<li><p>Select from the climate dataset (remember to <code>filter</code> rows and <code>select</code> columns):</p>
+<ol type="a">
+<li><p>all rows from the station in Oxford</p></li>
+<li><p>all rows from the station in Oxford when there were at least 100 hours of sunlight</p></li>
+<li><p>all rows from the stations in Oxford and Camborne when there were at least 100 hours of sunlight</p></li>
+<li><p>a subset that only contains the <code>station</code>, <code>year</code> and <code>rain</code> columns</p></li>
+</ol></li>
+</ol>
+<p>The next few questions build on each other, each adding a piece of code:</p>
+<ol start="8" type="1">
+<li><p>Compute the average rainfall over the full dataset by using the <code>summarize</code> function. You can look at the examples we did at the end of presentation 2.</p></li>
+<li><p>Now, compute the average rainfall, standard deviation of the rainfall and the total rainfall (the sum) on the full dataset. I.e. all three measures should be inside the same resulting table. Have a look at the tidyverse lecture if you have trouble with this.</p></li>
+<li><p>Now, use <code>group_by</code> before <code>summarize</code> in order to compute group summary statistics (average, standard deviation, and sum) but split up into each of the five weather stations.</p></li>
+<li><p>Include a column in the summary statistics which shows how many observations, i.e.&nbsp;rows, the data set contains for each station.</p></li>
+<li><p>Sort the rows in the output in descending order according to average annual rainfall.</p></li>
+</ol>
+</section>
+<section id="manipulating-the-data" class="level3">
+<h3 class="anchored" data-anchor-id="manipulating-the-data">Manipulating the data</h3>
+<ol start="13" type="1">
+<li><p>Create a new column in <code>climate</code> and save the new dataset in a different variable so you don’t overwrite your original <code>climate</code> data. The new column should count the number of days in each month without air frost, based on the existing <code>af</code> column. For this exercise, assume each month has 30 days. To find the number of days without air frost, subtract the value in the <code>af</code> column from 30.</p></li>
+<li><p>Add another column to your new dataset that says whether the weather this month was good. We consider a month to be good if it had at least 100 hours of sunshine and less than 100 mm of rain. Otherwise the weather was bad.</p></li>
+<li><p>How many months are there with good weather (use the column you made in 14) for each station? Find the station that has the most months with good weather.</p></li>
+</ol>
+</section>
+<section id="complex-operations" class="level3">
+<h3 class="anchored" data-anchor-id="complex-operations">Complex operations</h3>
+<p>The final questions require that you combine commands and variables of the type above.</p>
+<ol start="16" type="1">
+<li><p>For each weather station apart from the one in Armagh, compute the total rainfall and sunshine duration for months that had no days of air frost. Present the totals in centimetres and days, respectively.</p></li>
+<li><p>Identify the weather station for which the median number of monthly sunshine hours over the months April to September was largest.</p></li>
+</ol>
+
+
 </section>
 
-</main>
-<!-- /main column -->
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Contains public sector information licensed under the <a href="http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/">Open Government Licence v3.0</a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -168,18 +297,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -211,7 +329,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
       var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -219,7 +359,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {

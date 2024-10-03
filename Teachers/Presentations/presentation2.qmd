@@ -1,7 +1,9 @@
 ---
 title: "Presentation 2"
 format: html
-editor: visual
+project:
+  type: website
+  output-dir: docs
 ---
 
 ## Working with data in R
@@ -28,7 +30,7 @@ getwd()
 Often we will work with large datasets that already exist in i.e. an excel sheet or a tab separated file (.tsv). We can easily load that data into R, either with the read_excel function or by clicking on 'Import Dataset' in the Environment tab (right). We can also load data in via a command. Let's do this now. Navigate to the data from your working directory. Use the tap-button to check what your options are.
 
 ```{r}
-crohns <- read_excel("../Data/crohns_disease.xlsx")
+crohns <- read_excel("../../Data/crohns_disease.xlsx")
 ```
 
 ## A first look at the data

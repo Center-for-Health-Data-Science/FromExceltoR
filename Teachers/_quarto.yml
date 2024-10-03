@@ -1,0 +1,26 @@
+project: 
+  type: website
+  output-dir: docs
+  
+website: 
+  title: "FromExceltoR"
+  navbar:
+    left: 
+      - href: main_page.qmd
+        text: FromExcel2R
+  sidebar:
+    style: "floating"
+    right:
+      - text: "Presentations"
+        contents:
+          - href: Presentations/presentation1.qmd
+            text: "Presentation 1"
+          - href: Presentations/presentation2.qmd
+            text: "Presentation 2"
+
+format:
+  html:
+    theme: cosmo  # You can try different themes like cosmo, flatly, etc.
+
+    
+    

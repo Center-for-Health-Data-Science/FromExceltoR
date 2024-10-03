@@ -1,7 +1,9 @@
 ---
 title: "Presentation 1"
 format: html
-editor: visual
+project:
+  type: website
+  output-dir: docs
 ---
 
 ## Introduction
@@ -151,7 +153,7 @@ getwd()
 The working directory can changed but when working with Quarto this only influences individual code chunks (which is mentioned in a warning when executing the code below). However it is really useful when working with raw R scripts which are taught in the upcoming R for data science (R part 2) course.
 
 ```{r}
-setwd('../Exercises/')
+# setwd('../Exercises/')
 getwd()
 ```
 
