@@ -7,7 +7,7 @@ website:
   navbar:
     left: 
       - href: main_page.qmd
-        text: FromExcel2R
+        text: Home
   sidebar:
     style: "floating"
     right:
@@ -21,6 +21,6 @@ website:
 format:
   html:
     theme: cosmo  # You can try different themes like cosmo, flatly, etc.
-
+    
     
     

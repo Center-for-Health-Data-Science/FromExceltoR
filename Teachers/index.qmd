@@ -8,4 +8,6 @@ project:
 
 ## Welcome to the main page
 
+This course is about going from Excel to R. 
+
 ![](images/god_knows.jpeg)
