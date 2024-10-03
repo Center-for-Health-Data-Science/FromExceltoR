@@ -104,7 +104,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body class="nav-sidebar floating nav-fixed fullcontent">
+<body class="nav-sidebar floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -160,7 +160,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../Presentations/presentation1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Presentation 1: Introduction to R and Quarto</span></a>
+ <span class="menu-text">Presentation 1: Introduction</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -172,7 +172,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../Presentations/presentation4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Presentation 4: Visualization with ggplot2</span></a>
+ <span class="menu-text">Presentation 4: ggplot2</span></a>
   </div>
 </li>
       </ul>
@@ -189,7 +189,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../Exercises/exercise1.qmd" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Exercise 1: Introduction to R and Quarto</span></a>
+ <span class="menu-text">Exercise 1: Introduction</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -201,7 +201,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../Exercises/exercise4.qmd" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Presentation 4: Visualization with ggplot2</span></a>
+ <span class="menu-text">Exercise 4: ggplot2</span></a>
   </div>
 </li>
       </ul>
@@ -215,7 +215,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#working-with-data-in-r" id="toc-working-with-data-in-r" class="nav-link active" data-scroll-target="#working-with-data-in-r">Working with data in R</a></li>
+  <li><a href="#load-packages" id="toc-load-packages" class="nav-link" data-scroll-target="#load-packages">Load packages</a></li>
+  <li><a href="#check-working-directory" id="toc-check-working-directory" class="nav-link" data-scroll-target="#check-working-directory">Check working directory</a></li>
+  <li><a href="#importing-data" id="toc-importing-data" class="nav-link" data-scroll-target="#importing-data">Importing data</a></li>
+  <li><a href="#a-first-look-at-the-data" id="toc-a-first-look-at-the-data" class="nav-link" data-scroll-target="#a-first-look-at-the-data">A first look at the data</a></li>
+  <li><a href="#the-anatomy-of-tidyverse" id="toc-the-anatomy-of-tidyverse" class="nav-link" data-scroll-target="#the-anatomy-of-tidyverse">The anatomy of tidyverse</a></li>
+  <li><a href="#count-distinct-sort" id="toc-count-distinct-sort" class="nav-link" data-scroll-target="#count-distinct-sort">Count, distinct, sort</a></li>
+  <li><a href="#filtering-data-selecting-rows-with-filter" id="toc-filtering-data-selecting-rows-with-filter" class="nav-link" data-scroll-target="#filtering-data-selecting-rows-with-filter">Filtering data (selecting rows) with <code>filter()</code></a></li>
+  <li><a href="#the-world-of-conditional-operators" id="toc-the-world-of-conditional-operators" class="nav-link" data-scroll-target="#the-world-of-conditional-operators">The world of conditional operators</a></li>
+  <li><a href="#selecting-variables-columns-with-select" id="toc-selecting-variables-columns-with-select" class="nav-link" data-scroll-target="#selecting-variables-columns-with-select">Selecting variables (columns) with <code>select()</code></a></li>
+  <li><a href="#transformation-of-data-with-mutate" id="toc-transformation-of-data-with-mutate" class="nav-link" data-scroll-target="#transformation-of-data-with-mutate">Transformation of data with <code>mutate()</code></a></li>
+  <li><a href="#summary-statistics-revisited-with-summarize" id="toc-summary-statistics-revisited-with-summarize" class="nav-link" data-scroll-target="#summary-statistics-revisited-with-summarize">Summary statistics, revisited with <code>summarize()</code></a></li>
+  <li><a href="#grouping-with-group_by" id="toc-grouping-with-group_by" class="nav-link" data-scroll-target="#grouping-with-group_by">Grouping with <code>group_by()</code></a></li>
+  <li><a href="#the-might-of-the-pipe-operator" id="toc-the-might-of-the-pipe-operator" class="nav-link" data-scroll-target="#the-might-of-the-pipe-operator">The might of the pipe operator: <code>%&gt;%</code></a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 

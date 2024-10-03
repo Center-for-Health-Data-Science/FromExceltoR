@@ -104,7 +104,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body class="nav-sidebar floating nav-fixed fullcontent">
+<body class="nav-sidebar floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -136,7 +136,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Presentations/presentation1.html">Presentations</a></li><li class="breadcrumb-item"><a href="../Presentations/presentation4.html">Presentation 4: Visualization with ggplot2</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Presentations/presentation1.html">Presentations</a></li><li class="breadcrumb-item"><a href="../Presentations/presentation4.html">Presentation 4: ggplot2</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -160,7 +160,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../Presentations/presentation1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Presentation 1: Introduction to R and Quarto</span></a>
+ <span class="menu-text">Presentation 1: Introduction</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -172,7 +172,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../Presentations/presentation4.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Presentation 4: Visualization with ggplot2</span></a>
+ <span class="menu-text">Presentation 4: ggplot2</span></a>
   </div>
 </li>
       </ul>
@@ -189,7 +189,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../Exercises/exercise1.qmd" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Exercise 1: Introduction to R and Quarto</span></a>
+ <span class="menu-text">Exercise 1: Introduction</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -201,7 +201,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../Exercises/exercise4.qmd" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Presentation 4: Visualization with ggplot2</span></a>
+ <span class="menu-text">Exercise 4: ggplot2</span></a>
   </div>
 </li>
       </ul>
@@ -215,11 +215,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#presentaion-4-ggplot2" id="toc-presentaion-4-ggplot2" class="nav-link active" data-scroll-target="#presentaion-4-ggplot2">Presentaion 4: ggplot2</a>
+  <ul class="collapse">
+  <li><a href="#importing-libraries-and-data" id="toc-importing-libraries-and-data" class="nav-link" data-scroll-target="#importing-libraries-and-data">Importing libraries and data</a></li>
+  <li><a href="#load-data" id="toc-load-data" class="nav-link" data-scroll-target="#load-data">Load data</a></li>
+  <li><a href="#data-wranglig" id="toc-data-wranglig" class="nav-link" data-scroll-target="#data-wranglig">Data wranglig</a></li>
+  <li><a href="#ggplot2-the-basic-concepts" id="toc-ggplot2-the-basic-concepts" class="nav-link" data-scroll-target="#ggplot2-the-basic-concepts">ggplot2: The basic concepts</a></li>
+  <li><a href="#scatter-plot-with-geom_point" id="toc-scatter-plot-with-geom_point" class="nav-link" data-scroll-target="#scatter-plot-with-geom_point">Scatter plot with <code>geom_point</code></a></li>
+  <li><a href="#scatter-plot-with-geom_point-with-color-stratification" id="toc-scatter-plot-with-geom_point-with-color-stratification" class="nav-link" data-scroll-target="#scatter-plot-with-geom_point-with-color-stratification">Scatter plot with <code>geom_point</code> with color stratification</a></li>
+  <li><a href="#boxplot-with-geom_histogram" id="toc-boxplot-with-geom_histogram" class="nav-link" data-scroll-target="#boxplot-with-geom_histogram">Boxplot with <code>geom_histogram</code></a></li>
+  <li><a href="#violin-plot-with-geom_violin" id="toc-violin-plot-with-geom_violin" class="nav-link" data-scroll-target="#violin-plot-with-geom_violin">Violin plot with <code>geom_violin</code></a></li>
+  <li><a href="#histogram-with-geom_histogram" id="toc-histogram-with-geom_histogram" class="nav-link" data-scroll-target="#histogram-with-geom_histogram">Histogram with <code>geom_histogram</code></a></li>
+  <li><a href="#bar-chart-with-geom_bar" id="toc-bar-chart-with-geom_bar" class="nav-link" data-scroll-target="#bar-chart-with-geom_bar">Bar chart with <code>geom_bar</code></a></li>
+  </ul></li>
+  <li><a href="#extra-section" id="toc-extra-section" class="nav-link" data-scroll-target="#extra-section">Extra section</a>
+  <ul class="collapse">
+  <li><a href="#bar-chart-with-geom_col" id="toc-bar-chart-with-geom_col" class="nav-link" data-scroll-target="#bar-chart-with-geom_col">Bar chart with <code>geom_col</code></a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Presentations/presentation1.html">Presentations</a></li><li class="breadcrumb-item"><a href="../Presentations/presentation4.html">Presentation 4: Visualization with ggplot2</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Presentations/presentation1.html">Presentations</a></li><li class="breadcrumb-item"><a href="../Presentations/presentation4.html">Presentation 4: ggplot2</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Presentation 4</h1>
 </div>

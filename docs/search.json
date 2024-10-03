@@ -113,7 +113,7 @@
     "crumbs": [
       "Home",
       "Presentations",
-      "Presentation 1: Introduction to R and Quarto"
+      "Presentation 1: Introduction"
     ]
   },
   {
@@ -125,7 +125,7 @@
     "crumbs": [
       "Home",
       "Presentations",
-      "Presentation 1: Introduction to R and Quarto"
+      "Presentation 1: Introduction"
     ]
   },
   {
@@ -137,7 +137,7 @@
     "crumbs": [
       "Home",
       "Presentations",
-      "Presentation 1: Introduction to R and Quarto"
+      "Presentation 1: Introduction"
     ]
   },
   {
@@ -149,7 +149,7 @@
     "crumbs": [
       "Home",
       "Presentations",
-      "Presentation 1: Introduction to R and Quarto"
+      "Presentation 1: Introduction"
     ]
   },
   {
@@ -161,7 +161,7 @@
     "crumbs": [
       "Home",
       "Presentations",
-      "Presentation 1: Introduction to R and Quarto"
+      "Presentation 1: Introduction"
     ]
   },
   {
@@ -173,7 +173,7 @@
     "crumbs": [
       "Home",
       "Presentations",
-      "Presentation 1: Introduction to R and Quarto"
+      "Presentation 1: Introduction"
     ]
   },
   {
@@ -185,7 +185,7 @@
     "crumbs": [
       "Home",
       "Presentations",
-      "Presentation 1: Introduction to R and Quarto"
+      "Presentation 1: Introduction"
     ]
   },
   {
@@ -197,7 +197,7 @@
     "crumbs": [
       "Home",
       "Presentations",
-      "Presentation 1: Introduction to R and Quarto"
+      "Presentation 1: Introduction"
     ]
   },
   {
@@ -209,7 +209,7 @@
     "crumbs": [
       "Home",
       "Presentations",
-      "Presentation 1: Introduction to R and Quarto"
+      "Presentation 1: Introduction"
     ]
   },
   {
@@ -221,7 +221,7 @@
     "crumbs": [
       "Home",
       "Presentations",
-      "Presentation 1: Introduction to R and Quarto"
+      "Presentation 1: Introduction"
     ]
   },
   {
@@ -233,7 +233,7 @@
     "crumbs": [
       "Home",
       "Presentations",
-      "Presentation 1: Introduction to R and Quarto"
+      "Presentation 1: Introduction"
     ]
   },
   {
@@ -241,14 +241,14 @@
     "href": "index.html",
     "title": "FromExceltoR",
     "section": "",
-    "text": "This course is about going from Excel to R. Changes."
+    "text": "This course is about going from Excel to R.\n![../Program.png]"
   },
   {
     "objectID": "index.html#welcome-to-the-main-page",
     "href": "index.html#welcome-to-the-main-page",
     "title": "FromExceltoR",
     "section": "",
-    "text": "This course is about going from Excel to R. Changes."
+    "text": "This course is about going from Excel to R.\n![../Program.png]"
   },
   {
     "objectID": "Presentations/video_test.html",
@@ -436,7 +436,7 @@
     "crumbs": [
       "Home",
       "Presentations",
-      "Presentation 4: Visualization with ggplot2"
+      "Presentation 4: ggplot2"
     ]
   },
   {
@@ -448,7 +448,7 @@
     "crumbs": [
       "Home",
       "Presentations",
-      "Presentation 4: Visualization with ggplot2"
+      "Presentation 4: ggplot2"
     ]
   },
   {
@@ -460,7 +460,7 @@
     "crumbs": [
       "Home",
       "Presentations",
-      "Presentation 4: Visualization with ggplot2"
+      "Presentation 4: ggplot2"
     ]
   },
   {

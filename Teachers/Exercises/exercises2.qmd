@@ -2,9 +2,10 @@
 title: "II. Working with data in R (exercises)"
 author: "Data Science Lab, University of Copenhagen"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
-output:
-  html_document: default
-  pdf_document: default
+format: html
+project:
+  type: website
+  output-dir: ../docs
 ---
 
 ```{r setup, include=FALSE}

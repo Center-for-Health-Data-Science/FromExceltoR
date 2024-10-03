@@ -14,26 +14,29 @@ website:
       - section: "Presentations"
         contents:
           - href: Presentations/presentation1.qmd
-            text: "Presentation 1: Introduction to R and Quarto"
+            text: "Presentation 1: Introduction"
           - href: Presentations/presentation2.qmd
             text: "Presentation 2: Tidyverse"
           - href: Presentations/presentation4.qmd
-            text: "Presentation 4: Visualization with ggplot2"
+            text: "Presentation 4: ggplot2"
             
       - section: "Exercises"
         contents:
           - href: Exercises/exercise1.qmd
-            text: "Exercise 1: Introduction to R and Quarto"
+            text: "Exercise 1: Introduction"
           - href: Exercises/exercise2.qmd
             text: "Exercise 2: Tidyverse"
           - href: Exercises/exercise4.qmd
-            text: "Presentation 4: Visualization with ggplot2"
+            text: "Exercise 4: ggplot2"
             
       - section: "Cheat Sheets"
+        contents:
 
 format:
   html:
-    theme: cosmo  # You can try different themes like cosmo, flatly, etc.
+    theme: flatly  # You can try different themes like cosmo, flatly, etc.
+    toc: true
+    toc-location: right
     
     
     

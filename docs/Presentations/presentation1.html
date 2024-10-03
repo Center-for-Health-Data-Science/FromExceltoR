@@ -104,7 +104,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body class="nav-sidebar floating nav-fixed fullcontent">
+<body class="nav-sidebar floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -136,7 +136,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Presentations/presentation1.html">Presentations</a></li><li class="breadcrumb-item"><a href="../Presentations/presentation1.html">Presentation 1: Introduction to R and Quarto</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Presentations/presentation1.html">Presentations</a></li><li class="breadcrumb-item"><a href="../Presentations/presentation1.html">Presentation 1: Introduction</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -160,7 +160,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../Presentations/presentation1.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Presentation 1: Introduction to R and Quarto</span></a>
+ <span class="menu-text">Presentation 1: Introduction</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -172,7 +172,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../Presentations/presentation4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Presentation 4: Visualization with ggplot2</span></a>
+ <span class="menu-text">Presentation 4: ggplot2</span></a>
   </div>
 </li>
       </ul>
@@ -189,7 +189,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../Exercises/exercise1.qmd" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Exercise 1: Introduction to R and Quarto</span></a>
+ <span class="menu-text">Exercise 1: Introduction</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -201,7 +201,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../Exercises/exercise4.qmd" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Presentation 4: Visualization with ggplot2</span></a>
+ <span class="menu-text">Exercise 4: ggplot2</span></a>
   </div>
 </li>
       </ul>
@@ -215,11 +215,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#the-quarto-way" id="toc-the-quarto-way" class="nav-link" data-scroll-target="#the-quarto-way">The Quarto Way!</a></li>
+  <li><a href="#this-is-the-largest-header-header-1" id="toc-this-is-the-largest-header-header-1" class="nav-link" data-scroll-target="#this-is-the-largest-header-header-1">This is the largest header (Header 1)</a>
+  <ul class="collapse">
+  <li><a href="#this-is-the-second-largest-header-header-2" id="toc-this-is-the-second-largest-header-header-2" class="nav-link" data-scroll-target="#this-is-the-second-largest-header-header-2">This is the second largest header (Header 2)</a>
+  <ul class="collapse">
+  <li><a href="#this-is-the-third-largest-header-header-3" id="toc-this-is-the-third-largest-header-header-3" class="nav-link" data-scroll-target="#this-is-the-third-largest-header-header-3">This is the third largest header (Header 3)</a></li>
+  <li><a href="#modes-of-quarto" id="toc-modes-of-quarto" class="nav-link" data-scroll-target="#modes-of-quarto">Modes of Quarto</a></li>
+  <li><a href="#code-chunks-and-structure" id="toc-code-chunks-and-structure" class="nav-link" data-scroll-target="#code-chunks-and-structure">Code chunks and structure</a></li>
+  <li><a href="#alter-output-of-code-chunks" id="toc-alter-output-of-code-chunks" class="nav-link" data-scroll-target="#alter-output-of-code-chunks">Alter output of code chunks</a></li>
+  <li><a href="#shortcuts" id="toc-shortcuts" class="nav-link" data-scroll-target="#shortcuts">Shortcuts</a></li>
+  <li><a href="#render-making-the-report" id="toc-render-making-the-report" class="nav-link" data-scroll-target="#render-making-the-report">Render: Making the report</a></li>
+  </ul></li>
+  <li><a href="#working-directory" id="toc-working-directory" class="nav-link" data-scroll-target="#working-directory">Working directory</a></li>
+  <li><a href="#variable-assignment" id="toc-variable-assignment" class="nav-link" data-scroll-target="#variable-assignment">Variable assignment</a></li>
+  <li><a href="#functions-and-arguments" id="toc-functions-and-arguments" class="nav-link" data-scroll-target="#functions-and-arguments">Functions and Arguments</a></li>
+  <li><a href="#simple-summary-statistics" id="toc-simple-summary-statistics" class="nav-link" data-scroll-target="#simple-summary-statistics">Simple summary statistics</a></li>
+  <li><a href="#r-packages" id="toc-r-packages" class="nav-link" data-scroll-target="#r-packages">R packages</a></li>
+  <li><a href="#data-structures" id="toc-data-structures" class="nav-link" data-scroll-target="#data-structures">Data structures</a></li>
+  <li><a href="#fundamental-operations" id="toc-fundamental-operations" class="nav-link" data-scroll-target="#fundamental-operations">Fundamental operations</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Presentations/presentation1.html">Presentations</a></li><li class="breadcrumb-item"><a href="../Presentations/presentation1.html">Presentation 1: Introduction to R and Quarto</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Presentations/presentation1.html">Presentations</a></li><li class="breadcrumb-item"><a href="../Presentations/presentation1.html">Presentation 1: Introduction</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Presentation 1</h1>
 </div>
