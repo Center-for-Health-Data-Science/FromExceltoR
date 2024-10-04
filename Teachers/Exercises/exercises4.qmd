@@ -6,11 +6,11 @@ project:
   output-dir: ../docs
 ---
 
-## Getting started
-
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
 ```
+
+## Getting started
 
 Before you proceed with the exercises in this document, make sure to run the command `library(tidyverse)` in order to load the core **tidyverse** packages (including **ggplot2**).
 

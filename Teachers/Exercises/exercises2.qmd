@@ -1,6 +1,5 @@
 ---
-title: "Exersice 2: Tidyverse"
-author: "Data Science Lab, University of Copenhagen"
+title: "Exercise 2: Tidyverse"
 format: html
 project:
   type: website

@@ -1,15 +1,16 @@
 ---
-title: "VI. Graphics with ggplot2 (exercises)"
-author: "Data Science Lab, University of Copenhagen"
-date: "`r format(Sys.time(), '%d %B, %Y')`"
-output:
-  #pdf_document: default
-  html_document: default
+title: "Exercise 3: ggplot2 - Solutions"
+format: html
+project:
+  type: website
+  output-dir: ../docs
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
 ```
+
+## Getting started
 
 Before you proceed with the exercises in this document, make sure to run the command `library(tidyverse)` in order to load the core **tidyverse** packages (including **ggplot2**).
 

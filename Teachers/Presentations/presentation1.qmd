@@ -32,7 +32,7 @@ This is normal text. Yes it is larger than the smallest header. A Quarto documen
 
 ... a picture:
 
-[![This is a cute cat](images/striped-grey-kitten.jpg){fig-alt="Miw" fig-align="center" width="500"}](https://www.zooplus.co.uk/magazine/cat/kitten/how-to-monitor-your-kittens-weight)
+[![This is a cute cat](../images/striped-grey-kitten.jpg){fig-alt="Miw" fig-align="center" width="500"}](https://www.zooplus.co.uk/magazine/cat/kitten/how-to-monitor-your-kittens-weight)
 
 We can also make a list of things we like:
 
