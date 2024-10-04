@@ -14,8 +14,6 @@ This course is about going from Excel to R.
 
 ## Code memes
 
-![](images/god_knows.jpeg){width="300px"}
+![](images/god_knows.jpeg){fig-align="center"}
 
-
-
-![](images/dog_chatgpt.jpeg){height="200px"}
+![](images/dog_chatgpt.jpeg){fig-align="center" width="500"}
