@@ -11,6 +11,12 @@ website:
   sidebar:
     style: "floating"
     contents:
+    
+      - section: "Slides"
+        contents: 
+          - hef: Slideshow/FromExceltoR.pdf
+            text: "Slides"
+      
       - section: "Presentations"
         contents:
           - href: Presentations/presentation1.qmd
