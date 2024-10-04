@@ -14,7 +14,7 @@ website:
     
       - section: "Slides"
         contents: 
-          - hef: Slideshow/FromExceltoR.pdf
+          - href: Slideshow/FromExceltoR.pdf
             text: "Slides"
       
       - section: "Presentations"
