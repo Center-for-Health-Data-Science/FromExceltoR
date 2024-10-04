@@ -224,8 +224,56 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text">Cheat Sheets</span></span>
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Solutions</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Exercises/exercises2_SOLUTIONS.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercise 2 - Solution</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Exercises/exercises4_SOLUTIONS.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercise 3 - Solution</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Cheat Sheets</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../CheatSheet/TidyverseCheatSheet.pdf" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tidyverse</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../CheatSheet/ggplotCheatSheet.pdf" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ggplot2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../CheatSheet/BaseRCheatSheet.pdf" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Base R</span></a>
+  </div>
+</li>
+      </ul>
   </li>
     </ul>
     </div>
@@ -239,14 +287,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
   <li><a href="#the-quarto-way" id="toc-the-quarto-way" class="nav-link" data-scroll-target="#the-quarto-way">The Quarto Way!</a></li>
-  <li><a href="#this-is-the-largest-header-header-1" id="toc-this-is-the-largest-header-header-1" class="nav-link" data-scroll-target="#this-is-the-largest-header-header-1">This is the largest header (Header 1)</a>
-  <ul class="collapse">
-  <li><a href="#this-is-the-second-largest-header-header-2" id="toc-this-is-the-second-largest-header-header-2" class="nav-link" data-scroll-target="#this-is-the-second-largest-header-header-2">This is the second largest header (Header 2)</a>
-  <ul class="collapse">
+  <li><a href="#this-is-the-second-largest-header-header-2" id="toc-this-is-the-second-largest-header-header-2" class="nav-link" data-scroll-target="#this-is-the-second-largest-header-header-2">This is the second largest header (Header 2)</a></li>
   <li><a href="#modes-of-quarto" id="toc-modes-of-quarto" class="nav-link" data-scroll-target="#modes-of-quarto">Modes of Quarto</a></li>
   <li><a href="#code-chunks-and-structure" id="toc-code-chunks-and-structure" class="nav-link" data-scroll-target="#code-chunks-and-structure">Code chunks and structure</a></li>
   <li><a href="#alter-output-of-code-chunks" id="toc-alter-output-of-code-chunks" class="nav-link" data-scroll-target="#alter-output-of-code-chunks">Alter output of code chunks</a></li>
-  <li><a href="#shortcuts" id="toc-shortcuts" class="nav-link" data-scroll-target="#shortcuts">Shortcuts</a></li>
+  <li><a href="#shortcuts" id="toc-shortcuts" class="nav-link" data-scroll-target="#shortcuts">Shortcuts</a>
+  <ul class="collapse">
   <li><a href="#render-making-the-report" id="toc-render-making-the-report" class="nav-link" data-scroll-target="#render-making-the-report">Render: Making the report</a></li>
   </ul></li>
   <li><a href="#working-directory" id="toc-working-directory" class="nav-link" data-scroll-target="#working-directory">Working directory</a></li>
@@ -256,7 +302,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#r-packages" id="toc-r-packages" class="nav-link" data-scroll-target="#r-packages">R packages</a></li>
   <li><a href="#data-structures" id="toc-data-structures" class="nav-link" data-scroll-target="#data-structures">Data structures</a></li>
   <li><a href="#fundamental-operations" id="toc-fundamental-operations" class="nav-link" data-scroll-target="#fundamental-operations">Fundamental operations</a></li>
-  </ul></li>
   </ul>
 </nav>
     </div>
@@ -292,8 +337,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="the-quarto-way">The Quarto Way!</h2>
 <p>This section will go through how the Quarto format works and how to code in here.</p>
 </section>
-<section id="this-is-the-largest-header-header-1" class="level1">
-<h1>This is the largest header (Header 1)</h1>
 <section id="this-is-the-second-largest-header-header-2" class="level2">
 <h2 class="anchored" data-anchor-id="this-is-the-second-largest-header-header-2">This is the second largest header (Header 2)</h2>
 <section id="this-is-the-smallest-header-header-6" class="level6">
@@ -344,12 +387,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>Fruit</p></li>
 </ul>
 </section>
-<section id="modes-of-quarto" class="level3">
-<h3 class="anchored" data-anchor-id="modes-of-quarto">Modes of Quarto</h3>
+</section>
+<section id="modes-of-quarto" class="level2">
+<h2 class="anchored" data-anchor-id="modes-of-quarto">Modes of Quarto</h2>
 <p>There are two modes of Quarto: <strong>Source and Visual</strong>. The one that looks like Word is Visual. In the left part of the panel you can change to Source. If you have heard about Rmarkdown, the Source mode is essentially the same thing. Here you can see that headers are marked with hashtags. The more hashtags, the smaller the title. Some features can only be added when you are in Source mode. E.g <span style="color:blue">write blue text</span> is coded like this in the source code <code>[write blue text\]{style="color:blue"}</code>. We will only spend time in the Visual mode since it is the nicest to look at and we don’t need all of these fancy features in this course. Feel free to play around with it after the course!</p>
 </section>
-<section id="code-chunks-and-structure" class="level3">
-<h3 class="anchored" data-anchor-id="code-chunks-and-structure">Code chunks and structure</h3>
+<section id="code-chunks-and-structure" class="level2">
+<h2 class="anchored" data-anchor-id="code-chunks-and-structure">Code chunks and structure</h2>
 <p>Code chunks are where the coding come in. Go to the very right of the panel and press the green box with the C. A grey code chunk will appear with ‘{r}’ in the beginning. This mean that it is an R code chunk. It is also possible to insert code chunks of other coding language, but we will stick to R since that is what we are here to learn. For executing the code, press the green button in the top right of the code chunk.</p>
 <p>If you have ever worked with an R script, a code chunk is just like a part of an R script.</p>
 <p>Below is a code chunk with a comment. A comment is a line that starts with a hashtag. Comments can be useful in longer code chunks and will often describe the code.</p>
@@ -376,30 +420,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="alter-output-of-code-chunks" class="level3">
-<h3 class="anchored" data-anchor-id="alter-output-of-code-chunks">Alter output of code chunks</h3>
+<section id="alter-output-of-code-chunks" class="level2">
+<h2 class="anchored" data-anchor-id="alter-output-of-code-chunks">Alter output of code chunks</h2>
 <p>You don’t need this but it might be a good feature for your later R carrer.</p>
-<p><strong>Show or hide code.</strong> echo=FALSE will hide the code and echo=TRUE will show the code. Default is TRUE.</p>
-<p>The code (1+3) is <u>not</u> shown, but the result (4) is shown:</p>
+<p><strong>Show or hide code.</strong> <code>echo=FALSE</code> will hide the code and <code>echo=TRUE</code> will show the code. Default is TRUE.</p>
+<p>The code (1+3) is <u>not</u> shown, but the result (4) is shown (<code>{r echo=FALSE}</code>):</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 4</code></pre>
 </div>
 </div>
 <p><strong>Control whether code is executed.</strong> eval=FALSE not execute the code and eval=TRUE will execute the code. Default is TRUE.</p>
-<p>The code (1+3) is shown, but the result (4) is <u>not</u> shown:</p>
+<p>The code (1+3) is shown, but the result (4) is <u>not</u> shown (<code>{r eval=FALSE}</code>):</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">+</span><span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><strong>Control messages, warnings and errors.</strong> Maybe you have a code chunk that you know will produce one of the three and you don’t want to look at it. It is not a good idea to hide these statements (especially the errors) before you know what they are. But in a report, it might be nice to be able to mute the messages or the warnings.</p>
-<p>Warning is <u>not</u> printed:</p>
+<p>Warning is <u>not</u> printed (<code>{r message=FALSE, warning=FALSE, error=TRUE}</code>):</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(<span class="sc">-</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] NaN</code></pre>
 </div>
 </div>
-<p>Warning is printed:</p>
+<p>Warning is printed (<code>{r message=TRUE, warning=TRUE, error=TRUE}</code>):</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(<span class="sc">-</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
@@ -410,16 +454,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="shortcuts" class="level3">
-<h3 class="anchored" data-anchor-id="shortcuts">Shortcuts</h3>
+<section id="shortcuts" class="level2">
+<h2 class="anchored" data-anchor-id="shortcuts">Shortcuts</h2>
 <p>Skip if you are overwhelmed!</p>
 <p>If you want to look effortless while coding and impress you colleagues, have a look at the shortcuts. There are shortcuts for almost anything and you can find them (<em>Tools</em> –&gt; <em>Keyboard Shortcuts Help</em>) or change them to your own liking (<em>Tools</em> –&gt; <em>Modify Keyboard Shortcuts…</em>).</p>
-</section>
 <section id="render-making-the-report" class="level3">
 <h3 class="anchored" data-anchor-id="render-making-the-report">Render: Making the report</h3>
 <p>In the panel there is a blue arrow and the word <em>Render</em>. Open the rendered html file in your browser and admire your work.</p>
 <p><span style="color:blue"><strong>Let’s get to coding!</strong></span></p>
-<hr>
 </section>
 </section>
 <section id="working-directory" class="level2">
@@ -609,7 +651,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>?dplyr<span class="sc">::</span>select</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<hr>
 </section>
 <section id="data-structures" class="level2">
 <h2 class="anchored" data-anchor-id="data-structures">Data structures</h2>
@@ -750,7 +791,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->

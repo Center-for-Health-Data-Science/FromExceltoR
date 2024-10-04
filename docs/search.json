@@ -144,14 +144,24 @@
     "href": "Exercises/exercises2_SOLUTIONS.html",
     "title": "II. Working with data in R (exercises)",
     "section": "",
-    "text": "Create new Quarto document. For working on the exercise, create a new Quarto document with a descriptive name and save it where you can find it again, i.e. in the folder where you downloaded the teaching material. You can use the commands shown in presentation2.qmd to solve this exercise. There is no shame in outright copying from the presentation2.qmd script, provided you understand what the command is doing.\nLoad packages. You will need to load the packages tidyverse and readxl for this exercise.\n\n\nlibrary(tidyverse)\nlibrary(readxl)"
+    "text": "Create new Quarto document. For working on the exercise, create a new Quarto document with a descriptive name and save it where you can find it again, i.e. in the folder where you downloaded the teaching material. You can use the commands shown in presentation2.qmd to solve this exercise. There is no shame in outright copying from the presentation2.qmd script, provided you understand what the command is doing.\nLoad packages. You will need to load the packages tidyverse and readxl for this exercise.\n\n\nlibrary(tidyverse)\nlibrary(readxl)",
+    "crumbs": [
+      "Home",
+      "Solutions",
+      "Exercise 2 - Solution"
+    ]
   },
   {
     "objectID": "Exercises/exercises2_SOLUTIONS.html#footnotes",
     "href": "Exercises/exercises2_SOLUTIONS.html#footnotes",
     "title": "II. Working with data in R (exercises)",
     "section": "Footnotes",
-    "text": "Footnotes\n\n\nContains public sector information licensed under the Open Government Licence v3.0.↩︎"
+    "text": "Footnotes\n\n\nContains public sector information licensed under the Open Government Licence v3.0.↩︎",
+    "crumbs": [
+      "Home",
+      "Solutions",
+      "Exercise 2 - Solution"
+    ]
   },
   {
     "objectID": "Presentations/presentation5.html",
@@ -215,7 +225,55 @@
     "href": "Presentations/presentation1.html#this-is-the-second-largest-header-header-2",
     "title": "Presentation 1: Introduction",
     "section": "This is the second largest header (Header 2)",
-    "text": "This is the second largest header (Header 2)\n\nThis is the smallest header (Header 6)\nThis is normal text. Yes it is larger than the smallest header. A Quarto document works like a word document where we can write with bold or italic and insert thing like a table:\n\n\n\nMy friends\nTheir favorite drink\nTheir favorite food\n\n\n\n\nMicheal\nBeer\nBurger\n\n\nJane\nWine\nLasagne\n\n\nRobert\nWater\nSalad\n\n\n\n… a picture:\n\n\n\n\n\n\n\nThis is a cute cat\n\n\nWe can also make a list of things we like:\n\nCoffee\nCake\nWater\nFruit\n\n\n\nModes of Quarto\nThere are two modes of Quarto: Source and Visual. The one that looks like Word is Visual. In the left part of the panel you can change to Source. If you have heard about Rmarkdown, the Source mode is essentially the same thing. Here you can see that headers are marked with hashtags. The more hashtags, the smaller the title. Some features can only be added when you are in Source mode. E.g write blue text is coded like this in the source code [write blue text\\]{style=\"color:blue\"}. We will only spend time in the Visual mode since it is the nicest to look at and we don’t need all of these fancy features in this course. Feel free to play around with it after the course!\n\n\nCode chunks and structure\nCode chunks are where the coding come in. Go to the very right of the panel and press the green box with the C. A grey code chunk will appear with ‘{r}’ in the beginning. This mean that it is an R code chunk. It is also possible to insert code chunks of other coding language, but we will stick to R since that is what we are here to learn. For executing the code, press the green button in the top right of the code chunk.\nIf you have ever worked with an R script, a code chunk is just like a part of an R script.\nBelow is a code chunk with a comment. A comment is a line that starts with a hashtag. Comments can be useful in longer code chunks and will often describe the code.\n\n# This is a comment. Here I can write whatever I want because it is in hashtags. \n\nBelow I try to write text in a code chuck. If I try to execute I will get an error because R is trying to interpret it as code and does not understand.\n\n# Text without hashtag gets errors when executed\n\nNB! Write executable code in the code chunks and execute it.\n\n1+3\n\n[1] 4\n\n\nYou can add comments above or to the right of the code. This will not influence the executing of the code.\n\n# Place a comment here \n1+3 # or place a comment here\n\n[1] 4\n\n\n\n\nAlter output of code chunks\nYou don’t need this but it might be a good feature for your later R carrer.\nShow or hide code. echo=FALSE will hide the code and echo=TRUE will show the code. Default is TRUE.\nThe code (1+3) is not shown, but the result (4) is shown:\n\n\n[1] 4\n\n\nControl whether code is executed. eval=FALSE not execute the code and eval=TRUE will execute the code. Default is TRUE.\nThe code (1+3) is shown, but the result (4) is not shown:\n\n1+3\n\nControl messages, warnings and errors. Maybe you have a code chunk that you know will produce one of the three and you don’t want to look at it. It is not a good idea to hide these statements (especially the errors) before you know what they are. But in a report, it might be nice to be able to mute the messages or the warnings.\nWarning is not printed:\n\nlog(-1)\n\n[1] NaN\n\n\nWarning is printed:\n\nlog(-1)\n\nWarning in log(-1): NaNs produced\n\n\n[1] NaN\n\n\n\n\nShortcuts\nSkip if you are overwhelmed!\nIf you want to look effortless while coding and impress you colleagues, have a look at the shortcuts. There are shortcuts for almost anything and you can find them (Tools –&gt; Keyboard Shortcuts Help) or change them to your own liking (Tools –&gt; Modify Keyboard Shortcuts…).\n\n\nRender: Making the report\nIn the panel there is a blue arrow and the word Render. Open the rendered html file in your browser and admire your work.\nLet’s get to coding!",
+    "text": "This is the second largest header (Header 2)\n\nThis is the smallest header (Header 6)\nThis is normal text. Yes it is larger than the smallest header. A Quarto document works like a word document where we can write with bold or italic and insert thing like a table:\n\n\n\nMy friends\nTheir favorite drink\nTheir favorite food\n\n\n\n\nMicheal\nBeer\nBurger\n\n\nJane\nWine\nLasagne\n\n\nRobert\nWater\nSalad\n\n\n\n… a picture:\n\n\n\n\n\n\n\nThis is a cute cat\n\n\nWe can also make a list of things we like:\n\nCoffee\nCake\nWater\nFruit",
+    "crumbs": [
+      "Home",
+      "Presentations",
+      "Presentation 1: Introduction"
+    ]
+  },
+  {
+    "objectID": "Presentations/presentation1.html#modes-of-quarto",
+    "href": "Presentations/presentation1.html#modes-of-quarto",
+    "title": "Presentation 1: Introduction",
+    "section": "Modes of Quarto",
+    "text": "Modes of Quarto\nThere are two modes of Quarto: Source and Visual. The one that looks like Word is Visual. In the left part of the panel you can change to Source. If you have heard about Rmarkdown, the Source mode is essentially the same thing. Here you can see that headers are marked with hashtags. The more hashtags, the smaller the title. Some features can only be added when you are in Source mode. E.g write blue text is coded like this in the source code [write blue text\\]{style=\"color:blue\"}. We will only spend time in the Visual mode since it is the nicest to look at and we don’t need all of these fancy features in this course. Feel free to play around with it after the course!",
+    "crumbs": [
+      "Home",
+      "Presentations",
+      "Presentation 1: Introduction"
+    ]
+  },
+  {
+    "objectID": "Presentations/presentation1.html#code-chunks-and-structure",
+    "href": "Presentations/presentation1.html#code-chunks-and-structure",
+    "title": "Presentation 1: Introduction",
+    "section": "Code chunks and structure",
+    "text": "Code chunks and structure\nCode chunks are where the coding come in. Go to the very right of the panel and press the green box with the C. A grey code chunk will appear with ‘{r}’ in the beginning. This mean that it is an R code chunk. It is also possible to insert code chunks of other coding language, but we will stick to R since that is what we are here to learn. For executing the code, press the green button in the top right of the code chunk.\nIf you have ever worked with an R script, a code chunk is just like a part of an R script.\nBelow is a code chunk with a comment. A comment is a line that starts with a hashtag. Comments can be useful in longer code chunks and will often describe the code.\n\n# This is a comment. Here I can write whatever I want because it is in hashtags. \n\nBelow I try to write text in a code chuck. If I try to execute I will get an error because R is trying to interpret it as code and does not understand.\n\n# Text without hashtag gets errors when executed\n\nNB! Write executable code in the code chunks and execute it.\n\n1+3\n\n[1] 4\n\n\nYou can add comments above or to the right of the code. This will not influence the executing of the code.\n\n# Place a comment here \n1+3 # or place a comment here\n\n[1] 4",
+    "crumbs": [
+      "Home",
+      "Presentations",
+      "Presentation 1: Introduction"
+    ]
+  },
+  {
+    "objectID": "Presentations/presentation1.html#alter-output-of-code-chunks",
+    "href": "Presentations/presentation1.html#alter-output-of-code-chunks",
+    "title": "Presentation 1: Introduction",
+    "section": "Alter output of code chunks",
+    "text": "Alter output of code chunks\nYou don’t need this but it might be a good feature for your later R carrer.\nShow or hide code. echo=FALSE will hide the code and echo=TRUE will show the code. Default is TRUE.\nThe code (1+3) is not shown, but the result (4) is shown ({r echo=FALSE}):\n\n\n[1] 4\n\n\nControl whether code is executed. eval=FALSE not execute the code and eval=TRUE will execute the code. Default is TRUE.\nThe code (1+3) is shown, but the result (4) is not shown ({r eval=FALSE}):\n\n1+3\n\nControl messages, warnings and errors. Maybe you have a code chunk that you know will produce one of the three and you don’t want to look at it. It is not a good idea to hide these statements (especially the errors) before you know what they are. But in a report, it might be nice to be able to mute the messages or the warnings.\nWarning is not printed ({r message=FALSE, warning=FALSE, error=TRUE}):\n\nlog(-1)\n\n[1] NaN\n\n\nWarning is printed ({r message=TRUE, warning=TRUE, error=TRUE}):\n\nlog(-1)\n\nWarning in log(-1): NaNs produced\n\n\n[1] NaN",
+    "crumbs": [
+      "Home",
+      "Presentations",
+      "Presentation 1: Introduction"
+    ]
+  },
+  {
+    "objectID": "Presentations/presentation1.html#shortcuts",
+    "href": "Presentations/presentation1.html#shortcuts",
+    "title": "Presentation 1: Introduction",
+    "section": "Shortcuts",
+    "text": "Shortcuts\nSkip if you are overwhelmed!\nIf you want to look effortless while coding and impress you colleagues, have a look at the shortcuts. There are shortcuts for almost anything and you can find them (Tools –&gt; Keyboard Shortcuts Help) or change them to your own liking (Tools –&gt; Modify Keyboard Shortcuts…).\n\nRender: Making the report\nIn the panel there is a blue arrow and the word Render. Open the rendered html file in your browser and admire your work.\nLet’s get to coding!",
     "crumbs": [
       "Home",
       "Presentations",
@@ -816,21 +874,163 @@
     "href": "Exercises/exercises4_SOLUTIONS.html",
     "title": "VI. Graphics with ggplot2 (exercises)",
     "section": "",
-    "text": "Before you proceed with the exercises in this document, make sure to run the command library(tidyverse) in order to load the core tidyverse packages (including ggplot2).\nlibrary(tidyverse)\nlibrary(readxl)\nThe data set used in these exercises, climate.xlsx1, was compiled from data downloaded in 2017 from the website of the UK’s national weather service, the Met Office.\nThe spreadsheet contains data from five UK weather stations in 2016. The following variables are included in the data set:\nThe data set is the same as the one used for the Tidyverse exercise. If you have already imported the data, there is no need to import it again, unless you have made changes to the data assigned to climate since the original data set was imported.\nclimate &lt;- read_xlsx('../Data/climate.xlsx')\nhead(climate)\nNeed a little help? Consult the ggplot2 cheatsheet here: https://rstudio.github.io/cheatsheets/data-visualization.pdf"
+    "text": "Before you proceed with the exercises in this document, make sure to run the command library(tidyverse) in order to load the core tidyverse packages (including ggplot2).\nlibrary(tidyverse)\nlibrary(readxl)\nThe data set used in these exercises, climate.xlsx1, was compiled from data downloaded in 2017 from the website of the UK’s national weather service, the Met Office.\nThe spreadsheet contains data from five UK weather stations in 2016. The following variables are included in the data set:\nThe data set is the same as the one used for the Tidyverse exercise. If you have already imported the data, there is no need to import it again, unless you have made changes to the data assigned to climate since the original data set was imported.\nclimate &lt;- read_xlsx('../Data/climate.xlsx')\nhead(climate)\nNeed a little help? Consult the ggplot2 cheatsheet here: https://rstudio.github.io/cheatsheets/data-visualization.pdf",
+    "crumbs": [
+      "Home",
+      "Solutions",
+      "Exercise 3 - Solution"
+    ]
   },
   {
     "objectID": "Exercises/exercises4_SOLUTIONS.html#footnotes",
     "href": "Exercises/exercises4_SOLUTIONS.html#footnotes",
     "title": "VI. Graphics with ggplot2 (exercises)",
     "section": "Footnotes",
-    "text": "Footnotes\n\n\nContains public sector information licensed under the Open Government Licence v3.0.↩︎"
+    "text": "Footnotes\n\n\nContains public sector information licensed under the Open Government Licence v3.0.↩︎",
+    "crumbs": [
+      "Home",
+      "Solutions",
+      "Exercise 3 - Solution"
+    ]
   },
   {
     "objectID": "Exercises/exercises4.html",
     "href": "Exercises/exercises4.html",
     "title": "Exercise 3: ggplot2",
     "section": "",
-    "text": "Before you proceed with the exercises in this document, make sure to run the command library(tidyverse) in order to load the core tidyverse packages (including ggplot2).\nThe data set used in these exercises, climate.xlsx1, was compiled from data downloaded in 2017 from the website of the UK’s national weather service, the Met Office.\nThe spreadsheet contains data from five UK weather stations in 2016. The following variables are included in the data set:\nThe data set is the same as the one used for the Tidyverse exercise. If you have already imported the data, there is no need to import it again, unless you have made changes to the data assigned to climate since the original data set was imported.\nNeed a little help? Consult the ggplot2 cheatsheet here: https://rstudio.github.io/cheatsheets/data-visualization.pdf",
+    "text": "Before you proceed with the exercises in this document, make sure to run the command library(tidyverse) in order to load the core tidyverse packages (including ggplot2).\nThe data set used in these exercises, climate.xlsx1, was compiled from data downloaded in 2017 from the website of the UK’s national weather service, the Met Office.\nThe spreadsheet contains data from five UK weather stations in 2016. The following variables are included in the data set:\n\n\n\nVariable name\nExplanation\n\n\n\n\nstation\nLocation of weather station\n\n\nyear\nYear\n\n\nmonth\nMonth\n\n\naf\nDays of air frost\n\n\nrain\nRainfall in mm\n\n\nsun\nSunshine duration in hours\n\n\ndevice\nBrand of sunshine recorder / sensor\n\n\n\nThe data set is the same as the one used for the Tidyverse exercise. If you have already imported the data, there is no need to import it again, unless you have made changes to the data assigned to climate since the original data set was imported.\nNeed a little help? Consult the ggplot2 cheatsheet here: https://rstudio.github.io/cheatsheets/data-visualization.pdf",
+    "crumbs": [
+      "Home",
+      "Exercises",
+      "Exercise 3: ggplot2"
+    ]
+  },
+  {
+    "objectID": "Exercises/exercises4.html#getting-started",
+    "href": "Exercises/exercises4.html#getting-started",
+    "title": "Exercise 3: ggplot2",
+    "section": "",
+    "text": "Before you proceed with the exercises in this document, make sure to run the command library(tidyverse) in order to load the core tidyverse packages (including ggplot2).\nThe data set used in these exercises, climate.xlsx1, was compiled from data downloaded in 2017 from the website of the UK’s national weather service, the Met Office.\nThe spreadsheet contains data from five UK weather stations in 2016. The following variables are included in the data set:\n\n\n\nVariable name\nExplanation\n\n\n\n\nstation\nLocation of weather station\n\n\nyear\nYear\n\n\nmonth\nMonth\n\n\naf\nDays of air frost\n\n\nrain\nRainfall in mm\n\n\nsun\nSunshine duration in hours\n\n\ndevice\nBrand of sunshine recorder / sensor\n\n\n\nThe data set is the same as the one used for the Tidyverse exercise. If you have already imported the data, there is no need to import it again, unless you have made changes to the data assigned to climate since the original data set was imported.\nNeed a little help? Consult the ggplot2 cheatsheet here: https://rstudio.github.io/cheatsheets/data-visualization.pdf",
+    "crumbs": [
+      "Home",
+      "Exercises",
+      "Exercise 3: ggplot2"
+    ]
+  },
+  {
+    "objectID": "Exercises/exercises4.html#scatter-plot-i",
+    "href": "Exercises/exercises4.html#scatter-plot-i",
+    "title": "Exercise 3: ggplot2",
+    "section": "Scatter plot I",
+    "text": "Scatter plot I\n\nMake a scatter (point) plot of rain against sun.\nColor the points in the scatter plot according to weather station. Save the plot in an object.\nAdd the segment + facet_wrap(vars(station)) to the saved plot object from above, and update the plot. What happens?\nIs it necessary to have a legend in the faceted plot? How can you remove this legend? Hint: try adding a theme() with legend.position = \"none\" inside it.",
+    "crumbs": [
+      "Home",
+      "Exercises",
+      "Exercise 3: ggplot2"
+    ]
+  },
+  {
+    "objectID": "Exercises/exercises4.html#graphic-files",
+    "href": "Exercises/exercises4.html#graphic-files",
+    "title": "Exercise 3: ggplot2",
+    "section": "Graphic files",
+    "text": "Graphic files\n\nUse ggsave(file=\"weather.jpeg\") to remake the last ggplot as a jpeg-file and save it. The file will be saved on your working directory. Locate this file on your computer and open it.\nUse ggsave(file=\"weather.png\", width=10, height=8, units=\"cm\") to remake the last ggplot as a png-file and save it. What do the three other options do? Look at the help page ?ggsave to get an overview of the possible options.",
+    "crumbs": [
+      "Home",
+      "Exercises",
+      "Exercise 3: ggplot2"
+    ]
+  },
+  {
+    "objectID": "Exercises/exercises4.html#scatter-plot-ii-error-bars",
+    "href": "Exercises/exercises4.html#scatter-plot-ii-error-bars",
+    "title": "Exercise 3: ggplot2",
+    "section": "Scatter plot II: error bars",
+    "text": "Scatter plot II: error bars\n\nCalculate the average and standard deviation for sunshine in each month and save it to a table called summary_stats. You will need group_by and summarize. Recall how to do this from the tidyverse exercise.\nMake a scatter plot of the summary_stats with month on the x-axis, and the average number of sunshine hours on the y-axis.\nAdd error bars to the plot, which represent the average number of sunshine hours plus/minus the standard deviation of the observations. The relevant geom is called geom_errorbar.\n\nHint:\n\ngeom_errorbar(aes(ymin = sun_avg - sun_sd, ymax = sun_avg + sun_sd), width = 0.2)\n\n\nHow could make the plot with horizontal error bars instead? Tip: Think about which of the two variables, month and average sunshine hours, can meaningfully have an error.",
+    "crumbs": [
+      "Home",
+      "Exercises",
+      "Exercise 3: ggplot2"
+    ]
+  },
+  {
+    "objectID": "Exercises/exercises4.html#line-plot-also-known-as-a-spaghetti-plot",
+    "href": "Exercises/exercises4.html#line-plot-also-known-as-a-spaghetti-plot",
+    "title": "Exercise 3: ggplot2",
+    "section": "Line plot (also known as a spaghetti plot)",
+    "text": "Line plot (also known as a spaghetti plot)\n\nMake a line plot (find the correct geom_ for this) of the rainfall observations over time (month), such that observations from the same station are connected in one line. Put month on the x-axis. Color the lines according to weather station as well.\nThe month variable was read into R as a numerical variable. Convert this variable to a factor and make the line plot again. What has changed?\nUse theme(legend.position = ???) to move the color legend to the top of the plot.",
+    "crumbs": [
+      "Home",
+      "Exercises",
+      "Exercise 3: ggplot2"
+    ]
+  },
+  {
+    "objectID": "Exercises/exercises4.html#layering",
+    "href": "Exercises/exercises4.html#layering",
+    "title": "Exercise 3: ggplot2",
+    "section": "Layering",
+    "text": "Layering\nWe can add several geoms to the same plot to show several things at once.\n\n(Re)Make the line plot of monthly rainfall and add geom_point() to it.\nNow, add geom_hline(yintercept = mean(climate$rain), linetype = \"dashed\") at the end of your code for the line plot, and update the plot again. Have a look at the code again and understand what it does and how. What do you think ‘h’ in hline stands for?\nFinally, try adding the following code and update the plot. What changed? Replace X, Y, COL, and TITLE with some more suitable (informative) text.\n\n\nlabs(x = \"X\", y = \"Y\", color = \"COL\", title = \"TITLE\")",
+    "crumbs": [
+      "Home",
+      "Exercises",
+      "Exercise 3: ggplot2"
+    ]
+  },
+  {
+    "objectID": "Exercises/exercises4.html#box-plot-i",
+    "href": "Exercises/exercises4.html#box-plot-i",
+    "title": "Exercise 3: ggplot2",
+    "section": "Box plot I",
+    "text": "Box plot I\n\nMake a box plot of sunshine per weather station.\nColor the boxes according to weather station.",
+    "crumbs": [
+      "Home",
+      "Exercises",
+      "Exercise 3: ggplot2"
+    ]
+  },
+  {
+    "objectID": "Exercises/exercises4.html#box-plot-ii---aesthetics",
+    "href": "Exercises/exercises4.html#box-plot-ii---aesthetics",
+    "title": "Exercise 3: ggplot2",
+    "section": "Box plot II - Aesthetics",
+    "text": "Box plot II - Aesthetics\nThere are many ways in which you can manipulate the look of your plot. For this we will use the boxplot you made in the exercise above.\n\nAdd a different legend title with labs(fill = \"Custom Title\").\nChange the theme of the ggplot grid. Suggestions: theme_minimal(), theme_bw(), theme_dark(), theme_void().\nInstead of automatically chosen colors, pick your own colors for fill = station by adding the scale_fill_manual() command. You will need five colors, one for each station. What happens if you choose too few colors?\nChange the boxplot to a violin plot. Add the sunshine observations as scatter points to the plot. Include a boxplot inside the violin plot with geom_boxplot(width=.1).",
+    "crumbs": [
+      "Home",
+      "Exercises",
+      "Exercise 3: ggplot2"
+    ]
+  },
+  {
+    "objectID": "Exercises/exercises4.html#histogram",
+    "href": "Exercises/exercises4.html#histogram",
+    "title": "Exercise 3: ggplot2",
+    "section": "Histogram",
+    "text": "Histogram\n\nMake a histogram (find the correct geom_ for this) of rain from the climate dataset. Interpret the plot, what does it show?\nR suggests that you choose a different number of bins/bin width for the histogram. Use binwidth = inside the histogram geom to experiment with different values of bin width. Look at how the histogram changes.\nColor the entire histogram. Here we are not coloring/filling according to any attribute, just the entire thing so the argument needs to be outside aes().",
+    "crumbs": [
+      "Home",
+      "Exercises",
+      "Exercise 3: ggplot2"
+    ]
+  },
+  {
+    "objectID": "Exercises/exercises4.html#bar-chart-i",
+    "href": "Exercises/exercises4.html#bar-chart-i",
+    "title": "Exercise 3: ggplot2",
+    "section": "Bar chart I",
+    "text": "Bar chart I\n\nMake a bar chart (geom_col()) which visualizes the sunshine hours per month. If you have not done so in question 13, convert month to a factor now and remake the plot.\nColor, i.e. divide the bars according to weather station.\nFor better comparison, place the bars for each station next to each other instead of stacking them.\nMake the axis labels, legend title, and title of the plot more informative by customizing them like you did for the line plot above.",
+    "crumbs": [
+      "Home",
+      "Exercises",
+      "Exercise 3: ggplot2"
+    ]
+  },
+  {
+    "objectID": "Exercises/exercises4.html#bar-chart-ii-sorting-bars",
+    "href": "Exercises/exercises4.html#bar-chart-ii-sorting-bars",
+    "title": "Exercise 3: ggplot2",
+    "section": "Bar chart II: Sorting bars",
+    "text": "Bar chart II: Sorting bars\n\nMake a new bar chart showing the (total) annual rainfall recorded at each weather station. You will need to calculate this first. The format we need is a dataframe with summed up rain data per station.\nSort the stations in accordance to rainfall, either ascending or descending. This was shown in the ggplot lecture. Sort your rain dataframe from the question above by sum, then re-arrange the factor-levels of the ‘station’ as shown in the lecture.\nAdd labels to each bar that state the sum of the rainfall. You can do this by adding the label keyword to the aes() and adding geom_label() to the plot. Just like geoms like geom_scatter look at the aes() for knowing what to plot on the x and y axis, geom_label looks at it to know what to use for labels.\nAdjust the label positions so that the labels are positioned above the bars instead of inside them.",
     "crumbs": [
       "Home",
       "Exercises",
