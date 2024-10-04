@@ -168,21 +168,36 @@
     "href": "Presentations/data.html",
     "title": "Data",
     "section": "",
-    "text": "Go to https://github.com/Center-for-Health-Data-Science/FromExceltoR/tree/2024_Mar/Data and download the folder. Read the section below about file structure for recommendations on this."
+    "text": "Go to https://github.com/Center-for-Health-Data-Science/FromExceltoR/tree/2024_Mar/Data and download the folder. Read the section below about file structure for recommendations on this.",
+    "crumbs": [
+      "Home",
+      "Data",
+      "Data"
+    ]
   },
   {
     "objectID": "Presentations/data.html#download-data",
     "href": "Presentations/data.html#download-data",
     "title": "Data",
     "section": "",
-    "text": "Go to https://github.com/Center-for-Health-Data-Science/FromExceltoR/tree/2024_Mar/Data and download the folder. Read the section below about file structure for recommendations on this."
+    "text": "Go to https://github.com/Center-for-Health-Data-Science/FromExceltoR/tree/2024_Mar/Data and download the folder. Read the section below about file structure for recommendations on this.",
+    "crumbs": [
+      "Home",
+      "Data",
+      "Data"
+    ]
   },
   {
     "objectID": "Presentations/data.html#file-structure",
     "href": "Presentations/data.html#file-structure",
     "title": "Data",
     "section": "File structure",
-    "text": "File structure\nMake a project folder. Inside this, make a script and a data folder. Save the downloaded data in the data folder and save your scripts (Quarto documents) in the scripts folder."
+    "text": "File structure\nMake a project folder. Inside this, make a script and a data folder. Save the downloaded data in the data folder and save your scripts (Quarto documents) in the scripts folder.",
+    "crumbs": [
+      "Home",
+      "Data",
+      "Data"
+    ]
   },
   {
     "objectID": "Presentations/presentation2.html",
