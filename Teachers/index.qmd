@@ -10,10 +10,12 @@ project:
 
 This course is about going from Excel to R.
 
-![](../Program.png)
+![](images/Program.png)
 
 ## Code memes
 
 ![](images/god_knows.jpeg){width="300px"}
+
+
 
 ![](images/dog_chatgpt.jpeg){height="200px"}
