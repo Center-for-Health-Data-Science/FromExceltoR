@@ -35,8 +35,23 @@ website:
           - href: Exercises/exercises4.qmd
             text: "Exercise 3: ggplot2"
             
+      - section: "Solutions"
+        contents:
+          # - href: Exercises/TidyverseCheatSheet.pdf
+          #   text: "Exercise 1 - Solution"
+          - href: Exercises/exercises2_SOLUTIONS.qmd
+            text: "Exercise 2 - Solution"
+          - href: Exercises/exercises4_SOLUTIONS.qmd
+            text: "Exercise 3 - Solution"
+            
       - section: "Cheat Sheets"
         contents:
+          - href: CheatSheet/TidyverseCheatSheet.pdf
+            text: "Tidyverse"
+          - href: CheatSheet/ggplotCheatSheet.pdf
+            text: "ggplot2"
+          - href: CheatSheet/BaseRCheatSheet.pdf
+            text: "Base R"
 
 format:
   html:
