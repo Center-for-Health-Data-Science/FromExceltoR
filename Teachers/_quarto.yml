@@ -3,7 +3,7 @@ project:
   output-dir: ../docs
   
 website: 
-  title: "FromExceltoR"
+  title: '<img src="images/icon.png" style="vertical-align: middle; width: 24px;">FromExceltoR'
   navbar:
     left: 
       - href: index.qmd
@@ -66,7 +66,7 @@ format:
     toc: true # Add "On this page"
     toc-location: right
     sidebar:
-      collapsed: true
+      collapsed: false
       
       
       

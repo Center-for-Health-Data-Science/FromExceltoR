@@ -12,4 +12,4 @@ Go to <https://github.com/Center-for-Health-Data-Science/FromExceltoR/tree/2024_
 
 Make a project folder. Inside this, make a script and a data folder. Save the downloaded data in the data folder and save your scripts (Quarto documents) in the scripts folder.
 
-![](../images/file_tree.jpg){fig-align="center"}
+![](../images/file_tree.png){fig-align="center"}
