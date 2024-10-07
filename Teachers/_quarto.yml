@@ -7,7 +7,7 @@ title: 'FromExceltoR'
 # author: 
 website: 
   title: 'FromExceltoR'
-  favicon: '<img src="images/icon.png" style="vertical-align: middle; width: 150px;">'
+  #favicon: '<img src="images/icon.png" style="vertical-align: middle; width: 150px;">'
   navbar:
     left: 
       - href: index.qmd

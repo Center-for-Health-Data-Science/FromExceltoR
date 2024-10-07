@@ -11,7 +11,6 @@ project:
 knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
 ```
 
-
 ## Getting started
 
 1.  **Start RStudio**.
@@ -58,9 +57,8 @@ An R package needs be *installed* and *loaded* before you can use its functional
 
 11. **Install**. Choose one of the two installation methods:
 
-```{=html}
 <!-- -->
-```
+
 a.  Using the command line:
 
 ```{r}
