@@ -12,6 +12,7 @@ website:
         text: Home
   sidebar:
     style: "floating"
+    collapse-level: 2
     contents:
     
       - section: "Slides"
@@ -65,8 +66,8 @@ website:
 format:
   html:
     theme: flatly  # You can try different themes like cosmo, flatly, etc.
-    sidebar:
-      collapse-level: 1
+    # sidebar:
+    #   collapse-level: 1
       #collapsed: true
     toc: true # Add "On this page"
     toc-location: right
