@@ -11,7 +11,10 @@ website:
   navbar:
     left: 
       - href: index.qmd
-        text: Home
+        text: 'Course Material'
+      - href: about_heads.qmd
+        text: 'About us'
+        
   sidebar:
     style: "floating"
     collapse-level: 1
@@ -31,10 +34,10 @@ website:
           - href: Presentations/presentation4.qmd
             text: "Presentation 3: ggplot2"
       
-      - section: "Data"
-        contents: 
-          - href: Presentations/data.qmd
-            text: "Data"
+      # - section: "Data"
+      #   contents: 
+      - href: Presentations/data.qmd
+        text: "Data"
         
       - section: "Exercises"
         contents:
@@ -46,11 +49,8 @@ website:
             text: "Exercise 3: ggplot2"
       
       
-      # Add after exercises.
       - section: "Solutions"
         contents:
-          # - href: Exercises/TidyverseCheatSheet.pdf
-          #   text: "Exercise 1 - Solution"
           - href: Exercises/exercises2_SOLUTIONS.qmd
             text: "Exercise 2 - Solution"
           - href: Exercises/exercises4_SOLUTIONS.qmd

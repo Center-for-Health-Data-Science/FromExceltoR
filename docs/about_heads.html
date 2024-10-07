@@ -6,9 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Data Science Lab, University of Copenhagen">
 
-<title>Exersice 1: Introduction – FromExceltoR</title>
+<title>About HeaDS – FromExceltoR</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,60 +20,26 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
-<link href="../<img src=&quot;images/icon.png&quot; style=&quot;vertical-align: middle; width: 150px;&quot;>" rel="icon">
-<script src="../site_libs/quarto-html/quarto.js"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./<img src=&quot;images/icon.png&quot; style=&quot;vertical-align: middle; width: 150px;&quot;>" rel="icon">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -113,7 +78,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../index.html">
+    <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">FromExceltoR</span>
     </a>
   </div>
@@ -124,11 +89,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../index.html"> 
+    <a class="nav-link" href="./index.html"> 
 <span class="menu-text">Course Material</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../about_heads.html"> 
+    <a class="nav-link active" href="./about_heads.html" aria-current="page"> 
 <span class="menu-text">About us</span></a>
   </li>  
 </ul>
@@ -142,7 +107,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Exercises/exercises1.html">Exercises</a></li><li class="breadcrumb-item"><a href="../Exercises/exercises1.html">Exercise 1: Introduction</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">About HeaDS</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -156,7 +121,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Slideshow/FromExceltoR.pdf" class="sidebar-item-text sidebar-link">
+  <a href="./Slideshow/FromExceltoR.pdf" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Slides</span></a>
   </div>
 </li>
@@ -171,19 +136,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Presentations/presentation1.html" class="sidebar-item-text sidebar-link">
+  <a href="./Presentations/presentation1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Presentation 1: Introduction</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Presentations/presentation2.html" class="sidebar-item-text sidebar-link">
+  <a href="./Presentations/presentation2.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Presentation 2: Tidyverse</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Presentations/presentation4.html" class="sidebar-item-text sidebar-link">
+  <a href="./Presentations/presentation4.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Presentation 3: ggplot2</span></a>
   </div>
 </li>
@@ -191,34 +156,34 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Presentations/data.html" class="sidebar-item-text sidebar-link">
+  <a href="./Presentations/data.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Data</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
  <span class="menu-text">Exercises</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Exercises/exercises1.html" class="sidebar-item-text sidebar-link active">
+  <a href="./Exercises/exercises1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercise 1: Introduction</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Exercises/exercises2.html" class="sidebar-item-text sidebar-link">
+  <a href="./Exercises/exercises2.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercise 2: Tidyverse</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Exercises/exercises4.html" class="sidebar-item-text sidebar-link">
+  <a href="./Exercises/exercises4.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercise 3: ggplot2</span></a>
   </div>
 </li>
@@ -235,13 +200,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Exercises/exercises2_SOLUTIONS.html" class="sidebar-item-text sidebar-link">
+  <a href="./Exercises/exercises2_SOLUTIONS.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercise 2 - Solution</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Exercises/exercises4_SOLUTIONS.html" class="sidebar-item-text sidebar-link">
+  <a href="./Exercises/exercises4_SOLUTIONS.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercise 3 - Solution</span></a>
   </div>
 </li>
@@ -258,19 +223,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../CheatSheet/TidyverseCheatSheet.pdf" class="sidebar-item-text sidebar-link">
+  <a href="./CheatSheet/TidyverseCheatSheet.pdf" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Tidyverse</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../CheatSheet/ggplotCheatSheet.pdf" class="sidebar-item-text sidebar-link">
+  <a href="./CheatSheet/ggplotCheatSheet.pdf" class="sidebar-item-text sidebar-link">
  <span class="menu-text">ggplot2</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../CheatSheet/BaseRCheatSheet.pdf" class="sidebar-item-text sidebar-link">
+  <a href="./CheatSheet/BaseRCheatSheet.pdf" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Base R</span></a>
   </div>
 </li>
@@ -286,37 +251,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#getting-started" id="toc-getting-started" class="nav-link active" data-scroll-target="#getting-started">Getting started</a></li>
-  <li><a href="#write-commands-at-the-prompt" id="toc-write-commands-at-the-prompt" class="nav-link" data-scroll-target="#write-commands-at-the-prompt">Write commands at the prompt</a></li>
-  <li><a href="#working-with-quarto-documents" id="toc-working-with-quarto-documents" class="nav-link" data-scroll-target="#working-with-quarto-documents">Working with Quarto Documents</a></li>
-  <li><a href="#r-packages" id="toc-r-packages" class="nav-link" data-scroll-target="#r-packages">R Packages</a></li>
-  <li><a href="#basic-r-commands" id="toc-basic-r-commands" class="nav-link" data-scroll-target="#basic-r-commands">Basic R commands</a></li>
-  <li><a href="#making-some-graphics" id="toc-making-some-graphics" class="nav-link" data-scroll-target="#making-some-graphics">Making some graphics</a></li>
-  <li><a href="#shut-down-r" id="toc-shut-down-r" class="nav-link" data-scroll-target="#shut-down-r">Shut down R</a></li>
-  <li><a href="#getting-help-in-r" id="toc-getting-help-in-r" class="nav-link" data-scroll-target="#getting-help-in-r">Getting help in R</a></li>
-  <li><a href="#wrapping-up" id="toc-wrapping-up" class="nav-link" data-scroll-target="#wrapping-up">Wrapping up</a></li>
-  <li><a href="#lessons-learnt" id="toc-lessons-learnt" class="nav-link" data-scroll-target="#lessons-learnt">Lessons learnt</a></li>
+  <li><a href="#heads" id="toc-heads" class="nav-link active" data-scroll-target="#heads">HeaDS</a></li>
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Exercises/exercises1.html">Exercises</a></li><li class="breadcrumb-item"><a href="../Exercises/exercises1.html">Exercise 1: Introduction</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Exersice 1: Introduction</h1>
+<h1 class="title">About HeaDS</h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Data Science Lab, University of Copenhagen </p>
-          </div>
-  </div>
     
   
     
@@ -327,153 +278,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="getting-started" class="level2">
-<h2 class="anchored" data-anchor-id="getting-started">Getting started</h2>
-<ol type="1">
-<li><p><strong>Start RStudio</strong>.</p></li>
-<li><p><strong>Make a new Quarto document</strong>. Go to the menu bar and click <em>File</em> → <em>New file…</em> → <em>Quarto document…</em>. Give the Quarto document a title that makes sense to you.</p></li>
-<li><p><strong>Save your document</strong>. Go to the menu bar and click <em>File</em> → <em>Save as…</em>.</p></li>
-<li><p><strong>Check the working directory</strong>. Let’s check which working directory we are in with the <code>getwd()</code> function. When working with Quarto documents the working directory is always the same as where the file is located (where you saved it).</p></li>
-</ol>
+<section id="heads" class="level2">
+<h2 class="anchored" data-anchor-id="heads">HeaDS</h2>
+<p>Check our website at <a href="https://heads.ku.dk" class="uri">https://heads.ku.dk</a>.</p>
 </section>
-<section id="write-commands-at-the-prompt" class="level2">
-<h2 class="anchored" data-anchor-id="write-commands-at-the-prompt">Write commands at the prompt</h2>
-<ol start="5" type="1">
-<li>Go to the R console (lower left window) and write a few commands, <strong>one at a time</strong>. You could for example try these commands:</li>
-</ol>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">6</span><span class="sc">*</span><span class="dv">12</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">100</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>x <span class="sc">+</span> <span class="dv">7</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Notice how a new object, <em>x</em>, appears in the Global Environment window (upper right window) and can be used for new computations.</p>
-<p><strong>Commands written at the prompt are not saved for later use!</strong> It is fine to write commands that should never be used again at the prompt, and it is fine “to play at the prompt”, but in general you must organize your commands in R scripts (or Quarto files, which will be introduced in Lesson IV).</p>
-</section>
-<section id="working-with-quarto-documents" class="level2">
-<h2 class="anchored" data-anchor-id="working-with-quarto-documents">Working with Quarto Documents</h2>
-<p>To save your code, you need to store it in a file. There are several file formats available for this purpose, and in this course, we are using Quarto, the latest format in the code reproducibility domain.</p>
-<ol start="6" type="1">
-<li><p><strong>Create code chunk</strong>. In the Quarto document you just made, create a code chuck by pressing the green box with the white ‘C’ in the right of the panel.</p></li>
-<li><p><strong>Write code</strong>. Write a command in the code chunk, similar to one of those from above.</p></li>
-<li><p><strong>Run code</strong>. Click on the green button in the top right of the code chunk - or simply type <em>Ctrl + Enter</em>/<em>option + Enter</em>. Then the command is transferred to the prompt in the console and executed, just as if you had written the command directly at the prompt. Try with a new command in a new line.</p></li>
-<li><p><strong>Create a comment</strong>. Put a hashtag (#) before one of the commands in the code chunk and run it. Nothing happens! Hence, you can use hashtags for writing comments in your code chunks.</p></li>
-<li><p><strong>Save your files often</strong>. It happens that you ask R for something so weird that it shuts down, and then it is a pity to have lost your work.</p></li>
-</ol>
-</section>
-<section id="r-packages" class="level2">
-<h2 class="anchored" data-anchor-id="r-packages">R Packages</h2>
-<p>R is born with a lot of functionalities, but the enormous community of R users also contributes to R all the time by developing code and sharing it in R packages. An R package is simply a collection of R functions and/or datasets (including documentation). As of September 20, 2024, there are 21,361 packaged available at the CRAN repository (and there are many other repositories).</p>
-<p>An R package needs be <em>installed</em> and <em>loaded</em> before you can use its functionalities. You only have to install a package once (until you re-install R), whereas you have to load it in every R session you want to use it. As an example, let’s install the package <code>ContaminatedMixt</code>.</p>
-<ol start="11" type="1">
-<li><strong>Install</strong>. Choose one of the two installation methods:</li>
-</ol>
-<!-- -->
-<ol type="a">
-<li>Using the command line:</li>
-</ol>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"ContaminatedMixt"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Note that for this approach you need to know the name of the package and spell it correctly, including capitalization!</p>
-<ol start="2" type="a">
-<li><p>Using the graphical interface:</p>
-<p>Look at lower right of your Rstudio window where you have a window with several tabs. Click on <em>Packages</em>. You will see a list of your currently installed packages and their versions. To install <code>ContaminatedMixt</code>, click on <em>Install</em> and start to type the name. You will notice a drop down list appears from which you can select the correct package. This is useful if you are not quite sure of the correct spelling.</p></li>
-</ol>
-<p>A lot of red text will be written in the console while the installation goes on. This usually does not mean there was a problem, unless the text reads ‘error’ or ‘exit’. In the end, the package is installed, or you will see an explanation of what went wrong.</p>
-<ol start="12" type="1">
-<li><strong>Loading</strong>. Load the package you just installed with the command <code>library(ContaminatedMixt)</code>. If everything went well, you should now able to run the command <code>data(package = 'ContaminatedMixt')</code> which will show you an overview of the datasets included in the package.</li>
-</ol>
-</section>
-<section id="basic-r-commands" class="level2">
-<h2 class="anchored" data-anchor-id="basic-r-commands">Basic R commands</h2>
-<p>We will now have a look at basic commands in R that you just learned about. We will use an in-build dataset of R called <code>trees</code>. Copy-paste the commands into your document or write them yourself to get a hang of the coding! Start thinking about the structure of you document and when to create new code chunks.</p>
-<ol start="13" type="1">
-<li>To start with, load the <code>tidyverse</code> package.</li>
-</ol>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<ol start="14" type="1">
-<li>Now, load the <code>trees</code> dataset by copying and executing the following commands:</li>
-</ol>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"trees"</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">view</span>(trees)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>?trees</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<ol start="15" type="1">
-<li>Check what information is contained in the <code>trees</code> dataset by calling the <code>summary</code> function on it:</li>
-</ol>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(trees)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<ol start="16" type="1">
-<li><p>How many trees do we have data for?</p></li>
-<li><p>Now, extract the column called <code>Volume</code> from the dataset and assign it to a new variable called <code>volume_col</code>.</p></li>
-<li><p>Display the volume of the first 10 trees.</p></li>
-<li><p>Find the minimum, maximum and mean volume from the column you just extracted. Does it match what was stated in the <code>summary</code>?</p></li>
-<li><p>What class of data structure is <code>trees</code>? Make it into a tibble.</p></li>
-</ol>
-</section>
-<section id="making-some-graphics" class="level2">
-<h2 class="anchored" data-anchor-id="making-some-graphics">Making some graphics</h2>
-<p>Next, let’s also try to make some plots using the base graphics system in R (in <em>Presentation III</em> you will learn to make graphics using the <em>ggplot2</em>-package). We will continue to use the <code>trees</code> dataset.</p>
-<ol start="21" type="1">
-<li>The dataset <code>trees</code> contains 31 observations of 3 variables (diameter, height and volume of black cherry trees). Insert the following two commands in a code chunk, and execute them to make two plots.</li>
-</ol>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Volume<span class="sc">~</span>Height, <span class="at">data=</span>trees)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Volume<span class="sc">~</span>Height, <span class="at">data=</span>trees, <span class="at">log=</span><span class="st">"y"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="shut-down-r" class="level2">
-<h2 class="anchored" data-anchor-id="shut-down-r">Shut down R</h2>
-<ol start="22" type="1">
-<li><p><strong>Close RStudio</strong>. If changes were made either to the Quarto document (shown in the upper-left window) or to the workspace (called ‘Global Environment’ in the upper-right window) you will be prompted if you like to save those. Answer <em>Yes</em> to that; in particular it is important that you save your documents as they contain all relevant commands to reproduce your output and plots.</p></li>
-<li><p><strong>Reopen file</strong>. Locate the Quarto document that you saved in question 4 (and question 10!). Start RStudio again, and open the file (via the File menu). Check that you can run it again.</p></li>
-</ol>
-<p>Remark - You can also start RStudio by double clicking on a file with the .qmd extension (or other R-readable formats). One advantage of this is that the workspace and the R history will be saved to the same folder as the R script when you later close RStudio, since the <em>working directory</em> will be set to the map where the file is located.</p>
-</section>
-<section id="getting-help-in-r" class="level2">
-<h2 class="anchored" data-anchor-id="getting-help-in-r">Getting help in R</h2>
-<p>Every R function comes with a help page, that gives a brief description of the function and describes its usage (input/arguments and output/value). Let’s use the function <code>median()</code> as example. It is, no surprise, computing the median from a vector of numbers.</p>
-<ol start="24" type="1">
-<li>Try these commands:</li>
-</ol>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">8</span>, <span class="dv">9</span>, <span class="dv">100</span>, <span class="cn">NA</span>)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>x</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>The first command defines a vector with six elements, but where the last number is missing (NA = Not Available). Since the last number is missing, <code>median</code> returns <code>NA</code>. However, could we make <code>median</code> find the median of the remaining numbers. Perhaps the help page can help out!</p>
-<ol start="25" type="1">
-<li>Look at the help for the <code>median</code> function:</li>
-</ol>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>?median</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>The help page for <code>median</code> appears in the lower right window. If we read it carefully, then we realize that the extra argument (input) <code>na.rm</code> may help us. We therefore try this:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(x, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Admittedly, R help pages are often quite difficult to read, but be aware that there are examples of commands in the bottom of each help page. For more complicated functions, these examples can be very useful while trying to get to know the function and its functionalities.</p>
-<p>In order to use the help pages as above, you need to know the name of the function, which obviously may not be the case: You want to compute the median but have no idea what function to use. The best way to proceed: Google! Use “R whatever-you-want-to-search-for”, and you often get exactly what you need.</p>
-<p>While working with R, you will get a lot of error messages. Some are easy to understand, and you will readily be able to fix the problems, while others… Again, the best answer is: Google and ChatGPT! Copy the error message into Google or ChatGPT, and you will often find help.</p>
-</section>
-<section id="wrapping-up" class="level2">
-<h2 class="anchored" data-anchor-id="wrapping-up">Wrapping up</h2>
-<ol start="26" type="1">
-<li>Imagine you need to send your code to a collaborator. Review your code to ensure it is clear and well-structured, so your collaborator can easily understand and follow your work.</li>
-</ol>
-</section>
-<section id="lessons-learnt" class="level2">
-<h2 class="anchored" data-anchor-id="lessons-learnt">Lessons learnt</h2>
-<ul>
-<li><p>You must write you code in a document, like the Quarto document, such that you can save the work and return to it some other day.</p></li>
-<li><p>Save your files often.</p></li>
-<li><p>If you forget to save your files before you close RStudio, then RStudio will prompt you if you want to save your work.</p></li>
-<li><p>Have structure in your document by using headers, text, and code chunks (maybe with comments).</p></li>
-</ul>
+<section id="section" class="level2">
+<h2 class="anchored" data-anchor-id="section"></h2>
 
 
 </section>
