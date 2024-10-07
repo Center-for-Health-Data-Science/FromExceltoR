@@ -2,10 +2,12 @@ project:
   type: website
   output-dir: ../docs
   
-title: '<img src="images/icon.png" style="vertical-align: middle; width: 150px;">FromExceltoR'
+#title: '<img src="images/icon.png" style="vertical-align: middle; width: 150px;">FromExceltoR'
+title: 'FromExceltoR'
 # author: 
 website: 
-  title: '<img src="images/icon.png" style="vertical-align: middle; width: 150px;">FromExceltoR'
+  title: 'FromExceltoR'
+  favicon: '<img src="images/icon.png" style="vertical-align: middle; width: 150px;">'
   navbar:
     left: 
       - href: index.qmd
