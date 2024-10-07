@@ -17,10 +17,10 @@ website:
     collapse-level: 1
     contents:
     
-      - section: "Slides"
-        contents: 
-          - href: Slideshow/FromExceltoR.pdf
-            text: "Slides"
+      # - section: "Slides"
+      #   contents: 
+      - href: Slideshow/FromExceltoR.pdf
+        text: "Slides"
       
       - section: "Presentations"
         contents:
