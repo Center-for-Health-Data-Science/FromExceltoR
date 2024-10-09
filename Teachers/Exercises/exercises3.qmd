@@ -1,0 +1,136 @@
+---
+title: "Exercise 3: ggplot2"
+format: html
+author: "HeaDS Data Science Lab, University of Copenhagen"
+project:
+  type: website
+  output-dir: ../docs
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
+```
+
+## Getting started
+
+Before you proceed with the exercises in this document, make sure to run the command `library(tidyverse)` in order to load the core **tidyverse** packages (including **ggplot2**).
+
+The data set used in these exercises, **climate.xlsx**[^1], was compiled from data downloaded in 2017 from the website of the UK's national weather service, the [*Met Office*](http://www.metoffice.gov.uk/public/weather/climate-historic/).
+
+[^1]: Contains public sector information licensed under the [Open Government Licence v3.0](http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/).
+
+The spreadsheet contains data from five UK weather stations in 2016. The following variables are included in the data set:
+
+| Variable name | Explanation                         |
+|---------------|-------------------------------------|
+| **station**   | Location of weather station         |
+| **year**      | Year                                |
+| **month**     | Month                               |
+| **af**        | Days of air frost                   |
+| **rain**      | Rainfall in mm                      |
+| **sun**       | Sunshine duration in hours          |
+| **device**    | Brand of sunshine recorder / sensor |
+
+The data set is the same as the one used for the Tidyverse exercise. If you have already imported the data, there is no need to import it again, unless you have made changes to the data assigned to `climate` since the original data set was imported.
+
+**Need a little help?** Consult the ggplot2 cheatsheet here: <https://rstudio.github.io/cheatsheets/data-visualization.pdf>
+
+## Scatter plot I
+
+1.  Make a scatter (point) plot of **rain** against **sun**.
+
+2.  Color the points in the scatter plot according to weather station. Save the plot in an object.
+
+3.  Add the segment `+ facet_wrap(vars(station))` to the saved plot object from above, and update the plot. What happens?
+
+4.  Is it necessary to have a legend in the faceted plot? How can you remove this legend? Hint: try adding a `theme()` with `legend.position = "none"` inside it.
+
+## Graphic files
+
+5.  Use `ggsave(file="weather.jpeg")` to remake the last ggplot as a jpeg-file and save it. The file will be saved on your working directory. Locate this file on your computer and open it.
+
+6.  Use `ggsave(file="weather.png", width=10, height=8, units="cm")` to remake the last ggplot as a png-file and save it. What do the three other options do? Look at the help page `?ggsave` to get an overview of the possible options.
+
+## Scatter plot II: error bars
+
+7.  Calculate the average and standard deviation for sunshine in each month and save it to a table called `summary_stats`. You will need `group_by` and `summarize`. Recall how to do this from the tidyverse exercise.
+
+8.  Make a scatter plot of the summary_stats with month on the x-axis, and the average number of sunshine hours on the y-axis.
+
+9.  Add error bars to the plot, which represent the average number of sunshine hours plus/minus the standard deviation of the observations. The relevant geom is called `geom_errorbar`.
+
+Hint:
+
+```{r}
+geom_errorbar(aes(ymin = sun_avg - sun_sd, ymax = sun_avg + sun_sd), width = 0.2)
+```
+
+10. How could make the plot with horizontal error bars instead? Tip: Think about which of the two variables, month and average sunshine hours, can meaningfully have an error.
+
+## Line plot (also known as a spaghetti plot)
+
+11. Make a line plot (find the correct `geom_` for this) of the rainfall observations over time (month), such that observations from the same station are connected in one line. Put month on the x-axis. Color the lines according to weather station as well.
+
+12. The **month** variable was read into R as a numerical variable. Convert this variable to a factor and make the line plot again. What has changed?
+
+13. Use `theme(legend.position = ???)` to move the color legend to the top of the plot.
+
+## Layering
+
+We can add several geoms to the same plot to show several things at once.
+
+14. (Re)Make the line plot of monthly rainfall and add `geom_point()` to it.
+
+15. Now, add `geom_hline(yintercept = mean(climate$rain), linetype = "dashed")` at the end of your code for the line plot, and update the plot again. Have a look at the code again and understand what it does and how. What do you think 'h' in hline stands for?
+
+16. Finally, try adding the following code and update the plot. What changed? Replace `X`, `Y`, `COL`, and `TITLE` with some more suitable (informative) text.
+
+```{r, eval = FALSE}
+labs(x = "X", y = "Y", color = "COL", title = "TITLE")
+```
+
+## Box plot I
+
+17. Make a box plot of sunshine per weather station.
+
+18. Color the boxes according to weather station.
+
+## Box plot II - Aesthetics
+
+There are many ways in which you can manipulate the look of your plot. For this we will use the boxplot you made in the exercise above.
+
+19. Add a different legend title with `labs(fill = "Custom Title")`.
+
+20. Change the theme of the ggplot grid. Suggestions: `theme_minimal()`, `theme_bw()`, `theme_dark()`, `theme_void()`.
+
+21. Instead of automatically chosen colors, pick your own colors for `fill = station` by adding the `scale_fill_manual()` command. You will need five colors, one for each station. What happens if you choose too few colors?
+
+22. Change the boxplot to a **violin plot**. Add the sunshine observations as scatter points to the plot. Include a boxplot inside the violin plot with `geom_boxplot(width=.1)`.
+
+## Histogram
+
+23. Make a histogram (find the correct `geom_` for this) of rain from the climate dataset. Interpret the plot, what does it show?
+
+24. R suggests that you choose a different number of bins/bin width for the histogram. Use `binwidth =` inside the histogram geom to experiment with different values of bin width. Look at how the histogram changes.
+
+25. Color the entire histogram. Here we are not coloring/filling according to any attribute, just the entire thing so the argument needs to be **outside** `aes()`.
+
+## Bar chart I
+
+26. Make a bar chart (`geom_col()`) which visualizes the sunshine hours per month. If you have not done so in question 13, convert month to a factor now and remake the plot.
+
+27. Color, i.e. divide the bars according to weather station.
+
+28. For better comparison, place the bars for each station next to each other instead of stacking them.
+
+29. Make the axis labels, legend title, and title of the plot more informative by customizing them like you did for the line plot above.
+
+## Bar chart II: Sorting bars
+
+30. Make a new bar chart showing the (total) annual rainfall recorded at each weather station. You will need to calculate this first. The format we need is a dataframe with summed up rain data per station.
+
+31. Sort the stations in accordance to rainfall, either ascending or descending. This was shown in the ggplot lecture. Sort your rain dataframe from the question above by sum, then re-arrange the factor-levels of the 'station' as shown in the lecture.
+
+32. Add labels to each bar that state the sum of the rainfall. You can do this by adding the `label` keyword to the `aes()` and adding `geom_label()` to the plot. Just like geoms like `geom_scatter` look at the `aes()` for knowing what to plot on the x and y axis, `geom_label` looks at it to know what to use for labels.
+
+33. Adjust the label positions so that the labels are positioned above the bars instead of inside them.

@@ -31,7 +31,7 @@ website:
             text: "Presentation 1: Introduction"
           - href: Presentations/presentation2.qmd
             text: "Presentation 2: Tidyverse"
-          - href: Presentations/presentation4.qmd
+          - href: Presentations/presentation3.qmd
             text: "Presentation 3: ggplot2"
       
       # - section: "Data"
@@ -45,15 +45,16 @@ website:
             text: "Exercise 1: Introduction"
           - href: Exercises/exercises2.qmd
             text: "Exercise 2: Tidyverse"
-          - href: Exercises/exercises4.qmd
+          - href: Exercises/exercises3.qmd
             text: "Exercise 3: ggplot2"
-      
+          - href: Exercises/exercises6.qmd
+            text: "Exercise 6: Data Exercise in R"
       
       - section: "Solutions"
         contents:
           - href: Exercises/exercises2_SOLUTIONS.qmd
             text: "Exercise 2 - Solution"
-          - href: Exercises/exercises4_SOLUTIONS.qmd
+          - href: Exercises/exercises3_SOLUTIONS.qmd
             text: "Exercise 3 - Solution"
             
       - section: "Cheat Sheets"

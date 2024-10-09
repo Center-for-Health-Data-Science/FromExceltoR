@@ -1,10 +1,10 @@
 ---
-title: "Data Exercise in R"
-author: "HeaDS Data Lab"
-date: "`r format(Sys.time(), '%d %B, %Y')`"
-output: 
-      html_document
-      #pdf_document
+title: "Exercise 6: Data Exercise in R"
+author: "HeaDS Data Science Lab, University of Copenhagen"
+format: html
+project:
+  type: website
+  output-dir: ../docs
 ---
 
 ```{r setup, include=FALSE}
@@ -26,7 +26,7 @@ library(MASS)
 
 ## R-packages
 
-For the data wrangling and statistical modelling we will be doing in this exercise, you will need the following R-packages: `tidyverse`,`ggplot2`,`emmeans`, `MASS`.
+For the data wrangling and statistical modelling we will be doing in this exercise, you will need the following R-packages: `tidyverse`, `ggplot2`, `emmeans`, `MASS`.
 
 -   Make sure that these packages are installed and loaded into your R environment. You likely have the packages already installed and loaded (you used these in the previous exercises) try `sessionInfo()` and `require()` (look up what these function do). If the packages are not there install them and library them as in the previous exercises.
 
@@ -47,7 +47,7 @@ data(birthwt)
 
 *If you have a dataset of your own you would like yo look at instead of the example data we provide here, you are very welcome to. You can again use `read_excel()` for excel sheets. For other formats, have a look at `read.csv()`, `read.table()`, `read.delim()`, etc. You can either google your way to an answer or ask one of the course instructors.*
 
--   Now, check the class of the dataset. We'll be using tidyverse to do our anaylsis, so if it isn't already a tibble, make it into one.
+-   Now, check the class of the dataset. We'll be using `tidyverse` to do our anaylsis, so if it isn't already a tibble, make it into one.
 
 ------------------------------------------------------------------------
 
@@ -79,7 +79,7 @@ Some of the measured variables in our data are numeric, i.e. continuous. For the
 
 -   Calculate summary statistics (mean, median, sd, min, max)
 
--   Create boxplots for each numeric variable using `ggplot2`, and apply `scale_x_discrete()` to prevent meaningless scaling of the boxplot widths.
+-   Create boxplots for each numeric variable using `ggplot2`, and apply `scale_x_discrete()` to prevent meaningless scaling of the boxplot widths.
 
 -   Do you see outliers in your dataset?
 
@@ -89,7 +89,7 @@ Some of the measured variables in our data are numeric, i.e. continuous. For the
 
 Other columns describe variables that are categorical. Some of these may have been initially interpreted by R as numerical, especially if they are coded with 0/1.
 
--   If you haven't changed their datatype to factor yet, do so now. You can see how in presentation5.Rmd.
+-   If you haven't changed their datatype to factor yet, do so now. You can see how in Presentation 5.
 
 -   When you are done, make barplots of each categorical variable.
 

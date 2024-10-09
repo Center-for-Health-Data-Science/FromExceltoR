@@ -1,0 +1,302 @@
+---
+title: "Presentation 3: ggplot2"
+format: html
+editor: visual
+project:
+  type: website
+  output-dir: ../docs
+---
+
+## Importing libraries and data
+
+```{r}
+library(readxl)
+library(writexl)
+library(tidyverse)
+```
+
+## Load data
+
+The iris dataset is a widely-used dataset in data science, containing 150 observations of iris flowers with features like sepal length, sepal width, petal length, and petal width. It includes three species: Setosa, Versicolor, and Virginica, making it ideal for classification tasks and data visualization.
+
+```{r}
+data('iris')
+head(iris)
+```
+
+```{r}
+# some R code 
+```
+
+## Data wranglig
+
+Making the data more fun to plot.
+
+```{r}
+# Define 5 colors and their respective ratios
+set.seed(123)  # For reproducibility
+colors <- c(rep("Red", 50),       # 50 rows with Red
+            rep("Blue", 30),      # 30 rows with Blue
+            rep("Yellow", 30),    # 30 rows with Yellow
+            rep("Green", 20),     # 20 rows with Green
+            rep("Purple", 20))    # 20 rows with Purple
+
+# Shuffle the colors to mix them randomly
+colors <- sample(colors)
+
+# Add the 'Flower.Color' column to the iris dataset
+iris$Flower.Color <- colors
+
+# View the first few rows to check the result
+head(iris)
+```
+
+## ggplot2: The basic concepts
+
+This is the starting point of a ggplot. The dataframe and the columns we wish to plot are defined. We have not specified what type of plot we want, hence an empty plot is produced.
+
+```{r}
+ggplot(iris,                    # dataframe 
+       aes(x = Sepal.Length,    # x-value
+           y = Sepal.Width))    # y-value
+                                # missing type of plot 
+```
+
+## Scatter plot with `geom_point`
+
+A scatter plot is made with the `geom_point` function and is used to get an overview over the relationship between two numeric variables. Here we see the relationship between sepal length and width.
+
+```{r}
+ggplot(iris,                    # dataframe 
+       aes(x = Sepal.Length,    # x-value
+           y = Petal.Length)) + # y-value
+  geom_point()                  # type of plot
+```
+
+Change color of entire plot by setting it [outside]{.underline} `aes()`.
+
+```{r}
+ggplot(iris,                    
+       aes(x = Sepal.Length,    
+           y = Petal.Length)) + 
+  geom_point(color = 'hotpink') 
+```
+
+## Scatter plot with `geom_point` with color stratification
+
+To change colors based on a feature, you need to set it [inside]{.underline} `aes()`. Here we see the relationship between sepal length and width colored by species.
+
+```{r}
+ggplot(iris,                   
+       aes(x = Sepal.Length,   
+           y = Petal.Length,     
+           color = Species)) +  
+  geom_point()
+```
+
+## Boxplot with `geom_histogram`
+
+Boxplots are great to get an overview of continues variables and spot outliers. Can be shown on either axis (x and y).
+
+```{r}
+ggplot(iris,                    
+       aes(y = Sepal.Length)) + 
+  geom_boxplot() 
+```
+
+Split up by categorical variable like Species:
+
+```{r}
+ggplot(iris,                    
+       aes(y = Sepal.Length,    
+           x = Species)) +      
+  geom_boxplot()              
+```
+
+... or color.
+
+```{r}
+ggplot(iris,                    
+       aes(y = Sepal.Length,    
+           fill = Species)) +  
+  geom_boxplot()
+```
+
+## Violin plot with `geom_violin`
+
+A violin plot shows the distribution of a continuous variable across different categories, combining the features of a box plot and a density plot. Also, the labels can be edited.
+
+```{r}
+ggplot(iris,                    
+       aes(y = Sepal.Length,    
+           x = Species)) +      
+  geom_violin() + 
+  labs(y = 'Sepal Length', 
+       x = 'Flower Species', 
+       title = 'Violin plot of sepal length stratisfied by flower species')
+```
+
+## Histogram with `geom_histogram`
+
+Histogram shows the distribution of a continuous variable. You will sometimes get a message that suggests to select another `binwidth`. Do what is says and you will often get nicer plot (something nothing changes).
+
+```{r}
+ggplot(iris,                    
+       aes(x = Sepal.Length)) +     
+  geom_histogram()
+  # geom_histogram(binwidth = 0.5)
+```
+
+## Bar chart with `geom_bar`
+
+A bar chart is made with the `geom_bar` function and is used to get an overview over the distribution of a single categorical variable, e.g. Flower.Color in this instance. Here we see the number of flowers of each Flower.Color. Notice that the Flower.Colors are sorted alphabetically.
+
+```{r}
+# Save plot in p
+p <- ggplot(iris,                    
+            aes(x = Flower.Color)) + 
+  geom_bar()                         
+
+# Show p
+p
+
+# Show p with new labels 
+p + labs(x = 'Flower Color', y = 'Count')
+
+# Show p (nothing has changed)
+p
+
+# Save p with new lables in p (overwrite / reassign)
+p <- p + labs(x = 'Flower Color', y = 'Count')
+
+# Show p (lables have changed)
+p 
+```
+
+Color by species. The bars are stacked by default.
+
+```{r}
+ggplot(iris,                    
+       aes(x = Flower.Color,   
+           fill = Species)) +   
+  geom_bar()                   
+```
+
+Add `position = "dodge"` for bars to be placed next to each other.
+
+```{r}
+ggplot(iris,                   
+      aes(x = Flower.Color,    
+          fill = Species)) +   
+  geom_bar(position = "dodge") 
+```
+
+Add `position = "fill"` for bars to be normalized such that heights of the bars to represent percentages rather than counts.
+
+```{r}
+ggplot(iris,                   
+      aes(x = Flower.Color,   
+          fill = Species)) +   
+  geom_bar(position = "fill") + 
+  theme_bw()
+  # theme_classic()  
+  # theme_minimal()
+  # theme_dark()
+```
+
+Using `facet_wrap` if you want a plot to be split up according to a categorical variable.
+
+```{r}
+ggplot(iris,                   
+      aes(x = Flower.Color)) +
+  geom_bar()  + 
+  facet_wrap(vars(Species))
+```
+
+## Extra section
+
+**(Should we exclude this? Is it too advanced? Is it used in the exercises?)** We can order the columns such that the count goes from lowest to highest. This is actually not that easy in R.
+
+First, we see that the class of the Flower.Color is character. Characters are always sorted alphabetically like we saw above.
+
+```{r}
+class(iris$Flower.Color)
+```
+
+Extract the number of flowers for each Flower.Color.
+
+```{r}
+dl_Flower.Color <- iris %>%
+  group_by(Flower.Color) %>%
+  summarise(n = n()) %>% 
+  arrange(desc(n))
+
+dl_Flower.Color
+
+dl_Flower.Color$Flower.Color
+```
+
+Change the class of the Flower.Color feature to factor and add levels according to the number of flowers with each color.
+
+```{r}
+iris$Flower.Color <- factor(iris$Flower.Color,
+                            levels = dl_Flower.Color$Flower.Color)
+```
+
+Check class now
+
+```{r}
+class(iris$Flower.Color)
+```
+
+Now we do the same plot as before and we see that the order has changed to range from largest to smallest Flower.Colors group. The plot is saved in the variable p.
+
+```{r}
+p <- ggplot(iris,                # dataframe 
+       aes(x = Flower.Color)) +  # x-value
+  geom_bar()                     # type of plot 
+
+p
+```
+
+We can also flip the chart. We update the plot, p, be reassignment.
+
+```{r}
+p <- p + coord_flip()
+```
+
+Since we are working with colors, we can change the colors of the bars to match the groups.
+
+```{r}
+# Define color palette
+color_palette <- c("Red" = "red", 
+                   "Blue" = "blue", 
+                   "Yellow" = "yellow", 
+                   "Green" = "green", 
+                   "Purple" = "purple")
+
+p <- p + 
+  aes(fill = Flower.Color) +                # add the fill ascetics 
+  scale_fill_manual(values = color_palette) # set the fill color according to the color palette
+```
+
+## Bar chart with `geom_col`
+
+Summary of data:
+
+```{r}
+mean_sepal_length_pr_color <- iris %>%
+  group_by(Flower.Color) %>%
+  summarize(mean_Sepal.Length = mean(Sepal.Length))
+
+head(mean_sepal_length_pr_color)
+```
+
+A bar chart with `geom_bar` is used to get an overview over the distribution of a categorical variable relative to a continues variable. Here we see the average Sepal.Length of the flowers for each Flower.Color.
+
+```{r}
+ggplot(mean_sepal_length_pr_color,   # dataframe 
+       aes(x = Flower.Color,         # x-value
+           y = mean_Sepal.Length)) + # y-value
+  geom_col()                         # type of plot 
+```

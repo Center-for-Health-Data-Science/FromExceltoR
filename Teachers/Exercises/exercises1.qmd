@@ -1,6 +1,6 @@
 ---
 title: "Exersice 1: Introduction"
-author: "Data Science Lab, University of Copenhagen"
+author: "HeaDS Data Science Lab, University of Copenhagen"
 format: html
 project:
   type: website

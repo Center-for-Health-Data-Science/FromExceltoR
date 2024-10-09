@@ -1,6 +1,7 @@
 ---
 title: "Exercise 2: Tidyverse"
 format: html
+author: "HeaDS Data Science Lab, University of Copenhagen"
 project:
   type: website
   output-dir: ../docs
