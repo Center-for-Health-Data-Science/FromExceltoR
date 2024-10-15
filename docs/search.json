@@ -64,7 +64,7 @@
     "text": "Before you proceed with the exercises in this document, make sure to run the command library(tidyverse) in order to load the core tidyverse packages (including ggplot2).\nThe data set used in these exercises, climate.xlsx1, was compiled from data downloaded in 2017 from the website of the UK’s national weather service, the Met Office.\nThe spreadsheet contains data from five UK weather stations in 2016. The following variables are included in the data set:\n\n\n\nVariable name\nExplanation\n\n\n\n\nstation\nLocation of weather station\n\n\nyear\nYear\n\n\nmonth\nMonth\n\n\naf\nDays of air frost\n\n\nrain\nRainfall in mm\n\n\nsun\nSunshine duration in hours\n\n\ndevice\nBrand of sunshine recorder / sensor\n\n\n\nThe data set is the same as the one used for the Tidyverse exercise. If you have already imported the data, there is no need to import it again, unless you have made changes to the data assigned to climate since the original data set was imported.\nNeed a little help? Consult the ggplot2 cheatsheet here: https://rstudio.github.io/cheatsheets/data-visualization.pdf",
     "crumbs": [
       "Course Material",
-      "Exercises 🙌",
+      "Exercises 🏋🏽",
       "Exercise 3: ggplot2"
     ]
   },
@@ -76,7 +76,7 @@
     "text": "Before you proceed with the exercises in this document, make sure to run the command library(tidyverse) in order to load the core tidyverse packages (including ggplot2).\nThe data set used in these exercises, climate.xlsx1, was compiled from data downloaded in 2017 from the website of the UK’s national weather service, the Met Office.\nThe spreadsheet contains data from five UK weather stations in 2016. The following variables are included in the data set:\n\n\n\nVariable name\nExplanation\n\n\n\n\nstation\nLocation of weather station\n\n\nyear\nYear\n\n\nmonth\nMonth\n\n\naf\nDays of air frost\n\n\nrain\nRainfall in mm\n\n\nsun\nSunshine duration in hours\n\n\ndevice\nBrand of sunshine recorder / sensor\n\n\n\nThe data set is the same as the one used for the Tidyverse exercise. If you have already imported the data, there is no need to import it again, unless you have made changes to the data assigned to climate since the original data set was imported.\nNeed a little help? Consult the ggplot2 cheatsheet here: https://rstudio.github.io/cheatsheets/data-visualization.pdf",
     "crumbs": [
       "Course Material",
-      "Exercises 🙌",
+      "Exercises 🏋🏽",
       "Exercise 3: ggplot2"
     ]
   },
@@ -88,7 +88,7 @@
     "text": "Scatter plot I\n\nMake a scatter (point) plot of rain against sun.\nColor the points in the scatter plot according to weather station. Save the plot in an object.\nAdd the segment + facet_wrap(vars(station)) to the saved plot object from above, and update the plot. What happens?\nIs it necessary to have a legend in the faceted plot? How can you remove this legend? Hint: try adding a theme() with legend.position = \"none\" inside it.",
     "crumbs": [
       "Course Material",
-      "Exercises 🙌",
+      "Exercises 🏋🏽",
       "Exercise 3: ggplot2"
     ]
   },
@@ -100,7 +100,7 @@
     "text": "Graphic files\n\nUse ggsave(file=\"weather.jpeg\") to remake the last ggplot as a jpeg-file and save it. The file will be saved on your working directory. Locate this file on your computer and open it.\nUse ggsave(file=\"weather.png\", width=10, height=8, units=\"cm\") to remake the last ggplot as a png-file and save it. What do the three other options do? Look at the help page ?ggsave to get an overview of the possible options.",
     "crumbs": [
       "Course Material",
-      "Exercises 🙌",
+      "Exercises 🏋🏽",
       "Exercise 3: ggplot2"
     ]
   },
@@ -112,7 +112,7 @@
     "text": "Scatter plot II: error bars\n\nCalculate the average and standard deviation for sunshine in each month and save it to a table called summary_stats. You will need group_by and summarize. Recall how to do this from the tidyverse exercise.\nMake a scatter plot of the summary_stats with month on the x-axis, and the average number of sunshine hours on the y-axis.\nAdd error bars to the plot, which represent the average number of sunshine hours plus/minus the standard deviation of the observations. The relevant geom is called geom_errorbar.\n\nHint:\n\ngeom_errorbar(aes(ymin = sun_avg - sun_sd, ymax = sun_avg + sun_sd), width = 0.2)\n\n\nHow could make the plot with horizontal error bars instead? Tip: Think about which of the two variables, month and average sunshine hours, can meaningfully have an error.",
     "crumbs": [
       "Course Material",
-      "Exercises 🙌",
+      "Exercises 🏋🏽",
       "Exercise 3: ggplot2"
     ]
   },
@@ -124,7 +124,7 @@
     "text": "Line plot (also known as a spaghetti plot)\n\nMake a line plot (find the correct geom_ for this) of the rainfall observations over time (month), such that observations from the same station are connected in one line. Put month on the x-axis. Color the lines according to weather station as well.\nThe month variable was read into R as a numerical variable. Convert this variable to a factor and make the line plot again. What has changed?\nUse theme(legend.position = ???) to move the color legend to the top of the plot.",
     "crumbs": [
       "Course Material",
-      "Exercises 🙌",
+      "Exercises 🏋🏽",
       "Exercise 3: ggplot2"
     ]
   },
@@ -136,7 +136,7 @@
     "text": "Layering\nWe can add several geoms to the same plot to show several things at once.\n\n(Re)Make the line plot of monthly rainfall and add geom_point() to it.\nNow, add geom_hline(yintercept = mean(climate$rain), linetype = \"dashed\") at the end of your code for the line plot, and update the plot again. Have a look at the code again and understand what it does and how. What do you think ‘h’ in hline stands for?\nFinally, try adding the following code and update the plot. What changed? Replace X, Y, COL, and TITLE with some more suitable (informative) text.\n\n\nlabs(x = \"X\", y = \"Y\", color = \"COL\", title = \"TITLE\")",
     "crumbs": [
       "Course Material",
-      "Exercises 🙌",
+      "Exercises 🏋🏽",
       "Exercise 3: ggplot2"
     ]
   },
@@ -148,7 +148,7 @@
     "text": "Box plot I\n\nMake a box plot of sunshine per weather station.\nColor the boxes according to weather station.",
     "crumbs": [
       "Course Material",
-      "Exercises 🙌",
+      "Exercises 🏋🏽",
       "Exercise 3: ggplot2"
     ]
   },
@@ -160,7 +160,7 @@
     "text": "Box plot II - Aesthetics\nThere are many ways in which you can manipulate the look of your plot. For this we will use the boxplot you made in the exercise above.\n\nAdd a different legend title with labs(fill = \"Custom Title\").\nChange the theme of the ggplot grid. Suggestions: theme_minimal(), theme_bw(), theme_dark(), theme_void().\nInstead of automatically chosen colors, pick your own colors for fill = station by adding the scale_fill_manual() command. You will need five colors, one for each station. What happens if you choose too few colors?\nChange the boxplot to a violin plot. Add the sunshine observations as scatter points to the plot. Include a boxplot inside the violin plot with geom_boxplot(width=.1).",
     "crumbs": [
       "Course Material",
-      "Exercises 🙌",
+      "Exercises 🏋🏽",
       "Exercise 3: ggplot2"
     ]
   },
@@ -172,7 +172,7 @@
     "text": "Histogram\n\nMake a histogram (find the correct geom_ for this) of rain from the climate dataset. Interpret the plot, what does it show?\nR suggests that you choose a different number of bins/bin width for the histogram. Use binwidth = inside the histogram geom to experiment with different values of bin width. Look at how the histogram changes.\nColor the entire histogram. Here we are not coloring/filling according to any attribute, just the entire thing so the argument needs to be outside aes().",
     "crumbs": [
       "Course Material",
-      "Exercises 🙌",
+      "Exercises 🏋🏽",
       "Exercise 3: ggplot2"
     ]
   },
@@ -184,7 +184,7 @@
     "text": "Bar chart I\n\nMake a bar chart (geom_col()) which visualizes the sunshine hours per month. If you have not done so in question 13, convert month to a factor now and remake the plot.\nColor, i.e. divide the bars according to weather station.\nFor better comparison, place the bars for each station next to each other instead of stacking them.\nMake the axis labels, legend title, and title of the plot more informative by customizing them like you did for the line plot above.",
     "crumbs": [
       "Course Material",
-      "Exercises 🙌",
+      "Exercises 🏋🏽",
       "Exercise 3: ggplot2"
     ]
   },
@@ -196,7 +196,7 @@
     "text": "Bar chart II: Sorting bars\n\nMake a new bar chart showing the (total) annual rainfall recorded at each weather station. You will need to calculate this first. The format we need is a dataframe with summed up rain data per station.\nSort the stations in accordance to rainfall, either ascending or descending. This was shown in the ggplot lecture. Sort your rain dataframe from the question above by sum, then re-arrange the factor-levels of the ‘station’ as shown in the lecture.\nAdd labels to each bar that state the sum of the rainfall. You can do this by adding the label keyword to the aes() and adding geom_label() to the plot. Just like geoms like geom_scatter look at the aes() for knowing what to plot on the x and y axis, geom_label looks at it to know what to use for labels.\nAdjust the label positions so that the labels are positioned above the bars instead of inside them.",
     "crumbs": [
       "Course Material",
-      "Exercises 🙌",
+      "Exercises 🏋🏽",
       "Exercise 3: ggplot2"
     ]
   },
@@ -208,7 +208,7 @@
     "text": "Wrapping up\n\nLike in the last exercise; imagine you need to send your code to a collaborator. Review your code to ensure it is clear and well-structured, so your collaborator can easily understand and follow your work. Render your Quarto document and look at the result. Try to change the size of a figure by modifying the chunk header.",
     "crumbs": [
       "Course Material",
-      "Exercises 🙌",
+      "Exercises 🏋🏽",
       "Exercise 3: ggplot2"
     ]
   },
@@ -220,7 +220,7 @@
     "text": "Footnotes\n\n\nContains public sector information licensed under the Open Government Licence v3.0.↩︎",
     "crumbs": [
       "Course Material",
-      "Exercises 🙌",
+      "Exercises 🏋🏽",
       "Exercise 3: ggplot2"
     ]
   },
@@ -232,7 +232,7 @@
     "text": "Start RStudio.\nMake a new Quarto document. Go to the menu bar and click File → New file… → Quarto document…. Give the Quarto document a title that makes sense to you.\nSave your document. Go to the menu bar and click File → Save as….\nCheck the working directory. Let’s check which working directory we are in with the getwd() function. When working with Quarto documents the working directory is always the same as where the file is located (where you saved it).",
     "crumbs": [
       "Course Material",
-      "Exercises 🙌",
+      "Exercises 🏋🏽",
       "Exercise 1: Introduction"
     ]
   },
@@ -244,7 +244,7 @@
     "text": "Start RStudio.\nMake a new Quarto document. Go to the menu bar and click File → New file… → Quarto document…. Give the Quarto document a title that makes sense to you.\nSave your document. Go to the menu bar and click File → Save as….\nCheck the working directory. Let’s check which working directory we are in with the getwd() function. When working with Quarto documents the working directory is always the same as where the file is located (where you saved it).",
     "crumbs": [
       "Course Material",
-      "Exercises 🙌",
+      "Exercises 🏋🏽",
       "Exercise 1: Introduction"
     ]
   },
@@ -256,7 +256,7 @@
     "text": "Write commands at the prompt\n\nGo to the R console (lower left window) and write a few commands, one at a time. You could for example try these commands:\n\n\n6*12\nx &lt;- 100\nx + 7\n\nNotice how a new object, x, appears in the Global Environment window (upper right window) and can be used for new computations.\nCommands written at the prompt are not saved for later use! It is fine to write commands that should never be used again at the prompt, and it is fine “to play at the prompt”, but in general you must organize your commands in R scripts (or Quarto files, which will be introduced in Lesson IV).",
     "crumbs": [
       "Course Material",
-      "Exercises 🙌",
+      "Exercises 🏋🏽",
       "Exercise 1: Introduction"
     ]
   },
@@ -268,7 +268,7 @@
     "text": "Working with Quarto Documents\nTo save your code, you need to store it in a file. There are several file formats available for this purpose, and in this course, we are using Quarto, the latest format in the code reproducibility domain.\n\nCreate code chunk. In the Quarto document you just made, create a code chuck by pressing the green box with the white ‘C’ in the right of the panel.\nWrite code. Write a command in the code chunk, similar to one of those from above.\nRun code. Click on the green button in the top right of the code chunk - or simply type Ctrl + Enter/option + Enter. Then the command is transferred to the prompt in the console and executed, just as if you had written the command directly at the prompt. Try with a new command in a new line.\nCreate a comment. Put a hashtag (#) before one of the commands in the code chunk and run it. Nothing happens! Hence, you can use hashtags for writing comments in your code chunks.\nSave your files often. It happens that you ask R for something so weird that it shuts down, and then it is a pity to have lost your work.",
     "crumbs": [
       "Course Material",
-      "Exercises 🙌",
+      "Exercises 🏋🏽",
       "Exercise 1: Introduction"
     ]
   },
@@ -280,7 +280,7 @@
     "text": "R Packages\nR is born with a lot of functionalities, but the enormous community of R users also contributes to R all the time by developing code and sharing it in R packages. An R package is simply a collection of R functions and/or datasets (including documentation). As of September 20, 2024, there are 21,361 packaged available at the CRAN repository (and there are many other repositories).\nAn R package needs be installed and loaded before you can use its functionalities. You only have to install a package once (until you re-install R), whereas you have to load it in every R session you want to use it. As an example, let’s install the package ContaminatedMixt.\n\nInstall. Choose one of the two installation methods:\n\n\n\nUsing the command line:\n\n\ninstall.packages(\"ContaminatedMixt\")\n\nNote that for this approach you need to know the name of the package and spell it correctly, including capitalization!\n\nUsing the graphical interface:\nLook at lower right of your Rstudio window where you have a window with several tabs. Click on Packages. You will see a list of your currently installed packages and their versions. To install ContaminatedMixt, click on Install and start to type the name. You will notice a drop down list appears from which you can select the correct package. This is useful if you are not quite sure of the correct spelling.\n\nA lot of red text will be written in the console while the installation goes on. This usually does not mean there was a problem, unless the text reads ‘error’ or ‘exit’. In the end, the package is installed, or you will see an explanation of what went wrong.\n\nLoading. Load the package you just installed with the command library(ContaminatedMixt). If everything went well, you should now able to run the command data(package = 'ContaminatedMixt') which will show you an overview of the datasets included in the package.",
     "crumbs": [
       "Course Material",
-      "Exercises 🙌",
+      "Exercises 🏋🏽",
       "Exercise 1: Introduction"
     ]
   },
@@ -292,7 +292,7 @@
     "text": "Basic R commands\nWe will now have a look at basic commands in R that you just learned about. We will use an in-build dataset of R called trees. Copy-paste the commands into your document or write them yourself to get a hang of the coding! Start thinking about the structure of you document and when to create new code chunks.\n\nTo start with, load the tidyverse package.\n\n\nlibrary(tidyverse)\n\n\nNow, load the trees dataset by copying and executing the following commands:\n\n\ndata(\"trees\")\nview(trees)\n?trees\n\n\nCheck what information is contained in the trees dataset by calling the summary function on it:\n\n\nsummary(trees)\n\n\nHow many trees do we have data for?\nNow, extract the column called Volume from the dataset and assign it to a new variable called volume_col.\nDisplay the volume of the first 10 trees.\nFind the minimum, maximum and mean volume from the column you just extracted. Does it match what was stated in the summary?\nWhat class of data structure is trees? Make it into a tibble.",
     "crumbs": [
       "Course Material",
-      "Exercises 🙌",
+      "Exercises 🏋🏽",
       "Exercise 1: Introduction"
     ]
   },
@@ -304,7 +304,7 @@
     "text": "Making some graphics\nNext, let’s also try to make some plots using the base graphics system in R (in Presentation III you will learn to make graphics using the ggplot2-package). We will continue to use the trees dataset.\n\nThe dataset trees contains 31 observations of 3 variables (diameter, height and volume of black cherry trees). Insert the following two commands in a code chunk, and execute them to make two plots.\n\n\nplot(Volume~Height, data=trees)\nplot(Volume~Height, data=trees, log=\"y\")",
     "crumbs": [
       "Course Material",
-      "Exercises 🙌",
+      "Exercises 🏋🏽",
       "Exercise 1: Introduction"
     ]
   },
@@ -316,7 +316,7 @@
     "text": "Shut down R\n\nClose RStudio. If changes were made either to the Quarto document (shown in the upper-left window) or to the workspace (called ‘Global Environment’ in the upper-right window) you will be prompted if you like to save those. Answer Yes to that; in particular it is important that you save your documents as they contain all relevant commands to reproduce your output and plots.\nReopen file. Locate the Quarto document that you saved in question 3 (and question 10!). Start RStudio again, and open the file (via the File menu). Check that you can run it again.\n\nRemark - You can also start RStudio by double clicking on a file with the .qmd extension (or other R-readable formats). One advantage of this is that the workspace and the R history will be saved to the same folder as the Quarto document when you later close RStudio, since the working directory will be set to the map where the file is located.",
     "crumbs": [
       "Course Material",
-      "Exercises 🙌",
+      "Exercises 🏋🏽",
       "Exercise 1: Introduction"
     ]
   },
@@ -328,7 +328,7 @@
     "text": "Getting help in R\nEvery R function comes with a help page, that gives a brief description of the function and describes its usage (input/arguments and output/value). Let’s use the function median() as example. It is, no surprise, computing the median from a vector of numbers.\n\nTry these commands:\n\n\nx &lt;- c(1, 3, 8, 9, 100, NA)\nx\nmedian(x)\n\nThe first command defines a vector with six elements, but where the last number is missing (NA = Not Available). Since the last number is missing, median returns NA. However, could we make median find the median of the remaining numbers. Perhaps the help page can help out!\n\nLook at the help for the median function:\n\n\n?median\n\nThe help page for median appears in the lower right window. If we read it carefully, then we realize that the extra argument (input) na.rm may help us. We therefore try this:\n\nmedian(x, na.rm=TRUE)\n\nAdmittedly, R help pages are often quite difficult to read, but be aware that there are examples of commands in the bottom of each help page. For more complicated functions, these examples can be very useful while trying to get to know the function and its functionalities.\nIn order to use the help pages as above, you need to know the name of the function, which obviously may not be the case: You want to compute the median but have no idea what function to use. The best way to proceed: Google! Use “R whatever-you-want-to-search-for”, and you often get exactly what you need.\nWhile working with R, you will get a lot of error messages. Some are easy to understand, and you will readily be able to fix the problems, while others… Again, the best answer is: Google and ChatGPT! Copy the error message into Google or ChatGPT, and you will often find help.",
     "crumbs": [
       "Course Material",
-      "Exercises 🙌",
+      "Exercises 🏋🏽",
       "Exercise 1: Introduction"
     ]
   },
@@ -340,7 +340,7 @@
     "text": "Wrapping up\n\nImagine you need to send your code to a collaborator. Review your code to ensure it is clear and well-structured, so your collaborator can easily understand and follow your work.\nRender your Quarto document by clicking the Render button with the blue arrow in the toolbar. Once the HTML file is generated, open it in a web browser. Does the document look as you expected? Iterate on your document until it meets your desired format and appearance.",
     "crumbs": [
       "Course Material",
-      "Exercises 🙌",
+      "Exercises 🏋🏽",
       "Exercise 1: Introduction"
     ]
   },
@@ -352,7 +352,7 @@
     "text": "Lessons learnt\n\nYou must write you code in a document, like the Quarto document, such that you can save the work and return to it some other day.\nSave your files often.\nIf you forget to save your files before you close RStudio, then RStudio will prompt you if you want to save your work.\nHave structure in your document by using headers, text, and code chunks (maybe with comments).",
     "crumbs": [
       "Course Material",
-      "Exercises 🙌",
+      "Exercises 🏋🏽",
       "Exercise 1: Introduction"
     ]
   },
@@ -995,7 +995,7 @@
     "text": "Create new Quarto document. For working on the exercise, create a new Quarto document with a descriptive name and save it where you can find it again, i.e. in the folder where you downloaded the teaching material. You can use the commands shown in presentation2.qmd to solve this exercise. There is no shame in outright copying from the presentation2.qmd script, provided you understand what the command is doing.\nLoad packages. You will need to load the packages tidyverse and readxl for this exercise.",
     "crumbs": [
       "Course Material",
-      "Exercises 🙌",
+      "Exercises 🏋🏽",
       "Exercise 2: Tidyverse"
     ]
   },
@@ -1007,7 +1007,7 @@
     "text": "Create new Quarto document. For working on the exercise, create a new Quarto document with a descriptive name and save it where you can find it again, i.e. in the folder where you downloaded the teaching material. You can use the commands shown in presentation2.qmd to solve this exercise. There is no shame in outright copying from the presentation2.qmd script, provided you understand what the command is doing.\nLoad packages. You will need to load the packages tidyverse and readxl for this exercise.",
     "crumbs": [
       "Course Material",
-      "Exercises 🙌",
+      "Exercises 🏋🏽",
       "Exercise 2: Tidyverse"
     ]
   },
@@ -1019,7 +1019,7 @@
     "text": "Importing data and a first look at the dataset\nThe data set used in these exercises was compiled from data downloaded from the website of the UK’s national weather service, the Met Office. It is saved in the file climate.xlsx1 which can be found in the folder Exercises/Data/. The spreadsheet contains monthly data from five UK weather stations for the following variables:\n\n\n\nVariable name\nExplanation\n\n\n\n\nstation\nLocation of weather station\n\n\nyear\nYear\n\n\nmonth\nMonth\n\n\naf\nDays of air frost\n\n\nrain\nRainfall in mm\n\n\nsun\nSunshine duration in hours\n\n\ndevice\nBrand of sunshine recorder / sensor\n\n\n\n\nLoad data. Start by importing the dataset using either the read_excel() function or the Import Dataset button and name it climate. If you load with Import Dataset it is a good idea to copy the command into your script so that the next time you run your script you can just execute that line instead of having to find the file again.\nFirst look at data. Write the name of the dataframe, i.e. climate, into the console and press enter to see the first rows of the dataset. You can also click on the climate object in the Environment panel.\nExplore your dataset and understand what data you have.\n\nHow many observations, i.e. rows are there?\nHow many data columns are there and what are their types?\nWhat is the information in each row and column?\nHow many different stations are there?\nHow many rows per station?",
     "crumbs": [
       "Course Material",
-      "Exercises 🙌",
+      "Exercises 🏋🏽",
       "Exercise 2: Tidyverse"
     ]
   },
@@ -1031,7 +1031,7 @@
     "text": "Working with the data\nBefore you proceed with the exercises in this document, make sure you load the tidyverse in order to use the functions from this package.\n\nCount the number of rows that did not have any days with air frost.\nCount the number of rows per station that did not have any days with air frost.\nSelect from the climate dataset (remember to filter rows and select columns):\n\nall rows from the station in Oxford\nall rows from the station in Oxford when there were at least 100 hours of sunlight\nall rows from the stations in Oxford and Camborne when there were at least 100 hours of sunlight\na subset that only contains the station, year and rain columns\n\n\nThe next few questions build on each other, each adding a piece of code:\n\nCompute the average rainfall over the full dataset by using the summarize function. You can look at the examples we did at the end of presentation 2.\nNow, compute the average rainfall, standard deviation of the rainfall and the total rainfall (the sum) on the full dataset. I.e. all three measures should be inside the same resulting table. Have a look at the tidyverse lecture if you have trouble with this.\nNow, use group_by before summarize in order to compute group summary statistics (average, standard deviation, and sum) but split up into each of the five weather stations.\nInclude a column in the summary statistics which shows how many observations, i.e. rows, the data set contains for each station.\nSort the rows in the output in descending order according to average annual rainfall.",
     "crumbs": [
       "Course Material",
-      "Exercises 🙌",
+      "Exercises 🏋🏽",
       "Exercise 2: Tidyverse"
     ]
   },
@@ -1043,7 +1043,7 @@
     "text": "Manipulating the data\n\nCreate a new column in climate and save the new dataset in a different variable so you don’t overwrite your original climate data. The new column should count the number of days in each month without air frost, based on the existing af column. For this exercise, assume each month has 30 days. To find the number of days without air frost, subtract the value in the af column from 30.\nAdd another column to your new dataset that says whether the weather this month was good. We consider a month to be good if it had at least 100 hours of sunshine and less than 100 mm of rain. Otherwise the weather was bad.\nHow many months are there with good weather (use the column you made in 14) for each station? Find the station that has the most months with good weather.",
     "crumbs": [
       "Course Material",
-      "Exercises 🙌",
+      "Exercises 🏋🏽",
       "Exercise 2: Tidyverse"
     ]
   },
@@ -1055,7 +1055,7 @@
     "text": "Complex operations\nThe final questions require that you combine commands and variables of the type above.\n\nFor each weather station apart from the one in Armagh, compute the total rainfall and sunshine duration for months that had no days of air frost. Present the totals in centimetres and days, respectively.\nIdentify the weather station for which the median number of monthly sunshine hours over the months April to September was largest.",
     "crumbs": [
       "Course Material",
-      "Exercises 🙌",
+      "Exercises 🏋🏽",
       "Exercise 2: Tidyverse"
     ]
   },
@@ -1067,7 +1067,7 @@
     "text": "Wrapping up\n\nLike in the last exercise; imagine you need to send your code to a collaborator. Review your code to ensure it is clear and well-structured, so your collaborator can easily understand and follow your work. Render your Quarto document and look at the result.",
     "crumbs": [
       "Course Material",
-      "Exercises 🙌",
+      "Exercises 🏋🏽",
       "Exercise 2: Tidyverse"
     ]
   },
@@ -1079,7 +1079,7 @@
     "text": "Footnotes\n\n\nContains public sector information licensed under the Open Government Licence v3.0.↩︎",
     "crumbs": [
       "Course Material",
-      "Exercises 🙌",
+      "Exercises 🏋🏽",
       "Exercise 2: Tidyverse"
     ]
   },
@@ -1091,7 +1091,7 @@
     "text": "In this exercise you will practice your newly acquired R skills on an example dataset.\nIf you have your own data to work on, you can still follow the steps in the exercise where they apply.",
     "crumbs": [
       "Course Material",
-      "Exercises 🙌",
+      "Exercises 🏋🏽",
       "Exercise 6: Data Exercise in R"
     ]
   },
@@ -1103,7 +1103,7 @@
     "text": "In this exercise you will practice your newly acquired R skills on an example dataset.\nIf you have your own data to work on, you can still follow the steps in the exercise where they apply.",
     "crumbs": [
       "Course Material",
-      "Exercises 🙌",
+      "Exercises 🏋🏽",
       "Exercise 6: Data Exercise in R"
     ]
   },
@@ -1115,7 +1115,7 @@
     "text": "R-packages\nFor the data wrangling and statistical modelling we will be doing in this exercise, you will need the following R-packages: tidyverse, ggplot2, emmeans, MASS.\n\nMake sure that these packages are installed and loaded into your R environment. You likely have the packages already installed and loaded (you used these in the previous exercises) try sessionInfo() and require() (look up what these function do). If the packages are not there install them and library them as in the previous exercises.",
     "crumbs": [
       "Course Material",
-      "Exercises 🙌",
+      "Exercises 🏋🏽",
       "Exercise 6: Data Exercise in R"
     ]
   },
@@ -1127,7 +1127,7 @@
     "text": "Getting the Dataset\nFor this exercise, we’ll use the birthweight dataset from the package MASS. It contains the birthweight of infants and some information about the mother.\nTo get it we have to load the package and then the data. We will also display the help so we can read some background info about the data and what the columns are:\n\ndata(birthwt)\n?birthwt #display help page\n\nN.B If it says &lt;Promise&gt; after birthwt in your global environment just click on it and the dataframe will be loaded properly.\nIf you have a dataset of your own you would like yo look at instead of the example data we provide here, you are very welcome to. You can again use read_excel() for excel sheets. For other formats, have a look at read.csv(), read.table(), read.delim(), etc. You can either google your way to an answer or ask one of the course instructors.\n\nNow, check the class of the dataset. We’ll be using tidyverse to do our anaylsis, so if it isn’t already a tibble, make it into one.",
     "crumbs": [
       "Course Material",
-      "Exercises 🙌",
+      "Exercises 🏋🏽",
       "Exercise 6: Data Exercise in R"
     ]
   },
@@ -1139,7 +1139,7 @@
     "text": "Exploratory Analysis\n\nThe Basics\nBefore performing any statistical analysis (modelling), it is necessary to have a good understanding of the data. Start by looking at:\n\nHow many variables and observations are there in the data?\nWhat was measured, i.e. what do each of the variables describe? You can rename variables via the colnames() if you want to.\nWhich data types are the variables and does that make sense? Should you change the type of any variables? Hint: Think about types factor, numerical, integer, character, etc.\nWhat is our response/outcome variable(s)? There can be several.\nIs the (categorical) outcome variable balanced?\nAre there any missing values (NA), if yes and how many? Google how to check this if you don’t know.",
     "crumbs": [
       "Course Material",
-      "Exercises 🙌",
+      "Exercises 🏋🏽",
       "Exercise 6: Data Exercise in R"
     ]
   },
@@ -1151,7 +1151,7 @@
     "text": "Diving into the data\n\nNumeric variables\nSome of the measured variables in our data are numeric, i.e. continuous. For these do:\n\nCalculate summary statistics (mean, median, sd, min, max)\nCreate boxplots for each numeric variable using ggplot2, and apply scale_x_discrete() to prevent meaningless scaling of the boxplot widths.\nDo you see outliers in your dataset?\nNow remake the boxplot with two different colors, depending on the (categorical) outcome variable.\n\n\n\nCategorical variables\nOther columns describe variables that are categorical. Some of these may have been initially interpreted by R as numerical, especially if they are coded with 0/1.\n\nIf you haven’t changed their datatype to factor yet, do so now. You can see how in Presentation 5.\nWhen you are done, make barplots of each categorical variable.\nThen, split up the barplot for smoke so you have two different colors for the two different values of the outcome variable (the same way you did it above for the boxplots).\nNow, add the argument position ='dodge' to geom_bar and remake the plot. What has changed? Then remake it once again with position ='fill'. What information do the different barplots show? Compare to the counts you get from the smoke column when you group the dataframe by the outcome variable.\nLastly, make a density plot of the two continuous variables lwt and bwt, split it up by smoke.\n\nExtra: Pick custom colors for your plots (look into scale_fill_manual()).\n\n\nSubsetting the data\nBased on what you have observed in the last two sections, now choose two numeric variables and two categorical variables to move forward with. Create a subset of the dataframe with only these variables and the categorical and numeric outcome.",
     "crumbs": [
       "Course Material",
-      "Exercises 🙌",
+      "Exercises 🏋🏽",
       "Exercise 6: Data Exercise in R"
     ]
   },
@@ -1163,7 +1163,7 @@
     "text": "Modelling\nYou now have a prepared dataset on which we can do some modelling.\n\nRegression Model 1\nIn the Applied statistics session you’ve tried out an analysis with one way ANOVA, where you compared the effect of categorical variables (skin type) on the outcome (gene counts).\nWe’ll do something similar here but instead we will use the numerical variables as predictors and the measured birthweight as the (numerical) outcome. This is what is known as linear regression.\n\nWe can also do this with lm() and follow the same syntax as before:\n\nmodel1 &lt;- lm(resp ~ pred1, data=name_of_dataset)\n\nSimply, if the outcome variable we are interested in is continuous, then lm() will functionally be doing a linear regression. If the outcome is categorical, it will be performing ANOVA (which if you only have two groups is effectively a t-test). Have a look at this video if you want to understand why you can do a t-test / ANOVA with a linear model.\n\nNow, pick one of your numeric variables and use it to model the (numeric/continuous) outcome.\nInvestigate the model you have made by writing its name, i.e.\n\n\nmodel1\n\n\nWhat does this mean? Compare to the linear model illustration above.\nWe’ll now make a plot of your model to help us better visualize what has happened. Make a scatter plot with your predictor variable on the x-axis and the outcome variable on the y-axis.\nNow add the regression line to the plot by using the code below. For the slope and intercept, enter the values you found when you inspected the model. Does this look like a good fit?\n\n\n+ geom_abline(slope=???, intercept = ???, color = 'red')\n\n\nRepeat the process with the other numeric variable you picked.\n\nSometimes the variables we have measured are not good at explaining the outcome and we have to accept that.\n\nInstead of the geom_abline(), try geom_smooth() which provides you with a confidence interval in addition to the regression line. Look at the help for this geom (or google) to figure out what argument it needs to work!\nInspect your model in more detail with summary(). Look at the output, what additional information do you get about the model. Pay attention to the Residual standard error (RSE) and Adjusted R-squared (R2adj) at the bottom of the output. We would like RSE to be as small as possible (goes towards 0 when model improves) while we would like the R2adj to be large (goes towards 1 when model improves).\n\nN.B if you want to understand the output of a linear regression summary in greater detail have a look here.\n\nsummary(model1)\n\n\n\nRegression Model 2\n\nRemake your model (call it model2) but this time add an additional explanatory variable to the model in addition to lwt. This should be one of the categorical variable you selected to be in your subset. (smoke might be interesting, but you could also try either age and/or ht). Does adding this second exploratory variable improve the metrics RSE and/or R2adj?\n\n\nmodel2 &lt;- lm(resp ~ pred1 + pred2, data=name_of_dataset)\n\n\nFind the 95% confidence intervals for model2, by using the confint() function. If you are not familiar with confidence intervals, have a look here.\nTry the following commands (or a variation of it, depending on which variables you have included in model2), and see if you can figure out what the outcome means.\n\n\nnewData &lt;- data.frame(lwt=100, smoke=as.factor(1))\nnewData\npredict(model2, newData)\npredict(model2, newData, interval=\"prediction\")\n\n\n\n\nBonus Exercise - ANOVA\nNow, we will instead look at the two categorical variables you picked. Make a model of the outcome variable depending on one the categorical variable\n\nPick one of the two categorical variables and use it to model the (numeric) outcome, just as during the Applied Stats session:\n\n\nmodel3 &lt;- lm(resp ~ pred1, data=name_of_dataset)\n\n\ninspect the output by calling summary() on the model\n\n\nsummary(model3)\n\nYou can have a look at this website to help you understand the output of summary.\n\n\nShort detour: The meaning of the intercept in an ANOVA\nThe intercept is the estimate of the outcome variable that you would get when all explanatory variables are 0.\nSo if we have the model lm(bwt ~ smoke, data = birthData) and smoke is coded as 0 for non-smokers and 1 for smokers, the intercept is the estimate birthweight of a baby of a non-smoker. It will be significant because it is significantly different from 0, but that doesn’t mean much since we would usually expect babies to weight more than 0.\nYou can now make some other models, including several predictors and see what you get.",
     "crumbs": [
       "Course Material",
-      "Exercises 🙌",
+      "Exercises 🏋🏽",
       "Exercise 6: Data Exercise in R"
     ]
   },

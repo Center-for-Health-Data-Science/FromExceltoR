@@ -20,10 +20,8 @@ website:
     collapse-level: 1
     contents:
     
-      # - section: "Slides"
-      #   contents: 
       - href: Slideshow/FromExceltoR.pdf
-        text: "Slides"
+        text: "Slides 👩🏽‍🏫"
       
       - section: "Presentations"
         contents:
@@ -39,7 +37,7 @@ website:
       - href: Presentations/data.qmd
         text: "Data"
         
-      - section: "Exercises 🙌"
+      - section: "Exercises 🏋🏽"
         contents:
           - href: Exercises/exercises1.qmd
             text: "Exercise 1: Introduction"
@@ -57,7 +55,7 @@ website:
           - href: Exercises/exercises3_SOLUTIONS.qmd
             text: "Exercise 3 - Solution"
             
-      - section: "Cheat Sheets"
+      - section: "Cheat Sheets 👀"
         contents:
           - href: CheatSheet/TidyverseCheatSheet.pdf
             text: "Tidyverse"
