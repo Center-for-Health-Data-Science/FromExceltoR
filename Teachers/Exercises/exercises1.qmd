@@ -11,7 +11,7 @@ project:
 knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
 ```
 
-## Getting started \# yey
+## Getting started 
 
 1.  **Start RStudio**.
 

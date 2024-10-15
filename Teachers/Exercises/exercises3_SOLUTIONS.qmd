@@ -7,7 +7,7 @@ project:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
+knitr::opts_chunk$set(echo = TRUE, eval = TRUE)
 ```
 
 ## Getting started
@@ -38,7 +38,7 @@ The spreadsheet contains data from five UK weather stations in 2016. The followi
 The data set is the same as the one used for the Tidyverse exercise. If you have already imported the data, there is no need to import it again, unless you have made changes to the data assigned to `climate` since the original data set was imported.
 
 ```{r}
-climate <- read_xlsx('../Data/climate.xlsx')
+climate <- read_xlsx('../../Data/climate.xlsx')
 head(climate)
 ```
 
