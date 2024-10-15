@@ -21,9 +21,9 @@ website:
     contents:
     
       - href: Slideshow/FromExceltoR.pdf
-        text: "Slides 👩🏽‍🏫"
+        text: "Slides 🌟️"
       
-      - section: "Presentations"
+      - section: "Presentations 👩🏽‍🏫"
         contents:
           - href: Presentations/presentation1.qmd
             text: "Presentation 1: Introduction"
@@ -31,11 +31,9 @@ website:
             text: "Presentation 2: Tidyverse"
           - href: Presentations/presentation3.qmd
             text: "Presentation 3: ggplot2"
-      
-      # - section: "Data"
-      #   contents: 
+
       - href: Presentations/data.qmd
-        text: "Data"
+        text: "Data 🗂️"
         
       - section: "Exercises 🏋🏽"
         contents:
@@ -48,7 +46,7 @@ website:
           - href: Exercises/exercises6.qmd
             text: "Exercise 6: Data Exercise in R"
       
-      - section: "Solutions"
+      - section: "Solutions 💃🏻"
         contents:
           - href: Exercises/exercises2_SOLUTIONS.qmd
             text: "Exercise 2 - Solution"
@@ -57,12 +55,13 @@ website:
             
       - section: "Cheat Sheets 👀"
         contents:
+          - href: CheatSheet/BaseRCheatSheet.pdf
+            text: "Base R"
           - href: CheatSheet/TidyverseCheatSheet.pdf
             text: "Tidyverse"
           - href: CheatSheet/ggplotCheatSheet.pdf
             text: "ggplot2"
-          - href: CheatSheet/BaseRCheatSheet.pdf
-            text: "Base R"
+          
 
 format:
   html:
