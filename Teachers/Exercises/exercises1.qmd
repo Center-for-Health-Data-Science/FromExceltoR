@@ -11,7 +11,7 @@ project:
 knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
 ```
 
-## Getting started
+## Getting started \# yey
 
 1.  **Start RStudio**.
 
@@ -124,9 +124,9 @@ plot(Volume~Height, data=trees, log="y")
 
 22. **Close RStudio**. If changes were made either to the Quarto document (shown in the upper-left window) or to the workspace (called 'Global Environment' in the upper-right window) you will be prompted if you like to save those. Answer *Yes* to that; in particular it is important that you save your documents as they contain all relevant commands to reproduce your output and plots.
 
-23. **Reopen file**. Locate the Quarto document that you saved in question 4 (and question 10!). Start RStudio again, and open the file (via the File menu). Check that you can run it again.
+23. **Reopen file**. Locate the Quarto document that you saved in question 3 (and question 10!). Start RStudio again, and open the file (via the File menu). Check that you can run it again.
 
-Remark - You can also start RStudio by double clicking on a file with the .qmd extension (or other R-readable formats). One advantage of this is that the workspace and the R history will be saved to the same folder as the R script when you later close RStudio, since the *working directory* will be set to the map where the file is located.
+Remark - You can also start RStudio by double clicking on a file with the .qmd extension (or other R-readable formats). One advantage of this is that the workspace and the R history will be saved to the same folder as the Quarto document when you later close RStudio, since the *working directory* will be set to the map where the file is located.
 
 ## Getting help in R
 
@@ -163,6 +163,7 @@ While working with R, you will get a lot of error messages. Some are easy to und
 ## Wrapping up
 
 26. Imagine you need to send your code to a collaborator. Review your code to ensure it is clear and well-structured, so your collaborator can easily understand and follow your work.
+27. Render your Quarto document by clicking the Render button with the blue arrow in the toolbar. Once the HTML file is generated, open it in a web browser. Does the document look as you expected? Iterate on your document until it meets your desired format and appearance.
 
 ## Lessons learnt
 

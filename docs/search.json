@@ -4,14 +4,21 @@
     "href": "about_heads.html",
     "title": "About HeaDS",
     "section": "",
-    "text": "Check our website at https://heads.ku.dk."
+    "text": "In the Center for Health Data Science (HeaDS) we do both research and in the DataLab and Sandbox we develope and host course. Read more about all the cool stuff we do on our website."
   },
   {
-    "objectID": "about_heads.html#heads",
-    "href": "about_heads.html#heads",
+    "objectID": "about_heads.html#center-for-health-data-science",
+    "href": "about_heads.html#center-for-health-data-science",
     "title": "About HeaDS",
     "section": "",
-    "text": "Check our website at https://heads.ku.dk."
+    "text": "In the Center for Health Data Science (HeaDS) we do both research and in the DataLab and Sandbox we develope and host course. Read more about all the cool stuff we do on our website."
+  },
+  {
+    "objectID": "about_heads.html#talking-heads",
+    "href": "about_heads.html#talking-heads",
+    "title": "About HeaDS",
+    "section": "Talking HeaDS",
+    "text": "Talking HeaDS\nJoin us for Talking HeaDS, our engaging seminar series featuring inspiring speakers, drinks, and snacks. Don’t miss out—make sure to sign up for the next Talking HeaDS event!"
   },
   {
     "objectID": "Exercises/exercises3_SOLUTIONS.html",
@@ -218,8 +225,8 @@
     ]
   },
   {
-    "objectID": "Exercises/exercises1.html#getting-started",
-    "href": "Exercises/exercises1.html#getting-started",
+    "objectID": "Exercises/exercises1.html#getting-started-yey",
+    "href": "Exercises/exercises1.html#getting-started-yey",
     "title": "Exersice 1: Introduction",
     "section": "",
     "text": "Start RStudio.\nMake a new Quarto document. Go to the menu bar and click File → New file… → Quarto document…. Give the Quarto document a title that makes sense to you.\nSave your document. Go to the menu bar and click File → Save as….\nCheck the working directory. Let’s check which working directory we are in with the getwd() function. When working with Quarto documents the working directory is always the same as where the file is located (where you saved it).",
@@ -294,7 +301,7 @@
     "href": "Exercises/exercises1.html#shut-down-r",
     "title": "Exersice 1: Introduction",
     "section": "Shut down R",
-    "text": "Shut down R\n\nClose RStudio. If changes were made either to the Quarto document (shown in the upper-left window) or to the workspace (called ‘Global Environment’ in the upper-right window) you will be prompted if you like to save those. Answer Yes to that; in particular it is important that you save your documents as they contain all relevant commands to reproduce your output and plots.\nReopen file. Locate the Quarto document that you saved in question 4 (and question 10!). Start RStudio again, and open the file (via the File menu). Check that you can run it again.\n\nRemark - You can also start RStudio by double clicking on a file with the .qmd extension (or other R-readable formats). One advantage of this is that the workspace and the R history will be saved to the same folder as the R script when you later close RStudio, since the working directory will be set to the map where the file is located.",
+    "text": "Shut down R\n\nClose RStudio. If changes were made either to the Quarto document (shown in the upper-left window) or to the workspace (called ‘Global Environment’ in the upper-right window) you will be prompted if you like to save those. Answer Yes to that; in particular it is important that you save your documents as they contain all relevant commands to reproduce your output and plots.\nReopen file. Locate the Quarto document that you saved in question 3 (and question 10!). Start RStudio again, and open the file (via the File menu). Check that you can run it again.\n\nRemark - You can also start RStudio by double clicking on a file with the .qmd extension (or other R-readable formats). One advantage of this is that the workspace and the R history will be saved to the same folder as the Quarto document when you later close RStudio, since the working directory will be set to the map where the file is located.",
     "crumbs": [
       "Course Material",
       "Exercises",
@@ -318,7 +325,7 @@
     "href": "Exercises/exercises1.html#wrapping-up",
     "title": "Exersice 1: Introduction",
     "section": "Wrapping up",
-    "text": "Wrapping up\n\nImagine you need to send your code to a collaborator. Review your code to ensure it is clear and well-structured, so your collaborator can easily understand and follow your work.",
+    "text": "Wrapping up\n\nImagine you need to send your code to a collaborator. Review your code to ensure it is clear and well-structured, so your collaborator can easily understand and follow your work.\nRender your Quarto document by clicking the Render button with the blue arrow in the toolbar. Once the HTML file is generated, open it in a web browser. Does the document look as you expected? Iterate on your document until it meets your desired format and appearance.",
     "crumbs": [
       "Course Material",
       "Exercises",
@@ -949,7 +956,7 @@
     "href": "Exercises/exercises2_SOLUTIONS.html",
     "title": "Exercise 2: Tidyverse - Solutions",
     "section": "",
-    "text": "Create new Quarto document. For working on the exercise, create a new Quarto document with a descriptive name and save it where you can find it again, i.e. in the folder where you downloaded the teaching material. You can use the commands shown in presentation2.qmd to solve this exercise. There is no shame in outright copying from the presentation2.qmd script, provided you understand what the command is doing.\nLoad packages. You will need to load the packages tidyverse and readxl for this exercise.\n\n\nlibrary(tidyverse)\nlibrary(readxl)",
+    "text": "Create new Quarto document. For working on the exercise, create a new Quarto document with a descriptive name and save it where you can find it again, i.e. in the folder where you downloaded the teaching material. You can use the commands shown in presentation2.qmd to solve this exercise. There is no shame in outright copying from the presentation2.qmd script, provided you understand what the command is doing.\nLoad packages. You will need to load the packages tidyverse and readxl for this exercise.\n\n\nlibrary(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.1     ✔ tibble    3.2.1\n✔ lubridate 1.9.3     ✔ tidyr     1.3.1\n✔ purrr     1.0.2     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\nlibrary(readxl)",
     "crumbs": [
       "Course Material",
       "Solutions",
@@ -1034,6 +1041,18 @@
     "title": "Exercise 2: Tidyverse",
     "section": "Complex operations",
     "text": "Complex operations\nThe final questions require that you combine commands and variables of the type above.\n\nFor each weather station apart from the one in Armagh, compute the total rainfall and sunshine duration for months that had no days of air frost. Present the totals in centimetres and days, respectively.\nIdentify the weather station for which the median number of monthly sunshine hours over the months April to September was largest.",
+    "crumbs": [
+      "Course Material",
+      "Exercises",
+      "Exercise 2: Tidyverse"
+    ]
+  },
+  {
+    "objectID": "Exercises/exercises2.html#wrapping-up",
+    "href": "Exercises/exercises2.html#wrapping-up",
+    "title": "Exercise 2: Tidyverse",
+    "section": "Wrapping up",
+    "text": "Wrapping up\n\nLike in the last exercise; imagine you need to send your code to a collaborator. Review your code to ensure it is clear and well-structured, so your collaborator can easily understand and follow your work. Render your Quarto document and look at the result.",
     "crumbs": [
       "Course Material",
       "Exercises",

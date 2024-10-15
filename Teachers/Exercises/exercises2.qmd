@@ -94,3 +94,7 @@ The final questions require that you combine commands and variables of the type 
 16. For each weather station apart from the one in Armagh, compute the total rainfall and sunshine duration for months that had no days of air frost. Present the totals in centimetres and days, respectively.
 
 17. Identify the weather station for which the median number of monthly sunshine hours over the months April to September was largest.
+
+## Wrapping up
+
+18. Like in the last exercise; imagine you need to send your code to a collaborator. Review your code to ensure it is clear and well-structured, so your collaborator can easily understand and follow your work. Render your Quarto document and look at the result.

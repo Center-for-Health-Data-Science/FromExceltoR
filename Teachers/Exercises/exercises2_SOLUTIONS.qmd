@@ -7,7 +7,8 @@ project:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
+# knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
+knitr::opts_chunk$set(echo = TRUE, eval = TRUE)
 ```
 
 ### Setting up
@@ -40,12 +41,12 @@ The data set used in these exercises was compiled from data downloaded from the 
 2.  **Load data**. Start by importing the dataset using either the `read_excel()` function or the `Import Dataset` button and name it `climate`. If you load with `Import Dataset` it is a good idea to copy the command into your script so that the next time you run your script you can just execute that line instead of having to find the file again.
 
 ```{r}
-climate <- read_excel('../Data/climate.xlsx')
+climate <- read_excel('../../Data/climate.xlsx')
 ```
 
 3.  **First look at data**. Write the name of the dataframe, i.e. `climate`, into the console and press enter to see the first rows of the dataset. You can also click on the `climate` object in the Environment panel.
 
-```{r}
+```{r, echo=TRUE, eval=TRUE}
 head(climate)
 ```
 

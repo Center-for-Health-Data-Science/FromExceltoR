@@ -4,8 +4,11 @@ format: html
 editor: visual
 ---
 
-## HeaDS
+## Center for Health Data Science
 
-Check our website at <https://heads.ku.dk>.
+In the Center for Health Data Science (HeaDS) we do both research and in the DataLab and Sandbox we develope and host course. Read more about all the cool stuff we do on our [website](https://heads.ku.dk).
 
-## 
+## Talking HeaDS
+
+Join us for Talking HeaDS, our engaging seminar series featuring inspiring speakers, drinks, and snacks. Don’t miss out—make sure to [sign up](https://eventsignup.ku.dk/talkingheads-nov2024) for the next Talking HeaDS event!
+
