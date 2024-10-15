@@ -134,3 +134,7 @@ There are many ways in which you can manipulate the look of your plot. For this 
 32. Add labels to each bar that state the sum of the rainfall. You can do this by adding the `label` keyword to the `aes()` and adding `geom_label()` to the plot. Just like geoms like `geom_scatter` look at the `aes()` for knowing what to plot on the x and y axis, `geom_label` looks at it to know what to use for labels.
 
 33. Adjust the label positions so that the labels are positioned above the bars instead of inside them.
+
+## Wrapping up
+
+34. Like in the last exercise; imagine you need to send your code to a collaborator. Review your code to ensure it is clear and well-structured, so your collaborator can easily understand and follow your work. Render your Quarto document and look at the result. Try to change the size of a figure by modifying the chunk header.

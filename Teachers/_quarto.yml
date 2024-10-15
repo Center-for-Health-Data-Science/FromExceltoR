@@ -39,7 +39,7 @@ website:
       - href: Presentations/data.qmd
         text: "Data"
         
-      - section: "Exercises"
+      - section: "Exercises 🙌"
         contents:
           - href: Exercises/exercises1.qmd
             text: "Exercise 1: Introduction"

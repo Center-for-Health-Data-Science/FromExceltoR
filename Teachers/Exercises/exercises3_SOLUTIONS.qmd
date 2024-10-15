@@ -14,7 +14,7 @@ knitr::opts_chunk$set(echo = TRUE, eval = TRUE)
 
 Before you proceed with the exercises in this document, make sure to run the command `library(tidyverse)` in order to load the core **tidyverse** packages (including **ggplot2**).
 
-```{r}
+```{r, message=FALSE}
 library(tidyverse)
 library(readxl)
 ```
@@ -401,3 +401,5 @@ p + geom_label(aes(label = sum(rain_sum)))
 p + geom_label(aes(label = rain_sum), 
                position = position_nudge(y = 35))
 ```
+
+34. To alter size of figure in report: `{r, fig.width=10, fig.height=10}`

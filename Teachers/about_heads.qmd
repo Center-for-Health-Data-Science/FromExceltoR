@@ -1,7 +1,9 @@
 ---
 title: "About HeaDS"
 format: html
-editor: visual
+project:
+  type: website
+  output-dir: ../docs
 ---
 
 ## Center for Health Data Science
@@ -11,4 +13,3 @@ In the Center for Health Data Science (HeaDS) we do both research and in the Dat
 ## Talking HeaDS
 
 Join us for Talking HeaDS, our engaging seminar series featuring inspiring speakers, drinks, and snacks. Don’t miss out—make sure to [sign up](https://eventsignup.ku.dk/talkingheads-nov2024) for the next Talking HeaDS event!
-
