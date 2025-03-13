@@ -6,6 +6,9 @@ project:
   output-dir: ../docs
 ---
 
+Want to code along? If you haven't already, go to the Data tab of the website and press the **DOWNLOAD PRESENTATIONS** button. This is presentation2.
+
+
 ## Load packages
 
 ```{r, message=FALSE}

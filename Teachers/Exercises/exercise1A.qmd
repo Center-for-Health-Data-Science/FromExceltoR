@@ -15,11 +15,11 @@ knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
 
 1.  **Make a new directory** for this course.
 
-2.  **Go to course website** and to the Data tab. Press the **Download Data** button.
+2.  **Go to course website** and to the Data tab. Press the **DOWNLOAD DATA** button.
 
 3.  Move the Data folder to your course directory.
 
-4.  Under your course directory, make a new folder for your scripts and another for the presentations you download.
+4.  Under your course directory, make a new folder for your scripts and another for the presentations (download presentations via the **DOWNLOAD PRESENTATIONS** button).
 
 Your file tree should look something like this:
 
@@ -96,3 +96,4 @@ setwd("~/Desktop/Stuff/Projects/RNAseq/TheGreatProject")
 relative_path <- "../../../Courses/GreatestCourse/FromExceltoR/Data/climate.xlsx"
 ```
 :::
+
