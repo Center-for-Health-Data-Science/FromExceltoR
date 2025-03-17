@@ -23,9 +23,9 @@ Helene Wegener, Junior Data Scientist,
 Center for Health Data Science,
 email: helene.wegener@sund.ku.dk
 
-Tugce Karadair, Assistant Professor,
+Tugce Karaderi, Assistant Professor,
 Center for Health Data Science,
-email: tugce.karadair@sund.ku.dk
+email: tugce.karaderi@sund.ku.dk
 
 ---
 
