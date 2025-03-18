@@ -2,7 +2,7 @@
 
 This repository contains the course material for the 2-day course `From Excel to R`.
 
-Course participants, it would greatly help us if fill out our feedback form: <https://forms.office.com/e/amK1D9wLtd>
+Course participants, it would greatly help us if fill out our feedback form: <https://forms.office.com/e/JcDE5C9sLQ>
 
 
 
@@ -23,9 +23,9 @@ Helene Wegener, Junior Data Scientist,
 Center for Health Data Science,
 email: helene.wegener@sund.ku.dk
 
-Tugce Karadair, Assistant Professor,
+Tugce Karaderi, Assistant Professor,
 Center for Health Data Science,
-email: tugce.karadair@sund.ku.dk
+email: tugce.karaderi@sund.ku.dk
 
 ---
 
