@@ -2,7 +2,7 @@
 
 This repository contains the course material for the 2-day course `From Excel to R`.
 
-Course participants, it would greatly help us if fill out our feedback form: <https://forms.office.com/e/amK1D9wLtd>
+Course participants, it would greatly help us if fill out our feedback form: <https://forms.office.com/e/JcDE5C9sLQ>
 
 
 
