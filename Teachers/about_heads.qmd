@@ -15,6 +15,11 @@ In the Center for Health Data Science (HeaDS) we do both research and in the Dat
 The DataLab offers a range of services to support SUND employees in their data science analyses. Here’s an overview:
 
 -   **Courses:** We offer data science and bioinformatics courses for all SUND staff (researchers, administrative staff, technical staff, etc.). Our most popular courses include *"From Excel to R," "Python Tsunami,"* and *"Introduction to Bulk RNA-seq Analysis."*
+
 -   **Consultations:** We host drop-in sessions every Thursday from 13:00 to 15:00, where we assist with data science-related challenges and questions. Alternatively, you can reach out to arrange a one-on-one meeting on another day.
+
 -   **Commissions:** We conduct commissioned research, such as bioinformatics and data science analyses tailored to your needs. Additionally, we offer a commissioned supervision scheme if you would like to learn how to perform the analysis yourself.
--   **Events:** We host various data science events. Join us for our seminar series, *"Talking HeaDS."* Our next session is in the spring (date and speeker TBA), and you can sign up here: [https://eventsignup.ku.dk/talkingheadsspring2025](#0).
+
+-   **Events:** We host various data science events. Join us for our seminar series, *"Talking HeaDS."* Our next session is 27 May and you can sign up here: <https://eventsignup.ku.dk/talkingheadsmay2025>. More information on the picture below.
+
+![](Figures/Talking%20HeaDS_May%202025_1920x1080_DDSA.png)
