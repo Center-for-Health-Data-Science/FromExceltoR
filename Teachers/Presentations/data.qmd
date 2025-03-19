@@ -19,5 +19,5 @@ After download, unzip the data folder and place it somewhere you can find it aga
 It can be nice to follow along the presentation scripts as we go through them. 
 
 ::: {style="display: flex; gap: 10px;"}
-<a href="./presentations.zip" download="presentations.zip"> <button class="btn small-button" style="background-color: #18bc9c; color: white; border: none; padding: 10px 20px; border-radius: 5px;"> DOWNLOAD PRESENTATIONS </button> </a>
+<a href="./Presentations.zip" download="Presentations.zip"> <button class="btn small-button" style="background-color: #18bc9c; color: white; border: none; padding: 10px 20px; border-radius: 5px;"> DOWNLOAD PRESENTATIONS </button> </a>
 :::
