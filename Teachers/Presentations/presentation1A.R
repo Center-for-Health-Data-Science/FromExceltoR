@@ -112,9 +112,10 @@ getwd()
 
 # Change working directory 
 setwd("/Users/kgx936/Desktop/HeaDS/GitHub_repos/FromExceltoR")
+getwd()
 
 # Read excel file from path relative to working directory
-read_excel("/Data/climate.xlsx")
+df <- readxl::read_excel("Data/climate.xlsx")
 
 # Read excel file from absolute path
-read_excel("~/Users/kgx936/Desktop/HeaDS/GitHub_repos/FromExceltoR/Data/climate.xlsx")
+df <- read_excel("~/Users/kgx936/Desktop/HeaDS/GitHub_repos/FromExceltoR/Data/climate.xlsx")
