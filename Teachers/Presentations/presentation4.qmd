@@ -8,7 +8,7 @@ project:
   output-dir: ../docs
 ---
 
-You will need to code along using the Quarto file in this presentation. You will use the following [presentation4.qmd](https://github.com/Center-for-Health-Data-Science/FromExceltoR/blob/2024_Oct/Teachers/Presentations/presentation4.qmd) file. Please clink on the link, download and open the file in your RStudio
+You will need to code along using the Quarto file in this presentation. You will use the following [presentation4.qmd](https://github.com/Center-for-Health-Data-Science/FromExceltoR/blob/2024_Oct/Teachers/Presentations/presentation4.qmd) file. Please clink on the link, download and open the file in your RStudio.
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, eval = TRUE, warning = FALSE)
