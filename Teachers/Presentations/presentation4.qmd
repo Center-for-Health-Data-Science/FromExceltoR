@@ -1,13 +1,14 @@
 ---
 title: "Presentation 4: Applied Statistics in R"
 format: html
+editor: source
 author: "HeaDS Data Science Lab, University of Copenhagen"
 project:
   type: website
   output-dir: ../docs
 ---
 
-Want to code along? If you haven't already, go to the Data tab of the website and press the **DOWNLOAD PRESENTATIONS** button. This is presentation4.
+You will need to code along using the Quarto file in this presentation. You will use the following [presentation4.qmd](https://github.com/Center-for-Health-Data-Science/FromExceltoR/blob/2024_Oct/Teachers/Presentations/presentation4.qmd) file. Please clink on the link, download and open the file in your RStudio
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, eval = TRUE, warning = FALSE)
@@ -123,8 +124,6 @@ oneway <- lm(log(IGFL4) ~ type, data=psorData)
 
 ```
 
-QUESTION 3: Are you done? Please share how you feel here: https://www.menti.com/aldoypm5u6wr
-
 #### Step 4: Hypothesis test + Post hoc tests
 
 It is standard to carry out an $F$-test for the overall effect of the explanatory (i.e. independent) variable. To be precise, the hypothesis is that the expected values are the same in *all* groups. The most easy way to do this test is to use `drop1`. The option `test="F"` is needed to get the $F$-test using that function:
@@ -134,7 +133,7 @@ It is standard to carry out an $F$-test for the overall effect of the explanator
 
 ```
 
-QUESTION 4: What is your conclusion from the $F$-test result? Please share your answer here: https://www.menti.com/ali6bnwoiky7
+QUESTION 3: What is your conclusion from the $F$-test result? Please share your answer here: https://www.menti.com/ali6bnwoiky7
 
 It might be that the gene expression in two of the three groups may or may not be significantly different. To investigate that we do post hoc testing. This is nicely done within the framework of *estimated marginal means* using the **emmeans** package. Here `emmeans` makes the estimated marginal means (that is the predicted gene expression IGFL4 on the log scale), and the pairs() command provide post hoc pairwise comparisons (package automatically adjusts for multiple comparisons using the default tukey method):
 
@@ -146,4 +145,4 @@ emmeans(oneway,~type)
 
 ```
 
-QUESTION 5: What is your conclusion from the pairwise comparisons? Please share your answer here: https://www.menti.com/ali6bnwoiky7
+QUESTION 4: What is your conclusion from the pairwise comparisons? Please share your answer here: https://www.menti.com/ali6bnwoiky7
