@@ -1,13 +1,14 @@
 ---
 title: "Exercise 4, part 2: Applied Statistics in R"
 format: html
+editor: source
 author: "HeaDS Data Science Lab, University of Copenhagen"
 project:
   type: website
   output-dir: ../docs
 ---
 
-This part might be easier to follow from the Quarto document. You will use the following [exercise4_PART2.qmd](https://github.com/Center-for-Health-Data-Science/FromExceltoR/blob/2024_Oct/Teachers/Exercises/exercises4_PART2.qmd) file. Please clink on the link, download and open the file in your RStudio.
+You will need the Quarto file for this exercise. You will use the following [exercise4_PART2.qmd](https://github.com/Center-for-Health-Data-Science/FromExceltoR/blob/2024_Oct/Teachers/Exercises/exercise4_PART2.qmd) file. Please clink on the link, download and open the file in your RStudio.
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
