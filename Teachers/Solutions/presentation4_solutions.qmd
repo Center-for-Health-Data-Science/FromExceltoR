@@ -1,6 +1,7 @@
 ---
 title: "Presentation 4: Applied Statistics in R - Solutions"
 format: html
+editor: source
 author: "HeaDS Data Science Lab, University of Copenhagen"
 project:
   type: website
