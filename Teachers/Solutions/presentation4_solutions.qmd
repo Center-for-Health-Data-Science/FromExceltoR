@@ -156,7 +156,6 @@ oneway_relevelpsne
 levels(psorData_relevelpsne$type)
 ```
 
-QUESTION 3: Are you done? Please share how you feel here:
 
 #### Step 4: Hypothesis test + Post hoc tests
 
@@ -168,7 +167,7 @@ drop1(oneway,test="F")
 
 ```
 
-QUESTION 4: What is your conclusion from the $F$-test result? Please share your answer here:
+QUESTION 3: What is your conclusion from the $F$-test result? Please share your answer here:
 
 Thus, the overall test for homogeneity between the groups show that the groups are not all the same. But it might be that the gene expression in two of the three groups, say, are not significantly different. To investigate that we do post hoc testing. This is nicely done within the framework of *estimated marginal means* using the **emmeans** package. Here `emmeans` makes the estimated marginal means (that is the predicted gene expression IGFL4 on the log scale), and the pairs() command provide post hoc pairwise comparisons (package automatically adjusts for multiple comparisons using the default tukey method):
 
@@ -180,7 +179,7 @@ emmeans(oneway,~type)
 pairs(emmeans(oneway,~type))
 ```
 
-QUESTION 5: What is your conclusion from the pairwise comparisons? Please share your answer here:
+QUESTION 4: What is your conclusion from the pairwise comparisons? Please share your answer here:
 
 IGFL4 gene expression levels are not significantly different between healthy/control skin samples (healthy) and psoriasis-free patient skin samples (psne; healthy - psne; p-value \> 0.05).
 
