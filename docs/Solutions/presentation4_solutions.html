@@ -637,7 +637,6 @@ Coefficients:
 <pre><code>[1] "psne"    "healthy" "psor"   </code></pre>
 </div>
 </div>
-<p>QUESTION 3: Are you done? Please share how you feel here:</p>
 </section>
 <section id="step-4-hypothesis-test-post-hoc-tests" class="level4">
 <h4 class="anchored" data-anchor-id="step-4-hypothesis-test-post-hoc-tests">Step 4: Hypothesis test + Post hoc tests</h4>
@@ -657,7 +656,7 @@ type    2    1.2204 3.3128  -87.286  9.9153 0.0004052 ***
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
-<p>QUESTION 4: What is your conclusion from the <span class="math inline">\(F\)</span>-test result? Please share your answer here:</p>
+<p>QUESTION 3: What is your conclusion from the <span class="math inline">\(F\)</span>-test result? Please share your answer here:</p>
 <p>Thus, the overall test for homogeneity between the groups show that the groups are not all the same. But it might be that the gene expression in two of the three groups, say, are not significantly different. To investigate that we do post hoc testing. This is nicely done within the framework of <em>estimated marginal means</em> using the <strong>emmeans</strong> package. Here <code>emmeans</code> makes the estimated marginal means (that is the predicted gene expression IGFL4 on the log scale), and the pairs() command provide post hoc pairwise comparisons (package automatically adjusts for multiple comparisons using the default tukey method):</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Run emmeans</span></span>
@@ -683,7 +682,7 @@ Results are given on the log (not the response) scale.
 P value adjustment: tukey method for comparing a family of 3 estimates </code></pre>
 </div>
 </div>
-<p>QUESTION 5: What is your conclusion from the pairwise comparisons? Please share your answer here:</p>
+<p>QUESTION 4: What is your conclusion from the pairwise comparisons? Please share your answer here:</p>
 <p>IGFL4 gene expression levels are not significantly different between healthy/control skin samples (healthy) and psoriasis-free patient skin samples (psne; healthy - psne; p-value &gt; 0.05).</p>
 <p>IGFL4 gene expression levels are significantly different between healthy/control skin samples (healthy), psoriasis-free patient skin samples (psne) and psoriasis-affected patient skin samples (psor; healthy - psor and psne - psor; both p-values &lt; 0.05)</p>
 </section>

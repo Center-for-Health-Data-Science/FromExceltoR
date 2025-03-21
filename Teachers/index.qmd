@@ -22,13 +22,14 @@ The material in this repository is for teaching purposes only and not to be dist
 
 \
 We will use Quarto for the tutorials of this course. Please see more about Quarto following the links below.\
+[R Getting started video](https://www.youtube.com/watch?v=PzIO1FxhqIw)\
 [Quarto website](https://quarto.org)\
 ["Get started with Quarto" tutorial for RStudio](https://quarto.org/docs/get-started/hello/rstudio.html)\
 ["Get started with Quarto" video for RStudio\
 ](https://www.youtube.com/watch?v=_f3latmOhew)[Comprehensive guides to Quarto basics](https://quarto.org/docs/guide/)
 
 \
-Finally... Dear course participants, it would greatly help us if you could complete our [feedback]( https://forms.office.com/e/JcDE5C9sLQ) form.
+Finally... Dear course participants, it would greatly help us if you could complete our [feedback](https://forms.office.com/e/JcDE5C9sLQ) form.
 
 ## Program
 
