@@ -864,8 +864,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="optional-section" class="level2">
 <h2 class="anchored" data-anchor-id="optional-section">Optional section</h2>
-<p>If you went through the exercises above and are ready for more challenges - you have come to the right place. You have not learn all the operations you are asked to do, so feel free to search for help online. If you are a bit overwhelmed and need a break, by all means chill!</p>
-<p>Let’s simulate some climate data for year 2056 and merge it with the original climate data set from 2016.</p>
+<p>If you’ve gone through the exercises above and are ready for more challenges — you’re in the right place. You haven’t learned all the operations you’ll need here, so feel free to search online for help. If you’re feeling overwhelmed, no worries — take a break and come back later.</p>
+<p>Let’s simulate some climate data for the year 2056 and merge it with the original dataset from 2016.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>climate_fake <span class="ot">&lt;-</span> climate</span>
 <span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -891,7 +891,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <ol start="19" type="1">
-<li>Change the station names to begin with capital letters.</li>
+<li>Modify the station names so that they start with capital letters.</li>
 </ol>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>climate_change <span class="ot">&lt;-</span> climate_change <span class="sc">%&gt;%</span> </span>
@@ -911,7 +911,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <ol start="20" type="1">
-<li>Create a new column that contain the months in names. Could someone using R have needed the month names before you?</li>
+<li>Create a new column that contains the month names (e.g., ‘January’, ‘February’, etc.). Could someone before you have needed the <code>month.name</code> in R?</li>
 </ol>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>climate_change <span class="ot">&lt;-</span> climate_change <span class="sc">%&gt;%</span> </span>
@@ -931,7 +931,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <ol start="21" type="1">
-<li>Add a column that tells the season of the month (Winter, Spring, Summer, Fall). Have a look at the <code>case_when</code> function.</li>
+<li>Create a new column that assigns a season (Winter, Spring, Summer, Fall) based on the month. Have a look at the <code>case_when</code> function.</li>
 </ol>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
@@ -1047,7 +1047,7 @@ the `.groups` argument.</code></pre>
 # ℹ 30 more rows</code></pre>
 </div>
 </div>
-<p>We can get a better overview of the weather changes from three plots. We are learning the ggplot method in the next presentation.</p>
+<p>We can get a better overview of the weather changes by plotting the data. We are learning the <code>ggplot</code> method in the next presentation.</p>
 <ol start="25" type="1">
 <li>Export your data</li>
 </ol>
@@ -1055,9 +1055,9 @@ the `.groups` argument.</code></pre>
 <div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="co"># writexl::write_xlsx(DATASET, 'PATH/TO/DATASET')</span></span>
 <span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>writexl<span class="sc">::</span><span class="fu">write_xlsx</span>(climate_change, <span class="st">'../../Data/climate_change.xlsx'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>If you’re up for more, we can try some things that might not totally fit this dataset but will take you through some useful tidyverse operations</p>
+<p>If you’re up for more, we can explore some additional exercises that may not perfectly align with this dataset but will introduce you to some very useful tidyverse operations.</p>
 <ol start="26" type="1">
-<li>Extract the unique stations and save it as a vector.</li>
+<li>Extract the unique stations and save them as a vector.</li>
 </ol>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
@@ -1087,8 +1087,8 @@ Hint
    "Armagh"  "Camborne"   "Lerwick"    "Oxford" "Sheffield" </code></pre>
 </div>
 </div>
-<ol start="26" type="1">
-<li>Count the number of A’s in each station.</li>
+<ol start="27" type="1">
+<li>Count how many times the letter ‘A’ appears in each station.</li>
 </ol>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>station_unique <span class="sc">%&gt;%</span> <span class="fu">str_count</span>(<span class="st">'A'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1096,8 +1096,8 @@ Hint
 <pre><code>[1] 1 0 0 0 0</code></pre>
 </div>
 </div>
-<ol start="27" type="1">
-<li>Count the number of A’s and a’s in each station.</li>
+<ol start="28" type="1">
+<li>Count the number of both uppercase ‘A’ and lowercase ‘a’ in each station.</li>
 </ol>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>station_unique <span class="sc">%&gt;%</span> <span class="fu">str_count</span>(<span class="st">'A|a'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1105,24 +1105,24 @@ Hint
 <pre><code>[1] 2 1 0 0 0</code></pre>
 </div>
 </div>
-<ol start="28" type="1">
-<li>In the climate change dataframe, add a column for each word in the <code>device</code> column.</li>
+<ol start="29" type="1">
+<li>In the climate change data frame, create a new column for each word in the <code>device</code> column. For example, you can use the <code>str_split_i()</code> function to extract individual words and assign them to separate columns.</li>
 </ol>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a>climate_change <span class="ot">&lt;-</span> climate_change <span class="sc">%&gt;%</span> </span>
 <span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">device_1 =</span> <span class="fu">str_split_i</span>(device, <span class="at">pattern =</span> <span class="st">' '</span>, <span class="at">i =</span> <span class="dv">1</span>),</span>
 <span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">device_2 =</span> <span class="fu">str_split_i</span>(device, <span class="at">pattern =</span> <span class="st">' '</span>, <span class="at">i =</span> <span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<ol start="29" type="1">
-<li>Change one of the new columns to only include lower case letter and the other to only include upper case.</li>
+<ol start="30" type="1">
+<li>Modify one of the new columns to contain only lowercase letters and the other to contain only uppercase letters.</li>
 </ol>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>climate_change <span class="ot">&lt;-</span> climate_change <span class="sc">%&gt;%</span> </span>
 <span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">device_1 =</span> <span class="fu">tolower</span>(device_1),</span>
 <span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">device_2 =</span> <span class="fu">toupper</span>(device_1))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<ol start="30" type="1">
-<li>Add a new columns that contains the first three letters of each month in upper case.</li>
+<ol start="31" type="1">
+<li>Add a new columns that contains the first three letters of each month in uppercase.</li>
 </ol>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">

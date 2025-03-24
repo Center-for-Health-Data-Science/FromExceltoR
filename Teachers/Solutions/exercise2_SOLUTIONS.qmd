@@ -251,10 +251,9 @@ climate2 %>%
 
 ## Optional section
 
-If you went through the exercises above and are ready for more challenges - you have come to the right place. You have not learn all the operations you are asked to do, so feel free to search for help online. If you are a bit overwhelmed and need a break, by all means chill!
+If you’ve gone through the exercises above and are ready for more challenges — you’re in the right place. You haven’t learned all the operations you’ll need here, so feel free to search online for help. If you're feeling overwhelmed, no worries — take a break and come back later.
 
-
-Let's simulate some climate data for year 2056 and merge it with the original climate data set from 2016.
+Let’s simulate some climate data for the year 2056 and merge it with the original dataset from 2016.
 
 ```{r}
 climate_fake <- climate
@@ -270,7 +269,7 @@ climate_change <- rbind(climate, climate_fake)
 head(climate_change)
 ```
 
-19. Change the station names to begin with capital letters.
+19. Modify the station names so that they start with capital letters.
 
 ```{r}
 climate_change <- climate_change %>% 
@@ -279,7 +278,7 @@ climate_change <- climate_change %>%
 head(climate_change)
 ```
 
-20. Create a new column that contain the months in names. Could someone using R have needed the month names before you?
+20. Create a new column that contains the month names (e.g., 'January', 'February', etc.). Could someone before you have needed the `month.name` in R?
 
 ```{r}
 climate_change <- climate_change %>% 
@@ -288,7 +287,7 @@ climate_change <- climate_change %>%
 head(climate_change)
 ```
 
-21. Add a column that tells the season of the month (Winter, Spring, Summer, Fall). Have a look at the `case_when` function. 
+21. Create a new column that assigns a season (Winter, Spring, Summer, Fall) based on the month. Have a look at the `case_when` function. 
 
 ::: {.callout-tip collapse="true"}
 ## Hint
@@ -337,7 +336,7 @@ climate_change %>%
   summarize(mean_rain = mean(rain)) 
 ```
 
-We can get a better overview of the weather changes from three plots. We are learning the ggplot method in the next presentation.
+We can get a better overview of the weather changes by plotting the data. We are learning the `ggplot` method in the next presentation.
 
 25. Export your data 
 ```{r}
@@ -345,9 +344,9 @@ We can get a better overview of the weather changes from three plots. We are lea
 writexl::write_xlsx(climate_change, '../../Data/climate_change.xlsx')
 ```
 
-If you’re up for more, we can try some things that might not totally fit this dataset but will take you through some useful tidyverse operations 
+If you’re up for more, we can explore some additional exercises that may not perfectly align with this dataset but will introduce you to some very useful tidyverse operations.
 
-26. Extract the unique stations and save it as a vector. 
+26. Extract the unique stations and save them as a vector. 
 
 ::: {.callout-tip collapse="true"}
 ## Hint
@@ -363,31 +362,31 @@ station_unique <- climate_change %>%
 station_unique
 ```
 
-26. Count the number of A's in each station. 
+27. Count how many times the letter 'A' appears in each station.
 ```{r}
 station_unique %>% str_count('A')
 ```
 
-27. Count the number of A's and a's in each station. 
+28. Count the number of both uppercase 'A' and lowercase 'a' in each station.
 ```{r}
 station_unique %>% str_count('A|a')
 ```
 
-28. In the climate change dataframe, add a column for each word in the `device` column. 
+29. In the climate change data frame, create a new column for each word in the `device` column. For example, you can use the `str_split_i()` function to extract individual words and assign them to separate columns.
 ```{r}
 climate_change <- climate_change %>% 
   mutate(device_1 = str_split_i(device, pattern = ' ', i = 1),
          device_2 = str_split_i(device, pattern = ' ', i = 2))
 ```
 
-29. Change one of the new columns to only include lower case letter and the other to only include upper case.
+30. Modify one of the new columns to contain only lowercase letters and the other to contain only uppercase letters.
 ```{r}
 climate_change <- climate_change %>% 
   mutate(device_1 = tolower(device_1),
          device_2 = toupper(device_1))
 ```
 
-30. Add a new columns that contains the first three letters of each month in upper case.  
+31. Add a new columns that contains the first three letters of each month in uppercase. 
 
 ::: {.callout-tip collapse="true"}
 ## Hint

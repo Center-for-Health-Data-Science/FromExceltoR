@@ -141,12 +141,12 @@ There are many ways in which you can manipulate the look of your plot. For this 
 
 ## Optional section
 
-35. Load in the `climate_change` data set generated in the last optional exercises.
+35. Load in the climate change dataset you exported in the last optional exercises.
 
-36. Use `group_by`, `summarize`, and `facet_wrap` to recreate this plot. Consider if some of the variables should change class prior to plotting.
+36. Use `group_by`, `summarize`, and `facet_wrap` to recreate this plot. Consider if you need to change the class of some of the variables prior to plotting.
 ![](../Figures/exercise3_36.png) 
 
-37. Your supervisor does not like colors. Change the stratification to not include any colors and add white background. Also, update the labels to start with capital letters and give the plot a meaningful title. 
+37. Your supervisor does not like colors. Change the stratification to be based on `linetype` instead of `color`. Add a white background, update the labels to start with uppercase letters, and provide the plot with a meaningful title.
 
 38. Recreate this plot. Use whatever colors you like (but change them from the default coloring) and give the plot at meaningful title. 
 ![](../Figures/exercise3_38.png)

@@ -1071,7 +1071,7 @@ position_identity </code></pre>
 <section id="optional-section" class="level2">
 <h2 class="anchored" data-anchor-id="optional-section">Optional section</h2>
 <ol start="35" type="1">
-<li>Load in the <code>climate_change</code> data set generated in the last optional exercises.</li>
+<li>Load in the climate change dataset you exported in the last optional exercises.</li>
 </ol>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>climate_change <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_excel</span>(<span class="st">'../../Data/climate_change.xlsx'</span>)</span>
@@ -1089,7 +1089,7 @@ position_identity </code></pre>
 </div>
 </div>
 <ol start="36" type="1">
-<li>Use <code>group_by</code>, <code>summarize</code>, and <code>facet_wrap</code> to recreate this plot. Consider if some of the variables should change class prior to plotting.</li>
+<li>Use <code>group_by</code>, <code>summarize</code>, and <code>facet_wrap</code> to recreate this plot. Use <code>group_by</code>, <code>summarize</code>, and <code>facet_wrap</code> to recreate this plot. Consider if you need to change the class of some of the variables prior to plotting.</li>
 </ol>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>climate_change<span class="sc">$</span>year <span class="ot">&lt;-</span> <span class="fu">factor</span>(climate_change<span class="sc">$</span>year, <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">2016</span>, <span class="dv">2056</span>))</span>
@@ -1122,7 +1122,7 @@ the `.groups` argument.</code></pre>
 </div>
 </div>
 <ol start="37" type="1">
-<li>Your supervisor does not like colors. Change the stratification to not include any colors and add white background. Also, update the labels to start with capital letters and give the plot a meaningful title.</li>
+<li>Your supervisor does not like colors. Change the stratification to be based on <code>linetype</code> instead of <code>color</code>. Add a white background, update the labels to start with uppercase letters, and provide the plot with a meaningful title.</li>
 </ol>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>climate_change <span class="sc">%&gt;%</span> </span>
