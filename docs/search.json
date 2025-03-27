@@ -18,7 +18,7 @@
     "href": "Exercises/exercise1A.html",
     "title": "Exercise 1A: Introduction to R",
     "section": "",
-    "text": "Make a new directory for this course.\nGo to course website and to the Data tab. Press the DOWNLOAD DATA button.\nMove the Data folder to your course directory.\nUnder your course directory, make a new folder for your scripts and another for the presentations (download presentations via the DOWNLOAD PRESENTATIONS button).\n\nYour file tree should look something like this:",
+    "text": "Make a new directory for this course.\nGo to course website and to the Data tab. Press the DOWNLOAD DATA button.\nMove the Data folder to your course directory.\nUnder your course directory, make a new directory for your scripts and another for the presentations (download presentations via the DOWNLOAD PRESENTATIONS button).\n\nYour file tree should look something like this:",
     "crumbs": [
       "Course Material",
       "Exercises 🏋🏽",
@@ -30,7 +30,7 @@
     "href": "Exercises/exercise1A.html#file-tree",
     "title": "Exercise 1A: Introduction to R",
     "section": "",
-    "text": "Make a new directory for this course.\nGo to course website and to the Data tab. Press the DOWNLOAD DATA button.\nMove the Data folder to your course directory.\nUnder your course directory, make a new folder for your scripts and another for the presentations (download presentations via the DOWNLOAD PRESENTATIONS button).\n\nYour file tree should look something like this:",
+    "text": "Make a new directory for this course.\nGo to course website and to the Data tab. Press the DOWNLOAD DATA button.\nMove the Data folder to your course directory.\nUnder your course directory, make a new directory for your scripts and another for the presentations (download presentations via the DOWNLOAD PRESENTATIONS button).\n\nYour file tree should look something like this:",
     "crumbs": [
       "Course Material",
       "Exercises 🏋🏽",
@@ -1179,7 +1179,7 @@
     "href": "Exercises/exercise1B.html",
     "title": "Exercise 1B: Introduction to R",
     "section": "",
-    "text": "Start RStudio.\nMake a new Quarto document. Go to the menu bar and click File → New file… → Quarto document…. Give the Quarto document a title that makes sense to you. NB! The document is not saved yet.\nSave your document. Go to the menu bar and click File → Save as….\nCheck the working directory. Let’s check which working directory we are in with the getwd() function. When working with Quarto documents the working directory is always the same as where the file is located (where you saved it).",
+    "text": "Start RStudio.\nMake a new Quarto document. Go to the menu bar and click File → New file… → Quarto document…. Give the Quarto document a title that makes sense to you. NB! The document is not saved yet.\nSave your document in your scripts directory. Go to the menu bar and click File → Save as….\nCheck the working directory. Let’s check which working directory we are in with the getwd() function. When working with Quarto documents the working directory is always the same as where the file is located (where you saved it).",
     "crumbs": [
       "Course Material",
       "Exercises 🏋🏽",
@@ -1191,7 +1191,7 @@
     "href": "Exercises/exercise1B.html#getting-started",
     "title": "Exercise 1B: Introduction to R",
     "section": "",
-    "text": "Start RStudio.\nMake a new Quarto document. Go to the menu bar and click File → New file… → Quarto document…. Give the Quarto document a title that makes sense to you. NB! The document is not saved yet.\nSave your document. Go to the menu bar and click File → Save as….\nCheck the working directory. Let’s check which working directory we are in with the getwd() function. When working with Quarto documents the working directory is always the same as where the file is located (where you saved it).",
+    "text": "Start RStudio.\nMake a new Quarto document. Go to the menu bar and click File → New file… → Quarto document…. Give the Quarto document a title that makes sense to you. NB! The document is not saved yet.\nSave your document in your scripts directory. Go to the menu bar and click File → Save as….\nCheck the working directory. Let’s check which working directory we are in with the getwd() function. When working with Quarto documents the working directory is always the same as where the file is located (where you saved it).",
     "crumbs": [
       "Course Material",
       "Exercises 🏋🏽",

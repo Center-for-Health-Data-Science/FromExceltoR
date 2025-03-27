@@ -19,7 +19,7 @@ knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
 
 3.  Move the Data folder to your course directory.
 
-4.  Under your course directory, make a new folder for your scripts and another for the presentations (download presentations via the **DOWNLOAD PRESENTATIONS** button).
+4.  Under your course directory, make a new directory for your scripts and another for the presentations (download presentations via the **DOWNLOAD PRESENTATIONS** button).
 
 Your file tree should look something like this:
 
@@ -35,11 +35,11 @@ Your file tree should look something like this:
 
 8.  In the bottom-right panel, navigate to the file you just saved.
 
-When doing data science, you often work with some kind of input files, like an Excel sheet from the lab. It is therefore important that you know how to navigate to files from your R script. The directories you need to go through to find your input file can either be **absolute** or **relative**: 
+When doing data science, you often work with some kind of input files, like an Excel sheet from the lab. It is therefore important that you know how to navigate to files from your R script. The directories you need to go through to find your input file can either be **absolute** or **relative**:
 
-- **Absolute path**: The path from the root of your file system to the input file. 
+-   **Absolute path**: The path from the root of your file system to the input file.
 
-- **Relative path**: The path from the working directory to the input file.
+-   **Relative path**: The path from the working directory to the input file.
 
 We will try to find both paths to the `climate.xlsx` file in the `Data` directory.
 
@@ -73,10 +73,9 @@ absolute_path <- "~/Desktop/Stuff/Courses/GreatestCourse/FromExceltoR/Data/clima
 
 -   Write two periods and a slash (`../`):
 
--   Now place the cursor between the slash and the quotation mark and press the **tab key** again. What do you see? 
+-   Now place the cursor between the slash and the quotation mark and press the **tab key** again. What do you see?
 
 -   Use the **tab key** to navigate to the `climate.xlsx` file through the simplest path. **NB** This might include deleting the initial `../`.
-
 
 ::: {.callout-tip collapse="true"}
 ## Relative path examples
@@ -96,4 +95,3 @@ setwd("~/Desktop/Stuff/Projects/RNAseq/TheGreatProject")
 relative_path <- "../../../Courses/GreatestCourse/FromExceltoR/Data/climate.xlsx"
 ```
 :::
-

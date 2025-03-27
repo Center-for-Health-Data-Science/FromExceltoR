@@ -17,7 +17,7 @@ knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
 
 2.  **Make a new Quarto document**. Go to the menu bar and click *File* → *New file...* → *Quarto document...*. Give the Quarto document a title that makes sense to you. NB! The document is not saved yet.
 
-3.  **Save your document**. Go to the menu bar and click *File* → *Save as...*.
+3.  **Save your document** in your scripts directory. Go to the menu bar and click *File* → *Save as...*.
 
 4.  **Check the working directory**. Let's check which working directory we are in with the `getwd()` function. When working with Quarto documents the working directory is always the same as where the file is located (where you saved it).
 
