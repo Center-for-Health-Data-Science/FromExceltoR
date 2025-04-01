@@ -58,15 +58,15 @@ website:
       
       - section: "Solutions 💃🏻"
         contents:
-          - href: Solutions/solution_not_up.qmd # Solutions/exercise2_SOLUTIONS.qmd 
+          - href: Solutions/exercise2_SOLUTIONS.qmd 
             text: "Exercise 2 - Solution"
-          - href: Solutions/solution_not_up.qmd #Solutions/exercise3_SOLUTIONS.qmd # Solutions/solution_not_up.qmd # 
+          - href: Solutions/exercise3_SOLUTIONS.qmd # Solutions/solution_not_up.qmd # 
             text: "Exercise 3 - Solution"
-          - href: Solutions/solution_not_up.qmd #Solutions/presentation4_solutions.qmd # Solutions/presentation4_solutions.qmd
+          - href: Solutions/presentation4_solutions.qmd # Solutions/presentation4_solutions.qmd
             text: "Presentation 4: Applied Statistics in R - Solutions"
-          - href: Solutions/solution_not_up.qmd #Solutions/exercise4_PART1_solutions.qmd # Solutions/exercise4_PART1_solutions.qmd
+          - href: Solutions/exercise4_PART1_solutions.qmd # Solutions/exercise4_PART1_solutions.qmd
             text: "Exercise 4, Part 1 - Solutions"
-          - href: Solutions/solution_not_up.qmd #Solutions/exercise4_PART2_solutions.qmd # Solutions/exercise4_PART2_solutions.qmd
+          - href: Solutions/exercise4_PART2_solutions.qmd # Solutions/exercise4_PART2_solutions.qmd
             text: "Exercise 4, Part 2 - Solutions"
             
       - section: "Cheat Sheets 👀"
