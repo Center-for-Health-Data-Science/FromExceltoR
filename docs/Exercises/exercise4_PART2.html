@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.6.40">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -70,12 +70,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-8ea72dc5fed832574809a9c94082fbbb.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-04036d7ca062c87eb51b7d53d6467559.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-d0e44dc943948f2bb6610a3a265026c7.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -302,31 +302,31 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Solutions/solution_not_up.html" class="sidebar-item-text sidebar-link">
+  <a href="../Solutions/exercise2_SOLUTIONS.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercise 2 - Solution</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Solutions/solution_not_up.html" class="sidebar-item-text sidebar-link">
+  <a href="../Solutions/exercise3_SOLUTIONS.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercise 3 - Solution</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Solutions/solution_not_up.html" class="sidebar-item-text sidebar-link">
+  <a href="../Solutions/presentation4_solutions.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Presentation 4: Applied Statistics in R - Solutions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Solutions/solution_not_up.html" class="sidebar-item-text sidebar-link">
+  <a href="../Solutions/exercise4_PART1_solutions.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercise 4, Part 1 - Solutions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Solutions/solution_not_up.html" class="sidebar-item-text sidebar-link">
+  <a href="../Solutions/exercise4_PART2_solutions.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercise 4, Part 2 - Solutions</span></a>
   </div>
 </li>
@@ -427,26 +427,32 @@ The term <em>regression</em> is usually used for models where all explanatory va
 <li>Use the commands below to load the MASS package and get the help page for the data frame. The help page will appear in the lower right window of RStudio. Read about the data; in particular about the variables <code>age</code>, <code>lwt</code>, <code>ftv</code>, <code>smoke</code>, and <code>bwt</code>.</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>?birthwt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: pakke 'MASS' blev bygget under R version 4.2.3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>?birthwt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>starting httpd help server ... done</code></pre>
+</div>
 </div>
 <ol start="2" type="1">
 <li><code>birthwt</code> is not a tibble (the modern way to organize data), but we can make it one:</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)    </span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>birthData <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(birthwt)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>birthData</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)    </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>birthData <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(birthwt)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>birthData</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="3" type="1">
 <li><p>Mother’s smoking habits (<code>smoke</code>) is coded as numerical variable. Make it a factor (categorical variable).</p></li>
 <li><p>The <code>ftv</code> is a numerical variable, but we would also like a categorical version of it, with groups corresponding to zero visits, one visit, and two or more visits, respectively. Try the following commands, and check the results:</p></li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(birthData<span class="sc">$</span>ftv)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>birthData <span class="ot">&lt;-</span> <span class="fu">mutate</span>(birthData, <span class="at">ftvFac =</span> <span class="fu">factor</span>(ftv))</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>birthData <span class="ot">&lt;-</span> <span class="fu">mutate</span>(birthData, <span class="at">visits =</span> <span class="fu">fct_collapse</span>(ftvFac, <span class="at">Never=</span><span class="st">"0"</span>, <span class="at">Once=</span><span class="st">"1"</span>, <span class="at">other_level=</span><span class="st">"MoreThanOnce"</span>))</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(birthData)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(birthData<span class="sc">$</span>ftv)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>birthData <span class="ot">&lt;-</span> <span class="fu">mutate</span>(birthData, <span class="at">ftvFac =</span> <span class="fu">factor</span>(ftv))</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>birthData <span class="ot">&lt;-</span> <span class="fu">mutate</span>(birthData, <span class="at">visits =</span> <span class="fu">fct_collapse</span>(ftvFac, <span class="at">Never=</span><span class="st">"0"</span>, <span class="at">Once=</span><span class="st">"1"</span>, <span class="at">other_level=</span><span class="st">"MoreThanOnce"</span>))</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(birthData)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="5" type="1">
 <li><p>Make groupwise boxplots of <code>bwt</code> by <code>visits</code>, i.e., boxplots of birth weight for those women who did not see their doctor, those who saw their doctor once, and those who saw their doctor more than once during the first trimester - all boxplots in one graph. Do the same thing for <code>smoke</code> (instead of <code>visits</code>).</p></li>
@@ -467,10 +473,10 @@ Modify it further such that the symbol types are different for smokers and non-s
 </p></li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>newData <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">lwt=</span><span class="dv">100</span>, <span class="at">age=</span><span class="dv">25</span>, <span class="at">ftv=</span><span class="dv">0</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>newData</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(reg2, newData)</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(reg2, newData, <span class="at">interval=</span><span class="st">"prediction"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>newData <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">lwt=</span><span class="dv">100</span>, <span class="at">age=</span><span class="dv">25</span>, <span class="at">ftv=</span><span class="dv">0</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>newData</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(reg2, newData)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(reg2, newData, <span class="at">interval=</span><span class="st">"prediction"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="12" type="1">
 <li>Fit the multiple linear regression model again, but now only using data from mothers with a weight less than 160 pounds (<code>lwt</code> &lt; 160). <em>Hint:</em> Use the <code>filter</code> function and change the <code>data</code> argument in the <code>lm</code> command.</li>
@@ -481,7 +487,7 @@ Modify it further such that the symbol types are different for smokers and non-s
 <p>The term <em>analysis of variance</em> (ANOVA) is usually used for models where all explanatory variables are categorical (factors). It is important that you have coded <code>smoke</code> as a factor, cf.&nbsp;Question 3.<br>
 First, install and load the R-package <code>emmeans</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans)    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans)    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Welcome to emmeans.
 Caution: You lose important information if you filter this package's results.
@@ -495,14 +501,14 @@ See '? untidy'</code></pre>
 <li><p>Now, consider both <code>visits</code> and <code>smoke</code> as explanatory variables. Since they are both categorical variables (factors), the relevant model is a <em>twoway</em> ANOVA. Fit the twoway ANOVA model <em>without interaction</em>, and make sure you understand the estimates:</p></li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>twoway1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(bwt <span class="sc">~</span> visits <span class="sc">+</span> smoke, <span class="at">data=</span>birthData)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(twoway1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>twoway1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(bwt <span class="sc">~</span> visits <span class="sc">+</span> smoke, <span class="at">data=</span>birthData)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(twoway1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="16" type="1">
 <li>Fit the twoway ANOVA model <em>with interaction</em> (use the command below). Then use <code>anova</code> and/or <code>drop1</code> to test if the interaction between visits and smoking habits is statistically significant.</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>twoway2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(bwt <span class="sc">~</span> visits <span class="sc">*</span> smoke, <span class="at">data=</span>birthData)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>twoway2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(bwt <span class="sc">~</span> visits <span class="sc">*</span> smoke, <span class="at">data=</span>birthData)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="17" type="1">
 <li>You should still use <code>twoway2</code> in for this question. Use <code>emmeans</code> to compute the expected birth weight of infants for smokers and non-smokers, respectively, on average over the three levels of <code>visits</code>.</li>
@@ -515,16 +521,16 @@ See '? untidy'</code></pre>
 <li>Fit a model where <code>lwt</code> (numeric) and <code>smoke</code> (factor) are included as predictors in an additive way:</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(bwt <span class="sc">~</span> lwt <span class="sc">+</span> smoke, <span class="at">data=</span>birthData)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(bwt <span class="sc">~</span> lwt <span class="sc">+</span> smoke, <span class="at">data=</span>birthData)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>What is the interpretation of the estimates?</p>
 <ol start="19" type="1">
 <li>Fit a model with <em>interaction</em> between the two predictors, replacing <code>+</code> by a <code>*</code>:</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(bwt <span class="sc">~</span> lwt <span class="sc">*</span> smoke, <span class="at">data=</span>birthData)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(bwt <span class="sc">~</span> lwt <span class="sc">*</span> smoke, <span class="at">data=</span>birthData)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>What is the interpretation of the estimates? Is there evidence in the data that the effect of mother’s weight on infant’s weight differs between smokers and non-smokers? <em>Hint</em>: What does the last question have to do with interaction? Use <code>anova</code> on appropriate models.</p>
 <ol start="20" type="1">
@@ -535,15 +541,15 @@ See '? untidy'</code></pre>
 <h3 class="anchored" data-anchor-id="logistic-regression">Logistic regression</h3>
 <p>The variable <code>low</code> is 1 if birth weight is less than 2500 g, and 0 if birth weight is larger than 2500g, see the plot</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(birthData, <span class="fu">aes</span>(<span class="at">x=</span>bwt, <span class="at">y=</span>low)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(birthData, <span class="fu">aes</span>(<span class="at">x=</span>bwt, <span class="at">y=</span>low)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Consider for a moment the situation where the actual birth weight (<code>bwt</code>) was not registered, such that <code>low</code> was the only information on the child. Hence, the outcome is binary (<code>low</code> has two values), and the relevant analysis would be a <em>logistic regression</em> where the probablity <span class="math inline">\(Pr(low=1)\)</span> is described in terms of predictors. For example, we may consider a model with mothers’s weight, smoking status, age, and visit status as predictors, just like in the previous question.</p>
 <ol start="21" type="1">
 <li>Fit the model, and consider the estimates:</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>logreg1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(low <span class="sc">~</span> lwt <span class="sc">+</span> smoke <span class="sc">+</span> age <span class="sc">+</span> visits, <span class="at">data=</span>birthData, <span class="at">family=</span><span class="st">"binomial"</span>)</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(logreg1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>logreg1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(low <span class="sc">~</span> lwt <span class="sc">+</span> smoke <span class="sc">+</span> age <span class="sc">+</span> visits, <span class="at">data=</span>birthData, <span class="at">family=</span><span class="st">"binomial"</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(logreg1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Does this model give evidence for an effect of smoking on the weight of infants? Compare the signs of the estimates from <code>model3</code> (Gaussian model in the solution for Question 18) and <code>logreg1</code> (logistic regression model). Can you explain ‘what happens’?</p>
 </section>
@@ -553,19 +559,19 @@ See '? untidy'</code></pre>
 <li>Assume for a moment that the 189 births took place at 19 different medical centers with 10 births at each center, except for one center with only nine births. This is not the case, so we have to generate a center variable artificially. You should of course never invent such an artificial structure for a real dataset! Anyway, let’s do it like this:</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>center <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">19</span>, <span class="at">each=</span><span class="dv">10</span>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">189</span>])</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>center</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>birthData <span class="ot">&lt;-</span> <span class="fu">mutate</span>(birthData,<span class="at">center=</span><span class="fu">factor</span>(center))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>center <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">19</span>, <span class="at">each=</span><span class="dv">10</span>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">189</span>])</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>center</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>birthData <span class="ot">&lt;-</span> <span class="fu">mutate</span>(birthData,<span class="at">center=</span><span class="fu">factor</span>(center))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The <code>rep</code> command repeats the number from 1 to 19, 10 times each. We only need the first 189 numbers. The <code>sample</code> changes the order of the 189 numbers at random. The <code>set.seed</code> command has the effect that you get the same sample each time you run the commands. The last line includes the new variable in the original dataset as a categorical variable.</p>
 <ol start="23" type="1">
 <li>The <code>center</code> variable would typically be included in the model as a <em>random effect</em>. Gaussian models with both fixed and random effects are called <em>linear mixed models</em>, and are fitted with the <code>lmer</code> function from the <code>lme4</code> package. Run the code below and identify relevant estimates. Remember that <code>lme4</code> must be installed before the commands below can be used.</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4)</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>lmm1 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(bwt <span class="sc">~</span> lwt <span class="sc">+</span> smoke <span class="sc">+</span> age <span class="sc">+</span> visits <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>center), <span class="at">data=</span>birthData)</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lmm1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>lmm1 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(bwt <span class="sc">~</span> lwt <span class="sc">+</span> smoke <span class="sc">+</span> age <span class="sc">+</span> visits <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>center), <span class="at">data=</span>birthData)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lmm1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
@@ -798,8 +804,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -910,7 +914,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {
