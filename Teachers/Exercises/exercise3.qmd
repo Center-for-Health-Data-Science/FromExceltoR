@@ -59,17 +59,26 @@ The data set is the same as the one used for the Tidyverse exercise. If you have
 
 9.  Add error bars to the plot, which represent the average number of sunshine hours plus/minus the standard deviation of the observations. The relevant geom is called `geom_errorbar`.
 
-Hint:
-
-```{r}
+::: {.callout-tip collapse="true"}
+## Hint
+```{r eval=FALSE}
 geom_errorbar(aes(ymin = sun_avg - sun_sd, ymax = sun_avg + sun_sd), width = 0.2)
 ```
+:::
 
 10. How could make the plot with horizontal error bars instead? Tip: Think about which of the two variables, month and average sunshine hours, can meaningfully have an error.
 
 ## Line plot (also known as a spaghetti plot)
 
-11. Make a line plot (find the correct `geom_` for this) of the rainfall observations over time (month), such that observations from the same station are connected in one line. Put month on the x-axis. Color the lines according to weather station as well.
+11. Make a line plot (find the correct `geom_` for this) of the rainfall observations over time (month), such that observations from the same station are connected in one line. Put month on the x-axis. Color the lines according to weather station as well. 
+
+::: {.callout-tip collapse="true"}
+## Hint
+The `geom_line` function needs the `group` aesthetic to stratify categories. 
+```{r eval=FALSE}
+geom_line(aes(group = station)) 
+```
+:::
 
 12. The **month** variable was read into R as a numerical variable. Convert this variable to a factor and make the line plot again. What has changed?
 

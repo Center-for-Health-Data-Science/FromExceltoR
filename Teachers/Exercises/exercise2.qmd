@@ -54,8 +54,6 @@ If you're ever unsure, tap *Tab* on your keyboard inside empty quotation marks o
 
 ![](../Figures/file_tree_path.png){fig-align="center"}
 
-
-
 3.  **First look at data**. Write the name of the dataframe, i.e. `climate`, into the console and press enter to see the first rows of the dataset. You can also click on the `climate` object in the Environment panel.
 
 4.  Explore your dataset and understand what data you have.

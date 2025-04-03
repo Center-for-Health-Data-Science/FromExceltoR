@@ -161,9 +161,8 @@ str(climate)
 p <- ggplot(climate, 
             aes(x = month,
             y = rain, 
-            color = station,
-            group = station)) + 
-  geom_line()
+            color = station)) + 
+  geom_line(aes(group = station))
 
 p
 ```
