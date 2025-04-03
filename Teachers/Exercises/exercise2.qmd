@@ -35,6 +35,27 @@ The data set used in these exercises was compiled from data downloaded from the 
 
 2.  **Load data**. Start by importing the dataset using either the `read_excel()` function or the `Import Dataset` button and name it `climate`. If you load with `Import Dataset` it is a good idea to copy the command into your script so that the next time you run your script you can just execute that line instead of having to find the file again.
 
+If you chose the `read_excel()` function:
+In R, when you tell the computer where to find a file, you’re using something called a *path.* A path is just a set of directions that tells R how to get from one folder (directory) to another. Since your script is saved inside the Scripts directory, you need to tell R how to move up one level to get out of Scripts, and then into the Data folder where your file lives. We write paths as character strings — that means they go inside quotation marks.
+
+Here’s what this looks like:
+```{r eval=FALSE}
+read_excel("../Data/climate.xlsx")
+```
+
+In this path (also illustrated in figure below): 
+- `..` means "go up one directory" (move from *Scripts* to *FromExceltoR* folder). 
+- `Data` means "go into the *Data* folder" (move from *FromExceltoR* to *Data* folder). 
+- `climate.xlsx` is the file you want to open. 
+
+The directions are separated by slashs `/`. 
+
+If you're ever unsure, tap *Tab* on your keyboard inside empty quotation marks or after a slash — RStudio will help autocomplete the path based on what’s in your folders.
+
+![](../Figures/file_tree_path.png){fig-align="center"}
+
+
+
 3.  **First look at data**. Write the name of the dataframe, i.e. `climate`, into the console and press enter to see the first rows of the dataset. You can also click on the `climate` object in the Environment panel.
 
 4.  Explore your dataset and understand what data you have.

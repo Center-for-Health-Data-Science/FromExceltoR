@@ -441,7 +441,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tbody>
 </table>
 <ol start="2" type="1">
-<li><p><strong>Load data</strong>. Start by importing the dataset using either the <code>read_excel()</code> function or the <code>Import Dataset</code> button and name it <code>climate</code>. If you load with <code>Import Dataset</code> it is a good idea to copy the command into your script so that the next time you run your script you can just execute that line instead of having to find the file again.</p></li>
+<li><strong>Load data</strong>. Start by importing the dataset using either the <code>read_excel()</code> function or the <code>Import Dataset</code> button and name it <code>climate</code>. If you load with <code>Import Dataset</code> it is a good idea to copy the command into your script so that the next time you run your script you can just execute that line instead of having to find the file again.</li>
+</ol>
+<p>If you chose the <code>read_excel()</code> function: In R, when you tell the computer where to find a file, you’re using something called a <em>path.</em> A path is just a set of directions that tells R how to get from one folder (directory) to another. Since your script is saved inside the Scripts directory, you need to tell R how to move up one level to get out of Scripts, and then into the Data folder where your file lives. We write paths as character strings — that means they go inside quotation marks.</p>
+<p>Here’s what this looks like:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_excel</span>(<span class="st">"../Data/climate.xlsx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>In this path (also illustrated in figure below): - <code>..</code> means “go up one directory” (move from <em>Scripts</em> to <em>FromExceltoR</em> folder). - <code>Data</code> means “go into the <em>Data</em> folder” (move from <em>FromExceltoR</em> to <em>Data</em> folder). - <code>climate.xlsx</code> is the file you want to open.</p>
+<p>The directions are separated by slashs <code>/</code>.</p>
+<p>If you’re ever unsure, tap <em>Tab</em> on your keyboard inside empty quotation marks or after a slash — RStudio will help autocomplete the path based on what’s in your folders.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../Figures/file_tree_path.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<ol start="3" type="1">
 <li><p><strong>First look at data</strong>. Write the name of the dataframe, i.e.&nbsp;<code>climate</code>, into the console and press enter to see the first rows of the dataset. You can also click on the <code>climate</code> object in the Environment panel.</p></li>
 <li><p>Explore your dataset and understand what data you have.</p>
 <ol type="a">
@@ -503,17 +518,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>If you’ve gone through the exercises above and are ready for more challenges — you’re in the right place. You haven’t learned all the operations you’ll need here, so feel free to search online for help. If you’re feeling overwhelmed, no worries — take a break and come back later.</p>
 <p>Let’s simulate some climate data for the year 2056 and merge it with the original dataset from 2016.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>climate_fake <span class="ot">&lt;-</span> climate</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>climate_fake<span class="sc">$</span>year <span class="ot">&lt;-</span> <span class="dv">2056</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">101</span>)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>climate_fake<span class="sc">$</span>af <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">11</span>, <span class="fu">nrow</span>(climate_fake), <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>climate_fake<span class="sc">$</span>rain <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="fu">nrow</span>(climate_fake), <span class="at">mean =</span> <span class="fu">mean</span>(climate<span class="sc">$</span>rain)<span class="sc">+</span><span class="dv">150</span>, <span class="at">sd =</span> <span class="fu">sd</span>(climate<span class="sc">$</span>rain)<span class="sc">+</span><span class="dv">50</span>)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>climate_fake<span class="sc">$</span>sun <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="fu">nrow</span>(climate_fake), <span class="at">mean =</span> <span class="fu">mean</span>(climate<span class="sc">$</span>sun), <span class="at">sd =</span> <span class="fu">sd</span>(climate<span class="sc">$</span>sun))</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>climate_fake<span class="sc">$</span>device <span class="ot">&lt;-</span> <span class="fu">paste</span>(climate_fake<span class="sc">$</span>device, <span class="st">', New and Improved'</span>)</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>climate_change <span class="ot">&lt;-</span> <span class="fu">rbind</span>(climate, climate_fake)</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(climate_change)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>climate_fake <span class="ot">&lt;-</span> climate</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>climate_fake<span class="sc">$</span>year <span class="ot">&lt;-</span> <span class="dv">2056</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">101</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>climate_fake<span class="sc">$</span>af <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">11</span>, <span class="fu">nrow</span>(climate_fake), <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>climate_fake<span class="sc">$</span>rain <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="fu">nrow</span>(climate_fake), <span class="at">mean =</span> <span class="fu">mean</span>(climate<span class="sc">$</span>rain)<span class="sc">+</span><span class="dv">150</span>, <span class="at">sd =</span> <span class="fu">sd</span>(climate<span class="sc">$</span>rain)<span class="sc">+</span><span class="dv">50</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>climate_fake<span class="sc">$</span>sun <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="fu">nrow</span>(climate_fake), <span class="at">mean =</span> <span class="fu">mean</span>(climate<span class="sc">$</span>sun), <span class="at">sd =</span> <span class="fu">sd</span>(climate<span class="sc">$</span>sun))</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>climate_fake<span class="sc">$</span>device <span class="ot">&lt;-</span> <span class="fu">paste</span>(climate_fake<span class="sc">$</span>device, <span class="st">', New and Improved'</span>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>climate_change <span class="ot">&lt;-</span> <span class="fu">rbind</span>(climate, climate_fake)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(climate_change)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="19" type="1">
 <li><p>Modify the station names so that they start with capital letters.</p></li>

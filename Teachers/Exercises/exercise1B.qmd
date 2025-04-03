@@ -17,13 +17,11 @@ knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
 
 2.  **Make a new Quarto document**. Go to the menu bar and click *File* → *New file...* → *Quarto document...*. Give the Quarto document a title that makes sense to you. NB! The document is not saved yet.
 
-3.  **Save your document** in your scripts directory. Go to the menu bar and click *File* → *Save as...*.
-
-4.  **Check the working directory**. Let's check which working directory we are in with the `getwd()` function. When working with Quarto documents the working directory is always the same as where the file is located (where you saved it).
+3.  **Save your document** in your *Scripts* directory. Go to the menu bar and click *File* → *Save as...*.
 
 ## Write commands at the prompt
 
-5.  Go to the R console (lower left window) and write a few commands, **one at a time**. You could for example try these commands:
+4.  Go to the R console (lower left window) and write a few commands, **one at a time**. You could for example try these commands:
 
 ```{r results='hide'}
 6*12
@@ -39,15 +37,15 @@ Notice how a new object, *x*, appears in the Global Environment window (upper ri
 
 To save your code, you need to store it in a file. There are several file formats available for this purpose, and in this course, we are using Quarto, the latest format in the code reproducibility domain.
 
-6.  **Create code chunk**. In the Quarto document you just made, create a code chuck by pressing the green box with the white 'C' in the right of the panel.
+5.  **Create code chunk**. In the Quarto document you just made, create a code chuck by pressing the green box with the white 'C' in the right of the panel.
 
-7.  **Write code**. Write a command in the code chunk, similar to one of those from above.
+6.  **Write code**. Write a command in the code chunk, similar to one of those from above.
 
-8.  **Run code**. Click on the green button in the top right of the code chunk - or simply type *Ctrl + Enter*/*option + Enter*. Then the command is transferred to the prompt in the console and executed, just as if you had written the command directly at the prompt. Try with a new command in a new line.
+7.  **Run code**. Click on the green button in the top right of the code chunk - or simply type *Ctrl + Enter*/*option + Enter*. Then the command is transferred to the prompt in the console and executed, just as if you had written the command directly at the prompt. Try with a new command in a new line.
 
-9.  **Create a comment**. Put a hashtag (#) before one of the commands in the code chunk and run it. Nothing happens! Hence, you can use hashtags for writing comments in your code chunks.
+8.  **Create a comment**. Put a hashtag (#) before one of the commands in the code chunk and run it. Nothing happens! Hence, you can use hashtags for writing comments in your code chunks.
 
-10. **Save your files often**. It happens that you ask R for something so weird that it shuts down, and then it is a pity to have lost your work.
+9. **Save your files often**. It happens that you ask R for something so weird that it shuts down, and then it is a pity to have lost your work.
 
 ## R Packages
 
@@ -55,7 +53,7 @@ R is born with a lot of functionalities, but the enormous community of R users a
 
 An R package needs be *installed* and *loaded* before you can use its functionalities. You only have to install a package once (until you re-install R), whereas you have to load it in every R session you want to use it. As an example, let's install the package `ContaminatedMixt`.
 
-11. **Install**. Choose one of the two installation methods:
+10. **Install**. Choose one of the two installation methods:
 
 <!-- -->
 
@@ -73,19 +71,19 @@ b.  Using the graphical interface:
 
 A lot of red text will be written in the console while the installation goes on. This usually does not mean there was a problem, unless the text reads 'error' or 'exit'. In the end, the package is installed, or you will see an explanation of what went wrong.
 
-12. **Loading**. Load the package you just installed with the command `library(ContaminatedMixt)`. If everything went well, you should now able to run the command `data(package = 'ContaminatedMixt')` which will show you an overview of the datasets included in the package.
+11. **Loading**. Load the package you just installed with the command `library(ContaminatedMixt)`. If everything went well, you should now able to run the command `data(package = 'ContaminatedMixt')` which will show you an overview of the datasets included in the package.
 
 ## Basic R commands
 
 We will now have a look at basic commands in R that you just learned about. We will use an in-build dataset of R called `trees`. Copy-paste the commands into your document or write them yourself to get a hang of the coding! Start thinking about the structure of you document and when to create new code chunks.
 
-13. To start with, load the `tidyverse` package.
+12. To start with, load the `tidyverse` package.
 
 ```{r}
 library(tidyverse)
 ```
 
-14. Now, load the `trees` dataset by copying and executing the following commands:
+13. Now, load the `trees` dataset by copying and executing the following commands:
 
 ```{r}
 data("trees")
@@ -93,27 +91,27 @@ view(trees)
 ?trees
 ```
 
-15. Check what information is contained in the `trees` dataset by calling the `summary` function on it:
+14. Check what information is contained in the `trees` dataset by calling the `summary` function on it:
 
 ```{r}
 summary(trees)
 ```
 
-16. How many trees do we have data for?
+15. How many trees do we have data for?
 
-17. Now, extract the column called `Volume` from the dataset and assign it to a new variable called `volume_col`.
+16. Now, extract the column called `Volume` from the dataset and assign it to a new variable called `volume_col`.
 
-18. Display the volume of the first 10 trees.
+17. Display the volume of the first 10 trees.
 
-19. Find the minimum, maximum and mean volume from the column you just extracted. Does it match what was stated in the `summary`?
+18. Find the minimum, maximum and mean volume from the column you just extracted. Does it match what was stated in the `summary`?
 
-20. What class of data structure is `trees`? Make it into a tibble.
+19. What class of data structure is `trees`? Make it into a tibble.
 
 ## Making some graphics
 
 Next, let’s also try to make some plots using the base graphics system in R (in *Presentation III* you will learn to make graphics using the *ggplot2*-package). We will continue to use the `trees` dataset.
 
-21. The dataset `trees` contains 31 observations of 3 variables (diameter, height and volume of black cherry trees). Insert the following two commands in a code chunk, and execute them to make two plots.
+20. The dataset `trees` contains 31 observations of 3 variables (diameter, height and volume of black cherry trees). Insert the following two commands in a code chunk, and execute them to make two plots.
 
 ```{r}
 plot(Volume~Height, data=trees)
@@ -122,9 +120,9 @@ plot(Volume~Height, data=trees, log="y")
 
 ## Shut down R
 
-22. **Close RStudio**. If changes were made either to the Quarto document (shown in the upper-left window) or to the workspace (called 'Global Environment' in the upper-right window) you will be prompted if you like to save those. Answer *Yes* to that; in particular it is important that you save your documents as they contain all relevant commands to reproduce your output and plots.
+21. **Close RStudio**. If changes were made either to the Quarto document (shown in the upper-left window) or to the workspace (called 'Global Environment' in the upper-right window) you will be prompted if you like to save those. Answer *Yes* to that; in particular it is important that you save your documents as they contain all relevant commands to reproduce your output and plots.
 
-23. **Reopen file**. Locate the Quarto document that you saved in question 3 (and question 10!). Start RStudio again, and open the file (via the File menu). Check that you can run it again.
+22. **Reopen file**. Locate the Quarto document that you saved in question 3 (and question 10!). Start RStudio again, and open the file (via the File menu). Check that you can run it again.
 
 Remark - You can also start RStudio by double clicking on a file with the .qmd extension (or other R-readable formats). One advantage of this is that the workspace and the R history will be saved to the same folder as the Quarto document when you later close RStudio, since the *working directory* will be set to the map where the file is located.
 
@@ -132,7 +130,7 @@ Remark - You can also start RStudio by double clicking on a file with the .qmd e
 
 Every R function comes with a help page, that gives a brief description of the function and describes its usage (input/arguments and output/value). Let's use the function `median()` as example. It is, no surprise, computing the median from a vector of numbers.
 
-24. Try these commands:
+23: Try these commands:
 
 ```{r, results="hide"}
 x <- c(1, 3, 8, 9, 100, NA)
@@ -142,7 +140,7 @@ median(x)
 
 The first command defines a vector with six elements, but where the last number is missing (NA = Not Available). Since the last number is missing, `median` returns `NA`. However, could we make `median` find the median of the remaining numbers. Perhaps the help page can help out!
 
-25. Look at the help for the `median` function:
+24. Look at the help for the `median` function:
 
 ```{r}
 ?median
@@ -162,13 +160,13 @@ While working with R, you will get a lot of error messages. Some are easy to und
 
 ## Wrapping up
 
-26. Imagine you need to send your code to a collaborator. Review your code to ensure it is clear and well-structured, so your collaborator can easily understand and follow your work. You might consider emphasizing important points by making text **bold**, [underlined]{.underline} or [blue]{style="color:blue"}.
+25. Imagine you need to send your code to a collaborator. Review your code to ensure it is clear and well-structured, so your collaborator can easily understand and follow your work. You might consider emphasizing important points by making text **bold**, [underlined]{.underline} or [blue]{style="color:blue"}.
 
-27. Render your Quarto document by clicking the Render button with the blue arrow in the toolbar. Once the HTML file is generated, open it in a web browser. Does the document look as you expected? Iterate on your document until it meets your desired format and appearance.
+26. Render your Quarto document by clicking the Render button with the blue arrow in the toolbar. Once the HTML file is generated, open it in a web browser. Does the document look as you expected? Iterate on your document until it meets your desired format and appearance.
 
 ## Extra
 
-28. 
+27. 
 **Mac**
 If you want to render your document to a PDF you need to install `tinyex`. 
 
