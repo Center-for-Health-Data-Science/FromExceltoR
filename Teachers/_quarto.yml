@@ -68,6 +68,8 @@ website:
             text: "Exercise 4, Part 1 - Solutions"
           - href: Solutions/exercise4_PART2_solutions.qmd # Solutions/exercise4_PART2_solutions.qmd
             text: "Exercise 4, Part 2 - Solutions"
+          - href: Solutions/exercise5_solutions.qmd
+            text: "Exercise 5, Solutions"
             
       - section: "Cheat Sheets 👀"
         contents:
