@@ -45,7 +45,6 @@ c
 
 ls()
 
-
 ###### Object Types ######
 
 # Character 
@@ -103,7 +102,6 @@ min(vector2) # minimum value
 max(vector2) # maximum value
 
 length(vector2) # length of vector
-
 
 ###### Working directories ######
 
