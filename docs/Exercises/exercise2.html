@@ -144,7 +144,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Exercises/exercise1A.html">Exercises 🏋🏽</a></li><li class="breadcrumb-item"><a href="../Exercises/exercise2.html">Exercise 2: Tidyverse</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Exercises/exercise0.html">Exercises 🏋🏽</a></li><li class="breadcrumb-item"><a href="../Exercises/exercise2.html">Exercise 2: Tidyverse</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -179,14 +179,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Presentations/presentation1A.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Presentation 1A: Introduction to R</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../Presentations/presentation1B.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Presentation 1B: Introduction to R</span></a>
+  <a href="../Presentations/presentation1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Presentation 1: Introduction to R and Quarto</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -220,14 +214,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Exercises/exercise1A.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Exercise 1A: Introduction to R</span></a>
+  <a href="../Exercises/exercise0.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercise 0: File Tree</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Exercises/exercise1B.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Exercise 1B: Introduction to R</span></a>
+  <a href="../Exercises/exercise1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercise 1: Introduction to R and Quarto</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -367,7 +361,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Exercises/exercise1A.html">Exercises 🏋🏽</a></li><li class="breadcrumb-item"><a href="../Exercises/exercise2.html">Exercise 2: Tidyverse</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Exercises/exercise0.html">Exercises 🏋🏽</a></li><li class="breadcrumb-item"><a href="../Exercises/exercise2.html">Exercise 2: Tidyverse</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Exercise 2: Tidyverse</h1>
 </div>
@@ -441,20 +435,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tbody>
 </table>
 <ol start="2" type="1">
-<li><strong>Load data</strong>. Start by importing the dataset using either the <code>read_excel()</code> function or the <code>Import Dataset</code> button and name it <code>climate</code>. If you load with <code>Import Dataset</code> it is a good idea to copy the command into your script so that the next time you run your script you can just execute that line instead of having to find the file again.</li>
+<li><strong>Load data</strong>. Start by importing the dataset the <code>Import Dataset</code> button and name it <code>climate</code>. When you do this, a command starting with <code>read_excel()</code> is shown the consol. It is a good idea to <strong>copy the command into your script</strong> so that the next time you run your script you can just execute that line instead of having to find the file again.</li>
 </ol>
-<p>If you chose the <code>read_excel()</code> function: In R, when you tell the computer where to find a file, you’re using something called a <em>path.</em> A path is just a set of directions that tells R how to get from one folder (directory) to another. Since your script is saved inside the Scripts directory, you need to tell R how to move up one level to get out of Scripts, and then into the Data folder where your file lives. We write paths as character strings — that means they go inside quotation marks.</p>
-<p>Here’s what this looks like:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_excel</span>(<span class="st">"../Data/climate.xlsx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
-<p>In this path (also illustrated in figure below): - <code>..</code> means “go up one directory” (move from <em>Scripts</em> to <em>FromExceltoR</em> folder). - <code>Data</code> means “go into the <em>Data</em> folder” (move from <em>FromExceltoR</em> to <em>Data</em> folder). - <code>climate.xlsx</code> is the file you want to open.</p>
-<p>The directions are separated by slashs <code>/</code>.</p>
-<p>If you’re ever unsure, tap <em>Tab</em> on your keyboard inside empty quotation marks or after a slash — RStudio will help autocomplete the path based on what’s in your folders.</p>
+<div class="callout-title-container flex-fill">
+What is the character in the <code>read_excel()</code> function?
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The character inside the <code>read_excel()</code> is a <em>path</em> to the excel file your have imported. A path is just a set of directions that tells R how to get from one folder (directory) to another. Since your script is saved inside the Scripts directory, you need to tell R how to move up one level to get out of Scripts, and then into the Data folder where your file lives. We write paths as character strings — that means they go inside quotation marks.</p>
+<p>The path could look like the one below, where the directions are separated by slashs <code>/</code>. This means that we start in the <code>Desktop</code> folder, then go to the <code>Work</code>, to the <code>Courses</code> folder, to the <code>FromExceltoR</code> folder, to the <code>Data</code> folder where we select the <code>climate.xlsx</code> file.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>climate <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"Desktop/Work/Courses/FromExceltoR/Data/climate.xlsx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Have a look at the path inside the <code>read_excel()</code> that was printed in the console when you imported the excel file. Does this path make sense when you think about the files and sub files on your computer?</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="../Figures/file_tree_path.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+<p><img src="../Figures/file_tree_absolute_path.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
 </figure>
+</div>
+</div>
+</div>
 </div>
 <ol start="3" type="1">
 <li><p><strong>First look at data</strong>. Write the name of the dataframe, i.e.&nbsp;<code>climate</code>, into the console and press enter to see the first rows of the dataset. You can also click on the <code>climate</code> object in the Environment panel.</p></li>
@@ -536,7 +543,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>Create a new column that assigns a season (Winter, Spring, Summer, Fall) based on the month. Have a look at the <code>case_when</code> function.</p></li>
 </ol>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -545,7 +552,7 @@ Hint
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Have a look at the <code>case_when</code> function.</p>
 </div>
@@ -565,7 +572,7 @@ Hint
 <li>Extract the unique stations and save them as a vector.</li>
 </ol>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -574,7 +581,7 @@ Hint
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>The <code>unlist</code> function will convert a one-column dataframe to a vector.</p>
 </div>
@@ -588,7 +595,7 @@ Hint
 <li><p>Add a new columns that contains the first three letters of each month in uppercase.</p></li>
 </ol>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -597,7 +604,7 @@ Hint
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Have a look at the <code>str_sub</code> function.</p>
 </div>

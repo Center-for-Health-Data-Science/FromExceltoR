@@ -28,10 +28,8 @@ website:
       
       - section: "Presentations 👩🏽‍🏫"
         contents:
-          - href: Presentations/presentation1A.qmd
-            text: "Presentation 1A: Introduction to R"
-          - href: Presentations/presentation1B.qmd
-            text: "Presentation 1B: Introduction to R"
+          - href: Presentations/presentation1.qmd
+            text: "Presentation 1: Introduction to R and Quarto"
           - href: Presentations/presentation2.qmd
             text: "Presentation 2: Tidyverse"
           - href: Presentations/presentation3.qmd
@@ -41,10 +39,10 @@ website:
         
       - section: "Exercises 🏋🏽"
         contents:
-          - href: Exercises/exercise1A.qmd
-            text: "Exercise 1A: Introduction to R"
-          - href: Exercises/exercise1B.qmd
-            text: "Exercise 1B: Introduction to R"
+          - href: Exercises/exercise0.qmd
+            text: "Exercise 0: File Tree"
+          - href: Exercises/exercise1.qmd
+            text: "Exercise 1: Introduction to R and Quarto"
           - href: Exercises/exercise2.qmd
             text: "Exercise 2: Tidyverse"
           - href: Exercises/exercise3.qmd
