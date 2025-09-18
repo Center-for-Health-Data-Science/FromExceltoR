@@ -273,7 +273,7 @@ p <- ggplot(iris,                # dataframe
 p
 ```
 
-We can also flip the chart. We update the plot, p, be reassignment.
+We can also flip the chart. We update the plot, p, by reassignment.
 
 ```{r}
 p <- p + coord_flip()

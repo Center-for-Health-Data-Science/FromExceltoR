@@ -76,7 +76,13 @@ ggplot(climate,
   facet_wrap(vars(station))
 ```
 
-4.  Is it necessary to have a legend in the faceted plot? How can you remove this legend? Hint: try adding a `theme()` with `legend.position = "none"` inside it.
+4.  Is it necessary to have a legend in the faceted plot? How can you remove this legend?
+
+::: {.callout-tip collapse="true"}
+## Hint
+try adding a `theme()` with `legend.position = "none"` inside it.
+:::
+
 
 ```{r}
 ggplot(climate, 
@@ -90,9 +96,9 @@ ggplot(climate,
 
 ### Graphic files
 
-5.  Use `ggsave(file="weather.jpeg")` to remake the last ggplot as a jpeg-file and save it. The file will be saved on your working directory. Locate this file on your computer and open it.
+5.  Use `ggsave(file="weather.jpeg")` to re-make the last ggplot as a jpeg-file and save it. The file will be saved on your working directory. Locate this file on your computer and open it.
 
-6.  Use `ggsave(file="weather.png", width=10, height=8, units="cm")` to remake the last ggplot as a png-file and save it. What do the three other options do? Look at the help page `?ggsave` to get an overview of the possible options.
+6.  Use `ggsave(file="weather.png", width=10, height=8, units="cm")` to re-make the last ggplot as a png-file and save it. What do the three other options do? Look at the help page `?ggsave` to get an overview of the possible options.
 
 ### Scatter plot II: error bars
 
@@ -120,11 +126,15 @@ p
 
 9.  Add error bars to the plot, which represent the average number of sunshine hours plus/minus the standard deviation of the observations. The relevant geom is called `geom_errorbar`.\
 
-Hint:
+::: {.callout-tip collapse="true"}
+## Hint
 
-```{r}
+```{r eval=FALSE}
 geom_errorbar(aes(ymin = sun_avg - sun_sd, ymax = sun_avg + sun_sd), width = 0.2)
 ```
+:::
+
+
 
 ```{r}
 p <- p + geom_errorbar(aes(ymin = sun_avg - sun_sd, ymax = sun_avg + sun_sd), width = 0.2)
@@ -150,7 +160,7 @@ ggplot(climate,
   geom_line()
 ```
 
-12. The **month** variable was read into R as a numerical variable. Convert this variable to a factor and make the scatter plot from 8 again. What has changed?
+12. The **month** variable was read into R as a numerical variable. Convert this variable to a factor and make the line plot from 11 again. What has changed?
 
 ```{r}
 climate$month <- as.factor(climate$month)
@@ -161,8 +171,9 @@ str(climate)
 p <- ggplot(climate, 
             aes(x = month,
             y = rain, 
-            color = station)) + 
-  geom_line(aes(group = station))
+            color = station,
+            group = station)) + 
+  geom_line()
 
 p
 ```
@@ -181,7 +192,7 @@ p
 
 We can add several geoms to the same plot to show several things at once.
 
-14. (Re)Make the line plot of monthly rainfall and add `geom_point()` to it.
+14. Add `geom_point()` to the line plot from above.
 
 ```{r}
 p <- p + geom_point()
@@ -272,7 +283,7 @@ ggplot(climate,
 
 ### Histogram
 
-23. Make a histogram (find the correct `geom_` for this) of rain from the climate dataset. Interpret the plot, what does it show?
+23. Make a histogram of rain from the climate dataset (find the correct `geom_` for this). Interpret the plot, what does it show?
 
 *The plot shows the distribution of accumulated rainfall across stations and months. For most months, the rainfall is around 50 mm.*
 
@@ -306,7 +317,7 @@ ggplot(climate,
 
 ### Bar chart I
 
-26. Make a bar chart (`geom_col()`) which visualizes the sunshine hours per month. If you have not done so in question 13, convert month to a factor now and remake the plot.
+26. Make a bar chart (`geom_col()`) which visualizes the sunshine hours per month. If you have not done so in question 12, convert month to a factor now and remake the plot.
 
 ```{r}
 ggplot(climate, 
@@ -388,10 +399,10 @@ p <- rain_summary %>%
 p
 ```
 
-32. Add labels to each bar that state the sum of the rainfall. You can do this by adding the `label` keyword to the `aes()` and adding `geom_label()` to the plot. Just like geoms like `geom_scatter` look at the `aes()` for knowing what to plot on the x and y axis, `geom_label` looks at it to know what to use for labels.
+32. Add labels to each bar that state the sum of the rainfall per station. You can do this by adding `geom_label()` to the plot and providing the information under the `label` keyword inside the `aes()`. 
 
 ```{r}
-p + geom_label(aes(label = sum(rain_sum)))
+p + geom_label(aes(label = rain_sum))
 ```
 
 33. Adjust the label positions so that the labels are positioned above the bars instead of inside them.
@@ -400,18 +411,21 @@ p + geom_label(aes(label = sum(rain_sum)))
 p + geom_label(aes(label = rain_sum), 
                position = position_nudge(y = 35))
 ```
+## Wrapping up
 
 34. To alter size of figure in report: `{r, fig.width=10, fig.height=10}`
 
 ## Optional section
 
 35. Load in the climate change dataset you exported in the last optional exercises.
+
 ```{r}
 climate_change <- readxl::read_excel('../../Data/climate_change.xlsx')
 head(climate_change)
 ```
 
-36. Use `group_by`, `summarize`, and `facet_wrap` to recreate this plot. Use `group_by`, `summarize`, and `facet_wrap` to recreate this plot. Consider if you need to change the class of some of the variables prior to plotting.
+36. Use `group_by`, `summarize`, and `facet_wrap` to recreate this plot. Consider if you need to change the class of some of the variables prior to plotting.
+
 ```{r}
 climate_change$year <- factor(climate_change$year, levels = c(2016, 2056))
 climate_change$season <- factor(climate_change$season, levels = c('Winter', 'Spring', 'Summer', 'Fall'))
@@ -431,6 +445,7 @@ ggsave('../Figures/exercise3_36.png')
 ```
 
 37. Your supervisor does not like colors. Change the stratification to be based on `linetype` instead of `color`. Add a white background, update the labels to start with uppercase letters, and provide the plot with a meaningful title.
+
 ```{r}
 climate_change %>% 
   group_by(year, season, station) %>% 
@@ -448,7 +463,8 @@ climate_change %>%
        linetype = 'Year')
 ```
 
-38. Recreate this plot. Use whatever colors you like (but change them from the default coloring) and give the plot at meaningful title. 
+38. Recreate this plot. Use whatever colors you like (but change them from the default coloring) and give the plot at meaningful title.
+
 ```{r}
 climate_change %>% 
   ggplot(aes(x = af, 
@@ -464,7 +480,8 @@ climate_change %>%
 ggsave('../Figures/exercise3_38.png')
 ```
 
-39. Recreate this plot using `geom_tile()` to make a heatmap, and `scale_fill_gradient2()` to select custom colors. 
+39. Recreate this plot using `geom_tile()` to make a heatmap, and `scale_fill_gradient2()` to select custom colors.
+
 ```{r}
 climate_change %>% 
   filter(year == 2016) %>% 
@@ -484,6 +501,7 @@ ggsave('../Figures/exercise3_39.png')
 ```
 
 40. Make the same plot as above for year 2056. Compare the two plots. How will the sunlight change across stations and months?
+
 ```{r}
 climate_change %>% 
   filter(year == 2056) %>% 
@@ -499,11 +517,3 @@ climate_change %>%
        title = 'Monthly Sunlight Distribution Across Stations in 2056'
        )
 ```
-
-
-
-
-
-
-
-
