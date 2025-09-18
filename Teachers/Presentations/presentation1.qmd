@@ -167,7 +167,7 @@ You can add comments above or to the right of the code. This will not influence 
 
 **Control whether code is executed.**
 
-**eval=FALSE** not execute the code and **eval=TRUE** will execute the code.
+**eval=FALSE** will not execute the code and **eval=TRUE** will execute the code in the compiled document.
 
 The code is shown, but the result is not shown (`{r, echo=TRUE, eval=FALSE}`):
 
@@ -180,7 +180,7 @@ The code is shown, but the result is not shown (`{r, echo=TRUE, eval=FALSE}`):
 The code is not shown, but the result is shown (`{r, echo=FALSE, eval=TRUE}`):
 
 ```{r echo=FALSE}
-# The code will be hidden, but the output will be shown.
+# The code will be hidden in the compiled document, but the output will be shown.
 1+3
 ```
 
@@ -262,6 +262,7 @@ class(char1)
 ```
 
 **Factor**
+
 ```{r}
 num1 <- factor(num1)
 num1
@@ -275,6 +276,7 @@ class(char1)
 ```
 
 **A vector of numeric values**
+
 ```{r}
 vector1 <- c(1, 2, 4, 6, 8, 2, 5, 7)
 vector1
@@ -311,7 +313,6 @@ max(vector1) # maximum value
 
 length(vector1) # length of vector
 ```
-
 
 ## Data structures
 
@@ -397,7 +398,11 @@ class(my_data2)
 
 You can inspect an R objects in different ways:
 
-1\. Simply call it and it will be printed to the console. 2. With large object it is preferable to use \`head()\` or \`tail()\` to only see the first or last part. 3. To see the data in a tabular excel style format you can use \`view()\`
+1\. Simply call it and it will be printed to the console.
+
+2\. With large object it is preferable to use \`head()\` or \`tail()\` to only see the first or last part.
+
+3\. To see the data in a tabular excel style format you can use \`view()\`
 
 **Remove something:**
 

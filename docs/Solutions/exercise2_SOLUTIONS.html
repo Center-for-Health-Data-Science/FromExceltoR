@@ -352,6 +352,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#working-with-the-data" id="toc-working-with-the-data" class="nav-link" data-scroll-target="#working-with-the-data">Working with the data</a></li>
   <li><a href="#manipulating-the-data" id="toc-manipulating-the-data" class="nav-link" data-scroll-target="#manipulating-the-data">Manipulating the data</a></li>
   <li><a href="#complex-operations" id="toc-complex-operations" class="nav-link" data-scroll-target="#complex-operations">Complex operations</a></li>
+  <li><a href="#wrapping-up" id="toc-wrapping-up" class="nav-link" data-scroll-target="#wrapping-up">Wrapping up</a></li>
   <li><a href="#optional-section" id="toc-optional-section" class="nav-link" data-scroll-target="#optional-section">Optional section</a></li>
   </ul>
 </nav>
@@ -381,7 +382,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="setting-up" class="level3">
 <h3 class="anchored" data-anchor-id="setting-up">Setting up</h3>
 <ol start="0" type="1">
-<li><p><strong>Create new Quarto document</strong>. For working on the exercise, create a new Quarto document with a descriptive name and save it where you can find it again, i.e.&nbsp;in the folder where you downloaded the teaching material. You can use the commands shown in presentation2.qmd to solve this exercise. There is no shame in outright copying from the presentation2.qmd script, provided you understand what the command is doing.</p></li>
+<li><p><strong>Create new Quarto document</strong>. For working on the exercise, create a new Quarto document with a descriptive name and save it in the Scripts folder. You can use the commands shown in presentation2.qmd to solve this exercise. There is no shame in outright copying from the presentation2.qmd script, provided you understand what the command is doing.</p></li>
 <li><p><strong>Load packages</strong>. You will need to load the packages <code>tidyverse</code> and <code>readxl</code> for this exercise.</p></li>
 </ol>
 <div class="cell">
@@ -391,7 +392,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="importing-data-and-a-first-look-at-the-dataset" class="level3">
 <h3 class="anchored" data-anchor-id="importing-data-and-a-first-look-at-the-dataset">Importing data and a first look at the dataset</h3>
-<p>The data set used in these exercises was compiled from data downloaded from the website of the UK’s national weather service, the <a href="http://www.metoffice.gov.uk/public/weather/climate-historic/"><em>Met Office</em></a>. It is saved in the file <strong>climate.xlsx</strong><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> which can be found in the folder <code>Exercises/Data/</code>. The spreadsheet contains monthly data from five UK weather stations for the following variables:</p>
+<p>The data set used in these exercises was compiled from data downloaded from the website of the UK’s national weather service, the <a href="http://www.metoffice.gov.uk/public/weather/climate-historic/"><em>Met Office</em></a>. It is saved in the file <strong>climate.xlsx</strong><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> which can be found in the folder <code>Data/</code>. The spreadsheet contains monthly data from five UK weather stations for the following variables:</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -431,7 +432,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tbody>
 </table>
 <ol start="2" type="1">
-<li><strong>Load data</strong>. Start by importing the dataset using either the <code>read_excel()</code> function or the <code>Import Dataset</code> button and name it <code>climate</code>. If you load with <code>Import Dataset</code> it is a good idea to copy the command into your script so that the next time you run your script you can just execute that line instead of having to find the file again.</li>
+<li><strong>Load data</strong>. Start by importing the dataset with the <code>Import Dataset</code> button and name it <code>climate</code>. When you do this, a command starting with <code>read_excel()</code> is shown in the console. It is a good idea to <strong>copy the command into your script</strong> so that the next time you run your script you can just execute that line instead of having to find the file again.</li>
 </ol>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>climate <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">'../../Data/climate.xlsx'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -559,7 +560,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <ol start="7" type="1">
-<li><p>Select from the climate dataset (remember to <code>filter</code> rows and <code>select</code> columns):</p>
+<li><p>Filter/select from the climate dataset (remember to <code>filter</code> rows and <code>select</code> columns):</p>
 <ol type="a">
 <li><p>all rows from the station in Oxford</p></li>
 <li><p>all rows from the station in Oxford when there were at least 100 hours of sunlight</p></li>
@@ -752,7 +753,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="manipulating-the-data" class="level3">
 <h3 class="anchored" data-anchor-id="manipulating-the-data">Manipulating the data</h3>
 <ol start="13" type="1">
-<li>Create a new column in <code>climate</code> and save the new dataset in a different variable so you don’t overwrite your original <code>climate</code> data. The new column should count the number of days in each month without air frost, based on the existing <code>af</code> column. For this exercise, assume each month has 30 days. To find the number of days without air frost, subtract the value in the <code>af</code> column from 30.</li>
+<li>Create a new column in <code>climate</code> and save the new dataset in a different object so you don’t overwrite your original <code>climate</code> data. The new column should count the number of days in each month without air frost, based on the existing <code>af</code> column. For this exercise, assume each month has 30 days. To find the number of days without air frost, subtract the value in the <code>af</code> column from 30.</li>
 </ol>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>climate2 <span class="ot">&lt;-</span> climate <span class="sc">%&gt;%</span> </span>
@@ -858,6 +859,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>  <span class="co"># head(n = 1) # to only get the first/largest one</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+<section id="wrapping-up" class="level2">
+<h2 class="anchored" data-anchor-id="wrapping-up">Wrapping up</h2>
 <ol start="18" type="1">
 <li>Like in the last exercise; imagine you need to send your code to a collaborator. Review your code to ensure it is clear and well-structured, so your collaborator can easily understand and follow your work. Render your Quarto document and look at the result.</li>
 </ol>
@@ -931,7 +935,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <ol start="21" type="1">
-<li>Create a new column that assigns a season (Winter, Spring, Summer, Fall) based on the month. Have a look at the <code>case_when</code> function.</li>
+<li>Create a new column that assigns a season (Winter, Spring, Summer, Fall) based on the month.</li>
 </ol>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">

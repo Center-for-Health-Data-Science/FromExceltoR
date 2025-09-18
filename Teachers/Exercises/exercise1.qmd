@@ -45,13 +45,13 @@ To save your code, you need to store it in a file. There are several file format
 
 8.  **Create a comment**. Put a hashtag (#) before one of the commands in the code chunk and run it. Nothing happens! Hence, you can use hashtags for writing comments in your code chunks.
 
-9. **Save your files often**. It happens that you ask R for something so weird that it shuts down, and then it is a pity to have lost your work.
+9.  **Save your files often**. It happens that you ask R for something so weird that it shuts down, and then it is a pity to have lost your work.
 
 ## R Packages
 
 R is born with a lot of functionalities, but the enormous community of R users also contributes to R all the time by developing code and sharing it in R packages. An R package is simply a collection of R functions and/or datasets (including documentation). As of September 20, 2024, there are 21,361 packaged available at the CRAN repository (and there are many other repositories).
 
-An R package needs be *installed* and *loaded* before you can use its functionalities. You only have to install a package once (until you re-install R), whereas you have to load it in every R session you want to use it. As an example, let's install the package `cowplot`.
+An R package needs to be *installed* and *loaded* before you can use its functionalities. You only have to install a package once (until you re-install R), whereas you have to load it in every R session if you want to use it. As an example, let's install the package `cowplot`.
 
 10. **Install**. Choose one of the two installation methods:
 
@@ -71,11 +71,11 @@ b.  Using the graphical interface:
 
 A lot of red text will be written in the console while the installation goes on. This usually does not mean there was a problem, unless the text reads 'error' or 'exit'. In the end, the package is installed, or you will see an explanation of what went wrong.
 
-11. **Loading**. Load the package you just installed with the command `library(cowplot)`. If everything went well, you should now able to run the command `data(package = 'cowplot')` which will show you an overview of the datasets included in the package.
+11. **Loading**. Load the package you just installed with the command `library(cowplot)`. If everything went well, you should now be able to run the command `data(package = 'cowplot')` which will show you an overview of the datasets included in the package.
 
 ## Basic R commands
 
-We will now have a look at basic commands in R that you just learned about. We will use an in-build dataset of R called `trees`. Copy-paste the commands into your document or write them yourself to get a hang of the coding! Start thinking about the structure of you document and when to create new code chunks.
+We will now have a look at basic commands in R that you just learned about. We will use a build-in dataset of R called `trees`. Copy-paste the commands into your document or write them yourself to get a hang of the coding! Start thinking about the structure of you document and when to create new code chunks.
 
 12. To start with, load the `tidyverse` package.
 
@@ -101,7 +101,7 @@ summary(trees)
 
 16. Now, extract the column called `Volume` from the dataset and assign it to a new variable called `volume_col`.
 
-17. Display the volume of the first 10 trees.
+17. Display the the first 10 values of `volume_col`.
 
 18. Find the minimum, maximum and mean volume from the column you just extracted. Does it match what was stated in the `summary`?
 
@@ -166,13 +166,11 @@ While working with R, you will get a lot of error messages. Some are easy to und
 
 ## Extra
 
-27. 
-**Mac**
-If you want to render your document to a PDF you need to install `tinyex`. 
+27. **Mac** If you want to render your document to a PDF you need to install `tinyex`.
 
-Go to https://quarto.org/docs/download/ and install Quarto. 
+Go to https://quarto.org/docs/download/ and install Quarto.
 
-In the top of your console window, switch to **Terminal**. (If the Terminal is not there go to *Tools* → *Terminal* → *New Terminal*.) Write `quarto install tinytex` in the terminal and press enter. When it has completed and gives the message *Installation successful*, change the YAML in the every top of your Quarto document from `format: html` to `format: pdf`. Save and render your Quarto document again and review the PDF file. 
+In the top of your console window, switch to **Terminal**. (If the Terminal is not there go to *Tools* → *Terminal* → *New Terminal*.) Write `quarto install tinytex` in the terminal and press enter. When it has completed and gives the message *Installation successful*, change the YAML in the every top of your Quarto document from `format: html` to `format: pdf`. Save and render your Quarto document again and review the PDF file.
 
 ## Lessons learnt
 

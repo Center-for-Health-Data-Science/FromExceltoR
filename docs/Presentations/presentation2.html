@@ -402,13 +402,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "/Users/srz223/Desktop/DataLab/FromExceltoR/Teachers/Presentations"</code></pre>
+<pre><code>[1] "/Users/pbj825/Desktop/FromExceltoR/Teachers/Presentations"</code></pre>
 </div>
 </div>
 </section>
 <section id="importing-data" class="level2">
 <h2 class="anchored" data-anchor-id="importing-data">Importing data</h2>
-<p>Often we will work with large datasets that already exist in i.e.&nbsp;an excel sheet or a tab separated file (.tsv). We can easily load that data into R, either with the <code>read_excel</code> function or by clicking on ‘Import Dataset’ in the Environment tab (right). We can also load data in via a command. Let’s do this now. Navigate to the data from your working directory. Use the tap-button to check what your options are.</p>
+<p>Often we will work with large datasets that already exist in i.e.&nbsp;an excel sheet or a tab separated file (.tsv). We can easily load that data into R, either with the <code>read_excel</code> function via a command.</p>
+<p>We can also load data by clicking on ‘Import Dataset’ in the Environment tab (right). Let’s do this now. Navigate to the data from your working directory. RStudio will provide you with the full code needed to load the data. You can copy the code and save it for later use.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>crohns <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"../../Data/crohns_disease.xlsx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -444,7 +445,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>[1] 117</code></pre>
 </div>
 </div>
-<p>How many data columns are there and what are their types? Both ‘str’ and ‘summary’ will you what column types you have. Summary has some extra summary stats on numeric columns.</p>
+<p>How many data columns are there and what are their types? Both ‘str’ and ‘summary’ will let you know what column types you have. Summary has some extra stats on numeric columns.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(crohns)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -664,11 +665,11 @@ It is a good idea to make a new line after each pipe symbol.</p>
 # ℹ 107 more rows</code></pre>
 </div>
 </div>
-<p>Just like with <code>count</code> earlier this is not a permanent sort and does not change the order of rows in the original tibble, <code>crohns</code>. <strong>Without assignment (<code>&lt;-</code>)</strong> tidyverse commands only display the result, not save it.</p>
+<p>Just like with <code>count</code> earlier this is not a permanent sort and does not change the order of rows in the original tibble, <code>crohns</code>. <strong>Without assignment (<code>&lt;-</code>)</strong> tidyverse commands only display the result, not saves it.</p>
 </section>
 <section id="filtering-data-selecting-rows-with-filter" class="level2">
 <h2 class="anchored" data-anchor-id="filtering-data-selecting-rows-with-filter">Filtering data (selecting rows) with <code>filter()</code></h2>
-<p>How we subset dataset into subsets we find interesting. For example only female patients:</p>
+<p>How do we subset dataset is interesting. For example only female patients:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>crohns <span class="sc">%&gt;%</span> </span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(sex <span class="sc">==</span> <span class="st">'F'</span>) <span class="co"># processed from left to right</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -689,7 +690,7 @@ It is a good idea to make a new line after each pipe symbol.</p>
 # ℹ 90 more rows</code></pre>
 </div>
 </div>
-<p>A great about tidyverse: write code the way you think. You always filter by defining conditions. If the condition evaluates to ‘TRUE’ the line is included. See only data lines for patients over 65:</p>
+<p>A great thing about tidyverse: you can write code the way you think. You always filter by defining conditions. If the condition evaluates to ‘TRUE’ the line is included. See only data lines for patients over 65:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>crohns <span class="sc">%&gt;%</span> </span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(age <span class="sc">&gt;</span> <span class="dv">65</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -871,7 +872,7 @@ It is a good idea to make a new line after each pipe symbol.</p>
 <div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>without_id <span class="ot">&lt;-</span> crohns <span class="sc">%&gt;%</span> </span>
 <span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>ID)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>We have saved the dataset without the ID column in at new variable. Let’s have a look at this:</p>
+<p>We have saved the dataset without the ID column in a new dataset. Let’s have a look at it:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>without_id</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1104,7 +1105,7 @@ It is a good idea to make a new line after each pipe symbol.</p>
 # ℹ 1 more variable: underweight &lt;chr&gt;</code></pre>
 </div>
 </div>
-<p>By itself, group_by does nothing, we still get the same dataset returned. But it is very useful in combination with other commands! The reason we want to do it this is way is that we can first impose grouping with <code>group_by()</code> and then pipe, <code>%&gt;%</code>, the resulting tibble into summarize which will respect our grouping. So smart!</p>
+<p>By itself, <code>group_by()</code> does nothing, we still get the same dataset returned. But it is very useful in combination with other commands! The reason we want to do it this way is that we can first impose grouping with <code>group_by()</code> and then pipe, <code>%&gt;%</code>, into summarize function where we can calculate other functions, that now will be applied to each subgroup. So smart!</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a>crohns <span class="sc">%&gt;%</span>                      <span class="co"># the dataset</span></span>
 <span id="cb84-2"><a href="#cb84-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sex) <span class="sc">%&gt;%</span>             <span class="co"># grouped by sex</span></span>
@@ -1120,7 +1121,7 @@ It is a good idea to make a new line after each pipe symbol.</p>
 2 M      54.3    56  10.4    17</code></pre>
 </div>
 </div>
-<p>Now we see why <code>n()</code> is useful: It tells us how many lines, i.e.&nbsp;patients are in each group.</p>
+<p>Now we see why <code>n()</code> is useful: It tells us how many lines, i.e.&nbsp;patients are in each sub group.</p>
 <p>Group by sex and treatment, and calculate stats for the number of adverse events.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a>crohns <span class="sc">%&gt;%</span>                              <span class="co"># the dataset</span></span>

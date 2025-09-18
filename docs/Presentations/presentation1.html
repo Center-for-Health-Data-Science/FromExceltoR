@@ -479,8 +479,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "a"               "b"               "c"               "pandoc_dir"     
-[5] "quarto_bin_path"</code></pre>
+<pre><code>[1] "a" "b" "c"</code></pre>
 </div>
 </div>
 </section>
@@ -583,7 +582,7 @@ For executing the code, press the <code>Run</code> button in the top right of th
 <section id="output-of-code-chunks" class="level2">
 <h2 class="anchored" data-anchor-id="output-of-code-chunks">Output of code chunks</h2>
 <p><strong>Control whether code is executed.</strong></p>
-<p><strong>eval=FALSE</strong> not execute the code and <strong>eval=TRUE</strong> will execute the code.</p>
+<p><strong>eval=FALSE</strong> will not execute the code and <strong>eval=TRUE</strong> will execute the code in the compiled document.</p>
 <p>The code is shown, but the result is not shown (<code>{r, echo=TRUE, eval=FALSE}</code>):</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">+</span><span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -864,7 +863,9 @@ Levels: Hello World!</code></pre>
 <section id="fundamental-operations" class="level2">
 <h2 class="anchored" data-anchor-id="fundamental-operations">Fundamental operations</h2>
 <p>You can inspect an R objects in different ways:</p>
-<p>1. Simply call it and it will be printed to the console. 2. With large object it is preferable to use `head()` or `tail()` to only see the first or last part. 3. To see the data in a tabular excel style format you can use `view()`</p>
+<p>1. Simply call it and it will be printed to the console.</p>
+<p>2. With large object it is preferable to use `head()` or `tail()` to only see the first or last part.</p>
+<p>3. To see the data in a tabular excel style format you can use `view()`</p>
 <p><strong>Remove something:</strong></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb99"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(a)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>

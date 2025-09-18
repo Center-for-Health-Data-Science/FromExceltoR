@@ -19,14 +19,12 @@ Before diving into the hands-on exercises, it’s important to get your files or
 
 2.  Go to course website and to the *Data* tab. Press the **DOWNLOAD DATA** button.
 
-3.  Move the *Data* folder to your *FromExceltoR* directory and unzip it. 
+3.  Move the *Data* folder to your *FromExceltoR* directory and unzip it.
 
-4.  Download the presentations via the **DOWNLOAD PRESENTATIONS** button and move it to your *FromExceltoR* directory and unzip it, just like you did with the Data folder. 
+4.  Download the presentations via the **DOWNLOAD PRESENTATIONS** button and move it to your *FromExceltoR* directory and unzip it, just like you did with the Data folder.
 
-5.  Under your *FromExceltoR* directory, make a new directory for your scripts called *Scripts*. 
+5.  Under your *FromExceltoR* directory, make a new directory for your scripts called *Scripts*.
 
 Make sure your file tree looks like this:
 
 ![](../Figures/file_tree.png){fig-align="center"}
-
-

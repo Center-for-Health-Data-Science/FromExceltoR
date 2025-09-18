@@ -389,13 +389,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="setting-up" class="level2">
 <h2 class="anchored" data-anchor-id="setting-up">Setting up</h2>
 <ol start="0" type="1">
-<li><p><strong>Create new Quarto document</strong>. For working on the exercise, create a new Quarto document with a descriptive name and save it where you can find it again, i.e.&nbsp;in the folder where you downloaded the teaching material. You can use the commands shown in presentation2.qmd to solve this exercise. There is no shame in outright copying from the presentation2.qmd script, provided you understand what the command is doing.</p></li>
+<li><p><strong>Create new Quarto document</strong>. For working on the exercise, create a new Quarto document with a descriptive name and save it in the Scripts folder. You can use the commands shown in presentation2.qmd to solve this exercise. There is no shame in outright copying from the presentation2.qmd script, provided you understand what the command is doing.</p></li>
 <li><p><strong>Load packages</strong>. You will need to load the packages <code>tidyverse</code> and <code>readxl</code> for this exercise.</p></li>
 </ol>
 </section>
 <section id="importing-data-and-a-first-look-at-the-dataset" class="level2">
 <h2 class="anchored" data-anchor-id="importing-data-and-a-first-look-at-the-dataset">Importing data and a first look at the dataset</h2>
-<p>The data set used in these exercises was compiled from data downloaded from the website of the UK’s national weather service, the <a href="http://www.metoffice.gov.uk/public/weather/climate-historic/"><em>Met Office</em></a>. It is saved in the file <strong>climate.xlsx</strong><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> which can be found in the folder <code>Exercises/Data/</code>. The spreadsheet contains monthly data from five UK weather stations for the following variables:</p>
+<p>The data set used in these exercises was compiled from data downloaded from the website of the UK’s national weather service, the <a href="http://www.metoffice.gov.uk/public/weather/climate-historic/"><em>Met Office</em></a>. It is saved in the file <strong>climate.xlsx</strong><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> which can be found in the folder <code>Data/</code>. The spreadsheet contains monthly data from five UK weather stations for the following variables:</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -435,7 +435,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tbody>
 </table>
 <ol start="2" type="1">
-<li><strong>Load data</strong>. Start by importing the dataset the <code>Import Dataset</code> button and name it <code>climate</code>. When you do this, a command starting with <code>read_excel()</code> is shown the consol. It is a good idea to <strong>copy the command into your script</strong> so that the next time you run your script you can just execute that line instead of having to find the file again.</li>
+<li><strong>Load data</strong>. Start by importing the dataset with the <code>Import Dataset</code> button and name it <code>climate</code>. When you do this, a command starting with <code>read_excel()</code> is shown in the console. It is a good idea to <strong>copy the command into your script</strong> so that the next time you run your script you can just execute that line instead of having to find the file again.</li>
 </ol>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
@@ -449,7 +449,7 @@ What is the character in the <code>read_excel()</code> function?
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>The character inside the <code>read_excel()</code> is a <em>path</em> to the excel file your have imported. A path is just a set of directions that tells R how to get from one folder (directory) to another. Since your script is saved inside the Scripts directory, you need to tell R how to move up one level to get out of Scripts, and then into the Data folder where your file lives. We write paths as character strings — that means they go inside quotation marks.</p>
+<p>The character inside the <code>read_excel()</code> is a <em>path</em> to the excel file you have imported. A path is just a set of directions that tells R how to get from one folder (directory) to another. Since your script is saved inside the Scripts directory, you need to tell R how to move up one level to get out of Scripts, and then into the Data folder where your file lives. We write paths as character strings — that means they go inside quotation marks.</p>
 <p>The path could look like the one below, where the directions are separated by slashs <code>/</code>. This means that we start in the <code>Desktop</code> folder, then go to the <code>Work</code>, to the <code>Courses</code> folder, to the <code>FromExceltoR</code> folder, to the <code>Data</code> folder where we select the <code>climate.xlsx</code> file.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>climate <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"Desktop/Work/Courses/FromExceltoR/Data/climate.xlsx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -481,7 +481,7 @@ What is the character in the <code>read_excel()</code> function?
 <ol start="5" type="1">
 <li><p>Count the number of rows that did not have any days with air frost.</p></li>
 <li><p>Count the number of rows <u>per station</u> that did not have any days with air frost.</p></li>
-<li><p>Select from the climate dataset (remember to <code>filter</code> rows and <code>select</code> columns):</p>
+<li><p>Filter/select from the climate dataset (remember to <code>filter</code> rows and <code>select</code> columns):</p>
 <ol type="a">
 <li><p>all rows from the station in Oxford</p></li>
 <li><p>all rows from the station in Oxford when there were at least 100 hours of sunlight</p></li>
@@ -501,7 +501,7 @@ What is the character in the <code>read_excel()</code> function?
 <section id="manipulating-the-data" class="level2">
 <h2 class="anchored" data-anchor-id="manipulating-the-data">Manipulating the data</h2>
 <ol start="13" type="1">
-<li><p>Create a new column in <code>climate</code> and save the new dataset in a different variable so you don’t overwrite your original <code>climate</code> data. The new column should count the number of days in each month without air frost, based on the existing <code>af</code> column. For this exercise, assume each month has 30 days. To find the number of days without air frost, subtract the value in the <code>af</code> column from 30.</p></li>
+<li><p>Create a new column in <code>climate</code> and save the new dataset in a different object so you don’t overwrite your original <code>climate</code> data. The new column should count the number of days in each month without air frost, based on the existing <code>af</code> column. For this exercise, assume each month has 30 days. To find the number of days without air frost, subtract the value in the <code>af</code> column from 30.</p></li>
 <li><p>Add another column to your new dataset that says whether the weather this month was good. We consider a month to be good if it had at least 100 hours of sunshine and less than 100 mm of rain. Otherwise the weather was bad.</p></li>
 <li><p>How many months are there with good weather (use the column you made in 14) for each station? Find the station that has the most months with good weather.</p></li>
 </ol>
@@ -510,7 +510,7 @@ What is the character in the <code>read_excel()</code> function?
 <h2 class="anchored" data-anchor-id="complex-operations">Complex operations</h2>
 <p>The final questions require that you combine commands and variables of the type above.</p>
 <ol start="16" type="1">
-<li><p>For each weather station apart from the one in Armagh, compute the total rainfall and sunshine duration for months that had no days of air frost. Present the totals in centimetres and days, respectively.</p></li>
+<li><p>For each weather station apart from the one in Armagh, compute the total rainfall and sunshine duration for months that had no days of air frost. Present the totals in centimeters and days, respectively.</p></li>
 <li><p>Identify the weather station for which the median number of monthly sunshine hours over the months April to September was largest.</p></li>
 </ol>
 </section>
@@ -540,7 +540,7 @@ What is the character in the <code>read_excel()</code> function?
 <ol start="19" type="1">
 <li><p>Modify the station names so that they start with capital letters.</p></li>
 <li><p>Create a new column that contains the month names (e.g., ‘January’, ‘February’, etc.). Could someone before you have needed the <code>month.name</code> in R?</p></li>
-<li><p>Create a new column that assigns a season (Winter, Spring, Summer, Fall) based on the month. Have a look at the <code>case_when</code> function.</p></li>
+<li><p>Create a new column that assigns a season (Winter, Spring, Summer, Fall) based on the month.</p></li>
 </ol>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">

@@ -13,13 +13,13 @@ knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
 
 ## Setting up
 
-0.  **Create new Quarto document**. For working on the exercise, create a new Quarto document with a descriptive name and save it where you can find it again, i.e. in the folder where you downloaded the teaching material. You can use the commands shown in presentation2.qmd to solve this exercise. There is no shame in outright copying from the presentation2.qmd script, provided you understand what the command is doing.
+0.  **Create new Quarto document**. For working on the exercise, create a new Quarto document with a descriptive name and save it in the Scripts folder. You can use the commands shown in presentation2.qmd to solve this exercise. There is no shame in outright copying from the presentation2.qmd script, provided you understand what the command is doing.
 
 1.  **Load packages**. You will need to load the packages `tidyverse` and `readxl` for this exercise.
 
 ## Importing data and a first look at the dataset
 
-The data set used in these exercises was compiled from data downloaded from the website of the UK's national weather service, the [*Met Office*](http://www.metoffice.gov.uk/public/weather/climate-historic/). It is saved in the file **climate.xlsx**[^1] which can be found in the folder `Exercises/Data/`. The spreadsheet contains monthly data from five UK weather stations for the following variables:
+The data set used in these exercises was compiled from data downloaded from the website of the UK's national weather service, the [*Met Office*](http://www.metoffice.gov.uk/public/weather/climate-historic/). It is saved in the file **climate.xlsx**[^1] which can be found in the folder `Data/`. The spreadsheet contains monthly data from five UK weather stations for the following variables:
 
 [^1]: Contains public sector information licensed under the [Open Government Licence v3.0](http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/).
 
@@ -33,14 +33,15 @@ The data set used in these exercises was compiled from data downloaded from the 
 | **sun**       | Sunshine duration in hours          |
 | **device**    | Brand of sunshine recorder / sensor |
 
-2.  **Load data**. Start by importing the dataset the `Import Dataset` button and name it `climate`. When you do this, a command starting with `read_excel()` is shown the consol. It is a good idea to **copy the command into your script** so that the next time you run your script you can just execute that line instead of having to find the file again.
+2.  **Load data**. Start by importing the dataset with the `Import Dataset` button and name it `climate`. When you do this, a command starting with `read_excel()` is shown in the console. It is a good idea to **copy the command into your script** so that the next time you run your script you can just execute that line instead of having to find the file again.
 
 ::: {.callout-note collapse="true"}
 ## What is the character in the `read_excel()` function?
 
-The character inside the `read_excel()` is a *path* to the excel file your have imported. A path is just a set of directions that tells R how to get from one folder (directory) to another. Since your script is saved inside the Scripts directory, you need to tell R how to move up one level to get out of Scripts, and then into the Data folder where your file lives. We write paths as character strings — that means they go inside quotation marks.
+The character inside the `read_excel()` is a *path* to the excel file you have imported. A path is just a set of directions that tells R how to get from one folder (directory) to another. Since your script is saved inside the Scripts directory, you need to tell R how to move up one level to get out of Scripts, and then into the Data folder where your file lives. We write paths as character strings — that means they go inside quotation marks.
 
 The path could look like the one below, where the directions are separated by slashs `/`. This means that we start in the `Desktop` folder, then go to the `Work`, to the `Courses` folder, to the `FromExceltoR` folder, to the `Data` folder where we select the `climate.xlsx` file. 
+
 ```{r eval=FALSE}
 climate <- read_excel("Desktop/Work/Courses/FromExceltoR/Data/climate.xlsx")
 ```
@@ -73,7 +74,7 @@ Before you proceed with the exercises in this document, make sure you load the `
 
 6.  Count the number of rows [per station]{.underline} that did not have any days with air frost.
 
-7.  Select from the climate dataset (remember to `filter` rows and `select` columns):
+7.  Filter/select from the climate dataset (remember to `filter` rows and `select` columns):
 
     a.  all rows from the station in Oxford
 
@@ -97,7 +98,7 @@ The next few questions build on each other, each adding a piece of code:
 
 ## Manipulating the data
 
-13. Create a new column in `climate` and save the new dataset in a different variable so you don’t overwrite your original `climate` data. The new column should count the number of days in each month without air frost, based on the existing `af` column. For this exercise, assume each month has 30 days. To find the number of days without air frost, subtract the value in the `af` column from 30.
+13. Create a new column in `climate` and save the new dataset in a different object so you don’t overwrite your original `climate` data. The new column should count the number of days in each month without air frost, based on the existing `af` column. For this exercise, assume each month has 30 days. To find the number of days without air frost, subtract the value in the `af` column from 30.
 
 14. Add another column to your new dataset that says whether the weather this month was good. We consider a month to be good if it had at least 100 hours of sunshine and less than 100 mm of rain. Otherwise the weather was bad.
 
@@ -107,7 +108,7 @@ The next few questions build on each other, each adding a piece of code:
 
 The final questions require that you combine commands and variables of the type above.
 
-16. For each weather station apart from the one in Armagh, compute the total rainfall and sunshine duration for months that had no days of air frost. Present the totals in centimetres and days, respectively.
+16. For each weather station apart from the one in Armagh, compute the total rainfall and sunshine duration for months that had no days of air frost. Present the totals in centimeters and days, respectively.
 
 17. Identify the weather station for which the median number of monthly sunshine hours over the months April to September was largest.
 
@@ -139,7 +140,7 @@ head(climate_change)
 
 20. Create a new column that contains the month names (e.g., 'January', 'February', etc.). Could someone before you have needed the `month.name` in R?
 
-21. Create a new column that assigns a season (Winter, Spring, Summer, Fall) based on the month. Have a look at the `case_when` function. 
+21. Create a new column that assigns a season (Winter, Spring, Summer, Fall) based on the month.
 
 ::: {.callout-tip collapse="true"}
 ## Hint

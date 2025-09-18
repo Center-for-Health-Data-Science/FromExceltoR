@@ -29,7 +29,9 @@ getwd()
 
 ## Importing data
 
-Often we will work with large datasets that already exist in i.e. an excel sheet or a tab separated file (.tsv). We can easily load that data into R, either with the `read_excel` function or by clicking on 'Import Dataset' in the Environment tab (right). We can also load data in via a command. Let's do this now. Navigate to the data from your working directory. Use the tap-button to check what your options are.
+Often we will work with large datasets that already exist in i.e. an excel sheet or a tab separated file (.tsv). We can easily load that data into R, either with the `read_excel` function via a command. 
+
+We can also load data by clicking on 'Import Dataset' in the Environment tab (right). Let's do this now. Navigate to the data from your working directory. RStudio will provide you with the full code needed to load the data. You can copy the code and save it for later use.
 
 ```{r}
 crohns <- read_excel("../../Data/crohns_disease.xlsx")
@@ -55,7 +57,7 @@ dim(crohns)
 nrow(crohns)
 ```
 
-How many data columns are there and what are their types? Both 'str' and 'summary' will you what column types you have. Summary has some extra summary stats on numeric columns.
+How many data columns are there and what are their types? Both 'str' and 'summary' will let you know what column types you have. Summary has some extra stats on numeric columns.
 
 ```{r}
 summary(crohns)
@@ -148,18 +150,18 @@ crohns %>%
   arrange(sex, desc(age))
 ```
 
-Just like with `count` earlier this is not a permanent sort and does not change the order of rows in the original tibble, `crohns`. **Without assignment (`<-`)** tidyverse commands only display the result, not save it.  
+Just like with `count` earlier this is not a permanent sort and does not change the order of rows in the original tibble, `crohns`. **Without assignment (`<-`)** tidyverse commands only display the result, not saves it.  
 
 ## Filtering data (selecting rows) with `filter()`
 
-How we subset dataset into subsets we find interesting. For example only female patients:
+How do we subset dataset is interesting. For example only female patients:
 
 ```{r}
 crohns %>% 
   filter(sex == 'F') # processed from left to right
 ```
 
-A great about tidyverse: write code the way you think. You always filter by defining conditions. If the condition evaluates to 'TRUE' the line is included. See only data lines for patients over 65:
+A great thing about tidyverse: you can write code the way you think. You always filter by defining conditions. If the condition evaluates to 'TRUE' the line is included. See only data lines for patients over 65:
 
 ```{r}
 crohns %>% 
@@ -244,7 +246,7 @@ without_id <- crohns %>%
   select(-ID)
 ```
 
-We have saved the dataset without the ID column in at new variable. Let's have a look at this:
+We have saved the dataset without the ID column in a new dataset. Let's have a look at it:
 
 ```{r}
 without_id
@@ -346,7 +348,7 @@ crohns %>%
   group_by(sex, treat)
 ```
 
-By itself, group_by does nothing, we still get the same dataset returned. But it is very useful in combination with other commands! The reason we want to do it this is way is that we can first impose grouping with `group_by()` and then pipe, `%>%`, the resulting tibble into summarize which will respect our grouping. So smart!
+By itself, `group_by()` does nothing, we still get the same dataset returned. But it is very useful in combination with other commands! The reason we want to do it this way is that we can first impose grouping with `group_by()` and then pipe, `%>%`, into summarize function where we can calculate other functions, that now will be applied to each subgroup. So smart!
 
 ```{r, message=FALSE}
 crohns %>%                      # the dataset
@@ -357,7 +359,7 @@ crohns %>%                      # the dataset
             n = n())            # get the number of observations
 ```
 
-Now we see why `n()` is useful: It tells us how many lines, i.e. patients are in each group.
+Now we see why `n()` is useful: It tells us how many lines, i.e. patients are in each sub group.
 
 Group by sex and treatment, and calculate stats for the number of adverse events.
 

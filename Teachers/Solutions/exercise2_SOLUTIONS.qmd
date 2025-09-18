@@ -12,7 +12,7 @@ knitr::opts_chunk$set(echo = TRUE, eval = TRUE)
 
 ### Setting up
 
-0.  **Create new Quarto document**. For working on the exercise, create a new Quarto document with a descriptive name and save it where you can find it again, i.e. in the folder where you downloaded the teaching material. You can use the commands shown in presentation2.qmd to solve this exercise. There is no shame in outright copying from the presentation2.qmd script, provided you understand what the command is doing.
+0.  **Create new Quarto document**. For working on the exercise, create a new Quarto document with a descriptive name and save it in the Scripts folder. You can use the commands shown in presentation2.qmd to solve this exercise. There is no shame in outright copying from the presentation2.qmd script, provided you understand what the command is doing.
 
 1.  **Load packages**. You will need to load the packages `tidyverse` and `readxl` for this exercise.
 
@@ -23,7 +23,7 @@ library(readxl)
 
 ### Importing data and a first look at the dataset
 
-The data set used in these exercises was compiled from data downloaded from the website of the UK's national weather service, the [*Met Office*](http://www.metoffice.gov.uk/public/weather/climate-historic/). It is saved in the file **climate.xlsx**[^1] which can be found in the folder `Exercises/Data/`. The spreadsheet contains monthly data from five UK weather stations for the following variables:
+The data set used in these exercises was compiled from data downloaded from the website of the UK's national weather service, the [*Met Office*](http://www.metoffice.gov.uk/public/weather/climate-historic/). It is saved in the file **climate.xlsx**[^1] which can be found in the folder `Data/`. The spreadsheet contains monthly data from five UK weather stations for the following variables:
 
 [^1]: Contains public sector information licensed under the [Open Government Licence v3.0](http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/).
 
@@ -37,7 +37,7 @@ The data set used in these exercises was compiled from data downloaded from the 
 | **sun**       | Sunshine duration in hours          |
 | **device**    | Brand of sunshine recorder / sensor |
 
-2.  **Load data**. Start by importing the dataset using either the `read_excel()` function or the `Import Dataset` button and name it `climate`. If you load with `Import Dataset` it is a good idea to copy the command into your script so that the next time you run your script you can just execute that line instead of having to find the file again.
+2.  **Load data**. Start by importing the dataset with the `Import Dataset` button and name it `climate`. When you do this, a command starting with `read_excel()` is shown in the console. It is a good idea to **copy the command into your script** so that the next time you run your script you can just execute that line instead of having to find the file again.
 
 ```{r}
 climate <- read_excel('../../Data/climate.xlsx')
@@ -104,7 +104,7 @@ climate %>%
   count()
 ```
 
-7.  Select from the climate dataset (remember to `filter` rows and `select` columns):
+7.  Filter/select from the climate dataset (remember to `filter` rows and `select` columns):
 
     a.  all rows from the station in Oxford
 
@@ -191,7 +191,7 @@ climate %>%
 
 ### Manipulating the data
 
-13. Create a new column in `climate` and save the new dataset in a different variable so you don’t overwrite your original `climate` data. The new column should count the number of days in each month without air frost, based on the existing `af` column. For this exercise, assume each month has 30 days. To find the number of days without air frost, subtract the value in the `af` column from 30.
+13. Create a new column in `climate` and save the new dataset in a different object so you don’t overwrite your original `climate` data. The new column should count the number of days in each month without air frost, based on the existing `af` column. For this exercise, assume each month has 30 days. To find the number of days without air frost, subtract the value in the `af` column from 30.
 
 ```{r}
 climate2 <- climate %>% 
@@ -246,6 +246,7 @@ climate2 %>%
   arrange(desc(sun_median)) #%>% 
   # head(n = 1) # to only get the first/largest one
 ```
+## Wrapping up
 
 18. Like in the last exercise; imagine you need to send your code to a collaborator. Review your code to ensure it is clear and well-structured, so your collaborator can easily understand and follow your work. Render your Quarto document and look at the result.
 
@@ -287,7 +288,7 @@ climate_change <- climate_change %>%
 head(climate_change)
 ```
 
-21. Create a new column that assigns a season (Winter, Spring, Summer, Fall) based on the month. Have a look at the `case_when` function. 
+21. Create a new column that assigns a season (Winter, Spring, Summer, Fall) based on the month.
 
 ::: {.callout-tip collapse="true"}
 ## Hint
@@ -373,6 +374,7 @@ station_unique %>% str_count('A|a')
 ```
 
 29. In the climate change data frame, create a new column for each word in the `device` column. For example, you can use the `str_split_i()` function to extract individual words and assign them to separate columns.
+
 ```{r}
 climate_change <- climate_change %>% 
   mutate(device_1 = str_split_i(device, pattern = ' ', i = 1),
@@ -380,6 +382,7 @@ climate_change <- climate_change %>%
 ```
 
 30. Modify one of the new columns to contain only lowercase letters and the other to contain only uppercase letters.
+
 ```{r}
 climate_change <- climate_change %>% 
   mutate(device_1 = tolower(device_1),
