@@ -8,8 +8,6 @@ project:
   output-dir: ../docs
 ---
 
-You will need to code along using the Quarto file in this presentation. You will use the following [presentation4.qmd](https://github.com/Center-for-Health-Data-Science/FromExceltoR/blob/2024_Oct/Teachers/Presentations/presentation4.qmd) file. Please clink on the link, download and open the file in your RStudio.
-
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, eval = TRUE, warning = FALSE)
 ```
@@ -21,22 +19,31 @@ We will use the following [presentation4.qmd](https://github.com/Center-for-Heal
 The very basic structure of an R script doing a classical statistical analysis is as follows:
 
 -   Load packages that you will be using.\
+
 -   Read the dataset to be analyzed. Possibly also do some data cleaning and manipulation.\
+
 -   Visualize the dataset by graphics and other descriptive statistics.\
+
 -   Fit and validate a statistical model.\
+
 -   Hypothesis testing. Possibly also post hoc testing.
 
-Of course there are variants of this set-up, and in practice there will often be some iterations of the steps.\
+-   Report model parameters and/or model predictions.
+
+-   Visualize your results.
+
+Of course there are variants of this set-up, and in practice there will often be some iterations of the steps.
+
+\
 In this manuscript, we will exemplify the proposed steps in the analysis of a simple dataset:
 
--   In our current scenario, you are a researcher investigating psoriasis, an inflammatory skin disease. You have data on the expression of a number genes that are suspected to have something to do with the disease, but you cannot be sure until you perform some formal statistical analysis.
--   This is a great example where R skills would come very handy!
--   You will start with your gene of special interest IGFL4. IGFL4 belongs to the insulin-like growth factor family of signaling molecules that play critical roles in cellular energy metabolism as well as in growth and development.
--   You decide that your analysis approach will be one-way ANOVA of the expression of the IGFL4 gene against the skin type in psoriasis patients.
+1.  **One-way ANOVA** of the expression of the IGFL4 gene against the skin type in psoriasis patients (an inflammatory skin disease).
+
+2.  **Linear regression** of cherry trees diameter and height.
 
 #### Load packages
 
-We will use **ggplot2** to make plots, and to be prepared for data manipulations, we simply load this together with the rest of the **tidyverse**.
+We will use **ggplot2** to make plots, and to be prepared for data manipulations, we simply load this together with the rest of the **tidyverse**. We will also use helper functions from **GGally** and **ggfortify** packages.
 
 The psoriasis data are provided in an Excel sheet, so we also load **readxl**. Finally, we will use the package **emmeans** to make post hoc tests.
 
@@ -48,22 +55,36 @@ Thus,
 #install.packages("tidyverse")
 #install.packages("readxl")
 #install.packages("emmeans")
+#install.packages("GGally")
+#install.packages("ggfortify")
 library(tidyverse)
 library(readxl)
 library(emmeans)
+library(GGally)
+library(ggfortify)
 ```
 
-Now, we are done preparing for our analyses. Next, we will look specifically at the possible association between IGFL4 gene expression and psoriasis.
+Now, we are done preparing for our analyses.
 
 Please refer to the 'STATS CHEAT SHEET' provided in the slides for hints as well as other cheat sheets provided in other sessions where necessary.
 
-## Example: Analysis of variance
+## Example 1 : Analysis of variance
 
 #### Step 1: Data
 
-Psoriasis is an immune-mediated disease that affects the skin. You, as a researcher, carried out a micro-array experiment with skin from 37 people in order to examine a potential association between the disease and a certain gene (IGFL4). For each of the 37 samples the gene expression was measured. Fifteen skin samples were from psoriasis patients and from a part of the body affected by the disease (`psor`); 15 samples were from psoriasis patients but from a part of the body not affected by the disease (`psne`); and 7 skin samples were from healthy people (`control`).
+Psoriasis is an immune-mediated skin disease. You conducted a microarray experiment with skin samples from 37 individuals to study whether certain genes are associated with the disease. This is a perfect case where R skills are very useful, since you cannot be sure until you perform some formal statistical analysis.
 
-The data are saved in the file **psoriasis.xlsx**. At first the variable named `type` (i.e. skin sample type) is stored as a character variable, we change it to a factor (and check that indeed there are 15, 15 and 7 skin samples in the three groups).
+The dataset includes three groups:
+
+-   **psor:** 15 samples from affected skin of psoriasis patients
+
+-   **psne:** 15 samples from unaffected skin of psoriasis patients
+
+-   **control:** 7 samples from healthy individuals
+
+You will focus on the gene **IGFL4**, part of the insulin-like growth factor family involved in energy metabolism, growth, and development.
+
+The data are stored in `psoriasis.xlsx`.
 
 ```{r}
 # Read in the data from Excel file and call it psoriasisData
@@ -75,9 +96,11 @@ head(psoriasisData)
 # Extract the data of interest containing the IGFL4 expression levels and skin sample type from the dataset and call this subset psorData
 psorData  <- select(psoriasisData, type, IGFL4)
 
-# View the top rows of the dataset psorData
+```
 
+The `type` variable (skin sample type) is initially a character variable, so you will convert it to a factor and verify that the group counts are 15, 15, and 7.
 
+```{r}
 # Change variable named 'type' to factor so that we can use in our analysis in the next steps
 # First let's check if it is character
 is.character(psorData$type)
@@ -86,63 +109,216 @@ is.character(psorData$type)
 psorData <- mutate(psorData, type = factor(type))
 # Again, let's check if it is factor now
 
-
 # Check that there are 15, 15 and 7 skin samples in the three groups. Hint: count()
-
+count(psorData, type)
 ```
-
-QUESTION 1: According to your count summary table, are there 15 (psor), 15 (psne) and 7 (healthy) skin samples in the three groups? Please share your answer here: https://www.menti.com/alhf674h4r88
 
 #### Step 2: Descriptive plots and statistics
 
-To get an impression of the data, we make two plots, and compute group-wise means and standard deviations. Make (1) a plot showing three groups of skin samples (healthy, psne, psor) and IGFL4 expression levels from each skin sample so that we can visually compare each group of samples with regards to IGLF4 expression levels; (2) a boxplot for the same group-wise comparison. And finally, obtain the group-wise (healthy, psne, psor) descriptive statistics (mean, median and standard deviation). Hint: Consider using ggplot and tidyverse!
+To get an impression of the data, we make a violin plot of IGFL4 expression levels from each skin sample (healthy, psne, psor), and compute group-wise means and standard deviations.
 
 ```{r}
-# (1) a plot showing three groups of skin samples (healthy, psne, psor) and IGFL4 expression levels from each skin sample
+# A plot showing three groups of skin samples (healthy, psne, psor) and IGFL4 expression levels from each skin sample
 ggplot(psorData, aes(x=type, y=IGFL4)) +
+  geom_violin() +
   geom_point() + 
   labs(x="Skin type", y="IGFL4")
+```
 
-# (2) a boxplot for the same group-wise comparison. Hint: geom_boxplot()
+```{r}
+# And finally, obtain the group-wise (healthy, psne, psor) descriptive statistics (mean, median and standard deviation).
+psorData %>% 
+  group_by(type) %>% 
+  summarise(avg=mean(IGFL4), median=median(IGFL4), sd=sd(IGFL4))
+```
 
+Before we decide on statistical test to use to compare our groups, lets check if our gene expression data is normal distributed. If data are not normal, consider transformations (log, square root) or non-parametric tests (Wilcoxon, Kruskal–Wallis).
 
-# And finally, obtain the group-wise (healthy, psne, psor) descriptive statistics (mean, median and standard deviation). Hint: group_by()
+Testing for Normality in R is done by Visual inspection or statistical test.
+
+We will use a nice helper function from ggpubr package to plot a Quantile-Quantile plot.
+
+```{r}
+library(ggpubr)
+# nice ggplot2-based QQ plot
+ggqqplot(psorData$IGFL4)  # nice ggplot2-based QQ plot
 
 ```
 
-QUESTION 2: Please rank the three groups by their mean/average IGFL4 expression (descending order). Just visually assess the values and write down the order of the groups. Please share your answer here: https://www.menti.com/alhf674h4r88
+And Shapiro–Wilk to confirm statistically.
+
+```{r}
+shapiro.test(psorData$IGFL4)
+
+```
+
+Where Null hypothesis (H₀): data are normally distributed.
+
+p \> 0.05: fail to reject H₀ → data look normal.
+
+p ≤ 0.05: reject H₀ → data not normal.
+
+Best practice is to use both approaches: Visual inspection to see how data deviate from normality.
 
 #### Step 3: Fit of oneway ANOVA
 
-The scientific question is whether the gene expression level of IGFL4 differs between the three types/groups. Thus, the natural type of analysis is a oneway analysis of variance (ANOVA). The oneway ANOVA is fitted with the lm() function in R. It is a good approach to assign a name (below *oneway*) to the object with the fitted model. This object contains all relevant information and may be used for subsequent analysis. Note that we need to logarithmic transform the response (i.e. IGFL4 expression levels) as intensities are often on a multiplicative scale.
+The scientific question is whether the gene expression level of IGFL4 differs between the three types/groups.
+
+We will use a **one-way ANOVA** to test whether IGFL4 expression differs across the three groups. In R, you can fit a one-way ANOVA with the `lm()` function. It’s good practice to save the fitted model object (e.g., `oneway`) so you can reuse it for further analysis.
 
 ```{r}
 # oneway analysis of variance (ANOVA)
-oneway <- lm(log(IGFL4) ~ type, data=psorData)
-
-# View the model coefficients
-
+oneway <- lm(IGFL4 ~ type, data=psorData)
+oneway
 ```
+
+You can inspect the model parameters with:
+
+```{r}
+# View the model coefficients
+summary(oneway)
+```
+
+Although `summary()` works well, we recommend using the **emmeans** package for a clearer and more user-friendly presentation of group means and comparisons.
+
+Are we done?
 
 #### Step 4: Hypothesis test + Post hoc tests
 
-It is standard to carry out an $F$-test for the overall effect of the explanatory (i.e. independent) variable. To be precise, the hypothesis is that the expected values are the same in *all* groups. The most easy way to do this test is to use `drop1`. The option `test="F"` is needed to get the $F$-test using that function:
+It is standard to perform an **F-test** to check whether the mean IGFL4 expression differs across groups. Formally, the null hypothesis is that all group means are equal. The easiest way to run this test in R is with `drop1()` and the `test="F"` option:
 
 ```{r}
-# Carry out an $F$-test for the overall effect of the explanatory (i.e. independent) variable
-
+library(emmeans)
+# F-test for the overall effect of group
+drop1(oneway, test = "F")
 ```
 
-QUESTION 3: What is your conclusion from the $F$-test result? Please share your answer here: https://www.menti.com/ali6bnwoiky7
+If the F-test is significant, at least one group differs — but we don’t yet know which ones. To identify the specific differences, we perform **post hoc pairwise comparisons**.
 
-It might be that the gene expression in two of the three groups may or may not be significantly different. To investigate that we do post hoc testing. This is nicely done within the framework of *estimated marginal means* using the **emmeans** package. Here `emmeans` makes the estimated marginal means (that is the predicted gene expression IGFL4 on the log scale), and the pairs() command provide post hoc pairwise comparisons (package automatically adjusts for multiple comparisons using the default tukey method):
+A convenient approach uses the **emmeans** package:
 
 ```{r}
-# Run emmeans
-emmeans(oneway,~type)
-
 # Perform post hoc pairwise comparisons
+pairs(emmeans(oneway,~type))
+```
+
+Here, `emmeans()` computes the estimated marginal means (predicted IGFL4 expression), and `pairs()` performs Tukey-adjusted pairwise comparisons between groups.
+
+#### Step 5: Report of model parameters
+
+Gene expression levels are significantly different between 2 groups of skin samples
+
+-   healthy - psor
+
+-   psne - psor
+
+In this example it is natural to report the estimated intensities as well as the comparisons between the 3 groups.
+
+```{r}
+emmeans(oneway, ~ type)
+```
+
+## Example B: Simple linear regression
+
+#### Step 1: Data
+
+We will use data from 31 cherry trees available in the built in dataset `trees`: Girth, height and tree volume have been measured for each tree. Please note, that the help page `?trees` states, that girth is the tree diameter. Interest is in the association between tree volume on the one side and girth and height on the other side.
+
+The term ***regression*** is usually used for models where all explanatory variables are numerical, whereas the term ***analysis of variance*** **(ANOVA)** is usually used for models where all explanatory variables are categorical (i.e. factors). However, predictors of both types can be included in the same Gaussian linear model.
+
+```{r}
+data(trees)
+head(trees)
+```
+
+#### Step 2: Descriptive plots and statistics
+
+The **GGally** package helps us make an easy summary plot, where the diagonal is used to visualize the marginal distribution of the three tree variables:
+
+```{r}
+ggpairs(trees)
+```
+
+#### Step 3: Fitting and validating a simple linear regression model
+
+We fit a simple linear regression with volume as outcome (i.e. dependent variable) and girth as covariate (i.e. independent variable). This model is fitted with the `lm` function. It is a good approach to assign a name (below *linreg1*) to the object with the fitted model. This object contains all relevant information and may be used for subsequent analysis.
+
+```{r}
+linreg1 <- lm(Volume ~ Girth, data=trees)
+linreg1
+```
+
+Mathematically this model makes assumptions about linearity, variance homogeneity, and normality. These assumptions are checked visually via four plots generated from the model residuals. In R it is easy to make these plots; simply apply `plot` on the `lm`-object.
+
+```{r}
+#par(mfrow=c(2,2))   # makes room for 4=2x2 plots!
+#plot(linreg1)
+```
+
+OR we can use a fancy function from **ggfortify** package to build beautifull ggplot diagnostic plots for linear models.
+
+```{r}
+#| fig.height: 6
+library(ggfortify)
+autoplot(linreg1, which = 1:6, ncol = 2, label.size = 3)
+```
+
+In this case there appears to be problems with the model. In particular, the upper left plot shows a quadratic tendency suggesting that the linearity assumption is not appropriate. Or we have an outlyer. Perhaps a data transformation can help us out.
+
+#### Step 4 iterated: Transformation
+
+The linear regression model above says that an increment of $\Delta_g$ of girth corresponds to an increment of volume by $\beta\Delta_g$ where $\beta$ is the slope parameter (i.e. the coefficient), and hence, the interpretation is concerned with *absolute changes*. Perhaps it is more reasonable to talk about *relative changes*: An increment of girth by a factor $c_g$ corresponds to an increment of volume of $\gamma c_g$. This corresponds to a linear regression model on the log-transformed variables, which is easily fitted. Notice that `log` in R is the natural logarithm.
+
+```{r}
+linreg2 <- lm(log(Volume) ~ log(Girth), data=trees)
+```
+
+This model looks better!
+
+```{r}
+#| fig.height: 6
+autoplot(linreg2, which = 1:6, ncol = 2, label.size = 3)
+```
+
+#### Step 5: Hypothesis test + Report of the model
+
+Parameter estimates, standard errors are computed and certain hypothesis tests are carried out by the `summary` function:
+
+```{r}
+summary(linreg2)
+#drop1(linreg2, test = "F")
+```
+
+The coefficient table is the most important part of the output. It has two lines --- one for each parameter in the model --- and four columns. The first line is about the intercept, the second line is about the slope. The columns are
+
+-   `Estimate`: The estimated value of the parameter (intercept or slope).
+-   `Std. Error`: The standard error (estimated standard deviation) associated with the estimate in the first column.
+-   `t value`: The $t$-test statistic for the hypothesis that the corresponding parameter is zero. Computed as the estimate divided by the standard error.
+-   `Pr(>|t|)`: The $p$-value associated with the hypothesis just mentioned. In particular the $p$-value in the second line is for the null hypothesis that there is no effect of girth on volume.
+
+If you would like to report confidence intervals for the parameters (intercept and slope), then use `confint`:
+
+```{r}
+confint(linreg2)
+```
+
+#### Step 6: Visualization of the model
+
+An excellent synthesis of a statistical analysis is often provided by a plot combining the raw data with the model fit.
+
+```{r}
+ggplot(trees, aes(x = log(Girth), y = log(Volume))) + 
+  geom_point() +
+  geom_abline(intercept=-2.35332, slope=2.19997, col="red")
 
 ```
 
-QUESTION 4: What is your conclusion from the pairwise comparisons? Please share your answer here: https://www.menti.com/ali6bnwoiky7
+## Outlook: Other analyses
+
+The `lm` function is used for linear models, that is, models where data points are assumed to be independent with a Gaussian (i.e. normal) distribution (and typically also with the same variance). Obviously, these models are not always appropriate, and there exists functions for many, many more situations and data types. Here, we just mention a few functions corresponding to common data types and statistical problems.
+
+-   `glm`: For independent, but non-Gaussian data. Examples are binary outcomes (logistic regression) and outcomes that are counts (Poisson regression). glm is short for generalized linear models, and the `glm` function is part of the base installation of R.
+-   `lmer` and `glmer`: For data with dependence structures that can be described by random effects, e.g., block designs. lme is short for linear mixed effects (Gaussian data), glmer is short for generalized linear mixed effects (binary or count data). Both functions are part of the **lme4** package.
+-   `nls`: For non-linear regression, e.g., dose-response analysis. nls is short for non-linear least squares. The function is included in the base installation of R.
+
+The functions mentioned above are used in a similar way as `lm`: a model is fitted with the function in question, and the model object subsequently examined with respect to model validation, estimation, computation of confidence limits, hypothesis tests, prediction, etc. with functions `summary`, `confint`, `drop1`, `emmeans`, `pairs` as mostly indicated above.

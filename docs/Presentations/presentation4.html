@@ -267,7 +267,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Exercises/exercise4_PART1.html" class="sidebar-item-text sidebar-link">
+  <a href="../Exercises/exercise4_PART1.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercise 4, Part 1: Applied Statistics</span></a>
   </div>
 </li>
@@ -314,7 +314,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Solutions/exercise4_PART1_solutions.html" class="sidebar-item-text sidebar-link">
+  <a href="../Solutions/exercise4_PART1_solutions.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercise 4, Part 1 - Solutions</span></a>
   </div>
 </li>
@@ -378,7 +378,9 @@ window.Quarto = {
    
   <ul>
   <li><a href="#structure-of-a-biostatistical-analysis-in-r" id="toc-structure-of-a-biostatistical-analysis-in-r" class="nav-link active" data-scroll-target="#structure-of-a-biostatistical-analysis-in-r">Structure of a biostatistical analysis in R</a></li>
-  <li><a href="#example-analysis-of-variance" id="toc-example-analysis-of-variance" class="nav-link" data-scroll-target="#example-analysis-of-variance">Example: Analysis of variance</a></li>
+  <li><a href="#example-1-analysis-of-variance" id="toc-example-1-analysis-of-variance" class="nav-link" data-scroll-target="#example-1-analysis-of-variance">Example 1 : Analysis of variance</a></li>
+  <li><a href="#example-b-simple-linear-regression" id="toc-example-b-simple-linear-regression" class="nav-link" data-scroll-target="#example-b-simple-linear-regression">Example B: Simple linear regression</a></li>
+  <li><a href="#outlook-other-analyses" id="toc-outlook-other-analyses" class="nav-link" data-scroll-target="#outlook-other-analyses">Outlook: Other analyses</a></li>
   </ul>
 </nav>
     </div>
@@ -410,33 +412,33 @@ window.Quarto = {
 </header>
 
 
-<p>You will need to code along using the Quarto file in this presentation. You will use the following <a href="https://github.com/Center-for-Health-Data-Science/FromExceltoR/blob/2024_Oct/Teachers/Presentations/presentation4.qmd">presentation4.qmd</a> file. Please clink on the link, download and open the file in your RStudio.</p>
 <p>We will use the following <a href="https://github.com/Center-for-Health-Data-Science/FromExceltoR/blob/2024_Oct/Teachers/Presentations/presentation4.qmd">presentation4.qmd</a> file for this presentation. Please clink on the link, download and open the file in your RStudio.</p>
 <section id="structure-of-a-biostatistical-analysis-in-r" class="level2">
 <h2 class="anchored" data-anchor-id="structure-of-a-biostatistical-analysis-in-r">Structure of a biostatistical analysis in R</h2>
 <p>The very basic structure of an R script doing a classical statistical analysis is as follows:</p>
 <ul>
-<li>Load packages that you will be using.<br>
-</li>
-<li>Read the dataset to be analyzed. Possibly also do some data cleaning and manipulation.<br>
-</li>
-<li>Visualize the dataset by graphics and other descriptive statistics.<br>
-</li>
-<li>Fit and validate a statistical model.<br>
-</li>
-<li>Hypothesis testing. Possibly also post hoc testing.</li>
+<li><p>Load packages that you will be using.<br>
+</p></li>
+<li><p>Read the dataset to be analyzed. Possibly also do some data cleaning and manipulation.<br>
+</p></li>
+<li><p>Visualize the dataset by graphics and other descriptive statistics.<br>
+</p></li>
+<li><p>Fit and validate a statistical model.<br>
+</p></li>
+<li><p>Hypothesis testing. Possibly also post hoc testing.</p></li>
+<li><p>Report model parameters and/or model predictions.</p></li>
+<li><p>Visualize your results.</p></li>
 </ul>
-<p>Of course there are variants of this set-up, and in practice there will often be some iterations of the steps.<br>
+<p>Of course there are variants of this set-up, and in practice there will often be some iterations of the steps.</p>
+<p><br>
 In this manuscript, we will exemplify the proposed steps in the analysis of a simple dataset:</p>
-<ul>
-<li>In our current scenario, you are a researcher investigating psoriasis, an inflammatory skin disease. You have data on the expression of a number genes that are suspected to have something to do with the disease, but you cannot be sure until you perform some formal statistical analysis.</li>
-<li>This is a great example where R skills would come very handy!</li>
-<li>You will start with your gene of special interest IGFL4. IGFL4 belongs to the insulin-like growth factor family of signaling molecules that play critical roles in cellular energy metabolism as well as in growth and development.</li>
-<li>You decide that your analysis approach will be one-way ANOVA of the expression of the IGFL4 gene against the skin type in psoriasis patients.</li>
-</ul>
+<ol type="1">
+<li><p><strong>One-way ANOVA</strong> of the expression of the IGFL4 gene against the skin type in psoriasis patients (an inflammatory skin disease).</p></li>
+<li><p><strong>Linear regression</strong> of cherry trees diameter and height.</p></li>
+</ol>
 <section id="load-packages" class="level4">
 <h4 class="anchored" data-anchor-id="load-packages">Load packages</h4>
-<p>We will use <strong>ggplot2</strong> to make plots, and to be prepared for data manipulations, we simply load this together with the rest of the <strong>tidyverse</strong>.</p>
+<p>We will use <strong>ggplot2</strong> to make plots, and to be prepared for data manipulations, we simply load this together with the rest of the <strong>tidyverse</strong>. We will also use helper functions from <strong>GGally</strong> and <strong>ggfortify</strong> packages.</p>
 <p>The psoriasis data are provided in an Excel sheet, so we also load <strong>readxl</strong>. Finally, we will use the package <strong>emmeans</strong> to make post hoc tests.</p>
 <p>Remember that you should install the wanted packages before they can be used (but you only need to install the packages once!).</p>
 <p>Thus,</p>
@@ -444,20 +446,31 @@ In this manuscript, we will exemplify the proposed steps in the analysis of a si
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("tidyverse")</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("readxl")</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("emmeans")</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("GGally")</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("ggfortify")</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(GGally)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggfortify)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Now, we are done preparing for our analyses. Next, we will look specifically at the possible association between IGFL4 gene expression and psoriasis.</p>
+<p>Now, we are done preparing for our analyses.</p>
 <p>Please refer to the ‘STATS CHEAT SHEET’ provided in the slides for hints as well as other cheat sheets provided in other sessions where necessary.</p>
 </section>
 </section>
-<section id="example-analysis-of-variance" class="level2">
-<h2 class="anchored" data-anchor-id="example-analysis-of-variance">Example: Analysis of variance</h2>
+<section id="example-1-analysis-of-variance" class="level2">
+<h2 class="anchored" data-anchor-id="example-1-analysis-of-variance">Example 1 : Analysis of variance</h2>
 <section id="step-1-data" class="level4">
 <h4 class="anchored" data-anchor-id="step-1-data">Step 1: Data</h4>
-<p>Psoriasis is an immune-mediated disease that affects the skin. You, as a researcher, carried out a micro-array experiment with skin from 37 people in order to examine a potential association between the disease and a certain gene (IGFL4). For each of the 37 samples the gene expression was measured. Fifteen skin samples were from psoriasis patients and from a part of the body affected by the disease (<code>psor</code>); 15 samples were from psoriasis patients but from a part of the body not affected by the disease (<code>psne</code>); and 7 skin samples were from healthy people (<code>control</code>).</p>
-<p>The data are saved in the file <strong>psoriasis.xlsx</strong>. At first the variable named <code>type</code> (i.e.&nbsp;skin sample type) is stored as a character variable, we change it to a factor (and check that indeed there are 15, 15 and 7 skin samples in the three groups).</p>
+<p>Psoriasis is an immune-mediated skin disease. You conducted a microarray experiment with skin samples from 37 individuals to study whether certain genes are associated with the disease. This is a perfect case where R skills are very useful, since you cannot be sure until you perform some formal statistical analysis.</p>
+<p>The dataset includes three groups:</p>
+<ul>
+<li><p><strong>psor:</strong>&nbsp;15 samples from affected skin of psoriasis patients</p></li>
+<li><p><strong>psne:</strong>&nbsp;15 samples from unaffected skin of psoriasis patients</p></li>
+<li><p><strong>control:</strong>&nbsp;7 samples from healthy individuals</p></li>
+</ul>
+<p>You will focus on the gene&nbsp;<strong>IGFL4</strong>, part of the insulin-like growth factor family involved in energy metabolism, growth, and development.</p>
+<p>The data are stored in&nbsp;<code>psoriasis.xlsx</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in the data from Excel file and call it psoriasisData</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>psoriasisData <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"../../Data/psoriasis.xlsx"</span>)</span>
@@ -476,84 +489,356 @@ In this manuscript, we will exemplify the proposed steps in the analysis of a si
 6 psne  1.20   2.94  3.12  4.20 -0.200  3.46 0.472  3.95 -0.129   1.55  3.56</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract the data of interest containing the IGFL4 expression levels and skin sample type from the dataset and call this subset psorData</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>psorData  <span class="ot">&lt;-</span> <span class="fu">select</span>(psoriasisData, type, IGFL4)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># View the top rows of the dataset psorData</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Change variable named 'type' to factor so that we can use in our analysis in the next steps</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co"># First let's check if it is character</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="fu">is.character</span>(psorData<span class="sc">$</span>type)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>psorData  <span class="ot">&lt;-</span> <span class="fu">select</span>(psoriasisData, type, IGFL4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The&nbsp;<code>type</code>&nbsp;variable (skin sample type) is initially a character variable, so you will convert it to a factor and verify that the group counts are 15, 15, and 7.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Change variable named 'type' to factor so that we can use in our analysis in the next steps</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># First let's check if it is character</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">is.character</span>(psorData<span class="sc">$</span>type)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Now change to factor</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>psorData <span class="ot">&lt;-</span> <span class="fu">mutate</span>(psorData, <span class="at">type =</span> <span class="fu">factor</span>(type))</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Again, let's check if it is factor now</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Check that there are 15, 15 and 7 skin samples in the three groups. Hint: count()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Now change to factor</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>psorData <span class="ot">&lt;-</span> <span class="fu">mutate</span>(psorData, <span class="at">type =</span> <span class="fu">factor</span>(type))</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Again, let's check if it is factor now</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Check that there are 15, 15 and 7 skin samples in the three groups. Hint: count()</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="fu">count</span>(psorData, type)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  type        n
+  &lt;fct&gt;   &lt;int&gt;
+1 healthy     7
+2 psne       15
+3 psor       15</code></pre>
 </div>
-<p>QUESTION 1: According to your count summary table, are there 15 (psor), 15 (psne) and 7 (healthy) skin samples in the three groups? Please share your answer here: https://www.menti.com/alhf674h4r88</p>
+</div>
 </section>
 <section id="step-2-descriptive-plots-and-statistics" class="level4">
 <h4 class="anchored" data-anchor-id="step-2-descriptive-plots-and-statistics">Step 2: Descriptive plots and statistics</h4>
-<p>To get an impression of the data, we make two plots, and compute group-wise means and standard deviations. Make (1) a plot showing three groups of skin samples (healthy, psne, psor) and IGFL4 expression levels from each skin sample so that we can visually compare each group of samples with regards to IGLF4 expression levels; (2) a boxplot for the same group-wise comparison. And finally, obtain the group-wise (healthy, psne, psor) descriptive statistics (mean, median and standard deviation). Hint: Consider using ggplot and tidyverse!</p>
+<p>To get an impression of the data, we make a violin plot of IGFL4 expression levels from each skin sample (healthy, psne, psor), and compute group-wise means and standard deviations.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># (1) a plot showing three groups of skin samples (healthy, psne, psor) and IGFL4 expression levels from each skin sample</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(psorData, <span class="fu">aes</span>(<span class="at">x=</span>type, <span class="at">y=</span>IGFL4)) <span class="sc">+</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Skin type"</span>, <span class="at">y=</span><span class="st">"IGFL4"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A plot showing three groups of skin samples (healthy, psne, psor) and IGFL4 expression levels from each skin sample</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(psorData, <span class="fu">aes</span>(<span class="at">x=</span>type, <span class="at">y=</span>IGFL4)) <span class="sc">+</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_violin</span>() <span class="sc">+</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Skin type"</span>, <span class="at">y=</span><span class="st">"IGFL4"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="presentation4_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="presentation4_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># (2) a boxplot for the same group-wise comparison. Hint: geom_boxplot()</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># And finally, obtain the group-wise (healthy, psne, psor) descriptive statistics (mean, median and standard deviation). Hint: group_by()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>QUESTION 2: Please rank the three groups by their mean/average IGFL4 expression (descending order). Just visually assess the values and write down the order of the groups. Please share your answer here: https://www.menti.com/alhf674h4r88</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># And finally, obtain the group-wise (healthy, psne, psor) descriptive statistics (mean, median and standard deviation).</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>psorData <span class="sc">%&gt;%</span> </span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(type) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avg=</span><span class="fu">mean</span>(IGFL4), <span class="at">median=</span><span class="fu">median</span>(IGFL4), <span class="at">sd=</span><span class="fu">sd</span>(IGFL4))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 4
+  type      avg median    sd
+  &lt;fct&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
+1 healthy 1.34   1.27  0.230
+2 psne    1.39   1.32  0.363
+3 psor    0.955  0.909 0.255</code></pre>
+</div>
+</div>
+<p>Before we decide on statistical test to use to compare our groups, lets check if our gene expression data is normal distributed. If data are not normal, consider transformations (log, square root) or non-parametric tests (Wilcoxon, Kruskal–Wallis).</p>
+<p>Testing for Normality in R is done by Visual inspection or statistical test.</p>
+<p>We will use a nice helper function from ggpubr package to plot a Quantile-Quantile plot.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggpubr)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co"># nice ggplot2-based QQ plot</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggqqplot</span>(psorData<span class="sc">$</span>IGFL4)  <span class="co"># nice ggplot2-based QQ plot</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="presentation4_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>And Shapiro–Wilk to confirm statistically.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(psorData<span class="sc">$</span>IGFL4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Shapiro-Wilk normality test
+
+data:  psorData$IGFL4
+W = 0.96257, p-value = 0.2435</code></pre>
+</div>
+</div>
+<p>Where Null hypothesis (H₀): data are normally distributed.</p>
+<p>p &gt; 0.05: fail to reject H₀ → data look normal.</p>
+<p>p ≤ 0.05: reject H₀ → data not normal.</p>
+<p>Best practice is to use both approaches: Visual inspection to see how data deviate from normality.</p>
 </section>
 <section id="step-3-fit-of-oneway-anova" class="level4">
 <h4 class="anchored" data-anchor-id="step-3-fit-of-oneway-anova">Step 3: Fit of oneway ANOVA</h4>
-<p>The scientific question is whether the gene expression level of IGFL4 differs between the three types/groups. Thus, the natural type of analysis is a oneway analysis of variance (ANOVA). The oneway ANOVA is fitted with the lm() function in R. It is a good approach to assign a name (below <em>oneway</em>) to the object with the fitted model. This object contains all relevant information and may be used for subsequent analysis. Note that we need to logarithmic transform the response (i.e.&nbsp;IGFL4 expression levels) as intensities are often on a multiplicative scale.</p>
+<p>The scientific question is whether the gene expression level of IGFL4 differs between the three types/groups.</p>
+<p>We will use a&nbsp;<strong>one-way ANOVA</strong>&nbsp;to test whether IGFL4 expression differs across the three groups. In R, you can fit a one-way ANOVA with the&nbsp;<code>lm()</code>&nbsp;function. It’s good practice to save the fitted model object (e.g.,&nbsp;<code>oneway</code>) so you can reuse it for further analysis.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># oneway analysis of variance (ANOVA)</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>oneway <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log</span>(IGFL4) <span class="sc">~</span> type, <span class="at">data=</span>psorData)</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># View the model coefficients</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># oneway analysis of variance (ANOVA)</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>oneway <span class="ot">&lt;-</span> <span class="fu">lm</span>(IGFL4 <span class="sc">~</span> type, <span class="at">data=</span>psorData)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>oneway</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = IGFL4 ~ type, data = psorData)
+
+Coefficients:
+(Intercept)     typepsne     typepsor  
+    1.33766      0.05022     -0.38251  </code></pre>
 </div>
+</div>
+<p>You can inspect the model parameters with:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># View the model coefficients</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(oneway)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = IGFL4 ~ type, data = psorData)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.54697 -0.20606 -0.06494  0.20394  0.70303 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  1.33766    0.11352  11.783 1.49e-13 ***
+typepsne     0.05022    0.13748   0.365  0.71718    
+typepsor    -0.38251    0.13748  -2.782  0.00874 ** 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.3003 on 34 degrees of freedom
+Multiple R-squared:  0.3373,    Adjusted R-squared:  0.2983 
+F-statistic: 8.653 on 2 and 34 DF,  p-value: 0.0009171</code></pre>
+</div>
+</div>
+<p>Although&nbsp;<code>summary()</code>&nbsp;works well, we recommend using the&nbsp;<strong>emmeans</strong>&nbsp;package for a clearer and more user-friendly presentation of group means and comparisons.</p>
+<p>Are we done?</p>
 </section>
 <section id="step-4-hypothesis-test-post-hoc-tests" class="level4">
 <h4 class="anchored" data-anchor-id="step-4-hypothesis-test-post-hoc-tests">Step 4: Hypothesis test + Post hoc tests</h4>
-<p>It is standard to carry out an <span class="math inline">\(F\)</span>-test for the overall effect of the explanatory (i.e.&nbsp;independent) variable. To be precise, the hypothesis is that the expected values are the same in <em>all</em> groups. The most easy way to do this test is to use <code>drop1</code>. The option <code>test="F"</code> is needed to get the <span class="math inline">\(F\)</span>-test using that function:</p>
+<p>It is standard to perform an&nbsp;<strong>F-test</strong>&nbsp;to check whether the mean IGFL4 expression differs across groups. Formally, the null hypothesis is that all group means are equal. The easiest way to run this test in R is with&nbsp;<code>drop1()</code>&nbsp;and the&nbsp;<code>test="F"</code>&nbsp;option:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Carry out an $F$-test for the overall effect of the explanatory (i.e. independent) variable</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>QUESTION 3: What is your conclusion from the <span class="math inline">\(F\)</span>-test result? Please share your answer here: https://www.menti.com/ali6bnwoiky7</p>
-<p>It might be that the gene expression in two of the three groups may or may not be significantly different. To investigate that we do post hoc testing. This is nicely done within the framework of <em>estimated marginal means</em> using the <strong>emmeans</strong> package. Here <code>emmeans</code> makes the estimated marginal means (that is the predicted gene expression IGFL4 on the log scale), and the pairs() command provide post hoc pairwise comparisons (package automatically adjusts for multiple comparisons using the default tukey method):</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Run emmeans</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">emmeans</span>(oneway,<span class="sc">~</span>type)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co"># F-test for the overall effect of group</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">drop1</span>(oneway, <span class="at">test =</span> <span class="st">"F"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> type     emmean     SE df lower.CL upper.CL
- healthy  0.2791 0.0938 34   0.0885   0.4696
- psne     0.2963 0.0641 34   0.1662   0.4265
- psor    -0.0788 0.0641 34  -0.2090   0.0513
+<pre><code>Single term deletions
 
-Results are given on the log (not the response) scale. 
+Model:
+IGFL4 ~ type
+       Df Sum of Sq    RSS     AIC F value    Pr(&gt;F)    
+&lt;none&gt;              3.0671 -86.137                      
+type    2    1.5611 4.6282 -74.914  8.6525 0.0009171 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>If the F-test is significant, at least one group differs — but we don’t yet know which ones. To identify the specific differences, we perform&nbsp;<strong>post hoc pairwise comparisons</strong>.</p>
+<p>A convenient approach uses the&nbsp;<strong>emmeans</strong>&nbsp;package:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform post hoc pairwise comparisons</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(<span class="fu">emmeans</span>(oneway,<span class="sc">~</span>type))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> contrast       estimate    SE df t.ratio p.value
+ healthy - psne  -0.0502 0.137 34  -0.365  0.9293
+ healthy - psor   0.3825 0.137 34   2.782  0.0232
+ psne - psor      0.4327 0.110 34   3.946  0.0011
+
+P value adjustment: tukey method for comparing a family of 3 estimates </code></pre>
+</div>
+</div>
+<p>Here,&nbsp;<code>emmeans()</code>&nbsp;computes the estimated marginal means (predicted IGFL4 expression), and&nbsp;<code>pairs()</code>&nbsp;performs Tukey-adjusted pairwise comparisons between groups.</p>
+</section>
+<section id="step-5-report-of-model-parameters" class="level4">
+<h4 class="anchored" data-anchor-id="step-5-report-of-model-parameters">Step 5: Report of model parameters</h4>
+<p>Gene expression levels are significantly different between 2 groups of skin samples</p>
+<ul>
+<li><p>healthy - psor</p></li>
+<li><p>psne - psor</p></li>
+</ul>
+<p>In this example it is natural to report the estimated intensities as well as the comparisons between the 3 groups.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">emmeans</span>(oneway, <span class="sc">~</span> type)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> type    emmean     SE df lower.CL upper.CL
+ healthy  1.338 0.1140 34    1.107     1.57
+ psne     1.388 0.0775 34    1.230     1.55
+ psor     0.955 0.0775 34    0.798     1.11
+
 Confidence level used: 0.95 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform post hoc pairwise comparisons</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>QUESTION 4: What is your conclusion from the pairwise comparisons? Please share your answer here: https://www.menti.com/ali6bnwoiky7</p>
-
-
 </section>
+</section>
+<section id="example-b-simple-linear-regression" class="level2">
+<h2 class="anchored" data-anchor-id="example-b-simple-linear-regression">Example B: Simple linear regression</h2>
+<section id="step-1-data-1" class="level4">
+<h4 class="anchored" data-anchor-id="step-1-data-1">Step 1: Data</h4>
+<p>We will use data from 31 cherry trees available in the built in dataset <code>trees</code>: Girth, height and tree volume have been measured for each tree. Please note, that the help page <code>?trees</code> states, that girth is the tree diameter. Interest is in the association between tree volume on the one side and girth and height on the other side.</p>
+<p>The term <strong><em>regression</em></strong> is usually used for models where all explanatory variables are numerical, whereas the term <strong><em>analysis of variance</em></strong> <strong>(ANOVA)</strong> is usually used for models where all explanatory variables are categorical (i.e.&nbsp;factors). However, predictors of both types can be included in the same Gaussian linear model.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(trees)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(trees)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Girth Height Volume
+1   8.3     70   10.3
+2   8.6     65   10.3
+3   8.8     63   10.2
+4  10.5     72   16.4
+5  10.7     81   18.8
+6  10.8     83   19.7</code></pre>
+</div>
+</div>
+</section>
+<section id="step-2-descriptive-plots-and-statistics-1" class="level4">
+<h4 class="anchored" data-anchor-id="step-2-descriptive-plots-and-statistics-1">Step 2: Descriptive plots and statistics</h4>
+<p>The <strong>GGally</strong> package helps us make an easy summary plot, where the diagonal is used to visualize the marginal distribution of the three tree variables:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggpairs</span>(trees)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="presentation4_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="step-3-fitting-and-validating-a-simple-linear-regression-model" class="level4">
+<h4 class="anchored" data-anchor-id="step-3-fitting-and-validating-a-simple-linear-regression-model">Step 3: Fitting and validating a simple linear regression model</h4>
+<p>We fit a simple linear regression with volume as outcome (i.e.&nbsp;dependent variable) and girth as covariate (i.e.&nbsp;independent variable). This model is fitted with the <code>lm</code> function. It is a good approach to assign a name (below <em>linreg1</em>) to the object with the fitted model. This object contains all relevant information and may be used for subsequent analysis.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>linreg1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Volume <span class="sc">~</span> Girth, <span class="at">data=</span>trees)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>linreg1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = Volume ~ Girth, data = trees)
+
+Coefficients:
+(Intercept)        Girth  
+    -36.943        5.066  </code></pre>
+</div>
+</div>
+<p>Mathematically this model makes assumptions about linearity, variance homogeneity, and normality. These assumptions are checked visually via four plots generated from the model residuals. In R it is easy to make these plots; simply apply <code>plot</code> on the <code>lm</code>-object.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co">#par(mfrow=c(2,2))   # makes room for 4=2x2 plots!</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="co">#plot(linreg1)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>OR we can use a fancy function from <strong>ggfortify</strong> package to build beautifull ggplot diagnostic plots for linear models.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggfortify)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(linreg1, <span class="at">which =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">label.size =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="presentation4_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>In this case there appears to be problems with the model. In particular, the upper left plot shows a quadratic tendency suggesting that the linearity assumption is not appropriate. Or we have an outlyer. Perhaps a data transformation can help us out.</p>
+</section>
+<section id="step-4-iterated-transformation" class="level4">
+<h4 class="anchored" data-anchor-id="step-4-iterated-transformation">Step 4 iterated: Transformation</h4>
+<p>The linear regression model above says that an increment of <span class="math inline">\(\Delta_g\)</span> of girth corresponds to an increment of volume by <span class="math inline">\(\beta\Delta_g\)</span> where <span class="math inline">\(\beta\)</span> is the slope parameter (i.e.&nbsp;the coefficient), and hence, the interpretation is concerned with <em>absolute changes</em>. Perhaps it is more reasonable to talk about <em>relative changes</em>: An increment of girth by a factor <span class="math inline">\(c_g\)</span> corresponds to an increment of volume of <span class="math inline">\(\gamma c_g\)</span>. This corresponds to a linear regression model on the log-transformed variables, which is easily fitted. Notice that <code>log</code> in R is the natural logarithm.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>linreg2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log</span>(Volume) <span class="sc">~</span> <span class="fu">log</span>(Girth), <span class="at">data=</span>trees)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This model looks better!</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(linreg2, <span class="at">which =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">label.size =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="presentation4_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="step-5-hypothesis-test-report-of-the-model" class="level4">
+<h4 class="anchored" data-anchor-id="step-5-hypothesis-test-report-of-the-model">Step 5: Hypothesis test + Report of the model</h4>
+<p>Parameter estimates, standard errors are computed and certain hypothesis tests are carried out by the <code>summary</code> function:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(linreg2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = log(Volume) ~ log(Girth), data = trees)
+
+Residuals:
+      Min        1Q    Median        3Q       Max 
+-0.205999 -0.068702  0.001011  0.072585  0.247963 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) -2.35332    0.23066  -10.20 4.18e-11 ***
+log(Girth)   2.19997    0.08983   24.49  &lt; 2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.115 on 29 degrees of freedom
+Multiple R-squared:  0.9539,    Adjusted R-squared:  0.9523 
+F-statistic: 599.7 on 1 and 29 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co">#drop1(linreg2, test = "F")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The coefficient table is the most important part of the output. It has two lines — one for each parameter in the model — and four columns. The first line is about the intercept, the second line is about the slope. The columns are</p>
+<ul>
+<li><code>Estimate</code>: The estimated value of the parameter (intercept or slope).</li>
+<li><code>Std. Error</code>: The standard error (estimated standard deviation) associated with the estimate in the first column.</li>
+<li><code>t value</code>: The <span class="math inline">\(t\)</span>-test statistic for the hypothesis that the corresponding parameter is zero. Computed as the estimate divided by the standard error.</li>
+<li><code>Pr(&gt;|t|)</code>: The <span class="math inline">\(p\)</span>-value associated with the hypothesis just mentioned. In particular the <span class="math inline">\(p\)</span>-value in the second line is for the null hypothesis that there is no effect of girth on volume.</li>
+</ul>
+<p>If you would like to report confidence intervals for the parameters (intercept and slope), then use <code>confint</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(linreg2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                2.5 %    97.5 %
+(Intercept) -2.825083 -1.881566
+log(Girth)   2.016238  2.383702</code></pre>
+</div>
+</div>
+</section>
+<section id="step-6-visualization-of-the-model" class="level4">
+<h4 class="anchored" data-anchor-id="step-6-visualization-of-the-model">Step 6: Visualization of the model</h4>
+<p>An excellent synthesis of a statistical analysis is often provided by a plot combining the raw data with the model fit.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(trees, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">log</span>(Girth), <span class="at">y =</span> <span class="fu">log</span>(Volume))) <span class="sc">+</span> </span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">intercept=</span><span class="sc">-</span><span class="fl">2.35332</span>, <span class="at">slope=</span><span class="fl">2.19997</span>, <span class="at">col=</span><span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="presentation4_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="outlook-other-analyses" class="level2">
+<h2 class="anchored" data-anchor-id="outlook-other-analyses">Outlook: Other analyses</h2>
+<p>The <code>lm</code> function is used for linear models, that is, models where data points are assumed to be independent with a Gaussian (i.e.&nbsp;normal) distribution (and typically also with the same variance). Obviously, these models are not always appropriate, and there exists functions for many, many more situations and data types. Here, we just mention a few functions corresponding to common data types and statistical problems.</p>
+<ul>
+<li><code>glm</code>: For independent, but non-Gaussian data. Examples are binary outcomes (logistic regression) and outcomes that are counts (Poisson regression). glm is short for generalized linear models, and the <code>glm</code> function is part of the base installation of R.</li>
+<li><code>lmer</code> and <code>glmer</code>: For data with dependence structures that can be described by random effects, e.g., block designs. lme is short for linear mixed effects (Gaussian data), glmer is short for generalized linear mixed effects (binary or count data). Both functions are part of the <strong>lme4</strong> package.</li>
+<li><code>nls</code>: For non-linear regression, e.g., dose-response analysis. nls is short for non-linear least squares. The function is included in the base installation of R.</li>
+</ul>
+<p>The functions mentioned above are used in a similar way as <code>lm</code>: a model is fitted with the function in question, and the model object subsequently examined with respect to model validation, estimation, computation of confidence limits, hypothesis tests, prediction, etc. with functions <code>summary</code>, <code>confint</code>, <code>drop1</code>, <code>emmeans</code>, <code>pairs</code> as mostly indicated above.</p>
+
+
 </section>
 
 </main> <!-- /main -->
