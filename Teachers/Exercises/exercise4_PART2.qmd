@@ -8,56 +8,78 @@ project:
   output-dir: ../docs
 ---
 
-You will need the Quarto file for this exercise. You will use the following [exercise4_PART2.qmd](https://github.com/Center-for-Health-Data-Science/FromExceltoR/blob/2024_Oct/Teachers/Exercises/exercise4_PART2.qmd) file. Please clink on the link, download and open the file in your RStudio.
-
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
 ```
 
-Except for the last two parts, this exercise is about analysis with so-called *Gaussian linear models*. This is the class of models where data points are assumed to be independent, Gaussian (i.e. with a normal distribution) and with the same variance. All such models are fitted with the `lm` function in R, like so:\
-`lm(y~x, data = my.data)`\
-The term *regression* is usually used for models where all explanatory variables are numerical, whereas the term *analysis of variance* (ANOVA) is usually used for models where all explanatory variables are categorical (i.e. factors). However, predictors of both types can be included in the same Gaussian linear model. In the end, we are also concerned with logistic regression models (for binary outcomes e.g. cases vs. controls) and linear mixed models (for data with a block structure).
+This exercise focuses on **Gaussian linear models**, where data points are assumed to be independent, normally distributed, and have equal variance. Such models are fitted in R using `lm()`, e.g.
+
+Later sections also introduce **logistic regression** (for binary outcomes) and **linear mixed models** (for grouped or hierarchical data).
 
 The purpose of this exercise is to show how to fit and work with statistical models in R. This means that the analyses are not necessarily those that should be used in a real-life analysis of the data.
 
-Start with the **Data** part. The later parts are *almost* independent of each other, so you can choose the parts that are most appropriate for you. However, not all statistical concepts are studied in all the parts present.
+Start with the **Data** part.
 
 ### Data
 
-The dataset to be used is about risk factors associated with low infant birth weight. The data are available in the R-package **MASS** (part of base R, so it is installed automatically) as a data frame called birthwt. If nothing else is mentioned, then use the infants's birth weight, `bwt`, as outcome (response).
+The dataset to be used concerns risk factors for low infant birth weight and is available in the **MASS** package. It includes 189 births with the following variables:
 
-1.  Use the commands below to load the MASS package and get the help page for the data frame. The help page will appear in the lower right window of RStudio. Read about the data; in particular about the variables `age`, `lwt`, `ftv`, `smoke`, and `bwt`.
+1.  Use the commands below to load the MASS package and get the help page for the data. The help page will appear in the lower right window of RStudio. Read about the data; in particular about the variables `age`, `lwt`, `ftv`, `smoke`, and `bwt`.
 
-```{r, eval = TRUE}
-library(MASS)
-?birthwt
-```
+    ```{r}
+    library(MASS)
+    data(birthwt)
+    ?birthwt
+    ```
 
-2.  `birthwt` is not a tibble (the modern way to organize data), but we can make it one:
+2.  Assign the data to an object named `birthwt` if it is not already loaded. Then **glimpse** the dataset and check the first few rows.
 
-```{r}
-library(tidyverse)    
-birthData <- as_tibble(birthwt)
-birthData
-```
+    Note: `birthwt` is not a tibble (the modern tidyverse data format), but we can easily convert it:
 
-3.  Mother's smoking habits (`smoke`) is coded as numerical variable. Make it a factor (categorical variable).
+    ```{r}
+    library(tidyverse)    
+    birthData <- as_tibble(birthwt)
+    birthData
+    ```
 
-4.  The `ftv` is a numerical variable, but we would also like a categorical version of it, with groups corresponding to zero visits, one visit, and two or more visits, respectively. Try the following commands, and check the results:
+3.  The variables `smoke` (mother’s smoking habits) and `ftv` (number of first-trimester physician visits) are coded as numeric variables.\
+    Convert them to **factors** so they are treated as categorical variables in your analyses:
 
-```{r}
-table(birthData$ftv)
-birthData <- mutate(birthData, ftvFac = factor(ftv))
-birthData <- mutate(birthData, visits = fct_collapse(ftvFac, Never="0", Once="1", other_level="MoreThanOnce"))
-summary(birthData)
-```
+    ```{r}
+    birthData <- birthData %>%
+      mutate(
+        smoke = factor(smoke),
+        ftvFac = factor(ftv)
+      )
+    ```
 
-5.  Make groupwise boxplots of `bwt` by `visits`, i.e., boxplots of birth weight for those women who did not see their doctor, those who saw their doctor once, and those who saw their doctor more than once during the first trimester - all boxplots in one graph. Do the same thing for `smoke` (instead of `visits`).
+4.  Make boxplot of birth weight `bwt` according the number of visits to physician `ftvFac` during the first trimester. Split by smoking status.
 
-6.  You may also make groupwise boxplots for each combination of `smoke` and `visits`. You add a combination term with a `:`, e.g. `smoke:visits`. What is your initial impression about potential associations?
+    ```{r}
+    ggplot(birthData, aes(x=ftvFac, y=bwt, fill = smoke)) + geom_boxplot() 
+    ```
 
-7.  Make a scatterplot with `lwt` on the $x$-axis and `bwt` on the $y$-axis. Modify the plot such that points are coloured according to visits.\
-    Modify it further such that the symbol types are different for smokers and non-smokers. This is done by adding `pch=smoke`.
+5.  Make a scatterplot with `lwt` on the $x$-axis and `bwt` on the $y$-axis. Modify the plot such that points are colored according to `smoke` and size shows `ftv.`
+
+    ```{r}
+    ggplot(birthData, aes(x=lwt, y=bwt, col=smoke, size = ftv)) + geom_point() 
+    ```
+
+6.  The `ftv` is a numerical variable, but we would also like a categorical version of it called `visits` , with groups corresponding to zero visits, one visit, and two or more visits, respectively.
+
+    ```{r}
+    table(birthData$ftv)
+    birthData <- mutate(birthData, 
+                        visits = fct_collapse(ftvFac, 
+                                              Never="0", 
+                                              Once="1", 
+                                              other_level="MoreThanOnce"))
+    table(birthData$visits)
+    ```
+
+7.  Report how many how many women had more than one physician visit during the first trimester here.
+
+    ![](images/qr_code_Ex4Q1.png){width="200"}
 
 ### Regression
 
@@ -65,112 +87,171 @@ The term *regression* is usually used for models where all explanatory variables
 
 If you are not too familiar with linear regression, you can have a look at what the `summary()` output means [here](https://feliperego.github.io/blog/2015/10/23/Interpreting-Model-Output-In-R) and for understanding regression `plot()`, have a look [here](https://data.library.virginia.edu/diagnostic-plots/).
 
-8.  Fit a linear regression model with `bwt` as response and `lwt` as covariate, and identify the estimates for the intercept and for the slope. Find the 95% confidence interval for the slope parameter by using the `confint()` function.
+8.  Fit a linear regression model with `bwt` as response and `lwt` as covariate, and identify the estimates for the intercept and for the slope. Find the 97.5% confidence interval for the slope parameter by using the `confint()` function.
 
-9.  Just by calling `plot()` on your regression model you made you can carry out model validation. Does the model seem appropriate for the data?
+    ```{r}
+    reg1 <- lm(bwt ~ lwt, data=birthData) 
+    summary(reg1)
+    confint(reg1)
+    ```
+
+9.  Performe model validation. Hint: use autoplot. Does the model seem appropriate for the data?
+
+    ```{r}
+    #par(mfrow=c(2,2))
+    #plot(reg1)
+    autoplot(reg1, which = 1:6, ncol = 2, label.size = 3)
+    ```
 
 10. Fit the multiple linear regression model where you include `lwt` as well as `age` and `ftv` (numerical variables) as covariates. Identify the parameter estimates, and consider what their interpretation is.
 
-11. Try the following commands, and see if you can figure out what the outcome means. You should replace `reg2` with the name of the model object from the previous question.\
+    ```{r}
+    reg2 <- lm(bwt ~ lwt + age + ftv, data=birthData)
+    summary(reg2)
+    # Just to view the coefficients
+    summary(reg2)$coefficients
+    ```
 
-```{r}
-newData <- data.frame(lwt=100, age=25, ftv=0)
-newData
-predict(reg2, newData)
-predict(reg2, newData, interval="prediction")
-```
+11. Try the following commands, and see if you can figure out what the outcome means. You should replace `reg2` with the name of the model object from the previous question.
+
+    ```{r}
+    newData <- data.frame(lwt=100, age=25, ftv=0)
+    newData
+    predict(reg2, newData)
+    predict(reg2, newData, interval="prediction")
+    ```
+
+<!-- -->
 
 12. Fit the multiple linear regression model again, but now only using data from mothers with a weight less than 160 pounds (`lwt` \< 160). *Hint:* Use the `filter` function and change the `data` argument in the `lm` command.
 
+    ```{r}
+    ### Use only data from mothers with weight below 160
+    reg3 <- lm(bwt ~ lwt + age + ftv, data=filter(birthData, lwt<160))
+    summary(reg3)
+    # Just to view the coefficients
+    summary(reg3)$coefficients
+    ```
+
 ### ANOVA
 
-The term *analysis of variance* (ANOVA) is usually used for models where all explanatory variables are categorical (factors). It is important that you have coded `smoke` as a factor, cf. Question 3.\
-First, install and load the R-package `emmeans`.
+The term **analysis of variance (ANOVA)** is used for models where all explanatory variables are categorical (factors). Before proceeding, make sure that `smoke` is coded as a factor.
 
-```{r, eval = TRUE}
-library(emmeans)    
-```
+13. Fit a **one-way ANOVA** (using `lm()`) where the mean birth weight is allowed to differ between smokers and non-smokers. Find the estimated birth weight for infants from smokers as well as non-smokers. Hint: use `emmeans()`.
 
-13. Fit the oneway ANOVA (with `lm`) where the expected value of `bwt` is allowed to differ between smokers and non-smokers. Find the estimated birth weight for infants from smokers as well as non-smokers. Is there significant difference between smokers and non-smokers when it comes to infant's birth weight? *Hints:* Use `summary()` and the `emmeans()` function from the `emmeans` R-package. **N.B** make sure you know what needs to go into the function, use ?.
+    ```{r}
+    library(emmeans)    
+    oneway1 <- lm(bwt ~ smoke, data=birthData)
+    emmeans(oneway1,~smoke)
+    ```
 
-14. Fit the oneway ANOVA where you use `visits` as the explanatory variable. Find the estimated birth weight for each group, and make the pairwise comparisons between the groups. Furthermore, carry out the $F$-test for the overall comparison of the three levels.\
-    *Hint* `drop1(, test="F")`. What is the conclusion?
+14. Check, is there a statistically significant difference in mean birth weight between infants of smokers and non-smokers?
 
-15. Now, consider both `visits` and `smoke` as explanatory variables. Since they are both categorical variables (factors), the relevant model is a *twoway* ANOVA. Fit the twoway ANOVA model *without interaction*, and make sure you understand the estimates:
+    ```{r}
+    pairs(emmeans(oneway1,~smoke))
+    ```
 
-```{r}
-twoway1 <- lm(bwt ~ visits + smoke, data=birthData)
-summary(twoway1)
-```
+15. Fit the oneway ANOVA where you use `visits` as the explanatory variable. Perform an overall F-test for differences across all levels. Find the estimated birth weight for each group, and make the pairwise comparisons between the groups.\
+    *Hint* `drop1(, test="F")`. What do you conclude about the relationship between the number of visits and infant birth weight?
 
-16. Fit the twoway ANOVA model *with interaction* (use the command below). Then use `anova` and/or `drop1` to test if the interaction between visits and smoking habits is statistically significant.
+    ```{r}
+    oneway2 <- lm(bwt ~ visits, data=birthData)
+    emmeans(oneway2,~visits)
+    drop1(oneway2,test="F")
+    pairs(emmeans(oneway2,~visits))
+    ```
 
-```{r}
-twoway2 <- lm(bwt ~ visits * smoke, data=birthData)
-```
+16. Now, consider **both `visits` and `smoke`** as explanatory variables.\
+    Since both are categorical, the relevant model is a **two-way ANOVA**. Fit the model without interaction. Inspect the estimated means and group differences. How do you interpret the estimated means? What do they tell you about birth weight by smoking status and visit frequency?
 
-17. You should still use `twoway2` in for this question. Use `emmeans` to compute the expected birth weight of infants for smokers and non-smokers, respectively, on average over the three levels of `visits`.
+    ```{r}
+    twoway1 <- lm(bwt ~ visits + smoke, data=birthData)
+    emmeans(twoway1,~visits+smoke)
+    pairs(emmeans(twoway1,~visits+smoke))
+    ```
 
-### Models with numerical as well as categorical predictors
+<!-- -->
 
-Predictors of any type can be included in Gaussian linear models, still using `lm`.
+16. Fit the twoway ANOVA model *with interaction* replacing `+` by a `*`. Use `drop1()` to test whether the interaction term is statistically significant. Compare it to model without interaction? What do the p-values suggest about whether the effect of smoking depends on the number of visits?
 
-18. Fit a model where `lwt` (numeric) and `smoke` (factor) are included as predictors in an additive way:
+    ```{r}
+    twoway2 <- lm(bwt ~ visits * smoke, data=birthData)
+    drop1(twoway2,test="F")
+    drop1(twoway1,test="F")
+    ```
 
-```{r}
-model1 <- lm(bwt ~ lwt + smoke, data=birthData)
-summary(model1)
-```
+17. Use `anova()` to formally compare the two models. Are the two models statistically different?\
+    What does this imply about including the interaction term?
 
-What is the interpretation of the estimates?
+    ```{r}
+    anova(twoway1, twoway2)
+    ```
 
-19. Fit a model with *interaction* between the two predictors, replacing `+` by a `*`:
+18. Report are the 2 models statistically different here.
 
-```{r}
-model2 <- lm(bwt ~ lwt * smoke, data=birthData)
-summary(model2)
-```
-
-What is the interpretation of the estimates? Is there evidence in the data that the effect of mother's weight on infant's weight differs between smokers and non-smokers? *Hint*: What does the last question have to do with interaction? Use `anova` on appropriate models.
-
-20. Fit the model with additive effects of mothers's weight, smoking status, age, and visit status, and carry out model validation. Give an interpretation of the estimate associated to `smoke`. Does smoking affect the weight of infants?
+![](images/qr_code_Ex4Q2.png){width="200"}
 
 ### Logistic regression
 
-The variable `low` is 1 if birth weight is less than 2500 g, and 0 if birth weight is larger than 2500g, see the plot
+The variable `low` is **1** if birth weight is less than 2500 g, and **0** otherwise.\
+Visualize the data:
 
 ```{r}
-ggplot(birthData, aes(x=bwt, y=low)) + geom_point()
+ggplot(birthData, aes(x=bwt, y=low)) + 
+  geom_point() +
+  labs(y = "Low birthweight (1 = yes, 0 = no)")
 ```
 
-Consider for a moment the situation where the actual birth weight (`bwt`) was not registered, such that `low` was the only information on the child. Hence, the outcome is binary (`low` has two values), and the relevant analysis would be a *logistic regression* where the probablity $Pr(low=1)$ is described in terms of predictors. For example, we may consider a model with mothers's weight, smoking status, age, and visit status as predictors, just like in the previous question.
+Imagine the actual birth weight `bwt` was **not recorded**, but we still want to know whether the birth weight was low.\
+Because the outcome is binary (`low` has two values), we use **logistic regression** to model the probability.
 
-21. Fit the model, and consider the estimates:
+For example, we may consider a model with mothers's weight, smoking status, and age as predictors, just like in the previous question.
 
-```{r}
-logreg1 <- glm(low ~ lwt + smoke + age + visits, data=birthData, family="binomial")
-summary(logreg1)
-```
+19. Fit the model, take a look at glm function:
 
-Does this model give evidence for an effect of smoking on the weight of infants? Compare the signs of the estimates from `model3` (Gaussian model in the solution for Question 18) and `logreg1` (logistic regression model). Can you explain 'what happens'?
+    ```{r}
+    logreg1 <- glm(low ~ lwt + smoke + age, data=birthData, family="binomial")
+    logreg1
+    ```
 
-### Linear mixed models
+20. Use `drop1()` to check if each predictor contributes significantly:
 
-22. Assume for a moment that the 189 births took place at 19 different medical centers with 10 births at each center, except for one center with only nine births. This is not the case, so we have to generate a center variable artificially. You should of course never invent such an artificial structure for a real dataset! Anyway, let's do it like this:
+    A Note: `test = "F"` is for Gaussian linear models (`lm()`), where F-tests are appropriate.\
+    For logistic regression and other GLMs, `test = "Chisq"` is the correct choice.
 
-```{r}
-set.seed(123)
-center <- sample(rep(1:19, each=10)[1:189])
-center
-birthData <- mutate(birthData,center=factor(center))
-```
+    ```{r}
+    drop1(logreg1, test="Chisq")
+    ```
 
-The `rep` command repeats the number from 1 to 19, 10 times each. We only need the first 189 numbers. The `sample` changes the order of the 189 numbers at random. The `set.seed` command has the effect that you get the same sample each time you run the commands. The last line includes the new variable in the original dataset as a categorical variable.
+    **Question:** Based on the p-values, is there evidence that **smoking** affects the probability of low birth weight?
 
-23. The `center` variable would typically be included in the model as a *random effect*. Gaussian models with both fixed and random effects are called *linear mixed models*, and are fitted with the `lmer` function from the `lme4` package. Run the code below and identify relevant estimates. Remember that `lme4` must be installed before the commands below can be used.
+21. We have data for **5 new mothers**. Use your fitted logistic model `logreg1` to **predict the probability** of low birthweight and fill the `low` column.
 
-```{r}
-library(lme4)
-lmm1 <- lmer(bwt ~ lwt + smoke + age + visits + (1|center), data=birthData)
-summary(lmm1)
-```
+    ```{r}
+    newData <- tribble(
+      ~low, ~age, ~lwt, ~race, ~smoke, ~ptl,  ~ftv, ~bwt, 
+      NA,    22,   140,  "Black",  "1",    1,   1,   2800, 
+      NA,    30,   155,  "Other",  "0",    0,   3,   4500,
+      NA,    18,   130,  "Black",  "1",    0,   0,   1700,
+      NA,    17,   97,   "Other",  "1",    0,   0,   1500,
+      NA,    28,   165,  "White",  "0",    0,   2,   3400
+    )
+    ```
+
+    ```{r}
+    newData$low <- predict(logreg1, newdata = newData, type = "response")
+
+    ```
+
+22. Add the **predicted probabilities** (red points) and a **connecting line** to your `ggplot`. Hint: add geom_point and geom_line with the newData.
+
+    ```{r}
+    ggplot(birthData, aes(x=bwt, y=low)) + geom_point() + 
+      geom_point(data = newData, aes(x = bwt, y = low), color = "red", size = 2) +
+      geom_line(data = newData, aes(x = bwt, y = low), color = "red", size = 0.5) +
+      labs(y = "Predicted probability of low birthweight")
+    ```
+
+23. Report here - **In how many of the new cases is birthweight predicted to be low?**?
+
+    ![](images/qr_code_Ex4Q3.png){width="200"}
