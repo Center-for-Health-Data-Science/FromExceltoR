@@ -12,19 +12,19 @@ project:
 knitr::opts_chunk$set(echo = TRUE, eval = TRUE, warning = FALSE)
 ```
 
-We will use the following [presentation4.qmd](https://github.com/Center-for-Health-Data-Science/FromExceltoR/blob/2024_Oct/Teachers/Presentations/presentation4.qmd) file for this presentation. Please clink on the link, download and open the file in your RStudio.
+We will use the following [presentation4.qmd](https://github.com/Center-for-Health-Data-Science/FromExceltoR/blob/2025_Apr/Teachers/Presentations/presentation4.qmd) file for this presentation. Please clink on the link, download and open the file in your RStudio.
 
 ## Structure of a biostatistical analysis in R
 
 The very basic structure of an R doc when doing a classical statistical analysis is as follows:
 
--   Load packages that you will be using.\
+-   Load packages that you will be using.
 
--   Read the dataset to be analyzed. Possibly also do some data cleaning and manipulation.\
+-   Read the dataset to be analyzed. Possibly also do some data cleaning and manipulation.
 
--   Visualize the dataset by plots and descriptive statistics.\
+-   Visualize the dataset by plots and descriptive statistics.
 
--   Fit a statistical model. Validate the model.\
+-   Fit a statistical model. Validate the model.
 
 -   Hypothesis testing. Post hoc testing.
 
@@ -47,7 +47,6 @@ We will use **ggplot2** to make plots, and to be prepared for data manipulations
 
 The psoriasis data are provided in an Excel sheet, so we also load **readxl**. Finally, we will use the package **emmeans** to make post hoc tests.
 
-
 ```{r warning=FALSE, message=FALSE}
 #install.packages("tidyverse")
 #install.packages("readxl")
@@ -62,7 +61,6 @@ library(ggfortify)
 ```
 
 Now, we are done preparing for our analyses.
-
 
 ## Example 1 : Analysis of variance
 
@@ -80,7 +78,7 @@ The dataset includes three groups:
 
 You will focus on the gene **IGFL4**. This gene is a part of the insulin-like growth factor family involved in energy metabolism, growth, and development.
 
-The dataset are stored in `psoriasis.xlsx`. 
+The dataset are stored in `psoriasis.xlsx`.
 
 ```{r}
 # Read in the data from Excel file and call it psoriasisData
@@ -123,6 +121,7 @@ ggplot(psorData, aes(x=type, y=IGFL4, fill=type)) +
 ```
 
 We will also extract some descriptive statistics.
+
 ```{r}
 # And finally, obtain the group-wise (healthy, psne, psor) descriptive statistics (mean, median and standard deviation).
 psorData %>% 
@@ -176,18 +175,16 @@ You can inspect the model parameters with:
 # View the model coefficients
 summary(oneway)
 ```
-The output shows the estimated group means (intercept and coefficients) and standard errors. The intercept is the estimated mean IGFL4 expression in the reference group (here, healthy). The coefficients are the differences between the other groups and the reference group.
 
+The output shows the estimated group means (intercept and coefficients) and standard errors. The intercept is the estimated mean IGFL4 expression in the reference group (here, healthy). The coefficients are the differences between the other groups and the reference group.
 
 QUESTION: Is there a a significant difference in the expression level of the IGFL4 gene between psne and psor skin samples? How could we check this?
 
-Although `summary()` works well, we recommend using the **emmeans** package for a clearer and more user-friendly presentation of group means and comparisons. 
+Although `summary()` works well, we recommend using the **emmeans** package for a clearer and more user-friendly presentation of group means and comparisons.
 
 ```{r}
 library(emmeans)
 ```
-
-
 
 #### Step 4: Hypothesis test + Post hoc tests
 
@@ -256,12 +253,10 @@ linreg1
 
 Mathematically this model makes assumptions about linearity, variance homogeneity, and normality. These assumptions are checked visually via four plots generated from the model residuals. In R it is easy to make these plots; simply apply `plot` on the `lm`-object, or, use a function from **ggfortify** package to build a ggplot2 diagnostic plot for linear models.
 
-
 ```{r, eval=FALSE}
 par(mfrow=c(2,2))   # makes room for 4=2x2 plots!
 plot(linreg1)
 ```
-
 
 ```{r}
 #| fig.height: 6

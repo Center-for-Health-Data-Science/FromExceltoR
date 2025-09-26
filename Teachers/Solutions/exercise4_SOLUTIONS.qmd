@@ -1,7 +1,6 @@
 ---
-title: "Exercise 4, part 2: Applied Statistics in R"
+title: "Exercise 4, Part 2: Applied Statistics in R - Solutions"
 format: html
-editor: source
 author: "HeaDS Data Science Lab, University of Copenhagen"
 project:
   type: website
@@ -95,7 +94,7 @@ If you are not too familiar with linear regression, you can have a look at what 
     confint(reg1)
     ```
 
-9.  Performe model validation. Hint: use autoplot. Does the model seem appropriate for the data?
+9.  Perform model validation. Hint: use autoplot. Does the model seem appropriate for the data?
 
     ```{r}
     #par(mfrow=c(2,2))
@@ -228,22 +227,25 @@ For example, we may consider a model with mothers's weight, smoking status, and 
 21. We have data for **5 new mothers**. Use your fitted logistic model `logreg1` to **predict the probability** of low birthweight and fill the `low` column.
 
     ```{r}
-    newData <- tribble(
-      ~low, ~age, ~lwt, ~race, ~smoke, ~ptl,  ~ftv, ~bwt, 
-      NA,    22,   140,  "Black",  "1",    1,   1,   2800, 
-      NA,    30,   155,  "Other",  "0",    0,   3,   4500,
-      NA,    18,   130,  "Black",  "1",    0,   0,   1700,
-      NA,    17,   97,   "Other",  "1",    0,   0,   1500,
-      NA,    28,   165,  "White",  "0",    0,   2,   3400
+    newData <- tibble(
+      low = rep(NA, 5),
+      age = c(22, 30, 18, 17, 28),
+      lwt = c(140, 155, 130, 97, 165),
+      race = c("Black", "Other", "Black", "Other", "White"),
+      smoke = c(1, 0, 1, 1, 0),
+      ptl = c(1, 0, 0, 0, 0),
+      ftv = c(1, 3, 0, 0, 2),
+      bwt = c(2800, 4500, 1700, 1500, 3400)
     )
     ```
-
+    
+22. Use the `predict()` function to compute the predicted probabilities for the new cases. Make sure to set `type="response"` to get probabilities rather than log-odds.
     ```{r}
     newData$low <- predict(logreg1, newdata = newData, type = "response")
 
     ```
 
-22. Add the **predicted probabilities** (red points) and a **connecting line** to your `ggplot`. Hint: add geom_point and geom_line with the newData.
+23. Add the **predicted probabilities** (red points) and a **connecting line** to your `ggplot`. Hint: add geom_point and geom_line with the newData.
 
     ```{r}
     ggplot(birthData, aes(x=bwt, y=low)) + geom_point() + 
@@ -252,6 +254,6 @@ For example, we may consider a model with mothers's weight, smoking status, and 
       labs(y = "Predicted probability of low birthweight")
     ```
 
-23. Report here - **In how many of the new cases is birthweight predicted to be low?**?
+24. Report here - **In how many of the new cases is birthweight predicted to be low?**?
 
     ![](images/qr_code_Ex4Q3.png){width="200"}
