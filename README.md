@@ -13,27 +13,16 @@ This course is hosted by the SUND Data Lab, Center for Health Data Science:
 Website: https://heads.ku.dk/, Contact: datalab@sund.ku.dk
 
 
-Contacts:
+Course Responsible:
 
-Henrike Zschach, Special Consultant,
-Center for Health Data Science,
-email: henrike.zschach@sund.ku.dk
-
-Diana Andrejeva, Special Consultant,
+Diana Andrejeva, Research Consultant,
 Center for Health Data Science,
 email: diana.andrejeva@sund.ku.dk
 
-Thilde Terkelsen, Special Consultant,
+Thilde Terkelsen, Research Consultant,
 Center for Health Data Science,
 email: thilde.terkelsen@sund.ku.dk
 
-Tugce Karaderi, Assistant Professor,
-Center for Health Data Science,
-email: tugce.karaderi@sund.ku.dk
-
-Helene Wegener, Junior Data Scientist,
-Center for Health Data Science,
-email: helene.wegener@sund.ku.dk
 
 ---
 
