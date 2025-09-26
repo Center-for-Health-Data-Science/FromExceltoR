@@ -16,26 +16,26 @@ We will use the following [presentation4.qmd](https://github.com/Center-for-Heal
 
 ## Structure of a biostatistical analysis in R
 
-The very basic structure of an R script doing a classical statistical analysis is as follows:
+The very basic structure of an R doc when doing a classical statistical analysis is as follows:
 
 -   Load packages that you will be using.\
 
 -   Read the dataset to be analyzed. Possibly also do some data cleaning and manipulation.\
 
--   Visualize the dataset by graphics and other descriptive statistics.\
+-   Visualize the dataset by plots and descriptive statistics.\
 
--   Fit and validate a statistical model.\
+-   Fit a statistical model. Validate the model.\
 
--   Hypothesis testing. Possibly also post hoc testing.
+-   Hypothesis testing. Post hoc testing.
 
 -   Report model parameters and/or model predictions.
 
--   Visualize your results.
+-   Visualize the results.
 
 Of course there are variants of this set-up, and in practice there will often be some iterations of the steps.
 
 \
-In this manuscript, we will exemplify the proposed steps in the analysis of a simple dataset:
+In this quaro doc, we will exemplify the proposed steps in the analysis of a simple dataset. We will do:
 
 1.  **One-way ANOVA** of the expression of the IGFL4 gene against the skin type in psoriasis patients (an inflammatory skin disease).
 
@@ -43,13 +43,10 @@ In this manuscript, we will exemplify the proposed steps in the analysis of a si
 
 #### Load packages
 
-We will use **ggplot2** to make plots, and to be prepared for data manipulations, we simply load this together with the rest of the **tidyverse**. We will also use helper functions from **GGally** and **ggfortify** packages.
+We will use **ggplot2** to make plots, and to be prepared for data manipulations, we load this package alongside the rest of the **tidyverse**. We will also use helper functions from **GGally** and **ggfortify** packages for plotting.
 
 The psoriasis data are provided in an Excel sheet, so we also load **readxl**. Finally, we will use the package **emmeans** to make post hoc tests.
 
-Remember that you should install the wanted packages before they can be used (but you only need to install the packages once!).
-
-Thus,
 
 ```{r warning=FALSE, message=FALSE}
 #install.packages("tidyverse")
@@ -66,13 +63,12 @@ library(ggfortify)
 
 Now, we are done preparing for our analyses.
 
-Please refer to the 'STATS CHEAT SHEET' provided in the slides for hints as well as other cheat sheets provided in other sessions where necessary.
 
 ## Example 1 : Analysis of variance
 
 #### Step 1: Data
 
-Psoriasis is an immune-mediated skin disease. You conducted a microarray experiment with skin samples from 37 individuals to study whether certain genes are associated with the disease. This is a perfect case where R skills are very useful, since you cannot be sure until you perform some formal statistical analysis.
+Psoriasis is an immune-mediated skin disease. You conducted a sequencing experiment with skin samples from 37 individuals to study whether certain genes are associated with the disease. This is a perfect case where R skills are very useful, since you cannot be sure until you perform some formal statistical analysis.
 
 The dataset includes three groups:
 
@@ -82,9 +78,9 @@ The dataset includes three groups:
 
 -   **control:** 7 samples from healthy individuals
 
-You will focus on the gene **IGFL4**, part of the insulin-like growth factor family involved in energy metabolism, growth, and development.
+You will focus on the gene **IGFL4**. This gene is a part of the insulin-like growth factor family involved in energy metabolism, growth, and development.
 
-The data are stored in `psoriasis.xlsx`.
+The dataset are stored in `psoriasis.xlsx`. 
 
 ```{r}
 # Read in the data from Excel file and call it psoriasisData
@@ -115,16 +111,18 @@ count(psorData, type)
 
 #### Step 2: Descriptive plots and statistics
 
-To get an impression of the data, we make a violin plot of IGFL4 expression levels from each skin sample (healthy, psne, psor), and compute group-wise means and standard deviations.
+To get an overview of the data, we will make a violin plots of IGFL4 expression levels from each skin type (healthy, psne, psor), and compute group-wise means and standard deviations.
 
 ```{r}
 # A plot showing three groups of skin samples (healthy, psne, psor) and IGFL4 expression levels from each skin sample
-ggplot(psorData, aes(x=type, y=IGFL4)) +
-  geom_violin() +
+ggplot(psorData, aes(x=type, y=IGFL4, fill=type)) +
+  geom_violin(trim = FALSE) +
   geom_point() + 
-  labs(x="Skin type", y="IGFL4")
+  labs(x="Skin type", y="IGFL4") +
+  theme_minimal()
 ```
 
+We will also extract some descriptive statistics.
 ```{r}
 # And finally, obtain the group-wise (healthy, psne, psor) descriptive statistics (mean, median and standard deviation).
 psorData %>% 
@@ -132,27 +130,27 @@ psorData %>%
   summarise(avg=mean(IGFL4), median=median(IGFL4), sd=sd(IGFL4))
 ```
 
-Before we decide on statistical test to use to compare our groups, lets check if our gene expression data is normal distributed. If data are not normal, consider transformations (log, square root) or non-parametric tests (Wilcoxon, Kruskal–Wallis).
+Before we decide on which statistical test to use to compare our groups, lets check if our gene expression data is normal distributed. If data are not normal, consider transformations (log, square root) or non-parametric statistical tests (Wilcoxon, Kruskal–Wallis).
 
-Testing for Normality in R is done by Visual inspection or statistical test.
+Testing for Normality in R is done by either visual inspection or statistical test.
 
-We will use a nice helper function from ggpubr package to plot a Quantile-Quantile plot.
+We will use a helper function from `ggpubr` package to make a quantile-quantile plot. You can also use the base R function `qqnorm()`.
 
 ```{r}
 library(ggpubr)
 # nice ggplot2-based QQ plot
-ggqqplot(psorData$IGFL4)  # nice ggplot2-based QQ plot
+ggqqplot(psorData$IGFL4)  #  ggplot2-based QQ plot
 
 ```
 
-And Shapiro–Wilk to confirm statistically.
+In addition to our visual inspection, we will perform a `Shapiro–Wilk` test to test the null hypothesis that the data are normally distributed.
 
 ```{r}
 shapiro.test(psorData$IGFL4)
 
 ```
 
-Where Null hypothesis (H₀): data are normally distributed.
+The null hypothesis (H₀): data are normally distributed.
 
 p \> 0.05: fail to reject H₀ → data look normal.
 
@@ -164,7 +162,7 @@ Best practice is to use both approaches: Visual inspection to see how data devia
 
 The scientific question is whether the gene expression level of IGFL4 differs between the three types/groups.
 
-We will use a **one-way ANOVA** to test whether IGFL4 expression differs across the three groups. In R, you can fit a one-way ANOVA with the `lm()` function. It’s good practice to save the fitted model object (e.g., `oneway`) so you can reuse it for further analysis.
+We will use a **one-way ANOVA** to test whether IGFL4 expression differs across the three groups. In R, you can fit a one-way ANOVA with the `lm()` function. You should save the fitted model object (e.g., `oneway`) so you can reuse it for further analysis.
 
 ```{r}
 # oneway analysis of variance (ANOVA)
@@ -178,17 +176,24 @@ You can inspect the model parameters with:
 # View the model coefficients
 summary(oneway)
 ```
+The output shows the estimated group means (intercept and coefficients) and standard errors. The intercept is the estimated mean IGFL4 expression in the reference group (here, healthy). The coefficients are the differences between the other groups and the reference group.
 
-Although `summary()` works well, we recommend using the **emmeans** package for a clearer and more user-friendly presentation of group means and comparisons.
 
-Are we done?
+QUESTION: Is there a a significant difference in the expression level of the IGFL4 gene between psne and psor skin samples? How could we check this?
+
+Although `summary()` works well, we recommend using the **emmeans** package for a clearer and more user-friendly presentation of group means and comparisons. 
+
+```{r}
+library(emmeans)
+```
+
+
 
 #### Step 4: Hypothesis test + Post hoc tests
 
 It is standard to perform an **F-test** to check whether the mean IGFL4 expression differs across groups. Formally, the null hypothesis is that all group means are equal. The easiest way to run this test in R is with `drop1()` and the `test="F"` option:
 
 ```{r}
-library(emmeans)
 # F-test for the overall effect of group
 drop1(oneway, test = "F")
 ```
@@ -236,7 +241,8 @@ head(trees)
 The **GGally** package helps us make an easy summary plot, where the diagonal is used to visualize the marginal distribution of the three tree variables:
 
 ```{r}
-ggpairs(trees)
+ggpairs(trees) + 
+  theme_bw()
 ```
 
 #### Step 3: Fitting and validating a simple linear regression model
@@ -248,14 +254,14 @@ linreg1 <- lm(Volume ~ Girth, data=trees)
 linreg1
 ```
 
-Mathematically this model makes assumptions about linearity, variance homogeneity, and normality. These assumptions are checked visually via four plots generated from the model residuals. In R it is easy to make these plots; simply apply `plot` on the `lm`-object.
+Mathematically this model makes assumptions about linearity, variance homogeneity, and normality. These assumptions are checked visually via four plots generated from the model residuals. In R it is easy to make these plots; simply apply `plot` on the `lm`-object, or, use a function from **ggfortify** package to build a ggplot2 diagnostic plot for linear models.
 
-```{r}
-#par(mfrow=c(2,2))   # makes room for 4=2x2 plots!
-#plot(linreg1)
+
+```{r, eval=FALSE}
+par(mfrow=c(2,2))   # makes room for 4=2x2 plots!
+plot(linreg1)
 ```
 
-OR we can use a fancy function from **ggfortify** package to build beautifull ggplot diagnostic plots for linear models.
 
 ```{r}
 #| fig.height: 6
@@ -263,7 +269,7 @@ library(ggfortify)
 autoplot(linreg1, which = 1:6, ncol = 2, label.size = 3)
 ```
 
-In this case there appears to be problems with the model. In particular, the upper left plot shows a quadratic tendency suggesting that the linearity assumption is not appropriate. Or we have an outlyer. Perhaps a data transformation can help us out.
+In this case there appears to be problems with the model. In particular, the upper left plot shows a quadratic tendency suggesting that the linearity assumption is not appropriate. Sample 31, appears to be an outlier. Perhaps a data transformation can help us out.
 
 #### Step 4 iterated: Transformation
 
@@ -280,7 +286,7 @@ This model looks better!
 autoplot(linreg2, which = 1:6, ncol = 2, label.size = 3)
 ```
 
-#### Step 5: Hypothesis test + Report of the model
+#### Step 5: Hypothesis test and model assesment
 
 Parameter estimates, standard errors are computed and certain hypothesis tests are carried out by the `summary` function:
 
