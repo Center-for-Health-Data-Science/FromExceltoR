@@ -47,6 +47,7 @@ The data set is the same as the one used for the Tidyverse exercise. If you have
 
 ::: {.callout-tip collapse="true"}
 ## Hint
+
 try adding a `theme()` with `legend.position = "none"` inside it.
 :::
 
@@ -61,6 +62,10 @@ try adding a `theme()` with `legend.position = "none"` inside it.
 7.  Calculate the average and standard deviation for sunshine in each month and save it to a table called `summary_stats`. You will need `group_by` and `summarize`. Recall how to do this from the tidyverse exercise.
 
 8.  Make a scatter plot of the summary_stats with month on the x-axis, and the average number of sunshine hours on the y-axis.
+
+    **Report here the average number of sunshine hours in May.**
+
+    ![](images/qr_code_Ex3Q1.png){width="200"}
 
 9.  Add error bars to the plot, which represent the average number of sunshine hours plus/minus the standard deviation of the observations. The relevant geom is called `geom_errorbar`.
 
@@ -130,6 +135,10 @@ There are many ways in which you can manipulate the look of your plot. For this 
 
 24. R suggests that you choose a different number of bins/bin width for the histogram. Use `binwidth =` inside the histogram geom to experiment with different values of bin width. Look at how the histogram changes.
 
+    **Report here the number of bins you would recommend.**
+
+    ![](images/qr_code_Ex3Q2.png){width="200"}
+
 25. Color the entire histogram. Here we are not coloring/filling according to any attribute, just the entire thing so the argument needs to be **outside** `aes()`.
 
 ## Bar chart I
@@ -149,6 +158,10 @@ There are many ways in which you can manipulate the look of your plot. For this 
 31. Sort the stations in accordance to rainfall, either ascending or descending. This was shown in the ggplot lecture. Sort your rain dataframe from the question above by sum, then re-arrange the factor-levels of the 'station' as shown in the lecture.
 
 32. Add labels to each bar that state the sum of the rainfall per station. You can do this by adding `geom_label()` to the plot and providing the information under the `label` keyword inside the `aes()`.
+
+    **Report here the total rainfall recorded at the Armagh station.**
+
+    ![](images/qr_code_Ex3Q3.png){width="200"}
 
 33. Adjust the label positions so that the labels are positioned above the bars instead of inside them.
 

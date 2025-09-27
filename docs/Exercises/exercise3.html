@@ -238,13 +238,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Exercises/exercise4_PART1.html" class="sidebar-item-text sidebar-link">
+  <a href="../Exercises/exercise4_PART1.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercise 4, Part 1: Applied Statistics</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Exercises/exercise4_PART2.html" class="sidebar-item-text sidebar-link">
+  <a href="../Exercises/exercise4_PART2.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercise 4, Part 2: Applied Statistics</span></a>
   </div>
 </li>
@@ -279,19 +279,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Solutions/presentation4_solutions.html" class="sidebar-item-text sidebar-link">
+  <a href="../Solutions/presentation4_solutions.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Presentation 4: Applied Statistics in R - Solutions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Solutions/exercise4_PART1_solutions.html" class="sidebar-item-text sidebar-link">
+  <a href="../Solutions/exercise4_PART1_solutions.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercise 4, Part 1 - Solutions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Solutions/exercise4_PART2_solutions.html" class="sidebar-item-text sidebar-link">
+  <a href="../Solutions/exercise4_PART2_solutions.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercise 4, Part 2 - Solutions</span></a>
   </div>
 </li>
@@ -474,7 +474,9 @@ Hint
 <h2 class="anchored" data-anchor-id="scatter-plot-ii-error-bars">Scatter plot II: error bars</h2>
 <ol start="7" type="1">
 <li><p>Calculate the average and standard deviation for sunshine in each month and save it to a table called <code>summary_stats</code>. You will need <code>group_by</code> and <code>summarize</code>. Recall how to do this from the tidyverse exercise.</p></li>
-<li><p>Make a scatter plot of the summary_stats with month on the x-axis, and the average number of sunshine hours on the y-axis.</p></li>
+<li><p>Make a scatter plot of the summary_stats with month on the x-axis, and the average number of sunshine hours on the y-axis.</p>
+<p><strong>Report here the average number of sunshine hours in May.</strong></p>
+<p><img src="images/qr_code_Ex3Q1.png" class="img-fluid" width="200"></p></li>
 <li><p>Add error bars to the plot, which represent the average number of sunshine hours plus/minus the standard deviation of the observations. The relevant geom is called <code>geom_errorbar</code>.</p></li>
 </ol>
 <div class="callout callout-style-default callout-tip callout-titled">
@@ -561,7 +563,9 @@ Hint
 <h2 class="anchored" data-anchor-id="histogram">Histogram</h2>
 <ol start="23" type="1">
 <li><p>Make a histogram of rain from the climate dataset (find the correct <code>geom_</code> for this). Interpret the plot, what does it show?</p></li>
-<li><p>R suggests that you choose a different number of bins/bin width for the histogram. Use <code>binwidth =</code> inside the histogram geom to experiment with different values of bin width. Look at how the histogram changes.</p></li>
+<li><p>R suggests that you choose a different number of bins/bin width for the histogram. Use <code>binwidth =</code> inside the histogram geom to experiment with different values of bin width. Look at how the histogram changes.</p>
+<p><strong>Report here the number of bins you would recommend.</strong></p>
+<p><img src="images/qr_code_Ex3Q2.png" class="img-fluid" width="200"></p></li>
 <li><p>Color the entire histogram. Here we are not coloring/filling according to any attribute, just the entire thing so the argument needs to be <strong>outside</strong> <code>aes()</code>.</p></li>
 </ol>
 </section>
@@ -579,7 +583,9 @@ Hint
 <ol start="30" type="1">
 <li><p>Make a new bar chart showing the (total) annual rainfall recorded at each weather station. You will need to calculate this first. The format we need is a dataframe with summed up rain data per station.</p></li>
 <li><p>Sort the stations in accordance to rainfall, either ascending or descending. This was shown in the ggplot lecture. Sort your rain dataframe from the question above by sum, then re-arrange the factor-levels of the ‘station’ as shown in the lecture.</p></li>
-<li><p>Add labels to each bar that state the sum of the rainfall per station. You can do this by adding <code>geom_label()</code> to the plot and providing the information under the <code>label</code> keyword inside the <code>aes()</code>.</p></li>
+<li><p>Add labels to each bar that state the sum of the rainfall per station. You can do this by adding <code>geom_label()</code> to the plot and providing the information under the <code>label</code> keyword inside the <code>aes()</code>.</p>
+<p><strong>Report here the total rainfall recorded at the Armagh station.</strong></p>
+<p><img src="images/qr_code_Ex3Q3.png" class="img-fluid" width="200"></p></li>
 <li><p>Adjust the label positions so that the labels are positioned above the bars instead of inside them.</p></li>
 </ol>
 </section>
