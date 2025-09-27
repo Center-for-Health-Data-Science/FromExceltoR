@@ -19,304 +19,401 @@ library(tidyverse)
 
 ## Load data
 
-The iris dataset is a widely-used dataset in data science, containing 150 observations of iris flowers with features like sepal length, sepal width, petal length, and petal width. It includes three species: Setosa, Versicolor, and Virginica, making it ideal for classification tasks and data visualization.
+In the examples below, we use the **downloads** dataset. The dataset is available as an Excel file, which we import using the **readxl** package. Because **ggplot2** is part of the **tidyverse**, we also load the tidyverse packages so we can use its tools for data wrangling and visualization.
+
+We read the *downloads* dataset from the Excel file, and assign it to a `tibble` named *downloads*.
 
 ```{r}
-data('iris')
-head(iris)
+downloads <- read_excel("~/Desktop/FromExceltoR/Data/downloads.xlsx") %>% 
+  filter(size > 0)
+downloads
 ```
 
-## Data wrangling
+Here we have filtered out rows where `size` is zero, as they do not represent actual downloads and would distort the visualization.
 
-Making the data more fun to plot.
+## **ggplot2: The basic concepts**
+
+A ggplot object is a structured description of a plot. The function `ggplot()` creates the equivalent of a blank sheet of paper, ready for layers to be added.
+
+The two most important components of any ggplot are:
+
+-   The dataset — typically a `data.frame` or `tibble` containing the variables you want to plot
+
+-   The aesthetics (`aes()`) — a set of mappings that tell ggplot *how* to use the variables: x-axis, y-axis and whether to use color, fill, group, size, shape, etc. to represent groups or magnitudes
 
 ```{r}
-# Define 5 colors and their respective ratios
-colors <- c(rep("Red", 40), 
-            rep("Blue", 20), 
-            rep("Yellow",30), 
-            rep("Green", 20),
-            rep("Purple",40))
-
-set.seed(123)  # For reproducibility
-
-# Shuffle the colors to mix them randomly
-colors <- sample(colors, replace = TRUE)
-
-# Add the 'Flower.Color' column to the iris dataset
-iris$Flower.Color <- colors
+ggplot(
+  downloads,          # dataframe 
+  aes(x=machineName)  # x-value
+  )    
 ```
 
-### Have a look at the dataset
+This creates an empty coordinate system with axes defined — essentially a blank canvas.\
+At this point, `ggplot` has only drawn the axes and labels because we have not yet specified how the data should be visualized.
+
+The next step is to add a geom layer (for example, `geom_bar()`) to actually display the data.
+
+## **ggplot2: Plotting** One Variable
+
+A bar chart is created with `geom_bar()` and is useful for visualizing the distribution of a single categorical variable — for example, `machineName` in this dataset.
+
+`geom_bar()` automatically counts the number of observations in each category and uses those counts as the bar heights. By default, categories on the x-axis are displayed in alphabetical order.
 
 ```{r}
-head(iris)
-colnames(iris)
+ggplot(
+  downloads,              # dataframe 
+  aes(x=machineName)) +   # categorical variable on x-axis
+  geom_bar()              # geometrical object - bar chart
 ```
 
-## ggplot2: The basic concepts
-
-This is the starting point of a ggplot. The dataframe and the columns we wish to plot are defined. We have not specified what type of plot we want, hence an empty plot is produced.
+Or we can plot a histogram. It shows the distribution of a continuous variable by dividing the data into bins and counting observations in each bin.
 
 ```{r}
-ggplot(iris,                    # dataframe 
-       aes(x = Sepal.Length,    # x-value
-           y = Petal.Length))   # y-value
-                                # missing type of plot 
+ggplot(
+  downloads,               # dataframe 
+  aes(x = log2(size))) +   # continuous variable (log2-transformed)
+  geom_histogram()         # geometrical object - histogram
 ```
 
-## Scatter plot with `geom_point`
+## Aesthetics in ggplot2
 
-A scatter plot is made with the `geom_point` function and is used to get an overview over the relationship between two numeric variables. Here we see the relationship between sepal length and width.
+In ggplot2, aesthetics (`aes()`) map variables in your data to visual properties of the plot. In addition to `x` and `y`, you can map optional aesthetics such as `fill`,  `colour`,  `size`,  `alpha`,  `group`, or `shape`. By changing which aesthetic a variable is mapped to, we can tell ggplot how to display differences between categories.
 
 ```{r}
-ggplot(iris,                    # dataframe 
-       aes(x = Sepal.Length,    # x-value
-           y = Petal.Length)) + # y-value
-  geom_point()                  # type of plot
+ggplot(
+  downloads,
+  aes(x = machineName,
+      fill = month)) +     # fill by catergorical variable
+  geom_bar() 
 ```
 
-Change color of entire plot by setting it [outside]{.underline} `aes()`.
+Here, mapping `fill = month` tells ggplot to calculate counts separately for each month and assigns a different fill color to each month and stack the bars.
 
 ```{r}
-ggplot(iris,                    
-       aes(x = Sepal.Length,    
-           y = Petal.Length)) + 
-  geom_point(color = 'green') 
+ggplot(
+  downloads,
+  aes(x = machineName,
+      colour = month)) +   # Colour by catergorical variable
+  geom_bar() 
 ```
 
-## Scatter plot with `geom_point` with color stratification
+Here, `colour = month` only changes the outline color of the bars — the interior remains unfilled (or transparent).
 
-To change colors based on a feature, you need to set it [inside]{.underline} `aes()`. Here we see the relationship between sepal length and width colored by species.
+## Geometric objects
+
+Geoms (geometric objects) are the core building blocks of ggplot2. They tell ggplot *what kind of plot layer to draw*. Each geom requires data and aesthetics specified inside `aes()`.\
+Geoms inherit global aesthetics from the main `ggplot()` call, but you can override them locally inside each geom if needed.
+
+You can adjust how geoms are displayed using various options. For bar charts, position adjustments control how overlapping or grouped data appear. In the previous example, mapping `fill`, `colour`, or `group = month` subdivided each bar by month, producing stacked bars (the default).
+
+You can change this behavior by setting the `position` argument inside `geom_bar()`:
+
+-   `position = "dodge"` → places bars for each group side by side 
+
+-   `position = "fill"` → normalizes bar heights so they represent proportions (percentages).
 
 ```{r}
-ggplot(iris,                   
-       aes(x = Sepal.Length,   
-           y = Petal.Length,     
-           color = Species)) +  
-  geom_point()
+ggplot(
+  downloads,
+  aes(x = machineName,
+      fill = month)) + 
+  geom_bar(position = "dodge")  # side by side
+
 ```
 
-## Boxplot with `geom_boxplot`
-
-Boxplots are great to get an overview of continues variables and spot outliers. Can be shown on either axis (x and y).
-
 ```{r}
-ggplot(iris,                    
-       aes(y = Sepal.Length)) + 
-  geom_boxplot() 
+ggplot(
+  downloads,
+  aes(x = machineName,
+      fill = month)) + 
+  geom_bar(position = "fill")   # proportions
 ```
 
-Split up by categorical variable like Species:
+## **A simple Column Chart**
+
+To make a bar chart from pre-summarized data, we use `geom_col()` and it requires both x and y values.
+
+Suppose we want to plot the total size of all downloads per machine.\
+We first create a summary tibble `dl_sizes` using:
+
+1.  `group_by()` to group the dataset by `machineName`
+
+2.  `summarise()` to calculate the **sum of `size`** within each group
+
+In the example below, we also rescale the download sizes from bytes to megabytes by dividing by 1,000,000.
 
 ```{r}
-ggplot(iris,                    
-       aes(y = Sepal.Length,    
-           x = Species)) +      
-  geom_boxplot()              
+dl_sizes <- downloads %>% 
+  group_by(machineName) %>% 
+  summarise(size = sum(size))
 ```
 
-... or color.
+We now plot `machineName` on the x-axis and the total size (in MB) on the y-axis:
 
 ```{r}
-ggplot(iris,                    
-       aes(y = Sepal.Length, 
-           fill = Species)) +  
-  geom_boxplot() +
-  theme(axis.ticks = element_blank(),
-        axis.text.x = element_blank())
+ggplot(
+  dl_sizes, 
+  aes(x = machineName, 
+      y = size/10^6)) + 
+  geom_col()
+```
+
+## A Column Chart with Ordered Bars
+
+By default, categorical variables in R (called *factors*) are displayed in alphabetical order on the x-axis. Suppose we want the machines in our bar chart to be ordered by increasing total download size instead. This is actually not that easy in R.\
+We can do this by converting `machineName` into a factor with levels ordered according to download size.
+
+First, arrange the `dl_sizes` tibble by `size` using `tidyverse` function `arrange`.
+
+```{r}
+dl_sizes <- dl_sizes %>% 
+  arrange(size)
+dl_sizes
+```
+
+Next, set the levels of `machineName` according to the arranged order:
+
+```{r}
+dl_sizes <- dl_sizes %>% 
+  mutate(machineName = factor(machineName, levels = dl_sizes$machineName))
+
+dl_sizes$machineName
+```
+
+Now `machineName` is a factor with levels ordered from lowest to highest total download size.
+
+Finally, use the same `ggplot()` code as before to make the plot — now the bars will be ordered by total size rather than alphabetically:
+
+```{r}
+ggplot(
+  dl_sizes, 
+  aes(x = machineName, 
+      y = size/10^6)) + 
+  geom_col()
+```
+
+## Coordinate System in ggplot2
+
+In the next R chunk we will for the first time try to save the syntaxical description of a plot in an R variable. This makes it easy to reuse and modify the same plot — for example, to change scales or coordinate systems — without rewriting the entire code. Let’s try this out.
+
+```{r}
+p <- ggplot(
+  dl_sizes,
+  aes(x = machineName, 
+      y = size / 10^6),
+  color = month) +
+  geom_col()
+```
+
+Here, we store the bar chart in a variable called `p`. Running this code does not display the plot yet, but a variable named `p` now appears in the Global Environment.
+
+Because the plot is saved in `p`, we can easily modify it by adding more layers:
+
+```{r}
+# Flip the coordinate axes:
+p + coord_flip()
+```
+
+This swaps the x- and y-axes, which is often helpful when category names are long — it makes the plot easier to read.
+
+```{r}
+#Change the scale of the y-axis:
+p + scale_y_log10()
+```
+
+A logarithmic scale is useful when the data are highly skewed or span several orders of magnitude, making it easier to compare smaller values.
+
+## **A box plot**
+
+Boxplots are great to get an overview of continues variables, identifying outliers and comparing distributions across categories. Let’s create a boxplot of monthly download sizes for each machine.\
+Because the data are skewed, we use a logarithmic y-scale to make the plot more interpretable.
+
+Additionally, themes and titles can be added as a layer to any ggplot if you prefer a theme other than the default grey background.
+
+```{r}
+p <-                       # save in object p
+  ggplot(                  # call ggplot
+    downloads,             # data
+    aes(x = machineName,   # x and y and fill
+        y = size, 
+        fill = machineName)) +
+  geom_boxplot() +         # boxplot
+  scale_y_log10()          # scale
+
+p1 <- p + 
+  theme_minimal() +         # add theme ..................
+    # theme_bw()
+    # theme_classic()
+    # theme_dark()
+  labs(x = 'Machines',     # add label ..................
+       y = 'Size in Mb',
+       title = 'Boxplot')
+p1
 ```
 
 ## Violin plot with `geom_violin`
 
-A violin plot shows the distribution of a continuous variable across different categories, combining the features of a box plot and a density plot. Also, the labels can be edited.
+A violin plot shows the distribution of a continuous variable across different categories, combining the features of a box plot and a density plot.
 
 ```{r}
-ggplot(iris,                    
-       aes(y = Sepal.Length,    
-           x = Species)) +      
-  geom_violin() + 
-  labs(y = 'Sepal Length', 
-       x = 'Flower Species', 
-       title = 'Violin plot of sepal length stratisfied by flower species')
-```
-
-## Histogram with `geom_histogram`
-
-Histogram shows the distribution of a continuous variable.
-
-```{r}
-ggplot(iris,                    
-       aes(x = Sepal.Length)) +     
-  geom_histogram()
-```
-
-You will sometimes get a message that suggests to select another `binwidth`. Do what is says and you will often get nicer plot (something nothing changes).
-
-```{r}
-ggplot(iris,                    
-       aes(x = Sepal.Length)) +     
-  geom_histogram(binwidth = 0.8)
-```
-
-## Bar chart with `geom_bar`
-
-A bar chart is made with the `geom_bar` function and is used to get an overview over the distribution of a single categorical variable, e.g. Flower.Color in this instance. The function treats the x-axis as categorical and **calculates the bar heights based on the number of occurrences** in each category. Here we see the number of flowers of each Flower.Color. Notice that the Flower.Colors are sorted alphabetically.
-
-```{r}
-# Save plot in p
-p <- ggplot(iris,                    
-            aes(x = Flower.Color)) + 
-  geom_bar()                         
-
-# Show p
+p <-                         # save in object p
+  ggplot(                    # call ggplot
+    downloads,               # data
+    aes(x = machineName,     # x and y and fill
+        y = size, 
+        fill = machineName)) +
+  geom_violin(trim = TRUE) +   # draw violin plots, trim tails
+  scale_y_log10()              # scale
 p
 
-# Show p with new labels 
-p + labs(x = 'Awesome Flower Colors', y = 'Awesome Count')
+```
 
-# Show p again
-p
+We can enhance the plot by overlaying individual data points (with jittering to avoid overplotting), using a minimal theme, and customizing the fill colors:
 
-# Save p with new lables in p (overwrite / reassign)
-p2 <- p + labs(x = 'Awesome Flower Colors', y = 'Awesome Count')
-
-# Show p2
+```{r}
+p2 <- p + 
+  geom_jitter(           # overlay geom
+    size = 0.1, alpha = 0.05, width = 0.4) + 
+  theme_minimal() +      # theme
+  scale_fill_manual(
+    values=c("#2A2D43",  # change colors
+             "#91A6FF", 
+             "#C7EDE4", 
+             "#AFA060", 
+             "#AD8350"))
 p2
 ```
 
-Color by species. The bars are stacked by default.
+## Faceting
+
+First, let’s create a previous boxplot of download size by machine and enhanced it with `fill = month` to split data by a second categorical variable.
 
 ```{r}
-ggplot(iris,                    
-       aes(x = Flower.Color,   
-           fill = Species)) +   
-  geom_bar()                   
-```
-
-Add `position = "dodge"` for bars to be placed next to each other.
-
-```{r}
-ggplot(iris,                   
-      aes(x = Flower.Color,    
-          fill = Species)) +   
-  geom_bar(position = "dodge") 
-```
-
-Add `position = "fill"` for bars to be normalized such that heights of the bars to represent percentages rather than counts.
-
-Additionally, themes can be added as a layer to any ggplot if you prefer a theme other than the default grey background.
-
-```{r}
-ggplot(iris,                   
-      aes(x = Flower.Color,   
-          fill = Species)) +   
-  geom_bar(position = "fill") + 
-  # theme_bw()
-  # theme_classic()
-  # theme_minimal()
-  theme_dark() 
-```
-
-Using `facet_wrap` if you want a plot to be split up according to a categorical variable.
-
-```{r}
-ggplot(iris,                   
-      aes(x = Flower.Color)) +
-  geom_bar()  + 
-  facet_wrap(vars(Species))
-```
-
-## Ordering columns
-
-We can order the columns such that the count goes from lowest to highest. This is actually not that easy in R.
-
-First, we see that the class of the Flower.Color is character. Characters are always sorted alphabetically like we saw above.
-
-```{r}
-class(iris$Flower.Color)
-```
-
-Extract the number of flowers for each Flower.Color.
-
-```{r}
-dl_Flower.Color <- iris %>%
-  group_by(Flower.Color) %>%
-  summarise(n = n()) %>% 
-  arrange(desc(n))
-
-dl_Flower.Color
-
-dl_Flower.Color$Flower.Color
-```
-
-Change the class of the Flower.Color feature to factor and add levels according to the number of flowers with each color.
-
-```{r}
-iris$Flower.Color <- factor(iris$Flower.Color,
-                            levels = dl_Flower.Color$Flower.Color)
-```
-
-Check class now
-
-```{r}
-class(iris$Flower.Color)
-```
-
-Now we do the same plot as before and we see that the order has changed to range from largest to smallest Flower.Colors group. The plot is saved in the variable p.
-
-```{r}
-p <- ggplot(iris,                # dataframe 
-       aes(x = Flower.Color)) +  # x-value
-  geom_bar()                     # type of plot 
-
+p <-                       # save in object p
+  ggplot(                  # call ggplot
+    downloads,             # data
+    aes(x = machineName,   # x and y and fill
+        y = size, 
+        fill = month)) +   # add fill by month ..................
+  geom_boxplot() +         # boxplot
+  scale_y_log10()          # scale
 p
 ```
 
-We can also flip the chart. We update the plot, p, by reassignment.
+Sometimes adding a `fill` aesthetic makes a plot too busy, especially if there are many categories. Instead, we can use faceting to split the data into multiple smaller plots — one for each category — making it easier to compare groups.
 
 ```{r}
-p <- p + coord_flip()
-
-p
+#p + facet_grid(vars(month))
+p + facet_wrap(vars(month))
 ```
 
-Since we are working with colors, we can change the colors of the bars to match the groups.
+This wraps the plots into multiple rows and columns automatically, which is helpful when there are many facet levels.
 
-R color chart [here](http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf)
+## **Daily summary statistics**
+
+Next we want to visualize the number and the total size of the downloads done each date for each of the 6 machines. For later usage we also compute the cumulated number of downloads within each of the 6 machines over the dates. As before we do this via the following steps:
+
+1.  Using `group_by()` we group the dataset by both *machineName* and *date*.
+
+2.  Using `summarize()` we count the number and the total size of the downloads for within each machine and date.
+
+3.  Using `mutate()` we cumulate the number of downloads over the dates within the machines.
 
 ```{r}
-# Define color palette
-color_palette <- c("Red" = "red3", 
-                   "Blue" = "cornflowerblue", 
-                   "Yellow" = "lightgoldenrod1", 
-                   "Green" = "darkolivegreen2", 
-                   "Purple" = "darkorchid3")
-
-p <- p + 
-  aes(fill = Flower.Color) +                # add the fill ascetics 
-  scale_fill_manual(values = color_palette) # set the fill color according to the color palette
-
-print(p)
+daily_downloads <- 
+  downloads %>%
+    group_by(machineName, date) %>% 
+    summarize(dl_count = n(), 
+              size_mb = sum(size)/10^6) %>%
+    mutate(total_dl_count = cumsum(dl_count))
+daily_downloads
 ```
 
-## Bar chart with `geom_col`
+## Scatter plot with `geom_point`
 
-Another way to make a bar chart is by using `geom_col`. Unlike `geom_bar`, which only requires an x-value and automatically counts occurrences, `geom_col` requires both x- and y-values. This makes `geom_col` ideal for cases where you already have pre-calculated values that you want to use as the bar heights.
+A scatter plot is used to explore the relationship between two numerical variables by plotting them on the x- and y-axes. You can visualize a **third numeric variable** by mapping it to the `size` aesthetic.
 
-The mean of the sepal length within each color is calcualted using the `summarize` function.
+Here we will visualize the relationship between daily download counts and time and map size in Mb to  `size` aesthetic. We use `geom_point()` to draw individual data points.
+
+We can also color the points based on whether the download size is greater than 1 MB by mapping `color = size_mb > 1` inside `aes()`. This highlights larger downloads, making them easier to spot in the plot.
 
 ```{r}
-mean_sepal_length_pr_color <- iris %>%
-  group_by(Flower.Color) %>%
-  summarize(mean_Sepal.Length = mean(Sepal.Length))
+p <- ggplot(
+  daily_downloads, 
+  aes(x = date, 
+      y = dl_count, 
+      size = size_mb, 
+      color = size_mb>1)) +
+  geom_point() + 
+  scale_y_log10()
+p3 <- p
+p3
+```
 
-head(mean_sepal_length_pr_color)
+## Line plot with `geom_line`
+
+The geom called `geom_line()` is used to insert lines, which is ideal for showing trends over time or continuous changes. In the code below you see a first attempt to write R code that visualizes the cumulated total download size over the dates.
+
+We create a plot of the cumulative total download count over time:
+
+```{r}
+ggplot(                      # call ggplot
+  daily_downloads,           # data
+  aes(x = date,              # x and y
+      y = total_dl_count)) + # line
+  geom_line()
+
+```
+
+If we want a separate line for each machine, we must tell ggplot how to group the data. We can do this by mapping `color = machineName` (and optionally color by machine as well):
+
+```{r}
+p4 <- ggplot(
+  daily_downloads, 
+  aes(x = date, 
+      y = total_dl_count, 
+      colour = machineName)) + 
+  geom_line() 
+p4
+```
+
+## **Arrange multiple ggplots on the same page**
+
+In R there is a whole infrastructure of extension packages built around ggplot, that facilitate different types of plot modifications, arrangements, and animation.
+
+R package **ggpubr** is one of them and it helps to produce publication-ready plots using ggplot2.
+
+```{r}
+# install.packages("ggpubr")
+library(ggpubr)
+
+figure <- ggarrange(p1, p2, p3, p4,
+                    align = "hv",
+                    labels = c ("A", "B", "C", "D"),
+                    ncol = 2, nrow = 2)
+figure
 ```
 
 ```{r}
-ggplot(mean_sepal_length_pr_color,   # dataframe 
-       aes(x = Flower.Color,         # x-value
-           y = mean_Sepal.Length)) + # y-value
-  geom_col()                         # type of plot 
+## Save Tibble and Save Plot:
+
+#write_xlsx(daily_downloads, "daily_downloads.xlsx")
+
+#ggsave(filename = "vionlinPlot.pdf", plot = p2, height = 5, width = 10)
+
+#pdf("vionlinPlot2.pdf", height = 5, width = 10)
+#p2
+#dev.off()
 ```
+
+## **Conclusion**
+
+1.  The **ggplot2** package is a powerful and versatile tool for making plots.
+
+2.  We think, that the generated plots are beautiful.
+
+3.  As far as we know some plots, e.g. using *faceting* (see the exercises), in practice are only producible in **ggplot2**.
+
+4.  Learning the syntax needed for making specific plots is a challenge. The best way (the only way!?) to learn is to practice. You may start by solving the exercise sheet. After you have gotten used to the basic ideas you can find a lot of help on the internet. We remark, that there have been several updates of the **ggplot2** package over the recent years. And some of the old entries that might pop up when you google a ggplot2-issue might be outdated.
+
+5.  Not all things can be made in **ggplot2**! For a geometrical object to be available it need to have a syntaxical description, and it needs to be implemented. Other things require computer-hacks to be made (e.g. using different orderings of categorical variables in faceted plots).

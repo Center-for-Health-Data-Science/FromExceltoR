@@ -237,13 +237,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Exercises/exercise4_PART1.html" class="sidebar-item-text sidebar-link">
+  <a href="../Exercises/exercise4_PART1.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercise 4, Part 1: Applied Statistics</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Exercises/exercise4_PART2.html" class="sidebar-item-text sidebar-link">
+  <a href="../Exercises/exercise4_PART2.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercise 4, Part 2: Applied Statistics</span></a>
   </div>
 </li>
@@ -278,19 +278,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Solutions/presentation4_solutions.html" class="sidebar-item-text sidebar-link">
+  <a href="../Solutions/presentation4_solutions.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Presentation 4: Applied Statistics in R - Solutions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Solutions/exercise4_PART1_solutions.html" class="sidebar-item-text sidebar-link">
+  <a href="../Solutions/exercise4_PART1_solutions.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercise 4, Part 1 - Solutions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Solutions/exercise4_PART2_solutions.html" class="sidebar-item-text sidebar-link">
+  <a href="../Solutions/exercise4_PART2_solutions.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercise 4, Part 2 - Solutions</span></a>
   </div>
 </li>
@@ -349,19 +349,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#importing-libraries-and-data" id="toc-importing-libraries-and-data" class="nav-link active" data-scroll-target="#importing-libraries-and-data">Importing libraries and data</a></li>
   <li><a href="#load-data" id="toc-load-data" class="nav-link" data-scroll-target="#load-data">Load data</a></li>
-  <li><a href="#data-wrangling" id="toc-data-wrangling" class="nav-link" data-scroll-target="#data-wrangling">Data wrangling</a>
-  <ul class="collapse">
-  <li><a href="#have-a-look-at-the-dataset" id="toc-have-a-look-at-the-dataset" class="nav-link" data-scroll-target="#have-a-look-at-the-dataset">Have a look at the dataset</a></li>
-  </ul></li>
-  <li><a href="#ggplot2-the-basic-concepts" id="toc-ggplot2-the-basic-concepts" class="nav-link" data-scroll-target="#ggplot2-the-basic-concepts">ggplot2: The basic concepts</a></li>
-  <li><a href="#scatter-plot-with-geom_point" id="toc-scatter-plot-with-geom_point" class="nav-link" data-scroll-target="#scatter-plot-with-geom_point">Scatter plot with <code>geom_point</code></a></li>
-  <li><a href="#scatter-plot-with-geom_point-with-color-stratification" id="toc-scatter-plot-with-geom_point-with-color-stratification" class="nav-link" data-scroll-target="#scatter-plot-with-geom_point-with-color-stratification">Scatter plot with <code>geom_point</code> with color stratification</a></li>
-  <li><a href="#boxplot-with-geom_boxplot" id="toc-boxplot-with-geom_boxplot" class="nav-link" data-scroll-target="#boxplot-with-geom_boxplot">Boxplot with <code>geom_boxplot</code></a></li>
+  <li><a href="#ggplot2-the-basic-concepts" id="toc-ggplot2-the-basic-concepts" class="nav-link" data-scroll-target="#ggplot2-the-basic-concepts"><strong>ggplot2: The basic concepts</strong></a></li>
+  <li><a href="#ggplot2-plotting-one-variable" id="toc-ggplot2-plotting-one-variable" class="nav-link" data-scroll-target="#ggplot2-plotting-one-variable"><strong>ggplot2: Plotting</strong> One Variable</a></li>
+  <li><a href="#aesthetics-in-ggplot2" id="toc-aesthetics-in-ggplot2" class="nav-link" data-scroll-target="#aesthetics-in-ggplot2">Aesthetics in ggplot2</a></li>
+  <li><a href="#geometric-objects" id="toc-geometric-objects" class="nav-link" data-scroll-target="#geometric-objects">Geometric objects</a></li>
+  <li><a href="#a-simple-column-chart" id="toc-a-simple-column-chart" class="nav-link" data-scroll-target="#a-simple-column-chart"><strong>A simple Column Chart</strong></a></li>
+  <li><a href="#a-column-chart-with-ordered-bars" id="toc-a-column-chart-with-ordered-bars" class="nav-link" data-scroll-target="#a-column-chart-with-ordered-bars">A Column Chart with Ordered Bars</a></li>
+  <li><a href="#coordinate-system-in-ggplot2" id="toc-coordinate-system-in-ggplot2" class="nav-link" data-scroll-target="#coordinate-system-in-ggplot2">Coordinate System in ggplot2</a></li>
+  <li><a href="#a-box-plot" id="toc-a-box-plot" class="nav-link" data-scroll-target="#a-box-plot"><strong>A box plot</strong></a></li>
   <li><a href="#violin-plot-with-geom_violin" id="toc-violin-plot-with-geom_violin" class="nav-link" data-scroll-target="#violin-plot-with-geom_violin">Violin plot with <code>geom_violin</code></a></li>
-  <li><a href="#histogram-with-geom_histogram" id="toc-histogram-with-geom_histogram" class="nav-link" data-scroll-target="#histogram-with-geom_histogram">Histogram with <code>geom_histogram</code></a></li>
-  <li><a href="#bar-chart-with-geom_bar" id="toc-bar-chart-with-geom_bar" class="nav-link" data-scroll-target="#bar-chart-with-geom_bar">Bar chart with <code>geom_bar</code></a></li>
-  <li><a href="#ordering-columns" id="toc-ordering-columns" class="nav-link" data-scroll-target="#ordering-columns">Ordering columns</a></li>
-  <li><a href="#bar-chart-with-geom_col" id="toc-bar-chart-with-geom_col" class="nav-link" data-scroll-target="#bar-chart-with-geom_col">Bar chart with <code>geom_col</code></a></li>
+  <li><a href="#faceting" id="toc-faceting" class="nav-link" data-scroll-target="#faceting">Faceting</a></li>
+  <li><a href="#daily-summary-statistics" id="toc-daily-summary-statistics" class="nav-link" data-scroll-target="#daily-summary-statistics"><strong>Daily summary statistics</strong></a></li>
+  <li><a href="#scatter-plot-with-geom_point" id="toc-scatter-plot-with-geom_point" class="nav-link" data-scroll-target="#scatter-plot-with-geom_point">Scatter plot with <code>geom_point</code></a></li>
+  <li><a href="#line-plot-with-geom_line" id="toc-line-plot-with-geom_line" class="nav-link" data-scroll-target="#line-plot-with-geom_line">Line plot with <code>geom_line</code></a></li>
+  <li><a href="#arrange-multiple-ggplots-on-the-same-page" id="toc-arrange-multiple-ggplots-on-the-same-page" class="nav-link" data-scroll-target="#arrange-multiple-ggplots-on-the-same-page"><strong>Arrange multiple ggplots on the same page</strong></a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><strong>Conclusion</strong></a></li>
   </ul>
 </nav>
     </div>
@@ -398,68 +400,82 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="load-data" class="level2">
 <h2 class="anchored" data-anchor-id="load-data">Load data</h2>
-<p>The iris dataset is a widely-used dataset in data science, containing 150 observations of iris flowers with features like sepal length, sepal width, petal length, and petal width. It includes three species: Setosa, Versicolor, and Virginica, making it ideal for classification tasks and data visualization.</p>
+<p>In the examples below, we use the&nbsp;<strong>downloads</strong>&nbsp;dataset. The dataset is available as an Excel file, which we import using the&nbsp;<strong>readxl</strong>&nbsp;package. Because&nbsp;<strong>ggplot2</strong>&nbsp;is part of the&nbsp;<strong>tidyverse</strong>, we also load the tidyverse packages so we can use its tools for data wrangling and visualization.</p>
+<p>We read the&nbsp;<em>downloads</em>&nbsp;dataset from the Excel file, and assign it to a&nbsp;<code>tibble</code>&nbsp;named&nbsp;<em>downloads</em>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">'iris'</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>downloads <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"~/Desktop/FromExceltoR/Data/downloads.xlsx"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(size <span class="sc">&gt;</span> <span class="dv">0</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>downloads</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
-1          5.1         3.5          1.4         0.2  setosa
-2          4.9         3.0          1.4         0.2  setosa
-3          4.7         3.2          1.3         0.2  setosa
-4          4.6         3.1          1.5         0.2  setosa
-5          5.0         3.6          1.4         0.2  setosa
-6          5.4         3.9          1.7         0.4  setosa</code></pre>
+<pre><code># A tibble: 36,708 × 6
+   machineName userID  size  time date                month  
+   &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dttm&gt;              &lt;chr&gt;  
+ 1 cs18        146579  2464 0.493 1995-04-24 00:00:00 1995-04
+ 2 cs18        995988  7745 0.326 1995-04-24 00:00:00 1995-04
+ 3 cs18        317649  6727 0.314 1995-04-24 00:00:00 1995-04
+ 4 cs18        748501 13049 0.583 1995-04-24 00:00:00 1995-04
+ 5 cs18        955815   356 0.259 1995-04-24 00:00:00 1995-04
+ 6 cs18        596819 15063 0.336 1995-04-24 00:00:00 1995-04
+ 7 cs18        169424  2548 0.285 1995-04-24 00:00:00 1995-04
+ 8 cs18        386686  1932 0.286 1995-04-24 00:00:00 1995-04
+ 9 cs18        783767  7294 0.397 1995-04-24 00:00:00 1995-04
+10 cs18        788633  4470 3.41  1995-04-24 00:00:00 1995-04
+# ℹ 36,698 more rows</code></pre>
 </div>
 </div>
-</section>
-<section id="data-wrangling" class="level2">
-<h2 class="anchored" data-anchor-id="data-wrangling">Data wrangling</h2>
-<p>Making the data more fun to plot.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define 5 colors and their respective ratios</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>colors <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">"Red"</span>, <span class="dv">40</span>), </span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>            <span class="fu">rep</span>(<span class="st">"Blue"</span>, <span class="dv">20</span>), </span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>            <span class="fu">rep</span>(<span class="st">"Yellow"</span>,<span class="dv">30</span>), </span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>            <span class="fu">rep</span>(<span class="st">"Green"</span>, <span class="dv">20</span>),</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>            <span class="fu">rep</span>(<span class="st">"Purple"</span>,<span class="dv">40</span>))</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)  <span class="co"># For reproducibility</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Shuffle the colors to mix them randomly</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>colors <span class="ot">&lt;-</span> <span class="fu">sample</span>(colors, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Add the 'Flower.Color' column to the iris dataset</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>iris<span class="sc">$</span>Flower.Color <span class="ot">&lt;-</span> colors</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<section id="have-a-look-at-the-dataset" class="level3">
-<h3 class="anchored" data-anchor-id="have-a-look-at-the-dataset">Have a look at the dataset</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  Sepal.Length Sepal.Width Petal.Length Petal.Width Species Flower.Color
-1          5.1         3.5          1.4         0.2  setosa          Red
-2          4.9         3.0          1.4         0.2  setosa         Blue
-3          4.7         3.2          1.3         0.2  setosa       Purple
-4          4.6         3.1          1.5         0.2  setosa         Blue
-5          5.0         3.6          1.4         0.2  setosa          Red
-6          5.4         3.9          1.7         0.4  setosa       Purple</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "Sepal.Length" "Sepal.Width"  "Petal.Length" "Petal.Width"  "Species"     
-[6] "Flower.Color"</code></pre>
-</div>
-</div>
-</section>
+<p>Here we have filtered out rows where&nbsp;<code>size</code>&nbsp;is zero, as they do not represent actual downloads and would distort the visualization.</p>
 </section>
 <section id="ggplot2-the-basic-concepts" class="level2">
-<h2 class="anchored" data-anchor-id="ggplot2-the-basic-concepts">ggplot2: The basic concepts</h2>
-<p>This is the starting point of a ggplot. The dataframe and the columns we wish to plot are defined. We have not specified what type of plot we want, hence an empty plot is produced.</p>
+<h2 class="anchored" data-anchor-id="ggplot2-the-basic-concepts"><strong>ggplot2: The basic concepts</strong></h2>
+<p>A&nbsp;ggplot object&nbsp;is a structured description of a plot. The function&nbsp;<code>ggplot()</code>&nbsp;creates the equivalent of a blank sheet of paper, ready for layers to be added.</p>
+<p>The two most important components of any ggplot are:</p>
+<ul>
+<li><p>The dataset&nbsp;— typically a&nbsp;<code>data.frame</code>&nbsp;or&nbsp;<code>tibble</code>&nbsp;containing the variables you want to plot</p></li>
+<li><p>The aesthetics (<code>aes()</code>)&nbsp;— a set of mappings that tell ggplot&nbsp;<em>how</em>&nbsp;to use the variables: x-axis, y-axis and whether to use color, fill, group, size, shape, etc. to represent groups or magnitudes</p></li>
+</ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(iris,                    <span class="co"># dataframe </span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> Sepal.Length,    <span class="co"># x-value</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> Petal.Length))   <span class="co"># y-value</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  downloads,          <span class="co"># dataframe </span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x=</span>machineName)  <span class="co"># x-value</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  )    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="presentation3_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>This creates an&nbsp;empty coordinate system&nbsp;with axes defined — essentially a blank canvas.<br>
+At this point,&nbsp;<code>ggplot</code>&nbsp;has only drawn the axes and labels because we have not yet specified&nbsp;how&nbsp;the data should be visualized.</p>
+<p>The next step is to add a&nbsp;geom layer&nbsp;(for example,&nbsp;<code>geom_bar()</code>) to actually display the data.</p>
+</section>
+<section id="ggplot2-plotting-one-variable" class="level2">
+<h2 class="anchored" data-anchor-id="ggplot2-plotting-one-variable"><strong>ggplot2: Plotting</strong> One Variable</h2>
+<p>A&nbsp;bar chart&nbsp;is created with&nbsp;<code>geom_bar()</code>&nbsp;and is useful for visualizing the distribution of a single&nbsp;categorical variable&nbsp;— for example,&nbsp;<code>machineName</code>&nbsp;in this dataset.</p>
+<p><code>geom_bar()</code>&nbsp;automatically counts the number of observations in each category and uses those counts as the bar heights. By default, categories on the x-axis are displayed in&nbsp;alphabetical order.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  downloads,              <span class="co"># dataframe </span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x=</span>machineName)) <span class="sc">+</span>   <span class="co"># categorical variable on x-axis</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>()              <span class="co"># geometrical object - bar chart</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="presentation3_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Or we can plot a&nbsp;histogram.&nbsp;It shows the distribution of a continuous variable by dividing the data into bins and counting observations in each bin.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  downloads,               <span class="co"># dataframe </span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">log2</span>(size))) <span class="sc">+</span>   <span class="co"># continuous variable (log2-transformed)</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>()         <span class="co"># geometrical object - histogram</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+</div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -467,17 +483,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>                                <span class="co"># missing type of plot </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="scatter-plot-with-geom_point" class="level2">
-<h2 class="anchored" data-anchor-id="scatter-plot-with-geom_point">Scatter plot with <code>geom_point</code></h2>
-<p>A scatter plot is made with the <code>geom_point</code> function and is used to get an overview over the relationship between two numeric variables. Here we see the relationship between sepal length and width.</p>
+<section id="aesthetics-in-ggplot2" class="level2">
+<h2 class="anchored" data-anchor-id="aesthetics-in-ggplot2">Aesthetics in ggplot2</h2>
+<p>In ggplot2,&nbsp;aesthetics&nbsp;(<code>aes()</code>) map variables in your data to visual properties of the plot. In addition to&nbsp;<code>x</code>&nbsp;and&nbsp;<code>y</code>, you can map optional aesthetics such as&nbsp;<code>fill</code>, &nbsp;<code>colour</code>, &nbsp;<code>size</code>, &nbsp;<code>alpha</code>, &nbsp;<code>group</code>, or&nbsp;<code>shape</code>. By changing which aesthetic a variable is mapped to, we can tell ggplot how to display differences between categories.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(iris,                    <span class="co"># dataframe </span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> Sepal.Length,    <span class="co"># x-value</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> Petal.Length)) <span class="sc">+</span> <span class="co"># y-value</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()                  <span class="co"># type of plot</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  downloads,</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> machineName,</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">fill =</span> month)) <span class="sc">+</span>     <span class="co"># fill by catergorical variable</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -486,12 +502,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>Change color of entire plot by setting it <u>outside</u> <code>aes()</code>.</p>
+<p>Here, mapping&nbsp;<code>fill = month</code>&nbsp;tells ggplot to&nbsp;calculate counts separately for each month and assigns a&nbsp;different fill color&nbsp;to each month and stack the bars.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(iris,                    </span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> Sepal.Length,    </span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> Petal.Length)) <span class="sc">+</span> </span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">'green'</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  downloads,</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> machineName,</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">colour =</span> month)) <span class="sc">+</span>   <span class="co"># Colour by catergorical variable</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -500,16 +517,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
+<p>Here,&nbsp;<code>colour = month</code>&nbsp;only changes the&nbsp;outline color&nbsp;of the bars — the interior remains unfilled (or transparent).</p>
 </section>
-<section id="scatter-plot-with-geom_point-with-color-stratification" class="level2">
-<h2 class="anchored" data-anchor-id="scatter-plot-with-geom_point-with-color-stratification">Scatter plot with <code>geom_point</code> with color stratification</h2>
-<p>To change colors based on a feature, you need to set it <u>inside</u> <code>aes()</code>. Here we see the relationship between sepal length and width colored by species.</p>
+<section id="geometric-objects" class="level2">
+<h2 class="anchored" data-anchor-id="geometric-objects">Geometric objects</h2>
+<p>Geoms&nbsp;(geometric objects) are the core building blocks of&nbsp;ggplot2. They tell ggplot&nbsp;<em>what kind of plot layer to draw</em>. Each geom requires data and aesthetics specified inside&nbsp;<code>aes()</code>.<br>
+Geoms inherit&nbsp;global aesthetics&nbsp;from the main&nbsp;<code>ggplot()</code>&nbsp;call, but you can override them locally inside each geom if needed.</p>
+<p>You can adjust how geoms are displayed using various options. For bar charts,&nbsp;position adjustments&nbsp;control how overlapping or grouped data appear. In the previous example, mapping&nbsp;<code>fill</code>,&nbsp;<code>colour</code>, or&nbsp;<code>group = month</code>&nbsp;subdivided each bar by month, producing&nbsp;stacked bars&nbsp;(the default).</p>
+<p>You can change this behavior by setting the&nbsp;<code>position</code>&nbsp;argument inside&nbsp;<code>geom_bar()</code>:</p>
+<ul>
+<li><p><code>position = "dodge"</code>&nbsp;→ places bars for each group&nbsp;side by side&nbsp;</p></li>
+<li><p><code>position = "fill"</code>&nbsp;→&nbsp;normalizes bar heights&nbsp;so they represent&nbsp;proportions (percentages).</p></li>
+</ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(iris,                   </span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> Sepal.Length,   </span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> Petal.Length,     </span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">color =</span> Species)) <span class="sc">+</span>  </span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  downloads,</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> machineName,</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">fill =</span> month)) <span class="sc">+</span> </span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"dodge"</span>)  <span class="co"># side by side</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -518,14 +543,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-</section>
-<section id="boxplot-with-geom_boxplot" class="level2">
-<h2 class="anchored" data-anchor-id="boxplot-with-geom_boxplot">Boxplot with <code>geom_boxplot</code></h2>
-<p>Boxplots are great to get an overview of continues variables and spot outliers. Can be shown on either axis (x and y).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(iris,                    </span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">y =</span> Sepal.Length)) <span class="sc">+</span> </span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  downloads,</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> machineName,</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">fill =</span> month)) <span class="sc">+</span> </span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>)   <span class="co"># proportions</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -534,28 +557,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>Split up by categorical variable like Species:</p>
+</section>
+<section id="a-simple-column-chart" class="level2">
+<h2 class="anchored" data-anchor-id="a-simple-column-chart"><strong>A simple Column Chart</strong></h2>
+<p>To make a bar chart from pre-summarized data, we use&nbsp;<code>geom_col()</code> and it requires both&nbsp;x&nbsp;and&nbsp;y&nbsp;values.</p>
+<p>Suppose we want to plot the&nbsp;total size of all downloads per machine.<br>
+We first create a summary tibble&nbsp;<code>dl_sizes</code>&nbsp;using:</p>
+<ol type="1">
+<li><p><code>group_by()</code>&nbsp;to group the dataset by&nbsp;<code>machineName</code></p></li>
+<li><p><code>summarise()</code>&nbsp;to calculate the&nbsp;<strong>sum of&nbsp;<code>size</code></strong>&nbsp;within each group</p></li>
+</ol>
+<p>In the example below, we also&nbsp;rescale the download sizes&nbsp;from bytes to megabytes by dividing by 1,000,000.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(iris,                    </span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">y =</span> Sepal.Length,    </span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">x =</span> Species)) <span class="sc">+</span>      </span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()              </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="presentation3_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>dl_sizes <span class="ot">&lt;-</span> downloads <span class="sc">%&gt;%</span> </span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(machineName) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">size =</span> <span class="fu">sum</span>(size))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-</div>
-<p>… or color.</p>
+<p>We now plot&nbsp;<code>machineName</code>&nbsp;on the x-axis and the&nbsp;total size&nbsp;(in MB) on the y-axis:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(iris,                    </span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">y =</span> Sepal.Length, </span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">fill =</span> Species)) <span class="sc">+</span>  </span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.ticks =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_blank</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  dl_sizes, </span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> machineName, </span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> size<span class="sc">/</span><span class="dv">10</span><span class="sc">^</span><span class="dv">6</span>)) <span class="sc">+</span> </span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -565,49 +589,45 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="violin-plot-with-geom_violin" class="level2">
-<h2 class="anchored" data-anchor-id="violin-plot-with-geom_violin">Violin plot with <code>geom_violin</code></h2>
-<p>A violin plot shows the distribution of a continuous variable across different categories, combining the features of a box plot and a density plot. Also, the labels can be edited.</p>
+<section id="a-column-chart-with-ordered-bars" class="level2">
+<h2 class="anchored" data-anchor-id="a-column-chart-with-ordered-bars">A Column Chart with Ordered Bars</h2>
+<p>By default,&nbsp;categorical variables&nbsp;in R (called&nbsp;<em>factors</em>) are displayed in&nbsp;alphabetical order&nbsp;on the x-axis. Suppose we want the machines in our bar chart to be&nbsp;ordered by increasing total download size&nbsp;instead. This is actually not that easy in R.<br>
+We can do this by converting&nbsp;<code>machineName</code>&nbsp;into a factor with levels ordered according to download size.</p>
+<p>First, arrange the&nbsp;<code>dl_sizes</code>&nbsp;tibble by&nbsp;<code>size</code> using&nbsp;<code>tidyverse</code>&nbsp;function&nbsp;<code>arrange</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(iris,                    </span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">y =</span> Sepal.Length,    </span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">x =</span> Species)) <span class="sc">+</span>      </span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_violin</span>() <span class="sc">+</span> </span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">'Sepal Length'</span>, </span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">'Flower Species'</span>, </span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">'Violin plot of sepal length stratisfied by flower species'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="presentation3_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>dl_sizes <span class="ot">&lt;-</span> dl_sizes <span class="sc">%&gt;%</span> </span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(size)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>dl_sizes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 2
+  machineName      size
+  &lt;chr&gt;           &lt;dbl&gt;
+1 pluto        72605544
+2 cs18        100593281
+3 tweetie     104379794
+4 piglet      158149841
+5 kermit      175032552</code></pre>
 </div>
 </div>
-</div>
-</section>
-<section id="histogram-with-geom_histogram" class="level2">
-<h2 class="anchored" data-anchor-id="histogram-with-geom_histogram">Histogram with <code>geom_histogram</code></h2>
-<p>Histogram shows the distribution of a continuous variable.</p>
+<p>Next, set the levels of&nbsp;<code>machineName</code>&nbsp;according to the arranged order:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(iris,                    </span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> Sepal.Length)) <span class="sc">+</span>     </span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="presentation3_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>dl_sizes <span class="ot">&lt;-</span> dl_sizes <span class="sc">%&gt;%</span> </span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">machineName =</span> <span class="fu">factor</span>(machineName, <span class="at">levels =</span> dl_sizes<span class="sc">$</span>machineName))</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>dl_sizes<span class="sc">$</span>machineName</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] pluto   cs18    tweetie piglet  kermit 
+Levels: pluto cs18 tweetie piglet kermit</code></pre>
 </div>
 </div>
-</div>
-<p>You will sometimes get a message that suggests to select another <code>binwidth</code>. Do what is says and you will often get nicer plot (something nothing changes).</p>
+<p>Now&nbsp;<code>machineName</code>&nbsp;is a factor with levels ordered from&nbsp;lowest to highest total download size.</p>
+<p>Finally, use the same&nbsp;<code>ggplot()</code>&nbsp;code as before to make the plot — now the bars will be ordered by total size rather than alphabetically:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(iris,                    </span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> Sepal.Length)) <span class="sc">+</span>     </span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  dl_sizes, </span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> machineName, </span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> size<span class="sc">/</span><span class="dv">10</span><span class="sc">^</span><span class="dv">6</span>)) <span class="sc">+</span> </span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -617,61 +637,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="bar-chart-with-geom_bar" class="level2">
-<h2 class="anchored" data-anchor-id="bar-chart-with-geom_bar">Bar chart with <code>geom_bar</code></h2>
-<p>A bar chart is made with the <code>geom_bar</code> function and is used to get an overview over the distribution of a single categorical variable, e.g.&nbsp;Flower.Color in this instance. The function treats the x-axis as categorical and <strong>calculates the bar heights based on the number of occurrences</strong> in each category. Here we see the number of flowers of each Flower.Color. Notice that the Flower.Colors are sorted alphabetically.</p>
+<section id="coordinate-system-in-ggplot2" class="level2">
+<h2 class="anchored" data-anchor-id="coordinate-system-in-ggplot2">Coordinate System in ggplot2</h2>
+<p>In the next R chunk we will for the first time try to save the syntaxical description of a plot in an R variable. This makes it easy to&nbsp;reuse&nbsp;and&nbsp;modify&nbsp;the same plot — for example, to change scales or coordinate systems — without rewriting the entire code. Let’s try this out.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save plot in p</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(iris,                    </span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">x =</span> Flower.Color)) <span class="sc">+</span> </span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>()                         </span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Show p</span></span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="presentation3_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  dl_sizes,</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> machineName, </span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> size <span class="sc">/</span> <span class="dv">10</span><span class="sc">^</span><span class="dv">6</span>),</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">color =</span> month) <span class="sc">+</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Show p with new labels </span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>p <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">'Awesome Flower Colors'</span>, <span class="at">y =</span> <span class="st">'Awesome Count'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="presentation3_files/figure-html/unnamed-chunk-15-2.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Show p again</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="presentation3_files/figure-html/unnamed-chunk-15-3.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save p with new lables in p (overwrite / reassign)</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">'Awesome Flower Colors'</span>, <span class="at">y =</span> <span class="st">'Awesome Count'</span>)</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Show p2</span></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>p2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="presentation3_files/figure-html/unnamed-chunk-15-4.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Color by species. The bars are stacked by default.</p>
+<p>Here, we store the bar chart in a variable called&nbsp;<code>p</code>. Running this code does not display the plot yet, but a variable named&nbsp;<code>p</code>&nbsp;now appears in the&nbsp;Global Environment.</p>
+<p>Because the plot is saved in&nbsp;<code>p</code>, we can easily modify it by adding more layers:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(iris,                    </span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> Flower.Color,   </span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">fill =</span> Species)) <span class="sc">+</span>   </span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>()                   </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Flip the coordinate axes:</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>p <span class="sc">+</span> <span class="fu">coord_flip</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -680,12 +661,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>Add <code>position = "dodge"</code> for bars to be placed next to each other.</p>
+<p>This swaps the x- and y-axes, which is often helpful when category names are long — it makes the plot easier to read.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(iris,                   </span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>      <span class="fu">aes</span>(<span class="at">x =</span> Flower.Color,    </span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">fill =</span> Species)) <span class="sc">+</span>   </span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"dodge"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Change the scale of the y-axis:</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>p <span class="sc">+</span> <span class="fu">scale_y_log10</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -694,17 +673,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>Add <code>position = "fill"</code> for bars to be normalized such that heights of the bars to represent percentages rather than counts.</p>
-<p>Additionally, themes can be added as a layer to any ggplot if you prefer a theme other than the default grey background.</p>
+<p>A logarithmic scale is useful when the data are highly skewed or span several orders of magnitude, making it easier to compare smaller values.</p>
+</section>
+<section id="a-box-plot" class="level2">
+<h2 class="anchored" data-anchor-id="a-box-plot"><strong>A box plot</strong></h2>
+<p>Boxplots are great to get an overview of continues variables, identifying outliers and comparing distributions across&nbsp;categories. Let’s create a boxplot of monthly download sizes for each machine.<br>
+Because the data are skewed, we use a&nbsp;logarithmic y-scale&nbsp;to make the plot more interpretable.</p>
+<p>Additionally, themes and titles can be added as a layer to any ggplot if you prefer a theme other than the default grey background.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(iris,                   </span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>      <span class="fu">aes</span>(<span class="at">x =</span> Flower.Color,   </span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">fill =</span> Species)) <span class="sc">+</span>   </span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>) <span class="sc">+</span> </span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># theme_bw()</span></span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># theme_classic()</span></span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># theme_minimal()</span></span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_dark</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span>                       <span class="co"># save in object p</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(                  <span class="co"># call ggplot</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    downloads,             <span class="co"># data</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> machineName,   <span class="co"># x and y and fill</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> size, </span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">fill =</span> machineName)) <span class="sc">+</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span>         <span class="co"># boxplot</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_log10</span>()          <span class="co"># scale</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> p <span class="sc">+</span> </span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span>         <span class="co"># add theme ..................</span></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># theme_bw()</span></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># theme_classic()</span></span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># theme_dark()</span></span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">'Machines'</span>,     <span class="co"># add label ..................</span></span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">'Size in Mb'</span>,</span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">'Boxplot'</span>)</span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>p1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -713,12 +707,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>Using <code>facet_wrap</code> if you want a plot to be split up according to a categorical variable.</p>
+</section>
+<section id="violin-plot-with-geom_violin" class="level2">
+<h2 class="anchored" data-anchor-id="violin-plot-with-geom_violin">Violin plot with <code>geom_violin</code></h2>
+<p>A violin plot shows the distribution of a continuous variable across different categories, combining the features of a box plot and a density plot.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(iris,                   </span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>      <span class="fu">aes</span>(<span class="at">x =</span> Flower.Color)) <span class="sc">+</span></span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>()  <span class="sc">+</span> </span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(Species))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span>                         <span class="co"># save in object p</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(                    <span class="co"># call ggplot</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    downloads,               <span class="co"># data</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> machineName,     <span class="co"># x and y and fill</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> size, </span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">fill =</span> machineName)) <span class="sc">+</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_violin</span>(<span class="at">trim =</span> <span class="cn">TRUE</span>) <span class="sc">+</span>   <span class="co"># draw violin plots, trim tails</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_log10</span>()              <span class="co"># scale</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -727,59 +729,118 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
+<p>We can enhance the plot by overlaying&nbsp;individual data points&nbsp;(with jittering to avoid overplotting), using a minimal theme, and customizing the fill colors:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> p <span class="sc">+</span> </span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(           <span class="co"># overlay geom</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="fl">0.1</span>, <span class="at">alpha =</span> <span class="fl">0.05</span>, <span class="at">width =</span> <span class="fl">0.4</span>) <span class="sc">+</span> </span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span>      <span class="co"># theme</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">values=</span><span class="fu">c</span>(<span class="st">"#2A2D43"</span>,  <span class="co"># change colors</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>             <span class="st">"#91A6FF"</span>, </span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>             <span class="st">"#C7EDE4"</span>, </span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>             <span class="st">"#AFA060"</span>, </span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>             <span class="st">"#AD8350"</span>))</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>p2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="presentation3_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
-<section id="ordering-columns" class="level2">
-<h2 class="anchored" data-anchor-id="ordering-columns">Ordering columns</h2>
-<p>We can order the columns such that the count goes from lowest to highest. This is actually not that easy in R.</p>
-<p>First, we see that the class of the Flower.Color is character. Characters are always sorted alphabetically like we saw above.</p>
+<section id="faceting" class="level2">
+<h2 class="anchored" data-anchor-id="faceting">Faceting</h2>
+<p>First, let’s create a previous boxplot of download size by machine and enhanced it with <code>fill = month</code> to split data by a second categorical variable.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(iris<span class="sc">$</span>Flower.Color)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span>                       <span class="co"># save in object p</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(                  <span class="co"># call ggplot</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    downloads,             <span class="co"># data</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> machineName,   <span class="co"># x and y and fill</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> size, </span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">fill =</span> month)) <span class="sc">+</span>   <span class="co"># add fill by month ..................</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span>         <span class="co"># boxplot</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_log10</span>()          <span class="co"># scale</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="presentation3_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Sometimes adding a&nbsp;<code>fill</code>&nbsp;aesthetic makes a plot too busy, especially if there are many categories. Instead, we can use&nbsp;faceting&nbsp;to split the data into multiple smaller plots — one for each category — making it easier to compare groups.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">#p + facet_grid(vars(month))</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>p <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(month))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="presentation3_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>This wraps the plots into multiple rows and columns automatically, which is helpful when there are many facet levels.</p>
+</section>
+<section id="daily-summary-statistics" class="level2">
+<h2 class="anchored" data-anchor-id="daily-summary-statistics"><strong>Daily summary statistics</strong></h2>
+<p>Next we want to visualize the number and the total size of the downloads done each date for each of the 6 machines. For later usage we also compute the cumulated number of downloads within each of the 6 machines over the dates. As before we do this via the following steps:</p>
+<ol type="1">
+<li><p>Using&nbsp;<code>group_by()</code>&nbsp;we group the dataset by both&nbsp;<em>machineName</em>&nbsp;and&nbsp;<em>date</em>.</p></li>
+<li><p>Using&nbsp;<code>summarize()</code>&nbsp;we count the number and the total size of the downloads for within each machine and date.</p></li>
+<li><p>Using&nbsp;<code>mutate()</code>&nbsp;we cumulate the number of downloads over the dates within the machines.</p></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>daily_downloads <span class="ot">&lt;-</span> </span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  downloads <span class="sc">%&gt;%</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(machineName, date) <span class="sc">%&gt;%</span> </span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">dl_count =</span> <span class="fu">n</span>(), </span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">size_mb =</span> <span class="fu">sum</span>(size)<span class="sc">/</span><span class="dv">10</span><span class="sc">^</span><span class="dv">6</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">total_dl_count =</span> <span class="fu">cumsum</span>(dl_count))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by 'machineName'. You can override using the
+`.groups` argument.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>daily_downloads</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "character"</code></pre>
+<pre><code># A tibble: 337 × 5
+# Groups:   machineName [5]
+   machineName date                dl_count size_mb total_dl_count
+   &lt;chr&gt;       &lt;dttm&gt;                 &lt;int&gt;   &lt;dbl&gt;          &lt;int&gt;
+ 1 cs18        1994-11-22 00:00:00      168 22.4               168
+ 2 cs18        1994-11-23 00:00:00      191 12.2               359
+ 3 cs18        1994-11-24 00:00:00      256  8.05              615
+ 4 cs18        1994-11-25 00:00:00       13  0.0655            628
+ 5 cs18        1994-11-28 00:00:00      133  0.625             761
+ 6 cs18        1994-11-29 00:00:00        8  0.0201            769
+ 7 cs18        1994-11-30 00:00:00       14  0.209             783
+ 8 cs18        1994-12-01 00:00:00       35  0.631             818
+ 9 cs18        1994-12-02 00:00:00       61  5.67              879
+10 cs18        1994-12-03 00:00:00       11  0.156             890
+# ℹ 327 more rows</code></pre>
 </div>
 </div>
-<p>Extract the number of flowers for each Flower.Color.</p>
+</section>
+<section id="scatter-plot-with-geom_point" class="level2">
+<h2 class="anchored" data-anchor-id="scatter-plot-with-geom_point">Scatter plot with <code>geom_point</code></h2>
+<p>A&nbsp;scatter plot&nbsp;is used to explore the relationship between two numerical variables by plotting them on the x- and y-axes. You can visualize a&nbsp;<strong>third numeric variable</strong>&nbsp;by mapping it to the&nbsp;<code>size</code>&nbsp;aesthetic.</p>
+<p>Here we will visualize the relationship between daily download counts and time and map size in Mb to &nbsp;<code>size</code>&nbsp;aesthetic. We use&nbsp;<code>geom_point()</code>&nbsp;to draw individual data points.</p>
+<p>We can also color the points based on whether the download size is greater than 1 MB by mapping&nbsp;<code>color = size_mb &gt; 1</code>&nbsp;inside&nbsp;<code>aes()</code>. This highlights larger downloads, making them easier to spot in the plot.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>dl_Flower.Color <span class="ot">&lt;-</span> iris <span class="sc">%&gt;%</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Flower.Color) <span class="sc">%&gt;%</span></span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span> </span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(n))</span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>dl_Flower.Color</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 5 × 2
-  Flower.Color     n
-  &lt;chr&gt;        &lt;int&gt;
-1 Red             44
-2 Yellow          33
-3 Purple          30
-4 Green           22
-5 Blue            21</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>dl_Flower.Color<span class="sc">$</span>Flower.Color</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "Red"    "Yellow" "Purple" "Green"  "Blue"  </code></pre>
-</div>
-</div>
-<p>Change the class of the Flower.Color feature to factor and add levels according to the number of flowers with each color.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>iris<span class="sc">$</span>Flower.Color <span class="ot">&lt;-</span> <span class="fu">factor</span>(iris<span class="sc">$</span>Flower.Color,</span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>                            <span class="at">levels =</span> dl_Flower.Color<span class="sc">$</span>Flower.Color)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Check class now</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(iris<span class="sc">$</span>Flower.Color)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "factor"</code></pre>
-</div>
-</div>
-<p>Now we do the same plot as before and we see that the order has changed to range from largest to smallest Flower.Colors group. The plot is saved in the variable p.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(iris,                <span class="co"># dataframe </span></span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> Flower.Color)) <span class="sc">+</span>  <span class="co"># x-value</span></span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>()                     <span class="co"># type of plot </span></span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  daily_downloads, </span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> date, </span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> dl_count, </span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">size =</span> size_mb, </span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">color =</span> size_mb<span class="sc">&gt;</span><span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_log10</span>()</span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>p3 <span class="ot">&lt;-</span> p</span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>p3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -788,11 +849,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>We can also flip the chart. We update the plot, p, by reassignment.</p>
+</section>
+<section id="line-plot-with-geom_line" class="level2">
+<h2 class="anchored" data-anchor-id="line-plot-with-geom_line">Line plot with <code>geom_line</code></h2>
+<p>The geom called&nbsp;<code>geom_line()</code>&nbsp;is used to insert lines, which is ideal for showing&nbsp;trends over time&nbsp;or&nbsp;continuous changes. In the code below you see a first attempt to write R code that visualizes the cumulated total download size over the dates.</p>
+<p>We create a plot of the cumulative total download count over time:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">coord_flip</span>()</span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(                      <span class="co"># call ggplot</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  daily_downloads,           <span class="co"># data</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> date,              <span class="co"># x and y</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> total_dl_count)) <span class="sc">+</span> <span class="co"># line</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -801,21 +868,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>Since we are working with colors, we can change the colors of the bars to match the groups.</p>
-<p>R color chart <a href="http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf">here</a></p>
+<p>If we want a separate line for each machine, we must tell ggplot how to group the data. We can do this by mapping&nbsp;<code>color = machineName</code>&nbsp;(and optionally color by machine as well):</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define color palette</span></span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>color_palette <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Red"</span> <span class="ot">=</span> <span class="st">"red3"</span>, </span>
-<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"Blue"</span> <span class="ot">=</span> <span class="st">"cornflowerblue"</span>, </span>
-<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"Yellow"</span> <span class="ot">=</span> <span class="st">"lightgoldenrod1"</span>, </span>
-<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"Green"</span> <span class="ot">=</span> <span class="st">"darkolivegreen2"</span>, </span>
-<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"Purple"</span> <span class="ot">=</span> <span class="st">"darkorchid3"</span>)</span>
-<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span> </span>
-<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">fill =</span> Flower.Color) <span class="sc">+</span>                <span class="co"># add the fill ascetics </span></span>
-<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> color_palette) <span class="co"># set the fill color according to the color palette</span></span>
-<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>p4 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  daily_downloads, </span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> date, </span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> total_dl_count, </span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">colour =</span> machineName)) <span class="sc">+</span> </span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() </span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>p4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -825,40 +886,48 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="bar-chart-with-geom_col" class="level2">
-<h2 class="anchored" data-anchor-id="bar-chart-with-geom_col">Bar chart with <code>geom_col</code></h2>
-<p>Another way to make a bar chart is by using <code>geom_col</code>. Unlike <code>geom_bar</code>, which only requires an x-value and automatically counts occurrences, <code>geom_col</code> requires both x- and y-values. This makes <code>geom_col</code> ideal for cases where you already have pre-calculated values that you want to use as the bar heights.</p>
-<p>The mean of the sepal length within each color is calcualted using the <code>summarize</code> function.</p>
+<section id="arrange-multiple-ggplots-on-the-same-page" class="level2">
+<h2 class="anchored" data-anchor-id="arrange-multiple-ggplots-on-the-same-page"><strong>Arrange multiple ggplots on the same page</strong></h2>
+<p>In R there is a whole infrastructure of extension packages built around ggplot, that facilitate different types of plot modifications, arrangements, and animation.</p>
+<p>R package&nbsp;<strong>ggpubr</strong>&nbsp;is one of them and it helps to produce publication-ready plots using ggplot2.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>mean_sepal_length_pr_color <span class="ot">&lt;-</span> iris <span class="sc">%&gt;%</span></span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Flower.Color) <span class="sc">%&gt;%</span></span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_Sepal.Length =</span> <span class="fu">mean</span>(Sepal.Length))</span>
-<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mean_sepal_length_pr_color)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 5 × 2
-  Flower.Color mean_Sepal.Length
-  &lt;fct&gt;                    &lt;dbl&gt;
-1 Red                       5.88
-2 Yellow                    5.89
-3 Purple                    5.91
-4 Green                     5.65
-5 Blue                      5.79</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mean_sepal_length_pr_color,   <span class="co"># dataframe </span></span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> Flower.Color,         <span class="co"># x-value</span></span>
-<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> mean_Sepal.Length)) <span class="sc">+</span> <span class="co"># y-value</span></span>
-<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>()                         <span class="co"># type of plot </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("ggpubr")</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggpubr)</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>figure <span class="ot">&lt;-</span> <span class="fu">ggarrange</span>(p1, p2, p3, p4,</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">align =</span> <span class="st">"hv"</span>,</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>                    <span class="at">labels =</span> <span class="fu">c</span> (<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>, <span class="st">"D"</span>),</span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>                    <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">nrow =</span> <span class="dv">2</span>)</span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>figure</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="presentation3_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="presentation3_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Save Tibble and Save Plot:</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="co">#write_xlsx(daily_downloads, "daily_downloads.xlsx")</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="co">#ggsave(filename = "vionlinPlot.pdf", plot = p2, height = 5, width = 10)</span></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a><span class="co">#pdf("vionlinPlot2.pdf", height = 5, width = 10)</span></span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a><span class="co">#p2</span></span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a><span class="co">#dev.off()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion"><strong>Conclusion</strong></h2>
+<ol type="1">
+<li><p>The&nbsp;<strong>ggplot2</strong>&nbsp;package is a powerful and versatile tool for making plots.</p></li>
+<li><p>We think, that the generated plots are beautiful.</p></li>
+<li><p>As far as we know some plots, e.g.&nbsp;using&nbsp;<em>faceting</em>&nbsp;(see the exercises), in practice are only producible in&nbsp;<strong>ggplot2</strong>.</p></li>
+<li><p>Learning the syntax needed for making specific plots is a challenge. The best way (the only way!?) to learn is to practice. You may start by solving the exercise sheet. After you have gotten used to the basic ideas you can find a lot of help on the internet. We remark, that there have been several updates of the&nbsp;<strong>ggplot2</strong>&nbsp;package over the recent years. And some of the old entries that might pop up when you google a ggplot2-issue might be outdated.</p></li>
+<li><p>Not all things can be made in&nbsp;<strong>ggplot2</strong>! For a geometrical object to be available it need to have a syntaxical description, and it needs to be implemented. Other things require computer-hacks to be made (e.g.&nbsp;using different orderings of categorical variables in faceted plots).</p></li>
+</ol>
 
 
 </section>
