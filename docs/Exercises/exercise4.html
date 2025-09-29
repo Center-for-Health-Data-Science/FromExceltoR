@@ -402,46 +402,14 @@ window.Quarto = {
 <h3 class="anchored" data-anchor-id="data">Data</h3>
 <p>The dataset to be used concerns risk factors for low infant birth weight and is available in the <strong>MASS</strong> package. It includes 189 births with the following variables:</p>
 <ol type="1">
-<li><p>Use the commands below to load the MASS package and get the help page for the data. The help page will appear in the lower right window of RStudio. Read about the data; in particular about the variables <code>age</code>, <code>lwt</code>, <code>ftv</code>, <code>smoke</code>, and <code>bwt</code>.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(birthwt)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>?birthwt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div></li>
+<li><p>Use the commands below to load the MASS package and get the help page for the data. The help page will appear in the lower right window of RStudio. Read about the data; in particular about the variables <code>age</code>, <code>lwt</code>, <code>ftv</code>, <code>smoke</code>, and <code>bwt</code>.</p></li>
 <li><p>Assign the data to an object named&nbsp;<code>birthwt</code>&nbsp;if it is not already loaded. Then&nbsp;<strong>glimpse</strong>&nbsp;the dataset and check the first few rows.</p>
-<p>Note:&nbsp;<code>birthwt</code>&nbsp;is not a tibble (the modern tidyverse data format), but we can easily convert it:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)    </span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>birthData <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(birthwt)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>birthData</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div></li>
+<p>Note:&nbsp;<code>birthwt</code>&nbsp;is not a tibble (the modern tidyverse data format), but we can easily convert it:</p></li>
 <li><p>The variables&nbsp;<code>smoke</code>&nbsp;(mother’s smoking habits) and&nbsp;<code>ftv</code>&nbsp;(number of first-trimester physician visits) are coded as numeric variables.<br>
-Convert them to&nbsp;<strong>factors</strong>&nbsp;so they are treated as categorical variables in your analyses:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>birthData <span class="ot">&lt;-</span> birthData <span class="sc">%&gt;%</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">smoke =</span> <span class="fu">factor</span>(smoke),</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">ftvFac =</span> <span class="fu">factor</span>(ftv)</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div></li>
-<li><p>Make boxplot of birth weight <code>bwt</code> according the number of visits to physician <code>ftvFac</code> during the first trimester. Split by smoking status.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(birthData, <span class="fu">aes</span>(<span class="at">x=</span>ftvFac, <span class="at">y=</span>bwt, <span class="at">fill =</span> smoke)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div></li>
-<li><p>Make a scatterplot with <code>lwt</code> on the <span class="math inline">\(x\)</span>-axis and <code>bwt</code> on the <span class="math inline">\(y\)</span>-axis. Modify the plot such that points are colored according to <code>smoke</code> and size shows <code>ftv.</code></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(birthData, <span class="fu">aes</span>(<span class="at">x=</span>lwt, <span class="at">y=</span>bwt, <span class="at">col=</span>smoke, <span class="at">size =</span> ftv)) <span class="sc">+</span> <span class="fu">geom_point</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div></li>
-<li><p>The <code>ftv</code> is a numerical variable, but we would also like a categorical version of it called <code>visits</code> , with groups corresponding to zero visits, one visit, and two or more visits, respectively.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(birthData<span class="sc">$</span>ftv)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>birthData <span class="ot">&lt;-</span> <span class="fu">mutate</span>(birthData, </span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">visits =</span> <span class="fu">fct_collapse</span>(ftvFac, </span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">Never=</span><span class="st">"0"</span>, </span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">Once=</span><span class="st">"1"</span>, </span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">other_level=</span><span class="st">"MoreThanOnce"</span>))</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(birthData<span class="sc">$</span>visits)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div></li>
+Convert them to&nbsp;<strong>factors</strong>&nbsp;so they are treated as categorical variables in your analyses:</p></li>
+<li><p>Make boxplot of birth weight <code>bwt</code> according the number of visits to physician <code>ftvFac</code> during the first trimester. Split by smoking status.</p></li>
+<li><p>Make a scatterplot with <code>lwt</code> on the <span class="math inline">\(x\)</span>-axis and <code>bwt</code> on the <span class="math inline">\(y\)</span>-axis. Modify the plot such that points are colored according to <code>smoke</code> and size shows <code>ftv.</code></p></li>
+<li><p>The <code>ftv</code> is a numerical variable, but we would also like a categorical version of it called <code>visits</code> , with groups corresponding to zero visits, one visit, and two or more visits, respectively.</p></li>
 <li><p>Report how many how many women had more than one physician visit during the first trimester here.</p>
 <p><img src="images/qr_code_Ex4Q1.png" class="img-fluid" width="200"></p></li>
 </ol>
@@ -451,43 +419,18 @@ Convert them to&nbsp;<strong>factors</strong>&nbsp;so they are treated as catego
 <p>The term <em>regression</em> is usually used for models where all explanatory variables are numerical.</p>
 <p>If you are not too familiar with linear regression, you can have a look at what the <code>summary()</code> output means <a href="https://feliperego.github.io/blog/2015/10/23/Interpreting-Model-Output-In-R">here</a> and for understanding regression <code>plot()</code>, have a look <a href="https://data.library.virginia.edu/diagnostic-plots/">here</a>.</p>
 <ol start="8" type="1">
-<li><p>Fit a linear regression model with <code>bwt</code> as response and <code>lwt</code> as covariate, and identify the estimates for the intercept and for the slope. Find the 97.5% confidence interval for the slope parameter by using the <code>confint()</code> function.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>reg1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(bwt <span class="sc">~</span> lwt, <span class="at">data=</span>birthData) </span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(reg1)</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(reg1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div></li>
+<li><p>Fit a linear regression model with <code>bwt</code> as response and <code>lwt</code> as covariate, and identify the estimates for the intercept and for the slope. Find the 97.5% confidence interval for the slope parameter by using the <code>confint()</code> function.</p></li>
 <li><p>Performe model validation. Hint: use autoplot. Does the model seem appropriate for the data?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#par(mfrow=c(2,2))</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">#plot(reg1)</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(reg1, <span class="at">which =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">label.size =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#par(mfrow=c(2,2))</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#plot(reg1)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></li>
-<li><p>Fit the multiple linear regression model where you include <code>lwt</code> as well as <code>age</code> and <code>ftv</code> (numerical variables) as covariates. Identify the parameter estimates, and consider what their interpretation is.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>reg2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(bwt <span class="sc">~</span> lwt <span class="sc">+</span> age <span class="sc">+</span> ftv, <span class="at">data=</span>birthData)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(reg2)</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Just to view the coefficients</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(reg2)<span class="sc">$</span>coefficients</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div></li>
-<li><p>Try the following commands, and see if you can figure out what the outcome means. You should replace <code>reg2</code> with the name of the model object from the previous question.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>newData <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">lwt=</span><span class="dv">100</span>, <span class="at">age=</span><span class="dv">25</span>, <span class="at">ftv=</span><span class="dv">0</span>)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>newData</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(reg2, newData)</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(reg2, newData, <span class="at">interval=</span><span class="st">"prediction"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div></li>
+<li><p>Fit the multiple linear regression model where you include <code>lwt</code> as well as <code>age</code> and <code>ftv</code> (numerical variables) as covariates. Identify the parameter estimates, and consider what their interpretation is.</p></li>
+<li><p>Try the following commands, and see if you can figure out what the outcome means. You should replace <code>reg2</code> with the name of the model object from the previous question.</p></li>
 </ol>
 <!-- -->
 <ol start="12" type="1">
-<li><p>Fit the multiple linear regression model again, but now only using data from mothers with a weight less than 160 pounds (<code>lwt</code> &lt; 160). <em>Hint:</em> Use the <code>filter</code> function and change the <code>data</code> argument in the <code>lm</code> command.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Use only data from mothers with weight below 160</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>reg3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(bwt <span class="sc">~</span> lwt <span class="sc">+</span> age <span class="sc">+</span> ftv, <span class="at">data=</span><span class="fu">filter</span>(birthData, lwt<span class="sc">&lt;</span><span class="dv">160</span>))</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(reg3)</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Just to view the coefficients</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(reg3)<span class="sc">$</span>coefficients</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div></li>
+<li><p>Fit the multiple linear regression model again, but now only using data from mothers with a weight less than 160 pounds (<code>lwt</code> &lt; 160). <em>Hint:</em> Use the <code>filter</code> function and change the <code>data</code> argument in the <code>lm</code> command.</p></li>
 </ol>
 </section>
 <section id="anova" class="level3">
@@ -496,43 +439,19 @@ Convert them to&nbsp;<strong>factors</strong>&nbsp;so they are treated as catego
 <ol start="13" type="1">
 <li><p>Fit a&nbsp;<strong>one-way ANOVA</strong>&nbsp;(using&nbsp;<code>lm()</code>) where the mean birth weight is allowed to differ between smokers and non-smokers. Find the estimated birth weight for infants from smokers as well as non-smokers. Hint: use&nbsp;<code>emmeans()</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans)    </span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>oneway1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(bwt <span class="sc">~</span> smoke, <span class="at">data=</span>birthData)</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">emmeans</span>(oneway1,<span class="sc">~</span>smoke)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans)    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></li>
-<li><p>Check, is there a statistically significant difference in mean birth weight between infants of smokers and non-smokers?</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(<span class="fu">emmeans</span>(oneway1,<span class="sc">~</span>smoke))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div></li>
+<li><p>Check, is there a statistically significant difference in mean birth weight between infants of smokers and non-smokers?</p></li>
 <li><p>Fit the oneway ANOVA where you use <code>visits</code> as the explanatory variable. Perform an overall F-test for differences across all levels. Find the estimated birth weight for each group, and make the pairwise comparisons between the groups.<br>
-<em>Hint</em> <code>drop1(, test="F")</code>. What do you conclude about the relationship between the number of visits and infant birth weight?</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>oneway2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(bwt <span class="sc">~</span> visits, <span class="at">data=</span>birthData)</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">emmeans</span>(oneway2,<span class="sc">~</span>visits)</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">drop1</span>(oneway2,<span class="at">test=</span><span class="st">"F"</span>)</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(<span class="fu">emmeans</span>(oneway2,<span class="sc">~</span>visits))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div></li>
+<em>Hint</em> <code>drop1(, test="F")</code>. What do you conclude about the relationship between the number of visits and infant birth weight?</p></li>
 <li><p>Now, consider&nbsp;<strong>both&nbsp;<code>visits</code>&nbsp;and&nbsp;<code>smoke</code></strong>&nbsp;as explanatory variables.<br>
-Since both are categorical, the relevant model is a&nbsp;<strong>two-way ANOVA</strong>. Fit the model without interaction. Inspect the estimated means and group differences. How do you interpret the estimated means? What do they tell you about birth weight by smoking status and visit frequency?</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>twoway1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(bwt <span class="sc">~</span> visits <span class="sc">+</span> smoke, <span class="at">data=</span>birthData)</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">emmeans</span>(twoway1,<span class="sc">~</span>visits<span class="sc">+</span>smoke)</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(<span class="fu">emmeans</span>(twoway1,<span class="sc">~</span>visits<span class="sc">+</span>smoke))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div></li>
+Since both are categorical, the relevant model is a&nbsp;<strong>two-way ANOVA</strong>. Fit the model without interaction. Inspect the estimated means and group differences. How do you interpret the estimated means? What do they tell you about birth weight by smoking status and visit frequency?</p></li>
 </ol>
 <!-- -->
 <ol start="16" type="1">
-<li><p>Fit the twoway ANOVA model <em>with interaction</em> replacing <code>+</code> by a <code>*</code>. Use&nbsp;<code>drop1()</code>&nbsp;to test whether the interaction term is statistically significant. Compare it to model without interaction? What do the p-values suggest about whether the effect of smoking depends on the number of visits?</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>twoway2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(bwt <span class="sc">~</span> visits <span class="sc">*</span> smoke, <span class="at">data=</span>birthData)</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">drop1</span>(twoway2,<span class="at">test=</span><span class="st">"F"</span>)</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">drop1</span>(twoway1,<span class="at">test=</span><span class="st">"F"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div></li>
+<li><p>Fit the twoway ANOVA model <em>with interaction</em> replacing <code>+</code> by a <code>*</code>. Use&nbsp;<code>drop1()</code>&nbsp;to test whether the interaction term is statistically significant. Compare it to model without interaction? What do the p-values suggest about whether the effect of smoking depends on the number of visits?</p></li>
 <li><p>Use&nbsp;<code>anova()</code>&nbsp;to formally compare the two models. Are the two models statistically different?<br>
-What does this imply about including the interaction term?</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(twoway1, twoway2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div></li>
+What does this imply about including the interaction term?</p></li>
 <li><p>Report are the 2 models statistically different here.</p></li>
 </ol>
 <p><img src="images/qr_code_Ex4Q2.png" class="img-fluid" width="200"></p>
@@ -541,51 +460,30 @@ What does this imply about including the interaction term?</p>
 <h3 class="anchored" data-anchor-id="logistic-regression">Logistic regression</h3>
 <p>The variable&nbsp;<code>low</code>&nbsp;is&nbsp;<strong>1</strong>&nbsp;if birth weight is less than 2500 g, and&nbsp;<strong>0</strong>&nbsp;otherwise.<br>
 Visualize the data:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(birthData, <span class="fu">aes</span>(<span class="at">x=</span>bwt, <span class="at">y=</span>low)) <span class="sc">+</span> </span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Low birthweight (1 = yes, 0 = no)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 <p>Imagine the actual birth weight&nbsp;<code>bwt</code>&nbsp;was&nbsp;<strong>not recorded</strong>, but we still want to know whether the birth weight was low.<br>
 Because the outcome is binary (<code>low</code>&nbsp;has two values), we use&nbsp;<strong>logistic regression</strong>&nbsp;to model the probability.</p>
 <p>For example, we may consider a model with mothers’s weight, smoking status, and age as predictors, just like in the previous question.</p>
 <ol start="19" type="1">
-<li><p>Fit the model, take a look at glm function:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>logreg1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(low <span class="sc">~</span> lwt <span class="sc">+</span> smoke <span class="sc">+</span> age, <span class="at">data=</span>birthData, <span class="at">family=</span><span class="st">"binomial"</span>)</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>logreg1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div></li>
+<li><p>Fit the model, take a look at glm function:</p></li>
 <li><p>Use&nbsp;<code>drop1()</code>&nbsp;to check if each predictor contributes significantly:</p>
 <p>A Note: <code>test = "F"</code>&nbsp;is for Gaussian linear models (<code>lm()</code>), where F-tests are appropriate.<br>
 For logistic regression and other GLMs,&nbsp;<code>test = "Chisq"</code>&nbsp;is the correct choice.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">drop1</span>(logreg1, <span class="at">test=</span><span class="st">"Chisq"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 <p><strong>Question:</strong>&nbsp;Based on the p-values, is there evidence that&nbsp;<strong>smoking</strong>&nbsp;affects the probability of low birth weight?</p></li>
 <li><p>We have data for&nbsp;<strong>5 new mothers</strong>. Use your fitted logistic model&nbsp;<code>logreg1</code>&nbsp;to&nbsp;<strong>predict the probability</strong>&nbsp;of low birthweight and fill the&nbsp;<code>low</code>&nbsp;column.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>newData <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">low =</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">5</span>),</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">age =</span> <span class="fu">c</span>(<span class="dv">22</span>, <span class="dv">30</span>, <span class="dv">18</span>, <span class="dv">17</span>, <span class="dv">28</span>),</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">lwt =</span> <span class="fu">c</span>(<span class="dv">140</span>, <span class="dv">155</span>, <span class="dv">130</span>, <span class="dv">97</span>, <span class="dv">165</span>),</span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">race =</span> <span class="fu">c</span>(<span class="st">"Black"</span>, <span class="st">"Other"</span>, <span class="st">"Black"</span>, <span class="st">"Other"</span>, <span class="st">"White"</span>),</span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">smoke =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">ptl =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>),</span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">ftv =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">2</span>),</span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">bwt =</span> <span class="fu">c</span>(<span class="dv">2800</span>, <span class="dv">4500</span>, <span class="dv">1700</span>, <span class="dv">1500</span>, <span class="dv">3400</span>)</span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>newData <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">low =</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">5</span>),</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">age =</span> <span class="fu">c</span>(<span class="dv">22</span>, <span class="dv">30</span>, <span class="dv">18</span>, <span class="dv">17</span>, <span class="dv">28</span>),</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">lwt =</span> <span class="fu">c</span>(<span class="dv">140</span>, <span class="dv">155</span>, <span class="dv">130</span>, <span class="dv">97</span>, <span class="dv">165</span>),</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">race =</span> <span class="fu">c</span>(<span class="st">"Black"</span>, <span class="st">"Other"</span>, <span class="st">"Black"</span>, <span class="st">"Other"</span>, <span class="st">"White"</span>),</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">smoke =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">ptl =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>),</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">ftv =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">2</span>),</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">bwt =</span> <span class="fu">c</span>(<span class="dv">2800</span>, <span class="dv">4500</span>, <span class="dv">1700</span>, <span class="dv">1500</span>, <span class="dv">3400</span>)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></li>
-<li><p>Use the&nbsp;<code>predict()</code>&nbsp;function to compute the predicted probabilities for the new cases. Make sure to set&nbsp;<code>type="response"</code>&nbsp;to get probabilities rather than log-odds.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>newData<span class="sc">$</span>low <span class="ot">&lt;-</span> <span class="fu">predict</span>(logreg1, <span class="at">newdata =</span> newData, <span class="at">type =</span> <span class="st">"response"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div></li>
-<li><p>Add the&nbsp;<strong>predicted probabilities</strong>&nbsp;(red points) and a&nbsp;<strong>connecting line</strong>&nbsp;to your&nbsp;<code>ggplot</code>. Hint: add geom_point and geom_line with the newData.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(birthData, <span class="fu">aes</span>(<span class="at">x=</span>bwt, <span class="at">y=</span>low)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> newData, <span class="fu">aes</span>(<span class="at">x =</span> bwt, <span class="at">y =</span> low), <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> newData, <span class="fu">aes</span>(<span class="at">x =</span> bwt, <span class="at">y =</span> low), <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">size =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Predicted probability of low birthweight"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div></li>
+<li><p>Use the&nbsp;<code>predict()</code>&nbsp;function to compute the predicted probabilities for the new cases. Make sure to set&nbsp;<code>type="response"</code>&nbsp;to get probabilities rather than log-odds.</p></li>
+<li><p>Add the&nbsp;<strong>predicted probabilities</strong>&nbsp;(red points) and a&nbsp;<strong>connecting line</strong>&nbsp;to your&nbsp;<code>ggplot</code>. Hint: add geom_point and geom_line with the newData.</p></li>
 <li><p>Report here - <strong>In how many of the new cases is birthweight predicted to be low?</strong>?</p>
 <p><img src="images/qr_code_Ex4Q3.png" class="img-fluid" width="200"></p></li>
 </ol>
