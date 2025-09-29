@@ -13,7 +13,7 @@ knitr::opts_chunk$set(echo = TRUE, eval = TRUE, warning = FALSE)
 ```
 This quaro document is part of the course **Applied Statistics in R** given at HeaDS Data Science Lab, University of Copenhagen. The course is open to all interested students and researchers. The course is given in the fall semester every year.
 
-“Want to code along? Go to the Data tab of the website and press the **DOWNLOAD PRESENTATIONS** button. This is presentation 4.”
+Want to code along? Go to the Data tab of the website and press the **DOWNLOAD PRESENTATIONS** button. This is presentation 4.
 
 ## Structure of a biostatistical analysis in R
 
