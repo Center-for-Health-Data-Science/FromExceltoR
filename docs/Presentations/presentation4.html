@@ -463,26 +463,8 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Solutions/exercise2_SOLUTIONS.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Exercise 2 - Solution</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../Solutions/exercise3_SOLUTIONS.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Exercise 3 - Solution</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../Solutions/exercise4_SOLUTIONS.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Exercise 4: Applied Statistics in R - Solutions</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../Solutions/exercise5_SOLUTIONS.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Exercise 5, Solutions</span></a>
+  <a href="../Solutions/solution_not_up.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Solutions not up yet</span></a>
   </div>
 </li>
       </ul>
@@ -1007,11 +989,11 @@ log(Girth)   2.016238  2.383702</code></pre>
 <span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>newData</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  Girth
-1 19.08
-2 17.20
-3 18.19
-4 12.85
-5  8.88</code></pre>
+1  9.68
+2 17.26
+3 15.88
+4 11.22
+5 13.04</code></pre>
 </div>
 </div>
 <p>Next, we use the function predict to compute the predicted log-volumes and confidence intervals for these predictions.</p>
@@ -1021,17 +1003,17 @@ log(Girth)   2.016238  2.383702</code></pre>
 <span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>pred</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       fit      lwr      upr
-1 4.133596 4.050216 4.216976
-2 3.905390 3.837752 3.973029
-3 4.028506 3.952564 4.104448
-4 3.263955 3.221720 3.306189
-5 2.450973 2.370392 2.531554</code></pre>
+1 2.640743 2.573148 2.708338
+2 3.913051 3.844912 3.981190
+3 3.729725 3.672805 3.786645
+4 2.965538 2.916127 3.014948
+5 3.296245 3.253972 3.338519</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># back-transform to original scale</span></span>
 <span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(pred[,<span class="dv">1</span>])  </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       1        2        3        4        5 
-62.40191 49.66946 56.17693 26.15276 11.59963 </code></pre>
+14.02362 50.05143 41.66764 19.40514 27.01103 </code></pre>
 </div>
 </div>
 </section>
@@ -1076,11 +1058,11 @@ F-statistic: 609.8 on 2 and 28 DF,  p-value: &lt; 2.2e-16</code></pre>
 <span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a>newData</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  Girth Height
-1 19.08  87.57
-2 17.20  74.60
-3 18.19  61.45
-4 12.85  70.85
-5  8.88  61.55</code></pre>
+1  9.68  74.18
+2 17.26  67.98
+3 15.88  71.81
+4 11.22  88.20
+5 13.04  83.34</code></pre>
 </div>
 </div>
 <p>Lastly, we predict log-volume for these new values of Girth and Height.</p>
@@ -1090,16 +1072,16 @@ F-statistic: 609.8 on 2 and 28 DF,  p-value: &lt; 2.2e-16</code></pre>
 <span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>pred</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       fit      lwr      upr
-1 4.222218 4.154174 4.290263
-2 3.822074 3.764640 3.879508
-3 3.735941 3.613172 3.858711
-4 3.187620 3.146035 3.229206
-5 2.315326 2.238542 2.392111</code></pre>
+1 2.675725 2.625889 2.725561
+2 3.729746 3.645369 3.814123
+3 3.621893 3.564541 3.679246
+4 3.178682 3.091008 3.266355
+5 3.403956 3.353447 3.454465</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(pred[,<span class="dv">1</span>]) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       1        2        3        4        5 
-68.18457 45.69889 41.92746 24.23070 10.12823 </code></pre>
+14.52287 41.66852 37.40832 24.01507 30.08287 </code></pre>
 </div>
 </div>
 <p>BUT, which model should we chose?</p>
