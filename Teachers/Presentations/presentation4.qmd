@@ -11,8 +11,9 @@ project:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, eval = TRUE, warning = FALSE)
 ```
+This quaro document is part of the course **Applied Statistics in R** given at HeaDS Data Science Lab, University of Copenhagen. The course is open to all interested students and researchers. The course is given in the fall semester every year.
 
-We will use the following [presentation4.qmd](https://github.com/Center-for-Health-Data-Science/FromExceltoR/blob/2025_Apr/Teachers/Presentations/presentation4.qmd) file for this presentation. Please clink on the link, download and open the file in your RStudio.
+“Want to code along? Go to the Data tab of the website and press the **DOWNLOAD PRESENTATIONS** button. This is presentation 4.”
 
 ## Structure of a biostatistical analysis in R
 
@@ -151,7 +152,7 @@ shapiro.test(psorData$IGFL4)
 
 The null hypothesis (H₀): data are normally distributed.
 
-p \> 0.05: fail to reject H₀ → data look normal.
+p > 0.05: fail to reject H₀ → data look normal.
 
 p ≤ 0.05: reject H₀ → data not normal.
 

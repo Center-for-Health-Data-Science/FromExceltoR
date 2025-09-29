@@ -6,7 +6,7 @@ project:
   output-dir: ../docs
 ---
 
-Want to code along? Go to the Data tab of the website and press the **DOWNLOAD PRESENTATIONS** button. This is presentation1A.
+Want to code along? Go to the Data tab of the website and press the **DOWNLOAD PRESENTATIONS** button. This is presentation 1.
 
 ### R as a calculator
 
