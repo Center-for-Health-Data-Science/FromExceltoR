@@ -247,7 +247,7 @@ ggpairs(trees) +
 We fit a simple linear regression with volume as outcome (i.e. dependent variable) and girth as covariate (i.e. independent variable). This model is fitted with the `lm` function. It is a good approach to assign a name (below *linreg1*) to the object with the fitted model. This object contains all relevant information and may be used for subsequent analysis.
 
 ```{r}
-linreg1 <- lm(Volume ~ Girth, data=trees)
+linreg1 <- lm(Volume ~ Girth + Height, data=trees)
 linreg1
 ```
 
@@ -287,7 +287,9 @@ Parameter estimates, standard errors are computed and certain hypothesis tests a
 
 ```{r}
 summary(linreg2)
-#drop1(linreg2, test = "F")
+```
+```{r}
+drop1(linreg2, test = "F")
 ```
 
 The coefficient table is the most important part of the output. It has two lines --- one for each parameter in the model --- and four columns. The first line is about the intercept, the second line is about the slope. The columns are
@@ -313,6 +315,70 @@ ggplot(trees, aes(x = log(Girth), y = log(Volume))) +
   geom_abline(intercept=-2.35332, slope=2.19997, col="red")
 
 ```
+
+
+#### Step 7: Prediction of new values
+
+The fitted model may be used to predict the outcome (here: log-volume) for new values of the covariate (here: Girth). The new values are provided in a data frame with the same name as the covariate in the model. Here we predict log-volume for five new values of Girth.
+
+```{r}
+newGirth <- runif(5, min = 8, max = 20) %>% 
+  round(., digits = 2)
+
+newData <- data.frame(Girth=newGirth)
+
+newData
+```
+Next, we use the function predict to compute the predicted log-volumes and confidence intervals for these predictions. 
+```{r}
+pred <- predict(linreg2, newdata=newData, interval="confidence")
+
+pred
+
+# back-transform to original scale
+exp(pred[,1])  
+```
+
+
+#### Step 7: Two or more covariates
+
+In the model above we only used Girth as covariate, we did this because Girth showed a strong correlation with Volume, while Height did not. BUT, we could include this variable in the model as well and see if our predictions approve.
+
+The bi-variate plot showed that Girth and especially Volume might benefit from a log transform, this was not the case for Height. So we will include Height as it is.
+```{r}
+linreg3 <- lm(log(Volume) ~ log(Girth) + Height, data=trees)
+```
+
+```{r}
+summary(linreg3)
+```
+
+Lets make some new data for prediction, now we need both Girth and Height.
+```{r}
+newHeight <- runif(5, min = 60, max = 90) %>% 
+  round(., digits = 2)
+
+newData <- data.frame(Girth=newGirth, Height=newHeight)
+
+newData
+```
+Lastly, we predict log-volume for these new values of Girth and Height.
+```{r}
+pred <- predict(linreg3, newdata=newData, interval="confidence")
+
+pred
+
+exp(pred[,1]) 
+```
+BUT, which model should we chose?
+
+We can compare the two models with the `anova` function, which performs a likelihood ratio test. The null hypothesis is that the simpler model (linreg2) is sufficient.
+
+```{r}
+anova(linreg2, linreg3)
+```
+Here, the p-value > 0.05, so we can not reject the null hypothesis which is that the simpler model linreg2 is sufficient to predict volume. I.e. the additional terms in linreg3 do not improve fit.
+
 
 ## Outlook: Other analyses
 
