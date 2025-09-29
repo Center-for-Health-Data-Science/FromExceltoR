@@ -1,5 +1,5 @@
 ---
-title: "Exercise 4, Part 2: Applied Statistics in R - Solutions"
+title: "Exercise 4: Applied Statistics in R - Solutions"
 format: html
 author: "HeaDS Data Science Lab, University of Copenhagen"
 project:

@@ -47,10 +47,8 @@ website:
             text: "Exercise 2: Tidyverse"
           - href: Exercises/exercise3.qmd
             text: "Exercise 3: ggplot2"
-          - href: Exercises/exercise4_PART1.qmd
-            text: "Exercise 4, Part 1: Applied Statistics"
-          - href: Exercises/exercise4_PART2.qmd
-            text: "Exercise 4, Part 2: Applied Statistics"
+          - href: Exercises/exercise4.qmd
+            text: "Exercise 4: Applied Statistics in R"
           - href: Exercises/exercise5.qmd
             text: "Exercise 5: Data Exercise in R"
       
@@ -60,12 +58,8 @@ website:
             text: "Exercise 2 - Solution"
           - href: Solutions/exercise3_SOLUTIONS.qmd # Solutions/solution_not_up.qmd # 
             text: "Exercise 3 - Solution"
-          - href: Solutions/presentation4_solutions.qmd # Solutions/presentation4_solutions.qmd
-            text: "Presentation 4: Applied Statistics in R - Solutions"
-          - href: Solutions/exercise4_PART1_solutions.qmd # Solutions/exercise4_PART1_solutions.qmd
-            text: "Exercise 4, Part 1 - Solutions"
-          - href: Solutions/exercise4_PART2_solutions.qmd # Solutions/exercise4_PART2_solutions.qmd
-            text: "Exercise 4, Part 2 - Solutions"
+          - href: Solutions/exercise4_SOLUTIONS.qmd
+            text: "Exercise 4: Applied Statistics in R - Solutions"
           - href: Solutions/exercise5_SOLUTIONS.qmd
             text: "Exercise 5, Solutions"
             
