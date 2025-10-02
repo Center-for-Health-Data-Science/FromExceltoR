@@ -551,7 +551,7 @@ window.Quarto = {
 
 
 <p>This quaro document is part of the course <strong>Applied Statistics in R</strong> given at HeaDS Data Science Lab, University of Copenhagen. The course is open to all interested students and researchers. The course is given in the fall semester every year.</p>
-<p>“Want to code along? Go to the Data tab of the website and press the <strong>DOWNLOAD PRESENTATIONS</strong> button. This is presentation 4.”</p>
+<p>Want to code along? Go to the Data tab of the website and press the <strong>DOWNLOAD PRESENTATIONS</strong> button. This is presentation 4.</p>
 <section id="structure-of-a-biostatistical-analysis-in-r" class="level2">
 <h2 class="anchored" data-anchor-id="structure-of-a-biostatistical-analysis-in-r">Structure of a biostatistical analysis in R</h2>
 <p>The very basic structure of an R doc when doing a classical statistical analysis is as follows:</p>
@@ -989,11 +989,11 @@ log(Girth)   2.016238  2.383702</code></pre>
 <span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>newData</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  Girth
-1  9.68
-2 17.26
-3 15.88
-4 11.22
-5 13.04</code></pre>
+1 10.61
+2 12.62
+3 19.52
+4 12.55
+5 13.46</code></pre>
 </div>
 </div>
 <p>Next, we use the function predict to compute the predicted log-volumes and confidence intervals for these predictions.</p>
@@ -1003,17 +1003,17 @@ log(Girth)   2.016238  2.383702</code></pre>
 <span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>pred</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       fit      lwr      upr
-1 2.640743 2.573148 2.708338
-2 3.913051 3.844912 3.981190
-3 3.729725 3.672805 3.786645
-4 2.965538 2.916127 3.014948
-5 3.296245 3.253972 3.338519</code></pre>
+1 2.842557 2.787115 2.898000
+2 3.224221 3.181799 3.266643
+3 4.183753 4.096735 4.270770
+4 3.211984 3.169453 3.254516
+5 3.365986 3.323046 3.408926</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># back-transform to original scale</span></span>
 <span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(pred[,<span class="dv">1</span>])  </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       1        2        3        4        5 
-14.02362 50.05143 41.66764 19.40514 27.01103 </code></pre>
+17.15959 25.13399 65.61162 24.82831 28.96204 </code></pre>
 </div>
 </div>
 </section>
@@ -1058,11 +1058,11 @@ F-statistic: 609.8 on 2 and 28 DF,  p-value: &lt; 2.2e-16</code></pre>
 <span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a>newData</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  Girth Height
-1  9.68  74.18
-2 17.26  67.98
-3 15.88  71.81
-4 11.22  88.20
-5 13.04  83.34</code></pre>
+1 10.61  83.05
+2 12.62  73.44
+3 19.52  69.07
+4 12.55  82.85
+5 13.46  65.53</code></pre>
 </div>
 </div>
 <p>Lastly, we predict log-volume for these new values of Girth and Height.</p>
@@ -1072,16 +1072,16 @@ F-statistic: 609.8 on 2 and 28 DF,  p-value: &lt; 2.2e-16</code></pre>
 <span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>pred</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       fit      lwr      upr
-1 2.675725 2.625889 2.725561
-2 3.729746 3.645369 3.814123
-3 3.621893 3.564541 3.679246
-4 3.178682 3.091008 3.266355
-5 3.403956 3.353447 3.454465</code></pre>
+1 2.990619 2.922299 3.058938
+2 3.190626 3.157914 3.223338
+3 3.990117 3.894444 4.085790
+4 3.320651 3.269743 3.371559
+5 3.199852 3.130195 3.269510</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(pred[,<span class="dv">1</span>]) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       1        2        3        4        5 
-14.52287 41.66852 37.40832 24.01507 30.08287 </code></pre>
+19.89799 24.30363 54.06122 27.67837 24.52891 </code></pre>
 </div>
 </div>
 <p>BUT, which model should we chose?</p>
