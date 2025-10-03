@@ -11,6 +11,7 @@ project:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, eval = TRUE, warning = FALSE)
 ```
+
 This quaro document is part of the course **Applied Statistics in R** given at HeaDS Data Science Lab, University of Copenhagen. The course is open to all interested students and researchers. The course is given in the fall semester every year.
 
 Want to code along? Go to the Data tab of the website and press the **DOWNLOAD PRESENTATIONS** button. This is presentation 4.
@@ -152,7 +153,7 @@ shapiro.test(psorData$IGFL4)
 
 The null hypothesis (H₀): data are normally distributed.
 
-p > 0.05: fail to reject H₀ → data look normal.
+p \> 0.05: fail to reject H₀ → data look normal.
 
 p ≤ 0.05: reject H₀ → data not normal.
 
@@ -289,6 +290,7 @@ Parameter estimates, standard errors are computed and certain hypothesis tests a
 ```{r}
 summary(linreg2)
 ```
+
 ```{r}
 drop1(linreg2, test = "F")
 ```
@@ -317,7 +319,6 @@ ggplot(trees, aes(x = log(Girth), y = log(Volume))) +
 
 ```
 
-
 #### Step 7: Prediction of new values
 
 The fitted model may be used to predict the outcome (here: log-volume) for new values of the covariate (here: Girth). The new values are provided in a data frame with the same name as the covariate in the model. Here we predict log-volume for five new values of Girth.
@@ -330,7 +331,9 @@ newData <- data.frame(Girth=newGirth)
 
 newData
 ```
-Next, we use the function predict to compute the predicted log-volumes and confidence intervals for these predictions. 
+
+Next, we use the function predict to compute the predicted log-volumes and confidence intervals for these predictions.
+
 ```{r}
 pred <- predict(linreg2, newdata=newData, interval="confidence")
 
@@ -340,12 +343,12 @@ pred
 exp(pred[,1])  
 ```
 
-
 #### Step 7: Two or more covariates
 
 In the model above we only used Girth as covariate, we did this because Girth showed a strong correlation with Volume, while Height did not. BUT, we could include this variable in the model as well and see if our predictions approve.
 
 The bi-variate plot showed that Girth and especially Volume might benefit from a log transform, this was not the case for Height. So we will include Height as it is.
+
 ```{r}
 linreg3 <- lm(log(Volume) ~ log(Girth) + Height, data=trees)
 ```
@@ -355,6 +358,7 @@ summary(linreg3)
 ```
 
 Lets make some new data for prediction, now we need both Girth and Height.
+
 ```{r}
 newHeight <- runif(5, min = 60, max = 90) %>% 
   round(., digits = 2)
@@ -363,7 +367,9 @@ newData <- data.frame(Girth=newGirth, Height=newHeight)
 
 newData
 ```
+
 Lastly, we predict log-volume for these new values of Girth and Height.
+
 ```{r}
 pred <- predict(linreg3, newdata=newData, interval="confidence")
 
@@ -371,6 +377,7 @@ pred
 
 exp(pred[,1]) 
 ```
+
 BUT, which model should we chose?
 
 We can compare the two models with the `anova` function, which performs a likelihood ratio test. The null hypothesis is that the simpler model (linreg2) is sufficient.
@@ -378,8 +385,14 @@ We can compare the two models with the `anova` function, which performs a likeli
 ```{r}
 anova(linreg2, linreg3)
 ```
-Here, the p-value > 0.05, so we can not reject the null hypothesis which is that the simpler model linreg2 is sufficient to predict volume. I.e. the additional terms in linreg3 do not improve fit.
 
+Here, the p-value \< 0.05, so we can reject the null hypothesis which is that the simpler model linreg2 is sufficient to predict volume. I.e. the additional terms in linreg3 does improve the fit.
+
+We could alternatively have checked the significance of each term in our large model using `drop1()` with an `F-test`:
+
+```{r}
+drop1(linreg3, test = 'F')
+```
 
 ## Outlook: Other analyses
 
