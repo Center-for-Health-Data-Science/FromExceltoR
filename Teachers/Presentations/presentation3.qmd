@@ -200,8 +200,7 @@ In the next R chunk we will for the first time try to save the syntaxical descri
 p <- ggplot(
   dl_sizes,
   aes(x = machineName, 
-      y = size / 10^6),
-  color = month) +
+      y = size / 10^6)) +
   geom_col()
 ```
 
@@ -262,7 +261,7 @@ p <-                         # save in object p
     aes(x = machineName,     # x and y and fill
         y = size, 
         fill = machineName)) +
-  geom_violin(trim = TRUE) +   # draw violin plots, trim tails
+  geom_violin() +   # draw violin plots, trim tails
   scale_y_log10()              # scale
 p
 
@@ -273,7 +272,7 @@ We can enhance the plot by overlaying individual data points (with jittering t
 ```{r}
 p2 <- p + 
   geom_jitter(           # overlay geom
-    size = 0.1, alpha = 0.05, width = 0.4) + 
+    size = 0.1, alpha = 0.05) + 
   theme_minimal() +      # theme
   scale_fill_manual(
     values=c("#2A2D43",  # change colors

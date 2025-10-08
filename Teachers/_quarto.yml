@@ -54,16 +54,16 @@ website:
       
       - section: "Solutions 💃🏻"
         contents:
-          #- href: Solutions/exercise2_SOLUTIONS.qmd 
-          #  text: "Exercise 2 - Solution"
-          #- href: Solutions/exercise3_SOLUTIONS.qmd # Solutions/solution_not_up.qmd # 
-          #  text: "Exercise 3 - Solution"
-          #- href: Solutions/exercise4_SOLUTIONS.qmd
-          #  text: "Exercise 4: Applied Statistics in R - Solutions"
-          #- href: Solutions/exercise5_SOLUTIONS.qmd
-          #  text: "Exercise 5, Solutions"
-          - href: Solutions/solution_not_up.qmd
-            text: "Solutions not up yet"
+          - href: Solutions/exercise2_SOLUTIONS.qmd 
+            text: "Exercise 2 - Solution"
+          - href: Solutions/exercise3_SOLUTIONS.qmd # Solutions/solution_not_up.qmd # 
+            text: "Exercise 3 - Solution"
+          - href: Solutions/exercise4_SOLUTIONS.qmd
+            text: "Exercise 4: Applied Statistics in R - Solutions"
+          - href: Solutions/exercise5_SOLUTIONS.qmd
+            text: "Exercise 5, Solutions"
+          #- href: Solutions/solution_not_up.qmd
+          #  text: "Solutions not up yet"
             
       - section: "Cheat Sheets 👀"
         contents:
