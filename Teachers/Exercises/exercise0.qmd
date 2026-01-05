@@ -1,5 +1,5 @@
 ---
-title: "Exercise 0: File Tree"
+title: "Exercise 0: File Tree and Setup"
 author: "HeaDS Data Science Lab, University of Copenhagen"
 format: html
 project:
@@ -15,7 +15,7 @@ Before diving into the hands-on exercises, it’s important to get your files or
 
 ## File Tree
 
-1.  Make a new directory for this course called *FromExceltoR.*
+1.  Make a new directory for this course called *FromExceltoR .*
 
 2.  Go to course website and to the *Data* tab. Press the **DOWNLOAD DATA** button.
 
@@ -25,6 +25,42 @@ Before diving into the hands-on exercises, it’s important to get your files or
 
 5.  Under your *FromExceltoR* directory, make a new directory for your scripts called *Scripts*.
 
-Make sure your file tree looks like this:
+    Make sure your file tree looks like this:
 
-![](../Figures/file_tree.png){fig-align="center"}
+    ![](../Figures/file_tree.png){fig-align="center"}
+
+    ## RStudio
+
+6.  **Start RStudio**.
+
+7.  **Make a new R document**. Go to the menu bar and click *File* → *New file...* → *R Script...*. Give the R document a title that makes sense to you. NB! The document is not saved yet.
+
+8.  **Set working directory**. Let’s figure out where RStudio’s working directory is and then set it to your project folder, "FromExceltoR". Go to the menu bar and click *Session* → *Set Working Directory...* → *Choose Directory...*. Find your project folder in the navigation pane, select it, and click **Open**.
+
+9.  You should see a `setwd("...")` command appear in the Console below. Copy that working-directory path into your new R script file.
+
+10. **Save your document** in your *Scripts* directory. Go to the menu bar and click *File* → *Save as...*.
+
+    ## R Packages
+
+    R comes with a lot of functionalities, but the enormous community of R users also contributes to R all the time by developing code and sharing it in R packages. An R package is simply a collection of R functions and/or datasets (including documentation). As of September 20, 2024, there are 21,361 packages available at the CRAN repository (and there are many other repositories).
+
+    An R package needs to be *installed* and *loaded* before you can use its functionalities. You only have to install a package once (until you re-install R), whereas you have to load it in every R session if you want to use it. As an example, let's install the package `cowplot`.
+
+11. **Install**. Choose one of the two installation methods:
+
+    a\) Using the command line:
+
+    ```{r}
+    install.packages("cowplot")
+    ```
+
+    Note that for this approach you need to know the name of the package and spell it correctly, including capitalization!
+
+    b\) Using the graphical interface:
+
+    Look at lower right of your Rstudio window where you have a window with several tabs. Click on *Packages*. You will see a list of your currently installed packages and their versions. To install `cowplot`, click on *Install* and start to type the name. You will notice a drop down list appears from which you can select the correct package. This is useful if you are not quite sure of the correct spelling.
+
+    A lot of red text will be written in the console while the installation goes on. This usually does not mean there was a problem, unless the text reads 'error' or 'exit'. In the end, the package is installed, or you will see an explanation of what went wrong.
+
+12. **Loading**. Load the package you just installed with the command `library(cowplot)`. If everything went well, you should now be able to run the command `packageVersion('cowplot')` and `help(package = 'cowplot')`.
