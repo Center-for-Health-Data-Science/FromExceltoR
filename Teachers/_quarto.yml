@@ -40,9 +40,9 @@ website:
       - section: "Exercises 🏋🏽"
         contents:
           - href: Exercises/exercise0.qmd
-            text: "Exercise 0: File Tree"
+            text: "Exercise 0: File Tree and Setup"
           - href: Exercises/exercise1.qmd
-            text: "Exercise 1: Introduction to R and Quarto"
+            text: "Exercise 1: Introduction to Quarto"
           - href: Exercises/exercise2.qmd
             text: "Exercise 2: Tidyverse"
           - href: Exercises/exercise3.qmd

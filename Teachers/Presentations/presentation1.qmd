@@ -1,5 +1,5 @@
 ---
-title: "Presentation 1: Intro to R and Quarto"
+title: "Presentation 1: Intro to Quarto"
 format: html
 project:
   type: website
@@ -7,81 +7,6 @@ project:
 ---
 
 Want to code along? Go to the Data tab of the website and press the **DOWNLOAD PRESENTATIONS** button. This is presentation 1.
-
-### R as a calculator
-
-Adding
-
-```{r}
-1+1
-```
-
-Subtracting
-
-```{r}
-2-1
-```
-
-Multiplication
-
-```{r}
-3*3
-```
-
-Division
-
-```{r}
-15/3
-```
-
-Exponentiation
-
-```{r}
-10^2
-```
-
-Base-2 logarithm
-
-```{r}
-log2(20)
-```
-
-Base-10 logarithm
-
-```{r}
-log10(20)
-```
-
-### Define variables
-
-```{r}
-a <- 5
-
-b <- 3
-
-a
-
-b
-
-
-a + b 
-
-
-c <- a + b
-
-
-c
-```
-
-### Check objects in environment
-
-```{r}
-ls()
-```
-
-## First Slideshow Intermezzo
-
-------------------------------------------------------------------------
 
 # The Quarto Way!
 
@@ -92,9 +17,9 @@ Quarto documents often begin with a `YAML header` demarcated by three dashes (`-
 # Quarto uses a markup language
 
 Quarto works with `markup language`. A [markup language](https://en.wikipedia.org/wiki/Markup_language) is a text-coding system which specifies the structure and formatting of a document and the relationships among its parts. Markup languages control how the content of a document is displayed.\
-`Pandoc Markdown` is the markup language utilized by Quarto - another classic example of a markup language is `LaTex`.
+`Pandoc Markdown` is the markup language utilized by Quarto - another classic example of a markup language is `LaTeX`.
 
-Lets see how the pandoc `Pandoc Markdown` works:\
+Let´s see how the pandoc `Pandoc Markdown` works:\
 
 ### This is the third largest header (Header 3)
 
@@ -106,7 +31,7 @@ This is normal text. Yes, it is larger than the smallest header. A Quarto docume
 
 | My friends | Their favorite drink | Their favorite food |
 |------------|----------------------|---------------------|
-| Micheal    | Beer                 | Burger              |
+| Michael    | Beer                 | Burger              |
 | Jane       | Wine                 | Lasagne             |
 | Robert     | Water                | Salad               |
 
@@ -129,7 +54,11 @@ We can also make a list of things we like:
 ## Modes of Quarto Document
 
 There are two modes of Quarto: **Source and Visual**. In the left part of the panel you can change between the two modes.\
-Some features can only be added when you are in Source mode. E.g [write blue text]{style="color:blue"} is coded like this in the source code `[write blue text]{style="color:blue"}`.\
+
+Some features can only be added when you are in Source mode. E.g [write blue text]{style="color:blue"} is coded like this in the source code `[write blue text]{style="color:blue"}`.
+
+[*Note: Sometimes, if you are stuck in Quarto’s Visual mode, it’s worth switching between Source and Visual modes to reset things.\
+*]{style="color:red"}
 
 ## Code chunks and structure
 
@@ -171,7 +100,7 @@ You can add comments above or to the right of the code. This will not influence 
 
 The code is shown, but the result is not shown (`{r, echo=TRUE, eval=FALSE}`):
 
-```{r, echo=TRUE, eval=FALSE}
+```{r echo=TRUE, eval=FALSE}
 1+3
 ```
 
@@ -184,137 +113,35 @@ The code is not shown, but the result is shown (`{r, echo=FALSE, eval=TRUE}`):
 1+3
 ```
 
-**Control messages, warnings and errors.** Maybe you have a code chunk that you know will produce one of the three and you often don't want to see it in the compiled document. N.B! It is not a good idea to hide these statements (especially the errors) before you know what they are.
+**Control messages, warnings and errors.** Maybe you have a code chunk that you know will produce one of the three and you often don't want to see it in the compiled document.
 
-Warning is [not]{.underline} printed (`{r, message=FALSE, warning=FALSE, error=TRUE}`):
-
-```{r, message=FALSE, warning=FALSE, error=TRUE}
+```{r}
 log(-1)
 ```
 
-Warning is printed (`{r message=TRUE, warning=TRUE, error=TRUE}`):
+Warning and error is [not]{.underline} printed (`{r, message=FALSE, warning=FALSE, error=TRUE}`):
 
-```{r, message=TRUE, warning=TRUE, error=TRUE}
+```{r warning=FALSE}
 log(-1)
 ```
+
+```{r error = TRUE}
+stop("Intentional error for teaching.")
+```
+
+If an error occurs unexpectedly during rendering, Quarto will halt the render, so errors should be fixed (or intentionally demonstrated using `error: true` / `tryCatch()`).
+
+N.B! It is not a good idea to hide these statements (especially the errors) before you know what they are.
 
 ## Render: Making the report
 
 In the panel there is a blue arrow and the word *Render*. Open the rendered html file in your browser and admire your work.
 
-[**Let's get to coding!**]{style="color:blue"}\
-\
+# Data type and structures
 
-------------------------------------------------------------------------
+![](images/DataTypes.png){fig-align="center"}
 
-## R packages
-
-R packages are collections of functions written by R developers and super users and they make our lives much easier. Functions used in the same type of R analysis/pipeline are bundled and organized in packages. There is a help page for each package to tell us which functions it contains and which arguments go into these. In order to use a package we need to download and install it on our computer. Most R packages are stored and maintained on the CRAN\[<https://cran.r-project.org/mirrors.html%5D> repository.
-
-**Install a package**
-
-```{r}
-# install.packages('tidyverse')
-```
-
-**Load packages**
-
-```{r, message=FALSE}
-library(tidyverse)
-```
-
-**Query package**
-
-```{r}
-?tidyverse
-```
-
-**Query function from package**
-
-```{r}
-?dplyr::select
-```
-
-\
-
-## Second Slideshow Intermezzo
-
-------------------------------------------------------------------------
-
-\
-
-## Data Types
-
-**Numeric**
-
-```{r}
-num1 <- 5
-num1
-class(num1)
-```
-
-**Character**
-
-```{r}
-char1 <- "Hello World!"
-char1
-class(char1)
-```
-
-**Factor**
-
-```{r}
-num1 <- factor(num1)
-num1
-class(num1)
-```
-
-```{r}
-char1 <- factor(char1)
-char1
-class(char1)
-```
-
-**A vector of numeric values**
-
-```{r}
-vector1 <- c(1, 2, 4, 6, 8, 2, 5, 7)
-vector1
-```
-
-### Functions
-
-Summing a vector
-
-```{r}
-?sum
-sum(vector1)
-```
-
-Mean of vector
-
-```{r}
-?mean
-mean(vector1)
-```
-
-```{r}
-mean(vector1) # mean/average
-
-median(vector1) # median
-
-sd(vector1) # standard deviation
-
-sum(vector1) # sum
-
-min(vector1) # minimum value
-
-max(vector1) # maximum value
-
-length(vector1) # length of vector
-```
-
-## Data structures
+**Now let's get back to coding!**\
 
 In the example below we will make two vectors into a tibble. Tibbles are the R object types you will mainly be working with in this course. We will try to convert between data types and structures using the collection of 'as.' functions.
 
@@ -357,16 +184,22 @@ joined_year
 **Convert classes with the 'as.' functions**
 
 ```{r}
+
+# We will try to convert between data types and structures using the collection of 'as.' functions.
+
 # as.numeric()
 # as.integer()
 # as.character()
 # as.factor()
 # ...
+
 ```
 
 **Let's make a tibble from two vectors**
 
 ```{r}
+library(tidyverse) # run each time you start R
+
 my_data <- tibble(name = people, 
                   joined_year = joined_year)
 
@@ -394,7 +227,7 @@ class(my_data2)
 # as_tibble()
 ```
 
-## Fundamental operations
+# Fundamental operations
 
 You can inspect an R objects in different ways:
 
@@ -403,12 +236,6 @@ You can inspect an R objects in different ways:
 2\. With large object it is preferable to use \`head()\` or \`tail()\` to only see the first or last part.
 
 3\. To see the data in a tabular excel style format you can use \`view()\`
-
-**Remove something:**
-
-```{r}
-rm(a)
-```
 
 **Look at the "head" of an object:**
 

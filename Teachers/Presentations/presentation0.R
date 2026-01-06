@@ -48,6 +48,10 @@ c
 ### Check objects in environment
 ls()
 
+### Remove something:
+rm(c)
+
+
 ############# Basic Data Types and Structures ############# 
 
 # Numeric
