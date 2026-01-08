@@ -8,7 +8,6 @@ project:
 
 Want to code along? If you haven't already, go to the Data tab of the website and press the **DOWNLOAD PRESENTATIONS** button. This is presentation2.
 
-
 ## Load packages
 
 ```{r, message=FALSE}
@@ -29,13 +28,27 @@ getwd()
 
 ## Importing data
 
-Often we will work with large datasets that already exist in i.e. an excel sheet or a tab separated file (.tsv). We can easily load that data into R, either with the `read_excel` function via a command. 
+Often we will work with datasets stored in files such as Excel (`.xlsx`) or tab-separated files (`.tsv`). You can load these files by writing the import code yourself, or by using RStudio’s **Import Dataset** button in the Environment tab (right).
 
-We can also load data by clicking on 'Import Dataset' in the Environment tab (right). Let's do this now. Navigate to the data from your working directory. RStudio will provide you with the full code needed to load the data. You can copy the code and save it for later use.
+**Important:** The **Import Dataset** button creates code based on your **current working directory**, not based on where your Quarto document is saved.\
 
-```{r}
-crohns <- read_excel("../../Data/crohns_disease.xlsx")
-```
+So if your Quarto file is inside `Scripts/`, but your working directory is set to `FromExceltoR/`, the path in your chunk code should be "full" or written relative to `Scripts/`.
+
+You can still use the button to generate the code - just make sure the path matches your working directory (and adjust it if needed).
+
+-   Let's do this now. Navigate to the data from your working directory. RStudio will provide you with the full code needed to load the data.
+
+    ```{r}
+    crohns_full <- read_excel(
+      "~/Desktop/FromExceltoR/Teachers/Data/crohns_disease.xlsx")
+    ```
+
+-   If your Quarto working directory is instead set to `FromExceltoR/Presentations/`, then you would need go out one step and go back into Data folder:
+
+    ```{r}
+    getwd()
+    crohns <- read_excel("../Data/crohns_disease.xlsx")
+    ```
 
 ## A first look at the data
 
@@ -74,7 +87,7 @@ Tidyverse is a collection of R packages that are great for data wrangling and vi
 
 3.  The function you want to apply on the dataset (and whatever arguments must be provided to the function).
 
-In tidyverse we use the `pipe symbol %>%` to chain multiple functions together. The term `pipe` comes from the fact that we pipe the output from one function into another function as the input.   
+In tidyverse we use the `pipe symbol %>%` to chain multiple functions together. The term `pipe` comes from the fact that we pipe the output from one function into another function as the input.\
 It is a good idea to make a new line after each pipe symbol.
 
 ```{r}
@@ -143,14 +156,13 @@ crohns %>%
   arrange(desc(age))
 ```
 
-
 ```{r}
 #sort by two (or more!) columns
 crohns %>% 
   arrange(sex, desc(age))
 ```
 
-Just like with `count` earlier this is not a permanent sort and does not change the order of rows in the original tibble, `crohns`. **Without assignment (`<-`)** tidyverse commands only display the result, not saves it.  
+Just like with `count` earlier this is not a permanent sort and does not change the order of rows in the original tibble, `crohns`. **Without assignment (`<-`)** tidyverse commands only display the result, not saves it.
 
 ## Filtering data (selecting rows) with `filter()`
 

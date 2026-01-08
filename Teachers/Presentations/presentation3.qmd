@@ -24,7 +24,7 @@ In the examples below, we use the **downloads** dataset. The dataset is availa
 We read the *downloads* dataset from the Excel file, and assign it to a `tibble` named *downloads*.
 
 ```{r}
-downloads <- read_excel("../../Data/downloads.xlsx") %>% 
+downloads <- read_excel("../Data/downloads.xlsx") %>% 
   filter(size > 0)
 downloads
 ```

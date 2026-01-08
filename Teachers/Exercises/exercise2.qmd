@@ -33,14 +33,14 @@ The data set used in these exercises was compiled from data downloaded from the 
 | **sun**       | Sunshine duration in hours          |
 | **device**    | Brand of sunshine recorder / sensor |
 
-2.  **Load data**. Start by importing the dataset with the `Import Dataset` button and name it `climate`. When you do this, a command starting with `read_excel()` is shown in the console. It is a good idea to **copy the command into your script** so that the next time you run your script you can just execute that line instead of having to find the file again.
+2.  **Load data**. Start by importing the dataset with the `Import Dataset` button and name it `climate`. When you do this, a command starting with `read_excel()` is shown in the console. It is a good idea to **copy the command into your script** so that the next time you run your script you can just execute that line instead of having to find the file again. But make sure to use full path or relative whre your Quarto document is saved.
 
 ::: {.callout-note collapse="true"}
 ## What is the character in the `read_excel()` function?
 
 The character inside the `read_excel()` is a *path* to the excel file you have imported. A path is just a set of directions that tells R how to get from one folder (directory) to another. Since your script is saved inside the Scripts directory, you need to tell R how to move up one level to get out of Scripts, and then into the Data folder where your file lives. We write paths as character strings — that means they go inside quotation marks.
 
-The path could look like the one below, where the directions are separated by slashs `/`. This means that we start in the `Desktop` folder, then go to the `Work`, to the `Courses` folder, to the `FromExceltoR` folder, to the `Data` folder where we select the `climate.xlsx` file.
+The **Full** path could look like the one below, where the directions are separated by slashs `/`. This means that we start in the `Desktop` folder, then go to the `Work`, to the `Courses` folder, to the `FromExceltoR` folder, to the `Data` folder where we select the `climate.xlsx` file.
 
 ```{r eval=FALSE}
 climate <- read_excel("Desktop/Work/Courses/FromExceltoR/Data/climate.xlsx")
@@ -49,6 +49,12 @@ climate <- read_excel("Desktop/Work/Courses/FromExceltoR/Data/climate.xlsx")
 Have a look at the path inside the `read_excel()` that was printed in the console when you imported the excel file. Does this path make sense when you think about the files and sub files on your computer?
 
 ![](../Figures/file_tree_absolute_path.png){fig-align="center"}
+
+Or you can use relative path. If your Quarto working directory is set to `Scripts/`, then you would need go out one step and go back into Data folder:
+
+```{r}
+climate <- read_excel("../Data/climate.xlsx")
+```
 :::
 
 3.  **First look at data**. Write the name of the dataframe, i.e. `climate`, into the console and press enter to see the first rows of the dataset. You can also click on the `climate` object in the Environment panel.
@@ -102,6 +108,10 @@ The next few questions build on each other, each adding a piece of code:
 14. Add another column to your new dataset that says whether the weather this month was good. We consider a month to be good if it had at least 100 hours of sunshine and less than 100 mm of rain. Otherwise the weather was bad.
 
 15. How many months are there with good weather (use the column you made in 14) for each station? Find the station that has the most months with good weather.
+
+    **Report the value here.**
+
+    ![](images/qr_code_Ex2Q1.png){width="200"}
 
 ## Complex operations
 
@@ -168,6 +178,10 @@ The `unlist` function will convert a one-column dataframe to a vector.
 :::
 
 27. Count how many times the letter 'A' appears in each station.
+
+    **Let us know you’ve mastered the tidyverse, and report the value here.**
+
+    ![](images/qr_code_Ex2Q2.png){width="200"}
 
 28. Count the number of both uppercase 'A' and lowercase 'a' in each station.
 

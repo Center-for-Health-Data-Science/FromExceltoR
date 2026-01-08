@@ -29,7 +29,7 @@ website:
       - section: "Presentations 👩🏽‍🏫"
         contents:
           - href: Presentations/presentation1.qmd
-            text: "Presentation 1: Introduction to R and Quarto"
+            text: "Presentation 1: Intro to Quarto"
           - href: Presentations/presentation2.qmd
             text: "Presentation 2: Tidyverse"
           - href: Presentations/presentation3.qmd

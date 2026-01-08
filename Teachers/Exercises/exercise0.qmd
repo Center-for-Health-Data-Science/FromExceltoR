@@ -105,7 +105,7 @@ Before diving into the hands-on exercises, it’s important to get your files or
     median(x, na.rm=TRUE)
     ```
 
-    **Report here the median value here.**
+    **Report the median value here.**
 
     ![](images/qr_code_Ex0Q1.png){width="200"}
 
