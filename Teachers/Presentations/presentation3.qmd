@@ -31,7 +31,7 @@ downloads
 
 Here we have filtered out rows where `size` is zero, as they do not represent actual downloads and would distort the visualization.
 
-## **ggplot2: The basic concepts**
+## ggplot2: The basic concepts
 
 A ggplot object is a structured description of a plot. The function `ggplot()` creates the equivalent of a blank sheet of paper, ready for layers to be added.
 
@@ -48,12 +48,13 @@ ggplot(
   )    
 ```
 
-This creates an empty coordinate system with axes defined — essentially a blank canvas.\
+This creates an empty coordinate system with axes defined — essentially a blank canvas.
+
 At this point, `ggplot` has only drawn the axes and labels because we have not yet specified how the data should be visualized.
 
 The next step is to add a geom layer (for example, `geom_bar()`) to actually display the data.
 
-## **ggplot2: Plotting** One Variable
+## **Plotting** One Variable
 
 A bar chart is created with `geom_bar()` and is useful for visualizing the distribution of a single categorical variable — for example, `machineName` in this dataset.
 
@@ -129,7 +130,7 @@ ggplot(
   geom_bar(position = "fill")   # proportions
 ```
 
-## **A simple Column Chart**
+## Plotting Two Variable - A simple Column Chart
 
 To make a bar chart from pre-summarized data, we use `geom_col()` and it requires both x and y values.
 
@@ -160,7 +161,7 @@ ggplot(
 
 ## A Column Chart with Ordered Bars
 
-By default, categorical variables in R (called *factors*) are displayed in alphabetical order on the x-axis. Suppose we want the machines in our bar chart to be ordered by increasing total download size instead. This is actually not that easy in R.\
+By default, categorical variables in R are displayed in alphabetical order on the x-axis. Suppose we want the machines in our bar chart to be ordered by increasing total download size instead. This is actually not that easy in R.\
 We can do this by converting `machineName` into a factor with levels ordered according to download size.
 
 First, arrange the `dl_sizes` tibble by `size` using `tidyverse` function `arrange`.
@@ -192,42 +193,13 @@ ggplot(
   geom_col()
 ```
 
-## Coordinate System in ggplot2
+## A box plot
 
-In the next R chunk we will for the first time try to save the syntaxical description of a plot in an R variable. This makes it easy to reuse and modify the same plot — for example, to change scales or coordinate systems — without rewriting the entire code. Let’s try this out.
+Boxplots are great to get an overview of continues variables, identifying outliers and comparing distributions across categories.
 
-```{r}
-p <- ggplot(
-  dl_sizes,
-  aes(x = machineName, 
-      y = size / 10^6)) +
-  geom_col()
-```
+Here we will for the first time try to save the syntaxical description of a plot in an R variable. This makes it easy to reuse and modify the same plot - for example, to change axes scales or colors - without rewriting the entire code. Let’s try this out and create a boxplot of monthly download sizes for each machine.
 
 Here, we store the bar chart in a variable called `p`. Running this code does not display the plot yet, but a variable named `p` now appears in the Global Environment.
-
-Because the plot is saved in `p`, we can easily modify it by adding more layers:
-
-```{r}
-# Flip the coordinate axes:
-p + coord_flip()
-```
-
-This swaps the x- and y-axes, which is often helpful when category names are long — it makes the plot easier to read.
-
-```{r}
-#Change the scale of the y-axis:
-p + scale_y_log10()
-```
-
-A logarithmic scale is useful when the data are highly skewed or span several orders of magnitude, making it easier to compare smaller values.
-
-## **A box plot**
-
-Boxplots are great to get an overview of continues variables, identifying outliers and comparing distributions across categories. Let’s create a boxplot of monthly download sizes for each machine.\
-Because the data are skewed, we use a logarithmic y-scale to make the plot more interpretable.
-
-Additionally, themes and titles can be added as a layer to any ggplot if you prefer a theme other than the default grey background.
 
 ```{r}
 p <-                       # save in object p
@@ -236,10 +208,22 @@ p <-                       # save in object p
     aes(x = machineName,   # x and y and fill
         y = size, 
         fill = machineName)) +
-  geom_boxplot() +         # boxplot
-  scale_y_log10()          # scale
+  geom_boxplot()           # boxplot
 
-p1 <- p + 
+```
+
+Because the data are skewed, we use a logarithmic y-scale to make the plot more interpretable. A logarithmic scale is useful when the data are highly skewed or span several orders of magnitude.
+
+```{r}
+p <- p + scale_y_log10()          # Change the scale of the y-axis:
+```
+
+Additionally, themes and titles can be added as a layer to any ggplot if you prefer a theme other than the default grey background.
+
+Because the plot is saved in `p`, we can easily modify it by adding more layers:
+
+```{r}
+plot1 <- p + 
   theme_minimal() +         # add theme ..................
     # theme_bw()
     # theme_classic()
@@ -247,7 +231,7 @@ p1 <- p +
   labs(x = 'Machines',     # add label ..................
        y = 'Size in Mb',
        title = 'Boxplot')
-p1
+plot1
 ```
 
 ## Violin plot with `geom_violin`
@@ -261,8 +245,8 @@ p <-                         # save in object p
     aes(x = machineName,     # x and y and fill
         y = size, 
         fill = machineName)) +
-  geom_violin() +   # draw violin plots, trim tails
-  scale_y_log10()              # scale
+  geom_violin() +            # draw violin plots
+  scale_y_log10()            # scale
 p
 
 ```
@@ -270,7 +254,7 @@ p
 We can enhance the plot by overlaying individual data points (with jittering to avoid overplotting), using a minimal theme, and customizing the fill colors:
 
 ```{r}
-p2 <- p + 
+plot2 <- p + 
   geom_jitter(           # overlay geom
     size = 0.1, alpha = 0.05) + 
   theme_minimal() +      # theme
@@ -280,41 +264,52 @@ p2 <- p +
              "#C7EDE4", 
              "#AFA060", 
              "#AD8350"))
-p2
+plot2
 ```
 
-## Faceting
+## Scatter plot with `geom_point` and Faceting
 
-First, let’s create a previous boxplot of download size by machine and enhanced it with `fill = month` to split data by a second categorical variable.
+A scatter plot is used to explore the relationship between two numerical variables by plotting them on the x- and y-axes. You can visualize a **third** variable (or a condition) by mapping it to the `size` ,`shape` or  `color` aesthetic.
+
+First, we plot **download size vs. time** using `geom_point()` to draw individual data points. We map `time > 500` to the  `size`  aesthetic so downloads taking longer than 500 appear larger. We also map `log10(time)` to  `color`  (so color shows smooth continuous gradient), and use `shape`  to distinguish `machineName`. Because both variables are skewed, we use log scales on both axes with `scale_x_log10()` and `scale_y_log10()`.
 
 ```{r}
-p <-                       # save in object p
+plot3 <-                       # save in object p
   ggplot(                  # call ggplot
     downloads,             # data
-    aes(x = machineName,   # x and y and fill
-        y = size, 
-        fill = month)) +   # add fill by month ..................
-  geom_boxplot() +         # boxplot
-  scale_y_log10()          # scale
-p
+    aes(x = size,          # x and y and color
+        y = time, 
+        size = time > 500,
+        color = log10(time),
+        shape = machineName)) +   # add size, color and shape by machineName 
+  geom_point() +          # Scaterplot
+  scale_colour_continuous(palette = c("darkblue", "gold")) +
+  scale_x_log10() +       # scale x and y
+  scale_y_log10() + 
+  theme_minimal()         # theme
+
+plot3
 ```
 
-Sometimes adding a `fill` aesthetic makes a plot too busy, especially if there are many categories. Instead, we can use faceting to split the data into multiple smaller plots — one for each category — making it easier to compare groups.
+Sometimes adding several aesthetics (like both color and shape) makes a plot too busy, especially if there are many categories. Instead, we can use faceting to split the data into multiple smaller plots - one for each category - making it easier to compare groups.
 
 ```{r}
-#p + facet_grid(vars(month))
-p + facet_wrap(vars(month))
+#plot3 + facet_grid(vars(month))
+plot3 + facet_wrap(vars(machineName))
+
 ```
 
 This wraps the plots into multiple rows and columns automatically, which is helpful when there are many facet levels.
 
-## **Daily summary statistics**
+Now you have space to highlight important patterns without overcrowding the plot. For example, faceting makes it easier to see the **relationship (correlation)** between download size and time within each machine, and to spot extreme cases. In particular, we can highlight **very long downloads** (e.g. `time > 500`) by making those points larger, so they stand out clearly.
 
-Next we want to visualize the number and the total size of the downloads done each date for each of the 6 machines. For later usage we also compute the cumulated number of downloads within each of the 6 machines over the dates. As before we do this via the following steps:
+## Daily summary statistics
+
+Next we want to visualize the number of downloads done each day for each of the 6 machines. We compute the cumulated number of downloads within each of the 6 machines over the days. As before we do this via the following steps:
 
 1.  Using `group_by()` we group the dataset by both *machineName* and *date*.
 
-2.  Using `summarize()` we count the number and the total size of the downloads for within each machine and date.
+2.  Using `summarize()` we count the number for within each machine and date.
 
 3.  Using `mutate()` we cumulate the number of downloads over the dates within the machines.
 
@@ -322,31 +317,9 @@ Next we want to visualize the number and the total size of the downloads done ea
 daily_downloads <- 
   downloads %>%
     group_by(machineName, date) %>% 
-    summarize(dl_count = n(), 
-              size_mb = sum(size)/10^6) %>%
+    summarize(dl_count = n()) %>%
     mutate(total_dl_count = cumsum(dl_count))
 daily_downloads
-```
-
-## Scatter plot with `geom_point`
-
-A scatter plot is used to explore the relationship between two numerical variables by plotting them on the x- and y-axes. You can visualize a **third numeric variable** by mapping it to the `size` aesthetic.
-
-Here we will visualize the relationship between daily download counts and time and map size in Mb to  `size` aesthetic. We use `geom_point()` to draw individual data points.
-
-We can also color the points based on whether the download size is greater than 1 MB by mapping `color = size_mb > 1` inside `aes()`. This highlights larger downloads, making them easier to spot in the plot.
-
-```{r}
-p <- ggplot(
-  daily_downloads, 
-  aes(x = date, 
-      y = dl_count, 
-      size = size_mb, 
-      color = size_mb>1)) +
-  geom_point() + 
-  scale_y_log10()
-p3 <- p
-p3
 ```
 
 ## Line plot with `geom_line`
@@ -367,13 +340,14 @@ ggplot(                      # call ggplot
 If we want a separate line for each machine, we must tell ggplot how to group the data. We can do this by mapping `color = machineName` (and optionally color by machine as well):
 
 ```{r}
-p4 <- ggplot(
+plot4 <- ggplot(
   daily_downloads, 
   aes(x = date, 
       y = total_dl_count, 
       colour = machineName)) + 
-  geom_line() 
-p4
+  geom_line() +
+  theme_minimal()     # theme
+plot4
 ```
 
 ## **Arrange multiple ggplots on the same page**
@@ -386,10 +360,11 @@ R package **ggpubr** is one of them and it helps to produce publication-ready 
 # install.packages("ggpubr")
 library(ggpubr)
 
-figure <- ggarrange(p1, p2, p3, p4,
-                    align = "hv",
+figure <- ggarrange(plot1, plot2, plot3, plot4,
+                   align = "hv",
                     labels = c ("A", "B", "C", "D"),
-                    ncol = 2, nrow = 2)
+                   ncol = 2, nrow = 2, 
+                   legend = "none")
 figure
 ```
 
@@ -405,7 +380,7 @@ figure
 #dev.off()
 ```
 
-## **Conclusion**
+## Conclusion
 
 1.  The **ggplot2** package is a powerful and versatile tool for making plots.
 
