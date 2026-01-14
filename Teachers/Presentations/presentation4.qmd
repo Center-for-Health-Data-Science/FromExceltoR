@@ -41,9 +41,11 @@ In this quaro doc, we will exemplify the proposed steps in the analysis of a sim
 
 1.  **One-way ANOVA** of the expression of the IGFL4 gene against the skin type in psoriasis patients (an inflammatory skin disease).
 
-2.  **Linear regression** of cherry trees diameter and height.
+2.  **Simple linear regression** of cherry trees volume vs diameter.
 
-#### Load packages
+3.  **Multiple** **Linear regression** of cherry trees volume vs diameter and height.
+
+### Load packages
 
 We will use **ggplot2** to make plots, and to be prepared for data manipulations, we load this package alongside the rest of the **tidyverse**. We will also use helper functions from **GGally** and **ggfortify** packages for plotting.
 
@@ -64,7 +66,7 @@ library(ggfortify)
 
 Now, we are done preparing for our analyses.
 
-## Example 1 : Analysis of variance
+## Analysis of variance
 
 #### Step 1: Data
 
@@ -84,7 +86,7 @@ The dataset are stored in `psoriasis.xlsx`.
 
 ```{r}
 # Read in the data from Excel file and call it psoriasisData
-psoriasisData <- read_excel("../../Data/psoriasis.xlsx")
+psoriasisData <- read_excel("../Data/psoriasis.xlsx")
 
 # View the top rows of the dataset
 head(psoriasisData)
@@ -222,7 +224,7 @@ In this example it is natural to report the estimated intensities as well as the
 emmeans(oneway, ~ type)
 ```
 
-## Example B: Simple linear regression
+## Simple linear regression
 
 #### Step 1: Data
 
@@ -249,7 +251,7 @@ ggpairs(trees) +
 We fit a simple linear regression with volume as outcome (i.e. dependent variable) and girth as covariate (i.e. independent variable). This model is fitted with the `lm` function. It is a good approach to assign a name (below *linreg1*) to the object with the fitted model. This object contains all relevant information and may be used for subsequent analysis.
 
 ```{r}
-linreg1 <- lm(Volume ~ Girth + Height, data=trees)
+linreg1 <- lm(Volume ~ Girth, data=trees)
 linreg1
 ```
 
@@ -319,31 +321,7 @@ ggplot(trees, aes(x = log(Girth), y = log(Volume))) +
 
 ```
 
-#### Step 7: Prediction of new values
-
-The fitted model may be used to predict the outcome (here: log-volume) for new values of the covariate (here: Girth). The new values are provided in a data frame with the same name as the covariate in the model. Here we predict log-volume for five new values of Girth.
-
-```{r}
-newGirth <- runif(5, min = 8, max = 20) %>% 
-  round(., digits = 2)
-
-newData <- data.frame(Girth=newGirth)
-
-newData
-```
-
-Next, we use the function predict to compute the predicted log-volumes and confidence intervals for these predictions.
-
-```{r}
-pred <- predict(linreg2, newdata=newData, interval="confidence")
-
-pred
-
-# back-transform to original scale
-exp(pred[,1])  
-```
-
-#### Step 7: Two or more covariates
+## Linear regression: Two or more covariates
 
 In the model above we only used Girth as covariate, we did this because Girth showed a strong correlation with Volume, while Height did not. BUT, we could include this variable in the model as well and see if our predictions approve.
 
@@ -357,30 +335,11 @@ linreg3 <- lm(log(Volume) ~ log(Girth) + Height, data=trees)
 summary(linreg3)
 ```
 
-Lets make some new data for prediction, now we need both Girth and Height.
+## Model selection: simpler vs more complex
 
-```{r}
-newHeight <- runif(5, min = 60, max = 90) %>% 
-  round(., digits = 2)
+Now we have two nested linear models. Which one should we choose?
 
-newData <- data.frame(Girth=newGirth, Height=newHeight)
-
-newData
-```
-
-Lastly, we predict log-volume for these new values of Girth and Height.
-
-```{r}
-pred <- predict(linreg3, newdata=newData, interval="confidence")
-
-pred
-
-exp(pred[,1]) 
-```
-
-BUT, which model should we chose?
-
-We can compare the two models with the `anova` function, which performs a likelihood ratio test. The null hypothesis is that the simpler model (linreg2) is sufficient.
+We can compare the two models with the `anova` function, which performs a nested-model F-test. The null hypothesis is that the simpler model (`linreg2`) is sufficient, meaning the additional terms in `linreg3` do not improve fit.
 
 ```{r}
 anova(linreg2, linreg3)

@@ -27,12 +27,12 @@ The dataset to be used concerns risk factors for low infant birth weight and is 
 1.  Use the commands below to load the MASS package and get the help page for the data. The help page will appear in the lower right window of RStudio. Read about the data; in particular about the variables `age`, `lwt`, `ftv`, `smoke`, and `bwt`.
 
     ```{r}
-
+    library(MASS)
+    data(birthwt) # Calls the data frame called birthwt (Promise)
+    head(birthwt) # Loads the data in Environment and shows the head
     ```
 
-2.  Assign the data to an object named `birthwt` if it is not already loaded. Then **glimpse** the dataset and check the first few rows.
-
-    Note: `birthwt` is not a tibble (the modern tidyverse data format), but we can easily convert it:
+2.   `birthwt` is not a tibble (the modern tidyverse data format). Convert it to a tibble.
 
     ```{r}
 

@@ -11,6 +11,8 @@ project:
 knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
 ```
 
+
+
 This exercise focuses on **Gaussian linear models**, where data points are assumed to be independent, normally distributed, and have equal variance. Such models are fitted in R using `lm()`, e.g.
 
 Later sections also introduce **logistic regression** (for binary outcomes) and **linear mixed models** (for grouped or hierarchical data).
@@ -25,32 +27,31 @@ The dataset to be used concerns risk factors for low infant birth weight and is 
 
 1.  Use the commands below to load the MASS package and get the help page for the data. The help page will appear in the lower right window of RStudio. Read about the data; in particular about the variables `age`, `lwt`, `ftv`, `smoke`, and `bwt`.
 
-    ```{r}
-    library(MASS)
-    data(birthwt)
-    ?birthwt
-    ```
+```{r}
+library(MASS)
+data(birthwt) # Calls the data frame called birthwt (Promise)
+head(birthwt) # Loads the data in Environment and shows the head
+?birthwt # Opens Help page for birthwt data
+```
 
-2.  Assign the data to an object named `birthwt` if it is not already loaded. Then **glimpse** the dataset and check the first few rows.
+2.   birthwt is not a tibble (the modern tidyverse data format). Convert it to a tibble.
 
-    Note: `birthwt` is not a tibble (the modern tidyverse data format), but we can easily convert it:
-
-    ```{r}
-    library(tidyverse)    
-    birthData <- as_tibble(birthwt)
-    birthData
-    ```
+```{r}
+library(tidyverse)    
+birthData <- as_tibble(birthwt)
+birthData
+```
 
 3.  The variables `smoke` (mother’s smoking habits) and `ftv` (number of first-trimester physician visits) are coded as numeric variables.\
     Convert them to **factors** so they are treated as categorical variables in your analyses:
 
-    ```{r}
-    birthData <- birthData %>%
-      mutate(
-        smoke = factor(smoke),
-        ftvFac = factor(ftv)
-      )
-    ```
+```{r}
+birthData <- birthData %>%
+  mutate(
+    smoke = factor(smoke),
+    ftvFac = factor(ftv)
+    )
+```
 
 4.  Make boxplot of birth weight `bwt` according the number of visits to physician `ftvFac` during the first trimester. Split by smoking status.
 
