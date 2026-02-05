@@ -56,7 +56,7 @@ website:
         contents:
          #- href: Solutions/exercise2_SOLUTIONS.qmd 
          # text: "Exercise 2 - Solution"
-         #- href: Solutions/exercise3_SOLUTIONS.qmd # Solutions/solution_not_up.qmd # 
+         #- href: Solutions/exercise3_SOLUTIONS.qmd
          #  text: "Exercise 3 - Solution"
          #- href: Solutions/exercise4_SOLUTIONS.qmd
          #  text: "Exercise 4 - Applied Statistics in R - Solutions"
