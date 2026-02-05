@@ -15,59 +15,42 @@ knitr::opts_chunk$set(echo = TRUE)
 
 In this exercise you will practice your newly acquired R skills on an example dataset.
 
-If you have your own data to work on, you can still follow the steps in the exercise where they apply.
+For the data wrangling and statistical modelling we will be doing in this exercise, you will need the following R-packages: `tidyverse`, `MASS`.
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
+1.  Make sure that these packages are installed and loaded into your R environment. You likely have the packages already installed and loaded (you used these in the previous exercises) try `sessionInfo()` and `require()` (look up what these function do). If the packages are not there install them and library them as in the previous exercises.
+
+```{r message=FALSE, warning=FALSE}
 library(tidyverse)
 library(MASS)
 ```
-
-------------------------------------------------------------------------
-
-## R-packages
-
-For the data wrangling and statistical modelling we will be doing in this exercise, you will need the following R-packages: `tidyverse`, `ggplot2`, `emmeans`, `MASS`.
-
--   Make sure that these packages are installed and loaded into your R environment. You likely have the packages already installed and loaded (you used these in the previous exercises) try `sessionInfo()` and `require()` (look up what these function do). If the packages are not there install them and library them as in the previous exercises.
-
-------------------------------------------------------------------------
 
 ## Getting the Dataset
 
 For this exercise, we'll use the birthweight dataset from the package `MASS`. It contains the birthweight of infants and some information about the mother.
 
+If you have your own data to work on, you can still follow the steps in the exercise where they apply.
+
 To get it we have to load the package and then the data. We will also display the help so we can read some background info about the data and what the columns are:
+
+**N.B** If it says `<Promise>` after `birthwt` in your global environment just click on it and the dataframe will be loaded properly.
+
+*If you have a dataset of your own you would like yo look at instead of the example data we provide here, you are very welcome to. You can again use `read_excel()` for excel sheets. For other formats, have a look at `read.csv()`, `read.table()`, `read.delim()`, etc. You can either google your way to an answer or ask one of the course instructors.*
 
 ```{r message=FALSE, warning=FALSE}
 data(birthwt)
 ?birthwt #display help page
 ```
 
-**N.B** If it says `<Promise>` after `birthwt` in your global environment just click on it and the dataframe will be loaded properly.
-
-*If you have a dataset of your own you would like yo look at instead of the example data we provide here, you are very welcome to. You can again use `read_excel()` for excel sheets. For other formats, have a look at `read.csv()`, `read.table()`, `read.delim()`, etc. You can either google your way to an answer or ask one of the course instructors.*
-
--   Now, check the class of the dataset. We'll be using `tidyverse` to do our anaylsis, so if it isn't already a tibble, make it into one.
-
-Check class of data.
+2.  Now, check the class of the dataset. We'll be using `tidyverse` to do our anaylsis, so if it isn't already a tibble, make it into one.
 
 ```{r}
+#Check class of data.
 class(birthwt)
-```
-
-Convert into tibble.
-
-```{r}
+#Convert into tibble.
 birthwt <- as.tibble(birthwt)
-```
-
-Check class of data to confirm that it is a tibble.
-
-```{r}
+#Check class of data to confirm that it is a tibble.
 class(birthwt)
 ```
-
-------------------------------------------------------------------------
 
 ## Exploratory Analysis
 
@@ -75,13 +58,13 @@ class(birthwt)
 
 Before performing any statistical analysis (modelling), it is necessary to have a good understanding of the data. Start by looking at:
 
--   How many variables and observations are there in the data?
+3.  How many variables and observations are there in the data?
 
 ```{r}
-birthwt %>% count()
+dim(birthwt)        # rows, columns
 ```
 
--   What was measured, i.e. what do each of the variables describe? You can rename variables via the `colnames()` if you want to.
+4.  What was measured, i.e. what do each of the variables describe? You can rename variables via the `colnames()` if you want to.
 
 Run the command below to inspect the data. This can only be done to this dataset because it was loaded from a packages. Hence you will not be able to do this with your own data.
 
@@ -89,7 +72,7 @@ Run the command below to inspect the data. This can only be done to this dataset
 ?birthwt
 ```
 
--   Which data types are the variables and does that make sense? Should you change the type of any variables? *Hint:* Think about types `factor, numerical, integer, character, etc.`
+5.  Which data types are the variables and does that make sense? Should you change the type of any variables? *Hint:* Think about types `factor, numerical, integer, character, etc.`
 
 ```{r}
 str(birthwt)
@@ -107,21 +90,25 @@ birthwt <- birthwt %>%
          )
 ```
 
--   What is our response/outcome variable(s)? There can be several. `bwt` (birth weight) and `low` (the indicator of birth weight less than 2.5 kg).
+6.  What is our response/outcome variable(s)? There can be several.
 
--   Is the (categorical) outcome variable balanced? No, the categorical outsome variable (`low`) is nit very balanced.
+`bwt` (birth weight) and `low` (the indicator of birth weight less than 2.5 kg).
+
+7.  Is the (categorical) outcome variable balanced?
 
 ```{r}
 birthwt$low %>% table()
 ```
 
--   Are there any missing values (`NA`), if yes and how many? Google how to check this if you don't know. No, there are no `NA` values in any of the columns.
+No, the categorical outsome variable (`low`) is not very balanced.
+
+8.  Are there any missing values (`NA`), if yes and how many? Google how to check this if you don't know.
 
 ```{r}
 birthwt %>% is.na() %>% colSums()
 ```
 
-------------------------------------------------------------------------
+No, there are no `NA` values in any of the columns.
 
 ## Diving into the data
 
@@ -129,7 +116,7 @@ birthwt %>% is.na() %>% colSums()
 
 Some of the measured variables in our data are numeric, i.e. continuous. For these do:
 
--   Calculate summary statistics (mean, median, sd, min, max) Calculate mean, median, minimum and maximum with `summary` function.
+9.  Calculate summary statistics (mean, median, min, max) with `summary` function.
 
 ```{r}
 birthwt %>% 
@@ -137,7 +124,7 @@ birthwt %>%
   summary()
 ```
 
-Calculate standard deviation.
+10. Calculate standard deviation with `summarize` function.
 
 ```{r}
 birthwt %>% 
@@ -150,47 +137,79 @@ birthwt %>%
   )
 ```
 
--   Create boxplots for each numeric variable using `ggplot2`, and apply `scale_x_discrete()` to prevent meaningless scaling of the boxplot widths. Do this for all the numeric variables (`age`, `lwt`, `ptl`, `ftv`, `bwt`).
+11. Create a density for a continuous variable using `ggplot2`. Do this for all the numeric variables (`age`, `lwt`, `ptl`, `ftv`, `bwt`).
 
 ```{r}
 ggplot(birthwt,
-       aes(y = age)) + 
-  geom_boxplot() + 
-  scale_x_discrete()
+       aes(x = age)) + 
+  geom_density() + 
+  theme_bw()
 ```
 
--   Do you see outliers in your dataset? Look at the point in the data set.
-
--   Now remake the boxplot with two different colors, depending on the (categorical) outcome variable.
+12. Look at the distribution of mothers' age (`age`). Are mothers older than 40 possible outliers in this dataset?\
+    Make a small summary table (min, max, mean, sd and mean+(3\*sd)) that helps you decide whether you want to exclude ages \> 40 before modelling. Count how many observations are \> 40.\
+    Then create `birthwt_subset` (either filtered or unfiltered) with the variables we will use going forward: `age`, `lwt`, `smoke`, `ui`, `low`, `bwt`.
 
 ```{r}
-ggplot(birthwt,
-       aes(y = age, 
+#ggplot(birthwt, aes(y = age)) +
+#  geom_boxplot() +
+#  theme_bw()
+
+birthwt %>% 
+  summarise(
+    min_age = min(age),
+    max_age = max(age),
+    mean_age = mean(age),
+    sd_age = sd(age),
+    cutpoint = mean(age)+(3*sd(age))
+  )
+
+birthwt %>% 
+  summarise(n_over_40 = sum(age > 40),
+            prop_over_40 = mean(age > 40))
+
+birthwt_subset <- birthwt %>% 
+  filter(age <= 40) %>%
+  dplyr::select(age, lwt, smoke, ui, ui, low, bwt)
+
+```
+
+13. Now make the boxplot of age according to birth weigh categories. Pick custom colors for your plot. Use birthwt_subset from now on.
+
+::: {.callout-tip collapse="true"}
+## Hint
+
+Look into `scale_fill_manual()`
+:::
+
+```{r}
+ggplot(birthwt_subset,
+       aes(y = age,
+           x = low,
            fill = low)) + 
   geom_boxplot() + 
-  scale_x_discrete() + 
   scale_fill_manual(values = c('black', 'grey')) + 
   theme_bw() 
+
 ```
 
 ### Categorical variables
 
-Other columns describe variables that are categorical. Some of these may have been initially interpreted by R as numerical, especially if they are coded with 0/1.
-
--   If you haven't changed their datatype to factor yet, do so now. You can see how in Presentation 5. We did this in the beginning.
-
--   When you are done, make barplots of each categorical variable. Do for each of the categorical variables (`race`, `smoke`, `ht`, `ui`)
+14. Some variables in `birthwt` are categorical, but may be coded as 0/1 and therefore read in as numeric. If you haven't changed their datatype to factor yet, do so now. Then make a stacked bar plot for `smoke` showing counts, split by the outcome variable `low` by mapping `fill = low` (using two colors as above).
 
 ```{r}
-ggplot(birthwt, 
-       aes(x = smoke)) + 
-  geom_bar()
+ggplot(birthwt_subset, 
+       aes(x = smoke,
+           fill = low)) + 
+  geom_bar() +
+  scale_fill_manual(values = c('black', 'grey')) + 
+  theme_bw() 
 ```
 
--   Then, split up the barplot for `smoke` so you have two different colors for the two different values of the outcome variable (the same way you did it above for the boxplots).
+15. Remake the bar plot for `smoke`, but this time split each `smoke` bar by the outcome variable `low` by mapping fill = low, using two colors (as you did for the boxplots). Then add `position = "dodge"` to geom_bar() and remake the plot. Compared to the default (stacked) bar plot, what changes when you use "dodge"?
 
 ```{r}
-ggplot(birthwt, 
+ggplot(birthwt_subset, 
        aes(x = smoke, 
            fill = low)) + 
   geom_bar(position = 'dodge') + 
@@ -198,41 +217,68 @@ ggplot(birthwt,
   theme_bw() 
 ```
 
--   Now, add the argument `position ='dodge'` to geom_bar and remake the plot. What has changed? Then remake it once again with `position ='fill'`. What information do the different barplots show? Compare to the counts you get from the `smoke` column when you group the dataframe by the outcome variable.
+What information do the different barplots show? Compare to the counts you get from the `smoke` column when you group the dataframe by the outcome variable.
+
+16. Create a tidy summary table using one pipeline. Starting from `birthwt`, do all of the following in a single `%>%` chain:
+    -   Create a new variable `lwt_kg` that converts `lwt` from pounds to kilograms (1 lb = 0.453592 kg)
+    -   Group by `smoke` and `low`
+    -   Compute:
+        -   `n` (number of observations)
+        -   mean and sd of `bwt`
+        -   mean of `lwt_kg`
+    -   Arrange the output so the largest mean birth weight is on top
 
 ```{r}
-ggplot(birthwt, 
-       aes(x = smoke, 
-           fill = low)) + 
-  geom_bar(position = 'fill') + 
-  scale_fill_manual(values = c('black', 'grey')) + 
-  theme_bw() 
+birthwt_summary <- birthwt_subset %>%
+  mutate(lwt_kg = lwt * 0.453592) %>%
+  group_by(smoke, low) %>%
+  summarise(
+    n = n(),
+    mean_bwt = mean(bwt),
+    sd_bwt = sd(bwt),
+    mean_lwt_kg = mean(lwt_kg),
+    .groups = "drop"
+  ) %>%
+  arrange(desc(mean_bwt))
+
+birthwt_summary
 ```
 
--   Lastly, make a density plot of the two continuous variables `lwt` and `bwt`, split it up by `smoke`. Just showed for `lwt` here.
+17. Make one "publication-ish" plot: a boxplot of birth weight (`bwt`) by smoking status (`smoke`), colored by the combined groups of birthweight category (`low`) and presence of uterine irritability (ui).\
+    To make the legend readable, first create labeled versions of `low` and `ui`, then combine them into an interaction variable (e.g. `low_ui`). Your plot should include:
+
+-   a clear title and axis labels\
+-   a clean theme\
+-   custom fill colors\
+-   a clear legend title (e.g. "Birthweight group + HT")
 
 ```{r}
-ggplot(birthwt,
-       aes(x = lwt,
-           color = smoke)) + 
-  geom_density() + 
-  scale_color_manual(values = c('black', 'grey')) + 
+
+birthwt_subset <- birthwt_subset %>%
+  mutate(
+    low_lab = factor(low, levels = c(0, 1), 
+                     labels = c("Normal BW", "Low BW")),
+    ui_lab  = factor(ui,  levels = c(0, 1), 
+                     labels = c("No UI", " Yes UI")),
+    low_ui  = interaction(low_lab, ui_lab, sep = " + ", drop = TRUE)
+  )
+
+p_bwt_smoke <- ggplot(birthwt_subset,
+                      aes(x = smoke, 
+                          y = bwt, 
+                          fill = low_ui)) +
+  geom_boxplot(outlier.alpha = 0.6) +
+  scale_fill_manual(values = c("black",  "blue", "grey", "lightblue"),
+                    name = "Low BW : UI") +
+  labs(
+    title = "Birth weight by smoking status",
+    x = "Mother smokes",
+    y = "Birth weight (g)"
+  ) +
   theme_bw()
+
+p_bwt_smoke
 ```
-
-Extra: Pick custom colors for your plots (look into `scale_fill_manual()`).
-
-### Subsetting the data
-
-Based on what you have observed in the last two sections, now choose two numeric variables and two categorical variables to move forward with. Create a subset of the dataframe with only these variables and the categorical and numeric outcome.
-
-```{r}
-birthwt_subset <- birthwt %>% dplyr::select(age, lwt, smoke, ptl, low, bwt)
-
-head(birthwt_subset)
-```
-
-------------------------------------------------------------------------
 
 ## Modelling
 
@@ -254,21 +300,23 @@ model1 <- lm(resp ~ pred1, data=name_of_dataset)
 
 Simply, if the outcome variable we are interested in is continuous, then `lm()` will functionally be doing a linear regression. If the outcome is categorical, it will be performing ANOVA (which if you only have two groups is effectively a t-test). Have a look at [this video](https://www.youtube.com/watch?v=NF5_btOaCig&list=PLblh5JKOoLUIzaEkCLIUxQFjPIlapw8nU&index=5) if you want to understand why you can do a t-test / ANOVA with a linear model.
 
--   Now, pick one of your numeric variables and use it to model the (numeric/continuous) outcome.
+18. Now, pick one of your numeric variables and use it to model the (numeric/continuous) outcome.
 
 ```{r}
 model1_lwt <- lm(bwt ~ lwt, data = birthwt_subset)
 ```
 
--   Investigate the model you have made by writing its name, i.e.
+19. Investigate the model you have made by writing its name, i.e.
 
 ```{r, eval = FALSE}
 model1_lwt
 ```
 
--   What does this mean? Compare to the linear model illustration above. At the intercept the `lwt` (mother's weight in pounds) is 0 (very unrealistic) the `bwt` is 2369.624 grams. For each pound that a mother weighs more, the `btw` is 4.429 grams more.
+-   What does this mean? Compare to the linear model illustration above.
 
--   We'll now make a plot of your model to help us better visualize what has happened. Make a scatter plot with your predictor variable on the x-axis and the outcome variable on the y-axis.
+At the intercept the `lwt` (mother's weight in pounds) is 0 (very unrealistic) the `bwt` is 2369.624 grams. For each pound that a mother weighs more, the `btw` is 4.429 grams more.
+
+20. We'll now make a plot of your model to help us better visualize what has happened. Make a scatter plot with your predictor variable on the x-axis and the outcome variable on the y-axis.
 
 ```{r}
 ggplot(birthwt_subset, 
@@ -277,9 +325,9 @@ ggplot(birthwt_subset,
   geom_point()
 ```
 
--   Now add the regression line to the plot by using the code below. For the slope and intercept, enter the values you found when you inspected the model. Does this look like a good fit?
+21. Now add the regression line to the plot by using the code below. For the slope and intercept, enter the values you found when you inspected the model. Does this look like a good fit?
 
-```{r, eval = FALSE}
+```{r, eval = TRUE}
 ggplot(birthwt_subset, 
        aes(x = lwt,
            y = bwt)) + 
@@ -289,37 +337,27 @@ ggplot(birthwt_subset,
               color = 'red')
 ```
 
--   Repeat the process with the other numeric variable you picked.
+22. Instead of the `geom_abline()`, try `geom_smooth()` which provides you with a confidence interval in addition to the regression line. Look at the help for this geom (or google) to figure out what argument it needs to work!
+
+```{r}
+ggplot(birthwt_subset, 
+       aes(x = lwt,
+           y = bwt)) + 
+  geom_point() + 
+  geom_smooth(method = "lm",
+              formula = y ~ x,
+              color = 'red')
+```
+
+23. Repeat the process with the other numeric variable you picked.
 
 ```{r}
 model1_age <- lm(bwt ~ age, data = birthwt_subset)
 model1_age
 ```
 
-```{r, eval = FALSE}
-ggplot(birthwt_subset, 
-       aes(x = age,
-           y = bwt)) + 
-  geom_point() + 
-  geom_abline(slope = model1_age$coefficients["age"], 
-              intercept = model1_age$coefficients["(Intercept)"], 
-              color = 'red')
-```
 
-Sometimes the variables we have measured are not good at explaining the outcome and we have to accept that.
-
--   Instead of the `geom_abline()`, try `geom_smooth()` which provides you with a confidence interval in addition to the regression line. Look at the help for this geom (or google) to figure out what argument it needs to work!
-
-```{r}
-ggplot(birthwt_subset, 
-       aes(x = age,
-           y = bwt)) + 
-  geom_point() + 
-  geom_smooth(formula = y ~ x,
-              color = 'red')
-```
-
--   Inspect your model in more detail with `summary()`. Look at the output, what additional information do you get about the model. Pay attention to the `Residual standard error (RSE)` and `Adjusted R-squared (R2adj)` at the bottom of the output. We would like `RSE` to be as small as possible (goes towards 0 when model improves) while we would like the `R2adj` to be large (goes towards 1 when model improves).
+24. Inspect your model in more detail with `summary()`. Look at the output, what additional information do you get about the model. Pay attention to the `Residual standard error (RSE)` and `Adjusted R-squared (R2adj)` at the bottom of the output. We would like `RSE` to be as small as possible (goes towards 0 when model improves) while we would like the `R2adj` to be large (goes towards 1 when model improves).
 
 ```{r}
 summary(model1_lwt)
@@ -328,23 +366,26 @@ summary(model1_lwt)
 ```{r}
 summary(model1_age)
 ```
+Sometimes the variables we have measured are not good at explaining the outcome and we have to accept that.
+
 
 **N.B** if you want to understand the output of a linear regression summary in greater detail have a look [here](https://feliperego.github.io/blog/2015/10/23/Interpreting-Model-Output-In-R).
 
-```{r, eval = FALSE}
-summary(model1)
-```
-
 ### Regression Model 2
 
--   Remake your model (call it `model2`) but this time add an additional explanatory variable to the model in addition to `lwt`. This should be one of the categorical variable you selected to be in your subset. (`smoke` might be interesting, but you could also try either `age` and/or `ht`). Does adding this second exploratory variable improve the metrics `RSE` and/or `R2adj`?
+25. Remake your model (call it `model2`) but this time add an additional explanatory variable to the model in addition to `lwt`. This should be the categorical variable you selected to be in your subset. Does adding this second exploratory variable improve the metrics `RSE` and/or `R2adj`?
 
-```{r, eval = FALSE}
+::: {.callout-tip collapse="true"}
+## Hint
+
+```{r eval=FALSE}
 model2 <- lm(resp ~ pred1 + pred2, data=name_of_dataset)
+
 ```
+:::
 
 ```{r}
-model2 <- lm(bwt ~ lwt + age, data=birthwt_subset)
+model2 <- lm(bwt ~ lwt + ui, data=birthwt_subset)
 model2
 ```
 
@@ -352,13 +393,26 @@ model2
 summary(model2)
 ```
 
--   Find the 95% confidence intervals for model2, by using the `confint()` function. If you are not familiar with confidence intervals, have a look [here](https://sphweb.bumc.bu.edu/otlt/mph-modules/bs/bs704_confidence_intervals/bs704_confidence_intervals_print.html).
+26. Find the 95% confidence intervals for model2, by using the `confint()` function. If you are not familiar with confidence intervals, have a look [here](https://sphweb.bumc.bu.edu/otlt/mph-modules/bs/bs704_confidence_intervals/bs704_confidence_intervals_print.html).
 
 ```{r}
 confint(model2)
 ```
+27. Make a scatterplot of birth weight (bwt) vs mother’s weight (lwt). Color the points by uterine irritability (ui), and add a linear regression trend line using geom_smooth(method = "lm").
 
--   Try the following commands (or a variation of it, depending on which variables you have included in model2), and see if you can figure out what the outcome means.
+```{r}
+ggplot(birthwt_subset, 
+       aes(x = lwt,
+           y = bwt,
+           fill = ui,
+           color = ui)) + 
+  geom_point() + 
+  geom_smooth(method = "lm",
+              formula = y ~ x,
+              color = 'red')
+```
+
+28. Try the following commands (or a variation of it, depending on which variables you have included in model2), and see if you can figure out what the outcome means.
 
 ```{r, eval = FALSE}
 newData <- data.frame(lwt=100, age = 50, smoke=as.factor(1))
@@ -367,19 +421,17 @@ predict(model2, newData)
 predict(model2, newData, interval="prediction")
 ```
 
-------------------------------------------------------------------------
-
 ### Bonus Exercise - ANOVA
 
 Now, we will instead look at the two categorical variables you picked. Make a model of the outcome variable depending on one the categorical variable
 
--   Pick one of the two categorical variables and use it to model the (numeric) outcome, just as during the Applied Stats session:
+29. Pick one of the two categorical variables and use it to model the (numeric) outcome, just as during the Applied Stats session:
 
 ```{r, eval=FALSE}
 model3 <- lm(bwt ~ smoke, data=birthwt_subset)
 ```
 
--   inspect the output by calling `summary()` on the model
+30. inspect the output by calling `summary()` on the model
 
 ```{r, eval=FALSE}
 summary(model3)
