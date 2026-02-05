@@ -271,7 +271,9 @@ plot2
 
 A scatter plot is used to explore the relationship between two numerical variables by plotting them on the x- and y-axes. You can visualize a **third** variable (or a condition) by mapping it to the `size` ,`shape` or  `color` aesthetic.
 
-First, we plot **download size vs. time** using `geom_point()` to draw individual data points. We map `time > 500` to the  `size`  aesthetic so downloads taking longer than 500 appear larger. We also map `log10(time)` to  `color`  (so color shows smooth continuous gradient), and use `shape`  to distinguish `machineName`. Because both variables are skewed, we use log scales on both axes with `scale_x_log10()` and `scale_y_log10()`.
+Here, we plot **download size (`size`) vs. download time (`time`)** using `geom_point()`. We map the condition `time > 500` to both the **`size`** and **`color`** aesthetics, so downloads taking longer than 500 are shown as **larger and red**, while shorter downloads are **smaller and black**. The **`shape`** aesthetic is mapped to `machineName` to distinguish between machines.
+
+Because both `size` and `time` are right-skewed, we apply **log-scaled axes** using `scale_x_log10()` and `scale_y_log10()`.
 
 ```{r}
 plot3 <-                       # save in object p
@@ -280,10 +282,14 @@ plot3 <-                       # save in object p
     aes(x = size,          # x and y and color
         y = time, 
         size = time > 500,
-        color = log10(time),
+        color = time > 500,
         shape = machineName)) +   # add size, color and shape by machineName 
   geom_point() +          # Scaterplot
-  scale_colour_continuous(palette = c("darkblue", "gold")) +
+  scale_size_manual(
+    values = c(`FALSE` = 0.5, `TRUE` = 3),
+    name = "Time > 500"
+  ) + 
+  scale_colour_manual(values = c("black", "red")) +
   scale_x_log10() +       # scale x and y
   scale_y_log10() + 
   theme_minimal()         # theme
@@ -295,8 +301,7 @@ Sometimes adding several aesthetics (like both color and shape) makes a plot too
 
 ```{r}
 #plot3 + facet_grid(vars(month))
-plot3 + facet_wrap(vars(machineName))
-
+plot3 + facet_wrap(vars(machineName), nrow = 3)
 ```
 
 This wraps the plots into multiple rows and columns automatically, which is helpful when there are many facet levels.
