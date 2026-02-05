@@ -40,7 +40,7 @@ The data set used in these exercises was compiled from data downloaded from the 
 2.  **Load data**. Start by importing the dataset with the `Import Dataset` button and name it `climate`. When you do this, a command starting with `read_excel()` is shown in the console. It is a good idea to **copy the command into your script** so that the next time you run your script you can just execute that line instead of having to find the file again.
 
 ```{r}
-climate <- read_excel('../../Data/climate.xlsx')
+climate <- read_excel('../Data/climate.xlsx')
 ```
 
 3.  **First look at data**. Write the name of the dataframe, i.e. `climate`, into the console and press enter to see the first rows of the dataset. You can also click on the `climate` object in the Environment panel.
@@ -74,7 +74,7 @@ colnames(climate)
 
 # d: 5 different/unique stations
 climate %>% 
-  select(station) %>% 
+  dplyr::select(station) %>% 
   distinct()
 
 # e: 12 rows per station
@@ -135,7 +135,7 @@ climate %>%
 ```{r}
 # d
 climate %>% 
-  select(station, year, rain)
+  dplyr::select(station, year, rain)
 ```
 
 The next few questions build on each other, each adding a piece of code:
@@ -342,7 +342,7 @@ We can get a better overview of the weather changes by plotting the data. We are
 25. Export your data 
 ```{r}
 # writexl::write_xlsx(DATASET, 'PATH/TO/DATASET')
-writexl::write_xlsx(climate_change, '../../Data/climate_change.xlsx')
+writexl::write_xlsx(climate_change, '../Data/climate_change.xlsx')
 ```
 
 If you’re up for more, we can explore some additional exercises that may not perfectly align with this dataset but will introduce you to some very useful tidyverse operations.
@@ -356,7 +356,7 @@ The `unlist` function will convert a one-column dataframe to a vector.
 
 ```{r}
 station_unique <- climate_change %>% 
-  select(station) %>% 
+  dplyr::select(station) %>% 
   distinct() %>% 
   unlist()
 

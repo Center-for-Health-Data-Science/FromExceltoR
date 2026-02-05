@@ -427,26 +427,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Solutions/exercise2_SOLUTIONS.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Exercise 2 - Solution</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../Solutions/exercise3_SOLUTIONS.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Exercise 3 - Solution</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../Solutions/exercise4_SOLUTIONS.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Exercise 4: Applied Statistics in R - Solutions</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../Solutions/exercise5_SOLUTIONS.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Exercise 5, Solutions</span></a>
+  <a href="../Solutions/solution_not_up.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Solutions not up yet</span></a>
   </div>
 </li>
       </ul>
@@ -584,7 +566,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tbody>
 </table>
 <ol start="2" type="1">
-<li><strong>Load data</strong>. Start by importing the dataset with the <code>Import Dataset</code> button and name it <code>climate</code>. When you do this, a command starting with <code>read_excel()</code> is shown in the console. It is a good idea to <strong>copy the command into your script</strong> so that the next time you run your script you can just execute that line instead of having to find the file again.</li>
+<li><strong>Load data</strong>. Start by importing the dataset with the <code>Import Dataset</code> button and name it <code>climate</code>. When you do this, a command starting with <code>read_excel()</code> is shown in the console. It is a good idea to <strong>copy the command into your script</strong> so that the next time you run your script you can just execute that line instead of having to find the file again. But make sure to use full path or relative whre your Quarto document is saved.</li>
 </ol>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
@@ -599,7 +581,7 @@ What is the character in the <code>read_excel()</code> function?
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>The character inside the <code>read_excel()</code> is a <em>path</em> to the excel file you have imported. A path is just a set of directions that tells R how to get from one folder (directory) to another. Since your script is saved inside the Scripts directory, you need to tell R how to move up one level to get out of Scripts, and then into the Data folder where your file lives. We write paths as character strings — that means they go inside quotation marks.</p>
-<p>The path could look like the one below, where the directions are separated by slashs <code>/</code>. This means that we start in the <code>Desktop</code> folder, then go to the <code>Work</code>, to the <code>Courses</code> folder, to the <code>FromExceltoR</code> folder, to the <code>Data</code> folder where we select the <code>climate.xlsx</code> file.</p>
+<p>The <strong>Full</strong> path could look like the one below, where the directions are separated by slashs <code>/</code>. This means that we start in the <code>Desktop</code> folder, then go to the <code>Work</code>, to the <code>Courses</code> folder, to the <code>FromExceltoR</code> folder, to the <code>Data</code> folder where we select the <code>climate.xlsx</code> file.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>climate <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"Desktop/Work/Courses/FromExceltoR/Data/climate.xlsx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -608,6 +590,10 @@ What is the character in the <code>read_excel()</code> function?
 <figure class="figure">
 <p><img src="../Figures/file_tree_absolute_path.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
 </figure>
+</div>
+<p>Or you can use relative path. If your Quarto working directory is set to <code>Scripts/</code>, then you would need go out one step and go back into Data folder:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>climate <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"../Data/climate.xlsx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -652,7 +638,9 @@ What is the character in the <code>read_excel()</code> function?
 <ol start="13" type="1">
 <li><p>Create a new column in <code>climate</code> and save the new dataset in a different object so you don’t overwrite your original <code>climate</code> data. The new column should count the number of days in each month without air frost, based on the existing <code>af</code> column. For this exercise, assume each month has 30 days. To find the number of days without air frost, subtract the value in the <code>af</code> column from 30.</p></li>
 <li><p>Add another column to your new dataset that says whether the weather this month was good. We consider a month to be good if it had at least 100 hours of sunshine and less than 100 mm of rain. Otherwise the weather was bad.</p></li>
-<li><p>How many months are there with good weather (use the column you made in 14) for each station? Find the station that has the most months with good weather.</p></li>
+<li><p>How many months are there with good weather (use the column you made in 14) for each station? Find the station that has the most months with good weather.</p>
+<p><strong>Report the value here.</strong></p>
+<p><img src="images/qr_code_Ex2Q1.png" class="img-fluid" width="200"></p></li>
 </ol>
 </section>
 <section id="complex-operations" class="level2">
@@ -674,17 +662,17 @@ What is the character in the <code>read_excel()</code> function?
 <p>If you’ve gone through the exercises above and are ready for more challenges — you’re in the right place. You haven’t learned all the operations you’ll need here, so feel free to search online for help. If you’re feeling overwhelmed, no worries — take a break and come back later.</p>
 <p>Let’s simulate some climate data for the year 2056 and merge it with the original dataset from 2016.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>climate_fake <span class="ot">&lt;-</span> climate</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>climate_fake<span class="sc">$</span>year <span class="ot">&lt;-</span> <span class="dv">2056</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">101</span>)</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>climate_fake<span class="sc">$</span>af <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">11</span>, <span class="fu">nrow</span>(climate_fake), <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>climate_fake<span class="sc">$</span>rain <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="fu">nrow</span>(climate_fake), <span class="at">mean =</span> <span class="fu">mean</span>(climate<span class="sc">$</span>rain)<span class="sc">+</span><span class="dv">150</span>, <span class="at">sd =</span> <span class="fu">sd</span>(climate<span class="sc">$</span>rain)<span class="sc">+</span><span class="dv">50</span>)</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>climate_fake<span class="sc">$</span>sun <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="fu">nrow</span>(climate_fake), <span class="at">mean =</span> <span class="fu">mean</span>(climate<span class="sc">$</span>sun), <span class="at">sd =</span> <span class="fu">sd</span>(climate<span class="sc">$</span>sun))</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>climate_fake<span class="sc">$</span>device <span class="ot">&lt;-</span> <span class="fu">paste</span>(climate_fake<span class="sc">$</span>device, <span class="st">', New and Improved'</span>)</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>climate_change <span class="ot">&lt;-</span> <span class="fu">rbind</span>(climate, climate_fake)</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(climate_change)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>climate_fake <span class="ot">&lt;-</span> climate</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>climate_fake<span class="sc">$</span>year <span class="ot">&lt;-</span> <span class="dv">2056</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">101</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>climate_fake<span class="sc">$</span>af <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">11</span>, <span class="fu">nrow</span>(climate_fake), <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>climate_fake<span class="sc">$</span>rain <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="fu">nrow</span>(climate_fake), <span class="at">mean =</span> <span class="fu">mean</span>(climate<span class="sc">$</span>rain)<span class="sc">+</span><span class="dv">150</span>, <span class="at">sd =</span> <span class="fu">sd</span>(climate<span class="sc">$</span>rain)<span class="sc">+</span><span class="dv">50</span>)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>climate_fake<span class="sc">$</span>sun <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="fu">nrow</span>(climate_fake), <span class="at">mean =</span> <span class="fu">mean</span>(climate<span class="sc">$</span>sun), <span class="at">sd =</span> <span class="fu">sd</span>(climate<span class="sc">$</span>sun))</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>climate_fake<span class="sc">$</span>device <span class="ot">&lt;-</span> <span class="fu">paste</span>(climate_fake<span class="sc">$</span>device, <span class="st">', New and Improved'</span>)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>climate_change <span class="ot">&lt;-</span> <span class="fu">rbind</span>(climate, climate_fake)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(climate_change)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="19" type="1">
 <li><p>Modify the station names so that they start with capital letters.</p></li>
@@ -737,7 +725,9 @@ Hint
 </div>
 </div>
 <ol start="27" type="1">
-<li><p>Count how many times the letter ‘A’ appears in each station.</p></li>
+<li><p>Count how many times the letter ‘A’ appears in each station.</p>
+<p><strong>Let us know you’ve mastered the tidyverse, and report the value here.</strong></p>
+<p><img src="images/qr_code_Ex2Q2.png" class="img-fluid" width="200"></p></li>
 <li><p>Count the number of both uppercase ‘A’ and lowercase ‘a’ in each station.</p></li>
 <li><p>In the climate change data frame, create a new column for each word in the <code>device</code> column. For example, you can use the <code>str_split_i()</code> function to extract individual words and assign them to separate columns.</p></li>
 <li><p>Modify one of the new columns to contain only lowercase letters and the other to contain only uppercase letters.</p></li>
