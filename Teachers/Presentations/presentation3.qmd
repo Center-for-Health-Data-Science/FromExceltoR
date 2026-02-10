@@ -21,15 +21,13 @@ library(tidyverse)
 
 In the examples below, we use the **downloads** dataset. The dataset is available as an Excel file, which we import using the **readxl** package. Because **ggplot2** is part of the **tidyverse**, we also load the tidyverse packages so we can use its tools for data wrangling and visualization.
 
-We read the *downloads* dataset from the Excel file, and assign it to a `tibble` named *downloads*.
+We read the *downloads* dataset from the Excel file, and assign it to a `tibble` named *downloads*. Here we have filtered out rows where `size` is zero, as they do not represent actual downloads and would distort the visualization.
 
 ```{r}
 downloads <- read_excel("../Data/downloads.xlsx") %>% 
   filter(size > 0)
 downloads
 ```
-
-Here we have filtered out rows where `size` is zero, as they do not represent actual downloads and would distort the visualization.
 
 ## ggplot2: The basic concepts
 
@@ -54,6 +52,9 @@ At this point, `ggplot` has only drawn the axes and labels because we have not
 
 The next step is to add a geom layer (for example, `geom_bar()`) to actually display the data.
 
+Geoms (geometric objects) are the core building blocks of ggplot2. They tell ggplot *what kind of plot layer to draw*. Each geom requires data and aesthetics specified inside `aes()`.\
+Geoms inherit global aesthetics from the main `ggplot()` call, but you can override them locally inside each geom if needed.
+
 ## **Plotting** One Variable
 
 A bar chart is created with `geom_bar()` and is useful for visualizing the distribution of a single categorical variable — for example, `machineName` in this dataset.
@@ -76,7 +77,7 @@ ggplot(
   geom_histogram()         # geometrical object - histogram
 ```
 
-## Aesthetics in ggplot2
+## Aesthetics and Geoms in ggplot2
 
 In ggplot2, aesthetics (`aes()`) map variables in your data to visual properties of the plot. In addition to `x` and `y`, you can map optional aesthetics such as `fill`,  `colour`,  `size`,  `alpha`,  `group`, or `shape`. By changing which aesthetic a variable is mapped to, we can tell ggplot how to display differences between categories.
 
@@ -88,7 +89,7 @@ ggplot(
   geom_bar() 
 ```
 
-Here, mapping `fill = month` tells ggplot to calculate counts separately for each month and assigns a different fill color to each month and stack the bars.
+Here, mapping `fill = month` tells ggplot to calculate counts separately for each month and assigns a different fill color to each month. The bars are **stacked** by default.
 
 ```{r}
 ggplot(
@@ -100,18 +101,13 @@ ggplot(
 
 Here, `colour = month` only changes the outline color of the bars — the interior remains unfilled (or transparent).
 
-## Geometric objects
+When you map a variable to `fill`, `colour`, or `group`, ggplot doesn’t only change the appearance of the plot - it also uses that variable as a **grouping variable**. This means ggplot will split the data into separate groups before drawing the geom.
 
-Geoms (geometric objects) are the core building blocks of ggplot2. They tell ggplot *what kind of plot layer to draw*. Each geom requires data and aesthetics specified inside `aes()`.\
-Geoms inherit global aesthetics from the main `ggplot()` call, but you can override them locally inside each geom if needed.
+Now, you can also control how grouped bars are arranged using the `position` argument in `geom_bar()`:
 
-You can adjust how geoms are displayed using various options. For bar charts, position adjustments control how overlapping or grouped data appear. In the previous example, mapping `fill`, `colour`, or `group = month` subdivided each bar by month, producing stacked bars (the default).
+-   `position = "dodge"` → bars for each group are placed **side by side**
 
-You can change this behavior by setting the `position` argument inside `geom_bar()`:
-
--   `position = "dodge"` → places bars for each group side by side 
-
--   `position = "fill"` → normalizes bar heights so they represent proportions (percentages).
+-   `position = "fill"` → bars are scaled to show **proportions**
 
 ```{r}
 ggplot(
@@ -147,6 +143,7 @@ In the example below, we also rescale the download sizes from bytes to megabyt
 dl_sizes <- downloads %>% 
   group_by(machineName) %>% 
   summarise(size = sum(size))
+dl_sizes
 ```
 
 We now plot `machineName` on the x-axis and the total size (in MB) on the y-axis:
@@ -185,53 +182,54 @@ Now `machineName` is a factor with levels ordered from lowest to highest tota
 
 Finally, use the same `ggplot()` code as before to make the plot — now the bars will be ordered by total size rather than alphabetically:
 
+Here we will for the first time try to save the syntaxical description of a plot in an R variable. This makes it easy to reuse and modify the same plot - for example, to change axes scales or colors - without rewriting the entire code.
+
 ```{r}
-ggplot(
+p <- ggplot(           # save in object p
   dl_sizes, 
   aes(x = machineName, 
       y = size/10^6)) + 
   geom_col()
 ```
 
-## A box plot
-
-Boxplots are great to get an overview of continues variables, identifying outliers and comparing distributions across categories.
-
-Here we will for the first time try to save the syntaxical description of a plot in an R variable. This makes it easy to reuse and modify the same plot - for example, to change axes scales or colors - without rewriting the entire code. Let’s try this out and create a boxplot of monthly download sizes for each machine.
-
-Here, we store the bar chart in a variable called `p`. Running this code does not display the plot yet, but a variable named `p` now appears in the Global Environment.
+Here, we store the plot in an object called `p`, so we can reuse it and add layers without rewriting the code.
 
 ```{r}
-p <-                       # save in object p
-  ggplot(                  # call ggplot
-    downloads,             # data
-    aes(x = machineName,   # x and y and fill
+p
+plot1 <- p
+```
+
+## A box plot
+
+Boxplots are great to get an overview of continues variables, identifying outliers and comparing distributions across categories. Let’s try this out and create a boxplot of monthly download sizes for each machine.
+
+```{r}
+p <-                         # save in object p
+  ggplot(                    # call ggplot
+    downloads,               # data
+    aes(x = machineName,     # x and y and fill
         y = size, 
         fill = machineName)) +
-  geom_boxplot()           # boxplot
-
+  geom_boxplot() +           # boxplot
+  scale_y_log10()            # Change the scale of the y-axis:
+p
 ```
 
 Because the data are skewed, we use a logarithmic y-scale to make the plot more interpretable. A logarithmic scale is useful when the data are highly skewed or span several orders of magnitude.
-
-```{r}
-p <- p + scale_y_log10()          # Change the scale of the y-axis:
-```
 
 Additionally, themes and titles can be added as a layer to any ggplot if you prefer a theme other than the default grey background.
 
 Because the plot is saved in `p`, we can easily modify it by adding more layers:
 
 ```{r}
-plot1 <- p + 
-  theme_minimal() +         # add theme ..................
+p + 
+  theme_minimal() +            # add theme 
     # theme_bw()
     # theme_classic()
     # theme_dark()
-  labs(x = 'Machines',     # add label ..................
-       y = 'Size in Mb',
+  labs(x = 'Machines',         # add label 
+       y = 'Size in log10(bytes)',
        title = 'Boxplot')
-plot1
 ```
 
 ## Violin plot with `geom_violin`
@@ -267,69 +265,74 @@ plot2 <- p +
 plot2
 ```
 
-## Scatter plot with `geom_point` and Faceting
-
-A scatter plot is used to explore the relationship between two numerical variables by plotting them on the x- and y-axes. You can visualize a **third** variable (or a condition) by mapping it to the `size` ,`shape` or  `color` aesthetic.
-
-Here, we plot **download size (`size`) vs. download time (`time`)** using `geom_point()`. We map the condition `time > 500` to both the **`size`** and **`color`** aesthetics, so downloads taking longer than 500 are shown as **larger and red**, while shorter downloads are **smaller and black**. The **`shape`** aesthetic is mapped to `machineName` to distinguish between machines.
-
-Because both `size` and `time` are right-skewed, we apply **log-scaled axes** using `scale_x_log10()` and `scale_y_log10()`.
-
-```{r}
-plot3 <-                       # save in object p
-  ggplot(                  # call ggplot
-    downloads,             # data
-    aes(x = size,          # x and y and color
-        y = time, 
-        size = time > 500,
-        color = time > 500,
-        shape = machineName)) +   # add size, color and shape by machineName 
-  geom_point() +          # Scaterplot
-  scale_size_manual(
-    values = c(`FALSE` = 0.5, `TRUE` = 3),
-    name = "Time > 500"
-  ) + 
-  scale_colour_manual(values = c("black", "red")) +
-  scale_x_log10() +       # scale x and y
-  scale_y_log10() + 
-  theme_minimal()         # theme
-
-plot3
-```
-
-Sometimes adding several aesthetics (like both color and shape) makes a plot too busy, especially if there are many categories. Instead, we can use faceting to split the data into multiple smaller plots - one for each category - making it easier to compare groups.
-
-```{r}
-#plot3 + facet_grid(vars(month))
-plot3 + facet_wrap(vars(machineName), nrow = 3)
-```
-
-This wraps the plots into multiple rows and columns automatically, which is helpful when there are many facet levels.
-
-Now you have space to highlight important patterns without overcrowding the plot. For example, faceting makes it easier to see the **relationship (correlation)** between download size and time within each machine, and to spot extreme cases. In particular, we can highlight **very long downloads** (e.g. `time > 500`) by making those points larger, so they stand out clearly.
-
 ## Daily summary statistics
 
-Next we want to visualize the number of downloads done each day for each of the 6 machines. We compute the cumulated number of downloads within each of the 6 machines over the days. As before we do this via the following steps:
+Next we want to visualize the number of downloads done each day for each of the 6 machines. We compute the **daily totals** within each machine, and the **cumulated** number of downloads over the days. As before we do this via the following steps:
 
-1.  Using `group_by()` we group the dataset by both *machineName* and *date*.
+-   Using `group_by()` we group the dataset by both `machineName` and `date`.
 
-2.  Using `summarize()` we count the number for within each machine and date.
+-   Using `summarize()` we count the number of downloads within each machine and date (and also compute total size and total time for that day).
 
-3.  Using `mutate()` we cumulate the number of downloads over the dates within the machines.
+-   Using `mutate()` we cumulate the number of downloads over the dates within the machines.
 
 ```{r}
 daily_downloads <- 
   downloads %>%
     group_by(machineName, date) %>% 
-    summarize(dl_count = n()) %>%
+    summarize(dl_count = n(),
+              sum_size = sum(size),
+              sum_time = sum(time)) %>%
     mutate(total_dl_count = cumsum(dl_count))
 daily_downloads
+
 ```
+
+## Scatter plot with `geom_point` and Faceting
+
+A scatter plot is used to explore the relationship between two numerical variables by plotting them on the x- and y-axes. You can visualize a **third** variable (or a condition) by mapping it to the `size` ,`shape` or  `color` aesthetic.
+
+Here, we plot **total daily download size** (`sum_size`) vs. **total daily download time** (`sum_time`) using `geom_point()`. We map the condition **`dl_count > 100`** to both the `size` and `color` aesthetics, so days with more than 100 downloads are shown as larger and colored differently, while days with fewer downloads are smaller. The `shape` aesthetic is mapped to `machineName` to distinguish between machines.
+
+Because both `sum_size` and `sum_time` are right-skewed, we apply log-scaled axes using `scale_x_log10()` and `scale_y_log10()`.
+
+We put the `aes()` mapping for `size`, `color`, and `shape` **inside `geom_point()`** (instead of in the main `ggplot()` call) so that these aesthetics apply **only to the points**.
+
+```{r}
+
+plot3 <-                         # save in object p
+  ggplot(                        # call ggplot
+    daily_downloads,             # data
+    aes(x = sum_size,            # x and y
+        y = sum_time)) +  
+  geom_point(                    # scatterplot
+    aes(size  = dl_count > 100,
+        color = dl_count > 100,
+        shape = machineName)) + 
+  scale_size_manual(
+    values = c(`FALSE` = 1, `TRUE` = 3)
+  ) + 
+  scale_x_log10() +
+  scale_y_log10() +
+  theme_minimal()
+
+plot3
+```
+
+Sometimes adding several aesthetics (like both color and shape) makes a plot too busy, especially if there are many categories. Instead, we can use faceting to split the data into multiple smaller plots - one for each category - making it easier to compare groups. This wraps the plots into multiple rows and columns automatically.
+
+```{r}
+plot3 + 
+  facet_wrap(vars(machineName), nrow = 3) + 
+  geom_smooth() 
+```
+
+Now you have space to highlight important patterns without overcrowding the plot. Faceting makes it easier to see the relationship (correlation) between daily download size and time within each machine, and to spot extreme cases.
+
+This way, `geom_smooth()` uses the same `x` and `y` variables to fit the trend, but it is **not split or modified** by the point-specific aesthetics (e.g., it won’t try to draw separate smoothers for each color/shape group).
 
 ## Line plot with `geom_line`
 
-The geom called `geom_line()` is used to insert lines, which is ideal for showing trends over time or continuous changes. In the code below you see a first attempt to write R code that visualizes the cumulated total download size over the dates.
+The geom called `geom_line()` is used to insert lines, which is ideal for showing trends over time or continuous changes. In the code below you see a first attempt to write R code that visualizes the cumulated total download count over the dates.
 
 We create a plot of the cumulative total download count over time:
 
@@ -365,11 +368,14 @@ R package **ggpubr** is one of them and it helps to produce publication-ready 
 # install.packages("ggpubr")
 library(ggpubr)
 
-figure <- ggarrange(plot1, plot2, plot3, plot4,
-                   align = "hv",
+figure <- ggarrange(plot1 + theme_minimal(), 
+                    plot2, 
+                    plot3, 
+                    plot4,
+                    align = "hv",
                     labels = c ("A", "B", "C", "D"),
-                   ncol = 2, nrow = 2, 
-                   legend = "none")
+                    ncol = 2, nrow = 2, 
+                    legend = "none")
 figure
 ```
 

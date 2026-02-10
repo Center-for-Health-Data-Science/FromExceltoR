@@ -17,7 +17,7 @@ Course Responsible:
 
 Diana Andrejeva, Research Consultant,
 Center for Health Data Science,
-email: diana.andrejeva@sund.ku.dk
+email: andrejeva@sund.ku.dk
 
 Thilde Terkelsen, Research Consultant,
 Center for Health Data Science,
@@ -30,4 +30,4 @@ The material in this repository is for teaching purposes only and not to be dist
 
 ## Program
 
-![image](https://github.com/Center-for-Health-Data-Science/FromExceltoR/blob/2024_Oct/Teachers/Figures/Program.png)
+![image](https://github.com/Center-for-Health-Data-Science/FromExceltoR/blob/2025_Apr/Teachers/Figures/Program.png)
