@@ -21,3 +21,12 @@ It can be nice to follow along the presentation scripts as we go through them.
 ::: {style="display: flex; gap: 10px;"}
 <a href="./presentations.zip" download="presentations.zip"> <button class="btn small-button" style="background-color: #18bc9c; color: white; border: none; padding: 10px 20px; border-radius: 5px;"> DOWNLOAD PRESENTATIONS </button> </a>
 :::
+
+## Download exercises
+
+If you want, you can also download exercise files.
+
+::: {style="display: flex; gap: 10px;"}
+<a href="./exercise.zip" download="exercise.zip"> <button class="btn small-button" style="background-color: #18bc9c; color: white; border: none; padding: 10px 20px; border-radius: 5px;"> DOWNLOAD EXERCISES </button> </a>
+:::
+

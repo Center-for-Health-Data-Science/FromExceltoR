@@ -28,6 +28,8 @@ website:
       
       - section: "Presentations 👩🏽‍🏫"
         contents:
+          - href: Presentations/presentation0.qmd
+            text: "Presentation 0: Introduction to R"
           - href: Presentations/presentation1.qmd
             text: "Presentation 1: Intro to Quarto"
           - href: Presentations/presentation2.qmd

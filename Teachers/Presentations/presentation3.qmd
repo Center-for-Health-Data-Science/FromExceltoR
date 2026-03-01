@@ -321,6 +321,8 @@ plot3
 Sometimes adding several aesthetics (like both color and shape) makes a plot too busy, especially if there are many categories. Instead, we can use faceting to split the data into multiple smaller plots - one for each category - making it easier to compare groups. This wraps the plots into multiple rows and columns automatically.
 
 ```{r}
+#| fig-height: 7.5
+
 plot3 + 
   facet_wrap(vars(machineName), nrow = 3) + 
   geom_smooth() 

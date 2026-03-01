@@ -1,0 +1,14 @@
+---
+title: "Presentation 0: Introduction to R"
+format: html
+project:
+  type: website
+  output-dir: ../docs
+---
+
+```{r}
+#| echo: false
+#| eval: true
+#| code-fold: false
+cat(readLines("presentation0.R"), sep = "\n")
+```

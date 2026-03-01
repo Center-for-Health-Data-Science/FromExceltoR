@@ -309,7 +309,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Presentations/presentation1.html">Presentations 👩🏽‍🏫</a></li><li class="breadcrumb-item"><a href="../Presentations/presentation3.html">Presentation 3: ggplot2</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Presentations/presentation0.html">Presentations 👩🏽‍🏫</a></li><li class="breadcrumb-item"><a href="../Presentations/presentation3.html">Presentation 3: ggplot2</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -342,6 +342,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           </a> 
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Presentations/presentation0.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Presentation 0: Introduction to R</span></a>
+  </div>
+</li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../Presentations/presentation1.html" class="sidebar-item-text sidebar-link">
@@ -481,14 +487,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#load-data" id="toc-load-data" class="nav-link" data-scroll-target="#load-data">Load data</a></li>
   <li><a href="#ggplot2-the-basic-concepts" id="toc-ggplot2-the-basic-concepts" class="nav-link" data-scroll-target="#ggplot2-the-basic-concepts">ggplot2: The basic concepts</a></li>
   <li><a href="#plotting-one-variable" id="toc-plotting-one-variable" class="nav-link" data-scroll-target="#plotting-one-variable"><strong>Plotting</strong> One Variable</a></li>
-  <li><a href="#aesthetics-in-ggplot2" id="toc-aesthetics-in-ggplot2" class="nav-link" data-scroll-target="#aesthetics-in-ggplot2">Aesthetics in ggplot2</a></li>
-  <li><a href="#geometric-objects" id="toc-geometric-objects" class="nav-link" data-scroll-target="#geometric-objects">Geometric objects</a></li>
+  <li><a href="#aesthetics-and-geoms-in-ggplot2" id="toc-aesthetics-and-geoms-in-ggplot2" class="nav-link" data-scroll-target="#aesthetics-and-geoms-in-ggplot2">Aesthetics and Geoms in ggplot2</a></li>
   <li><a href="#plotting-two-variable---a-simple-column-chart" id="toc-plotting-two-variable---a-simple-column-chart" class="nav-link" data-scroll-target="#plotting-two-variable---a-simple-column-chart">Plotting Two Variable - A simple Column Chart</a></li>
   <li><a href="#a-column-chart-with-ordered-bars" id="toc-a-column-chart-with-ordered-bars" class="nav-link" data-scroll-target="#a-column-chart-with-ordered-bars">A Column Chart with Ordered Bars</a></li>
   <li><a href="#a-box-plot" id="toc-a-box-plot" class="nav-link" data-scroll-target="#a-box-plot">A box plot</a></li>
   <li><a href="#violin-plot-with-geom_violin" id="toc-violin-plot-with-geom_violin" class="nav-link" data-scroll-target="#violin-plot-with-geom_violin">Violin plot with <code>geom_violin</code></a></li>
-  <li><a href="#scatter-plot-with-geom_point-and-faceting" id="toc-scatter-plot-with-geom_point-and-faceting" class="nav-link" data-scroll-target="#scatter-plot-with-geom_point-and-faceting">Scatter plot with <code>geom_point</code> and Faceting</a></li>
   <li><a href="#daily-summary-statistics" id="toc-daily-summary-statistics" class="nav-link" data-scroll-target="#daily-summary-statistics">Daily summary statistics</a></li>
+  <li><a href="#scatter-plot-with-geom_point-and-faceting" id="toc-scatter-plot-with-geom_point-and-faceting" class="nav-link" data-scroll-target="#scatter-plot-with-geom_point-and-faceting">Scatter plot with <code>geom_point</code> and Faceting</a></li>
   <li><a href="#line-plot-with-geom_line" id="toc-line-plot-with-geom_line" class="nav-link" data-scroll-target="#line-plot-with-geom_line">Line plot with <code>geom_line</code></a></li>
   <li><a href="#arrange-multiple-ggplots-on-the-same-page" id="toc-arrange-multiple-ggplots-on-the-same-page" class="nav-link" data-scroll-target="#arrange-multiple-ggplots-on-the-same-page"><strong>Arrange multiple ggplots on the same page</strong></a></li>
   <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
@@ -499,7 +504,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Presentations/presentation1.html">Presentations 👩🏽‍🏫</a></li><li class="breadcrumb-item"><a href="../Presentations/presentation3.html">Presentation 3: ggplot2</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Presentations/presentation0.html">Presentations 👩🏽‍🏫</a></li><li class="breadcrumb-item"><a href="../Presentations/presentation3.html">Presentation 3: ggplot2</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Presentation 3: ggplot2</h1>
 </div>
@@ -530,7 +535,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="load-data" class="level2">
 <h2 class="anchored" data-anchor-id="load-data">Load data</h2>
 <p>In the examples below, we use the&nbsp;<strong>downloads</strong>&nbsp;dataset. The dataset is available as an Excel file, which we import using the&nbsp;<strong>readxl</strong>&nbsp;package. Because&nbsp;<strong>ggplot2</strong>&nbsp;is part of the&nbsp;<strong>tidyverse</strong>, we also load the tidyverse packages so we can use its tools for data wrangling and visualization.</p>
-<p>We read the&nbsp;<em>downloads</em>&nbsp;dataset from the Excel file, and assign it to a&nbsp;<code>tibble</code>&nbsp;named&nbsp;<em>downloads</em>.</p>
+<p>We read the&nbsp;<em>downloads</em>&nbsp;dataset from the Excel file, and assign it to a&nbsp;<code>tibble</code>&nbsp;named&nbsp;<em>downloads</em>. Here we have filtered out rows where&nbsp;<code>size</code>&nbsp;is zero, as they do not represent actual downloads and would distort the visualization.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>downloads <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"../Data/downloads.xlsx"</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(size <span class="sc">&gt;</span> <span class="dv">0</span>)</span>
@@ -552,7 +557,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 # ℹ 36,698 more rows</code></pre>
 </div>
 </div>
-<p>Here we have filtered out rows where&nbsp;<code>size</code>&nbsp;is zero, as they do not represent actual downloads and would distort the visualization.</p>
 </section>
 <section id="ggplot2-the-basic-concepts" class="level2">
 <h2 class="anchored" data-anchor-id="ggplot2-the-basic-concepts">ggplot2: The basic concepts</h2>
@@ -578,6 +582,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>This creates an&nbsp;empty coordinate system&nbsp;with axes defined — essentially a blank canvas.</p>
 <p>At this point,&nbsp;<code>ggplot</code>&nbsp;has only drawn the axes and labels because we have not yet specified&nbsp;how&nbsp;the data should be visualized.</p>
 <p>The next step is to add a&nbsp;geom layer&nbsp;(for example,&nbsp;<code>geom_bar()</code>) to actually display the data.</p>
+<p>Geoms&nbsp;(geometric objects) are the core building blocks of&nbsp;ggplot2. They tell ggplot&nbsp;<em>what kind of plot layer to draw</em>. Each geom requires data and aesthetics specified inside&nbsp;<code>aes()</code>.<br>
+Geoms inherit&nbsp;global aesthetics&nbsp;from the main&nbsp;<code>ggplot()</code>&nbsp;call, but you can override them locally inside each geom if needed.</p>
 </section>
 <section id="plotting-one-variable" class="level2">
 <h2 class="anchored" data-anchor-id="plotting-one-variable"><strong>Plotting</strong> One Variable</h2>
@@ -614,8 +620,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="aesthetics-in-ggplot2" class="level2">
-<h2 class="anchored" data-anchor-id="aesthetics-in-ggplot2">Aesthetics in ggplot2</h2>
+<section id="aesthetics-and-geoms-in-ggplot2" class="level2">
+<h2 class="anchored" data-anchor-id="aesthetics-and-geoms-in-ggplot2">Aesthetics and Geoms in ggplot2</h2>
 <p>In ggplot2,&nbsp;aesthetics&nbsp;(<code>aes()</code>) map variables in your data to visual properties of the plot. In addition to&nbsp;<code>x</code>&nbsp;and&nbsp;<code>y</code>, you can map optional aesthetics such as&nbsp;<code>fill</code>, &nbsp;<code>colour</code>, &nbsp;<code>size</code>, &nbsp;<code>alpha</code>, &nbsp;<code>group</code>, or&nbsp;<code>shape</code>. By changing which aesthetic a variable is mapped to, we can tell ggplot how to display differences between categories.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
@@ -631,7 +637,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>Here, mapping&nbsp;<code>fill = month</code>&nbsp;tells ggplot to&nbsp;calculate counts separately for each month and assigns a&nbsp;different fill color&nbsp;to each month and stack the bars.</p>
+<p>Here, mapping <code>fill = month</code> tells ggplot to calculate counts separately for each month and assigns a&nbsp;different fill color&nbsp;to each month. The bars are <strong>stacked</strong> by default.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  downloads,</span>
@@ -647,16 +653,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Here,&nbsp;<code>colour = month</code>&nbsp;only changes the&nbsp;outline color&nbsp;of the bars — the interior remains unfilled (or transparent).</p>
-</section>
-<section id="geometric-objects" class="level2">
-<h2 class="anchored" data-anchor-id="geometric-objects">Geometric objects</h2>
-<p>Geoms&nbsp;(geometric objects) are the core building blocks of&nbsp;ggplot2. They tell ggplot&nbsp;<em>what kind of plot layer to draw</em>. Each geom requires data and aesthetics specified inside&nbsp;<code>aes()</code>.<br>
-Geoms inherit&nbsp;global aesthetics&nbsp;from the main&nbsp;<code>ggplot()</code>&nbsp;call, but you can override them locally inside each geom if needed.</p>
-<p>You can adjust how geoms are displayed using various options. For bar charts,&nbsp;position adjustments&nbsp;control how overlapping or grouped data appear. In the previous example, mapping&nbsp;<code>fill</code>,&nbsp;<code>colour</code>, or&nbsp;<code>group = month</code>&nbsp;subdivided each bar by month, producing&nbsp;stacked bars&nbsp;(the default).</p>
-<p>You can change this behavior by setting the&nbsp;<code>position</code>&nbsp;argument inside&nbsp;<code>geom_bar()</code>:</p>
+<p>When you map a variable to <code>fill</code>, <code>colour</code>, or <code>group</code>, ggplot doesn’t only change the appearance of the plot - it also uses that variable as a <strong>grouping variable</strong>. This means ggplot will split the data into separate groups before drawing the geom.</p>
+<p>Now, you can also control how grouped bars are arranged using the <code>position</code> argument in <code>geom_bar()</code>:</p>
 <ul>
-<li><p><code>position = "dodge"</code>&nbsp;→ places bars for each group&nbsp;side by side&nbsp;</p></li>
-<li><p><code>position = "fill"</code>&nbsp;→&nbsp;normalizes bar heights&nbsp;so they represent&nbsp;proportions (percentages).</p></li>
+<li><p><code>position = "dodge"</code> → bars for each group are placed <strong>side by side</strong></p></li>
+<li><p><code>position = "fill"</code> → bars are scaled to show <strong>proportions</strong></p></li>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
@@ -762,39 +763,40 @@ Levels: pluto cs18 tweetie piglet kermit</code></pre>
 </div>
 <p>Now&nbsp;<code>machineName</code>&nbsp;is a factor with levels ordered from&nbsp;lowest to highest total download size.</p>
 <p>Finally, use the same&nbsp;<code>ggplot()</code>&nbsp;code as before to make the plot — now the bars will be ordered by total size rather than alphabetically:</p>
+<p>Here we will for the first time try to save the syntaxical description of a plot in an R variable. This makes it easy to&nbsp;reuse&nbsp;and&nbsp;modify&nbsp;the same plot - for example, to change axes scales or colors - without rewriting the entire code.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(           <span class="co"># save in object p</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  dl_sizes, </span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> machineName, </span>
 <span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> size<span class="sc">/</span><span class="dv">10</span><span class="sc">^</span><span class="dv">6</span>)) <span class="sc">+</span> </span>
 <span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Here, we store the plot in an object called <code>p</code>, so we can reuse it and add layers without rewriting the code.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="presentation3_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="presentation3_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>plot1 <span class="ot">&lt;-</span> p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="a-box-plot" class="level2">
 <h2 class="anchored" data-anchor-id="a-box-plot">A box plot</h2>
-<p>Boxplots are great to get an overview of continues variables, identifying outliers and comparing distributions across&nbsp;categories.</p>
-<p>Here we will for the first time try to save the syntaxical description of a plot in an R variable. This makes it easy to&nbsp;reuse&nbsp;and&nbsp;modify&nbsp;the same plot - for example, to change axes scales or colors - without rewriting the entire code. Let’s try this out and create a boxplot of monthly download sizes for each machine.</p>
-<p>Here, we store the bar chart in a variable called&nbsp;<code>p</code>. Running this code does not display the plot yet, but a variable named&nbsp;<code>p</code>&nbsp;now appears in the&nbsp;Global Environment.</p>
+<p>Boxplots are great to get an overview of continues variables, identifying outliers and comparing distributions across&nbsp;categories. Let’s try this out and create a boxplot of monthly download sizes for each machine.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span>                       <span class="co"># save in object p</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(                  <span class="co"># call ggplot</span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    downloads,             <span class="co"># data</span></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> machineName,   <span class="co"># x and y and fill</span></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> size, </span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">fill =</span> machineName)) <span class="sc">+</span></span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span>           <span class="co"># boxplot</span></span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_log10</span>()          <span class="co"># Change the scale of the y-axis:</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Because the data are skewed, we use a&nbsp;logarithmic y-scale&nbsp;to make the plot more interpretable. A logarithmic scale is useful when the data are highly skewed or span several orders of magnitude.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span>                         <span class="co"># save in object p</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(                    <span class="co"># call ggplot</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    downloads,               <span class="co"># data</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> machineName,     <span class="co"># x and y and fill</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> size, </span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">fill =</span> machineName)) <span class="sc">+</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span>           <span class="co"># boxplot</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_log10</span>()            <span class="co"># Change the scale of the y-axis:</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -803,18 +805,18 @@ Levels: pluto cs18 tweetie piglet kermit</code></pre>
 </div>
 </div>
 </div>
+<p>Because the data are skewed, we use a&nbsp;logarithmic y-scale&nbsp;to make the plot more interpretable. A logarithmic scale is useful when the data are highly skewed or span several orders of magnitude.</p>
 <p>Additionally, themes and titles can be added as a layer to any ggplot if you prefer a theme other than the default grey background.</p>
 <p>Because the plot is saved in&nbsp;<code>p</code>, we can easily modify it by adding more layers:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>plot1 <span class="ot">&lt;-</span> p <span class="sc">+</span> </span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span>         <span class="co"># add theme ..................</span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># theme_bw()</span></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># theme_classic()</span></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># theme_dark()</span></span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">'Machines'</span>,     <span class="co"># add label ..................</span></span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">'Size in Mb'</span>,</span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">'Boxplot'</span>)</span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>plot1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>p <span class="sc">+</span> </span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span>            <span class="co"># add theme </span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># theme_bw()</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># theme_classic()</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># theme_dark()</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">'Machines'</span>,         <span class="co"># add label </span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">'Size in log10(bytes)'</span>,</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">'Boxplot'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -828,15 +830,15 @@ Levels: pluto cs18 tweetie piglet kermit</code></pre>
 <h2 class="anchored" data-anchor-id="violin-plot-with-geom_violin">Violin plot with <code>geom_violin</code></h2>
 <p>A violin plot shows the distribution of a continuous variable across different categories, combining the features of a box plot and a density plot.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span>                         <span class="co"># save in object p</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(                    <span class="co"># call ggplot</span></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    downloads,               <span class="co"># data</span></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> machineName,     <span class="co"># x and y and fill</span></span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> size, </span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">fill =</span> machineName)) <span class="sc">+</span></span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_violin</span>() <span class="sc">+</span>            <span class="co"># draw violin plots</span></span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_log10</span>()            <span class="co"># scale</span></span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span>                         <span class="co"># save in object p</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(                    <span class="co"># call ggplot</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    downloads,               <span class="co"># data</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> machineName,     <span class="co"># x and y and fill</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> size, </span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">fill =</span> machineName)) <span class="sc">+</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_violin</span>() <span class="sc">+</span>            <span class="co"># draw violin plots</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_log10</span>()            <span class="co"># scale</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -847,17 +849,17 @@ Levels: pluto cs18 tweetie piglet kermit</code></pre>
 </div>
 <p>We can enhance the plot by overlaying&nbsp;individual data points&nbsp;(with jittering to avoid overplotting), using a minimal theme, and customizing the fill colors:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>plot2 <span class="ot">&lt;-</span> p <span class="sc">+</span> </span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(           <span class="co"># overlay geom</span></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="fl">0.1</span>, <span class="at">alpha =</span> <span class="fl">0.05</span>) <span class="sc">+</span> </span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span>      <span class="co"># theme</span></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(</span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">values=</span><span class="fu">c</span>(<span class="st">"#2A2D43"</span>,  <span class="co"># change colors</span></span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>             <span class="st">"#91A6FF"</span>, </span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>             <span class="st">"#C7EDE4"</span>, </span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>             <span class="st">"#AFA060"</span>, </span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>             <span class="st">"#AD8350"</span>))</span>
-<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>plot2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>plot2 <span class="ot">&lt;-</span> p <span class="sc">+</span> </span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(           <span class="co"># overlay geom</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="fl">0.1</span>, <span class="at">alpha =</span> <span class="fl">0.05</span>) <span class="sc">+</span> </span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span>      <span class="co"># theme</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">values=</span><span class="fu">c</span>(<span class="st">"#2A2D43"</span>,  <span class="co"># change colors</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>             <span class="st">"#91A6FF"</span>, </span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>             <span class="st">"#C7EDE4"</span>, </span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>             <span class="st">"#AFA060"</span>, </span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>             <span class="st">"#AD8350"</span>))</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>plot2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -867,43 +869,70 @@ Levels: pluto cs18 tweetie piglet kermit</code></pre>
 </div>
 </div>
 </section>
+<section id="daily-summary-statistics" class="level2">
+<h2 class="anchored" data-anchor-id="daily-summary-statistics">Daily summary statistics</h2>
+<p>Next we want to visualize the number of downloads done each day for each of the 6 machines. We compute the <strong>daily totals</strong> within each machine, and the <strong>cumulated</strong> number of downloads over the days. As before we do this via the following steps:</p>
+<ul>
+<li><p>Using <code>group_by()</code> we group the dataset by both <code>machineName</code> and <code>date</code>.</p></li>
+<li><p>Using <code>summarize()</code> we count the number of downloads within each machine and date (and also compute total size and total time for that day).</p></li>
+<li><p>Using <code>mutate()</code> we cumulate the number of downloads over the dates within the machines.</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>daily_downloads <span class="ot">&lt;-</span> </span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  downloads <span class="sc">%&gt;%</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(machineName, date) <span class="sc">%&gt;%</span> </span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">dl_count =</span> <span class="fu">n</span>(),</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">sum_size =</span> <span class="fu">sum</span>(size),</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">sum_time =</span> <span class="fu">sum</span>(time)) <span class="sc">%&gt;%</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">total_dl_count =</span> <span class="fu">cumsum</span>(dl_count))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by 'machineName'. You can override using the
+`.groups` argument.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>daily_downloads</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 337 × 6
+# Groups:   machineName [5]
+   machineName date                dl_count sum_size sum_time total_dl_count
+   &lt;chr&gt;       &lt;dttm&gt;                 &lt;int&gt;    &lt;dbl&gt;    &lt;dbl&gt;          &lt;int&gt;
+ 1 cs18        1994-11-22 00:00:00      168 22374257  8993.              168
+ 2 cs18        1994-11-23 00:00:00      191 12164511  1539.              359
+ 3 cs18        1994-11-24 00:00:00      256  8051844   389.              615
+ 4 cs18        1994-11-25 00:00:00       13    65492    18.4             628
+ 5 cs18        1994-11-28 00:00:00      133   625010   101.              761
+ 6 cs18        1994-11-29 00:00:00        8    20119     3.55            769
+ 7 cs18        1994-11-30 00:00:00       14   209456    10.0             783
+ 8 cs18        1994-12-01 00:00:00       35   630891   315.              818
+ 9 cs18        1994-12-02 00:00:00       61  5665512  2300.              879
+10 cs18        1994-12-03 00:00:00       11   155513    30.2             890
+# ℹ 327 more rows</code></pre>
+</div>
+</div>
+</section>
 <section id="scatter-plot-with-geom_point-and-faceting" class="level2">
 <h2 class="anchored" data-anchor-id="scatter-plot-with-geom_point-and-faceting">Scatter plot with <code>geom_point</code> and Faceting</h2>
 <p>A&nbsp;scatter plot&nbsp;is used to explore the relationship between two numerical variables by plotting them on the x- and y-axes. You can visualize a&nbsp;<strong>third</strong> variable (or a condition)&nbsp;by mapping it to the&nbsp;<code>size</code>&nbsp;,<code>shape</code>&nbsp;or &nbsp;<code>color</code>&nbsp;aesthetic.</p>
-<p>Here, we plot <strong>download size (<code>size</code>) vs.&nbsp;download time (<code>time</code>)</strong> using <code>geom_point()</code>. We map the condition <code>time &gt; 500</code> to both the <strong><code>size</code></strong> and <strong><code>color</code></strong> aesthetics, so downloads taking longer than 500 are shown as <strong>larger and red</strong>, while shorter downloads are <strong>smaller and black</strong>. The <strong><code>shape</code></strong> aesthetic is mapped to <code>machineName</code> to distinguish between machines.</p>
-<p>Because both <code>size</code> and <code>time</code> are right-skewed, we apply <strong>log-scaled axes</strong> using <code>scale_x_log10()</code> and <code>scale_y_log10()</code>.</p>
+<p>Here, we plot <strong>total daily download size</strong> (<code>sum_size</code>) vs.&nbsp;<strong>total daily download time</strong> (<code>sum_time</code>) using <code>geom_point()</code>. We map the condition <strong><code>dl_count &gt; 100</code></strong> to both the <code>size</code> and <code>color</code> aesthetics, so days with more than 100 downloads are shown as larger and colored differently, while days with fewer downloads are smaller. The <code>shape</code> aesthetic is mapped to <code>machineName</code> to distinguish between machines.</p>
+<p>Because both <code>sum_size</code> and <code>sum_time</code> are right-skewed, we apply log-scaled axes using <code>scale_x_log10()</code> and <code>scale_y_log10()</code>.</p>
+<p>We put the <code>aes()</code> mapping for <code>size</code>, <code>color</code>, and <code>shape</code> <strong>inside <code>geom_point()</code></strong> (instead of in the main <code>ggplot()</code> call) so that these aesthetics apply <strong>only to the points</strong>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>plot3 <span class="ot">&lt;-</span>                       <span class="co"># save in object p</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(                  <span class="co"># call ggplot</span></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    downloads,             <span class="co"># data</span></span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> size,          <span class="co"># x and y and color</span></span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> time, </span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">size =</span> time <span class="sc">&gt;</span> <span class="dv">500</span>,</span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">color =</span> time <span class="sc">&gt;</span> <span class="dv">500</span>,</span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">shape =</span> machineName)) <span class="sc">+</span>   <span class="co"># add size, color and shape by machineName </span></span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span>          <span class="co"># Scaterplot</span></span>
-<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size_manual</span>(</span>
-<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">values =</span> <span class="fu">c</span>(<span class="st">`</span><span class="at">FALSE</span><span class="st">`</span> <span class="ot">=</span> <span class="fl">0.5</span>, <span class="st">`</span><span class="at">TRUE</span><span class="st">`</span> <span class="ot">=</span> <span class="dv">3</span>),</span>
-<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Time &gt; 500"</span></span>
-<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span> </span>
-<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"black"</span>, <span class="st">"red"</span>)) <span class="sc">+</span></span>
-<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_log10</span>() <span class="sc">+</span>       <span class="co"># scale x and y</span></span>
-<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_log10</span>() <span class="sc">+</span> </span>
-<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()         <span class="co"># theme</span></span>
-<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>plot3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="presentation3_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Sometimes adding several aesthetics (like both color and shape) makes a plot too busy, especially if there are many categories. Instead, we can use&nbsp;faceting&nbsp;to split the data into multiple smaller plots - one for each category - making it easier to compare groups.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">#plot3 + facet_grid(vars(month))</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>plot3 <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(machineName), <span class="at">nrow =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>plot3 <span class="ot">&lt;-</span>                         <span class="co"># save in object p</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(                        <span class="co"># call ggplot</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>    daily_downloads,             <span class="co"># data</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> sum_size,            <span class="co"># x and y</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> sum_time)) <span class="sc">+</span>  </span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(                    <span class="co"># scatterplot</span></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">size  =</span> dl_count <span class="sc">&gt;</span> <span class="dv">100</span>,</span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">color =</span> dl_count <span class="sc">&gt;</span> <span class="dv">100</span>,</span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">shape =</span> machineName)) <span class="sc">+</span> </span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size_manual</span>(</span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">values =</span> <span class="fu">c</span>(<span class="st">`</span><span class="at">FALSE</span><span class="st">`</span> <span class="ot">=</span> <span class="dv">1</span>, <span class="st">`</span><span class="at">TRUE</span><span class="st">`</span> <span class="ot">=</span> <span class="dv">3</span>)</span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span> </span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_log10</span>() <span class="sc">+</span></span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_log10</span>() <span class="sc">+</span></span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a>plot3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -912,57 +941,35 @@ Levels: pluto cs18 tweetie piglet kermit</code></pre>
 </div>
 </div>
 </div>
-<p>This wraps the plots into multiple rows and columns automatically, which is helpful when there are many facet levels.</p>
-<p>Now you have space to highlight important patterns without overcrowding the plot. For example, faceting makes it easier to see the <strong>relationship (correlation)</strong> between download size and time within each machine, and to spot extreme cases. In particular, we can highlight <strong>very long downloads</strong> (e.g.&nbsp;<code>time &gt; 500</code>) by making those points larger, so they stand out clearly.</p>
-</section>
-<section id="daily-summary-statistics" class="level2">
-<h2 class="anchored" data-anchor-id="daily-summary-statistics">Daily summary statistics</h2>
-<p>Next we want to visualize the number of downloads done each day for each of the 6 machines. We compute the cumulated number of downloads within each of the 6 machines over the days. As before we do this via the following steps:</p>
-<ol type="1">
-<li><p>Using&nbsp;<code>group_by()</code>&nbsp;we group the dataset by both&nbsp;<em>machineName</em>&nbsp;and&nbsp;<em>date</em>.</p></li>
-<li><p>Using&nbsp;<code>summarize()</code>&nbsp;we count the number for within each machine and date.</p></li>
-<li><p>Using&nbsp;<code>mutate()</code>&nbsp;we cumulate the number of downloads over the dates within the machines.</p></li>
-</ol>
+<p>Sometimes adding several aesthetics (like both color and shape) makes a plot too busy, especially if there are many categories. Instead, we can use&nbsp;faceting&nbsp;to split the data into multiple smaller plots - one for each category - making it easier to compare groups. This wraps the plots into multiple rows and columns automatically.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>daily_downloads <span class="ot">&lt;-</span> </span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  downloads <span class="sc">%&gt;%</span></span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(machineName, date) <span class="sc">%&gt;%</span> </span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">dl_count =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">total_dl_count =</span> <span class="fu">cumsum</span>(dl_count))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>plot3 <span class="sc">+</span> </span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(machineName), <span class="at">nrow =</span> <span class="dv">3</span>) <span class="sc">+</span> </span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>`summarise()` has grouped output by 'machineName'. You can override using the
-`.groups` argument.</code></pre>
+<pre><code>`geom_smooth()` using method = 'loess' and formula = 'y ~ x'</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>daily_downloads</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 337 × 4
-# Groups:   machineName [5]
-   machineName date                dl_count total_dl_count
-   &lt;chr&gt;       &lt;dttm&gt;                 &lt;int&gt;          &lt;int&gt;
- 1 cs18        1994-11-22 00:00:00      168            168
- 2 cs18        1994-11-23 00:00:00      191            359
- 3 cs18        1994-11-24 00:00:00      256            615
- 4 cs18        1994-11-25 00:00:00       13            628
- 5 cs18        1994-11-28 00:00:00      133            761
- 6 cs18        1994-11-29 00:00:00        8            769
- 7 cs18        1994-11-30 00:00:00       14            783
- 8 cs18        1994-12-01 00:00:00       35            818
- 9 cs18        1994-12-02 00:00:00       61            879
-10 cs18        1994-12-03 00:00:00       11            890
-# ℹ 327 more rows</code></pre>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="presentation3_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
 </div>
 </div>
+</div>
+<p>Now you have space to highlight important patterns without overcrowding the plot. Faceting makes it easier to see the relationship (correlation) between daily download size and time within each machine, and to spot extreme cases.</p>
+<p>This way, <code>geom_smooth()</code> uses the same <code>x</code> and <code>y</code> variables to fit the trend, but it is <strong>not split or modified</strong> by the point-specific aesthetics (e.g., it won’t try to draw separate smoothers for each color/shape group).</p>
 </section>
 <section id="line-plot-with-geom_line" class="level2">
 <h2 class="anchored" data-anchor-id="line-plot-with-geom_line">Line plot with <code>geom_line</code></h2>
-<p>The geom called&nbsp;<code>geom_line()</code>&nbsp;is used to insert lines, which is ideal for showing&nbsp;trends over time&nbsp;or&nbsp;continuous changes. In the code below you see a first attempt to write R code that visualizes the cumulated total download size over the dates.</p>
+<p>The geom called&nbsp;<code>geom_line()</code>&nbsp;is used to insert lines, which is ideal for showing&nbsp;trends over time&nbsp;or&nbsp;continuous changes. In the code below you see a first attempt to write R code that visualizes the cumulated total download count over the dates.</p>
 <p>We create a plot of the cumulative total download count over time:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(                      <span class="co"># call ggplot</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  daily_downloads,           <span class="co"># data</span></span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> date,              <span class="co"># x and y</span></span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> total_dl_count)) <span class="sc">+</span> <span class="co"># line</span></span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(                      <span class="co"># call ggplot</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  daily_downloads,           <span class="co"># data</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> date,              <span class="co"># x and y</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> total_dl_count)) <span class="sc">+</span> <span class="co"># line</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -973,14 +980,14 @@ Levels: pluto cs18 tweetie piglet kermit</code></pre>
 </div>
 <p>If we want a separate line for each machine, we must tell ggplot how to group the data. We can do this by mapping&nbsp;<code>color = machineName</code>&nbsp;(and optionally color by machine as well):</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>plot4 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(</span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  daily_downloads, </span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> date, </span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> total_dl_count, </span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">colour =</span> machineName)) <span class="sc">+</span> </span>
-<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()     <span class="co"># theme</span></span>
-<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>plot4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>plot4 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  daily_downloads, </span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> date, </span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> total_dl_count, </span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">colour =</span> machineName)) <span class="sc">+</span> </span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()     <span class="co"># theme</span></span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>plot4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -995,15 +1002,18 @@ Levels: pluto cs18 tweetie piglet kermit</code></pre>
 <p>In R there is a whole infrastructure of extension packages built around ggplot, that facilitate different types of plot modifications, arrangements, and animation.</p>
 <p>R package&nbsp;<strong>ggpubr</strong>&nbsp;is one of them and it helps to produce publication-ready plots using ggplot2.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("ggpubr")</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggpubr)</span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>figure <span class="ot">&lt;-</span> <span class="fu">ggarrange</span>(plot1, plot2, plot3, plot4,</span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">align =</span> <span class="st">"hv"</span>,</span>
-<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>                    <span class="at">labels =</span> <span class="fu">c</span> (<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>, <span class="st">"D"</span>),</span>
-<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>                   <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">nrow =</span> <span class="dv">2</span>, </span>
-<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>                   <span class="at">legend =</span> <span class="st">"none"</span>)</span>
-<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>figure</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("ggpubr")</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggpubr)</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>figure <span class="ot">&lt;-</span> <span class="fu">ggarrange</span>(plot1 <span class="sc">+</span> <span class="fu">theme_minimal</span>(), </span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>                    plot2, </span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>                    plot3, </span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>                    plot4,</span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>                    <span class="at">align =</span> <span class="st">"hv"</span>,</span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>                    <span class="at">labels =</span> <span class="fu">c</span> (<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>, <span class="st">"D"</span>),</span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>                    <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">nrow =</span> <span class="dv">2</span>, </span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>                    <span class="at">legend =</span> <span class="st">"none"</span>)</span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a>figure</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1013,15 +1023,15 @@ Levels: pluto cs18 tweetie piglet kermit</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Save Tibble and Save Plot:</span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="co">#write_xlsx(daily_downloads, "daily_downloads.xlsx")</span></span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="co">#ggsave(filename = "vionlinPlot.pdf", plot = p2, height = 5, width = 10)</span></span>
-<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a><span class="co">#pdf("vionlinPlot2.pdf", height = 5, width = 10)</span></span>
-<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a><span class="co">#p2</span></span>
-<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a><span class="co">#dev.off()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Save Tibble and Save Plot:</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="co">#write_xlsx(daily_downloads, "daily_downloads.xlsx")</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="co">#ggsave(filename = "vionlinPlot.pdf", plot = p2, height = 5, width = 10)</span></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a><span class="co">#pdf("vionlinPlot2.pdf", height = 5, width = 10)</span></span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a><span class="co">#p2</span></span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a><span class="co">#dev.off()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="conclusion" class="level2">
