@@ -1,5 +1,5 @@
 ---
-title: "Presentation 4: Applied Statistics in R"
+title: "Presentation 4: Applied Statistics"
 format: html
 editor: source
 author: "HeaDS Data Science Lab, University of Copenhagen"

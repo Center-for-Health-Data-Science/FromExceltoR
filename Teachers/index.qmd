@@ -29,7 +29,7 @@ We will use Quarto for the tutorials of this course. Please see more about Quart
 ](https://www.youtube.com/watch?v=_f3latmOhew)[Comprehensive guides to Quarto basics](https://quarto.org/docs/guide/)
 
 \
-Finally... Dear course participants, it would greatly help us if you could complete our [feedback](https://forms.office.com/e/JcDE5C9sLQ) form.
+Finally... Dear course participants, it would greatly help us if you could complete our [feedback](https://forms.office.com/e/gwQxMdwALA) form. 
 
 ## Program
 

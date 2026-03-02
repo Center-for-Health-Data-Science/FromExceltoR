@@ -50,7 +50,7 @@ website:
           - href: Exercises/exercise3.qmd
             text: "Exercise 3: ggplot2"
           - href: Exercises/exercise4.qmd
-            text: "Exercise 4: Applied Statistics in R"
+            text: "Exercise 4: Applied Statistics"
           - href: Exercises/exercise5.qmd
             text: "Exercise 5: Data Exercise in R"
       
