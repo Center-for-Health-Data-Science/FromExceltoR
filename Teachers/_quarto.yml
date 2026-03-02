@@ -29,7 +29,7 @@ website:
       - section: "Presentations 👩🏽‍🏫"
         contents:
           - href: Presentations/presentation0.qmd
-            text: "Presentation 0: Introduction to R"
+            text: "Presentation 0: Intro to R"
           - href: Presentations/presentation1.qmd
             text: "Presentation 1: Intro to Quarto"
           - href: Presentations/presentation2.qmd
@@ -37,7 +37,7 @@ website:
           - href: Presentations/presentation3.qmd
             text: "Presentation 3: ggplot2"
           - href: Presentations/presentation4.qmd
-            text: "Presentation 4: Applied Statistics in R"
+            text: "Presentation 4: Applied Statistics"
         
       - section: "Exercises 🏋🏽"
         contents:

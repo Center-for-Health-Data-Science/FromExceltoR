@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="HeaDS Data Science Lab, University of Copenhagen">
 
-<title>About HeaDS – FromExceltoR</title>
+<title>Exercise 4: Applied Statistics in R – FromExceltoR</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,30 +21,65 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-2fef5ea3f8957b3e4ecc936fc74692ca.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-1a1b94732c3f738a433516df90adcc6a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-8966b87b708f3525d625b5bf86374a4d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-1a1b94732c3f738a433516df90adcc6a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-2fef5ea3f8957b3e4ecc936fc74692ca.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-1a1b94732c3f738a433516df90adcc6a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-8966b87b708f3525d625b5bf86374a4d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-1a1b94732c3f738a433516df90adcc6a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -72,6 +108,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -244,7 +309,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">FromExceltoR</span>
     </a>
   </div>
@@ -255,11 +320,11 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
+    <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Course Material</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./about_heads.html" aria-current="page"> 
+    <a class="nav-link" href="../../about_heads.html"> 
 <span class="menu-text">About us</span></a>
   </li>  
 </ul>
@@ -274,7 +339,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">About HeaDS</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Exercise 4: Applied Statistics in R</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -288,13 +353,13 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Slideshow/FromExceltoR.pdf" class="sidebar-item-text sidebar-link">
+  <a href="../../Slideshow/FromExceltoR.pdf" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Slides 🌟️</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Presentations/data.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Presentations/data.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Data 🗂️</span></a>
   </div>
 </li>
@@ -309,32 +374,32 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Presentations/presentation0.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Presentation 0: Intro to R</span></a>
+  <a href="../../Presentations/presentation0.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Presentation 0: Introduction to R</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Presentations/presentation1.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Presentations/presentation1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Presentation 1: Intro to Quarto</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Presentations/presentation2.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Presentations/presentation2.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Presentation 2: Tidyverse</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Presentations/presentation3.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Presentations/presentation3.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Presentation 3: ggplot2</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Presentations/presentation4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Presentation 4: Applied Statistics</span></a>
+  <a href="../../Presentations/presentation4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Presentation 4: Applied Statistics in R</span></a>
   </div>
 </li>
       </ul>
@@ -350,37 +415,37 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Exercises/exercise0.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Exercises/exercise0.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercise 0: File Tree and Setup</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Exercises/exercise1.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Exercises/exercise1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercise 1: Introduction to Quarto</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Exercises/exercise2.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Exercises/exercise2.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercise 2: Tidyverse</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Exercises/exercise3.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Exercises/exercise3.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercise 3: ggplot2</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Exercises/exercise4.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Exercises/exercise4.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercise 4: Applied Statistics in R</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Exercises/exercise5.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Exercises/exercise5.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercise 5: Data Exercise in R</span></a>
   </div>
 </li>
@@ -397,7 +462,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Solutions/solution_not_up.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Solutions/solution_not_up.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Solutions not up yet</span></a>
   </div>
 </li>
@@ -414,25 +479,25 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./CheatSheet/quartoCheatSheet.pdf" class="sidebar-item-text sidebar-link">
+  <a href="../../CheatSheet/quartoCheatSheet.pdf" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Quarto</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./CheatSheet/BaseRCheatSheet.pdf" class="sidebar-item-text sidebar-link">
+  <a href="../../CheatSheet/BaseRCheatSheet.pdf" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Base R</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./CheatSheet/TidyverseCheatSheet.pdf" class="sidebar-item-text sidebar-link">
+  <a href="../../CheatSheet/TidyverseCheatSheet.pdf" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Tidyverse</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./CheatSheet/ggplotCheatSheet.pdf" class="sidebar-item-text sidebar-link">
+  <a href="../../CheatSheet/ggplotCheatSheet.pdf" class="sidebar-item-text sidebar-link">
  <span class="menu-text">ggplot2</span></a>
   </div>
 </li>
@@ -448,9 +513,12 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#center-for-health-data-science" id="toc-center-for-health-data-science" class="nav-link active" data-scroll-target="#center-for-health-data-science">Center for Health Data Science</a>
+  <li><a href="#data-and-packages" id="toc-data-and-packages" class="nav-link active" data-scroll-target="#data-and-packages">Data and Packages</a></li>
+  <li><a href="#regression" id="toc-regression" class="nav-link" data-scroll-target="#regression">Regression</a></li>
+  <li><a href="#anova" id="toc-anova" class="nav-link" data-scroll-target="#anova">ANOVA</a></li>
+  <li><a href="#optional-section" id="toc-optional-section" class="nav-link" data-scroll-target="#optional-section">Optional section</a>
   <ul class="collapse">
-  <li><a href="#datalab" id="toc-datalab" class="nav-link" data-scroll-target="#datalab">DataLab</a></li>
+  <li><a href="#logistic-regression" id="toc-logistic-regression" class="nav-link" data-scroll-target="#logistic-regression">Logistic regression</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -461,13 +529,19 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">About HeaDS</h1>
+<h1 class="title">Exercise 4: Applied Statistics in R</h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>HeaDS Data Science Lab, University of Copenhagen </p>
+          </div>
+  </div>
     
   
     
@@ -478,19 +552,162 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="center-for-health-data-science" class="level2">
-<h2 class="anchored" data-anchor-id="center-for-health-data-science">Center for Health Data Science</h2>
-<p>In the Center for Health Data Science (HeaDS) we do both research and in the DataLab and Sandbox we develop and host course. Read more about all the cool stuff we do on our <a href="https://heads.ku.dk">website</a>.</p>
-<section id="datalab" class="level3">
-<h3 class="anchored" data-anchor-id="datalab">DataLab</h3>
-<p>The DataLab offers a range of services to support SUND employees in their data science analyses. Here’s an overview:</p>
-<ul>
-<li><p><strong>Courses:</strong> We offer data science and bioinformatics courses for all SUND staff (researchers, administrative staff, technical staff, etc.). Our most popular courses include&nbsp;<em>“From Excel to R,” “Python Tsunami,”</em> and <em>“Introduction to Bulk RNA-seq Analysis.”</em></p></li>
-<li><p><strong>Consultations:</strong>&nbsp;We host drop-in sessions every Thursday from 13:00 to 15:00, where we assist with data science-related challenges and questions. Alternatively, you can reach out to arrange a one-on-one meeting on another day.</p></li>
-<li><p><strong>Commissions:</strong> We conduct commissioned research, such as bioinformatics and data science analyses tailored to your needs. Additionally, we offer a commissioned&nbsp;supervision scheme&nbsp;if you would like to learn how to perform the analysis yourself.</p></li>
-<li><p><strong>Events:</strong> We host various data science events. Join us for our seminar series, <em>“Talking HeaDS.”</em> Our next session is 27 May and you can sign up here: <a href="https://eventsignup.ku.dk/talkingheadsmay2025" class="uri">https://eventsignup.ku.dk/talkingheadsmay2025</a>. More information on the picture below.</p></li>
-</ul>
-<p><img src="Figures/Talking HeaDS_May 2025_1920x1080_DDSA.png" class="img-fluid"></p>
+<p>This exercise focuses on&nbsp;<strong>Gaussian linear models</strong>, where data points are assumed to be independent, normally distributed, and have equal variance. Such models are fitted in R using&nbsp;<code>lm()</code>, e.g.</p>
+<p>Later sections also introduce&nbsp;<strong>logistic regression</strong>&nbsp;(for binary outcomes) and&nbsp;<strong>linear mixed models</strong>&nbsp;(for grouped or hierarchical data).</p>
+<p>The purpose of this exercise is to show how to fit and work with statistical models in R. This means that the analyses are not necessarily those that should be used in a real-life analysis of the data.</p>
+<p>Start with the <strong>Data</strong> part.</p>
+<section id="data-and-packages" class="level3">
+<h3 class="anchored" data-anchor-id="data-and-packages">Data and Packages</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggfortify)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The dataset to be used concerns risk factors for low infant birth weight and is available in the <strong>MASS</strong> package. It includes 189 births with the following variables:</p>
+<ol type="1">
+<li>Use the commands below to load the MASS package and get the help page for the data. The help page will appear in the lower right window of RStudio. Read about the data; in particular about the variables <code>age</code>, <code>lwt</code>, <code>ftv</code>, <code>smoke</code>, and <code>bwt</code>.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(birthwt) <span class="co"># Calls the data frame called birthwt (Promise)</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(birthwt) <span class="co"># Loads the data in Environment and shows the head</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="2" type="1">
+<li>&nbsp;<code>birthwt</code>&nbsp;is not a tibble (the modern tidyverse data format). Convert it to a tibble.</li>
+</ol>
+<ol start="3" type="1">
+<li>The variables&nbsp;<code>smoke</code>&nbsp;(mother’s smoking habits) and&nbsp;<code>ftv</code>&nbsp;(number of first-trimester physician visits) are coded as numeric variables.<br>
+Convert them to&nbsp;<strong>factors</strong>&nbsp;so they are treated as categorical variables in your analyses:</li>
+</ol>
+<ol start="4" type="1">
+<li>Make boxplot of birth weight <code>bwt</code> according the number of visits to physician <code>ftvFac</code> during the first trimester. Split by smoking status.</li>
+</ol>
+<ol start="5" type="1">
+<li>Make a scatterplot with <code>lwt</code> on the <span class="math inline">\(x\)</span>-axis and <code>bwt</code> on the <span class="math inline">\(y\)</span>-axis. Modify the plot such that points are colored according to <code>smoke</code> and size shows <code>ftv.</code></li>
+</ol>
+<ol start="6" type="1">
+<li>The <code>ftv</code> is a numerical variable, but we would also like a categorical version of it called <code>visits</code> , with groups corresponding to zero visits, one visit, and two or more visits, respectively.</li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Hint
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Use <code>mutate</code> and take a look at <code>fct_collapse</code> function.</p>
+</div>
+</div>
+</div>
+<ol start="7" type="1">
+<li><p>Report how many women had more than one physician visit during the first trimester here.</p>
+<p><img src="images/qr_code_Ex4Q1.png" class="img-fluid" width="200"></p></li>
+</ol>
+</section>
+<section id="regression" class="level3">
+<h3 class="anchored" data-anchor-id="regression">Regression</h3>
+<p>The term <em>regression</em> is usually used for models where all explanatory variables are numerical.</p>
+<p>If you are not too familiar with linear regression, you can have a look at what the <code>summary()</code> output means <a href="https://feliperego.github.io/blog/2015/10/23/Interpreting-Model-Output-In-R">here</a> and for understanding regression <code>plot()</code>, have a look <a href="https://data.library.virginia.edu/diagnostic-plots/">here</a>.</p>
+<ol start="8" type="1">
+<li>Fit a linear regression model with <code>bwt</code> as response and <code>lwt</code> as covariate, and identify the estimates for the intercept and for the slope. Find the 97.5% confidence interval for the slope parameter by using the <code>confint()</code> function.</li>
+</ol>
+<ol start="9" type="1">
+<li>Performe model validation. Hint: use autoplot. Does the model seem appropriate for the data?</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#par(mfrow=c(2,2))</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">#plot(reg1)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="10" type="1">
+<li>Fit the multiple linear regression model where you include <code>lwt</code> as well as <code>age</code> and <code>ftv</code> (numerical variables) as covariates. Identify the parameter estimates, and consider what their interpretation is.</li>
+</ol>
+<ol start="11" type="1">
+<li>Fit the multiple linear regression model again, but now only using data from mothers with a weight less than 160 pounds (<code>lwt</code> &lt; 160). <em>Hint:</em> Use the <code>filter</code> function and change the <code>data</code> argument in the <code>lm</code> command.</li>
+</ol>
+</section>
+<section id="anova" class="level3">
+<h3 class="anchored" data-anchor-id="anova">ANOVA</h3>
+<p>The term&nbsp;<strong>analysis of variance (ANOVA)</strong>&nbsp;is used for models where all explanatory variables are categorical (factors). Before proceeding, make sure that&nbsp;<code>smoke</code>&nbsp;is coded as a factor.</p>
+<ol start="12" type="1">
+<li>Fit a&nbsp;<strong>one-way ANOVA</strong>&nbsp;(using&nbsp;<code>lm()</code>) where the mean birth weight is allowed to differ between smokers and non-smokers. Find the estimated birth weight for infants from smokers as well as non-smokers. Hint: use&nbsp;<code>emmeans()</code>.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans)    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="13" type="1">
+<li>Check, is there a statistically significant difference in mean birth weight between infants of smokers and non-smokers?</li>
+</ol>
+<ol start="14" type="1">
+<li>Fit the oneway ANOVA where you use <code>visits</code> as the explanatory variable. Perform an overall F-test for differences across all levels. Find the estimated birth weight for each group, and make the pairwise comparisons between the groups.<br>
+<em>Hint</em> <code>drop1(, test="F")</code>. What do you conclude about the relationship between the number of visits and infant birth weight?</li>
+</ol>
+<ol start="15" type="1">
+<li>Now, consider&nbsp;<strong>both&nbsp;<code>visits</code>&nbsp;and&nbsp;<code>smoke</code></strong>&nbsp;as explanatory variables.<br>
+Since both are categorical, the relevant model is a&nbsp;<strong>two-way ANOVA</strong>. Fit the model without interaction. Inspect the estimated means and group differences. How do you interpret the estimated means? What do they tell you about birth weight by smoking status and visit frequency?</li>
+</ol>
+<!-- -->
+<ol start="16" type="1">
+<li>Fit the twoway ANOVA model <em>with interaction</em> replacing <code>+</code> by a <code>*</code>. Use&nbsp;<code>drop1()</code>&nbsp;to test whether the interaction term is statistically significant. Compare it to model without interaction? What do the p-values suggest about whether the effect of smoking depends on the number of visits?</li>
+</ol>
+<ol start="17" type="1">
+<li>Use&nbsp;<code>anova()</code>&nbsp;to formally compare the two models. Are the two models statistically different?<br>
+What does this imply about including the interaction term?</li>
+</ol>
+<ol start="18" type="1">
+<li>Report are the 2 models statistically different here.</li>
+</ol>
+<p><img src="images/qr_code_Ex4Q2.png" class="img-fluid" width="200"></p>
+</section>
+<section id="optional-section" class="level2">
+<h2 class="anchored" data-anchor-id="optional-section">Optional section</h2>
+<section id="logistic-regression" class="level3">
+<h3 class="anchored" data-anchor-id="logistic-regression">Logistic regression</h3>
+<ol start="19" type="1">
+<li>The variable&nbsp;<code>low</code>&nbsp;is&nbsp;<strong>1</strong>&nbsp;if birth weight is less than 2500 g, and&nbsp;<strong>0</strong>&nbsp;otherwise.<br>
+Visualize the data:</li>
+</ol>
+<p>Imagine the actual birth weight&nbsp;<code>bwt</code>&nbsp;was&nbsp;<strong>not recorded</strong>, but we still want to know whether the birth weight was low.<br>
+Because the outcome is binary (<code>low</code>&nbsp;has two values), we use&nbsp;<strong>logistic regression</strong>&nbsp;to model the probability.</p>
+<p>For example, we may consider a model with mothers’s weight, smoking status, and age as predictors, just like in the previous question.</p>
+<ol start="20" type="1">
+<li>Fit the model, take a look at <code>glm</code> function:</li>
+</ol>
+<ol start="21" type="1">
+<li><p>Use&nbsp;<code>drop1()</code>&nbsp;to check if each predictor contributes significantly:</p>
+<p>A Note: <code>test = "F"</code>&nbsp;is for Gaussian linear models (<code>lm()</code>), where F-tests are appropriate.<br>
+For logistic regression and other GLMs,&nbsp;<code>test = "Chisq"</code>&nbsp;is the correct choice.</p></li>
+</ol>
+<pre><code>**Question:**&nbsp;Based on the p-values, is there evidence that&nbsp;**smoking**&nbsp;affects the probability of low birth weight?</code></pre>
+<ol start="22" type="1">
+<li>The fitted model may be used to predict the outcome for new values. The new values are provided in a <code>newData</code> data frame with the same names as the covariate in the model.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># new data</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>newData <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">low =</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">5</span>),</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">age =</span> <span class="fu">c</span>(<span class="dv">22</span>, <span class="dv">30</span>, <span class="dv">18</span>, <span class="dv">17</span>, <span class="dv">28</span>),</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">lwt =</span> <span class="fu">c</span>(<span class="dv">140</span>, <span class="dv">155</span>, <span class="dv">130</span>, <span class="dv">97</span>, <span class="dv">165</span>),</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">race =</span> <span class="fu">c</span>(<span class="st">"Black"</span>, <span class="st">"Other"</span>, <span class="st">"Black"</span>, <span class="st">"Other"</span>, <span class="st">"White"</span>),</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">smoke =</span> <span class="fu">as.factor</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>)),</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">ptl =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>),</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">ftv =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">2</span>),</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">bwt =</span> <span class="fu">c</span>(<span class="dv">2800</span>, <span class="dv">4500</span>, <span class="dv">1700</span>, <span class="dv">1500</span>, <span class="dv">3400</span>)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="23" type="1">
+<li>We have data for&nbsp;<strong>5 new mothers</strong>. Use your fitted logistic model&nbsp;<code>logreg1</code>&nbsp;to&nbsp;<strong>predict the probability</strong>&nbsp;of low birthweight and fill the&nbsp;<code>low</code>&nbsp;column. Use the&nbsp;<code>predict()</code>&nbsp;function to compute the predicted probabilities for the new cases. Make sure to set&nbsp;<code>type="response"</code>&nbsp;to get probabilities rather than log-odds.</li>
+</ol>
+<ol start="24" type="1">
+<li>Add the&nbsp;<strong>predicted probabilities</strong>&nbsp;(red points) and a&nbsp;<strong>connecting line</strong>&nbsp;to your&nbsp;<code>ggplot</code>. Hint: add geom_point and geom_line with the newData.</li>
+</ol>
+<ol start="25" type="1">
+<li><p>Report here - <strong>In how many of the new cases is birthweight predicted to be low?</strong>?</p>
+<p><img src="images/qr_code_Ex4Q3.png" class="img-fluid" width="200"></p></li>
+</ol>
 
 
 </section>

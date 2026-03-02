@@ -90,7 +90,7 @@ Use `mutate` and take a look at `fct_collapse` function.
 
 7.  Report how many women had more than one physician visit during the first trimester here.
 
-    ![](images/qr_code_Ex4Q1.png){width="200"}
+    *Answer - 42*
 
 ### Regression
 
@@ -126,7 +126,7 @@ summary(reg2)$coefficients
 
 <!-- -->
 
-11.  Fit the multiple linear regression model again, but now only using data from mothers with a weight less than 160 pounds (`lwt` \< 160). *Hint:* Use the `filter` function and change the `data` argument in the `lm` command.
+11. Fit the multiple linear regression model again, but now only using data from mothers with a weight less than 160 pounds (`lwt` \< 160). *Hint:* Use the `filter` function and change the `data` argument in the `lm` command.
 
 ```{r}
     ### Use only data from mothers with weight below 160
@@ -192,14 +192,14 @@ anova(twoway1, twoway2)
 
 18. Report are the 2 models statistically different here.
 
-![](images/qr_code_Ex4Q2.png){width="200"}
+    *Answer - No, including the interaction term does not improve the model.*
 
 ## Optional section
 
 ### Logistic regression
 
 19. The variable `low` is **1** if birth weight is less than 2500 g, and **0** otherwise.\
-Visualize the data:
+    Visualize the data:
 
 ```{r}
 ggplot(birthData, aes(x=bwt, y=low)) + 
@@ -270,4 +270,4 @@ ggplot(birthData, aes(x=bwt, y=low)) +
 
 25. Report here - **In how many of the new cases is birthweight predicted to be low?**?
 
-    ![](images/qr_code_Ex4Q3.png){width="200"}
+    *Answer - 4*

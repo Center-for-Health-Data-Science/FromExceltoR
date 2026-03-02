@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="HeaDS Data Science Lab, University of Copenhagen">
 
-<title>About HeaDS – FromExceltoR</title>
+<title>Exercise 1: Introduction to Quarto – FromExceltoR</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,30 +21,65 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-2fef5ea3f8957b3e4ecc936fc74692ca.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-1a1b94732c3f738a433516df90adcc6a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-8966b87b708f3525d625b5bf86374a4d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-1a1b94732c3f738a433516df90adcc6a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-2fef5ea3f8957b3e4ecc936fc74692ca.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-1a1b94732c3f738a433516df90adcc6a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-8966b87b708f3525d625b5bf86374a4d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-1a1b94732c3f738a433516df90adcc6a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -244,7 +280,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">FromExceltoR</span>
     </a>
   </div>
@@ -255,11 +291,11 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
+    <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Course Material</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./about_heads.html" aria-current="page"> 
+    <a class="nav-link" href="../../about_heads.html"> 
 <span class="menu-text">About us</span></a>
   </li>  
 </ul>
@@ -274,7 +310,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">About HeaDS</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Exercise 1: Introduction to Quarto</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -288,13 +324,13 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Slideshow/FromExceltoR.pdf" class="sidebar-item-text sidebar-link">
+  <a href="../../Slideshow/FromExceltoR.pdf" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Slides 🌟️</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Presentations/data.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Presentations/data.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Data 🗂️</span></a>
   </div>
 </li>
@@ -309,32 +345,32 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Presentations/presentation0.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Presentation 0: Intro to R</span></a>
+  <a href="../../Presentations/presentation0.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Presentation 0: Introduction to R</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Presentations/presentation1.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Presentations/presentation1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Presentation 1: Intro to Quarto</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Presentations/presentation2.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Presentations/presentation2.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Presentation 2: Tidyverse</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Presentations/presentation3.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Presentations/presentation3.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Presentation 3: ggplot2</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Presentations/presentation4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Presentation 4: Applied Statistics</span></a>
+  <a href="../../Presentations/presentation4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Presentation 4: Applied Statistics in R</span></a>
   </div>
 </li>
       </ul>
@@ -350,37 +386,37 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Exercises/exercise0.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Exercises/exercise0.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercise 0: File Tree and Setup</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Exercises/exercise1.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Exercises/exercise1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercise 1: Introduction to Quarto</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Exercises/exercise2.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Exercises/exercise2.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercise 2: Tidyverse</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Exercises/exercise3.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Exercises/exercise3.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercise 3: ggplot2</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Exercises/exercise4.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Exercises/exercise4.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercise 4: Applied Statistics in R</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Exercises/exercise5.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Exercises/exercise5.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercise 5: Data Exercise in R</span></a>
   </div>
 </li>
@@ -397,7 +433,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Solutions/solution_not_up.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Solutions/solution_not_up.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Solutions not up yet</span></a>
   </div>
 </li>
@@ -414,25 +450,25 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./CheatSheet/quartoCheatSheet.pdf" class="sidebar-item-text sidebar-link">
+  <a href="../../CheatSheet/quartoCheatSheet.pdf" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Quarto</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./CheatSheet/BaseRCheatSheet.pdf" class="sidebar-item-text sidebar-link">
+  <a href="../../CheatSheet/BaseRCheatSheet.pdf" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Base R</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./CheatSheet/TidyverseCheatSheet.pdf" class="sidebar-item-text sidebar-link">
+  <a href="../../CheatSheet/TidyverseCheatSheet.pdf" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Tidyverse</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./CheatSheet/ggplotCheatSheet.pdf" class="sidebar-item-text sidebar-link">
+  <a href="../../CheatSheet/ggplotCheatSheet.pdf" class="sidebar-item-text sidebar-link">
  <span class="menu-text">ggplot2</span></a>
   </div>
 </li>
@@ -448,10 +484,13 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#center-for-health-data-science" id="toc-center-for-health-data-science" class="nav-link active" data-scroll-target="#center-for-health-data-science">Center for Health Data Science</a>
-  <ul class="collapse">
-  <li><a href="#datalab" id="toc-datalab" class="nav-link" data-scroll-target="#datalab">DataLab</a></li>
-  </ul></li>
+  <li><a href="#getting-started" id="toc-getting-started" class="nav-link active" data-scroll-target="#getting-started">Getting started</a></li>
+  <li><a href="#working-with-quarto-documents" id="toc-working-with-quarto-documents" class="nav-link" data-scroll-target="#working-with-quarto-documents">Working with Quarto Documents</a></li>
+  <li><a href="#making-some-graphics" id="toc-making-some-graphics" class="nav-link" data-scroll-target="#making-some-graphics">Making some graphics</a></li>
+  <li><a href="#shut-down-r" id="toc-shut-down-r" class="nav-link" data-scroll-target="#shut-down-r">Shut down R</a></li>
+  <li><a href="#wrapping-up" id="toc-wrapping-up" class="nav-link" data-scroll-target="#wrapping-up">Wrapping up</a></li>
+  <li><a href="#extra" id="toc-extra" class="nav-link" data-scroll-target="#extra">Extra</a></li>
+  <li><a href="#lessons-learnt" id="toc-lessons-learnt" class="nav-link" data-scroll-target="#lessons-learnt">Lessons learnt</a></li>
   </ul>
 </nav>
     </div>
@@ -461,13 +500,19 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">About HeaDS</h1>
+<h1 class="title">Exercise 1: Introduction to Quarto</h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>HeaDS Data Science Lab, University of Copenhagen </p>
+          </div>
+  </div>
     
   
     
@@ -478,22 +523,97 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="center-for-health-data-science" class="level2">
-<h2 class="anchored" data-anchor-id="center-for-health-data-science">Center for Health Data Science</h2>
-<p>In the Center for Health Data Science (HeaDS) we do both research and in the DataLab and Sandbox we develop and host course. Read more about all the cool stuff we do on our <a href="https://heads.ku.dk">website</a>.</p>
-<section id="datalab" class="level3">
-<h3 class="anchored" data-anchor-id="datalab">DataLab</h3>
-<p>The DataLab offers a range of services to support SUND employees in their data science analyses. Here’s an overview:</p>
-<ul>
-<li><p><strong>Courses:</strong> We offer data science and bioinformatics courses for all SUND staff (researchers, administrative staff, technical staff, etc.). Our most popular courses include&nbsp;<em>“From Excel to R,” “Python Tsunami,”</em> and <em>“Introduction to Bulk RNA-seq Analysis.”</em></p></li>
-<li><p><strong>Consultations:</strong>&nbsp;We host drop-in sessions every Thursday from 13:00 to 15:00, where we assist with data science-related challenges and questions. Alternatively, you can reach out to arrange a one-on-one meeting on another day.</p></li>
-<li><p><strong>Commissions:</strong> We conduct commissioned research, such as bioinformatics and data science analyses tailored to your needs. Additionally, we offer a commissioned&nbsp;supervision scheme&nbsp;if you would like to learn how to perform the analysis yourself.</p></li>
-<li><p><strong>Events:</strong> We host various data science events. Join us for our seminar series, <em>“Talking HeaDS.”</em> Our next session is 27 May and you can sign up here: <a href="https://eventsignup.ku.dk/talkingheadsmay2025" class="uri">https://eventsignup.ku.dk/talkingheadsmay2025</a>. More information on the picture below.</p></li>
-</ul>
-<p><img src="Figures/Talking HeaDS_May 2025_1920x1080_DDSA.png" class="img-fluid"></p>
-
-
+<section id="getting-started" class="level2">
+<h2 class="anchored" data-anchor-id="getting-started">Getting started</h2>
+<ol type="1">
+<li><p><strong>Make a new Quarto document</strong>. Go to the menu bar and click <em>File</em> → <em>New file…</em> → <em>Quarto document…</em>. Give the Quarto document a title that makes sense to you. NB! The document is not saved yet.</p></li>
+<li><p><strong>Save your document</strong> in your <em>Scripts</em> directory. Go to the menu bar and click <em>File</em> → <em>Save as…</em>.</p></li>
+</ol>
 </section>
+<section id="working-with-quarto-documents" class="level2">
+<h2 class="anchored" data-anchor-id="working-with-quarto-documents">Working with Quarto Documents</h2>
+<ol start="3" type="1">
+<li><p><strong>Create code chunk</strong>. In the Quarto document you just made, create a code chuck by pressing the green box with the white ‘C’ in the right of the panel.</p></li>
+<li><p><strong>Write code</strong>. Write a command in the code chunk, similar to one of those from exercise-0.</p></li>
+<li><p><strong>Run code</strong>. Click on the green button in the top right of the code chunk - or simply type <em>Ctrl + Enter</em>/<em>option + Enter</em>. Then the command is transferred to the prompt in the console and executed, just as if you had written the command directly at the prompt. Try with a new command in a new line.</p></li>
+<li><p><strong>Create a comment</strong>. Put a hashtag (#) before one of the commands in the code chunk and run it. Nothing happens! Hence, you can use hashtags for writing comments in your code chunks.</p></li>
+<li><p><strong>Save your files often</strong>. It happens that you ask R for something so weird that it shuts down, and then it is a pity to have lost your work.</p>
+<h2 id="basic-r-commands" class="anchored">Basic R commands</h2>
+<p>We will now have a look at basic commands. We will use a built-in dataset of R called <code>trees</code>. Copy-paste the commands into your document or write them yourself to get a hang of the coding! Start thinking about the structure of you document and when to create new code chunks.</p></li>
+<li><p>To start with, load the <code>tidyverse</code> package.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></li>
+<li><p>Now, load the <code>trees</code> dataset by copying and executing the following commands:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"trees"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">view</span>(trees)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>?trees</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></li>
+<li><p>Check what information is contained in the <code>trees</code> dataset by calling the <code>summary</code> function on it:</p></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(trees)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="11" type="1">
+<li><p>How many trees do we have data for?</p></li>
+<li><p>Now, extract the column called <code>Volume</code> from the dataset and assign it to a new variable called <code>volume_col</code>.</p></li>
+<li><p>Display the the first 10 values of <code>volume_col</code>.</p></li>
+<li><p>Find the minimum, maximum and mean volume from the column you just extracted. Does it match what was stated in the <code>summary</code>?</p>
+<p><strong>Report here the median height of the trees.</strong></p>
+<p><img src="images/qr_code_Ex1Q1.png" class="img-fluid" width="200"></p></li>
+<li><p>What class of data structure is <code>trees</code>? Make it into a tibble.</p></li>
+</ol>
+</section>
+<section id="making-some-graphics" class="level2">
+<h2 class="anchored" data-anchor-id="making-some-graphics">Making some graphics</h2>
+<p>Next, let’s also try to make some plots using the base graphics system in R (in <em>Presentation III</em> you will learn to make graphics using the <em>ggplot2</em>-package). We will continue to use the <code>trees</code> dataset.</p>
+<ol start="16" type="1">
+<li>The dataset <code>trees</code> contains 31 observations of 3 variables (diameter, height and volume of black cherry trees). Insert the following two commands in a code chunk, and execute them to test out base R plots.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(trees<span class="sc">$</span>Volume, <span class="at">main =</span> <span class="st">"Distribution of Volume"</span>, <span class="at">xlab =</span> <span class="st">"Volume"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Volume <span class="sc">~</span> Height, <span class="at">data =</span> trees,</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Raw scale"</span>,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Height"</span>, </span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Volume"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="shut-down-r" class="level2">
+<h2 class="anchored" data-anchor-id="shut-down-r">Shut down R</h2>
+<ol start="17" type="1">
+<li><p><strong>Close RStudio</strong>. If changes were made either to the Quarto document (shown in the upper-left window) or to the workspace (called ‘Global Environment’ in the upper-right window) you will be prompted if you like to save those. Answer <em>Yes</em> to that; in particular it is important that you save your documents as they contain all relevant commands to reproduce your output and plots.</p></li>
+<li><p><strong>Reopen file</strong>. Locate the Quarto document that you saved. Start RStudio again, and open the file (via the File menu). Check that you can run it again.</p></li>
+</ol>
+<p>Remark - You can also start RStudio by double clicking on a file with the .qmd extension (or other R-readable formats). One advantage of this is that the workspace and the R history will be saved to the same folder as the Quarto document when you later close RStudio, since the <em>working directory</em> will be set to the map where the file is located.</p>
+</section>
+<section id="wrapping-up" class="level2">
+<h2 class="anchored" data-anchor-id="wrapping-up">Wrapping up</h2>
+<ol start="19" type="1">
+<li><p>Imagine you need to send your code to a collaborator. Review your code to ensure it is clear and well-structured, so your collaborator can easily understand and follow your work. You might consider emphasizing important points by making text <strong>bold</strong>, <u>underlined</u> or <span style="color:blue">blue</span>.</p></li>
+<li><p>Render your Quarto document by clicking the Render button with the blue arrow in the toolbar. Once the HTML file is generated, open it in a web browser. Does the document look as you expected? Iterate on your document until it meets your desired format and appearance.</p></li>
+</ol>
+</section>
+<section id="extra" class="level2">
+<h2 class="anchored" data-anchor-id="extra">Extra</h2>
+<ol start="21" type="1">
+<li><strong>Mac</strong> If you want to render your document to a PDF you need to install <code>tinyex</code>.</li>
+</ol>
+<p>Go to https://quarto.org/docs/download/ and install Quarto.</p>
+<p>In the top of your console window, switch to <strong>Terminal</strong>. (If the Terminal is not there go to <em>Tools</em> → <em>Terminal</em> → <em>New Terminal</em>.) Write <code>quarto install tinytex</code> in the terminal and press enter. When it has completed and gives the message <em>Installation successful</em>, change the YAML in the every top of your Quarto document from <code>format: html</code> to <code>format: pdf</code>. Save and render your Quarto document again and review the PDF file.</p>
+</section>
+<section id="lessons-learnt" class="level2">
+<h2 class="anchored" data-anchor-id="lessons-learnt">Lessons learnt</h2>
+<ul>
+<li><p>You must write your code in a document, like the Quarto document, such that you can save the work and return to it some other day.</p></li>
+<li><p>Save your files often.</p></li>
+<li><p>If you forget to save your files before you close RStudio, then RStudio will prompt you if you want to save your work.</p></li>
+<li><p>Have structure in your document by using headers, text, and code chunks (maybe with comments).</p></li>
+</ul>
+
+
 </section>
 
 </main> <!-- /main -->

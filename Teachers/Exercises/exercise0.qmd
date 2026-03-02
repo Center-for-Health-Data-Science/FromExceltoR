@@ -33,7 +33,7 @@ Before diving into the hands-on exercises, it’s important to get your files or
 
 6.  **Start RStudio**.
 
-7.  **Make a new R document**. Go to the menu bar and click *File* → *New file...* → *R Script...*. Give the R document a title that makes sense to you. NB! The document is not saved yet.
+7.  **Make a new R document**. Go to the menu bar and click *File* → *New file...* → *R Script...*. Note! The document is not saved yet.
 
 8.  **Set working directory**. Let’s figure out where RStudio’s working directory is and then set it to your project folder, "FromExceltoR". Go to the menu bar and click *Session* → *Set Working Directory...* → *Choose Directory...*. Find your project folder in the navigation pane, select it, and click **Open**.
 
