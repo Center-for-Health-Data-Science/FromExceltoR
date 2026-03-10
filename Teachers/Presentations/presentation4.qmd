@@ -235,6 +235,7 @@ The term ***regression*** is usually used for models where all explanatory varia
 ```{r}
 data(trees)
 head(trees)
+dim(trees)
 ```
 
 #### Step 2: Descriptive plots and statistics
