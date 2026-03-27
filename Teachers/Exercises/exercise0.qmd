@@ -15,11 +15,11 @@ knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
 
 Before diving into the hands-on exercises, it’s important to get your files organized so everything runs smoothly. In coding, we refer to folders as *directories*, and we often describe their structure using a *file tree* — a visual or written outline that shows how files and folders are arranged. Setting up a clear file tree will save you time and frustration later. This short setup will make sure all your data, presentations, and scripts are easy to find and ready to use. Follow the steps below carefully — they’ll help you stay organized throughout the course.
 
-1.  Make a new directory for this course called *FromExceltoR .*
+1.  Make a new directory for this course called *FromExceltoR .* Call it EXACTLY like this. Do not put it on OneDrive.
 
 2.  Go to course website and to the *Data* tab. Press the **DOWNLOAD DATA** button.
 
-3.  Move the *Data* folder to your *FromExceltoR* directory and unzip it.
+3.  Unzip  *Data* folder. Pay attention that you actually unzip the folder and delete the zip file. Move the *Data* folder to your *FromExceltoR* directory.
 
 4.  Download the presentations via the **DOWNLOAD PRESENTATIONS** button and move it to your *FromExceltoR* directory and unzip it, just like you did with the Data folder.
 
@@ -35,7 +35,7 @@ Before diving into the hands-on exercises, it’s important to get your files or
 
 7.  **Make a new R document**. Go to the menu bar and click *File* → *New file...* → *R Script...*. Note! The document is not saved yet.
 
-8.  **Set working directory**. Let’s figure out where RStudio’s working directory is and then set it to your project folder, "FromExceltoR". Go to the menu bar and click *Session* → *Set Working Directory...* → *Choose Directory...*. Find your project folder in the navigation pane, select it, and click **Open**.
+8.  **Set working directory**. Let’s figure out where RStudio’s working directory is and then set it to your project folder, "FromExceltoR". Call it EXACTLY like thisGo to the menu bar and click *Session* → *Set Working Directory...* → *Choose Directory...*. Find your project folder in the navigation pane, select it, and click **Open**.
 
 9.  You should see a `setwd("...")` command appear in the Console below. Copy that working-directory path into your new R script file.
 
@@ -104,10 +104,6 @@ Before diving into the hands-on exercises, it’s important to get your files or
     ```{r}
     median(x, na.rm=TRUE)
     ```
-
-    **Report the median value here.**
-
-    ![](images/qr_code_Ex0Q1.png){width="200"}
 
 16. Admittedly, R help pages are often quite difficult to read, but be aware that there are examples of commands in the bottom of each help page. For more complicated functions, these examples can be very useful while trying to get to know the function and its functionalities.
 

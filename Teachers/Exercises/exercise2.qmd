@@ -109,10 +109,6 @@ The next few questions build on each other, each adding a piece of code:
 
 15. How many months are there with good weather (use the column you made in 14) for each station? Find the station that has the most months with good weather.
 
-    **Report the value here.**
-
-    ![](images/qr_code_Ex2Q1.png){width="200"}
-
 ## Complex operations
 
 The final questions require that you combine commands and variables of the type above.
@@ -178,10 +174,6 @@ The `unlist` function will convert a one-column dataframe to a vector.
 :::
 
 27. Count how many times the letter 'A' appears in each station.
-
-    **Let us know you’ve mastered the tidyverse, and report the value here.**
-
-    ![](images/qr_code_Ex2Q2.png){width="200"}
 
 28. Count the number of both uppercase 'A' and lowercase 'a' in each station.
 

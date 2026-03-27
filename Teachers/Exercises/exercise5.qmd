@@ -17,7 +17,7 @@ In this exercise you will practice your newly acquired R skills on an example da
 
 For the data wrangling and statistical modelling we will be doing in this exercise, you will need the following R-packages: `tidyverse`, `MASS`.
 
-1. Make sure that these packages are installed and loaded into your R environment. You likely have the packages already installed and loaded (you used these in the previous exercises) try `sessionInfo()` and `require()` (look up what these function do). If the packages are not there install them and library them as in the previous exercises.
+1.  Make sure that these packages are installed and loaded into your R environment. You likely have the packages already installed and loaded (you used these in the previous exercises) try `sessionInfo()` and `require()` (look up what these function do). If the packages are not there install them and library them as in the previous exercises.
 
 ## Getting the Dataset
 
@@ -80,14 +80,13 @@ Some of the measured variables in our data are numeric, i.e. continuous. For the
     Make a small summary table (min, max, mean, sd and mean+(3\*sd)) that helps you decide whether you want to exclude ages \> 40 before modelling. Count how many observations are \> 40.\
     Then create `birthwt_subset` (either filtered or unfiltered) with the variables we will use going forward: `age`, `lwt`, `smoke`, `ui`, `low`, `bwt`.
 
-
 13. Now make the boxplot of age according to birth weigh categories. Pick custom colors for your plot. Use birthwt_subset from now on.
 
 ::: {.callout-tip collapse="true"}
 ## Hint
+
 Look into `scale_fill_manual()`
 :::
-
 
 ### Categorical variables
 
@@ -107,7 +106,6 @@ What information do the different barplots show? Compare to the counts you get f
         -   mean and sd of `bwt`
         -   mean of `lwt_kg`
     -   Arrange the output so the largest mean birth weight is on top
-    
 17. Make one "publication-ish" plot: a boxplot of birth weight (`bwt`) by smoking status (`smoke`), colored by the combined groups of birthweight category (`low`) and presence of uterine irritability (ui).\
     To make the legend readable, first create labeled versions of `low` and `ui`, then combine them into an interaction variable (e.g. `low_ui`). Your plot should include:
 
@@ -115,7 +113,6 @@ What information do the different barplots show? Compare to the counts you get f
 -   a clean theme\
 -   custom fill colors\
 -   a clear legend title (e.g. "Birthweight group + HT")
-
 
 ## Modelling
 
@@ -159,11 +156,9 @@ model1
 
 22. Instead of the `geom_abline()`, try `geom_smooth()` which provides you with a confidence interval in addition to the regression line. Look at the help for this geom (or google) to figure out what argument it needs to work!
 
-
 23. Repeat the process with the other numeric variable you picked.
 
 24. Inspect your model in more detail with `summary()`. Look at the output, what additional information do you get about the model. Pay attention to the `Residual standard error (RSE)` and `Adjusted R-squared (R2adj)` at the bottom of the output. We would like `RSE` to be as small as possible (goes towards 0 when model improves) while we would like the `R2adj` to be large (goes towards 1 when model improves).
-
 
 Sometimes the variables we have measured are not good at explaining the outcome and we have to accept that.
 
@@ -181,7 +176,6 @@ model2 <- lm(resp ~ pred1 + pred2, data=name_of_dataset)
 
 ```
 :::
-
 
 26. Find the 95% confidence intervals for model2, by using the `confint()` function. If you are not familiar with confidence intervals, have a look [here](https://sphweb.bumc.bu.edu/otlt/mph-modules/bs/bs704_confidence_intervals/bs704_confidence_intervals_print.html).
 

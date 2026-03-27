@@ -74,9 +74,7 @@ Use `mutate` and take a look at `fct_collapse` function.
 
 ```
 
-7.  Report how many women had more than one physician visit during the first trimester here.
-
-    ![](images/qr_code_Ex4Q1.png){width="200"}
+7.  How many women had more than one physician visit during the first trimester?
 
 ### Regression
 
@@ -156,16 +154,14 @@ library(emmeans)
 
 ```
 
-18. Report are the 2 models statistically different here.
-
-![](images/qr_code_Ex4Q2.png){width="200"}
+18. Are the 2 models statistically different?
 
 ## Optional section
 
 ### Logistic regression
 
 19. The variable `low` is **1** if birth weight is less than 2500 g, and **0** otherwise.\
-Visualize the data:
+    Visualize the data:
 
 ```{r}
 
@@ -223,6 +219,4 @@ newData <- tibble(
 
 ```
 
-25. Report here - **In how many of the new cases is birthweight predicted to be low?**?
-
-    ![](images/qr_code_Ex4Q3.png){width="200"}
+25. **In how many of the new cases is birthweight predicted to be low?**?

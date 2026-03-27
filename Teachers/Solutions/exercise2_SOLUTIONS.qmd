@@ -246,6 +246,7 @@ climate2 %>%
   arrange(desc(sun_median)) #%>% 
   # head(n = 1) # to only get the first/largest one
 ```
+
 ## Wrapping up
 
 18. Like in the last exercise; imagine you need to send your code to a collaborator. Review your code to ensure it is clear and well-structured, so your collaborator can easily understand and follow your work. Render your Quarto document and look at the result.
@@ -292,6 +293,7 @@ head(climate_change)
 
 ::: {.callout-tip collapse="true"}
 ## Hint
+
 Have a look at the `case_when` function.
 :::
 
@@ -318,7 +320,7 @@ climate_change %>%
             )
 ```
 
-23. Summarize the mean rain fall, air frost, and sun for each **season and year**.  Compare the seasons across the years. How will the seasons be different in year 2056?
+23. Summarize the mean rain fall, air frost, and sun for each **season and year**. Compare the seasons across the years. How will the seasons be different in year 2056?
 
 ```{r}
 climate_change %>% 
@@ -339,7 +341,8 @@ climate_change %>%
 
 We can get a better overview of the weather changes by plotting the data. We are learning the `ggplot` method in the next presentation.
 
-25. Export your data 
+25. Export your data
+
 ```{r}
 # writexl::write_xlsx(DATASET, 'PATH/TO/DATASET')
 writexl::write_xlsx(climate_change, '../Data/climate_change.xlsx')
@@ -347,11 +350,12 @@ writexl::write_xlsx(climate_change, '../Data/climate_change.xlsx')
 
 If you’re up for more, we can explore some additional exercises that may not perfectly align with this dataset but will introduce you to some very useful tidyverse operations.
 
-26. Extract the unique stations and save them as a vector. 
+26. Extract the unique stations and save them as a vector.
 
 ::: {.callout-tip collapse="true"}
 ## Hint
-The `unlist` function will convert a one-column dataframe to a vector. 
+
+The `unlist` function will convert a one-column dataframe to a vector.
 :::
 
 ```{r}
@@ -364,11 +368,13 @@ station_unique
 ```
 
 27. Count how many times the letter 'A' appears in each station.
+
 ```{r}
 station_unique %>% str_count('A')
 ```
 
 28. Count the number of both uppercase 'A' and lowercase 'a' in each station.
+
 ```{r}
 station_unique %>% str_count('A|a')
 ```
@@ -389,10 +395,11 @@ climate_change <- climate_change %>%
          device_2 = toupper(device_1))
 ```
 
-31. Add a new columns that contains the first three letters of each month in uppercase. 
+31. Add a new columns that contains the first three letters of each month in uppercase.
 
 ::: {.callout-tip collapse="true"}
 ## Hint
+
 Have a look at the `str_sub` function.
 :::
 
@@ -400,15 +407,3 @@ Have a look at the `str_sub` function.
 climate_change <- climate_change %>% 
   mutate(month_names_short = str_sub(month_names, start = 1, end = 3) %>% toupper())
 ```
-
-
-
-
-
-
-
-
-
-
-
-

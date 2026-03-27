@@ -169,7 +169,7 @@ How do we subset dataset is interesting. For example only female patients:
 
 ```{r}
 crohns %>% 
-  filter(sex == 'F') # processed from left to right
+  filter(sex == 'F')
 ```
 
 A great thing about tidyverse: you can write code the way you think. You always filter by defining conditions. If the condition evaluates to 'TRUE' the line is included. See only data lines for patients over 65:
