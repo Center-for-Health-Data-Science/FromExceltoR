@@ -4,3 +4,6 @@
 .Ruserdata
 .DS_store
 FromExceltoR.Rproj
+
+/.quarto/
+**/*.quarto_ipynb
