@@ -35,9 +35,9 @@ A ggplot object is a structured description of a plot. The function `ggplot()
 
 The two most important components of any ggplot are:
 
--   The dataset — typically a `data.frame` or `tibble` containing the variables you want to plot
+- The dataset — typically a `data.frame` or `tibble` containing the variables you want to plot
 
--   The aesthetics (`aes()`) — a set of mappings that tell ggplot *how* to use the variables: x-axis, y-axis and whether to use color, fill, group, size, shape, etc. to represent groups or magnitudes
+- The aesthetics (`aes()`) — a set of mappings that tell ggplot *how* to use the variables: x-axis, y-axis and whether to use color, fill, group, size, shape, etc. to represent groups or magnitudes
 
 ```{r}
 ggplot(
@@ -105,9 +105,9 @@ When you map a variable to `fill`, `colour`, or `group`, ggplot doesn’t only c
 
 Now, you can also control how grouped bars are arranged using the `position` argument in `geom_bar()`:
 
--   `position = "dodge"` → bars for each group are placed **side by side**
+- `position = "dodge"` → bars for each group are placed **side by side**
 
--   `position = "fill"` → bars are scaled to show **proportions**
+- `position = "fill"` → bars are scaled to show **proportions**
 
 ```{r}
 ggplot(
@@ -269,11 +269,11 @@ plot2
 
 Next we want to visualize the number of downloads done each day for each of the 6 machines. We compute the **daily totals** within each machine, and the **cumulated** number of downloads over the days. As before we do this via the following steps:
 
--   Using `group_by()` we group the dataset by both `machineName` and `date`.
+- Using `group_by()` we group the dataset by both `machineName` and `date`.
 
--   Using `summarize()` we count the number of downloads within each machine and date (and also compute total size and total time for that day).
+- Using `summarize()` we count the number of downloads within each machine and date (and also compute total size and total time for that day).
 
--   Using `mutate()` we cumulate the number of downloads over the dates within the machines.
+- Using `mutate()` we cumulate the number of downloads over the dates within the machines.
 
 ```{r}
 daily_downloads <- 
@@ -386,10 +386,10 @@ figure
 
 #write_xlsx(daily_downloads, "daily_downloads.xlsx")
 
-#ggsave(filename = "vionlinPlot.pdf", plot = p2, height = 5, width = 10)
+#ggsave(filename = "vionlinPlot.pdf", plot = plot2, height = 5, width = 10)
 
 #pdf("vionlinPlot2.pdf", height = 5, width = 10)
-#p2
+#plot2
 #dev.off()
 ```
 
