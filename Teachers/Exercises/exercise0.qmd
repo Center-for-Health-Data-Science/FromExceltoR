@@ -35,9 +35,15 @@ Before diving into the hands-on exercises, it’s important to get your files or
 
 7.  **Make a new R document**. Go to the menu bar and click *File* → *New file...* → *R Script...*. Note! The document is not saved yet.
 
-8.  **Set working directory**. Let’s figure out where RStudio’s working directory is and then set it to your project folder, "FromExceltoR". Call it EXACTLY like thisGo to the menu bar and click *Session* → *Set Working Directory...* → *Choose Directory...*. Find your project folder in the navigation pane, select it, and click **Open**.
+8.  **Set working directory**. Let’s figure out where RStudio’s working directory is and then set it to your project folder, "FromExceltoR". Call it EXACTLY like this. Go to the menu bar and click *Session* → *Set Working Directory...* → *Choose Directory...*. Find your project folder in the navigation pane, select it, and click **Open**.
 
 9.  You should see a `setwd("...")` command appear in the Console below. Copy that working-directory path into your new R script file.
+
+::: {.callout-tip collapse="false"}
+## Tip
+
+You can see where your current working directory is by typing `getwd()` in the Console.
+:::
 
 10. Go to the R console (lower left window) and write a few commands, **one at a time**. You could for example try these commands:
 
