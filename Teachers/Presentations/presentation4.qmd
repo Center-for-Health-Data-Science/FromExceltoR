@@ -90,10 +90,12 @@ psoriasisData <- read_excel("../Data/psoriasis.xlsx")
 
 # View the top rows of the dataset
 head(psoriasisData)
+```
 
+```{r}
 # Extract the data of interest containing the IGFL4 expression levels and skin sample type from the dataset and call this subset psorData
 psorData  <- select(psoriasisData, type, IGFL4)
-
+head(psorData)
 ```
 
 The `type` variable (skin sample type) is initially a character variable, so you will convert it to a factor and verify that the group counts are 15, 15, and 7.
@@ -102,7 +104,9 @@ The `type` variable (skin sample type) is initially a character variable, so y
 # Change variable named 'type' to factor so that we can use in our analysis in the next steps
 # First let's check if it is character
 is.character(psorData$type)
+```
 
+```{r}
 # Now change to factor
 psorData <- mutate(psorData, type = factor(type))
 # Again, let's check if it is factor now
@@ -135,7 +139,7 @@ psorData %>%
 
 Before we decide on which statistical test to use to compare our groups, lets check if our gene expression data is normal distributed. If data are not normal, consider transformations (log, square root) or non-parametric statistical tests (Wilcoxon, Kruskal–Wallis).
 
-Testing for Normality in R is done by either visual inspection or statistical test.
+Testing for Normality in R is either done by visual inspection or statistical test.
 
 We will use a helper function from `ggpubr` package to make a quantile-quantile plot. You can also use the base R function `qqnorm()`.
 
@@ -182,30 +186,24 @@ summary(oneway)
 
 The output shows the estimated group means (intercept and coefficients) and standard errors. The intercept is the estimated mean IGFL4 expression in the reference group (here, healthy). The coefficients are the differences between the other groups and the reference group.
 
-QUESTION: Is there a a significant difference in the expression level of the IGFL4 gene between psne and psor skin samples? How could we check this?
+#### Step 4: Hypothesis test + Post hoc tests
 
-Although `summary()` works well, we recommend using the **emmeans** package for a clearer and more user-friendly presentation of group means and comparisons.
+It is standard to perform an **F-test** to check whether the mean IGFL4 expression differs across groups. Formally, the null hypothesis is that all group means are equal. This test is reported at the bottom of the `summary(oneway)` output.
+
+If the F-test is significant, at least one group mean differs - but we don’t yet know which ones.
+
+**QUESTION**: Is there a significant difference in the expression level of the IGFL4 gene between psne and psor skin samples? How could we check this?
+
+To identify the specific differences, we perform **post hoc pairwise comparisons**.
+
+A convenient approach uses the **emmeans** package for a clearer and more user-friendly presentation of pairwise comparisons between groups.
 
 ```{r}
 library(emmeans)
-```
-
-#### Step 4: Hypothesis test + Post hoc tests
-
-It is standard to perform an **F-test** to check whether the mean IGFL4 expression differs across groups. Formally, the null hypothesis is that all group means are equal. The easiest way to run this test in R is with `drop1()` and the `test="F"` option:
-
-```{r}
-# F-test for the overall effect of group
-drop1(oneway, test = "F")
-```
-
-If the F-test is significant, at least one group differs — but we don’t yet know which ones. To identify the specific differences, we perform **post hoc pairwise comparisons**.
-
-A convenient approach uses the **emmeans** package:
-
-```{r}
 # Perform post hoc pairwise comparisons
-pairs(emmeans(oneway,~type))
+pairs(emmeans(oneway, ~type))
+
+comparisons <- as.data.frame(pairs(emmeans(oneway, ~type)))
 ```
 
 Here, `emmeans()` computes the estimated marginal means (predicted IGFL4 expression), and `pairs()` performs Tukey-adjusted pairwise comparisons between groups.
@@ -221,7 +219,54 @@ Gene expression levels are significantly different between 2 groups of skin samp
 In this example it is natural to report the estimated intensities as well as the comparisons between the 3 groups.
 
 ```{r}
+# Obtain and display the estimated group means
 emmeans(oneway, ~ type)
+```
+
+#### Step 6: Visualize the results
+
+We will add the pairwise comparisons to our violin plot to show which groups differ.
+
+First, create the plot and save it as `p`. The violin plots show the distributions, and the points show individual observations.
+
+```{r}
+p <- ggplot(psorData, aes(x = type, y = IGFL4, fill = type)) +
+  geom_violin(trim = FALSE, alpha = 0.5) +
+  # Move points slightly sideways to reduce overlap
+  geom_jitter(width = 0.08, height = 0) +
+  labs(
+    x = "Skin type",
+    y = "IGFL4 expression",
+    caption = "Pairwise comparisons: Tukey-adjusted p-values"
+  ) +
+  theme_minimal()
+```
+
+Next, prepare the results from `emmeans`. We split the comparison names into two columns so R knows which groups each bracket connects.
+
+```{r}
+# Convert the pairwise results to a data frame
+comparisons
+
+# Split names such as "psne - psor" into two group columns
+comparisons <- separate(
+  comparisons, contrast,
+  into = c("group1", "group2"),
+  sep = " - "
+)
+comparisons
+```
+
+We can now add the **existing Tukey-adjusted p-values** to the plot. `stat_pvalue_manual()` displays these results without performing another test.
+
+```{r}
+p +
+  ggpubr::stat_pvalue_manual(
+    comparisons,
+    label = "p = {signif(p.value, 2)}", # Show two significant digits
+    y.position = 2.8,                 # Height of the first bracket
+    step.increase = 0.2               # Space between successive brackets
+  )
 ```
 
 ## Simple linear regression
@@ -294,10 +339,6 @@ Parameter estimates, standard errors are computed and certain hypothesis tests a
 summary(linreg2)
 ```
 
-```{r}
-drop1(linreg2, test = "F")
-```
-
 The coefficient table is the most important part of the output. It has two lines --- one for each parameter in the model --- and four columns. The first line is about the intercept, the second line is about the slope. The columns are
 
 -   `Estimate`: The estimated value of the parameter (intercept or slope).
@@ -318,8 +359,27 @@ An excellent synthesis of a statistical analysis is often provided by a plot com
 ```{r}
 ggplot(trees, aes(x = log(Girth), y = log(Volume))) + 
   geom_point() +
-  geom_abline(intercept=-2.35332, slope=2.19997, col="red")
-
+  
+  geom_abline(intercept=-2.35332, slope=2.19997, col="red") +
+  
+  geom_smooth(
+    method = "lm",
+    formula = y ~ x,
+    se = TRUE,          # Show the confidence band
+    level = 0.95,       # 95% confidence interval
+    colour = "red",
+    fill = "red",
+    alpha = 0.15        # Light, transparent shading
+  ) + 
+  
+  labs(
+    subtitle = "log(Volume) = -2.35 + 2.20 × log(Girth)",
+    x = "log(Girth)",
+    y = "log(Volume)",
+    caption = "A 1% increase in girth is assoc. with approx. 2.2% higher volume."
+  ) +
+  
+  theme_minimal()
 ```
 
 ## Linear regression: Two or more covariates
